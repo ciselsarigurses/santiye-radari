@@ -1,51 +1,33 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-28
-**Hazırlanma:** 2026-08-28 00:01 +03
+**Hazırlanma:** 2026-08-28 00:02 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 35
+**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 36
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
-### 1. BEKLEYEN — Alaçatı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
-- **Koordinat:** `38.238824, 26.399714`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.238824,26.399714)
+### 1. ORTA — Ilıca
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ilıca
+- **Koordinat:** `38.297324, 26.355429`
+- **Değişim alanı:** yaklaşık 4.221 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297324,26.355429)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 2. BEKLEYEN — Musalla
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
-- **Koordinat:** `38.303518, 26.298`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303518,26.298000)
+### 2. ORTA — Ovacık
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
+- **Koordinat:** `38.263982, 26.318286`
+- **Değişim alanı:** yaklaşık 3.658 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263982,26.318286)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 3. BEKLEYEN — Musalla
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
-- **Koordinat:** `38.301453, 26.304667`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301453,26.304667)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 4. BEKLEYEN — Musalla
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
-- **Koordinat:** `38.313612, 26.307619`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313612,26.307619)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 5. BEKLEYEN — Çiftlikköy
+### 3. BEKLEYEN — Çiftlikköy
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
 - **Koordinat:** `38.294308, 26.277524`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -54,25 +36,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294308,26.277524)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 6. BEKLEYEN — Ovacık
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
-- **Koordinat:** `38.264018, 26.318212`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.264018,26.318212)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 7. BEKLEYEN — Ilıca
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ilıca
-- **Koordinat:** `38.297354, 26.355416`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297354,26.355416)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 8. BEKLEYEN — Uzunkuyu
+### 4. BEKLEYEN — Uzunkuyu
 - **Yaklaşık konum:** Saha listesi / Uzunkuyu
 - **Koordinat:** `None, None`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -81,13 +45,49 @@
 - **Rota:** [Google Maps'te aç](None)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 9. BEKLEYEN — Cumhuriyet
+### 5. BEKLEYEN — Cumhuriyet
 - **Yaklaşık konum:** Saha listesi / Cumhuriyet
 - **Koordinat:** `38.363104, 26.291048`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
 - **Sinyal:** Önceki saha görevi: kontrol bekliyor
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.363104,26.291048)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 6. BEKLEYEN — Ilıca
+- **Yaklaşık konum:** Saha listesi / Ilıca
+- **Koordinat:** `None, None`
+- **Değişim alanı:** yaklaşık 0 m²
+- **Görüntü aralığı:** - → -
+- **Sinyal:** Önceki saha görevi: kontrol bekliyor
+- **Rota:** [Google Maps'te aç](None)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 7. BEKLEYEN — Ilıca
+- **Yaklaşık konum:** Saha listesi / Ilıca
+- **Koordinat:** `None, None`
+- **Değişim alanı:** yaklaşık 0 m²
+- **Görüntü aralığı:** - → -
+- **Sinyal:** Önceki saha görevi: kontrol bekliyor
+- **Rota:** [Google Maps'te aç](None)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 8. BEKLEYEN — Ilıca
+- **Yaklaşık konum:** Saha listesi / Ilıca
+- **Koordinat:** `None, None`
+- **Değişim alanı:** yaklaşık 0 m²
+- **Görüntü aralığı:** - → -
+- **Sinyal:** Önceki saha görevi: kontrol bekliyor
+- **Rota:** [Google Maps'te aç](None)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 9. BEKLEYEN — Ilıca
+- **Yaklaşık konum:** Saha listesi / Ilıca
+- **Koordinat:** `None, None`
+- **Değişim alanı:** yaklaşık 0 m²
+- **Görüntü aralığı:** - → -
+- **Sinyal:** Önceki saha görevi: kontrol bekliyor
+- **Rota:** [Google Maps'te aç](None)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 10. BEKLEYEN — Ilıca
@@ -117,8 +117,8 @@
 - **Rota:** [Google Maps'te aç](None)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 13. BEKLEYEN — Ilıca
-- **Yaklaşık konum:** Saha listesi / Ilıca
+### 13. BEKLEYEN — Alaçatı
+- **Yaklaşık konum:** Saha listesi / Alaçatı
 - **Koordinat:** `None, None`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
@@ -126,8 +126,8 @@
 - **Rota:** [Google Maps'te aç](None)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 14. BEKLEYEN — Ilıca
-- **Yaklaşık konum:** Saha listesi / Ilıca
+### 14. BEKLEYEN — Alaçatı
+- **Yaklaşık konum:** Saha listesi / Alaçatı
 - **Koordinat:** `None, None`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
@@ -135,8 +135,8 @@
 - **Rota:** [Google Maps'te aç](None)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 15. BEKLEYEN — Ilıca
-- **Yaklaşık konum:** Saha listesi / Ilıca
+### 15. BEKLEYEN — Alaçatı
+- **Yaklaşık konum:** Saha listesi / Alaçatı
 - **Koordinat:** `None, None`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
@@ -144,8 +144,8 @@
 - **Rota:** [Google Maps'te aç](None)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 16. BEKLEYEN — Ilıca
-- **Yaklaşık konum:** Saha listesi / Ilıca
+### 16. BEKLEYEN — Alaçatı
+- **Yaklaşık konum:** Saha listesi / Alaçatı
 - **Koordinat:** `None, None`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
@@ -279,49 +279,58 @@
 - **Rota:** [Google Maps'te aç](None)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 31. BEKLEYEN — Alaçatı
-- **Yaklaşık konum:** Saha listesi / Alaçatı
-- **Koordinat:** `None, None`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](None)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 32. BEKLEYEN — Alaçatı
-- **Yaklaşık konum:** Saha listesi / Alaçatı
-- **Koordinat:** `None, None`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](None)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 33. BEKLEYEN — Alaçatı
-- **Yaklaşık konum:** Saha listesi / Alaçatı
-- **Koordinat:** `None, None`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](None)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 34. BEKLEYEN — Alaçatı
-- **Yaklaşık konum:** Saha listesi / Alaçatı
-- **Koordinat:** `None, None`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](None)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 35. BEKLEYEN — Reisdere
+### 31. BEKLEYEN — Reisdere
 - **Yaklaşık konum:** Saha listesi / Reisdere
 - **Koordinat:** `None, None`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
 - **Sinyal:** Önceki saha görevi: kontrol bekliyor
 - **Rota:** [Google Maps'te aç](None)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 32. NORMAL — Musalla
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
+- **Koordinat:** `38.313535, 26.307619`
+- **Değişim alanı:** yaklaşık 1.688 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313535,26.307619)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 33. NORMAL — Musalla
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
+- **Koordinat:** `38.301453, 26.304762`
+- **Değişim alanı:** yaklaşık 1.688 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301453,26.304762)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 34. NORMAL — Çiftlikköy
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
+- **Koordinat:** `38.294876, 26.278476`
+- **Değişim alanı:** yaklaşık 1.688 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294876,26.278476)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 35. NORMAL — Musalla
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
+- **Koordinat:** `38.303594, 26.297905`
+- **Değişim alanı:** yaklaşık 1.126 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303594,26.297905)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 36. NORMAL — Alaçatı
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
+- **Koordinat:** `38.2389, 26.399619`
+- **Değişim alanı:** yaklaşık 1.126 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.238900,26.399619)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ## Bugünün yeni internet / sosyal medya bulguları
