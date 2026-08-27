@@ -1,7 +1,5 @@
-streamlit
-pandas
-pydeck
-requests
-beautifulsoup4
-numpy
-opencv-python-headless
+streamlit>=1.39,<2
+pandas>=2.0,<3
+pydeck>=0.8,<1
+requests>=2.31,<3
+beautifulsoup4>=4.12,<5
