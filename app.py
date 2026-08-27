@@ -13,47 +13,10 @@ from scanner import DB, INSTAGRAM_SEARCH_LINKS, connect, ensure_schema, scan_and
 st.set_page_config(page_title="Şantiye Radarı", page_icon="📍", layout="wide")
 ensure_schema()
 
-SATELLITE_TILES = (
-    "https://server.arcgisonline.com/ArcGIS/rest/services/"
-    "World_Imagery/MapServer/tile/{z}/{y}/{x}"
+SATELLITE_STYLE = (
+    "https://raw.githubusercontent.com/ciselsarigurses/santiye-radari/"
+    "main/satellite-style.json"
 )
-SATELLITE_LABELS = (
-    "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/"
-    "World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
-)
-SATELLITE_STYLE = {
-    "version": 8,
-    "sources": {
-        "esri-imagery": {
-            "type": "raster",
-            "tiles": [SATELLITE_TILES],
-            "tileSize": 256,
-            "attribution": "Tiles © Esri",
-        },
-        "esri-labels": {
-            "type": "raster",
-            "tiles": [SATELLITE_LABELS],
-            "tileSize": 256,
-            "attribution": "Esri, OpenStreetMap contributors",
-        },
-    },
-    "layers": [
-        {
-            "id": "esri-imagery",
-            "type": "raster",
-            "source": "esri-imagery",
-            "minzoom": 0,
-            "maxzoom": 19,
-        },
-        {
-            "id": "esri-labels",
-            "type": "raster",
-            "source": "esri-labels",
-            "minzoom": 0,
-            "maxzoom": 19,
-        },
-    ],
-}
 
 # Kesin koordinatı olmayan kayıtları yanlış bir parsele yerleştirmek yerine
 # mahalle merkezinde, adet belirten mavi bir küme olarak gösteriyoruz.
