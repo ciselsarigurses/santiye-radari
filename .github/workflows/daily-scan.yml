@@ -13,6 +13,7 @@ on:
       - "field_state.py"
       - "apply_field_status.py"
       - "refresh_satellite_analysis.py"
+      - "retain_recent_candidates.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
       - ".github/workflows/field-status.yml"
@@ -63,6 +64,9 @@ jobs:
       - name: İnternet taramasını çalıştır
         run: python scanner.py
 
+      - name: Taze internet adaylarını kısa süre koru
+        run: python retain_recent_candidates.py
+
       - name: Uydu analiz sürümünü kontrol et
         run: python refresh_satellite_analysis.py
 
@@ -94,6 +98,7 @@ jobs:
             git reset --hard origin/main
             pip install -r requirements.txt
             python scanner.py
+            python retain_recent_candidates.py
             python refresh_satellite_analysis.py
             python daily_report.py
             python report_quality.py
