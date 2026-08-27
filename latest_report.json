@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-28",
-  "olusturma": "2026-08-28 01:03 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 8",
+  "olusturma": "2026-08-28 01:04 +03",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7",
   "saha_adaylari": [
     {
       "oncelik": "ORTA",
@@ -34,30 +34,6 @@
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
       "gorev_id": "UD24100197B",
       "saha_durumu": "KONTROLE_GIT"
-    },
-    {
-      "oncelik": "BEKLEYEN",
-      "mahalle": "Çiftlikköy",
-      "enlem": 38.294308,
-      "boylam": 26.277524,
-      "alan_m2": 0,
-      "sinyal": "Önceki uydu saha görevi: kontrol bekliyor",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": null,
-      "son_tarih": null,
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.294308,26.277524",
-      "konum_notu": "Yeni uydu sinyali olmasa da saha kontrolü tamamlanmadığı için aktif listede tutuluyor.",
-      "gorev_id": "UF246EB409A",
-      "saha_durumu": "KONTROLE_GIT",
-      "takip_gorevi": false,
-      "kontrol_sayisi": 0,
-      "son_islem": "2026-08-27",
-      "adres": null,
-      "ada": null,
-      "parsel": null,
-      "firma": null,
-      "proje": null
     },
     {
       "oncelik": "NORMAL",

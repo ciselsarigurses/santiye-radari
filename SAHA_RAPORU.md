@@ -1,9 +1,9 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-28
-**Hazırlanma:** 2026-08-28 01:03 +03
+**Hazırlanma:** 2026-08-28 01:04 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 8
+**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
@@ -27,16 +27,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263982,26.318286)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 3. BEKLEYEN — Çiftlikköy
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
-- **Koordinat:** `38.294308, 26.277524`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki uydu saha görevi: kontrol bekliyor
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294308,26.277524)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 4. NORMAL — Musalla
+### 3. NORMAL — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.313535, 26.307619`
 - **Değişim alanı:** yaklaşık 1.688 m²
@@ -45,7 +36,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313535,26.307619)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 5. NORMAL — Musalla
+### 4. NORMAL — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.301453, 26.304762`
 - **Değişim alanı:** yaklaşık 1.688 m²
@@ -54,7 +45,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301453,26.304762)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 6. NORMAL — Çiftlikköy
+### 5. NORMAL — Çiftlikköy
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
 - **Koordinat:** `38.294876, 26.278476`
 - **Değişim alanı:** yaklaşık 1.688 m²
@@ -63,7 +54,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294876,26.278476)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 7. NORMAL — Musalla
+### 6. NORMAL — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.303594, 26.297905`
 - **Değişim alanı:** yaklaşık 1.126 m²
@@ -72,7 +63,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303594,26.297905)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 8. NORMAL — Alaçatı
+### 7. NORMAL — Alaçatı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
 - **Koordinat:** `38.2389, 26.399619`
 - **Değişim alanı:** yaklaşık 1.126 m²
