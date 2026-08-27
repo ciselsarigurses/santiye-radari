@@ -63,7 +63,7 @@ else:
                     use_container_width=True)
             elif r.adres:
                 b1.link_button("📍 Adresi Google Maps'te Ara",
-                    f"https://www.google.com/maps/search/?api=1&query={quote_plus(r.adres+' Çeşme İzmir')}",
+                    f"https://www.google.com/maps/search/?api=1&query={quote_plus(str(r.adres) + ' Çeşme İzmir')}",
                     use_container_width=True)
             if r.kaynak_url:
                 st.link_button("Kaynağı Aç",r.kaynak_url,use_container_width=True)
