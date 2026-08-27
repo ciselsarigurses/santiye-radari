@@ -8,12 +8,14 @@ kararlarının tek kaynağı olmaz.
 from __future__ import annotations
 
 import hashlib
+import math
 from datetime import datetime, timezone
 
 from scanner import connect
 
 
 ALLOWED_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT", "KONTROL_EDILDI"}
+SATELLITE_MATCH_METERS = 80
 
 
 def _now():
@@ -50,7 +52,7 @@ def ensure_state_schema(connection=None):
 
 
 def satellite_task_id(item):
-    """Yaklaşık 100 m hücreye dayalı kararlı, koordinatı açığa çıkarmayan kimlik."""
+    """Yaklaşık 100 m hücreye dayalı, koordinatı açığa çıkarmayan ilk kimlik."""
     latitude = float(item.get("enlem"))
     longitude = float(item.get("boylam"))
     region = str(item.get("bolge") or "uydu")
@@ -61,6 +63,41 @@ def satellite_task_id(item):
 
 def site_task_id(site_id):
     return f"S{int(site_id)}"
+
+
+def _distance_m(lat1, lon1, lat2, lon2):
+    mean_lat = math.radians((lat1 + lat2) / 2)
+    north = (lat1 - lat2) * 110570
+    east = (lon1 - lon2) * 111320 * math.cos(mean_lat)
+    return math.hypot(north, east)
+
+
+def _nearby_satellite_task(connection, source_key, latitude, longitude):
+    """Yeni görüntüde merkezi biraz kayan aynı saha görevini bulur."""
+    rows = connection.execute(
+        """SELECT gorev_id,enlem,boylam FROM saha_durumlari
+        WHERE kaynak='uydu' AND kaynak_kimlik=?
+        AND enlem IS NOT NULL AND boylam IS NOT NULL""",
+        (source_key,),
+    ).fetchall()
+    nearest_id = None
+    nearest_distance = None
+    for task_id, old_latitude, old_longitude in rows:
+        try:
+            distance = _distance_m(
+                latitude,
+                longitude,
+                float(old_latitude),
+                float(old_longitude),
+            )
+        except (TypeError, ValueError):
+            continue
+        if nearest_distance is None or distance < nearest_distance:
+            nearest_id = str(task_id)
+            nearest_distance = distance
+    if nearest_distance is not None and nearest_distance <= SATELLITE_MATCH_METERS:
+        return nearest_id
+    return None
 
 
 def _upsert_task(
@@ -119,16 +156,25 @@ def sync_satellite_tasks(connection, hotspots, report_date):
     decorated = []
     for item in hotspots:
         try:
-            task_id = satellite_task_id(item)
             latitude = float(item.get("enlem"))
             longitude = float(item.get("boylam"))
         except (TypeError, ValueError):
             continue
+        source_key = str(item.get("bolge") or "")
+        generated_id = satellite_task_id(item)
+        exact = connection.execute(
+            "SELECT 1 FROM saha_durumlari WHERE gorev_id=?",
+            (generated_id,),
+        ).fetchone()
+        task_id = generated_id if exact else (
+            _nearby_satellite_task(connection, source_key, latitude, longitude)
+            or generated_id
+        )
         status = _upsert_task(
             connection,
             task_id=task_id,
             source="uydu",
-            source_key=str(item.get("bolge") or ""),
+            source_key=source_key,
             neighborhood=str(item.get("mahalle") or ""),
             latitude=latitude,
             longitude=longitude,
