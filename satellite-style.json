@@ -1,0 +1,38 @@
+{
+  "version": 8,
+  "name": "Santiye Radari Uydu",
+  "sources": {
+    "esri-imagery": {
+      "type": "raster",
+      "tiles": [
+        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+      ],
+      "tileSize": 256,
+      "attribution": "Tiles © Esri"
+    },
+    "esri-labels": {
+      "type": "raster",
+      "tiles": [
+        "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
+      ],
+      "tileSize": 256,
+      "attribution": "Esri, OpenStreetMap contributors"
+    }
+  },
+  "layers": [
+    {
+      "id": "esri-imagery",
+      "type": "raster",
+      "source": "esri-imagery",
+      "minzoom": 0,
+      "maxzoom": 19
+    },
+    {
+      "id": "esri-labels",
+      "type": "raster",
+      "source": "esri-labels",
+      "minzoom": 0,
+      "maxzoom": 19
+    }
+  ]
+}
