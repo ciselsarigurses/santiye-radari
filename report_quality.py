@@ -37,6 +37,16 @@ def _active_daily_details(connection, report_date):
     ]
 
 
+def _latest_scan_error_count(connection):
+    """Son internet taramasında kaç kaynak/arama hatası olduğunu döndürür."""
+    row = connection.execute(
+        "SELECT hata FROM tarama_gecmisi ORDER BY id DESC LIMIT 1"
+    ).fetchone()
+    if not row or not row[0]:
+        return 0
+    return sum(1 for line in str(row[0]).splitlines() if line.strip())
+
+
 def _satellite_summary(connection, report_date):
     rows = connection.execute(
         """SELECT bolge_adi,yeni_goruntu,hareket_json,hata
@@ -194,6 +204,7 @@ def normalize_daily_report(report_date=None):
             "belediye" in str(item.get("kaynak_tipi") or "").casefold()
             for item in details
         )
+        scan_error_count = _latest_scan_error_count(connection)
         satellite = _satellite_summary(connection, report_date)
         hotspots = _active_hotspots(connection, report_date)
         counts = status_counts(connection)
@@ -204,6 +215,8 @@ def normalize_daily_report(report_date=None):
             f"Instagram: {instagram} yeni indekslenmiş sonuç. "
             f"Belediye: {municipality} yeni açık sonuç."
         )
+        if scan_error_count:
+            summary += f" · Tarama uyarısı: {scan_error_count} kaynak/arama hatası"
         if satellite:
             summary += " " + " · ".join(satellite)
         summary += f" · Aktif saha görevi: {len(hotspots)}"
