@@ -1,3 +1,4 @@
+import json
 import sqlite3
 from datetime import datetime, timezone
 from urllib.parse import quote_plus
@@ -8,12 +9,13 @@ import requests
 import streamlit as st
 from bs4 import BeautifulSoup
 
+from daily_report import ensure_daily_schema
 from scanner import DB, INSTAGRAM_SEARCH_LINKS, connect, ensure_schema, scan_and_store
 from satellite import REGIONS, SatelliteError, analyze_sentinel_change
 
 
 st.set_page_config(page_title="Şantiye Radarı", page_icon="📍", layout="wide")
-ensure_schema()
+ensure_daily_schema()
 
 SATELLITE_STYLE = (
     "https://raw.githubusercontent.com/ciselsarigurses/santiye-radari/"
@@ -106,6 +108,14 @@ def selected_map_object(event, layer_id):
         return selected[0] if selected else None
     except (AttributeError, KeyError, TypeError, IndexError):
         return None
+
+
+def json_list(raw):
+    try:
+        parsed = json.loads(raw or "[]")
+        return parsed if isinstance(parsed, list) else []
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return []
 
 
 @st.cache_data(ttl=21600, show_spinner=False)
@@ -204,10 +214,10 @@ if run_scan:
         st.error(f"Tarama tamamlanamadı: {type(exc).__name__}")
 
 
-field_tab, web_tab, satellite_tab, scan_tab, add_tab = st.tabs(
+field_tab, web_tab, satellite_tab, report_tab, scan_tab, add_tab = st.tabs(
     [
         "🎯 Saha Listesi", "🌐 Radar Bulguları", "🛰️ Ücretsiz Uydu",
-        "🔍 Tarama Merkezi", "➕ Yeni Kayıt",
+        "📋 Günlük Rapor", "🔍 Tarama Merkezi", "➕ Yeni Kayıt",
     ]
 )
 
@@ -666,6 +676,207 @@ with satellite_tab:
             )
         except (SatelliteError, requests.RequestException, OSError) as exc:
             st.error(f"Ücretsiz uydu görüntüsü hazırlanamadı: {exc}")
+
+
+with report_tab:
+    st.subheader("Her sabah hazırlanan günlük rapor")
+    st.caption(
+        "İnternet, herkese açık ve indekslenmiş Instagram sonuçları, belediye açık "
+        "kaynakları ve ücretsiz Sentinel-2 görüntüleri birlikte özetlenir."
+    )
+    reports = read_df(
+        """SELECT rapor_tarihi,olusturma,internet_bulgu,internet_yeni,
+        internet_guncellenen,instagram_yeni,belediye_yeni,
+        internet_detay_json,ozet
+        FROM gunluk_raporlar ORDER BY rapor_tarihi DESC LIMIT 90"""
+    )
+    if reports.empty:
+        st.info(
+            "İlk otomatik günlük rapor tarama işi çalıştıktan sonra burada görünecek. "
+            "Rapor her gün Türkiye saatiyle 11.00 için hazırlanır."
+        )
+    else:
+        report_dates = reports.rapor_tarihi.astype(str).tolist()
+        selected_report_date = st.selectbox(
+            "Rapor günü",
+            report_dates,
+            format_func=lambda item: datetime.strptime(item, "%Y-%m-%d").strftime("%d.%m.%Y"),
+        )
+        selected_report = reports[
+            reports.rapor_tarihi.astype(str) == selected_report_date
+        ].iloc[0]
+        satellite_rows = read_df(
+            """SELECT bolge,bolge_adi,onceki_tarih,son_tarih,yeni_goruntu,
+            degisim_km2,degisim_yuzde,bulut_yuzde,hareket_json,hata
+            FROM gunluk_uydu_raporlari WHERE rapor_tarihi=? ORDER BY bolge""",
+            (selected_report_date,),
+        )
+
+        hotspot_rows = []
+        new_satellite_regions = 0
+        for _, satellite_row in satellite_rows.iterrows():
+            if number(satellite_row.get("yeni_goruntu")):
+                new_satellite_regions += 1
+            for hotspot in json_list(satellite_row.get("hareket_json")):
+                hotspot_rows.append(
+                    {
+                        **hotspot,
+                        "bolge_adi": value(satellite_row.get("bolge_adi")),
+                        "goruntu_araligi": (
+                            f"{value(satellite_row.get('onceki_tarih'))} → "
+                            f"{value(satellite_row.get('son_tarih'))}"
+                        ),
+                    }
+                )
+        hotspots = pd.DataFrame(hotspot_rows)
+
+        r1, r2, r3, r4 = st.columns(4)
+        r1.metric("🌐 Yeni internet", number(selected_report.get("internet_yeni")))
+        r2.metric("📸 Yeni Instagram", number(selected_report.get("instagram_yeni")))
+        r3.metric("🏛️ Yeni belediye", number(selected_report.get("belediye_yeni")))
+        r4.metric("🛰️ Yeni uydu bölgesi", new_satellite_regions)
+        st.write("**Günün özeti:**", value(selected_report.get("ozet")))
+        st.caption(f"Raporun hazırlanması: {value(selected_report.get('olusturma'))}")
+
+        st.markdown("#### Bir önceki görüntüye göre hareket adayları")
+        errors = [
+            value(row.get("hata")) for _, row in satellite_rows.iterrows()
+            if value(row.get("hata")) != "-"
+        ]
+        if errors:
+            st.warning(
+                "Bazı uydu bölgeleri bu raporda tamamlanamadı: " + " · ".join(errors)
+            )
+        if not hotspots.empty:
+            hotspots["enlem"] = pd.to_numeric(hotspots.enlem, errors="coerce")
+            hotspots["boylam"] = pd.to_numeric(hotspots.boylam, errors="coerce")
+            hotspots["alan_m2"] = pd.to_numeric(hotspots.alan_m2, errors="coerce").fillna(0)
+            hotspots = hotspots.dropna(subset=["enlem", "boylam"])
+            hotspots["renk"] = hotspots.alan_m2.apply(
+                lambda area: [235, 45, 65, 235] if area >= 5000
+                else [255, 145, 25, 235]
+            )
+            hotspots["etiket"] = hotspots.apply(
+                lambda row: (
+                    f"{value(row.get('mahalle'))} · yaklaşık "
+                    f"{int(row.get('alan_m2', 0)):,} m²"
+                ).replace(",", "."),
+                axis=1,
+            )
+            hotspots["harita"] = hotspots.apply(
+                lambda row: (
+                    "https://www.google.com/maps/search/?api=1&query="
+                    f"{row.enlem},{row.boylam}"
+                ),
+                axis=1,
+            )
+            st.warning(
+                f"{len(hotspots)} bölgede yüzey/toprak değişimi adayı bulundu. "
+                "Kırmızı daha geniş, turuncu daha küçük alandır; işaret kazıyı kesinleştirmez."
+            )
+            st.pydeck_chart(
+                pdk.Deck(
+                    map_provider="carto",
+                    map_style=SATELLITE_STYLE,
+                    layers=[
+                        pdk.Layer(
+                            "ScatterplotLayer", hotspots,
+                            id="daily-movement-points",
+                            get_position="[boylam,enlem]",
+                            get_fill_color="renk",
+                            get_line_color=[255, 255, 255, 255],
+                            get_radius=200,
+                            radius_min_pixels=11,
+                            radius_max_pixels=25,
+                            line_width_min_pixels=3,
+                            stroked=True,
+                            pickable=True,
+                        )
+                    ],
+                    initial_view_state=pdk.ViewState(
+                        latitude=38.305, longitude=26.43, zoom=10.2
+                    ),
+                    tooltip={
+                        "html": (
+                            "<b>{etiket}</b><br>{sinyal}<br>{goruntu_araligi}"
+                            "<br><small>Harita noktası yaklaşık değişim merkezi.</small>"
+                        )
+                    },
+                ),
+                use_container_width=True,
+                key=f"daily_report_map_{selected_report_date}",
+            )
+            st.dataframe(
+                hotspots[[
+                    "mahalle", "alan_m2", "goruntu_araligi", "enlem",
+                    "boylam", "harita",
+                ]].rename(columns={
+                    "mahalle": "Yakın mahalle", "alan_m2": "Yaklaşık alan (m²)",
+                    "goruntu_araligi": "Karşılaştırılan görüntüler",
+                    "enlem": "Enlem", "boylam": "Boylam", "harita": "Haritada aç",
+                }),
+                column_config={"Haritada aç": st.column_config.LinkColumn("Haritada aç")},
+                hide_index=True,
+                use_container_width=True,
+            )
+        elif not satellite_rows.empty and new_satellite_regions:
+            st.success("Yeni uydu görüntüsü kontrol edildi; eşik üstünde hareket adayı bulunmadı.")
+        elif not satellite_rows.empty:
+            st.info(
+                "Bu gün yeni Sentinel-2 görüntüsü gelmedi. Son görüntü tarihleri: "
+                + " · ".join(
+                    f"{value(row.get('bolge_adi'))}: {value(row.get('son_tarih'))}"
+                    for _, row in satellite_rows.iterrows()
+                )
+            )
+        else:
+            st.info("Bu gün için uydu kontrol kaydı bulunmuyor.")
+
+        st.markdown("#### Günün yeni internet ve sosyal medya bulguları")
+        internet_details = pd.DataFrame(
+            json_list(selected_report.get("internet_detay_json"))
+        )
+        if internet_details.empty:
+            st.info("Bu gün ilk kez bulunan yeni internet sonucu yok.")
+        else:
+            shown_columns = [
+                column for column in (
+                    "durum", "bolge", "proje", "sinyal", "kaynak_tipi",
+                    "skor", "kaynak_url",
+                ) if column in internet_details.columns
+            ]
+            st.dataframe(
+                internet_details[shown_columns].rename(columns={
+                    "durum": "Durum", "bolge": "Bölge", "proje": "Bulgu",
+                    "sinyal": "Sinyal", "kaynak_tipi": "Kaynak",
+                    "skor": "Puan", "kaynak_url": "Bağlantı",
+                }),
+                column_config={"Bağlantı": st.column_config.LinkColumn("Bağlantı")},
+                hide_index=True,
+                use_container_width=True,
+            )
+
+        show_history = st.toggle("📚 Geriye dönük raporları göster")
+        if show_history:
+            st.dataframe(
+                reports[[
+                    "rapor_tarihi", "internet_yeni", "internet_guncellenen",
+                    "instagram_yeni", "belediye_yeni", "ozet",
+                ]].rename(columns={
+                    "rapor_tarihi": "Gün", "internet_yeni": "Yeni internet",
+                    "internet_guncellenen": "Güncellenen",
+                    "instagram_yeni": "Instagram", "belediye_yeni": "Belediye",
+                    "ozet": "Özet",
+                }),
+                hide_index=True,
+                use_container_width=True,
+            )
+        st.caption(
+            "Uydu değişim analizi 10 m çözünürlüklü ücretsiz Sentinel-2 verisidir. "
+            "Bulut, gölge, tarla sürümü ve mevsimsel değişim yanlış alarm üretebilir; "
+            "işaretlenen yerler saha veya yüksek çözünürlüklü görüntüyle doğrulanmalıdır."
+        )
+
 
 with scan_tab:
     st.subheader("Radar nasıl çalışıyor?")
