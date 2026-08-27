@@ -8,6 +8,7 @@ on:
       - "scanner.py"
       - "satellite.py"
       - "daily_report.py"
+      - "report_quality.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
   schedule:
@@ -55,6 +56,9 @@ jobs:
 
       - name: Günlük uydu ve radar raporunu oluştur
         run: python daily_report.py
+
+      - name: Günlük rapor kalite kontrolü
+        run: python report_quality.py
 
       - name: Tarama ve rapor sonuçlarını kaydet
         run: |
