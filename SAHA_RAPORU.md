@@ -1,9 +1,9 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-27
-**Hazırlanma:** 2026-08-27 22:02 +03
+**Hazırlanma:** 2026-08-27 22:07 +03
 
-**Özet:** İnternet: 6 yeni aktif bulgu, 0 güncellendi. Instagram: 3 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 7 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır: 0 hareket bölgesi adayı
+**Özet:** İnternet: 6 yeni aktif bulgu, 0 güncellendi. Instagram: 3 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 7 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır: 0 hareket bölgesi adayı · Aktif saha görevi: 7
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 

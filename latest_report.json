@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-27",
-  "olusturma": "2026-08-27 22:02 +03",
-  "ozet": "İnternet: 6 yeni aktif bulgu, 0 güncellendi. Instagram: 3 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 7 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır: 0 hareket bölgesi adayı",
+  "olusturma": "2026-08-27 22:07 +03",
+  "ozet": "İnternet: 6 yeni aktif bulgu, 0 güncellendi. Instagram: 3 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 7 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır: 0 hareket bölgesi adayı · Aktif saha görevi: 7",
   "saha_adaylari": [
     {
       "oncelik": "ORTA",
@@ -15,7 +15,9 @@
       "son_tarih": "26.08.2026",
       "yeni_goruntu": true,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.297354,26.355416",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UB81E69FF41",
+      "saha_durumu": "KONTROLE_GIT"
     },
     {
       "oncelik": "ORTA",
@@ -29,7 +31,9 @@
       "son_tarih": "26.08.2026",
       "yeni_goruntu": true,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.264018,26.318212",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UD24100197B",
+      "saha_durumu": "KONTROLE_GIT"
     },
     {
       "oncelik": "NORMAL",
@@ -43,7 +47,9 @@
       "son_tarih": "26.08.2026",
       "yeni_goruntu": true,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.294308,26.277524",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UF246EB409A",
+      "saha_durumu": "KONTROLE_GIT"
     },
     {
       "oncelik": "NORMAL",
@@ -57,7 +63,9 @@
       "son_tarih": "26.08.2026",
       "yeni_goruntu": true,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.313612,26.307619",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UCF568A03B1",
+      "saha_durumu": "KONTROLE_GIT"
     },
     {
       "oncelik": "NORMAL",
@@ -71,7 +79,9 @@
       "son_tarih": "26.08.2026",
       "yeni_goruntu": true,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.301453,26.304667",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U424909649F",
+      "saha_durumu": "KONTROLE_GIT"
     },
     {
       "oncelik": "NORMAL",
@@ -85,7 +95,9 @@
       "son_tarih": "26.08.2026",
       "yeni_goruntu": true,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.303518,26.298000",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U29A6385636",
+      "saha_durumu": "KONTROLE_GIT"
     },
     {
       "oncelik": "NORMAL",
@@ -99,7 +111,9 @@
       "son_tarih": "26.08.2026",
       "yeni_goruntu": true,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.238824,26.399714",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U905113324A",
+      "saha_durumu": "KONTROLE_GIT"
     }
   ],
   "yeni_internet_bulgulari": [
