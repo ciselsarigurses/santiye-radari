@@ -132,6 +132,7 @@ def refresh_if_needed():
                 refreshed.append((region_key, len(result["hotspots"])))
             except Exception as exc:
                 # Sürüm işareti yazılmaz; geçici ağ/uydu hatasında sonraki çalışmada yeniden denenir.
+                # Günlük rapor kendi hata toleransıyla devam edeceği için workflow burada düşürülmez.
                 errors.append(f"{region_key}: {type(exc).__name__}: {exc}")
 
     return refreshed, skipped, errors
@@ -147,5 +148,7 @@ if __name__ == "__main__":
     if skipped:
         print("Atlanan güncel bölgeler: " + ", ".join(skipped))
     if errors:
-        print("Geçici/işlemsel hatalar: " + " | ".join(errors))
-        raise SystemExit(1)
+        print(
+            "Yeniden işleme hataları (sonraki çalışmada tekrar denenecek): "
+            + " | ".join(errors)
+        )
