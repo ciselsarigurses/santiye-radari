@@ -5,12 +5,16 @@ on:
     branches: [main]
     paths:
       - "app.py"
+      - "pages/**"
       - "scanner.py"
       - "satellite.py"
       - "daily_report.py"
       - "report_quality.py"
+      - "field_state.py"
+      - "apply_field_status.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
+      - ".github/workflows/field-status.yml"
   schedule:
     # Türkiye saatiyle her sabah yaklaşık 11:00 (UTC+3)
     - cron: "0 8 * * *"
@@ -20,7 +24,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: santiye-radari-daily-scan
+  group: santiye-radari-db-write
   cancel-in-progress: false
 
 jobs:
@@ -29,10 +33,10 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Depoyu al
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Python kur
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -49,6 +53,10 @@ jobs:
           app = AppTest.from_file("app.py")
           app.run(timeout=45)
           assert not app.exception, app.exception
+
+          field_page = AppTest.from_file("pages/1_Saha_Kontrol.py")
+          field_page.run(timeout=45)
+          assert not field_page.exception, field_page.exception
           PY
 
       - name: İnternet taramasını çalıştır
@@ -71,11 +79,10 @@ jobs:
           git add santiye.db SAHA_RAPORU.md latest_report.json
           git commit -m "Radar: günlük tarama ve saha raporunu güncelle"
 
-          # Workflow çalışırken ana dala kod güncellemesi gelebilir. Üretilen raporu
-          # eski commit'in üstünden zorla itmek yerine son main'in üzerine güvenle taşı.
+          # Kod ve saha kararları aynı anda gelirse eski veriyi zorla üzerine yazma.
           git fetch origin main
           if ! git rebase origin/main; then
-            echo "Ana dal ile rapor çıktısı çakıştı; üzerine yazmamak için push atlandı."
+            echo "Ana dal ile rapor çıktısı çakıştı; veri kaybını önlemek için durduruldu."
             git rebase --abort || true
             exit 1
           fi
