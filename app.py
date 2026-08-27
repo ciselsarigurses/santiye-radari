@@ -213,7 +213,9 @@ with field_tab:
         st.info("Henüz aktif saha kaydı yok. Radar bulgularından bir adayı saha listesine aktarabilirsin.")
     else:
         field = field.reset_index(drop=True)
-        field["liste_no"] = field.index + 1
+        # Harita ve alt listedeki # numarası kalıcı veritabanı kayıt kimliğidir.
+        # Tarama/öncelik sırası değişse bile aynı saha aynı numarada kalır.
+        field["liste_no"] = field.id.astype(int)
         classifications = field.apply(
             field_record_classification, axis=1, result_type="expand"
         )
@@ -230,6 +232,10 @@ with field_tab:
             "Belediye meclisinde veya E-İmar'da görünen parsel, tek başına yapı "
             "ruhsatı ya da inşaat başlangıcı değildir. Ruhsat teyidi olmayan kayıtlar "
             "aşağıda açıkça işaretlenmiştir."
+        )
+        st.caption(
+            "# numarası sabit kayıt numarasıdır; öncelik puanı değildir. "
+            "Saha önceliğini kırmızı/turuncu renk gösterir."
         )
 
         mapped = field.dropna(subset=["enlem", "boylam"]).copy()
