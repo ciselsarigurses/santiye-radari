@@ -28,6 +28,21 @@ REGIONS = {
     },
 }
 
+PLACE_CENTERS = {
+    "Çeşme": (38.3226, 26.3067),
+    "Alaçatı": (38.2848, 26.3745),
+    "Ilıca": (38.3084, 26.3607),
+    "Reisdere": (38.3158, 26.4173),
+    "Ovacık": (38.2587, 26.3370),
+    "Dalyan": (38.3540, 26.3070),
+    "Çiftlikköy": (38.2715, 26.2660),
+    "Musalla": (38.3170, 26.3020),
+    "Şifne": (38.3300, 26.4280),
+    "Germiyan": (38.3220, 26.4970),
+    "Uzunkuyu": (38.2843, 26.5510),
+    "Ildır": (38.3840, 26.4840),
+}
+
 
 class SatelliteError(RuntimeError):
     """Uydu arama veya görüntü okuma hatası."""
@@ -73,6 +88,14 @@ def _pick_pair(items, minimum_gap_days=2):
         if (latest_time - older_time).total_seconds() >= minimum_gap_days * 86400:
             return older, latest
     return items[1], latest
+
+
+def sentinel_pair(region_key):
+    """Bölge için son iki uygun Sentinel sahnesini döndürür."""
+    if region_key not in REGIONS:
+        raise SatelliteError("Bilinmeyen uydu bölgesi.")
+    items = _search_items(REGIONS[region_key]["bbox"])
+    return _pick_pair(items)
 
 
 def _output_shape(bbox, max_width=1050):
@@ -158,14 +181,70 @@ def _item_date(item):
     return timestamp.strftime("%d.%m.%Y")
 
 
-def analyze_sentinel_change(region_key):
+def _nearest_place(latitude, longitude):
+    cosine = np.cos(np.radians(latitude))
+    return min(
+        PLACE_CENTERS,
+        key=lambda name: (
+            (PLACE_CENTERS[name][0] - latitude) ** 2
+            + ((PLACE_CENTERS[name][1] - longitude) * cosine) ** 2
+        ),
+    )
+
+
+def _hotspots(change_mask, bbox, pixel_area_m2, limit=10):
+    """Değişen pikselleri yaklaşık 1 km hücrelerde özetler."""
+    rows, columns = np.nonzero(change_mask)
+    if not len(rows):
+        return []
+
+    height, width = change_mask.shape
+    west, south, east, north = bbox
+    latitudes = north - (rows + 0.5) / height * (north - south)
+    longitudes = west + (columns + 0.5) / width * (east - west)
+    cell_size = 0.01
+    lat_bins = np.floor(latitudes / cell_size).astype("int32")
+    lon_bins = np.floor(longitudes / cell_size).astype("int32")
+    grouped = {}
+    for lat_bin, lon_bin, latitude, longitude in zip(
+        lat_bins, lon_bins, latitudes, longitudes
+    ):
+        key = (int(lat_bin), int(lon_bin))
+        bucket = grouped.setdefault(
+            key, {"count": 0, "lat_total": 0.0, "lon_total": 0.0}
+        )
+        bucket["count"] += 1
+        bucket["lat_total"] += float(latitude)
+        bucket["lon_total"] += float(longitude)
+
+    results = []
+    for bucket in sorted(
+        grouped.values(), key=lambda item: item["count"], reverse=True
+    )[:limit]:
+        latitude = bucket["lat_total"] / bucket["count"]
+        longitude = bucket["lon_total"] / bucket["count"]
+        area_m2 = bucket["count"] * pixel_area_m2
+        if area_m2 < 800:
+            continue
+        results.append(
+            {
+                "mahalle": _nearest_place(latitude, longitude),
+                "enlem": round(latitude, 6),
+                "boylam": round(longitude, 6),
+                "alan_m2": round(area_m2),
+                "sinyal": "Geniş yüzey/toprak değişimi adayı",
+            }
+        )
+    return results
+
+
+def analyze_sentinel_change(region_key, pair=None):
     if region_key not in REGIONS:
         raise SatelliteError("Bilinmeyen uydu bölgesi.")
 
     region = REGIONS[region_key]
     bbox = region["bbox"]
-    items = _search_items(bbox)
-    older, latest = _pick_pair(items)
+    older, latest = pair or sentinel_pair(region_key)
     height, width = _output_shape(bbox)
 
     older_visual = _read_asset(
@@ -225,7 +304,8 @@ def analyze_sentinel_change(region_key):
         np.radians((south + north) / 2)
     ) / width
     pixel_height_m = (north - south) * 110570 / height
-    changed_km2 = float(change_mask.sum() * pixel_width_m * pixel_height_m / 1e6)
+    pixel_area_m2 = pixel_width_m * pixel_height_m
+    changed_km2 = float(change_mask.sum() * pixel_area_m2 / 1e6)
     valid_pixels = max(int(valid.sum()), 1)
 
     return {
@@ -238,7 +318,7 @@ def analyze_sentinel_change(region_key):
         "change_png": _png_bytes(overlay),
         "changed_km2": changed_km2,
         "changed_percent": float(change_mask.sum() / valid_pixels * 100),
+        "hotspots": _hotspots(change_mask, bbox, pixel_area_m2),
         "latest_item": latest["id"],
         "older_item": older["id"],
     }
-
