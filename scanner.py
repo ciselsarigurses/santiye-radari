@@ -32,6 +32,11 @@ SEARCH_QUERIES = [
     'Çiftlikköy Çeşme yeni inşaat',
     'Musalla Çeşme yeni inşaat',
     'Uzunkuyu Urla inşaat proje',
+    'site:cesme.bel.tr "yapı ruhsatı" Çeşme',
+    'site:cesme.bel.tr "inşaata başlama" OR "temel atıldı"',
+    'Çeşme "ruhsat aldı" OR "yapı ruhsatı aldı"',
+    'Çeşme "hafriyat başladı" OR "şantiye kuruldu"',
+    'Çeşme "inşaata başlayacak" müteahhit proje',
     'site:cesme.bel.tr inşaat ruhsat ihale',
     'site:instagram.com Çeşme inşaat villa',
     'site:instagram.com Alaçatı şantiye villa',
@@ -114,6 +119,7 @@ NOISE = (
     "davalık",
     "kaçak hafriyat",
     "kaçak inşaat",
+    "inşaat yasağı",
 )
 
 STRONG_ACTIVE_SIGNALS = (

@@ -72,6 +72,40 @@ def short_text(item, limit=110):
     return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
 
 
+def field_record_classification(row):
+    municipal = value(row.get("belediye_bilgisi"), "").casefold()
+    combined = " ".join(
+        value(row.get(column), "")
+        for column in (
+            "neden", "belediye_bilgisi", "internet_bilgisi", "kaynak_url"
+        )
+    ).casefold()
+    if "ruhsat doğrulandı" in municipal or "yapı ruhsat no" in municipal:
+        return "Yapı ruhsatı", "Ruhsat doğrulandı"
+    if "meclis" in combined or "imar planı" in combined:
+        return "İmar/meclis sinyali", "Ruhsat teyit edilmedi"
+    if "imardurumu" in combined or "e-imar" in combined:
+        return "E-İmar parsel kaydı", "Ruhsat teyit edilmedi"
+    if "ruhsat aldı" in combined or "yapı ruhsatı" in combined:
+        return "Ruhsat internet sinyali", "Belediye ruhsatı teyitsiz"
+    active_terms = (
+        "yapım sürüyor", "inşaata başladı", "temel atıldı", "hafriyat",
+        "şantiye kuruldu", "kaba inşaat",
+    )
+    if any(term in combined for term in active_terms):
+        return "Aktif inşaat internet sinyali", "Belediye ruhsatı teyitsiz"
+    return "Saha/internet kontrol adayı", "Ruhsat teyit edilmedi"
+
+
+def selected_map_object(event, layer_id):
+    try:
+        objects = event.selection.objects
+        selected = objects.get(layer_id, [])
+        return selected[0] if selected else None
+    except (AttributeError, KeyError, TypeError, IndexError):
+        return None
+
+
 def add_to_field(candidate):
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     with connect() as connection:
@@ -178,11 +212,25 @@ with field_tab:
     if field.empty:
         st.info("Henüz aktif saha kaydı yok. Radar bulgularından bir adayı saha listesine aktarabilirsin.")
     else:
-        c1, c2, c3, c4 = st.columns(4)
-        c1.metric("🔴 Gidilmeli", int((field.durum == "KIRMIZI").sum()))
+        field = field.reset_index(drop=True)
+        field["liste_no"] = field.index + 1
+        classifications = field.apply(
+            field_record_classification, axis=1, result_type="expand"
+        )
+        classifications.columns = ["kayit_turu", "ruhsat_durumu"]
+        field[["kayit_turu", "ruhsat_durumu"]] = classifications
+
+        c1, c2, c3, c4, c5 = st.columns(5)
+        c1.metric("🔴 Güçlü sinyal", int((field.durum == "KIRMIZI").sum()))
         c2.metric("🟠 Kontrol", int((field.durum == "TURUNCU").sum()))
-        c3.metric("📍 Konum eksik", int((field.enlem.isna() | field.boylam.isna()).sum()))
-        c4.metric("Toplam aktif", len(field))
+        c3.metric("✅ Ruhsat teyitli", int(field.ruhsat_durumu.str.startswith("Ruhsat doğrulandı").sum()))
+        c4.metric("📍 Konum eksik", int((field.enlem.isna() | field.boylam.isna()).sum()))
+        c5.metric("Toplam aktif", len(field))
+        st.warning(
+            "Belediye meclisinde veya E-İmar'da görünen parsel, tek başına yapı "
+            "ruhsatı ya da inşaat başlangıcı değildir. Ruhsat teyidi olmayan kayıtlar "
+            "aşağıda açıkça işaretlenmiştir."
+        )
 
         mapped = field.dropna(subset=["enlem", "boylam"]).copy()
         if not mapped.empty:
@@ -192,8 +240,12 @@ with field_tab:
             mapped["renk"] = mapped.durum.map(
                 {"KIRMIZI": [235, 45, 65, 235], "TURUNCU": [255, 145, 25, 235]}
             ).apply(lambda x: x if isinstance(x, list) else [60, 120, 180, 235])
+            mapped["sayi"] = mapped.liste_no.astype(str)
             mapped["etiket"] = mapped.apply(
-                lambda row: f"{value(row.mahalle, '')} | {value(row.ada)} / {value(row.parsel)}",
+                lambda row: (
+                    f"#{int(row.liste_no)} • {value(row.mahalle, '')} | "
+                    f"{value(row.ada)} / {value(row.parsel)}"
+                ),
                 axis=1,
             )
 
@@ -207,16 +259,27 @@ with field_tab:
             if not center:
                 continue
             count = len(group)
+            group_status = "KIRMIZI" if (group.durum == "KIRMIZI").any() else "TURUNCU"
+            group_color = (
+                [235, 45, 65, 235] if group_status == "KIRMIZI"
+                else [255, 145, 25, 235]
+            )
+            list_numbers = ", ".join(f"#{int(no)}" for no in group.liste_no)
             approximate_rows.append(
                 {
                     "enlem": center[0],
                     "boylam": center[1],
                     "sayi": str(count),
+                    "mahalle": value(group.iloc[0].mahalle),
                     "etiket": f"{value(group.iloc[0].mahalle)} • {count} kayıt",
-                    "durum": "Yaklaşık bölge",
+                    "durum": f"{group_status} • yaklaşık mahalle merkezi",
+                    "renk": group_color,
+                    "kayit_turu": "Koordinatı eksik kayıt kümesi",
+                    "kayit_idleri": ",".join(str(int(item)) for item in group.id),
+                    "kayit_nolari": list_numbers,
                     "neden": (
-                        "Kesin ada/parsel koordinatı henüz yok; işaret mahalle "
-                        "merkezini ve kayıt sayısını gösterir."
+                        f"Bu sayı sıra numarası değil; {count} koordinatsız kaydın "
+                        "mahalle toplamıdır. Kesin parsel konumu değildir."
                     ),
                 }
             )
@@ -228,18 +291,20 @@ with field_tab:
                 [
                     pdk.Layer(
                         "ScatterplotLayer", approximate,
+                        id="area-groups",
                         get_position="[boylam,enlem]",
-                        get_fill_color=[35, 135, 255, 205],
-                        get_line_color=[255, 255, 255, 255],
+                        get_fill_color="renk",
+                        get_line_color=[35, 135, 255, 255],
                         get_radius=230,
                         radius_min_pixels=15,
                         radius_max_pixels=28,
-                        line_width_min_pixels=3,
+                        line_width_min_pixels=5,
                         stroked=True,
                         pickable=True,
                     ),
                     pdk.Layer(
                         "TextLayer", approximate,
+                        id="area-group-labels",
                         get_position="[boylam,enlem]",
                         get_text="sayi",
                         get_color=[255, 255, 255, 255],
@@ -248,26 +313,43 @@ with field_tab:
                         size_max_pixels=18,
                         get_text_anchor="'middle'",
                         get_alignment_baseline="'center'",
+                        pickable=False,
                     ),
                 ]
             )
         if not mapped.empty:
-            map_layers.append(
-                pdk.Layer(
-                    "ScatterplotLayer", mapped,
-                    get_position="[boylam,enlem]",
-                    get_fill_color="renk",
-                    get_line_color=[255, 255, 255, 255],
-                    get_radius=120,
-                    radius_min_pixels=11,
-                    radius_max_pixels=25,
-                    line_width_min_pixels=3,
-                    stroked=True,
-                    pickable=True,
-                )
+            map_layers.extend(
+                [
+                    pdk.Layer(
+                        "ScatterplotLayer", mapped,
+                        id="site-points",
+                        get_position="[boylam,enlem]",
+                        get_fill_color="renk",
+                        get_line_color=[255, 255, 255, 255],
+                        get_radius=120,
+                        radius_min_pixels=12,
+                        radius_max_pixels=26,
+                        line_width_min_pixels=4,
+                        stroked=True,
+                        pickable=True,
+                    ),
+                    pdk.Layer(
+                        "TextLayer", mapped,
+                        id="site-labels",
+                        get_position="[boylam,enlem]",
+                        get_text="sayi",
+                        get_color=[255, 255, 255, 255],
+                        get_size=15,
+                        size_min_pixels=12,
+                        size_max_pixels=17,
+                        get_text_anchor="'middle'",
+                        get_alignment_baseline="'center'",
+                        pickable=False,
+                    ),
+                ]
             )
 
-        st.pydeck_chart(
+        map_event = st.pydeck_chart(
             pdk.Deck(
                 map_provider="carto",
                 map_style=SATELLITE_STYLE,
@@ -276,20 +358,100 @@ with field_tab:
                     latitude=38.305, longitude=26.405, zoom=10.35
                 ),
                 tooltip={
-                    "html": "<b>{etiket}</b><br>{durum}<br><small>{neden}</small>"
+                    "html": (
+                        "<b>{etiket}</b><br>{durum}<br>{kayit_turu}"
+                        "<br><small>{neden}</small>"
+                    )
                 },
             ),
             use_container_width=True,
+            key="field_map",
+            on_select="rerun",
+            selection_mode="single-object",
         )
         st.caption(
-            "🔴 Gidilmeli · 🟠 Kontrol · 🔵 Sayılı kümeler kesin koordinatı eksik "
-            "kayıtların mahalle merkezidir (parsel konumu değildir). "
+            "🔴 Güçlü sinyal · 🟠 Kontrol · Beyaz çerçeveli tek sayı = listede aynı "
+            "numaralı kesin nokta · Mavi çerçeveli sayı = o mahalledeki koordinatsız "
+            "kayıt adedi (sıra numarası değildir). Bir işarete tıklayarak detayını aç. "
             "Uydu: Esri, yer adları ve mahalle merkezleri: OpenStreetMap katkıcıları."
         )
 
+        selected_site = selected_map_object(map_event, "site-points")
+        selected_area = selected_map_object(map_event, "area-groups")
+        if selected_site:
+            try:
+                selected_id = int(float(selected_site.get("id")))
+            except (TypeError, ValueError):
+                selected_id = -1
+            selected_rows = field[field.id == selected_id]
+            if not selected_rows.empty:
+                selected_row = selected_rows.iloc[0]
+                with st.container(border=True):
+                    icon = "🔴" if selected_row.durum == "KIRMIZI" else "🟠"
+                    st.markdown(
+                        f"#### {icon} #{int(selected_row.liste_no)} • "
+                        f"{value(selected_row.mahalle, 'Konum araştırılıyor')}"
+                    )
+                    st.write("**Kayıt türü:**", selected_row.kayit_turu)
+                    st.write("**Ruhsat:**", selected_row.ruhsat_durumu)
+                    if value(selected_row.firma) != "-":
+                        st.write("**Firma:**", value(selected_row.firma))
+                    if value(selected_row.proje) != "-":
+                        st.write("**Proje:**", value(selected_row.proje))
+                    st.write(
+                        "**Ada / Parsel:**",
+                        f"{value(selected_row.ada)} / {value(selected_row.parsel)}",
+                    )
+                    st.write("**Ön bilgi:**", value(selected_row.neden))
+                    if value(selected_row.kaynak_url) != "-":
+                        st.link_button("Kaynağı Aç", value(selected_row.kaynak_url))
+        elif selected_area:
+            selected_ids = [
+                int(item) for item in str(selected_area.get("kayit_idleri", "")).split(",")
+                if item.strip().isdigit()
+            ]
+            area_records = field[field.id.isin(selected_ids)].copy()
+            if not area_records.empty:
+                st.markdown(
+                    f"#### 🟠 {value(selected_area.get('mahalle'))} • "
+                    f"{len(area_records)} koordinatsız kayıt"
+                )
+                st.info(
+                    "Haritadaki sayı kayıt adedidir. Aşağıdaki # numaralar, "
+                    "‘Aktif noktalar’ listesindeki kayıtlarla aynıdır."
+                )
+                st.dataframe(
+                    area_records[[
+                        "liste_no", "durum", "ada", "parsel", "kayit_turu",
+                        "ruhsat_durumu",
+                    ]].rename(columns={
+                        "liste_no": "#", "durum": "Durum", "ada": "Ada",
+                        "parsel": "Parsel", "kayit_turu": "Kayıt türü",
+                        "ruhsat_durumu": "Ruhsat",
+                    }),
+                    hide_index=True,
+                    use_container_width=True,
+                )
+        else:
+            st.info("Haritadaki kırmızı/turuncu işarete tıkla; ön bilgi burada açılacak.")
+
+        if not approximate.empty:
+            st.markdown("**Mavi çerçeveli sayıların açıklaması**")
+            st.dataframe(
+                approximate[["mahalle", "sayi", "kayit_nolari"]].rename(
+                    columns={
+                        "mahalle": "Mahalle", "sayi": "Haritadaki sayı (adet)",
+                        "kayit_nolari": "Alttaki kayıt numaraları",
+                    }
+                ),
+                hide_index=True,
+                use_container_width=True,
+            )
+
         export_columns = [
-            "durum", "mahalle", "ada", "parsel", "adres", "firma", "proje",
-            "neden", "kaynak_url", "son_kontrol",
+            "liste_no", "durum", "kayit_turu", "ruhsat_durumu", "mahalle",
+            "ada", "parsel", "adres", "firma", "proje", "neden",
+            "kaynak_url", "son_kontrol",
         ]
         st.download_button(
             "📥 Saha listesini CSV indir",
@@ -301,13 +463,18 @@ with field_tab:
         st.subheader("Aktif noktalar")
         for _, row in field.iterrows():
             icon = "🔴" if row.durum == "KIRMIZI" else "🟠"
-            label = f"{icon} {value(row.mahalle, 'Konum araştırılıyor')}"
+            label = (
+                f"#{int(row.liste_no)} {icon} "
+                f"{value(row.mahalle, 'Konum araştırılıyor')}"
+            )
             if value(row.ada) != "-" or value(row.parsel) != "-":
                 label += f" — {value(row.ada)} / {value(row.parsel)}"
             with st.expander(label):
                 st.markdown(
                     f"### {'MUTLAKA GİDİLMELİ' if row.durum == 'KIRMIZI' else 'KONTROL EDİLMELİ'}"
                 )
+                st.write("**Kayıt türü:**", row.kayit_turu)
+                st.write("**Ruhsat durumu:**", row.ruhsat_durumu)
                 if value(row.firma) != "-":
                     st.write("**Firma:**", value(row.firma))
                 if value(row.proje) != "-":
@@ -434,6 +601,30 @@ with scan_tab:
         'kontrol için hazırdır.</div>',
         unsafe_allow_html=True,
     )
+    st.markdown("#### Resmî ruhsat ve inşaata başlama verisi")
+    st.warning(
+        "Çeşme Belediyesi E-İmar ekranı parselin imar koşullarını gösterir; "
+        "yapı ruhsatı verildiğini veya şantiyenin başladığını kanıtlamaz. E-Ruhsat "
+        "sistemi giriş korumalıdır. Bu nedenle belediye belgesi/API/CSV kaydı "
+        "gelmeden hiçbir parsel ‘ruhsat teyitli’ sayılmaz."
+    )
+    official_1, official_2 = st.columns(2)
+    official_1.link_button(
+        "Çeşme Belediyesi E-Belediye",
+        "https://www.cesme.bel.tr/e-belediye",
+        use_container_width=True,
+    )
+    official_2.link_button(
+        "Çeşme Belediyesi E-Ruhsat",
+        "https://keos.cesme.bel.tr/BELNET/",
+        use_container_width=True,
+    )
+    st.caption(
+        "Yetkili veri talebi: Ruhsat ve Denetim Müdürlüğü · "
+        "ruhsat.denetim@cesme.bel.tr · 0 232 750 07 50 / 2801. "
+        "Gerekli alanlar: ruhsat tarihi/numarası, mahalle, ada, parsel, yapı sahibi "
+        "ve mümkünse işe başlama/temel-hafriyat tarihi."
+    )
     for label, link in INSTAGRAM_SEARCH_LINKS:
         st.link_button(f"Instagram kontrolü · {label}", link, use_container_width=True)
 
@@ -467,21 +658,32 @@ with add_tab:
         project = b.text_input("Proje")
         reason = st.text_area("Neden / bulunan bilgi")
         source = st.text_input("Kaynak URL")
+        permit_verification = st.selectbox(
+            "Yapı ruhsatı teyidi",
+            ["Teyit edilmedi", "Belediye belgesiyle doğrulandı"],
+            help="Yalnızca belediye E-Ruhsat çıktısı, resmî yazı veya yetkili veri kaydı varsa doğrulandı seç.",
+        )
+        permit_number = st.text_input("Yapı ruhsat numarası (varsa)")
         lat = a.number_input("Enlem", value=None, format="%.7f")
         lon = b.number_input("Boylam", value=None, format="%.7f")
         submitted = st.form_submit_button("Kaydet", type="primary", use_container_width=True)
 
     if submitted:
         now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        municipal_info = ""
+        if permit_verification == "Belediye belgesiyle doğrulandı":
+            municipal_info = "Ruhsat doğrulandı"
+            if permit_number.strip():
+                municipal_info += f" • Yapı ruhsat no: {permit_number.strip()}"
         with connect() as connection:
             connection.execute(
                 """INSERT INTO santiyeler
                 (durum,mahalle,ada,parsel,adres,enlem,boylam,firma,proje,
-                neden,kaynak_url,son_kontrol,aktif)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,1)""",
+                neden,belediye_bilgisi,kaynak_url,son_kontrol,aktif)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,1)""",
                 (
                     status, neighborhood, block, parcel, address, lat, lon,
-                    company, project, reason, source, now,
+                    company, project, reason, municipal_info, source, now,
                 ),
             )
         st.success("Kayıt saha listesine eklendi.")

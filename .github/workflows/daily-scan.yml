@@ -40,18 +40,13 @@ jobs:
       - name: Uygulama açılış testi
         if: github.event_name == 'push'
         run: |
-          streamlit run app.py --server.headless true --server.port 8501 > /tmp/streamlit.log 2>&1 &
-          APP_PID=$!
-          for attempt in {1..20}; do
-            if curl -fsS http://127.0.0.1:8501/_stcore/health | grep -q ok; then
-              kill "$APP_PID"
-              exit 0
-            fi
-            sleep 1
-          done
-          cat /tmp/streamlit.log
-          kill "$APP_PID" || true
-          exit 1
+          python - <<'PY'
+          from streamlit.testing.v1 import AppTest
+
+          app = AppTest.from_file("app.py")
+          app.run(timeout=45)
+          assert not app.exception, app.exception
+          PY
 
       - name: İnternet taramasını çalıştır
         run: python scanner.py
