@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-27",
-  "olusturma": "2026-08-27 22:08 +03",
-  "ozet": "İnternet: 6 yeni aktif bulgu, 0 güncellendi. Instagram: 3 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 7 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır: 0 hareket bölgesi adayı · Aktif saha görevi: 7",
+  "olusturma": "2026-08-27 22:10 +03",
+  "ozet": "İnternet: 5 yeni aktif bulgu, 0 güncellendi. Instagram: 2 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 7 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır: 0 hareket bölgesi adayı · Aktif saha görevi: 7",
   "saha_adaylari": [
     {
       "oncelik": "ORTA",
@@ -143,15 +143,6 @@
       "kaynak_tipi": "Google Haberler",
       "skor": 8,
       "durum": "KIRMIZI"
-    },
-    {
-      "proje": "360 çeşme villa projesinin tüm reklam işlerini tamamladık... dostlarımıza hayırlı olsun.. Destan reklam farkı ile - instagram.com",
-      "bolge": "Çeşme",
-      "sinyal": "villa projesi, proje",
-      "kaynak_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1JUU54MTQxaXJjdWo0UDdzT01JRU1VZk1zb2xfMjloM29hcWstYm5ucU5uV29nbzlIWnppNlBLMUlVZjRkNG1wOFlFSlgweE9LSkE1NFRR?oc=5",
-      "kaynak_tipi": "Instagram (indekslenmiş)",
-      "skor": 6,
-      "durum": "TURUNCU"
     },
     {
       "proje": "Çeşme Dalyan İkiz Villa Projesi... - instagram.com",
