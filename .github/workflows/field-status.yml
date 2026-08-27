@@ -1,0 +1,64 @@
+name: Saha Durumunu İşle
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: santiye-radari-db-write
+  cancel-in-progress: false
+
+jobs:
+  apply-status:
+    if: >-
+      startsWith(github.event.issue.title, '[SAHA] ') &&
+      github.event.issue.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Saha durumunu uygula
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: python apply_field_status.py "$ISSUE_TITLE"
+
+      - name: Durumu kalıcı kaydet
+        run: |
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add santiye.db SAHA_RAPORU.md latest_report.json
+          if git diff --cached --quiet; then
+            echo "Kaydedilecek yeni durum farkı yok."
+          else
+            git commit -m "Saha: ${{ github.event.issue.title }}"
+            git fetch origin main
+            if ! git rebase origin/main; then
+              echo "Ana dal ile saha durumu çakıştı; veri kaybını önlemek için durduruldu."
+              git rebase --abort || true
+              exit 1
+            fi
+            git push origin HEAD:main
+          fi
+
+      - name: Talebi kapat
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue close "${{ github.event.issue.number }}" \
+            --repo "$GITHUB_REPOSITORY" \
+            --comment "Durum Şantiye Radarı'na kaydedildi."
