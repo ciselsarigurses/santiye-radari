@@ -6,7 +6,12 @@ import json
 from datetime import datetime
 
 from daily_report import ISTANBUL, _maps_route, _report_hotspots, _write_public_report
-from field_state import status_counts, sync_satellite_tasks, sync_site_tasks
+from field_state import (
+    reconcile_satellite_duplicates,
+    status_counts,
+    sync_satellite_tasks,
+    sync_site_tasks,
+)
 from scanner import connect
 
 
@@ -133,6 +138,7 @@ def _active_hotspots(connection, report_date):
     raw = _report_hotspots(connection, report_date)
     sync_site_tasks(connection, report_date)
     decorated = sync_satellite_tasks(connection, raw, report_date)
+    reconcile_satellite_duplicates(connection, decorated, report_date)
 
     active = []
     known_task_ids = set()
