@@ -13,6 +13,24 @@ from scanner import DB, INSTAGRAM_SEARCH_LINKS, connect, ensure_schema, scan_and
 st.set_page_config(page_title="Şantiye Radarı", page_icon="📍", layout="wide")
 ensure_schema()
 
+SATELLITE_TILES = (
+    "https://server.arcgisonline.com/ArcGIS/rest/services/"
+    "World_Imagery/MapServer/tile/{z}/{y}/{x}"
+)
+SATELLITE_LABELS = (
+    "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/"
+    "World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
+)
+
+# Kesin koordinatı olmayan kayıtları yanlış bir parsele yerleştirmek yerine
+# mahalle merkezinde, adet belirten mavi bir küme olarak gösteriyoruz.
+NEIGHBORHOOD_CENTERS = {
+    "alaçatı": (38.2847573, 26.3745176),
+    "ilıca": (38.3083827, 26.3607464),
+    "reisdere": (38.3157625, 26.4173433),
+    "uzunkuyu": (38.2842936, 26.5509824),
+}
+
 st.markdown(
     """
     <style>
@@ -176,28 +194,110 @@ with field_tab:
             mapped["boylam"] = pd.to_numeric(mapped.boylam, errors="coerce")
             mapped = mapped.dropna(subset=["enlem", "boylam"])
             mapped["renk"] = mapped.durum.map(
-                {"KIRMIZI": [220, 40, 40], "TURUNCU": [240, 140, 30]}
-            ).apply(lambda x: x if isinstance(x, list) else [60, 120, 180])
+                {"KIRMIZI": [235, 45, 65, 235], "TURUNCU": [255, 145, 25, 235]}
+            ).apply(lambda x: x if isinstance(x, list) else [60, 120, 180, 235])
             mapped["etiket"] = mapped.apply(
                 lambda row: f"{value(row.mahalle, '')} | {value(row.ada)} / {value(row.parsel)}",
                 axis=1,
             )
-            st.pydeck_chart(
-                pdk.Deck(
-                    layers=[
-                        pdk.Layer(
-                            "ScatterplotLayer", mapped,
-                            get_position="[boylam,enlem]", get_fill_color="renk",
-                            get_radius=65, pickable=True,
-                        )
-                    ],
-                    initial_view_state=pdk.ViewState(
-                        latitude=38.31, longitude=26.30, zoom=10.2
+
+        missing = field[field.enlem.isna() | field.boylam.isna()].copy()
+        missing["mahalle_anahtari"] = (
+            missing.mahalle.fillna("").astype(str).str.strip().str.casefold()
+        )
+        approximate_rows = []
+        for mahalle_key, group in missing.groupby("mahalle_anahtari"):
+            center = NEIGHBORHOOD_CENTERS.get(mahalle_key)
+            if not center:
+                continue
+            count = len(group)
+            approximate_rows.append(
+                {
+                    "enlem": center[0],
+                    "boylam": center[1],
+                    "sayi": str(count),
+                    "etiket": f"{value(group.iloc[0].mahalle)} • {count} kayıt",
+                    "durum": "Yaklaşık bölge",
+                    "neden": (
+                        "Kesin ada/parsel koordinatı henüz yok; işaret mahalle "
+                        "merkezini ve kayıt sayısını gösterir."
                     ),
-                    tooltip={"html": "<b>{etiket}</b><br>{durum}<br>{neden}"},
-                ),
-                use_container_width=True,
+                }
             )
+        approximate = pd.DataFrame(approximate_rows)
+
+        map_layers = [
+            pdk.Layer(
+                "TileLayer", data=SATELLITE_TILES, min_zoom=0, max_zoom=19,
+                tile_size=256,
+            ),
+            pdk.Layer(
+                "TileLayer", data=SATELLITE_LABELS, min_zoom=0, max_zoom=19,
+                tile_size=256,
+            ),
+        ]
+        if not approximate.empty:
+            map_layers.extend(
+                [
+                    pdk.Layer(
+                        "ScatterplotLayer", approximate,
+                        get_position="[boylam,enlem]",
+                        get_fill_color=[35, 135, 255, 205],
+                        get_line_color=[255, 255, 255, 255],
+                        get_radius=230,
+                        radius_min_pixels=15,
+                        radius_max_pixels=28,
+                        line_width_min_pixels=3,
+                        stroked=True,
+                        pickable=True,
+                    ),
+                    pdk.Layer(
+                        "TextLayer", approximate,
+                        get_position="[boylam,enlem]",
+                        get_text="sayi",
+                        get_color=[255, 255, 255, 255],
+                        get_size=16,
+                        size_min_pixels=13,
+                        size_max_pixels=18,
+                        get_text_anchor="'middle'",
+                        get_alignment_baseline="'center'",
+                    ),
+                ]
+            )
+        if not mapped.empty:
+            map_layers.append(
+                pdk.Layer(
+                    "ScatterplotLayer", mapped,
+                    get_position="[boylam,enlem]",
+                    get_fill_color="renk",
+                    get_line_color=[255, 255, 255, 255],
+                    get_radius=120,
+                    radius_min_pixels=11,
+                    radius_max_pixels=25,
+                    line_width_min_pixels=3,
+                    stroked=True,
+                    pickable=True,
+                )
+            )
+
+        st.pydeck_chart(
+            pdk.Deck(
+                map_style=None,
+                layers=map_layers,
+                initial_view_state=pdk.ViewState(
+                    latitude=38.305, longitude=26.405, zoom=10.35
+                ),
+                tooltip={
+                    "html": "<b>{etiket}</b><br>{durum}<br><small>{neden}</small>"
+                },
+            ),
+            use_container_width=True,
+        )
+        st.caption(
+            "🔴 Gidilmeli · 🟠 Kontrol · 🔵 Sayılı kümeler kesin koordinatı eksik "
+            "kayıtların mahalle merkezidir (parsel konumu değildir). "
+            "Uydu: Esri, yer adları ve mahalle merkezleri: OpenStreetMap katkıcıları."
+        )
 
         export_columns = [
             "durum", "mahalle", "ada", "parsel", "adres", "firma", "proje",
