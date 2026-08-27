@@ -61,9 +61,13 @@ else:
                 b2.link_button("🛰️ Google Maps'te Gör",
                     f"https://www.google.com/maps/search/?api=1&query={r.enlem},{r.boylam}",
                     use_container_width=True)
-            elif r.adres:
+                       elif pd.notna(r.adres) and str(r.adres).strip().lower() != "nan":
                 b1.link_button("📍 Adresi Google Maps'te Ara",
                     f"https://www.google.com/maps/search/?api=1&query={quote_plus(str(r.adres) + ' Çeşme İzmir')}",
+                    use_container_width=True)
+            elif pd.notna(r.ada) and pd.notna(r.parsel):
+                b1.link_button("📍 Ada / Parseli Google Maps'te Ara",
+                    f"https://www.google.com/maps/search/?api=1&query={quote_plus(str(r.mahalle) + ' ' + str(r.ada) + ' ada ' + str(r.parsel) + ' parsel Çeşme İzmir')}",
                     use_container_width=True)
             if r.kaynak_url:
                 st.link_button("Kaynağı Aç",r.kaynak_url,use_container_width=True)
