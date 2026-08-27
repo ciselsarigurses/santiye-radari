@@ -57,18 +57,19 @@ def _satellite_summary(connection, report_date):
     return summaries
 
 
-def _persisted_repeat_tasks(connection, known_task_ids):
-    """Bugünkü uydu görüntüsünde görünmese de TEKRAR_GIT kararını kaybetme."""
+def _persisted_open_tasks(connection, known_task_ids):
+    """Yeni görüntüde görünmese de açık saha kararlarını günlük listede tut."""
     rows = connection.execute(
         """SELECT d.gorev_id,d.kaynak,d.kaynak_kimlik,d.mahalle,d.enlem,d.boylam,
-        d.kontrol_sayisi,d.son_islem,s.adres,s.ada,s.parsel,s.firma,s.proje
+        d.kontrol_sayisi,d.son_islem,s.adres,s.ada,s.parsel,s.firma,s.proje,d.durum
         FROM saha_durumlari d
         LEFT JOIN santiyeler s
           ON d.kaynak='saha' AND CAST(s.id AS TEXT)=d.kaynak_kimlik
-        WHERE d.durum='TEKRAR_GIT'
-        ORDER BY d.son_islem DESC, d.id DESC"""
+        WHERE d.durum IN ('KONTROLE_GIT','TEKRAR_GIT')
+        ORDER BY CASE d.durum WHEN 'TEKRAR_GIT' THEN 0 ELSE 1 END,
+        d.son_islem DESC, d.id DESC"""
     ).fetchall()
-    repeats = []
+    pending = []
     for row in rows:
         task_id = str(row[0] or "")
         if not task_id or task_id in known_task_ids:
@@ -86,14 +87,20 @@ def _persisted_repeat_tasks(connection, known_task_ids):
         )
         source = str(row[1] or "")
         source_key = str(row[2] or "")
-        repeats.append(
+        status = str(row[13] or "KONTROLE_GIT")
+        is_repeat = status == "TEKRAR_GIT"
+        pending.append(
             {
-                "oncelik": "TEKRAR",
+                "oncelik": "TEKRAR" if is_repeat else "BEKLEYEN",
                 "mahalle": str(row[3] or "Konum araştırılıyor"),
                 "enlem": round(latitude, 6) if latitude is not None else None,
                 "boylam": round(longitude, 6) if longitude is not None else None,
                 "alan_m2": 0,
-                "sinyal": "Önceki saha kararı: bir daha git bak",
+                "sinyal": (
+                    "Önceki saha kararı: bir daha git bak"
+                    if is_repeat
+                    else "Önceki saha görevi: kontrol bekliyor"
+                ),
                 "bolge": source_key if source == "uydu" else "Saha listesi",
                 "onceki_tarih": None,
                 "son_tarih": None,
@@ -102,10 +109,13 @@ def _persisted_repeat_tasks(connection, known_task_ids):
                 "konum_notu": (
                     "Yeni uydu sinyali olmasa da saha ekibi tekrar kontrol istediği "
                     "için aktif takipte tutuluyor."
+                    if is_repeat
+                    else "Yeni uydu sinyali olmasa da saha kontrolü tamamlanmadığı "
+                    "için aktif listede tutuluyor."
                 ),
                 "gorev_id": task_id,
-                "saha_durumu": "TEKRAR_GIT",
-                "takip_gorevi": True,
+                "saha_durumu": status,
+                "takip_gorevi": is_repeat,
                 "kontrol_sayisi": int(row[6] or 0),
                 "son_islem": row[7],
                 "adres": row[8],
@@ -115,7 +125,7 @@ def _persisted_repeat_tasks(connection, known_task_ids):
                 "proje": row[12],
             }
         )
-    return repeats
+    return pending
 
 
 def _active_hotspots(connection, report_date):
@@ -139,9 +149,9 @@ def _active_hotspots(connection, report_date):
             item["sinyal"] = "Tekrar saha kontrolü · " + str(item.get("sinyal") or "")
         active.append(item)
 
-    active.extend(_persisted_repeat_tasks(connection, known_task_ids))
+    active.extend(_persisted_open_tasks(connection, known_task_ids))
 
-    priority = {"TEKRAR": 0, "YÜKSEK": 1, "ORTA": 2, "NORMAL": 3}
+    priority = {"TEKRAR": 0, "YÜKSEK": 1, "ORTA": 2, "BEKLEYEN": 3, "NORMAL": 4}
     active.sort(
         key=lambda item: (
             priority.get(str(item.get("oncelik")), 9),
