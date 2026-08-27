@@ -1,11 +1,4 @@
-"""Günlük raporu aktif radar adaylarıyla tutarlı hale getirir.
-
-Aynı gün içinde birden fazla workflow çalıştığında son taramanın ``yeni`` sayısı
-sıfıra dönebilir. Günlük rapor ise o gün ilk kez görülen adayları göstermelidir.
-Ayrıca sonradan gürültü/eskimiş diye pasife alınan adayların saha raporunda
-kalmaması gerekir. Bu adım günlük özet, veritabanı ve açık rapor dosyalarını
-aynı aktif veri kümesinden yeniden üretir.
-"""
+"""Günlük raporu aktif radar adayları ve saha kararlarıyla tutarlı tutar."""
 
 from __future__ import annotations
 
@@ -13,6 +6,7 @@ import json
 from datetime import datetime
 
 from daily_report import ISTANBUL, _report_hotspots, _write_public_report
+from field_state import status_counts, sync_satellite_tasks, sync_site_tasks
 from scanner import connect
 
 
@@ -63,6 +57,32 @@ def _satellite_summary(connection, report_date):
     return summaries
 
 
+def _active_hotspots(connection, report_date):
+    raw = _report_hotspots(connection, report_date)
+    sync_site_tasks(connection, report_date)
+    decorated = sync_satellite_tasks(connection, raw, report_date)
+
+    active = []
+    for item in decorated:
+        status = str(item.get("saha_durumu") or "KONTROLE_GIT")
+        if status == "KONTROL_EDILDI":
+            continue
+        item = dict(item)
+        if status == "TEKRAR_GIT":
+            item["oncelik"] = "TEKRAR"
+            item["sinyal"] = "Tekrar saha kontrolü · " + str(item.get("sinyal") or "")
+        active.append(item)
+
+    priority = {"TEKRAR": 0, "YÜKSEK": 1, "ORTA": 2, "NORMAL": 3}
+    active.sort(
+        key=lambda item: (
+            priority.get(str(item.get("oncelik")), 9),
+            -float(item.get("alan_m2") or 0),
+        )
+    )
+    return active
+
+
 def normalize_daily_report(report_date=None):
     now = datetime.now(ISTANBUL)
     report_date = report_date or now.strftime("%Y-%m-%d")
@@ -90,6 +110,10 @@ def normalize_daily_report(report_date=None):
             for item in details
         )
         satellite = _satellite_summary(connection, report_date)
+        hotspots = _active_hotspots(connection, report_date)
+        counts = status_counts(connection)
+        repeat_count = counts.get("TEKRAR_GIT", 0)
+
         summary = (
             f"İnternet: {daily_new} yeni aktif bulgu, {updated} güncellendi. "
             f"Instagram: {instagram} yeni indekslenmiş sonuç. "
@@ -97,6 +121,9 @@ def normalize_daily_report(report_date=None):
         )
         if satellite:
             summary += " " + " · ".join(satellite)
+        summary += f" · Aktif saha görevi: {len(hotspots)}"
+        if repeat_count:
+            summary += f" · Tekrar gidilecek: {repeat_count}"
 
         connection.execute(
             """UPDATE gunluk_raporlar SET
@@ -113,12 +140,12 @@ def normalize_daily_report(report_date=None):
                 report_date,
             ),
         )
-        hotspots = _report_hotspots(connection, report_date)
 
     _write_public_report(report_date, created, summary, hotspots, details)
     return {
         "date": report_date,
         "active_daily_findings": daily_new,
+        "active_field_tasks": len(hotspots),
         "summary": summary,
     }
 
@@ -128,7 +155,8 @@ if __name__ == "__main__":
     if result:
         print(
             f"Rapor kalite kontrolü tamamlandı ({result['date']}): "
-            f"{result['active_daily_findings']} aktif günlük bulgu"
+            f"{result['active_daily_findings']} aktif günlük bulgu, "
+            f"{result['active_field_tasks']} aktif saha görevi"
         )
     else:
         print("Kalite kontrolü için günlük rapor bulunamadı.")
