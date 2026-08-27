@@ -6,6 +6,7 @@ on:
     paths:
       - "app.py"
       - "scanner.py"
+      - "satellite.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
   schedule:

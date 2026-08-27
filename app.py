@@ -4,10 +4,12 @@ from urllib.parse import quote_plus
 
 import pandas as pd
 import pydeck as pdk
+import requests
 import streamlit as st
 from bs4 import BeautifulSoup
 
 from scanner import DB, INSTAGRAM_SEARCH_LINKS, connect, ensure_schema, scan_and_store
+from satellite import REGIONS, SatelliteError, analyze_sentinel_change
 
 
 st.set_page_config(page_title="Şantiye Radarı", page_icon="📍", layout="wide")
@@ -106,6 +108,11 @@ def selected_map_object(event, layer_id):
         return None
 
 
+@st.cache_data(ttl=21600, show_spinner=False)
+def cached_satellite_analysis(region_key):
+    return analyze_sentinel_change(region_key)
+
+
 def add_to_field(candidate):
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     with connect() as connection:
@@ -197,8 +204,11 @@ if run_scan:
         st.error(f"Tarama tamamlanamadı: {type(exc).__name__}")
 
 
-field_tab, web_tab, scan_tab, add_tab = st.tabs(
-    ["🎯 Saha Listesi", "🌐 Radar Bulguları", "🔍 Tarama Merkezi", "➕ Yeni Kayıt"]
+field_tab, web_tab, satellite_tab, scan_tab, add_tab = st.tabs(
+    [
+        "🎯 Saha Listesi", "🌐 Radar Bulguları", "🛰️ Ücretsiz Uydu",
+        "🔍 Tarama Merkezi", "➕ Yeni Kayıt",
+    ]
 )
 
 with field_tab:
@@ -586,6 +596,76 @@ with web_tab:
                 if a2.button("Arşivle", key=f"archive_{int(row.id)}", use_container_width=True):
                     archive_candidate(row.id)
                     st.rerun()
+
+with satellite_tab:
+    st.subheader("Ücretsiz Sentinel-2 değişim kontrolü")
+    st.info(
+        "Bu ekran ücretsiz ve açık Sentinel-2 görüntülerini karşılaştırır. "
+        "Yaklaşık 5 günlük geçiş ve 10 metre çözünürlük nedeniyle geniş hafriyat, "
+        "yol açılması ve büyük toprak değişimleri görülebilir; tek villa temeli "
+        "her zaman yakalanamaz."
+    )
+    region_labels = {key: item["label"] for key, item in REGIONS.items()}
+    selected_region = st.selectbox(
+        "İzlenecek bölge",
+        list(region_labels),
+        format_func=lambda key: region_labels[key],
+    )
+    st.caption(
+        "Kırmızı alanlar otomatik değişim adayıdır; bulut, gölge, tarla sürümü veya "
+        "mevsimsel bitki değişimi de işaretlenebilir. Son karar saha kontrolüyle verilir."
+    )
+    run_satellite = st.button(
+        "🛰️ Son ücretsiz görüntüleri karşılaştır",
+        type="primary",
+        use_container_width=True,
+    )
+    if run_satellite:
+        try:
+            with st.spinner("Sentinel-2 görüntüleri indiriliyor ve karşılaştırılıyor…"):
+                satellite_result = cached_satellite_analysis(selected_region)
+            s1, s2, s3, s4 = st.columns(4)
+            s1.metric("Önceki görüntü", satellite_result["older_date"])
+            s2.metric("Son görüntü", satellite_result["latest_date"])
+            s3.metric("Son görüntü bulutu", f"%{satellite_result['latest_cloud']:.1f}")
+            s4.metric("Değişim adayı", f"{satellite_result['changed_km2']:.2f} km²")
+
+            image_1, image_2 = st.columns(2)
+            image_1.image(
+                satellite_result["latest_png"],
+                caption=f"Son ücretsiz görüntü · {satellite_result['latest_date']}",
+                use_container_width=True,
+            )
+            image_2.image(
+                satellite_result["change_png"],
+                caption=(
+                    f"Kırmızı = değişim adayı · {satellite_result['older_date']} → "
+                    f"{satellite_result['latest_date']}"
+                ),
+                use_container_width=True,
+            )
+            st.warning(
+                f"Geçerli kara piksellerinin %{satellite_result['changed_percent']:.2f} "
+                "kadarı otomatik değişim adayı olarak işaretlendi. Bu bir ruhsat veya "
+                "kesin inşaat tespiti değildir."
+            )
+            st.download_button(
+                "📥 Değişim görüntüsünü indir",
+                satellite_result["change_png"],
+                file_name=(
+                    f"sentinel_degisim_{selected_region}_"
+                    f"{satellite_result['latest_date'].replace('.', '-')}.png"
+                ),
+                mime="image/png",
+                use_container_width=True,
+            )
+            st.caption(
+                "Kaynak: Copernicus Sentinel-2 L2A · ücretsiz Earth Search/AWS açık veri. "
+                f"Sahneler: {satellite_result['older_item']} · "
+                f"{satellite_result['latest_item']}"
+            )
+        except (SatelliteError, requests.RequestException, OSError) as exc:
+            st.error(f"Ücretsiz uydu görüntüsü hazırlanamadı: {exc}")
 
 with scan_tab:
     st.subheader("Radar nasıl çalışıyor?")

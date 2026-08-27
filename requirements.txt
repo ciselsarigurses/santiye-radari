@@ -3,3 +3,6 @@ pandas>=2.0,<3
 pydeck>=0.8,<1
 requests>=2.31,<3
 beautifulsoup4>=4.12,<5
+numpy>=1.26,<3
+Pillow>=10,<12
+rasterio>=1.4,<2
