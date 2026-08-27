@@ -306,7 +306,7 @@ with field_tab:
 
         st.pydeck_chart(
             pdk.Deck(
-                map_provider="maplibre",
+                map_provider="carto",
                 map_style=SATELLITE_STYLE,
                 layers=map_layers,
                 initial_view_state=pdk.ViewState(
