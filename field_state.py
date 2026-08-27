@@ -16,6 +16,8 @@ from scanner import connect
 
 ALLOWED_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT", "KONTROL_EDILDI"}
 SATELLITE_MATCH_METERS = 80
+LEGACY_DUPLICATE_METERS = 120
+INTERNAL_DUPLICATE_STATUS = "MUKERRER"
 
 
 def _now():
@@ -185,6 +187,119 @@ def sync_satellite_tasks(connection, hotspots, report_date):
         updated["saha_durumu"] = status
         decorated.append(updated)
     return decorated
+
+
+def reconcile_satellite_duplicates(connection, current_tasks, report_date):
+    """Analiz değişiminden kalan açık mükerrer uydu görevlerini pasifleştirir.
+
+    Yalnızca hiç saha işlemi görmemiş, bugün yeniden görülmeyen ve aynı gün ilk kez
+    oluşmuş mevcut bir görevle aynı bölge/mahallede 120 m içinde kalan kayıtlar
+    değerlendirilir. Eşleşme iki yönde de tekil değilse hiçbir kayıt değiştirilmez.
+    Kayıt silinmez; ``MUKERRER`` durumu ile geçmişte tutulur.
+    """
+    ensure_state_schema(connection)
+    current_ids = [
+        str(item.get("gorev_id") or "")
+        for item in current_tasks
+        if str(item.get("gorev_id") or "")
+    ]
+    if not current_ids:
+        return []
+
+    placeholders = ",".join("?" for _ in current_ids)
+    current_rows = connection.execute(
+        f"""SELECT gorev_id,kaynak_kimlik,mahalle,enlem,boylam,ilk_gorulme
+        FROM saha_durumlari
+        WHERE kaynak='uydu' AND gorev_id IN ({placeholders})
+        AND enlem IS NOT NULL AND boylam IS NOT NULL""",
+        current_ids,
+    ).fetchall()
+    current = []
+    for row in current_rows:
+        try:
+            latitude = float(row[3])
+            longitude = float(row[4])
+        except (TypeError, ValueError):
+            continue
+        current.append(
+            {
+                "gorev_id": str(row[0]),
+                "kaynak_kimlik": str(row[1] or ""),
+                "mahalle": str(row[2] or "").casefold().strip(),
+                "enlem": latitude,
+                "boylam": longitude,
+                "ilk_gorulme": str(row[5] or "")[:10],
+            }
+        )
+    if not current:
+        return []
+
+    stale_rows = connection.execute(
+        """SELECT gorev_id,kaynak_kimlik,mahalle,enlem,boylam,ilk_gorulme,
+        son_gorulme,kontrol_sayisi
+        FROM saha_durumlari
+        WHERE kaynak='uydu' AND durum='KONTROLE_GIT'
+        AND COALESCE(kontrol_sayisi,0)=0
+        AND enlem IS NOT NULL AND boylam IS NOT NULL
+        AND COALESCE(son_gorulme,'')<?""",
+        (report_date,),
+    ).fetchall()
+
+    candidate_pairs = []
+    for row in stale_rows:
+        old_id = str(row[0] or "")
+        if not old_id or old_id in current_ids:
+            continue
+        try:
+            old_latitude = float(row[3])
+            old_longitude = float(row[4])
+        except (TypeError, ValueError):
+            continue
+        old_source = str(row[1] or "")
+        old_neighborhood = str(row[2] or "").casefold().strip()
+        old_first_seen = str(row[5] or "")[:10]
+        if not old_first_seen:
+            continue
+
+        for new in current:
+            if old_source != new["kaynak_kimlik"]:
+                continue
+            if old_neighborhood != new["mahalle"]:
+                continue
+            if old_first_seen != new["ilk_gorulme"]:
+                continue
+            distance = _distance_m(
+                old_latitude,
+                old_longitude,
+                new["enlem"],
+                new["boylam"],
+            )
+            if distance <= LEGACY_DUPLICATE_METERS:
+                candidate_pairs.append((old_id, new["gorev_id"], distance))
+
+    old_counts = {}
+    new_counts = {}
+    for old_id, new_id, _distance in candidate_pairs:
+        old_counts[old_id] = old_counts.get(old_id, 0) + 1
+        new_counts[new_id] = new_counts.get(new_id, 0) + 1
+
+    reconciled = []
+    for old_id, new_id, distance in candidate_pairs:
+        if old_counts.get(old_id) != 1 or new_counts.get(new_id) != 1:
+            continue
+        connection.execute(
+            """UPDATE saha_durumlari SET durum=?,son_islem=?
+            WHERE gorev_id=? AND durum='KONTROLE_GIT' AND COALESCE(kontrol_sayisi,0)=0""",
+            (INTERNAL_DUPLICATE_STATUS, _now(), old_id),
+        )
+        reconciled.append(
+            {
+                "eski_gorev_id": old_id,
+                "guncel_gorev_id": new_id,
+                "mesafe_m": round(distance, 1),
+            }
+        )
+    return reconciled
 
 
 def sync_site_tasks(connection, seen_at=None):
