@@ -1,0 +1,7 @@
+streamlit
+pandas
+pydeck
+requests
+beautifulsoup4
+numpy
+opencv-python-headless
