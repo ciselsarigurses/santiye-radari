@@ -1,28 +1,33 @@
-"""Arama motoru sıralama dalgalanmasında taze internet adaylarını kısa süre korur."""
-
-from datetime import datetime, timedelta, timezone
+"""Arama sıralaması dalgalanmasında yalnızca bir tarama kaçıran adayları korur."""
 
 from scanner import connect, ensure_schema
 
 
-RETENTION_DAYS = 3
-
-
-def retain_recent_candidates(days=RETENTION_DAYS):
-    """Son birkaç günde görülmüş adayları tek bir aramada kayboldu diye pasife düşürme."""
+def retain_recent_candidates():
+    """Önceki taramada görülüp bu turda kaybolan adayı bir tur daha aktif tut."""
     ensure_schema()
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).strftime(
-        "%Y-%m-%d %H:%M UTC"
-    )
     with connect() as connection:
+        scans = connection.execute(
+            """SELECT baslangic FROM tarama_gecmisi
+            ORDER BY id DESC LIMIT 2"""
+        ).fetchall()
+        if len(scans) < 2:
+            return 0
+
+        current_started = scans[0][0]
+        previous_started = scans[1][0]
+        if not current_started or not previous_started:
+            return 0
+
         cursor = connection.execute(
             """UPDATE internet_adaylari
             SET aktif=1
             WHERE aktif=0
               AND kaynak_tipi IS NOT NULL
               AND son_gorulme IS NOT NULL
-              AND son_gorulme>=?""",
-            (cutoff,),
+              AND son_gorulme>=?
+              AND son_gorulme<?""",
+            (previous_started, current_started),
         )
         return max(cursor.rowcount or 0, 0)
 
@@ -30,6 +35,6 @@ def retain_recent_candidates(days=RETENTION_DAYS):
 if __name__ == "__main__":
     restored = retain_recent_candidates()
     print(
-        f"Aday kalıcılığı: son {RETENTION_DAYS} günde görülmüş "
-        f"{restored} kayıt aktif tutuldu."
+        "Aday kalıcılığı: önceki taramada görülüp bu turda kaybolan "
+        f"{restored} kayıt bir tur daha aktif tutuldu."
     )
