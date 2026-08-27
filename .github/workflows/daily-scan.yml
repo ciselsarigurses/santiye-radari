@@ -58,12 +58,12 @@ jobs:
 
       - name: Tarama ve rapor sonuçlarını kaydet
         run: |
-          if git diff --quiet -- santiye.db; then
+          if [[ -z "$(git status --porcelain -- santiye.db SAHA_RAPORU.md latest_report.json)" ]]; then
             echo "Yeni veya güncellenen bulgu/rapor yok."
             exit 0
           fi
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add santiye.db
-          git commit -m "Radar: günlük tarama ve rapor sonuçlarını güncelle"
+          git add santiye.db SAHA_RAPORU.md latest_report.json
+          git commit -m "Radar: günlük tarama ve saha raporunu güncelle"
           git push
