@@ -31,6 +31,11 @@ SEARCH_QUERIES = [
     'Dalyan Çeşme yeni inşaat',
     'Çiftlikköy Çeşme yeni inşaat',
     'Musalla Çeşme yeni inşaat',
+    'Şifne Çeşme yeni inşaat villa',
+    'Germiyan Çeşme yeni inşaat villa',
+    'Ildır Çeşme yeni inşaat villa',
+    'Paşalimanı Çeşme yeni inşaat villa',
+    'Çakabey Çeşme yeni inşaat villa',
     'Uzunkuyu Urla inşaat proje',
     'site:cesme.bel.tr "yapı ruhsatı" Çeşme',
     'site:cesme.bel.tr "inşaata başlama" OR "temel atıldı"',
@@ -125,6 +130,11 @@ NOISE = (
 STRONG_ACTIVE_SIGNALS = (
     "ruhsat", "temel at", "hafriyat", "şantiye kuruldu", "şantiye çalışmaları",
     "inşaata baş", "inşaat baş", "kaba inşaat", "yapımına baş",
+)
+
+CANDIDATE_COMPARE_FIELDS = (
+    "proje", "firma", "bolge", "sinyal", "notlar",
+    "kaynak_tipi", "skor", "durum",
 )
 
 
@@ -377,14 +387,31 @@ def _duckduckgo(session, query):
     return results
 
 
-def _store(candidates):
+def _stored_candidate_changed(row, item):
+    existing = dict(zip(CANDIDATE_COMPARE_FIELDS, row[1:]))
+    for field in CANDIDATE_COMPARE_FIELDS:
+        old_value = existing.get(field)
+        new_value = item.get(field)
+        if field == "skor":
+            try:
+                if int(old_value or 0) != int(new_value or 0):
+                    return True
+            except (TypeError, ValueError):
+                return True
+        elif _plain(str(old_value or "")) != _plain(str(new_value or "")):
+            return True
+    return False
+
+
+def _store(candidates, deactivate_missing=True):
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     new_count = 0
     updated_count = 0
     with connect() as connection:
-        if candidates:
-            # Önceki otomatik sonuçları pasife al; bu taramada yeniden bulunanlar
-            # aşağıda tekrar aktif edilir. Elle eklenmiş/önceden hazırlanmış kayıtlar korunur.
+        if candidates and deactivate_missing:
+            # Yalnızca bütün arama kaynakları sağlıklıysa bu turda artık görülmeyen
+            # otomatik sonuçları pasife al. Kısmi kaynak hatasında eski bulguyu
+            # yanlışlıkla kaybetmek yerine koru.
             connection.execute(
                 "UPDATE internet_adaylari SET aktif=0 WHERE kaynak_tipi IS NOT NULL"
             )
@@ -392,10 +419,12 @@ def _store(candidates):
             if not item.get("kaynak_url"):
                 continue
             row = connection.execute(
-                "SELECT id FROM internet_adaylari WHERE kaynak_url=? LIMIT 1",
+                """SELECT id,proje,firma,bolge,sinyal,notlar,kaynak_tipi,skor,durum
+                FROM internet_adaylari WHERE kaynak_url=? LIMIT 1""",
                 (item["kaynak_url"],),
             ).fetchone()
             if row:
+                changed = _stored_candidate_changed(row, item)
                 connection.execute(
                     """UPDATE internet_adaylari SET proje=?, firma=?, bolge=?, sinyal=?,
                     notlar=?, son_gorulme=?, kaynak_tipi=?, skor=?, durum=?, aktif=1 WHERE id=?""",
@@ -405,7 +434,8 @@ def _store(candidates):
                         item["durum"], row[0],
                     ),
                 )
-                updated_count += 1
+                if changed:
+                    updated_count += 1
             else:
                 connection.execute(
                     """INSERT INTO internet_adaylari
@@ -457,7 +487,12 @@ def scan_and_store(progress_callback=None):
             if progress_callback:
                 progress_callback(completed / total_steps, f"{query} · {engine_name}")
 
-    new_count, updated_count = _store(list(found.values()))
+    # Kısmi arama hatasında bu turda görülmeyen eski adayları pasife alma.
+    # Böylece geçici bir motor hatası günlük radar listesini eksiltmez.
+    new_count, updated_count = _store(
+        list(found.values()),
+        deactivate_missing=not errors,
+    )
     finished = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     with connect() as connection:
         connection.execute(
