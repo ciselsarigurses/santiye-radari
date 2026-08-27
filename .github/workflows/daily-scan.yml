@@ -12,6 +12,7 @@ on:
       - "report_quality.py"
       - "field_state.py"
       - "apply_field_status.py"
+      - "refresh_satellite_analysis.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
       - ".github/workflows/field-status.yml"
@@ -61,6 +62,9 @@ jobs:
 
       - name: İnternet taramasını çalıştır
         run: python scanner.py
+
+      - name: Uydu analiz sürümünü kontrol et
+        run: python refresh_satellite_analysis.py
 
       - name: Günlük uydu ve radar raporunu oluştur
         run: python daily_report.py
