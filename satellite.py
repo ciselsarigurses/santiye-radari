@@ -192,50 +192,80 @@ def _nearest_place(latitude, longitude):
     )
 
 
-def _hotspots(change_mask, bbox, pixel_area_m2, limit=10):
-    """Değişen pikselleri yaklaşık 1 km hücrelerde özetler."""
-    rows, columns = np.nonzero(change_mask)
+def _connected_components(mask):
+    """Değişim maskesindeki 8-komşu bitişik piksel kümelerini döndürür."""
+    rows, columns = np.nonzero(mask)
     if not len(rows):
+        return []
+
+    height, width = mask.shape
+    visited = np.zeros(mask.shape, dtype=bool)
+    neighbors = (
+        (-1, -1), (-1, 0), (-1, 1),
+        (0, -1), (0, 1),
+        (1, -1), (1, 0), (1, 1),
+    )
+    components = []
+
+    for seed_row, seed_col in zip(rows.tolist(), columns.tolist()):
+        if visited[seed_row, seed_col]:
+            continue
+        visited[seed_row, seed_col] = True
+        stack = [(seed_row, seed_col)]
+        component = []
+        while stack:
+            row, column = stack.pop()
+            component.append((row, column))
+            for row_offset, col_offset in neighbors:
+                next_row = row + row_offset
+                next_col = column + col_offset
+                if not (0 <= next_row < height and 0 <= next_col < width):
+                    continue
+                if not mask[next_row, next_col] or visited[next_row, next_col]:
+                    continue
+                visited[next_row, next_col] = True
+                stack.append((next_row, next_col))
+        components.append(component)
+
+    return components
+
+
+def _hotspots(change_mask, bbox, pixel_area_m2, limit=10):
+    """Bitişik değişim kümelerini ayrı saha adayları olarak konumlandırır."""
+    components = _connected_components(change_mask)
+    if not components:
         return []
 
     height, width = change_mask.shape
     west, south, east, north = bbox
-    latitudes = north - (rows + 0.5) / height * (north - south)
-    longitudes = west + (columns + 0.5) / width * (east - west)
-    cell_size = 0.01
-    lat_bins = np.floor(latitudes / cell_size).astype("int32")
-    lon_bins = np.floor(longitudes / cell_size).astype("int32")
-    grouped = {}
-    for lat_bin, lon_bin, latitude, longitude in zip(
-        lat_bins, lon_bins, latitudes, longitudes
-    ):
-        key = (int(lat_bin), int(lon_bin))
-        bucket = grouped.setdefault(
-            key, {"count": 0, "lat_total": 0.0, "lon_total": 0.0}
-        )
-        bucket["count"] += 1
-        bucket["lat_total"] += float(latitude)
-        bucket["lon_total"] += float(longitude)
-
     results = []
-    for bucket in sorted(
-        grouped.values(), key=lambda item: item["count"], reverse=True
-    )[:limit]:
-        latitude = bucket["lat_total"] / bucket["count"]
-        longitude = bucket["lon_total"] / bucket["count"]
-        area_m2 = bucket["count"] * pixel_area_m2
+
+    for component in components:
+        area_m2 = len(component) * pixel_area_m2
         if area_m2 < 800:
             continue
+
+        pixels = np.asarray(component, dtype="int32")
+        centroid = pixels.mean(axis=0)
+        distance_to_centroid = np.sum((pixels - centroid) ** 2, axis=1)
+        representative = pixels[int(np.argmin(distance_to_centroid))]
+        row, column = int(representative[0]), int(representative[1])
+
+        # Ortalama koordinat iki ayrı saha arasına düşmesin: rota noktası mutlaka
+        # değişim maskesinin gerçekten işaretlediği bir piksel üzerinde tutulur.
+        latitude = north - (row + 0.5) / height * (north - south)
+        longitude = west + (column + 0.5) / width * (east - west)
         results.append(
             {
                 "mahalle": _nearest_place(latitude, longitude),
                 "enlem": round(latitude, 6),
                 "boylam": round(longitude, 6),
                 "alan_m2": round(area_m2),
-                "sinyal": "Geniş yüzey/toprak değişimi adayı",
+                "sinyal": "Bitişik yüzey/toprak değişimi adayı",
             }
         )
-    return results
+
+    return sorted(results, key=lambda item: item["alan_m2"], reverse=True)[:limit]
 
 
 def analyze_sentinel_change(region_key, pair=None):
