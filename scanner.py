@@ -5,6 +5,7 @@ import unicodedata
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import parse_qs, quote_plus, unquote, urlparse, urlunparse
 
@@ -76,7 +77,10 @@ SIGNALS = {
     "yapı ruhsatı": 5,
     "temel at": 5,
     "hafriyat": 4,
-    "şantiye": 4,
+    "şantiye kuruldu": 5,
+    "şantiye çalışmaları": 4,
+    "şantiye alanı": 4,
+    "şantiye": 1,
     "inşaata baş": 5,
     "inşaat baş": 5,
     "kaba inşaat": 5,
@@ -98,6 +102,23 @@ NOISE = (
     "ikinci el",
     "dekorasyon fikirleri",
     "deprem son dakika",
+    "şantiye evleri",
+    "şantiye bölgesi",
+    "taşınmaya hazır",
+    "inşa edilmiş",
+    "tamamlanmış",
+    "çalışma durdu",
+    "durduruldu",
+    "iptal edildi",
+    "bakanlık freni",
+    "davalık",
+    "kaçak hafriyat",
+    "kaçak inşaat",
+)
+
+STRONG_ACTIVE_SIGNALS = (
+    "ruhsat", "temel at", "hafriyat", "şantiye kuruldu", "şantiye çalışmaları",
+    "inşaata baş", "inşaat baş", "kaba inşaat", "yapımına baş",
 )
 
 
@@ -210,9 +231,9 @@ def _canonical_url(url):
     return urlunparse((parsed.scheme, parsed.netloc.lower(), parsed.path.rstrip("/"), "", clean_query, ""))
 
 
-def _source_type(url):
+def _source_type(url, text=""):
     host = urlparse(url).netloc.lower()
-    if "instagram.com" in host:
+    if "instagram.com" in host or "instagram.com" in (text or "").lower():
         return "Instagram (indekslenmiş)"
     if "cesme.bel.tr" in host:
         return "Çeşme Belediyesi"
@@ -221,8 +242,9 @@ def _source_type(url):
     return host.removeprefix("www.") or "Web"
 
 
-def _evaluate(title, snippet, url):
-    combined = _plain(f"{title} {snippet} {url}").lower()
+def _evaluate(title, snippet, url, published=None):
+    snippet_text = BeautifulSoup(snippet or "", "html.parser").get_text(" ", strip=True)
+    combined = _plain(f"{title} {snippet_text} {url}").lower()
     if any(word in combined for word in NOISE):
         return None
 
@@ -238,10 +260,25 @@ def _evaluate(title, snippet, url):
             score += points
     if not matches:
         return None
+    has_strong_signal = any(signal in combined for signal in STRONG_ACTIVE_SIGNALS)
+    if "satılık" in combined and "proje" not in combined and not has_strong_signal:
+        return None
     if "instagram.com" in url.lower():
         score += 1
     if "cesme.bel.tr" in url.lower():
         score += 2
+    if published:
+        try:
+            published_date = parsedate_to_datetime(published)
+            if published_date.tzinfo is None:
+                published_date = published_date.replace(tzinfo=timezone.utc)
+            age_days = (datetime.now(timezone.utc) - published_date).days
+            if age_days > 365:
+                return None
+            if age_days > 180:
+                score -= 1
+        except (TypeError, ValueError, OverflowError):
+            pass
     score = min(score, 10)
     if score < 5:
         return None
@@ -251,9 +288,9 @@ def _evaluate(title, snippet, url):
         "firma": urlparse(url).netloc.removeprefix("www.")[:120],
         "bolge": location,
         "sinyal": ", ".join(matches[:5]),
-        "notlar": _plain(snippet)[:700],
+        "notlar": _plain(snippet_text)[:700],
         "kaynak_url": _canonical_url(url),
-        "kaynak_tipi": _source_type(url),
+        "kaynak_tipi": _source_type(url, combined),
         "skor": score,
         "durum": "KIRMIZI" if score >= 8 else "TURUNCU",
     }
@@ -275,6 +312,7 @@ def _google_news(session, query):
                 "title": item.findtext("title") or "",
                 "snippet": item.findtext("description") or "",
                 "url": item.findtext("link") or "",
+                "published": item.findtext("pubDate") or "",
             }
         )
     return results
@@ -309,6 +347,12 @@ def _store(candidates):
     new_count = 0
     updated_count = 0
     with connect() as connection:
+        if candidates:
+            # Önceki otomatik sonuçları pasife al; bu taramada yeniden bulunanlar
+            # aşağıda tekrar aktif edilir. Elle eklenmiş/önceden hazırlanmış kayıtlar korunur.
+            connection.execute(
+                "UPDATE internet_adaylari SET aktif=0 WHERE kaynak_tipi IS NOT NULL"
+            )
         for item in candidates:
             if not item.get("kaynak_url"):
                 continue
@@ -319,7 +363,7 @@ def _store(candidates):
             if row:
                 connection.execute(
                     """UPDATE internet_adaylari SET proje=?, firma=?, bolge=?, sinyal=?,
-                    notlar=?, son_gorulme=?, kaynak_tipi=?, skor=?, durum=? WHERE id=?""",
+                    notlar=?, son_gorulme=?, kaynak_tipi=?, skor=?, durum=?, aktif=1 WHERE id=?""",
                     (
                         item["proje"], item["firma"], item["bolge"], item["sinyal"],
                         item["notlar"], now, item["kaynak_tipi"], item["skor"],
@@ -363,7 +407,10 @@ def scan_and_store(progress_callback=None):
             try:
                 for raw in future.result():
                     url = _canonical_url(raw.get("url", ""))
-                    candidate = _evaluate(raw.get("title", ""), raw.get("snippet", ""), url)
+                    candidate = _evaluate(
+                        raw.get("title", ""), raw.get("snippet", ""), url,
+                        raw.get("published"),
+                    )
                     if candidate:
                         key = hashlib.sha1(candidate["kaynak_url"].encode("utf-8")).hexdigest()
                         old = found.get(key)
