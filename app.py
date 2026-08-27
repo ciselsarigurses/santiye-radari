@@ -1,110 +1,388 @@
-
 import sqlite3
-from pathlib import Path
+from datetime import datetime, timezone
 from urllib.parse import quote_plus
-import streamlit as st
+
 import pandas as pd
 import pydeck as pdk
+import streamlit as st
 
-DB=Path(__file__).with_name("santiye.db")
-def conn(): return sqlite3.connect(DB)
+from scanner import DB, INSTAGRAM_SEARCH_LINKS, connect, ensure_schema, scan_and_store
+
 
 st.set_page_config(page_title="Şantiye Radarı", page_icon="📍", layout="wide")
-st.title("Şantiye Radarı")
-st.caption("Çeşme + Uzunkuyu | İnternet + Belediye + Google Maps")
+ensure_schema()
 
-with conn() as c:
-    df=pd.read_sql_query("""SELECT id,durum,mahalle,ada,parsel,adres,enlem,boylam,
+st.markdown(
+    """
+    <style>
+    .block-container {padding-top: 1.5rem; padding-bottom: 3rem;}
+    [data-testid="stMetric"] {background:#f7f7f8;border:1px solid #e5e5e5;
+        padding:14px;border-radius:12px;}
+    .radar-note {padding:12px 14px;border-radius:10px;background:#fff8e8;
+        border-left:4px solid #f39c12;margin-bottom:14px;}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+def read_df(query, params=()):
+    with connect() as connection:
+        return pd.read_sql_query(query, connection, params=params)
+
+
+def value(item, fallback="-"):
+    if item is None or (isinstance(item, float) and pd.isna(item)):
+        return fallback
+    text = str(item).strip()
+    return text if text and text.lower() != "nan" else fallback
+
+
+def number(item, fallback=0):
+    try:
+        return fallback if pd.isna(item) else int(item)
+    except (TypeError, ValueError):
+        return fallback
+
+
+def add_to_field(candidate):
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    with connect() as connection:
+        exists = connection.execute(
+            "SELECT id FROM santiyeler WHERE kaynak_url=? AND aktif=1 LIMIT 1",
+            (candidate.kaynak_url,),
+        ).fetchone()
+        if exists:
+            return False
+        connection.execute(
+            """INSERT INTO santiyeler
+            (durum,mahalle,firma,proje,neden,internet_bilgisi,kaynak_url,
+            son_kontrol,aktif) VALUES(?,?,?,?,?,?,?,?,1)""",
+            (
+                value(candidate.durum, "TURUNCU"), value(candidate.bolge, ""),
+                value(candidate.firma, ""), value(candidate.proje, ""),
+                value(candidate.sinyal, ""), value(candidate.notlar, ""),
+                value(candidate.kaynak_url, ""), now,
+            ),
+        )
+        connection.execute(
+            "UPDATE internet_adaylari SET aktif=0 WHERE id=?", (int(candidate.id),)
+        )
+    return True
+
+
+def archive_candidate(candidate_id):
+    with connect() as connection:
+        connection.execute(
+            "UPDATE internet_adaylari SET aktif=0 WHERE id=?", (int(candidate_id),)
+        )
+
+
+st.title("📍 Şantiye Radarı")
+st.caption("Çeşme + Uzunkuyu · Saha, internet, belediye ve indekslenmiş Instagram sinyalleri")
+
+try:
+    last_scan = read_df(
+        "SELECT * FROM tarama_gecmisi ORDER BY id DESC LIMIT 1"
+    )
+except sqlite3.Error:
+    last_scan = pd.DataFrame()
+
+with st.sidebar:
+    st.header("Radar Kontrolü")
+    if not last_scan.empty:
+        last = last_scan.iloc[0]
+        st.caption(f"Son tarama: {value(last.get('bitis'))}")
+        st.write(
+            f"**{number(last.get('yeni'))} yeni** · "
+            f"{number(last.get('guncellenen'))} güncellendi"
+        )
+    else:
+        st.caption("Henüz otomatik tarama kaydı yok.")
+
+    run_scan = st.button("🔎 Şimdi İnterneti Tara", type="primary", use_container_width=True)
+    st.caption("Tarama yaklaşık 1–2 dakika sürebilir.")
+    st.divider()
+    st.markdown("**Kapsam**")
+    st.write("• Genel web ve haber sonuçları")
+    st.write("• Çeşme Belediyesi indeksleri")
+    st.write("• Herkese açık, indekslenmiş Instagram sonuçları")
+    st.caption("Kapalı hesaplar ve Instagram'ın arama motorlarından gizlediği içerikler görülemez.")
+
+if run_scan:
+    progress = st.progress(0, text="Tarama hazırlanıyor…")
+
+    def show_progress(ratio, label):
+        progress.progress(min(float(ratio), 1.0), text=f"Taranıyor: {label}")
+
+    try:
+        result = scan_and_store(show_progress)
+        progress.progress(1.0, text="Tarama tamamlandı")
+        if result["new"]:
+            st.success(
+                f"Radar {result['found']} uygun sonuç yakaladı; "
+                f"{result['new']} tanesi yeni."
+            )
+        else:
+            st.info(
+                f"Tarama tamamlandı. {result['found']} uygun sonuç kontrol edildi; "
+                "yeni kayıt bulunmadı."
+            )
+        if result["errors"]:
+            st.warning(
+                f"{len(result['errors'])} arama yanıt vermedi; çalışan kaynakların sonuçları kaydedildi."
+            )
+    except Exception as exc:
+        st.error(f"Tarama tamamlanamadı: {type(exc).__name__}")
+
+
+field_tab, web_tab, scan_tab, add_tab = st.tabs(
+    ["🎯 Saha Listesi", "🌐 Radar Bulguları", "🔍 Tarama Merkezi", "➕ Yeni Kayıt"]
+)
+
+with field_tab:
+    field = read_df(
+        """SELECT id,durum,mahalle,ada,parsel,adres,enlem,boylam,
         firma,proje,neden,belediye_bilgisi,internet_bilgisi,harita_bilgisi,
         kaynak_url,son_kontrol FROM santiyeler WHERE aktif=1
-        ORDER BY CASE durum WHEN 'KIRMIZI' THEN 1 ELSE 2 END, son_kontrol DESC""",c)
+        ORDER BY CASE durum WHEN 'KIRMIZI' THEN 1 ELSE 2 END, son_kontrol DESC"""
+    )
 
-if df.empty:
-    st.info("Henüz aktif kayıt yok.")
-else:
-    c1,c2,c3=st.columns(3)
-    c1.metric("🔴 Gidilmeli",int((df.durum=="KIRMIZI").sum()))
-    c2.metric("🟠 Kontrol",int((df.durum=="TURUNCU").sum()))
-    c3.metric("📍 Konum eksik",int((df.enlem.isna()|df.boylam.isna()).sum()))
+    if field.empty:
+        st.info("Henüz aktif saha kaydı yok. Radar bulgularından bir adayı saha listesine aktarabilirsin.")
+    else:
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("🔴 Gidilmeli", int((field.durum == "KIRMIZI").sum()))
+        c2.metric("🟠 Kontrol", int((field.durum == "TURUNCU").sum()))
+        c3.metric("📍 Konum eksik", int((field.enlem.isna() | field.boylam.isna()).sum()))
+        c4.metric("Toplam aktif", len(field))
 
-    mapped=df.dropna(subset=["enlem","boylam"]).copy()
-    if not mapped.empty:
-        mapped["renk"]=mapped.durum.map({"KIRMIZI":[220,40,40],"TURUNCU":[240,140,30]})
-        mapped["etiket"]=mapped.apply(lambda r:f"{r.mahalle or ''} | {r.ada or '-'} / {r.parsel or '-'}",axis=1)
-        st.pydeck_chart(pdk.Deck(
-            layers=[pdk.Layer("ScatterplotLayer",mapped,get_position="[boylam,enlem]",
-                              get_fill_color="renk",get_radius=55,pickable=True)],
-            initial_view_state=pdk.ViewState(latitude=38.31,longitude=26.30,zoom=10.2),
-            tooltip={"html":"<b>{etiket}</b><br>{durum}<br>{neden}"}
-        ))
+        mapped = field.dropna(subset=["enlem", "boylam"]).copy()
+        if not mapped.empty:
+            mapped["enlem"] = pd.to_numeric(mapped.enlem, errors="coerce")
+            mapped["boylam"] = pd.to_numeric(mapped.boylam, errors="coerce")
+            mapped = mapped.dropna(subset=["enlem", "boylam"])
+            mapped["renk"] = mapped.durum.map(
+                {"KIRMIZI": [220, 40, 40], "TURUNCU": [240, 140, 30]}
+            ).apply(lambda x: x if isinstance(x, list) else [60, 120, 180])
+            mapped["etiket"] = mapped.apply(
+                lambda row: f"{value(row.mahalle, '')} | {value(row.ada)} / {value(row.parsel)}",
+                axis=1,
+            )
+            st.pydeck_chart(
+                pdk.Deck(
+                    layers=[
+                        pdk.Layer(
+                            "ScatterplotLayer", mapped,
+                            get_position="[boylam,enlem]", get_fill_color="renk",
+                            get_radius=65, pickable=True,
+                        )
+                    ],
+                    initial_view_state=pdk.ViewState(
+                        latitude=38.31, longitude=26.30, zoom=10.2
+                    ),
+                    tooltip={"html": "<b>{etiket}</b><br>{durum}<br>{neden}"},
+                ),
+                use_container_width=True,
+            )
 
-    st.subheader("Aktif noktalar")
-    for _,r in df.iterrows():
-        icon="🔴" if r.durum=="KIRMIZI" else "🟠"
-        label=f"{icon} {r.mahalle or 'Konum araştırılıyor'}"
-        if r.ada or r.parsel: label+=f" — {r.ada or '-'} / {r.parsel or '-'}"
-        with st.expander(label):
-            st.markdown(f"### {'MUTLAKA GİDİLMELİ' if r.durum=='KIRMIZI' else 'KONTROL EDİLMELİ'}")
-            if r.firma: st.write("**Firma:**",r.firma)
-            if r.proje: st.write("**Proje:**",r.proje)
-            st.write("**Ada / Parsel:**",f"{r.ada or '-'} / {r.parsel or '-'}")
-            st.write("**Adres:**",r.adres or "Henüz bulunamadı")
-            st.write("**Neden:**",r.neden or "-")
-            st.write("**Belediye:**",r.belediye_bilgisi or "Bilgi bulunmadı")
-            st.write("**İnternet:**",r.internet_bilgisi or "Bilgi bulunmadı")
-            st.write("**Harita kontrolü:**",r.harita_bilgisi or "Google Maps üzerinden kontrol edilebilir")
-            b1,b2=st.columns(2)
-            if pd.notna(r.enlem) and pd.notna(r.boylam):
-                b1.link_button("📍 Google Maps / Yol Tarifi",
-                    f"https://www.google.com/maps/dir/?api=1&destination={r.enlem},{r.boylam}",
-                    use_container_width=True)
-                b2.link_button("🛰️ Google Maps'te Gör",
-                    f"https://www.google.com/maps/search/?api=1&query={r.enlem},{r.boylam}",
-                    use_container_width=True)
-            elif pd.notna(r.adres) and str(r.adres).strip().lower() != "nan":
-                b1.link_button("📍 Adresi Google Maps'te Ara",
-                    f"https://www.google.com/maps/search/?api=1&query={quote_plus(str(r.adres) + ' Çeşme İzmir')}",
-                    use_container_width=True)
-            elif pd.notna(r.ada) and pd.notna(r.parsel):
-                b1.link_button("📍 Ada / Parseli Google Maps'te Ara",
-                    f"https://www.google.com/maps/search/?api=1&query={quote_plus(str(r.mahalle) + ' ' + str(r.ada) + ' ada ' + str(r.parsel) + ' parsel Çeşme İzmir')}",
-                    use_container_width=True)
-            if r.kaynak_url:
-                st.link_button("Kaynağı Aç",r.kaynak_url,use_container_width=True)
-            st.caption(f"Son kontrol: {r.son_kontrol or '-'}")
+        export_columns = [
+            "durum", "mahalle", "ada", "parsel", "adres", "firma", "proje",
+            "neden", "kaynak_url", "son_kontrol",
+        ]
+        st.download_button(
+            "📥 Saha listesini CSV indir",
+            field[export_columns].to_csv(index=False).encode("utf-8-sig"),
+            file_name="santiye_saha_listesi.csv",
+            mime="text/csv",
+        )
 
-st.divider()
-st.subheader("İnternetten bulunan proje adayları")
-with conn() as c:
-    try:
-        webdf=pd.read_sql_query("""SELECT firma,proje,bolge,sinyal,notlar,kaynak_url
-          FROM internet_adaylari WHERE aktif=1 ORDER BY ilk_gorulme DESC""",c)
-        for _,r in webdf.iterrows():
-            with st.expander(f"🟠 {r.proje or r.firma} — {r.bolge or ''}"):
-                st.write("**Firma:**",r.firma or "-")
-                st.write("**Bulgu:**",r.sinyal or "-")
-                st.write("**Not:**",r.notlar or "-")
-                if r.kaynak_url: st.link_button("Kaynağı Aç",r.kaynak_url)
-    except Exception:
-        pass
+        st.subheader("Aktif noktalar")
+        for _, row in field.iterrows():
+            icon = "🔴" if row.durum == "KIRMIZI" else "🟠"
+            label = f"{icon} {value(row.mahalle, 'Konum araştırılıyor')}"
+            if value(row.ada) != "-" or value(row.parsel) != "-":
+                label += f" — {value(row.ada)} / {value(row.parsel)}"
+            with st.expander(label):
+                st.markdown(
+                    f"### {'MUTLAKA GİDİLMELİ' if row.durum == 'KIRMIZI' else 'KONTROL EDİLMELİ'}"
+                )
+                if value(row.firma) != "-":
+                    st.write("**Firma:**", value(row.firma))
+                if value(row.proje) != "-":
+                    st.write("**Proje:**", value(row.proje))
+                st.write("**Ada / Parsel:**", f"{value(row.ada)} / {value(row.parsel)}")
+                st.write("**Adres:**", value(row.adres, "Henüz bulunamadı"))
+                st.write("**Neden:**", value(row.neden))
+                st.write("**Belediye:**", value(row.belediye_bilgisi, "Bilgi bulunmadı"))
+                st.write("**İnternet:**", value(row.internet_bilgisi, "Bilgi bulunmadı"))
+                st.write("**Harita kontrolü:**", value(row.harita_bilgisi, "Google Maps üzerinden kontrol edilebilir"))
 
-st.divider()
-with st.expander("Yeni kayıt ekle"):
-    with st.form("new"):
-        a,b=st.columns(2)
-        durum=a.selectbox("Durum",["TURUNCU","KIRMIZI"])
-        mahalle=b.text_input("Mahalle")
-        ada=a.text_input("Ada"); parsel=b.text_input("Parsel")
-        adres=st.text_input("Adres")
-        firma=a.text_input("Firma"); proje=b.text_input("Proje")
-        neden=st.text_area("Neden / bulunan bilgi")
-        kaynak=st.text_input("Kaynak URL")
-        lat=a.number_input("Enlem",value=None,format="%.7f")
-        lon=b.number_input("Boylam",value=None,format="%.7f")
-        if st.form_submit_button("Kaydet",use_container_width=True):
-            with conn() as c:
-                c.execute("""INSERT INTO santiyeler
-                (durum,mahalle,ada,parsel,adres,enlem,boylam,firma,proje,neden,kaynak_url,aktif)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,1)""",
-                (durum,mahalle,ada,parsel,adres,lat,lon,firma,proje,neden,kaynak))
-            st.success("Kaydedildi. Sayfayı yenileyin.")
+                b1, b2 = st.columns(2)
+                if pd.notna(row.enlem) and pd.notna(row.boylam):
+                    b1.link_button(
+                        "📍 Yol Tarifi",
+                        f"https://www.google.com/maps/dir/?api=1&destination={row.enlem},{row.boylam}",
+                        use_container_width=True,
+                    )
+                    b2.link_button(
+                        "🛰️ Haritada Gör",
+                        f"https://www.google.com/maps/search/?api=1&query={row.enlem},{row.boylam}",
+                        use_container_width=True,
+                    )
+                elif value(row.adres) != "-":
+                    b1.link_button(
+                        "📍 Adresi Haritada Ara",
+                        "https://www.google.com/maps/search/?api=1&query="
+                        + quote_plus(value(row.adres) + " Çeşme İzmir"),
+                        use_container_width=True,
+                    )
+                elif value(row.ada) != "-" and value(row.parsel) != "-":
+                    b1.link_button(
+                        "📍 Ada / Parseli Ara",
+                        "https://www.google.com/maps/search/?api=1&query="
+                        + quote_plus(
+                            f"{value(row.mahalle, '')} {value(row.ada)} ada "
+                            f"{value(row.parsel)} parsel Çeşme İzmir"
+                        ),
+                        use_container_width=True,
+                    )
+                if value(row.kaynak_url) != "-":
+                    st.link_button("Kaynağı Aç", value(row.kaynak_url), use_container_width=True)
+                st.caption(f"Son kontrol: {value(row.son_kontrol)}")
+
+with web_tab:
+    candidates = read_df(
+        """SELECT id,firma,proje,bolge,sinyal,notlar,kaynak_url,
+        ilk_gorulme,son_gorulme,kaynak_tipi,skor,durum
+        FROM internet_adaylari WHERE aktif=1
+        ORDER BY skor DESC, ilk_gorulme DESC"""
+    )
+
+    if candidates.empty:
+        st.info("Henüz radar bulgusu yok. Sol menüden ‘Şimdi İnterneti Tara’ düğmesine basabilirsin.")
+    else:
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Yeni aday", len(candidates))
+        m2.metric("🔴 Güçlü sinyal", int((candidates.durum == "KIRMIZI").sum()))
+        m3.metric("Instagram sinyali", int(candidates.kaynak_tipi.str.contains("Instagram", na=False).sum()))
+
+        f1, f2, f3 = st.columns(3)
+        regions = ["Tümü"] + sorted(candidates.bolge.dropna().unique().tolist())
+        sources = ["Tümü"] + sorted(candidates.kaynak_tipi.dropna().unique().tolist())
+        region_filter = f1.selectbox("Bölge", regions)
+        source_filter = f2.selectbox("Kaynak", sources)
+        min_score = f3.slider("En düşük sinyal puanı", 0, 10, 5)
+
+        shown = candidates[candidates.skor.fillna(0) >= min_score]
+        if region_filter != "Tümü":
+            shown = shown[shown.bolge == region_filter]
+        if source_filter != "Tümü":
+            shown = shown[shown.kaynak_tipi == source_filter]
+
+        st.caption(f"{len(shown)} bulgu gösteriliyor. Puan yükseldikçe sahaya gitme ihtiyacı güçlenir.")
+        st.download_button(
+            "📥 Radar bulgularını CSV indir",
+            shown.to_csv(index=False).encode("utf-8-sig"),
+            file_name="santiye_radar_bulgulari.csv",
+            mime="text/csv",
+        )
+
+        for _, row in shown.iterrows():
+            icon = "🔴" if value(row.durum) == "KIRMIZI" else "🟠"
+            with st.expander(
+                f"{icon} {value(row.bolge, 'Bölge belirsiz')} · {value(row.proje, 'Başlıksız bulgu')}"
+            ):
+                st.write("**Kaynak:**", value(row.kaynak_tipi))
+                st.write("**Sinyal:**", value(row.sinyal))
+                st.write("**Radar puanı:**", f"{number(row.skor)}/10")
+                st.write("**Bulunan bilgi:**", value(row.notlar))
+                st.caption(
+                    f"İlk görülme: {value(row.ilk_gorulme)} · Son görülme: {value(row.son_gorulme)}"
+                )
+                if value(row.kaynak_url) != "-":
+                    st.link_button("🔗 Kaynağı Aç", value(row.kaynak_url), use_container_width=True)
+                a1, a2 = st.columns(2)
+                if a1.button("🎯 Saha listesine aktar", key=f"field_{int(row.id)}", use_container_width=True):
+                    if add_to_field(row):
+                        st.success("Saha listesine aktarıldı.")
+                    else:
+                        st.info("Bu kaynak zaten saha listesinde.")
+                    st.rerun()
+                if a2.button("Arşivle", key=f"archive_{int(row.id)}", use_container_width=True):
+                    archive_candidate(row.id)
+                    st.rerun()
+
+with scan_tab:
+    st.subheader("Radar nasıl çalışıyor?")
+    st.markdown(
+        """
+        1. Çeşme, Alaçatı, Ilıca, Reisdere, Ovacık, Dalyan, Çiftlikköy,
+           Musalla ve Uzunkuyu için hedefli aramalar yapar.
+        2. “Ruhsat”, “temel”, “hafriyat”, “şantiye”, “yeni inşaat” ve
+           “villa projesi” gibi satış fırsatı sinyallerini puanlar.
+        3. Aynı bağlantıyı tekrar bulursa yeni kayıt açmaz; mevcut kaydın
+           son görülme tarihini günceller.
+        4. Güçlü sinyalleri kırmızı, teyit edilmesi gerekenleri turuncu gösterir.
+        """
+    )
+    st.markdown(
+        '<div class="radar-note"><b>Net sınır:</b> Instagram doğrudan ve eksiksiz '
+        'taranamaz. Radar, yalnızca herkese açık olup Google/DuckDuckGo tarafından '
+        'indekslenmiş Instagram sayfalarını yakalar. Aşağıdaki bağlantılar manuel '
+        'kontrol için hazırdır.</div>',
+        unsafe_allow_html=True,
+    )
+    for label, link in INSTAGRAM_SEARCH_LINKS:
+        st.link_button(f"Instagram kontrolü · {label}", link, use_container_width=True)
+
+    history = read_df(
+        """SELECT bitis,bulunan,yeni,guncellenen,hata
+        FROM tarama_gecmisi ORDER BY id DESC LIMIT 10"""
+    )
+    if not history.empty:
+        st.subheader("Son taramalar")
+        st.dataframe(
+            history.rename(
+                columns={
+                    "bitis": "Tarih", "bulunan": "Uygun sonuç", "yeni": "Yeni",
+                    "guncellenen": "Güncellenen", "hata": "Kaynak hataları",
+                }
+            ),
+            hide_index=True,
+            use_container_width=True,
+        )
+
+with add_tab:
+    st.subheader("Elle saha kaydı ekle")
+    with st.form("new_field"):
+        a, b = st.columns(2)
+        status = a.selectbox("Durum", ["TURUNCU", "KIRMIZI"])
+        neighborhood = b.text_input("Mahalle")
+        block = a.text_input("Ada")
+        parcel = b.text_input("Parsel")
+        address = st.text_input("Adres")
+        company = a.text_input("Firma")
+        project = b.text_input("Proje")
+        reason = st.text_area("Neden / bulunan bilgi")
+        source = st.text_input("Kaynak URL")
+        lat = a.number_input("Enlem", value=None, format="%.7f")
+        lon = b.number_input("Boylam", value=None, format="%.7f")
+        submitted = st.form_submit_button("Kaydet", type="primary", use_container_width=True)
+
+    if submitted:
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        with connect() as connection:
+            connection.execute(
+                """INSERT INTO santiyeler
+                (durum,mahalle,ada,parsel,adres,enlem,boylam,firma,proje,
+                neden,kaynak_url,son_kontrol,aktif)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,1)""",
+                (
+                    status, neighborhood, block, parcel, address, lat, lon,
+                    company, project, reason, source, now,
+                ),
+            )
+        st.success("Kayıt saha listesine eklendi.")
+
+st.caption("Şantiye Radarı karar destek aracıdır. Kırmızı işaret saha teyidi önerir; kesin yapı ruhsatı anlamına gelmez.")
