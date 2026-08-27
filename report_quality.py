@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from datetime import datetime
 
-from daily_report import ISTANBUL, _report_hotspots, _write_public_report
+from daily_report import ISTANBUL, _maps_route, _report_hotspots, _write_public_report
 from field_state import status_counts, sync_satellite_tasks, sync_site_tasks
 from scanner import connect
 
@@ -57,21 +57,89 @@ def _satellite_summary(connection, report_date):
     return summaries
 
 
+def _persisted_repeat_tasks(connection, known_task_ids):
+    """Bugünkü uydu görüntüsünde görünmese de TEKRAR_GIT kararını kaybetme."""
+    rows = connection.execute(
+        """SELECT d.gorev_id,d.kaynak,d.kaynak_kimlik,d.mahalle,d.enlem,d.boylam,
+        d.kontrol_sayisi,d.son_islem,s.adres,s.ada,s.parsel,s.firma,s.proje
+        FROM saha_durumlari d
+        LEFT JOIN santiyeler s
+          ON d.kaynak='saha' AND CAST(s.id AS TEXT)=d.kaynak_kimlik
+        WHERE d.durum='TEKRAR_GIT'
+        ORDER BY d.son_islem DESC, d.id DESC"""
+    ).fetchall()
+    repeats = []
+    for row in rows:
+        task_id = str(row[0] or "")
+        if not task_id or task_id in known_task_ids:
+            continue
+        latitude, longitude = row[4], row[5]
+        try:
+            latitude = float(latitude)
+            longitude = float(longitude)
+        except (TypeError, ValueError):
+            latitude = longitude = None
+        route = (
+            _maps_route(latitude, longitude)
+            if latitude is not None and longitude is not None
+            else None
+        )
+        source = str(row[1] or "")
+        source_key = str(row[2] or "")
+        repeats.append(
+            {
+                "oncelik": "TEKRAR",
+                "mahalle": str(row[3] or "Konum araştırılıyor"),
+                "enlem": round(latitude, 6) if latitude is not None else None,
+                "boylam": round(longitude, 6) if longitude is not None else None,
+                "alan_m2": 0,
+                "sinyal": "Önceki saha kararı: bir daha git bak",
+                "bolge": source_key if source == "uydu" else "Saha listesi",
+                "onceki_tarih": None,
+                "son_tarih": None,
+                "yeni_goruntu": False,
+                "harita": route,
+                "konum_notu": (
+                    "Yeni uydu sinyali olmasa da saha ekibi tekrar kontrol istediği "
+                    "için aktif takipte tutuluyor."
+                ),
+                "gorev_id": task_id,
+                "saha_durumu": "TEKRAR_GIT",
+                "takip_gorevi": True,
+                "kontrol_sayisi": int(row[6] or 0),
+                "son_islem": row[7],
+                "adres": row[8],
+                "ada": row[9],
+                "parsel": row[10],
+                "firma": row[11],
+                "proje": row[12],
+            }
+        )
+    return repeats
+
+
 def _active_hotspots(connection, report_date):
     raw = _report_hotspots(connection, report_date)
     sync_site_tasks(connection, report_date)
     decorated = sync_satellite_tasks(connection, raw, report_date)
 
     active = []
+    known_task_ids = set()
     for item in decorated:
+        task_id = str(item.get("gorev_id") or "")
+        if task_id:
+            known_task_ids.add(task_id)
         status = str(item.get("saha_durumu") or "KONTROLE_GIT")
         if status == "KONTROL_EDILDI":
             continue
         item = dict(item)
         if status == "TEKRAR_GIT":
             item["oncelik"] = "TEKRAR"
+            item["takip_gorevi"] = True
             item["sinyal"] = "Tekrar saha kontrolü · " + str(item.get("sinyal") or "")
         active.append(item)
+
+    active.extend(_persisted_repeat_tasks(connection, known_task_ids))
 
     priority = {"TEKRAR": 0, "YÜKSEK": 1, "ORTA": 2, "NORMAL": 3}
     active.sort(
