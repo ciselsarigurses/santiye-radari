@@ -83,7 +83,7 @@ def _internet_snapshot(connection, report_date):
     rows = connection.execute(
         """SELECT proje,bolge,sinyal,kaynak_url,kaynak_tipi,skor,durum
         FROM internet_adaylari
-        WHERE ilk_gorulme LIKE ?
+        WHERE aktif=1 AND ilk_gorulme LIKE ?
         ORDER BY skor DESC LIMIT 20""",
         (f"{report_date}%",),
     ).fetchall()
