@@ -21,6 +21,39 @@ SATELLITE_LABELS = (
     "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/"
     "World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
 )
+SATELLITE_STYLE = {
+    "version": 8,
+    "sources": {
+        "esri-imagery": {
+            "type": "raster",
+            "tiles": [SATELLITE_TILES],
+            "tileSize": 256,
+            "attribution": "Tiles © Esri",
+        },
+        "esri-labels": {
+            "type": "raster",
+            "tiles": [SATELLITE_LABELS],
+            "tileSize": 256,
+            "attribution": "Esri, OpenStreetMap contributors",
+        },
+    },
+    "layers": [
+        {
+            "id": "esri-imagery",
+            "type": "raster",
+            "source": "esri-imagery",
+            "minzoom": 0,
+            "maxzoom": 19,
+        },
+        {
+            "id": "esri-labels",
+            "type": "raster",
+            "source": "esri-labels",
+            "minzoom": 0,
+            "maxzoom": 19,
+        },
+    ],
+}
 
 # Kesin koordinatı olmayan kayıtları yanlış bir parsele yerleştirmek yerine
 # mahalle merkezinde, adet belirten mavi bir küme olarak gösteriyoruz.
@@ -226,16 +259,7 @@ with field_tab:
             )
         approximate = pd.DataFrame(approximate_rows)
 
-        map_layers = [
-            pdk.Layer(
-                "TileLayer", data=SATELLITE_TILES, min_zoom=0, max_zoom=19,
-                tile_size=256,
-            ),
-            pdk.Layer(
-                "TileLayer", data=SATELLITE_LABELS, min_zoom=0, max_zoom=19,
-                tile_size=256,
-            ),
-        ]
+        map_layers = []
         if not approximate.empty:
             map_layers.extend(
                 [
@@ -282,7 +306,8 @@ with field_tab:
 
         st.pydeck_chart(
             pdk.Deck(
-                map_style=None,
+                map_provider="maplibre",
+                map_style=SATELLITE_STYLE,
                 layers=map_layers,
                 initial_view_state=pdk.ViewState(
                     latitude=38.305, longitude=26.405, zoom=10.35
