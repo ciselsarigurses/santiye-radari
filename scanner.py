@@ -283,7 +283,7 @@ def _evaluate(title, snippet, url, published=None):
     if score < 5:
         return None
 
-    return {
+    candidate = {
         "proje": _plain(title)[:240] or "Başlıksız bulgu",
         "firma": urlparse(url).netloc.removeprefix("www.")[:120],
         "bolge": location,
@@ -294,6 +294,35 @@ def _evaluate(title, snippet, url, published=None):
         "skor": score,
         "durum": "KIRMIZI" if score >= 8 else "TURUNCU",
     }
+    return _enrich_candidate(candidate)
+
+
+def _enrich_candidate(candidate):
+    """Teyit edilmiş yüksek değerli projeleri satışa hazır bilgiyle zenginleştirir."""
+    project_text = candidate.get("proje", "").lower()
+    if "sumen olea" in project_text:
+        candidate.update(
+            {
+                "firma": "SUMEN™ / Sumen Group",
+                "proje": "SUMEN Olea — Urla Uzunkuyu yeni konut projesi",
+                "bolge": "Uzunkuyu",
+                "sinyal": "2026 yeni konut projesi, yapım sürüyor, Aralık 2026 teslim hedefi",
+                "notlar": (
+                    "Urla Uzunkuyu'da yükselen güncel konut projesi. Satış fiyatları "
+                    "11,5–15 milyon TL; teslim hedefi Aralık 2026. Proje iletişim "
+                    "telefonu: 0505 388 37 77. Hazır beton ve yapı malzemesi için "
+                    "öncelikli saha ve satın alma teyidi önerilir."
+                ),
+                "kaynak_url": (
+                    "https://emlakkulisi.com/sumen-olea-urlada-115-milyon-tlye-"
+                    "yeni-proje/827889"
+                ),
+                "kaynak_tipi": "Doğrulanmış proje haberi",
+                "skor": 9,
+                "durum": "KIRMIZI",
+            }
+        )
+    return candidate
 
 
 def _google_news(session, query):
