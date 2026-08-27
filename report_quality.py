@@ -58,14 +58,15 @@ def _satellite_summary(connection, report_date):
 
 
 def _persisted_open_tasks(connection, known_task_ids):
-    """Yeni görüntüde görünmese de açık saha kararlarını günlük listede tut."""
+    """Yeni görüntüde görünmese de açık uydu saha kararlarını günlük listede tut."""
     rows = connection.execute(
         """SELECT d.gorev_id,d.kaynak,d.kaynak_kimlik,d.mahalle,d.enlem,d.boylam,
         d.kontrol_sayisi,d.son_islem,s.adres,s.ada,s.parsel,s.firma,s.proje,d.durum
         FROM saha_durumlari d
         LEFT JOIN santiyeler s
           ON d.kaynak='saha' AND CAST(s.id AS TEXT)=d.kaynak_kimlik
-        WHERE d.durum IN ('KONTROLE_GIT','TEKRAR_GIT')
+        WHERE (d.kaynak='uydu' AND d.durum IN ('KONTROLE_GIT','TEKRAR_GIT'))
+           OR (d.kaynak='saha' AND d.durum='TEKRAR_GIT')
         ORDER BY CASE d.durum WHEN 'TEKRAR_GIT' THEN 0 ELSE 1 END,
         d.son_islem DESC, d.id DESC"""
     ).fetchall()
@@ -99,7 +100,7 @@ def _persisted_open_tasks(connection, known_task_ids):
                 "sinyal": (
                     "Önceki saha kararı: bir daha git bak"
                     if is_repeat
-                    else "Önceki saha görevi: kontrol bekliyor"
+                    else "Önceki uydu saha görevi: kontrol bekliyor"
                 ),
                 "bolge": source_key if source == "uydu" else "Saha listesi",
                 "onceki_tarih": None,
