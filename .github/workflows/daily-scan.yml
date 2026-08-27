@@ -74,20 +74,42 @@ jobs:
 
       - name: Tarama ve rapor sonuçlarını kaydet
         run: |
-          if [[ -z "$(git status --porcelain -- santiye.db SAHA_RAPORU.md latest_report.json)" ]]; then
+          report_files="santiye.db SAHA_RAPORU.md latest_report.json"
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Yeni veya güncellenen bulgu/rapor yok."
             exit 0
           fi
+
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add santiye.db SAHA_RAPORU.md latest_report.json
+          git add $report_files
           git commit -m "Radar: günlük tarama ve saha raporunu güncelle"
 
-          # Kod ve saha kararları aynı anda gelirse eski veriyi zorla üzerine yazma.
+          # Tarama sürerken main değişmişse SQLite/veri dosyalarını rebase ile
+          # birleştirmeye çalışma. En güncel main'i alıp taramayı bir kez yeniden
+          # üret; böylece ikili DB çakışması ve eski verinin üzerine yazılması önlenir.
           git fetch origin main
-          if ! git rebase origin/main; then
-            echo "Ana dal ile rapor çıktısı çakıştı; veri kaybını önlemek için durduruldu."
-            git rebase --abort || true
-            exit 1
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal tarama sırasında değişti; en güncel veri üzerinde bir kez yeniden üretiliyor."
+            git reset --hard origin/main
+            pip install -r requirements.txt
+            python scanner.py
+            python refresh_satellite_analysis.py
+            python daily_report.py
+            python report_quality.py
+
+            if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+              echo "Yeniden üretim sonrası kaydedilecek veri değişikliği yok."
+              exit 0
+            fi
+
+            git add $report_files
+            git commit -m "Radar: günlük tarama ve saha raporunu güncelle"
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Ana dal yeniden değişti; veri kaybı riskine girmeden sonraki çalışmaya bırakıldı."
+              exit 1
+            fi
           fi
+
           git push origin HEAD:main
