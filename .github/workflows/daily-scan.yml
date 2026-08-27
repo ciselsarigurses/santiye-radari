@@ -70,4 +70,13 @@ jobs:
           git config user.email "santiye-radari-bot@users.noreply.github.com"
           git add santiye.db SAHA_RAPORU.md latest_report.json
           git commit -m "Radar: günlük tarama ve saha raporunu güncelle"
-          git push
+
+          # Workflow çalışırken ana dala kod güncellemesi gelebilir. Üretilen raporu
+          # eski commit'in üstünden zorla itmek yerine son main'in üzerine güvenle taşı.
+          git fetch origin main
+          if ! git rebase origin/main; then
+            echo "Ana dal ile rapor çıktısı çakıştı; üzerine yazmamak için push atlandı."
+            git rebase --abort || true
+            exit 1
+          fi
+          git push origin HEAD:main
