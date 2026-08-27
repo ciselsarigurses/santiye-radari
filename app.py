@@ -5,6 +5,7 @@ from urllib.parse import quote_plus
 import pandas as pd
 import pydeck as pdk
 import streamlit as st
+from bs4 import BeautifulSoup
 
 from scanner import DB, INSTAGRAM_SEARCH_LINKS, connect, ensure_schema, scan_and_store
 
@@ -43,6 +44,18 @@ def number(item, fallback=0):
         return fallback if pd.isna(item) else int(item)
     except (TypeError, ValueError):
         return fallback
+
+
+def plain_text(item, fallback="-"):
+    text = value(item, fallback)
+    if text == fallback:
+        return fallback
+    return BeautifulSoup(text, "html.parser").get_text(" ", strip=True)
+
+
+def short_text(item, limit=110):
+    text = plain_text(item, "Başlıksız bulgu")
+    return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
 
 
 def add_to_field(candidate):
@@ -263,7 +276,7 @@ with web_tab:
         st.info("Henüz radar bulgusu yok. Sol menüden ‘Şimdi İnterneti Tara’ düğmesine basabilirsin.")
     else:
         m1, m2, m3 = st.columns(3)
-        m1.metric("Yeni aday", len(candidates))
+        m1.metric("Otomatik bulgu", int(candidates.kaynak_tipi.notna().sum()))
         m2.metric("🔴 Güçlü sinyal", int((candidates.durum == "KIRMIZI").sum()))
         m3.metric("Instagram sinyali", int(candidates.kaynak_tipi.str.contains("Instagram", na=False).sum()))
 
@@ -291,12 +304,12 @@ with web_tab:
         for _, row in shown.iterrows():
             icon = "🔴" if value(row.durum) == "KIRMIZI" else "🟠"
             with st.expander(
-                f"{icon} {value(row.bolge, 'Bölge belirsiz')} · {value(row.proje, 'Başlıksız bulgu')}"
+                f"{icon} {value(row.bolge, 'Bölge belirsiz')} · {short_text(row.proje)}"
             ):
                 st.write("**Kaynak:**", value(row.kaynak_tipi))
                 st.write("**Sinyal:**", value(row.sinyal))
                 st.write("**Radar puanı:**", f"{number(row.skor)}/10")
-                st.write("**Bulunan bilgi:**", value(row.notlar))
+                st.write("**Bulunan bilgi:**", plain_text(row.notlar))
                 st.caption(
                     f"İlk görülme: {value(row.ilk_gorulme)} · Son görülme: {value(row.son_gorulme)}"
                 )
