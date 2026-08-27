@@ -1,0 +1,288 @@
+{
+  "rapor_tarihi": "2026-08-27",
+  "olusturma": "2026-08-27 21:08 +03",
+  "ozet": "İnternet: 0 yeni, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 7 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır: 0 hareket bölgesi adayı",
+  "saha_adaylari": [
+    {
+      "oncelik": "ORTA",
+      "mahalle": "Ilıca",
+      "enlem": 38.297354,
+      "boylam": 26.355416,
+      "alan_m2": 4221,
+      "sinyal": "Geniş yüzey/toprak değişimi adayı",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.297354,26.355416",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+    },
+    {
+      "oncelik": "ORTA",
+      "mahalle": "Ovacık",
+      "enlem": 38.264018,
+      "boylam": 26.318212,
+      "alan_m2": 3658,
+      "sinyal": "Geniş yüzey/toprak değişimi adayı",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.264018,26.318212",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+    },
+    {
+      "oncelik": "NORMAL",
+      "mahalle": "Çiftlikköy",
+      "enlem": 38.294308,
+      "boylam": 26.277524,
+      "alan_m2": 1970,
+      "sinyal": "Geniş yüzey/toprak değişimi adayı",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.294308,26.277524",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+    },
+    {
+      "oncelik": "NORMAL",
+      "mahalle": "Musalla",
+      "enlem": 38.313612,
+      "boylam": 26.307619,
+      "alan_m2": 1688,
+      "sinyal": "Geniş yüzey/toprak değişimi adayı",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.313612,26.307619",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+    },
+    {
+      "oncelik": "NORMAL",
+      "mahalle": "Musalla",
+      "enlem": 38.301453,
+      "boylam": 26.304667,
+      "alan_m2": 1688,
+      "sinyal": "Geniş yüzey/toprak değişimi adayı",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.301453,26.304667",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+    },
+    {
+      "oncelik": "NORMAL",
+      "mahalle": "Musalla",
+      "enlem": 38.303518,
+      "boylam": 26.298,
+      "alan_m2": 1126,
+      "sinyal": "Geniş yüzey/toprak değişimi adayı",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.303518,26.298000",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+    },
+    {
+      "oncelik": "NORMAL",
+      "mahalle": "Alaçatı",
+      "enlem": 38.238824,
+      "boylam": 26.399714,
+      "alan_m2": 1126,
+      "sinyal": "Geniş yüzey/toprak değişimi adayı",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.238824,26.399714",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir."
+    }
+  ],
+  "yeni_internet_bulgulari": [
+    {
+      "proje": "Çeşme'de Sosyal Konut Projesi Temel Atıldı - Son Dakika",
+      "bolge": "Çeşme",
+      "sinyal": "temel at, konut projesi, proje",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQVUlPMU5id2poemFaaUllWXJMWWc5QUZBOGxWbFJYbFRJMk1iS19sR1Y0MUp1c1Z2ZXRwY0tUY19IOG5CQXZOUzhKMG8yZ2RQWTFuVUphR2llbDdGZXlhWC1oM0JDODYyeXhjMU52Y2J6X1BXN1V2NVNGTlRzS1JoUnNhSWZzTkV0YnZXOUp5MlQtM2RFUEZWV9IBkgFBVV95cUxQd3U5cW9LeW1kSlpVLWwxcGdINUdTdHV3b2hvV2NmMGRxYjhGaVJqZlBBdE5NSTBYRzZobWdXWnFyeEFZT2FEMjVRdXphNjlRbkN1bk5TN3VrMFZ4Y2RFaWtZZDZwcXZiWGM2a3JyR0lzazlKbHd2QTE1SWZuZy1yQlBCMnpSNVJpVjlkMmw5TThJZw?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 10,
+      "durum": "KIRMIZI"
+    },
+    {
+      "proje": "SUMEN Olea — Urla Uzunkuyu yeni konut projesi",
+      "bolge": "Uzunkuyu",
+      "sinyal": "2026 yeni konut projesi, yapım sürüyor, Aralık 2026 teslim hedefi",
+      "kaynak_url": "https://emlakkulisi.com/sumen-olea-urlada-115-milyon-tlye-yeni-proje/827889",
+      "kaynak_tipi": "Doğrulanmış proje haberi",
+      "skor": 9,
+      "durum": "KIRMIZI"
+    },
+    {
+      "proje": "Çeşme’deki tartışmalı otel ile ilgili yeni detaylar ortaya çıktı: Alt yapısı yok, inşaata başlamış bile - İz Gazete",
+      "bolge": "Çeşme",
+      "sinyal": "inşaata baş, inşaat",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOamhGUVRMa1dLY0d6NnVmY2FOZGhJUGFmT0hCX3NBekk1UzZPRjNpSHdvOUJxRVcxRDJtOVUzNVpuQXFPcTZhVHVTR3AtTzdXSENHeVJWZHlNOHBfZTRfRXI5NUV4bURaclFQWjVCblN3dmY4b3NzRkNRNkFFalNqaHZpTVhpd2czNER5U20xdXV1T3BPNGduOVR2OGJKcllxY1JPQzA2V2Q0UmxfcE8wcDJKenFDNjh0TjduSVFUaEZEbWc?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 8,
+      "durum": "KIRMIZI"
+    },
+    {
+      "proje": "Çeşme’de SİT Alanında Kaçak Hafriyat Tahribatı - yapi.com.tr",
+      "bolge": "Çeşme",
+      "sinyal": "hafriyat",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE4zN1FxYzNlNjYyUkdjU251R0pGOTE2Z1BHalVDVGtYYmVKUGlFQnRQd0RtUlNyd1NWbUhtcjNXdnVENWliUXNPUWR4TkM5NEFxV3dnMkRLWHBrcTFZRmhjMklhamZFX0xmdHRjb2Y1Z2RocEU?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Çeşme Aya Yorgi Koyu villa projesi davalık oluyor! - Son Mühür",
+      "bolge": "Çeşme",
+      "sinyal": "villa projesi, proje",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPM1MwclQwdDM2eEpMU1JwYmhrSWFuT3hVV1EtSFBXcTZDZXdCejc3UXVTS3VkbXItNDBkeUpqZHJXbU9hSlk3R2dBQ3Q1Zk9IdVRSRE9WVlctcEtrMlRnSTZiWmFWTnU0cHNXU2tKTWh3SVRGVnlzSmpUU2ZIYUJONmxydlFzT2NBc0FXTFpVdDUzaVg1SFR6V0M0Q2xacnR0NFAtaG42R24?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Turizm sezonunda Alaçatı şantiyeye döndü - Sabah",
+      "bolge": "Alaçatı",
+      "sinyal": "şantiye",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOZTJlcmg0QXQ0OUdjMTlEVmJJZ3FUb05Pd1ZEeEsxZUtZQlZLaHBlV0NxdkJGV01xSFgzQU5nV1o2U0cxdm9Jel9fdjNLNnJ4RkdYNWJtekVxLUJ2THFJNGgzSnM4OGdib3ctVkt4QTNBeE9ScDlkRk1SR0FpTk11LWFXTjNEdEt5WFHSAYwBQVVfeXFMT3A4Y0RyQ2lJOG5WeXFiRzFFbHBoemNCaG9IQjVhOFVRcnNkWk1WTGJzM1l2d3ZBMS0xT0NrVHZaNTJDVm00bWhHT0o3bk5PN01aUG9WdDZ3MTlrbVZ2cHNwNHhDU01vTW5aeHcxMjhIMC11SnN1bDVKbGRQMVNhNWVZVDdiY3RKbFk4aXY?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Swissotel Residences Çeşme: Ilıca'nın ilk markalı konut projesi - capital.com.tr",
+      "bolge": "Çeşme",
+      "sinyal": "konut projesi, proje",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNRm8yalVqZ2lYUXBQanhJZmVuMkpidG5PemV6MzJlQ2hmWUp0R2o5YTZoSWw1UHhSWnJxNVI2Y2p5aGZZVFNTUEF1TUxkaHZKbkVBQlF4ZERhbXd1SFpwdlRIWUVYbE5XTkU1a3ExUTB4M1lFNW1RZjZvN05tUERPaUQyR2tVRTVGcGFKQWhTUjUzWEZGSGE5bnhzOWNBZHlvN2FhZHpMWWtBcjJudGxR?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "KADEM MİMARLIK & İNŞAAT Çeşme Çiftlik İkiz Villa Projesi - instagram.com",
+      "bolge": "Çeşme",
+      "sinyal": "villa projesi, proje",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE56R2JaNkZrcElHOFhoR0czYXRZTi1tTVRXYkZpSU5xak5lNjBrTTdySW9WUEFIbkNyUGlZRlNKeDBjOXZ3dXhHRFpOVG96My1ENGc?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Çeşme Çiftlik Köy Mahallesinde İkiz Villa Projesi ✨ 📍Plaja 100 metre 600 m2 arsa içerisinde Müstakil havuzlu ikiz villa 4+1 Ebeveyn banyo Yarı kapalı mutfak Yerden ısıtma Şömine Akıllı ev sistemi ACELE EDİNN - instagram.com",
+      "bolge": "Çeşme",
+      "sinyal": "villa projesi, proje",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9TTHo0SVF3aWZXMDdRTmdVZkZiTEN1TXVrUVpfS3FLR0ZXNjVsdEw3TXlBdzJ5QVFmeFl4NnphMHlDbnhSR2h3TjRacU9LWEx4TGc?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Çeşme’de Otel Görünümlü Villa Projesine Bakanlık Freni: Turizm Belgesi İptal Edildi! ObjektifÇeşmeHaber/ Selma Artar Çeşme Çevre Derneği, Tikveşli markasının kurucu ortakları arasında yer alan Recai Demirbaş’ın sahibi olduğu Demirbaş Yapı i",
+      "bolge": "Çeşme",
+      "sinyal": "villa projesi, proje",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE01anNaVTNlVjJmWlBOWlc1Q1VwQm5qcE9IZTA1b20xaFJxNHFySnZRQnhqdkUydzE5ZUF6TVhUOWZITDBEZjBrQVd2UDlfby1KNEE?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Ege’nin en prestijli lokasyonlarından biri olan Çeşme – Ilıca Şantiye Bölgesi’nde, 687 m2 arsa üzerinde inşa edilmiş bu tek katlı müstakil villa, hem huzurlu bir yaşam hem de yüksek değer artışı potansiyeli sunan bir yatırım fırsatıdır. Mod",
+      "bolge": "Çeşme",
+      "sinyal": "şantiye",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5GV0JucVNOY0pvWkRRNDhUQllPMjBWZTB4VmRydkFza3ktQTJiSGxTaU42LXFBYzBCeUY4UF9peU5PSi1JMXZKQldWVzlMUzc2N2l5SEZn?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Satılık Villa 🏡 Çeşme | Ilıca | Şantiye Evleri 620 m2 arsa içinde tek katlı, büyük havuzlu gerçek bir Şantiye Evi... Denize 180 metre mesafede. Detaylı Bilgi İçin Lütfen Arayın. Etka ORDU | 0(533) 311 13 14 . . . #satılık #villa #izmir #çeş",
+      "bolge": "Çeşme",
+      "sinyal": "şantiye",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE85TGk3X3RCSEN5SUN4Q3ZDT21oQUJZelM4MHkyME4xbDVwcGN4dnRHUUZFNm9PQkl1Y1lwUThQN3ZsU20zX0hfaG1DdTlrQk8tLXZYVHJR?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "ILICA ŞANTİYE EVLERİ S 4+1 VİLLA Villamız, Çeşmenin en değerli lokasyonların Ilıca, yeni şantiye bölgesindedir. * 1.000 m2 üzerine kurulmuş olup iki adet adet villa her biri 500 m2 arsa * 4 oda 1 salon, 2 Banyo, 1 wc'den oluşmaktadır. * 200",
+      "bolge": "Çeşme",
+      "sinyal": "şantiye",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5EN3BIUzBiQllZMm45X0pTZWxfaDJuZjVqX2pNZElxMVFEUEtUWkl1WUh6YjBJallxd3hjYVgzd3BuQ2JkOGlBV0lpVi00OGh6QkdoZVhB?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "✨ Çeşme Ilıca Şantiye’de Müstakil Havuzlu Villa! ✨ 🏡 605 m2 arsa – 280 m2 brüt / 220 m2 net kullanım alanı 🌊 Ilıca Plajı’na sadece 200 METRE 🏊‍♂️ 40 m2 özel yüzme havuzu 🌴 Geniş bahçe, kamelya & mangal alanı 🛏 4+1 – 3 banyo – ebeveyn suit ❄",
+      "bolge": "Çeşme",
+      "sinyal": "şantiye",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBhSk9KeW9JSWpLZEp3em1McV93U1RxYnMtS2hfYVhJRGRrUTZldzB5bndVRG1WNmNkZ1V4QlV2M21OYjF4Um1CRmVkSFBYc2psVEE?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Ilıca Şantiyede Satılık Emsalsiz Malikane! 1816 m2 arsa içerisinde Ana bina, misafir evi ve müştemilattan oluşan bu emsalsiz mülkle ilgili detaylı bilgi almak için beni aramanız yeterli Emre Dayıoğlu Remax Kuvars Çeşme 0544 738 80 40 #çeşme",
+      "bolge": "Alaçatı",
+      "sinyal": "şantiye",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE80NHhrR2lPNFFWdW1pamVxZWFRc2pTcmY0TDYtdEdMVmRrT3hwaEVjUFFaeWNRZDNvTGViWElOd3M1N1l1YmRfcDdkLUpnU0lGNUxmVDd3?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Dünyaca ünlü Ilıca plajına Yalnızca 5dk yürüyüş mesafesinde! Satılık fırsat villa Çeşmenin en değerli lokasyonlarından biri Şantiye mevkinde yer alan villa Swiss Otel sokağında yer almaktadır. Detaylı bilgi için hemen arayın ☎️ 0544 738 80 ",
+      "bolge": "Çeşme",
+      "sinyal": "şantiye",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1zb3Z0cFpoRGNrNUhheFd3aXhURzBVZzZESlBaNGFTbFIwM2pZeVBUM3JkYlVpYVJrVDR3TVhEcm9qLXZORWROcFBOQVlkdHNmWGc?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "🏡 ÇEŞME ILICA’DA TAŞINMAYA HAZIR, MASRAFSIZ VİLLA! 🌿 Denize yakın, doğayla iç içe, konforlu bir yaşam sizi bekliyor. ✨ Çeşme Ilıca Celal Bayar Mahallesi’nde, Şantiye Evleri’nin üst paralelinde yer alan bu özel villa, Ilıca Plajı’na sadece 5",
+      "bolge": "Çeşme",
+      "sinyal": "şantiye",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFAwcktNMXZXUldWNkJiV0stdkRsNV9kYjFwTkRpanluNUxCMHcxc1hVZnZVYTdOSHNwRzZBM3hzYWZ5NDJFMS1SYXg3ZjVNLWhMcW5YNnNn?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Çeşme’nin en prestijli bölgelerinden Ilıca’da Şantiye evlerinde ,Swiss Otel’e komşu ve Ilıca Plajı’na yalnızca 3. sırada ( Ki bu hat ,yaz ayları için denize sıfır olan hatlardan sakinlik olarak daha kıymetlidir ve daha çok tercih sebebidir.",
+      "bolge": "Çeşme",
+      "sinyal": "şantiye",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1XUU5oX2R5akg5blVlLXBzUVpCLUpIZzlUYUg4UWtPbzAyVFgtSngwaExMMkFlb1FhVmh3M2pmREdXbko3Y1ZWei1RNmkycGNhUDRzUUZn?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "Aydın Villa projesi Islak hacim projemiz... Alaçatı tarzı ile mekanda ferah ve hoş bir görüntü yakaladık 🏖 Melike Kömür Yorulmaz İç Mimarlık ve Tasarım Stüdyosu size şu hizmetleri sunar; 📌 İç Mekan tasarımı 📌 2 boyutlu çizimler ve detaylar ",
+      "bolge": "Alaçatı",
+      "sinyal": "villa projesi, proje",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBDeEJ0SnNuWmg4RmtYbTA0XzF4VUFTMWt5T1JPX2NMMzZINnEzUk0yVmxKZHZuMnNMcFRDMTFBZU1iU0E1SlVRT0NZQTFZR2FvMXc?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    },
+    {
+      "proje": "ALAÇATI ASPOLAT A.S. (@alacatiaspolatinsaathafriyat) · Alacatı - instagram.com",
+      "bolge": "Alaçatı",
+      "sinyal": "hafriyat",
+      "kaynak_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1UTEJieHFJd3V0eU1hYTk3d2s5R3gzTWNVdUc5NXhTYzZ1cnY4Qk50b3BZdFlpaV80YWhQU3NEeFUyUzctWlJIeXdLLXNLV3QzM1NTanBpbGRJQjNQMm91SUw1ekt3QQ?oc=5",
+      "kaynak_tipi": "Google Haberler",
+      "skor": 6,
+      "durum": "TURUNCU"
+    }
+  ],
+  "uyari": "Uydu koordinatları yaklaşık değişim merkezidir. Kesin adres/ada-parsel olarak kullanılmamalı; saha kontrolüyle doğrulanmalıdır."
+}
