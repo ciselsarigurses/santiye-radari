@@ -1,6 +1,12 @@
 name: Günlük Şantiye Taraması
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "scanner.py"
+      - "requirements.txt"
+      - ".github/workflows/daily-scan.yml"
   schedule:
     # Türkiye saatiyle her sabah yaklaşık 07:15 (yaz saati sabittir, UTC+3)
     - cron: "15 4 * * *"
