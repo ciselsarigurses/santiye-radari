@@ -117,7 +117,11 @@ def validate_report(payload):
         size_class = str(item.get("boyut_sinifi") or "").upper()
         signal = str(item.get("sinyal") or "")
         if size_class == "KUCUK":
-            if not (MIN_HOTSPOT_AREA_M2 <= area_m2 < SMALL_HOTSPOT_MAX_M2):
+            # Uydu motoru sınıfı yuvarlama öncesi gerçek alana göre (<800 m²)
+            # belirler, rapor ise alanı tam m²'ye yuvarlar. 799.x m² bu nedenle
+            # raporda 800 m² görünebilir; sınıf doğru olduğu halde kalite kontrolü
+            # bunu hata saymamalı.
+            if not (MIN_HOTSPOT_AREA_M2 <= area_m2 <= SMALL_HOTSPOT_MAX_M2):
                 raise AssertionError(
                     f"Aday #{index}: KUCUK sınıfı {area_m2:.0f} m² ile beklenen aralık dışında."
                 )
