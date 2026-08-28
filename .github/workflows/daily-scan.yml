@@ -16,6 +16,7 @@ on:
       - "field_outcome.py"
       - "apply_field_status.py"
       - "refresh_satellite_analysis.py"
+      - "reactivate_current_satellite.py"
       - "retain_recent_candidates.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
@@ -82,6 +83,9 @@ jobs:
       - name: Mekânsal saha kalite kontrolü
         run: python spatial_quality.py
 
+      - name: Yeniden görünen otomatik-elendi uydu görevlerini geri aç
+        run: python reactivate_current_satellite.py
+
       - name: Günlük rapor kalite kontrolü
         run: python report_quality.py
 
@@ -112,6 +116,7 @@ jobs:
             python refresh_satellite_analysis.py
             python daily_report.py
             python spatial_quality.py
+            python reactivate_current_satellite.py
             python report_quality.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
