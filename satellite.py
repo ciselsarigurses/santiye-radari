@@ -126,13 +126,14 @@ def _read_asset(item, asset_name, bbox, height, width, resampling_name):
     try:
         import rasterio
         from rasterio.enums import Resampling
-        from rasterio.windows import from_bounds
-        from rasterio.warp import transform_bounds
+        from rasterio.transform import from_bounds
+        from rasterio.vrt import WarpedVRT
     except ImportError as exc:
         raise SatelliteError("Uydu görüntü işleme bağımlılıkları kurulamadı.") from exc
 
     href = item["assets"][asset_name]["href"]
     resampling = getattr(Resampling, resampling_name)
+    target_transform = from_bounds(*bbox, width=width, height=height)
     environment = {
         "GDAL_DISABLE_READDIR_ON_OPEN": "EMPTY_DIR",
         "CPL_VSIL_CURL_ALLOWED_EXTENSIONS": ".tif",
@@ -141,17 +142,22 @@ def _read_asset(item, asset_name, bbox, height, width, resampling_name):
     }
     with rasterio.Env(**environment):
         with rasterio.open(href) as source:
-            projected = transform_bounds(
-                "EPSG:4326", source.crs, *bbox, densify_pts=21
-            )
-            window = from_bounds(*projected, transform=source.transform)
-            return source.read(
-                out_shape=(source.count, height, width),
-                window=window,
+            # Tüm tarih ve bantları aynı WGS84 hedef ızgarasına yeniden örnekle.
+            # Önceki yöntem UTM penceresini doğrudan diziye sıkıştırıp dizi satırını
+            # enlemle doğrusal eşliyordu; projeksiyon yakınsaması rota noktasını
+            # onlarca metre kaydırabiliyordu ve farklı granüllerde piksel hizasını
+            # garanti etmiyordu. Bu VRT hem değişim maskesini hem koordinatı aynı
+            # coğrafi ızgaraya sabitler.
+            with WarpedVRT(
+                source,
+                crs="EPSG:4326",
+                transform=target_transform,
+                width=width,
+                height=height,
                 resampling=resampling,
-                boundless=True,
-                fill_value=0,
-            )
+                nodata=0,
+            ) as warped:
+                return warped.read()
 
 
 def _reflectance(raw):
