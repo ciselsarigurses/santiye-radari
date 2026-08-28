@@ -82,9 +82,23 @@ def active_sites(states):
 def task_card(item, task_id, status, source_label):
     neighborhood = str(item.get("mahalle") or "Konum araştırılıyor")
     priority = str(item.get("oncelik") or item.get("durum") or "KONTROL")
+    try:
+        waiting_days = max(int(item.get("bekleme_gun") or 0), 0)
+    except (TypeError, ValueError):
+        waiting_days = 0
+    overdue = bool(item.get("gecikmis"))
+
     with st.container(border=True):
         st.markdown(f"### {STATUS_LABELS.get(status, status)} · {neighborhood}")
         st.caption(f"Görev {task_id} · {source_label} · {priority}")
+
+        if overdue:
+            st.warning(
+                f"⚠️ Bu görev {waiting_days} gündür saha kontrolü bekliyor; "
+                "günün ilk rotalarından biri olmalı."
+            )
+        elif waiting_days > 0:
+            st.caption(f"⏱️ {waiting_days} gündür saha kontrolü bekliyor.")
 
         if item.get("alan_m2") is not None:
             try:
@@ -171,11 +185,13 @@ repeat_total = sum(
     item.get("saha_durumu") == "TEKRAR_GIT"
     for item in satellite_items + site_items
 )
+overdue_total = sum(bool(item.get("gecikmis")) for item in satellite_items)
 
-m1, m2, m3 = st.columns(3)
+m1, m2, m3, m4 = st.columns(4)
 m1.metric("🛰️ Uydu görevi", len(satellite_items))
 m2.metric("🎯 Kayıtlı saha", len(site_items))
-m3.metric("🔁 Tekrar gidilecek", repeat_total)
+m3.metric("⚠️ Geciken", overdue_total)
+m4.metric("🔁 Tekrar gidilecek", repeat_total)
 
 repeat_tab, satellite_tab, site_tab, history_tab = st.tabs(
     ["🔁 Tekrar Git", "🛰️ Uydu Adayları", "🎯 Saha Kayıtları", "✅ Kontrol Edilenler"]
