@@ -18,6 +18,7 @@ on:
       - "refresh_satellite_analysis.py"
       - "reactivate_current_satellite.py"
       - "retain_recent_candidates.py"
+      - "carry_forward_satellite_candidates.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
       - ".github/workflows/field-status.yml"
@@ -82,6 +83,9 @@ jobs:
       - name: Günlük uydu ve radar raporunu oluştur
         run: python daily_report.py
 
+      - name: Yeni görüntü yokken bekleyen uydu aday ayrıntılarını koru
+        run: python carry_forward_satellite_candidates.py
+
       - name: Mekânsal saha kalite kontrolü
         run: python spatial_quality.py
 
@@ -117,6 +121,7 @@ jobs:
             python retain_recent_candidates.py
             python refresh_satellite_analysis.py
             python daily_report.py
+            python carry_forward_satellite_candidates.py
             python spatial_quality.py
             python reactivate_current_satellite.py
             python report_quality.py
