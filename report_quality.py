@@ -223,7 +223,10 @@ def _active_hotspots(connection, report_date):
         if task_id:
             known_task_ids.add(task_id)
         status = str(item.get("saha_durumu") or "KONTROLE_GIT")
-        if status == "KONTROL_EDILDI":
+        # MUKERRER / ALGORITMA_ELENDI gibi iç durumlar yalnız veri uzlaştırması
+        # içindir; saha personeline görev gibi gösterilmemelidir. Kullanıcıya açık
+        # listede sadece gerçekten eylem gerektiren iki durum tutulur.
+        if status not in {"KONTROLE_GIT", "TEKRAR_GIT"}:
             continue
         item = dict(item)
         age = age_map.get(task_id, {})
