@@ -78,6 +78,20 @@ def check_coverage():
         + ", ".join(uncovered)
     )
 
+    # Sadece mahalle merkezlerini test etmek kör kıyı şeritlerini kaçırabilir.
+    # Günlük iki tarama kutusunun, tanımlı tüm Çeşme + Uzunkuyu zarfını noktasal
+    # bir ızgara üzerinde eksiksiz kapladığını da doğrula.
+    west, south, east, north = REGIONS["all"]["bbox"]
+    uncovered_grid = []
+    for latitude in np.linspace(south, north, 9):
+        for longitude in np.linspace(west, east, 13):
+            if not any(_contains(box, latitude, longitude) for box in report_boxes):
+                uncovered_grid.append((float(latitude), float(longitude)))
+    assert not uncovered_grid, (
+        "Günlük uydu kutularında 'all' zarfı içinde kör alan var; "
+        f"ilk örnek: {uncovered_grid[0] if uncovered_grid else None}."
+    )
+
     # Çeşme kutusundan Uzunkuyu kutusuna doğu-batı yönünde kör şerit oluşmasın.
     cesme = REGIONS["cesme"]["bbox"]
     uzunkuyu = REGIONS["uzunkuyu"]["bbox"]
@@ -124,7 +138,7 @@ def main():
     check_configuration()
     check_coverage()
     check_small_site_path()
-    print("Uydu kalite kontrolü başarılı: kapsama, 10 m ölçek ve 250 m² küçük saha yolu korunuyor.")
+    print("Uydu kalite kontrolü başarılı: tam zarf kapsaması, 10 m ölçek ve 250 m² küçük saha yolu korunuyor.")
 
 
 if __name__ == "__main__":
