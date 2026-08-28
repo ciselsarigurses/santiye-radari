@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-28",
-  "olusturma": "2026-08-28 21:35 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 16",
+  "olusturma": "2026-08-28 21:37 +03",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 15",
   "saha_adaylari": [
     {
       "oncelik": "ORTA",
@@ -41,27 +41,6 @@
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
       "gorev_id": "UD24100197B",
       "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-08-27",
-      "bekleme_gun": 1,
-      "gecikmis": false
-    },
-    {
-      "oncelik": "ORTA",
-      "oncelik_nedeni": "Geniş bitişik zemin/yüzey değişimi.",
-      "mahalle": "Çiftlikköy",
-      "enlem": 38.294296,
-      "boylam": 26.277772,
-      "alan_m2": 2300,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "STANDART",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "24.08.2026",
-      "son_tarih": "26.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.294296,26.277772",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "UF246EB409A",
-      "saha_durumu": "MUKERRER",
       "ilk_gorulme": "2026-08-27",
       "bekleme_gun": 1,
       "gecikmis": false
