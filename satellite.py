@@ -14,8 +14,11 @@ EARTH_SEARCH_URL = "https://earth-search.aws.element84.com/v1/search"
 MIN_HOTSPOT_AREA_M2 = 250
 SMALL_HOTSPOT_MAX_M2 = 800
 SMALL_HOTSPOT_MIN_PIXELS = 3
-HOTSPOT_LIMIT = 12
-SMALL_HOTSPOT_QUOTA = 3
+# Aynı görüntüde 12 adaya tam oturmak sessiz kesilme riski yaratıyordu. Filtreleri
+# gevşetmeden yalnızca çıktı tavanını iki katına çıkarıyoruz; böylece mevcut güçlü
+# 250 m²+ adaylar sırf sıralama kotası yüzünden kaybolmuyor.
+HOTSPOT_LIMIT = 24
+SMALL_HOTSPOT_QUOTA = 6
 TARGET_PIXEL_SIZE_M = 10
 MAX_ANALYSIS_DIMENSION = 2400
 
