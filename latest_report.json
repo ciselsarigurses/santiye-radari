@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-28",
-  "olusturma": "2026-08-28 07:02 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7",
+  "olusturma": "2026-08-28 10:30 +03",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7",
   "saha_adaylari": [
     {
       "oncelik": "ORTA",
@@ -150,19 +150,6 @@
       "durum": "KIRMIZI",
       "ilk_gorulme": "2026-08-27 12:10 UTC",
       "son_gorulme": "2026-08-28 04:02 UTC",
-      "yeni": false
-    },
-    {
-      "proje": "Çeşme’deki tartışmalı otel ile ilgili yeni detaylar ortaya çıktı: Alt yapısı yok, inşaata başlamış bile - İz Gazete",
-      "firma": "news.google.com",
-      "bolge": "Çeşme",
-      "sinyal": "inşaata baş, inşaat",
-      "kaynak_url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOamhGUVRMa1dLY0d6NnVmY2FOZGhJUGFmT0hCX3NBekk1UzZPRjNpSHdvOUJxRVcxRDJtOVUzNVpuQXFPcTZhVHVTR3AtTzdXSENHeVJWZHlNOHBfZTRfRXI5NUV4bURaclFQWjVCblN3dmY4b3NzRkNRNkFFalNqaHZpTVhpd2czNER5U20xdXV1T3BPNGduOVR2OGJKcllxY1JPQzA2V2Q0UmxfcE8wcDJKenFDNjh0TjduSVFUaEZEbWc?oc=5",
-      "kaynak_tipi": "Google Haberler",
-      "skor": 8,
-      "durum": "KIRMIZI",
-      "ilk_gorulme": "2026-08-27 10:15 UTC",
-      "son_gorulme": "2026-08-28 03:08 UTC",
       "yeni": false
     }
   ],

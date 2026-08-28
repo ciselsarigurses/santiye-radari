@@ -1,9 +1,9 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-28
-**Hazırlanma:** 2026-08-28 07:02 +03
+**Hazırlanma:** 2026-08-28 10:30 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7
+**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
@@ -79,7 +79,6 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 ## Aktif güçlü internet fırsatları
 
 - **AKTİF · KIRMIZI · 9 puan · Uzunkuyu:** [SUMEN Olea — Urla Uzunkuyu yeni konut projesi](https://emlakkulisi.com/sumen-olea-urlada-115-milyon-tlye-yeni-proje/827889) — 2026 yeni konut projesi, yapım sürüyor, Aralık 2026 teslim hedefi
-- **AKTİF · KIRMIZI · 8 puan · Çeşme:** [Çeşme’deki tartışmalı otel ile ilgili yeni detaylar ortaya çıktı: Alt yapısı yok, inşaata başlamış bile - İz Gazete](https://news.google.com/rss/articles/CBMiwwFBVV95cUxOamhGUVRMa1dLY0d6NnVmY2FOZGhJUGFmT0hCX3NBekk1UzZPRjNpSHdvOUJxRVcxRDJtOVUzNVpuQXFPcTZhVHVTR3AtTzdXSENHeVJWZHlNOHBfZTRfRXI5NUV4bURaclFQWjVCblN3dmY4b3NzRkNRNkFFalNqaHZpTVhpd2czNER5U20xdXV1T3BPNGduOVR2OGJKcllxY1JPQzA2V2Q0UmxfcE8wcDJKenFDNjh0TjduSVFUaEZEbWc?oc=5) — inşaata baş, inşaat
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL sırası yalnızca uydu değişim alanının büyüklüğüne göre saha ziyaret önceliğidir; inşaat olduğuna dair güven skoru değildir. Yanlış pozitifler saha kontrolüyle elenir.
