@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 import pandas as pd
 import streamlit as st
 
+from field_outcome import OUTCOME_LABELS, outcome_map
 from field_state import ensure_state_schema, satellite_task_id, site_task_id
 from scanner import connect
 
@@ -20,16 +21,24 @@ STATUS_LABELS = {
     "TEKRAR_GIT": "🔁 Bir daha git bak",
     "KONTROL_EDILDI": "✅ Kontrol edildi · listeden kaldır",
 }
+OUTCOME_BUTTONS = (
+    ("🏗️ Şantiye / kazı", "SANTIYE_KAZI"),
+    ("🚧 Yol / altyapı", "YOL_ALTYAPI"),
+    ("🌿 Tarla / bitki", "TARLA_BITKI"),
+    ("❌ Yanlış pozitif", "YANLIS_POZITIF"),
+)
 
 
-def issue_link(task_id, status):
-    params = {
-        "title": f"[SAHA] {task_id} {status}",
-        "body": (
-            "Şantiye Radarı saha durum talebi. Bu kayıt otomatik işlenecektir.\n\n"
-            f"Görev: {task_id}\nDurum: {status}"
-        ),
-    }
+def issue_link(task_id, status, outcome=None):
+    title = f"[SAHA] {task_id} {status}"
+    body = (
+        "Şantiye Radarı saha durum talebi. Bu kayıt otomatik işlenecektir.\n\n"
+        f"Görev: {task_id}\nDurum: {status}"
+    )
+    if outcome:
+        title += f" {outcome}"
+        body += f"\nKontrol sonucu: {OUTCOME_LABELS.get(outcome, outcome)}"
+    params = {"title": title, "body": body}
     return ISSUE_URL + "?" + urlencode(params)
 
 
@@ -124,7 +133,7 @@ def task_card(item, task_id, status, source_label):
                 f"{item['enlem']},{item['boylam']}"
             )
         if route:
-            st.link_button("🗺️ Yol tarifi", route, use_container_width=True)
+            st.link_button("🗺️ Yol tarifi", route, width="stretch")
 
         st.caption(
             "Durum düğmesi GitHub'da hazır bir talep açar. Açılan sayfada yalnızca "
@@ -134,18 +143,32 @@ def task_card(item, task_id, status, source_label):
         c1.link_button(
             "📍 Kontrole git",
             issue_link(task_id, "KONTROLE_GIT"),
-            use_container_width=True,
+            width="stretch",
         )
         c2.link_button(
             "🔁 Bir daha git bak",
             issue_link(task_id, "TEKRAR_GIT"),
-            use_container_width=True,
+            width="stretch",
         )
         c3.link_button(
             "✅ Kontrol edildi",
             issue_link(task_id, "KONTROL_EDILDI"),
-            use_container_width=True,
+            width="stretch",
         )
+
+        with st.expander("🧾 Sonuçla kapat · yanlış pozitifleri öğren"):
+            st.caption(
+                "Sahada ne görüldüğünü biliyorsan genel ‘Kontrol edildi’ yerine "
+                "sonucu seç. Kayıt, uydu yanlış pozitiflerini ileride gerçek saha "
+                "verisine göre azaltmak için saklanır."
+            )
+            columns = st.columns(len(OUTCOME_BUTTONS))
+            for column, (label, outcome) in zip(columns, OUTCOME_BUTTONS):
+                column.link_button(
+                    label,
+                    issue_link(task_id, "KONTROL_EDILDI", outcome),
+                    width="stretch",
+                )
 
 
 st.title("✅ Saha Kontrol Merkezi")
@@ -233,7 +256,6 @@ with site_tab:
         )
 
 with history_tab:
-    completed = []
     with connect() as connection:
         ensure_state_schema(connection)
         completed = connection.execute(
@@ -244,8 +266,24 @@ with history_tab:
     if not completed:
         st.info("Henüz kontrol edilip kapatılan kayıt yok.")
     else:
+        outcomes = outcome_map()
+        history_rows = []
+        for task_id, source, neighborhood, check_count, last_action in completed:
+            outcome = outcomes.get(str(task_id), {})
+            history_rows.append(
+                (
+                    task_id,
+                    source,
+                    neighborhood,
+                    check_count,
+                    outcome.get("etiket") or "Sonuç belirtilmedi",
+                    last_action,
+                )
+            )
         history = pd.DataFrame(
-            completed,
-            columns=["Görev", "Kaynak", "Mahalle", "Kontrol sayısı", "Son işlem"],
+            history_rows,
+            columns=[
+                "Görev", "Kaynak", "Mahalle", "Kontrol sayısı", "Sonuç", "Son işlem"
+            ],
         )
-        st.dataframe(history, hide_index=True, use_container_width=True)
+        st.dataframe(history, hide_index=True, width="stretch")
