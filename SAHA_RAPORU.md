@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-28
-**Hazırlanma:** 2026-08-28 06:04 +03
+**Hazırlanma:** 2026-08-28 06:08 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7
 
@@ -75,6 +75,12 @@
 ## Bugünün yeni internet / sosyal medya bulguları
 
 Bugün ilk kez bulunan yeni internet sonucu yok.
+
+## Aktif güçlü internet fırsatları
+
+- **AKTİF · KIRMIZI · 10 puan · Çeşme:** [Çeşme'de Sosyal Konut Projesi Temel Atıldı - Son Dakika](https://news.google.com/rss/articles/CBMimAFBVV95cUxQVUlPMU5id2poemFaaUllWXJMWWc5QUZBOGxWbFJYbFRJMk1iS19sR1Y0MUp1c1Z2ZXRwY0tUY19IOG5CQXZOUzhKMG8yZ2RQWTFuVUphR2llbDdGZXlhWC1oM0JDODYyeXhjMU52Y2J6X1BXN1V2NVNGTlRzS1JoUnNhSWZzTkV0YnZXOUp5MlQtM2RFUEZWV9IBkgFBVV95cUxQd3U5cW9LeW1kSlpVLWwxcGdINUdTdHV3b2hvV2NmMGRxYjhGaVJqZlBBdE5NSTBYRzZobWdXWnFyeEFZT2FEMjVRdXphNjlRbkN1bk5TN3VrMFZ4Y2RFaWtZZDZwcXZiWGM2a3JyR0lzazlKbHd2QTE1SWZuZy1yQlBCMnpSNVJpVjlkMmw5TThJZw?oc=5) — temel at, konut projesi, proje
+- **AKTİF · KIRMIZI · 9 puan · Uzunkuyu:** [SUMEN Olea — Urla Uzunkuyu yeni konut projesi](https://emlakkulisi.com/sumen-olea-urlada-115-milyon-tlye-yeni-proje/827889) — 2026 yeni konut projesi, yapım sürüyor, Aralık 2026 teslim hedefi
+- **AKTİF · KIRMIZI · 8 puan · Çeşme:** [Çeşme’deki tartışmalı otel ile ilgili yeni detaylar ortaya çıktı: Alt yapısı yok, inşaata başlamış bile - İz Gazete](https://news.google.com/rss/articles/CBMiwwFBVV95cUxOamhGUVRMa1dLY0d6NnVmY2FOZGhJUGFmT0hCX3NBekk1UzZPRjNpSHdvOUJxRVcxRDJtOVUzNVpuQXFPcTZhVHVTR3AtTzdXSENHeVJWZHlNOHBfZTRfRXI5NUV4bURaclFQWjVCblN3dmY4b3NzRkNRNkFFalNqaHZpTVhpd2czNER5U20xdXV1T3BPNGduOVR2OGJKcllxY1JPQzA2V2Q0UmxfcE8wcDJKenFDNjh0TjduSVFUaEZEbWc?oc=5) — inşaata baş, inşaat
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL sırası yalnızca uydu değişim alanının büyüklüğüne göre saha ziyaret önceliğidir; inşaat olduğuna dair güven skoru değildir. Yanlış pozitifler saha kontrolüyle elenir.
