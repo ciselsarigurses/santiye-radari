@@ -9,6 +9,8 @@ on:
       - "scanner.py"
       - "satellite.py"
       - "satellite_quality.py"
+      - "temporal_gap_scan.py"
+      - "temporal_quality.py"
       - "spatial_quality.py"
       - "daily_report.py"
       - "report_quality.py"
@@ -56,6 +58,9 @@ jobs:
       - name: Uydu kapsama ve 250 m² kalite kontrolü
         run: python satellite_quality.py
 
+      - name: Zaman serisi bulut-gölge kalite kontrolü
+        run: python temporal_quality.py
+
       - name: Uygulama açılış testi
         if: github.event_name == 'push'
         run: |
@@ -82,6 +87,9 @@ jobs:
 
       - name: Günlük uydu ve radar raporunu oluştur
         run: python daily_report.py
+
+      - name: Eski görüntü bulut-gölge boşluklarını zaman serisiyle tamamla
+        run: python temporal_gap_scan.py
 
       - name: Yeni görüntü yokken bekleyen uydu aday ayrıntılarını koru
         run: python carry_forward_satellite_candidates.py
@@ -117,10 +125,12 @@ jobs:
             git reset --hard origin/main
             pip install -r requirements.txt
             python satellite_quality.py
+            python temporal_quality.py
             python scanner.py
             python retain_recent_candidates.py
             python refresh_satellite_analysis.py
             python daily_report.py
+            python temporal_gap_scan.py
             python carry_forward_satellite_candidates.py
             python spatial_quality.py
             python reactivate_current_satellite.py
