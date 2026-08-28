@@ -8,6 +8,7 @@ on:
       - "pages/**"
       - "scanner.py"
       - "satellite.py"
+      - "satellite_quality.py"
       - "daily_report.py"
       - "report_quality.py"
       - "field_state.py"
@@ -46,6 +47,9 @@ jobs:
 
       - name: Bağımlılıkları kur
         run: pip install -r requirements.txt
+
+      - name: Uydu kapsama ve 250 m² kalite kontrolü
+        run: python satellite_quality.py
 
       - name: Uygulama açılış testi
         if: github.event_name == 'push'
@@ -98,6 +102,7 @@ jobs:
             echo "Ana dal tarama sırasında değişti; en güncel veri üzerinde bir kez yeniden üretiliyor."
             git reset --hard origin/main
             pip install -r requirements.txt
+            python satellite_quality.py
             python scanner.py
             python retain_recent_candidates.py
             python refresh_satellite_analysis.py
