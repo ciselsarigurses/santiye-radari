@@ -1,16 +1,16 @@
 {
-  "rapor_tarihi": "2026-08-28",
-  "olusturma": "2026-08-28 23:35 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 18",
+  "rapor_tarihi": "2026-08-29",
+  "olusturma": "2026-08-29 00:34 +03",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 18 · Geciken kontrol: 5",
   "saha_adaylari": [
     {
-      "oncelik": "ORTA",
+      "oncelik": "GECİKEN",
       "oncelik_nedeni": "Geniş bitişik zemin/yüzey değişimi.",
       "mahalle": "Ilıca",
       "enlem": 38.297371,
       "boylam": 26.355305,
       "alan_m2": 4801,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+      "sinyal": "2 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
       "boyut_sinifi": "STANDART",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "24.08.2026",
@@ -21,17 +21,18 @@
       "gorev_id": "UB81E69FF41",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-27",
-      "bekleme_gun": 1,
-      "gecikmis": false
+      "bekleme_gun": 2,
+      "gecikmis": true,
+      "uydu_onceligi": "ORTA"
     },
     {
-      "oncelik": "ORTA",
+      "oncelik": "GECİKEN",
       "oncelik_nedeni": "Geniş bitişik zemin/yüzey değişimi.",
       "mahalle": "Ovacık",
       "enlem": 38.263456,
       "boylam": 26.318199,
       "alan_m2": 3901,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+      "sinyal": "2 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
       "boyut_sinifi": "STANDART",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "24.08.2026",
@@ -42,17 +43,18 @@
       "gorev_id": "UD24100197B",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-27",
-      "bekleme_gun": 1,
-      "gecikmis": false
+      "bekleme_gun": 2,
+      "gecikmis": true,
+      "uydu_onceligi": "ORTA"
     },
     {
-      "oncelik": "ORTA",
+      "oncelik": "GECİKEN",
       "oncelik_nedeni": "Geniş bitişik zemin/yüzey değişimi.",
       "mahalle": "Musalla",
       "enlem": 38.303159,
       "boylam": 26.29747,
       "alan_m2": 2200,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+      "sinyal": "2 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
       "boyut_sinifi": "STANDART",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "24.08.2026",
@@ -63,8 +65,53 @@
       "gorev_id": "U29A6385636",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-27",
-      "bekleme_gun": 1,
-      "gecikmis": false
+      "bekleme_gun": 2,
+      "gecikmis": true,
+      "uydu_onceligi": "ORTA"
+    },
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Eşik üstü uydu değişimi; normal saha sırası.",
+      "mahalle": "Musalla",
+      "enlem": 38.313379,
+      "boylam": 26.307205,
+      "alan_m2": 1700,
+      "sinyal": "2 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.313379,26.307205",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UCF568A03B1",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-27",
+      "bekleme_gun": 2,
+      "gecikmis": true,
+      "uydu_onceligi": "NORMAL"
+    },
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Eşik üstü uydu değişimi; normal saha sırası.",
+      "mahalle": "Musalla",
+      "enlem": 38.301079,
+      "boylam": 26.304227,
+      "alan_m2": 1300,
+      "sinyal": "2 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.301079,26.304227",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U424909649F",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-27",
+      "bekleme_gun": 2,
+      "gecikmis": true,
+      "uydu_onceligi": "NORMAL"
     },
     {
       "oncelik": "ORTA",
@@ -84,7 +131,7 @@
       "gorev_id": "U01296BD121",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -105,7 +152,7 @@
       "gorev_id": "U9DC48A6EA7",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -126,7 +173,7 @@
       "gorev_id": "UBC28A80DF1",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -147,75 +194,6 @@
       "gorev_id": "U7798D390CA",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
-      "gecikmis": false
-    },
-    {
-      "oncelik": "BEKLEYEN",
-      "mahalle": "Alaçatı",
-      "enlem": 38.238766,
-      "boylam": 26.399396,
-      "alan_m2": 0,
-      "sinyal": "Önceki uydu saha görevi: kontrol bekliyor",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": null,
-      "son_tarih": null,
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.238766,26.399396",
-      "konum_notu": "Yeni uydu sinyali olmasa da saha kontrolü tamamlanmadığı için aktif listede tutuluyor.",
-      "gorev_id": "U905113324A",
-      "saha_durumu": "KONTROLE_GIT",
-      "takip_gorevi": false,
-      "gecikmis": false,
-      "ilk_gorulme": "2026-08-27",
-      "bekleme_gun": 1,
-      "kontrol_sayisi": 0,
-      "son_islem": "2026-08-27",
-      "adres": null,
-      "ada": null,
-      "parsel": null,
-      "firma": null,
-      "proje": null
-    },
-    {
-      "oncelik": "NORMAL",
-      "oncelik_nedeni": "Eşik üstü uydu değişimi; normal saha sırası.",
-      "mahalle": "Musalla",
-      "enlem": 38.313379,
-      "boylam": 26.307205,
-      "alan_m2": 1700,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "STANDART",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "24.08.2026",
-      "son_tarih": "26.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.313379,26.307205",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "UCF568A03B1",
-      "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-08-27",
-      "bekleme_gun": 1,
-      "gecikmis": false
-    },
-    {
-      "oncelik": "NORMAL",
-      "oncelik_nedeni": "Eşik üstü uydu değişimi; normal saha sırası.",
-      "mahalle": "Musalla",
-      "enlem": 38.301079,
-      "boylam": 26.304227,
-      "alan_m2": 1300,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "STANDART",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "24.08.2026",
-      "son_tarih": "26.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.301079,26.304227",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "U424909649F",
-      "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-08-27",
       "bekleme_gun": 1,
       "gecikmis": false
     },
@@ -237,7 +215,7 @@
       "gorev_id": "U02BDD66A44",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -258,7 +236,7 @@
       "gorev_id": "U323433E687",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -279,7 +257,7 @@
       "gorev_id": "UBE08D26E28",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -300,7 +278,7 @@
       "gorev_id": "U94F536DC51",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -321,7 +299,7 @@
       "gorev_id": "UABDE5B6A68",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -342,7 +320,7 @@
       "gorev_id": "UFBE2D95038",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -363,7 +341,7 @@
       "gorev_id": "U1CA0ACAC42",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 0,
+      "bekleme_gun": 1,
       "gecikmis": false
     },
     {
@@ -384,6 +362,27 @@
       "gorev_id": "U297CD118A9",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
+      "bekleme_gun": 1,
+      "gecikmis": false
+    },
+    {
+      "oncelik": "NORMAL",
+      "oncelik_nedeni": "Eşik üstü uydu değişimi; normal saha sırası.",
+      "mahalle": "Alaçatı",
+      "enlem": 38.238495,
+      "boylam": 26.400312,
+      "alan_m2": 1200,
+      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.238495,26.400312",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U881D3F0500",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-29",
       "bekleme_gun": 0,
       "gecikmis": false
     }
