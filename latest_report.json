@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-28",
-  "olusturma": "2026-08-28 06:08 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7",
+  "olusturma": "2026-08-28 07:02 +03",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7",
   "saha_adaylari": [
     {
       "oncelik": "ORTA",
@@ -140,19 +140,6 @@
   "yeni_internet_bulgulari": [],
   "oncelikli_internet_firsatlari": [
     {
-      "proje": "Çeşme'de Sosyal Konut Projesi Temel Atıldı - Son Dakika",
-      "firma": "news.google.com",
-      "bolge": "Çeşme",
-      "sinyal": "temel at, konut projesi, proje",
-      "kaynak_url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQVUlPMU5id2poemFaaUllWXJMWWc5QUZBOGxWbFJYbFRJMk1iS19sR1Y0MUp1c1Z2ZXRwY0tUY19IOG5CQXZOUzhKMG8yZ2RQWTFuVUphR2llbDdGZXlhWC1oM0JDODYyeXhjMU52Y2J6X1BXN1V2NVNGTlRzS1JoUnNhSWZzTkV0YnZXOUp5MlQtM2RFUEZWV9IBkgFBVV95cUxQd3U5cW9LeW1kSlpVLWwxcGdINUdTdHV3b2hvV2NmMGRxYjhGaVJqZlBBdE5NSTBYRzZobWdXWnFyeEFZT2FEMjVRdXphNjlRbkN1bk5TN3VrMFZ4Y2RFaWtZZDZwcXZiWGM2a3JyR0lzazlKbHd2QTE1SWZuZy1yQlBCMnpSNVJpVjlkMmw5TThJZw?oc=5",
-      "kaynak_tipi": "Google Haberler",
-      "skor": 10,
-      "durum": "KIRMIZI",
-      "ilk_gorulme": "2026-08-27 10:15 UTC",
-      "son_gorulme": "2026-08-28 03:08 UTC",
-      "yeni": false
-    },
-    {
       "proje": "SUMEN Olea — Urla Uzunkuyu yeni konut projesi",
       "firma": "SUMEN™ / Sumen Group",
       "bolge": "Uzunkuyu",
@@ -162,7 +149,7 @@
       "skor": 9,
       "durum": "KIRMIZI",
       "ilk_gorulme": "2026-08-27 12:10 UTC",
-      "son_gorulme": "2026-08-28 03:08 UTC",
+      "son_gorulme": "2026-08-28 04:02 UTC",
       "yeni": false
     },
     {
