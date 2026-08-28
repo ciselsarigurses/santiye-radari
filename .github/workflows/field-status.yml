@@ -38,18 +38,30 @@ jobs:
         run: python apply_field_status.py "$ISSUE_TITLE"
 
       - name: Durumu kalıcı kaydet
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          # Saha işlemi sürerken main değişmişse binary SQLite dosyasını rebase ile
+          # birleştirmeye çalışma. En güncel main'i alıp aynı kullanıcı kararını
+          # bir kez yeniden uygula; böylece saha kararı kaybolmaz ve DB çakışmaz.
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal saha işlemi sırasında değişti; karar en güncel veri üzerinde yeniden uygulanıyor."
+            git reset --hard origin/main
+            python apply_field_status.py "$ISSUE_TITLE"
+          fi
+
           git add santiye.db SAHA_RAPORU.md latest_report.json
           if git diff --cached --quiet; then
             echo "Kaydedilecek yeni durum farkı yok."
           else
-            git commit -m "Saha: ${{ github.event.issue.title }}"
+            git commit -m "Saha: $ISSUE_TITLE"
             git fetch origin main
-            if ! git rebase origin/main; then
-              echo "Ana dal ile saha durumu çakıştı; veri kaybını önlemek için durduruldu."
-              git rebase --abort || true
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Ana dal yeniden değişti; veri kaybı riskine girmeden durum talebi açık bırakılıyor."
               exit 1
             fi
             git push origin HEAD:main
