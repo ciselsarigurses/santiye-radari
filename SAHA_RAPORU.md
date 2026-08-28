@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-28
-**Hazırlanma:** 2026-08-28 03:04 +03
+**Hazırlanma:** 2026-08-28 04:04 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7
 
@@ -45,16 +45,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301453,26.304762)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 5. NORMAL — Çiftlikköy
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
-- **Koordinat:** `38.294876, 26.278476`
-- **Değişim alanı:** yaklaşık 1.688 m²
-- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
-- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294876,26.278476)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 6. NORMAL — Musalla
+### 5. NORMAL — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.303594, 26.297905`
 - **Değişim alanı:** yaklaşık 1.126 m²
@@ -63,13 +54,22 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303594,26.297905)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 7. NORMAL — Alaçatı
+### 6. NORMAL — Alaçatı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
 - **Koordinat:** `38.2389, 26.399619`
 - **Değişim alanı:** yaklaşık 1.126 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.238900,26.399619)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 7. NORMAL — Çiftlikköy
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
+- **Koordinat:** `38.294876, 26.278476`
+- **Değişim alanı:** yaklaşık 1.688 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294876,26.278476)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ## Bugünün yeni internet / sosyal medya bulguları

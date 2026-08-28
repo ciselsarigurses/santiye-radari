@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-28",
-  "olusturma": "2026-08-28 03:04 +03",
+  "olusturma": "2026-08-28 04:04 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 7",
   "saha_adaylari": [
     {
@@ -17,7 +17,10 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.297324,26.355429",
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
       "gorev_id": "UB81E69FF41",
-      "saha_durumu": "KONTROLE_GIT"
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-27",
+      "bekleme_gun": 1,
+      "gecikmis": false
     },
     {
       "oncelik": "ORTA",
@@ -33,7 +36,10 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.263982,26.318286",
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
       "gorev_id": "UD24100197B",
-      "saha_durumu": "KONTROLE_GIT"
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-27",
+      "bekleme_gun": 1,
+      "gecikmis": false
     },
     {
       "oncelik": "NORMAL",
@@ -49,7 +55,10 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.313535,26.307619",
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
       "gorev_id": "UCF568A03B1",
-      "saha_durumu": "KONTROLE_GIT"
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-27",
+      "bekleme_gun": 1,
+      "gecikmis": false
     },
     {
       "oncelik": "NORMAL",
@@ -65,23 +74,10 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.301453,26.304762",
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
       "gorev_id": "U424909649F",
-      "saha_durumu": "KONTROLE_GIT"
-    },
-    {
-      "oncelik": "NORMAL",
-      "mahalle": "Çiftlikköy",
-      "enlem": 38.294876,
-      "boylam": 26.278476,
-      "alan_m2": 1688,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "24.08.2026",
-      "son_tarih": "26.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.294876,26.278476",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "U7585BB9B43",
-      "saha_durumu": "KONTROLE_GIT"
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-27",
+      "bekleme_gun": 1,
+      "gecikmis": false
     },
     {
       "oncelik": "NORMAL",
@@ -97,7 +93,10 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.303594,26.297905",
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
       "gorev_id": "U29A6385636",
-      "saha_durumu": "KONTROLE_GIT"
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-27",
+      "bekleme_gun": 1,
+      "gecikmis": false
     },
     {
       "oncelik": "NORMAL",
@@ -113,7 +112,29 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.238900,26.399619",
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
       "gorev_id": "U905113324A",
-      "saha_durumu": "KONTROLE_GIT"
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-27",
+      "bekleme_gun": 1,
+      "gecikmis": false
+    },
+    {
+      "oncelik": "NORMAL",
+      "mahalle": "Çiftlikköy",
+      "enlem": 38.294876,
+      "boylam": 26.278476,
+      "alan_m2": 1688,
+      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.294876,26.278476",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U7585BB9B43",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-28",
+      "bekleme_gun": 0,
+      "gecikmis": false
     }
   ],
   "yeni_internet_bulgulari": [],
