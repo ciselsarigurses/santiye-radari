@@ -452,6 +452,56 @@ def _store(candidates, deactivate_missing=True):
     return new_count, updated_count
 
 
+def apply_candidate_retention():
+    """Bir tarama kaçırılan adayı korur; iki taramadır görünmeyeni pasife alır.
+
+    Bu kural taramanın içinde çalıştığı için Streamlit'teki manuel tarama ile
+    GitHub Actions taraması aynı aday yaşam döngüsünü uygular. Kısmi kaynak
+    hatasında hiçbir aday yaşlandırılmaz.
+    """
+    ensure_schema()
+    with connect() as connection:
+        scans = connection.execute(
+            """SELECT baslangic,hata FROM tarama_gecmisi
+            ORDER BY id DESC LIMIT 2"""
+        ).fetchall()
+        if len(scans) < 2:
+            return {"retained": 0, "deactivated": 0, "skipped": True}
+
+        current_started, current_error = scans[0]
+        previous_started, _ = scans[1]
+        if not current_started or not previous_started:
+            return {"retained": 0, "deactivated": 0, "skipped": True}
+        if (current_error or "").strip():
+            return {"retained": 0, "deactivated": 0, "skipped": True}
+        if previous_started >= current_started:
+            return {"retained": 0, "deactivated": 0, "skipped": True}
+
+        stale = connection.execute(
+            """UPDATE internet_adaylari
+            SET aktif=0
+            WHERE aktif=1
+              AND kaynak_tipi IS NOT NULL
+              AND (son_gorulme IS NULL OR son_gorulme<?)""",
+            (previous_started,),
+        )
+        retained = connection.execute(
+            """UPDATE internet_adaylari
+            SET aktif=1
+            WHERE aktif=0
+              AND kaynak_tipi IS NOT NULL
+              AND son_gorulme IS NOT NULL
+              AND son_gorulme>=?
+              AND son_gorulme<?""",
+            (previous_started, current_started),
+        )
+        return {
+            "retained": max(retained.rowcount or 0, 0),
+            "deactivated": max(stale.rowcount or 0, 0),
+            "skipped": False,
+        }
+
+
 def scan_and_store(progress_callback=None):
     ensure_schema()
     started = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -500,12 +550,15 @@ def scan_and_store(progress_callback=None):
             (baslangic,bitis,bulunan,yeni,guncellenen,hata) VALUES(?,?,?,?,?,?)""",
             (started, finished, len(found), new_count, updated_count, "\n".join(errors[:30])),
         )
+
+    retention = apply_candidate_retention()
     return {
         "found": len(found),
         "new": new_count,
         "updated": updated_count,
         "errors": errors,
         "finished": finished,
+        "retention": retention,
     }
 
 
