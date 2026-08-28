@@ -289,9 +289,16 @@ def _evaluate(title, snippet, url, published=None):
             if published_date.tzinfo is None:
                 published_date = published_date.replace(tzinfo=timezone.utc)
             age_days = (datetime.now(timezone.utc) - published_date).days
+            # Radarın amacı erken satış sinyali yakalamak. RSS'te eski bir haber
+            # tekrar üst sıralara çıktığında bunu yeni/aktif şantiye gibi öne taşıma;
+            # kaydı tamamen silmek yerine yaşına göre puanını kontrollü düşür.
             if age_days > 365:
                 return None
             if age_days > 180:
+                score -= 5
+            elif age_days > 90:
+                score -= 4
+            elif age_days > 30:
                 score -= 1
         except (TypeError, ValueError, OverflowError):
             pass
