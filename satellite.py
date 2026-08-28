@@ -29,12 +29,14 @@ REGIONS = {
     },
     "uzunkuyu": {
         "label": "Uzunkuyu · Germiyan · Ildır",
-        # Ildır'ın kuzeyi ve güneydeki ince boşluk da günlük taramaya dahil edildi.
-        "bbox": [26.45, 38.22, 26.64, 38.43],
+        # 26.64 doğu sınırına 200 m'den yakın gerçek aday gözlendi. Kümenin sınırda
+        # kesilmesini ve hemen doğudaki Uzunkuyu/Urla geçişinin kör kalmasını önlemek
+        # için yaklaşık 1.7 km operasyonel tampon açıldı; 10 m hedef ölçek korunur.
+        "bbox": [26.45, 38.22, 26.66, 38.43],
     },
     "all": {
         "label": "Tüm Çeşme + Uzunkuyu",
-        "bbox": [26.25, 38.22, 26.64, 38.43],
+        "bbox": [26.25, 38.22, 26.66, 38.43],
     },
 }
 

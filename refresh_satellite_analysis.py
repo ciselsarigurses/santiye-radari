@@ -12,7 +12,7 @@ from scanner import connect
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
 # Böylece aynı Sentinel görüntüsü yeni algoritmayla bir kez yeniden analiz edilir.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-v7"
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-v8"
 
 
 def _ensure_version_table(connection):
