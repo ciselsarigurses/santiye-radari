@@ -15,6 +15,7 @@ from scanner import connect
 
 
 ALLOWED_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT", "KONTROL_EDILDI"}
+ALLOWED_RESULTS = {"SANTIYE_KAZI", "YOL_ALTYAPI", "ARAZI_BITKI", "YANLIS_POZITIF"}
 SATELLITE_MATCH_METERS = 80
 LEGACY_DUPLICATE_METERS = 120
 INTERNAL_DUPLICATE_STATUS = "MUKERRER"
@@ -41,8 +42,14 @@ def ensure_state_schema(connection=None):
             kontrol_sayisi INTEGER DEFAULT 0,
             ilk_gorulme TEXT,
             son_gorulme TEXT,
-            son_islem TEXT)"""
+            son_islem TEXT,
+            sonuc TEXT)"""
         )
+        columns = {
+            row[1] for row in connection.execute("PRAGMA table_info(saha_durumlari)")
+        }
+        if "sonuc" not in columns:
+            connection.execute("ALTER TABLE saha_durumlari ADD COLUMN sonuc TEXT")
         connection.execute(
             "CREATE INDEX IF NOT EXISTS idx_saha_durum ON saha_durumlari(durum)"
         )
@@ -329,28 +336,37 @@ def sync_site_tasks(connection, seen_at=None):
             )
 
 
-def apply_status(task_id, status):
+def apply_status(task_id, status, result=None):
     status = str(status or "").strip().upper()
     task_id = str(task_id or "").strip().upper()
+    result = str(result or "").strip().upper() or None
     if status not in ALLOWED_STATUSES:
         raise ValueError("Bilinmeyen saha durumu.")
+    if result and result not in ALLOWED_RESULTS:
+        raise ValueError("Bilinmeyen saha kontrol sonucu.")
+    if result and status != "KONTROL_EDILDI":
+        raise ValueError("Saha kontrol sonucu yalnızca kapatılan görevde kaydedilebilir.")
 
     with connect() as connection:
         ensure_state_schema(connection)
         row = connection.execute(
-            """SELECT kaynak,kaynak_kimlik,durum,kontrol_sayisi
+            """SELECT kaynak,kaynak_kimlik,durum,kontrol_sayisi,sonuc
             FROM saha_durumlari WHERE gorev_id=?""",
             (task_id,),
         ).fetchone()
         if not row:
             raise ValueError("Saha görevi bulunamadı veya henüz günlük rapora girmedi.")
 
-        source, source_key, old_status, count = row
+        source, source_key, old_status, count, old_result = row
         increment = 1 if status in {"TEKRAR_GIT", "KONTROL_EDILDI"} else 0
+        if status == "KONTROL_EDILDI":
+            stored_result = result or old_result
+        else:
+            stored_result = None
         connection.execute(
-            """UPDATE saha_durumlari SET durum=?,kontrol_sayisi=?,son_islem=?
+            """UPDATE saha_durumlari SET durum=?,kontrol_sayisi=?,son_islem=?,sonuc=?
             WHERE gorev_id=?""",
-            (status, int(count or 0) + increment, _now(), task_id),
+            (status, int(count or 0) + increment, _now(), stored_result, task_id),
         )
 
         if source == "saha" and str(source_key).isdigit():
@@ -366,6 +382,7 @@ def apply_status(task_id, status):
             "eski_durum": old_status,
             "yeni_durum": status,
             "kaynak": source,
+            "sonuc": stored_result,
         }
 
 
