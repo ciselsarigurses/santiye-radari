@@ -12,7 +12,7 @@ from scanner import connect
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
 # Böylece aynı Sentinel görüntüsü yeni algoritmayla bir kez yeniden analiz edilir.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-v8"
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-cap24-v9"
 
 
 def _ensure_version_table(connection):
@@ -57,8 +57,7 @@ def _store_result(connection, report_date, region_key, result, older, latest, ne
         bolge_adi=excluded.bolge_adi,onceki_tarih=excluded.onceki_tarih,
         son_tarih=excluded.son_tarih,onceki_item=excluded.onceki_item,
         son_item=excluded.son_item,yeni_goruntu=excluded.yeni_goruntu,
-        degisim_km2=excluded.degisim_km2,
-        degisim_yuzde=excluded.degisim_yuzde,
+        degisim_km2=excluded.degisim_km2,degisim_yuzde=excluded.degisim_yuzde,
         bulut_yuzde=excluded.bulut_yuzde,
         hareket_json=excluded.hareket_json,hata=excluded.hata""",
         (
