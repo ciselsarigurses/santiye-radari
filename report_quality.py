@@ -6,6 +6,7 @@ import json
 from datetime import datetime
 
 from daily_report import ISTANBUL, _maps_route, _report_hotspots, _write_public_report
+from field_outcome import ensure_outcome_schema
 from field_state import (
     reconcile_satellite_duplicates,
     status_counts,
@@ -16,6 +17,12 @@ from scanner import connect
 
 
 OVERDUE_FIELD_DAYS = 2
+FIELD_OUTCOME_KEYS = (
+    "SANTIYE_KAZI",
+    "YOL_ALTYAPI",
+    "TARLA_BITKI",
+    "YANLIS_POZITIF",
+)
 
 
 def _active_daily_details(connection, report_date):
@@ -48,6 +55,16 @@ def _latest_scan_error_count(connection):
     if not row or not row[0]:
         return 0
     return sum(1 for line in str(row[0]).splitlines() if line.strip())
+
+
+def _field_outcome_counts(connection):
+    """Doğrulanmış saha sonuçlarını kategori bazında sayar."""
+    ensure_outcome_schema(connection)
+    rows = connection.execute(
+        "SELECT sonuc,COUNT(*) FROM saha_sonuclari GROUP BY sonuc"
+    ).fetchall()
+    raw = {str(outcome): int(count) for outcome, count in rows}
+    return {key: raw.get(key, 0) for key in FIELD_OUTCOME_KEYS}
 
 
 def _satellite_summary(connection, report_date):
@@ -280,6 +297,8 @@ def normalize_daily_report(report_date=None):
         counts = status_counts(connection)
         repeat_count = counts.get("TEKRAR_GIT", 0)
         overdue_count = sum(bool(item.get("gecikmis")) for item in hotspots)
+        field_outcomes = _field_outcome_counts(connection)
+        field_outcomes_total = sum(field_outcomes.values())
 
         summary = (
             f"İnternet: {daily_new} yeni aktif bulgu, {updated} güncellendi. "
@@ -295,6 +314,14 @@ def normalize_daily_report(report_date=None):
             summary += f" · Geciken kontrol: {overdue_count}"
         if repeat_count:
             summary += f" · Tekrar gidilecek: {repeat_count}"
+        if field_outcomes_total:
+            summary += (
+                f" · Saha sonucu: {field_outcomes_total} kontrol "
+                f"({field_outcomes['SANTIYE_KAZI']} şantiye/kazı, "
+                f"{field_outcomes['YOL_ALTYAPI']} yol/altyapı, "
+                f"{field_outcomes['TARLA_BITKI']} tarla/bitki, "
+                f"{field_outcomes['YANLIS_POZITIF']} yanlış pozitif)"
+            )
 
         connection.execute(
             """UPDATE gunluk_raporlar SET
@@ -317,6 +344,8 @@ def normalize_daily_report(report_date=None):
         "date": report_date,
         "active_daily_findings": daily_new,
         "active_field_tasks": len(hotspots),
+        "field_outcomes_total": field_outcomes_total,
+        "field_outcomes": field_outcomes,
         "summary": summary,
     }
 
@@ -327,7 +356,8 @@ if __name__ == "__main__":
         print(
             f"Rapor kalite kontrolü tamamlandı ({result['date']}): "
             f"{result['active_daily_findings']} aktif günlük bulgu, "
-            f"{result['active_field_tasks']} aktif saha görevi"
+            f"{result['active_field_tasks']} aktif saha görevi, "
+            f"{result['field_outcomes_total']} saha sonucu"
         )
     else:
         print("Kalite kontrolü için günlük rapor bulunamadı.")
