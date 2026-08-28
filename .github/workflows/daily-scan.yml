@@ -9,6 +9,7 @@ on:
       - "scanner.py"
       - "satellite.py"
       - "satellite_quality.py"
+      - "spatial_quality.py"
       - "daily_report.py"
       - "report_quality.py"
       - "field_state.py"
@@ -78,6 +79,9 @@ jobs:
       - name: Günlük uydu ve radar raporunu oluştur
         run: python daily_report.py
 
+      - name: Mekânsal saha kalite kontrolü
+        run: python spatial_quality.py
+
       - name: Günlük rapor kalite kontrolü
         run: python report_quality.py
 
@@ -107,6 +111,7 @@ jobs:
             python retain_recent_candidates.py
             python refresh_satellite_analysis.py
             python daily_report.py
+            python spatial_quality.py
             python report_quality.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
