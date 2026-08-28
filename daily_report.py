@@ -158,13 +158,35 @@ def _number(value, default=0.0):
         return default
 
 
-def _field_priority(area_m2):
-    """Alan büyüklüğüne göre saha ziyaret sırası; güven skoru değildir."""
+def _is_strong_small_site(size_class, signal):
+    """Uydu motorunun daha sert filtreden geçirdiği küçük saha adayını tanır."""
+    if str(size_class or "").upper() == "KUCUK":
+        return True
+    return "küçük, güçlü" in str(signal or "").casefold()
+
+
+def _field_priority(area_m2, size_class="", signal=""):
+    """Saha ziyaret sırası; küçük güçlü adayları yalnız m² yüzünden gömme."""
+    strong_small = _is_strong_small_site(size_class, signal)
     if area_m2 >= 5000:
         return "YÜKSEK"
     if area_m2 >= 2000:
         return "ORTA"
+    if strong_small and area_m2 >= 250:
+        # 250-800 m² küçük saha sınıfı, genel filtreden daha sert çoklu-spektral
+        # koşulları geçtiği için büyük NORMAL adayların arkasına atılmaz.
+        return "ORTA"
     return "NORMAL"
+
+
+def _priority_reason(area_m2, size_class="", signal=""):
+    if _is_strong_small_site(size_class, signal) and 250 <= area_m2 < 2000:
+        return "Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
+    if area_m2 >= 5000:
+        return "Çok geniş bitişik zemin/yüzey değişimi."
+    if area_m2 >= 2000:
+        return "Geniş bitişik zemin/yüzey değişimi."
+    return "Eşik üstü uydu değişimi; normal saha sırası."
 
 
 def _maps_route(latitude, longitude):
@@ -198,14 +220,18 @@ def _report_hotspots(connection, report_date):
             if latitude is None or longitude is None:
                 continue
             area_m2 = max(_number(item.get("alan_m2"), 0), 0)
+            signal = str(item.get("sinyal") or "Yüzey değişimi adayı")
+            size_class = str(item.get("boyut_sinifi") or "")
             results.append(
                 {
-                    "oncelik": _field_priority(area_m2),
+                    "oncelik": _field_priority(area_m2, size_class, signal),
+                    "oncelik_nedeni": _priority_reason(area_m2, size_class, signal),
                     "mahalle": str(item.get("mahalle") or "Yakın mevki bilinmiyor"),
                     "enlem": round(latitude, 6),
                     "boylam": round(longitude, 6),
                     "alan_m2": round(area_m2),
-                    "sinyal": str(item.get("sinyal") or "Yüzey değişimi adayı"),
+                    "sinyal": signal,
+                    "boyut_sinifi": size_class or None,
                     "bolge": str(row[1] or row[0] or "-"),
                     "onceki_tarih": row[2],
                     "son_tarih": row[3],
@@ -310,6 +336,7 @@ def _write_public_report(report_date, created, summary, hotspots, details):
                     f"- **Değişim alanı:** yaklaşık {area_text} m²",
                     f"- **Görüntü aralığı:** {interval}",
                     f"- **Sinyal:** {_md_text(item['sinyal'])}",
+                    f"- **Öncelik nedeni:** {_md_text(item.get('oncelik_nedeni'))}",
                     f"- **Rota:** [Google Maps'te aç]({item['harita']})",
                     "- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, "
                     "şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; "
@@ -368,9 +395,11 @@ def _write_public_report(report_date, created, summary, hotspots, details):
         [
             "",
             "---",
-            "**Not:** YÜKSEK / ORTA / NORMAL sırası yalnızca uydu değişim alanının "
-            "büyüklüğüne göre saha ziyaret önceliğidir; inşaat olduğuna dair güven "
-            "skoru değildir. Yanlış pozitifler saha kontrolüyle elenir.",
+            "**Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan "
+            "büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral "
+            "filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. "
+            "Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması "
+            "değildir; yanlış pozitifler saha kontrolüyle elenir.",
             "",
         ]
     )
