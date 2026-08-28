@@ -18,6 +18,7 @@ ALLOWED_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT", "KONTROL_EDILDI"}
 SATELLITE_MATCH_METERS = 80
 LEGACY_DUPLICATE_METERS = 120
 INTERNAL_DUPLICATE_STATUS = "MUKERRER"
+INTERNAL_SUPERSEDED_STATUS = "ALGORITMA_ELENDI"
 
 
 def _now():
@@ -190,19 +191,23 @@ def sync_satellite_tasks(connection, hotspots, report_date):
 
 
 def reconcile_satellite_duplicates(connection, current_tasks, report_date):
-    """Aynı uydu görüntüsünün yeniden analizinden doğan mükerrerleri pasifleştirir.
+    """Aynı uydu görüntüsünün yeniden analizinden doğan eski görevleri pasifleştirir.
 
-    Güvenlik koşulları özellikle dar tutulur: yeni görev bugün ilk kez oluşmuş
-    olmalı, raporda yeni uydu görüntüsü olmamalı, eski görev bugün yeniden
-    görülmemiş ve hiç saha işlemi görmemiş olmalı. Ayrıca aynı bölge/mahallede
-    120 m içinde tekil bir eşleşme gerekir. Kayıt silinmez; ``MUKERRER`` durumu
-    ile geçmişte tutulur.
+    İki güvenli durum ele alınır. İlkinde yeni analiz aynı saha için biraz farklı
+    merkez üretmiştir; tekil ve yakın eski görev ``MUKERRER`` yapılır. İkincisinde
+    görev aynı gün, yeni uydu görüntüsü gelmeden önceki algoritma sürümü tarafından
+    üretilmiş fakat güncel analizde artık hiç desteklenmiyordur; kullanıcı işlemi
+    görmemiş bu kayıt ``ALGORITMA_ELENDI`` yapılır. Eski günlerden gelen veya saha
+    ekibinin dokunduğu görevler otomatik kapatılmaz.
     """
     ensure_state_schema(connection)
-    no_new_image_ids = {
-        str(item.get("gorev_id") or "")
+    no_new_image_tasks = [
+        item
         for item in current_tasks
         if str(item.get("gorev_id") or "") and not bool(item.get("yeni_goruntu"))
+    ]
+    no_new_image_ids = {
+        str(item.get("gorev_id") or "") for item in no_new_image_tasks
     }
     if not no_new_image_ids:
         return []
@@ -235,70 +240,115 @@ def reconcile_satellite_duplicates(connection, current_tasks, report_date):
                 "boylam": longitude,
             }
         )
-    if not current:
-        return []
-
-    stale_rows = connection.execute(
-        """SELECT gorev_id,kaynak_kimlik,mahalle,enlem,boylam,son_gorulme,
-        kontrol_sayisi
-        FROM saha_durumlari
-        WHERE kaynak='uydu' AND durum='KONTROLE_GIT'
-        AND COALESCE(kontrol_sayisi,0)=0
-        AND enlem IS NOT NULL AND boylam IS NOT NULL
-        AND COALESCE(son_gorulme,'')<?""",
-        (report_date,),
-    ).fetchall()
-
-    candidate_pairs = []
-    for row in stale_rows:
-        old_id = str(row[0] or "")
-        if not old_id or old_id in no_new_image_ids:
-            continue
-        try:
-            old_latitude = float(row[3])
-            old_longitude = float(row[4])
-        except (TypeError, ValueError):
-            continue
-        old_source = str(row[1] or "")
-        old_neighborhood = str(row[2] or "").casefold().strip()
-
-        for new in current:
-            if old_source != new["kaynak_kimlik"]:
-                continue
-            if old_neighborhood != new["mahalle"]:
-                continue
-            distance = _distance_m(
-                old_latitude,
-                old_longitude,
-                new["enlem"],
-                new["boylam"],
-            )
-            if distance <= LEGACY_DUPLICATE_METERS:
-                candidate_pairs.append((old_id, new["gorev_id"], distance))
-
-    old_counts = {}
-    new_counts = {}
-    for old_id, new_id, _distance in candidate_pairs:
-        old_counts[old_id] = old_counts.get(old_id, 0) + 1
-        new_counts[new_id] = new_counts.get(new_id, 0) + 1
 
     reconciled = []
-    for old_id, new_id, distance in candidate_pairs:
-        if old_counts.get(old_id) != 1 or new_counts.get(new_id) != 1:
-            continue
-        cursor = connection.execute(
-            """UPDATE saha_durumlari SET durum=?,son_islem=?
-            WHERE gorev_id=? AND durum='KONTROLE_GIT' AND COALESCE(kontrol_sayisi,0)=0""",
-            (INTERNAL_DUPLICATE_STATUS, _now(), old_id),
-        )
-        if cursor.rowcount:
-            reconciled.append(
-                {
-                    "eski_gorev_id": old_id,
-                    "guncel_gorev_id": new_id,
-                    "mesafe_m": round(distance, 1),
-                }
+    if current:
+        stale_rows = connection.execute(
+            """SELECT gorev_id,kaynak_kimlik,mahalle,enlem,boylam,son_gorulme,
+            kontrol_sayisi
+            FROM saha_durumlari
+            WHERE kaynak='uydu' AND durum='KONTROLE_GIT'
+            AND COALESCE(kontrol_sayisi,0)=0
+            AND enlem IS NOT NULL AND boylam IS NOT NULL
+            AND COALESCE(son_gorulme,'')<?""",
+            (report_date,),
+        ).fetchall()
+
+        candidate_pairs = []
+        for row in stale_rows:
+            old_id = str(row[0] or "")
+            if not old_id or old_id in no_new_image_ids:
+                continue
+            try:
+                old_latitude = float(row[3])
+                old_longitude = float(row[4])
+            except (TypeError, ValueError):
+                continue
+            old_source = str(row[1] or "")
+            old_neighborhood = str(row[2] or "").casefold().strip()
+
+            for new in current:
+                if old_source != new["kaynak_kimlik"]:
+                    continue
+                if old_neighborhood != new["mahalle"]:
+                    continue
+                distance = _distance_m(
+                    old_latitude,
+                    old_longitude,
+                    new["enlem"],
+                    new["boylam"],
+                )
+                if distance <= LEGACY_DUPLICATE_METERS:
+                    candidate_pairs.append((old_id, new["gorev_id"], distance))
+
+        old_counts = {}
+        new_counts = {}
+        for old_id, new_id, _distance in candidate_pairs:
+            old_counts[old_id] = old_counts.get(old_id, 0) + 1
+            new_counts[new_id] = new_counts.get(new_id, 0) + 1
+
+        for old_id, new_id, distance in candidate_pairs:
+            if old_counts.get(old_id) != 1 or new_counts.get(new_id) != 1:
+                continue
+            cursor = connection.execute(
+                """UPDATE saha_durumlari SET durum=?,son_islem=?
+                WHERE gorev_id=? AND durum='KONTROLE_GIT'
+                AND COALESCE(kontrol_sayisi,0)=0""",
+                (INTERNAL_DUPLICATE_STATUS, _now(), old_id),
             )
+            if cursor.rowcount:
+                reconciled.append(
+                    {
+                        "eski_gorev_id": old_id,
+                        "guncel_gorev_id": new_id,
+                        "mesafe_m": round(distance, 1),
+                    }
+                )
+
+    # Aynı gün aynı Sentinel görüntüsü üzerinde algoritma/çözünürlük değiştiyse,
+    # önceki sürümün kısa süreli ürettiği fakat güncel analizde bulunmayan görevler
+    # saha listesinde 0 m² "bekleyen" kayıt olarak kalmasın. Yalnızca otomasyonun
+    # oluşturduğu ve hiçbir kullanıcı/saha işlemi görmemiş kayıtlar kapatılır.
+    current_sources = sorted(
+        {
+            str(item.get("bolge") or "")
+            for item in no_new_image_tasks
+            if str(item.get("bolge") or "")
+        }
+    )
+    if current_sources:
+        source_placeholders = ",".join("?" for _ in current_sources)
+        candidates = connection.execute(
+            f"""SELECT gorev_id FROM saha_durumlari
+            WHERE kaynak='uydu'
+            AND kaynak_kimlik IN ({source_placeholders})
+            AND durum='KONTROLE_GIT'
+            AND COALESCE(kontrol_sayisi,0)=0
+            AND substr(COALESCE(ilk_gorulme,''),1,10)=?
+            AND substr(COALESCE(son_gorulme,''),1,10)=?
+            AND COALESCE(son_islem,'')=?""",
+            (*current_sources, report_date, report_date, report_date),
+        ).fetchall()
+        for (task_id,) in candidates:
+            task_id = str(task_id or "")
+            if not task_id or task_id in no_new_image_ids:
+                continue
+            cursor = connection.execute(
+                """UPDATE saha_durumlari SET durum=?,son_islem=?
+                WHERE gorev_id=? AND durum='KONTROLE_GIT'
+                AND COALESCE(kontrol_sayisi,0)=0
+                AND COALESCE(son_islem,'')=?""",
+                (INTERNAL_SUPERSEDED_STATUS, _now(), task_id, report_date),
+            )
+            if cursor.rowcount:
+                reconciled.append(
+                    {
+                        "eski_gorev_id": task_id,
+                        "guncel_gorev_id": None,
+                        "mesafe_m": None,
+                    }
+                )
+
     return reconciled
 
 
