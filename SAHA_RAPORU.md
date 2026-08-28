@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-28
-**Hazırlanma:** 2026-08-28 18:07 +03
+**Hazırlanma:** 2026-08-28 19:32 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 15
 
@@ -9,154 +9,154 @@
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
-### 1. YÜKSEK — Ilıca
+### 1. ORTA — Ilıca
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ilıca
-- **Koordinat:** `38.297294, 26.355479`
-- **Değişim alanı:** yaklaşık 5.001 m²
+- **Koordinat:** `38.297461, 26.35519`
+- **Değişim alanı:** yaklaşık 4.501 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297294,26.355479)
+- **Öncelik nedeni:** Geniş bitişik zemin/yüzey değişimi.
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297461,26.355190)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 2. ORTA — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
-- **Koordinat:** `38.263826, 26.318278`
-- **Değişim alanı:** yaklaşık 3.401 m²
+- **Koordinat:** `38.263999, 26.318084`
+- **Değişim alanı:** yaklaşık 3.701 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263826,26.318278)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263999,26.318084)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 3. ORTA — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
-- **Koordinat:** `38.303355, 26.298018`
+- **Koordinat:** `38.303611, 26.297928`
 - **Değişim alanı:** yaklaşık 2.000 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303355,26.298018)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303611,26.297928)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 4. ORTA — Çiftlikköy
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
-- **Koordinat:** `38.287615, 26.258184`
-- **Değişim alanı:** yaklaşık 3.001 m²
+- **Koordinat:** `38.287784, 26.258074`
+- **Değişim alanı:** yaklaşık 2.800 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.287615,26.258184)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.287784,26.258074)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 5. ORTA — Çiftlikköy
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
-- **Koordinat:** `38.29458, 26.278101`
-- **Değişim alanı:** yaklaşık 2.000 m²
+- **Koordinat:** `38.294839, 26.27823`
+- **Değişim alanı:** yaklaşık 2.700 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294580,26.278101)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294839,26.278230)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 6. ORTA — Dalyan
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Dalyan
-- **Koordinat:** `38.355005, 26.303283`
-- **Değişim alanı:** yaklaşık 600 m²
+- **Koordinat:** `38.355433, 26.303196`
+- **Değişim alanı:** yaklaşık 500 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.355005,26.303283)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.355433,26.303196)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 7. ORTA — Musalla
+### 7. NORMAL — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
-- **Koordinat:** `38.294852, 26.311982`
-- **Değişim alanı:** yaklaşık 400 m²
+- **Koordinat:** `38.31374, 26.307663`
+- **Değişim alanı:** yaklaşık 1.700 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
-- **Sinyal:** Küçük, güçlü yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294852,26.311982)
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313740,26.307663)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 8. NORMAL — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
-- **Koordinat:** `38.313486, 26.307747`
-- **Değişim alanı:** yaklaşık 1.600 m²
+- **Koordinat:** `38.301531, 26.304571`
+- **Değişim alanı:** yaklaşık 1.500 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313486,26.307747)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301531,26.304571)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 9. NORMAL — Musalla
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
-- **Koordinat:** `38.301365, 26.304771`
-- **Değişim alanı:** yaklaşık 1.200 m²
-- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
-- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301365,26.304771)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 10. NORMAL — Alaçatı
+### 9. NORMAL — Alaçatı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
-- **Koordinat:** `38.238679, 26.399776`
-- **Değişim alanı:** yaklaşık 1.200 m²
+- **Koordinat:** `38.238766, 26.399396`
+- **Değişim alanı:** yaklaşık 1.000 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.238679,26.399776)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.238766,26.399396)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 11. NORMAL — Çiftlikköy
+### 10. NORMAL — Çiftlikköy
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
-- **Koordinat:** `38.290691, 26.272492`
+- **Koordinat:** `38.290859, 26.272389`
 - **Değişim alanı:** yaklaşık 1.200 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.290691,26.272492)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.290859,26.272389)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 12. NORMAL — Dalyan
+### 11. NORMAL — Dalyan
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Dalyan
-- **Koordinat:** `38.346231, 26.302138`
+- **Koordinat:** `38.34657, 26.302051`
 - **Değişim alanı:** yaklaşık 1.100 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.346231,26.302138)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.346570,26.302051)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 13. NORMAL — Uzunkuyu
+### 12. NORMAL — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
-- **Koordinat:** `38.334486, 26.602515`
+- **Koordinat:** `38.334541, 26.602378`
+- **Değişim alanı:** yaklaşık 1.100 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334541,26.602378)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 13. NORMAL — Alaçatı
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
+- **Koordinat:** `38.285704, 26.383935`
 - **Değişim alanı:** yaklaşık 1.000 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334486,26.602515)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285704,26.383935)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 14. NORMAL — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
-- **Koordinat:** `38.332767, 26.609955`
+- **Koordinat:** `38.332823, 26.609708`
 - **Değişim alanı:** yaklaşık 1.000 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.332767,26.609955)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.332823,26.609708)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 15. NORMAL — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
-- **Koordinat:** `38.31305, 26.637768`
-- **Değişim alanı:** yaklaşık 1.000 m²
+- **Koordinat:** `38.313198, 26.637538`
+- **Değişim alanı:** yaklaşık 900 m²
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313050,26.637768)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313198,26.637538)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ## Bugünün yeni internet / sosyal medya bulguları
