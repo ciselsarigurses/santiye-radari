@@ -22,8 +22,10 @@ on:
       - ".github/workflows/daily-scan.yml"
       - ".github/workflows/field-status.yml"
   schedule:
-    # Türkiye saatiyle her sabah yaklaşık 11:00 (UTC+3)
-    - cron: "0 8 * * *"
+    # Türkiye saatiyle 11:00 ana tarama korunur. Sentinel görüntüsü sabah
+    # taramasından sonra yayımlanırsa ertesi güne kalmaması için 15:00 ve 19:00'da
+    # da aynı ücretsiz kaynaklar yeniden kontrol edilir (UTC+3: 08,12,16 UTC).
+    - cron: "0 8,12,16 * * *"
   workflow_dispatch:
 
 permissions:
