@@ -12,6 +12,8 @@ from PIL import Image
 
 EARTH_SEARCH_URL = "https://earth-search.aws.element84.com/v1/search"
 MIN_HOTSPOT_AREA_M2 = 250
+TARGET_PIXEL_SIZE_M = 10
+MAX_ANALYSIS_DIMENSION = 2400
 
 # Batı, güney, doğu, kuzey (WGS84)
 REGIONS = {
@@ -59,10 +61,17 @@ def sentinel_pair(region_key):
     return _pick_pair(_search_items(REGIONS[region_key]["bbox"]))
 
 
-def _output_shape(bbox, max_width=1050):
-    west, south, east, north = bbox; mean_lat = (south + north) / 2
-    width_km = (east-west)*111.32*np.cos(np.radians(mean_lat)); height_km=(north-south)*110.57
-    return min(max(320, round(max_width*height_km/max(width_km,0.1))),850), max_width
+def _output_shape(bbox, target_pixel_m=TARGET_PIXEL_SIZE_M, max_dimension=MAX_ANALYSIS_DIMENSION):
+    """Analizi 10 m Sentinel bant ölçeğine yakın, yaklaşık kare piksellerle çalıştırır."""
+    west, south, east, north = bbox
+    mean_lat = (south + north) / 2
+    width_m = (east - west) * 111320 * np.cos(np.radians(mean_lat))
+    height_m = (north - south) * 110570
+
+    width = max(1, round(width_m / target_pixel_m))
+    height = max(1, round(height_m / target_pixel_m))
+    scale = max(width / max_dimension, height / max_dimension, 1.0)
+    return max(1, round(height / scale)), max(1, round(width / scale))
 
 
 def _read_asset(item, asset_name, bbox, height, width, resampling_name):
