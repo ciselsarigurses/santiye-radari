@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 import pandas as pd
 import streamlit as st
 
+from field_outcome import OUTCOME_LABELS, outcome_map
 from field_state import ensure_state_schema, satellite_task_id, site_task_id
 from scanner import connect
 
@@ -20,16 +21,27 @@ STATUS_LABELS = {
     "TEKRAR_GIT": "🔁 Bir daha git bak",
     "KONTROL_EDILDI": "✅ Kontrol edildi · listeden kaldır",
 }
+OUTCOME_BUTTONS = {
+    "SANTIYE_KAZI": "🏗️ Şantiye / kazı / temel",
+    "YOL_ALTYAPI": "🚧 Yol / altyapı",
+    "TARLA_BITKI": "🌿 Tarla / bitki",
+    "YANLIS_POZITIF": "❌ Yanlış pozitif",
+}
 
 
-def issue_link(task_id, status):
-    params = {
-        "title": f"[SAHA] {task_id} {status}",
-        "body": (
-            "Şantiye Radarı saha durum talebi. Bu kayıt otomatik işlenecektir.\n\n"
-            f"Görev: {task_id}\nDurum: {status}"
-        ),
-    }
+def issue_link(task_id, status, outcome=None):
+    title = f"[SAHA] {task_id} {status}"
+    if outcome:
+        title += f" {outcome}"
+    body_lines = [
+        "Şantiye Radarı saha durum talebi. Bu kayıt otomatik işlenecektir.",
+        "",
+        f"Görev: {task_id}",
+        f"Durum: {status}",
+    ]
+    if outcome:
+        body_lines.append(f"Sonuç: {OUTCOME_LABELS.get(outcome, outcome)}")
+    params = {"title": title, "body": "\n".join(body_lines)}
     return ISSUE_URL + "?" + urlencode(params)
 
 
@@ -87,10 +99,20 @@ def task_card(item, task_id, status, source_label):
     except (TypeError, ValueError):
         waiting_days = 0
     overdue = bool(item.get("gecikmis"))
+    satellite_source = source_label == "Sentinel-2"
+    location_title = (
+        f"Yaklaşık mevki: {neighborhood}" if satellite_source else neighborhood
+    )
 
     with st.container(border=True):
-        st.markdown(f"### {STATUS_LABELS.get(status, status)} · {neighborhood}")
+        st.markdown(f"### {STATUS_LABELS.get(status, status)} · {location_title}")
         st.caption(f"Görev {task_id} · {source_label} · {priority}")
+
+        if satellite_source:
+            st.caption(
+                item.get("konum_notu")
+                or "Uydu için yazılan mahalle/mevki en yakın referans noktasıdır; kesin adres değildir."
+            )
 
         if overdue:
             st.warning(
@@ -127,10 +149,10 @@ def task_card(item, task_id, status, source_label):
             st.link_button("🗺️ Yol tarifi", route, use_container_width=True)
 
         st.caption(
-            "Durum düğmesi GitHub'da hazır bir talep açar. Açılan sayfada yalnızca "
-            "yeşil ‘Submit new issue’ düğmesine bas; radar kaydı otomatik günceller."
+            "Düğme GitHub'da hazır bir talep açar. Açılan sayfada yalnızca yeşil "
+            "‘Submit new issue’ düğmesine bas; radar kaydı otomatik günceller."
         )
-        c1, c2, c3 = st.columns(3)
+        c1, c2 = st.columns(2)
         c1.link_button(
             "📍 Kontrole git",
             issue_link(task_id, "KONTROLE_GIT"),
@@ -141,22 +163,29 @@ def task_card(item, task_id, status, source_label):
             issue_link(task_id, "TEKRAR_GIT"),
             use_container_width=True,
         )
-        c3.link_button(
-            "✅ Kontrol edildi",
-            issue_link(task_id, "KONTROL_EDILDI"),
-            use_container_width=True,
-        )
+
+        st.markdown("**Kontrol tamamlandıysa sonucu seç:**")
+        r1, r2, r3, r4 = st.columns(4)
+        result_columns = [r1, r2, r3, r4]
+        for column, (outcome, label) in zip(result_columns, OUTCOME_BUTTONS.items()):
+            column.link_button(
+                label,
+                issue_link(task_id, "KONTROL_EDILDI", outcome),
+                use_container_width=True,
+            )
 
 
 st.title("✅ Saha Kontrol Merkezi")
 st.caption("Git · tekrar kontrol et · kontrol edildi kararlarını kalıcı olarak yönet.")
 st.info(
-    "‘Kontrol edildi’ seçilen nokta aktif listeden çıkar; geçmiş kaydı silinmez. "
-    "‘Bir daha git bak’ seçilen nokta takip listesinde en öne alınır."
+    "Kontrol tamamlandığında sonucu da seç. ‘Gerçek şantiye/kazı’, yol-altyapı, "
+    "tarla-bitki ve yanlış pozitif geri bildirimleri gelecekte uydu yanlış "
+    "pozitiflerini azaltmak için ayrı saklanır."
 )
 
 report = read_report()
 states = state_map()
+outcomes = outcome_map()
 
 satellite_items = []
 for raw in report.get("saha_adaylari", []):
@@ -244,8 +273,18 @@ with history_tab:
     if not completed:
         st.info("Henüz kontrol edilip kapatılan kayıt yok.")
     else:
+        history_rows = [
+            (
+                row[0], row[1], row[2], row[3], row[4],
+                outcomes.get(str(row[0]), {}).get("etiket", "Sonuç kaydedilmedi"),
+            )
+            for row in completed
+        ]
         history = pd.DataFrame(
-            completed,
-            columns=["Görev", "Kaynak", "Mahalle", "Kontrol sayısı", "Son işlem"],
+            history_rows,
+            columns=[
+                "Görev", "Kaynak", "Mahalle / mevki", "Kontrol sayısı",
+                "Son işlem", "Saha sonucu",
+            ],
         )
         st.dataframe(history, hide_index=True, use_container_width=True)
