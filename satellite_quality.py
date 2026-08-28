@@ -11,11 +11,13 @@ from __future__ import annotations
 import numpy as np
 
 from satellite import (
+    HOTSPOT_LIMIT,
     MAX_ANALYSIS_DIMENSION,
     MIN_HOTSPOT_AREA_M2,
     PLACE_CENTERS,
     REGIONS,
     SMALL_HOTSPOT_MIN_PIXELS,
+    SMALL_HOTSPOT_QUOTA,
     TARGET_PIXEL_SIZE_M,
     _clean_mask,
     _hotspots,
@@ -54,6 +56,13 @@ def check_configuration():
     assert SMALL_HOTSPOT_MIN_PIXELS <= 3, (
         "250-400 m² güçlü küçük saha adayını engelleyecek kadar yüksek "
         "minimum piksel şartı tanımlanmış."
+    )
+    assert HOTSPOT_LIMIT >= 24, (
+        "Bölge başına aday tavanı tekrar 12 gibi düşük bir değere inmiş; "
+        "yoğun dönemde gerçek 250 m²+ hareketler sessizce kesilebilir."
+    )
+    assert SMALL_HOTSPOT_QUOTA >= 6, (
+        "Yoğun görüntüde küçük ve güçlü hafriyat adayları için ayrılan kota yetersiz."
     )
 
     for region_key in REPORT_REGIONS:
@@ -134,11 +143,31 @@ def check_small_site_path():
     ), "Yaklaşık 200 m² eşik-altı sinyal yanlış saha görevi üretiyor."
 
 
+def check_candidate_capacity():
+    # Yoğun inşaat döneminde aynı bölgedeki 12'den fazla güçlü küçük adayın sırf
+    # sabit çıktı tavanı nedeniyle sessizce kaybolmadığını doğrula.
+    signal = np.zeros((30, 8), dtype=bool)
+    for index in range(14):
+        row = 1 + index * 2
+        signal[row, 2:5] = True
+    hotspots = _hotspots(
+        signal,
+        [26.30, 38.28, 26.31, 38.31],
+        100.0,
+        small_site_mask=signal,
+    )
+    assert len(hotspots) == 14, (
+        "14 güçlü 300 m² adayın tamamı korunmalı; düşük aday tavanı saha "
+        f"fırsatlarını kesiyor (çıktı: {len(hotspots)})."
+    )
+
+
 def main():
     check_configuration()
     check_coverage()
     check_small_site_path()
-    print("Uydu kalite kontrolü başarılı: tam zarf kapsaması, 10 m ölçek ve 250 m² küçük saha yolu korunuyor.")
+    check_candidate_capacity()
+    print("Uydu kalite kontrolü başarılı: tam zarf kapsaması, 10 m ölçek, 250 m² küçük saha yolu ve yoğun-dönem aday kapasitesi korunuyor.")
 
 
 if __name__ == "__main__":
