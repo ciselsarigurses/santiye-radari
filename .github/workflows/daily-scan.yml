@@ -11,6 +11,7 @@ on:
       - "daily_report.py"
       - "report_quality.py"
       - "field_state.py"
+      - "field_outcome.py"
       - "apply_field_status.py"
       - "refresh_satellite_analysis.py"
       - "retain_recent_candidates.py"
