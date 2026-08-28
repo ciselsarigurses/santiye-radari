@@ -23,7 +23,9 @@ MAX_ANALYSIS_DIMENSION = 2400
 REGIONS = {
     "cesme": {
         "label": "Çeşme merkez · Alaçatı · Ilıca",
-        "bbox": [26.27, 38.235, 26.47, 38.365],
+        # Çiftlikköy'ün batı kesimi ve yarımadanın güney kıyısı önceki kutunun
+        # dışında kalıyordu. 10 m hedef çözünürlüğü bozmadan kapsama genişletildi.
+        "bbox": [26.25, 38.22, 26.47, 38.365],
     },
     "uzunkuyu": {
         "label": "Uzunkuyu · Germiyan · Ildır",
