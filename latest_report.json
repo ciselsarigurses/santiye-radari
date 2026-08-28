@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-28",
-  "olusturma": "2026-08-28 19:32 +03",
+  "olusturma": "2026-08-28 20:32 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 15",
   "saha_adaylari": [
     {
@@ -271,7 +271,7 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.285704,26.383935",
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
       "gorev_id": "UABDE5B6A68",
-      "saha_durumu": "ALGORITMA_ELENDI",
+      "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
       "bekleme_gun": 0,
       "gecikmis": false
