@@ -232,13 +232,44 @@ def _md_text(value, fallback="-"):
     return text.replace("[", "(").replace("]", ")")
 
 
+def _active_priority_opportunities(report_date, limit=10):
+    """Taze kalan KIRMIZI internet fırsatlarını günlük raporda görünür tutar."""
+    with connect() as connection:
+        rows = connection.execute(
+            """SELECT proje,firma,bolge,sinyal,kaynak_url,kaynak_tipi,skor,durum,
+            ilk_gorulme,son_gorulme
+            FROM internet_adaylari
+            WHERE aktif=1 AND durum='KIRMIZI' AND COALESCE(skor,0)>=8
+            ORDER BY skor DESC, son_gorulme DESC, id DESC LIMIT ?""",
+            (int(limit),),
+        ).fetchall()
+    return [
+        {
+            "proje": row[0],
+            "firma": row[1],
+            "bolge": row[2],
+            "sinyal": row[3],
+            "kaynak_url": row[4],
+            "kaynak_tipi": row[5],
+            "skor": int(row[6] or 0),
+            "durum": row[7],
+            "ilk_gorulme": row[8],
+            "son_gorulme": row[9],
+            "yeni": str(row[8] or "")[:10] == report_date,
+        }
+        for row in rows
+    ]
+
+
 def _write_public_report(report_date, created, summary, hotspots, details):
+    opportunities = _active_priority_opportunities(report_date)
     payload = {
         "rapor_tarihi": report_date,
         "olusturma": created,
         "ozet": summary,
         "saha_adaylari": hotspots,
         "yeni_internet_bulgulari": details,
+        "oncelikli_internet_firsatlari": opportunities,
         "uyari": (
             "Uydu koordinatları yaklaşık değişim merkezidir. Kesin adres/ada-parsel "
             "olarak kullanılmamalı; saha kontrolüyle doğrulanmalıdır."
@@ -314,6 +345,24 @@ def _write_public_report(report_date, created, summary, hotspots, details):
             )
     else:
         lines.append("Bugün ilk kez bulunan yeni internet sonucu yok.")
+
+    lines.extend(["", "## Aktif güçlü internet fırsatları", ""])
+    if opportunities:
+        for item in opportunities:
+            title = _md_text(item.get("proje"), "Başlıksız bulgu")
+            location = _md_text(item.get("bolge"))
+            signal = _md_text(item.get("sinyal"))
+            score = int(item.get("skor") or 0)
+            badge = "YENİ" if item.get("yeni") else "AKTİF"
+            url = str(item.get("kaynak_url") or "").strip()
+            if url.startswith(("http://", "https://")):
+                title = f"[{title}]({url})"
+            lines.append(
+                f"- **{badge} · KIRMIZI · {score} puan · {location}:** "
+                f"{title} — {signal}"
+            )
+    else:
+        lines.append("Şu anda aktif KIRMIZI internet fırsatı yok.")
 
     lines.extend(
         [
