@@ -146,7 +146,7 @@ def task_card(item, task_id, status, source_label):
                 f"{item['enlem']},{item['boylam']}"
             )
         if route:
-            st.link_button("🗺️ Yol tarifi", route, use_container_width=True)
+            st.link_button("🗺️ Yol tarifi", route, width="stretch")
 
         st.caption(
             "Düğme GitHub'da hazır bir talep açar. Açılan sayfada yalnızca yeşil "
@@ -156,12 +156,12 @@ def task_card(item, task_id, status, source_label):
         c1.link_button(
             "📍 Kontrole git",
             issue_link(task_id, "KONTROLE_GIT"),
-            use_container_width=True,
+            width="stretch",
         )
         c2.link_button(
             "🔁 Bir daha git bak",
             issue_link(task_id, "TEKRAR_GIT"),
-            use_container_width=True,
+            width="stretch",
         )
 
         st.markdown("**Kontrol tamamlandıysa sonucu seç:**")
@@ -171,7 +171,7 @@ def task_card(item, task_id, status, source_label):
             column.link_button(
                 label,
                 issue_link(task_id, "KONTROL_EDILDI", outcome),
-                use_container_width=True,
+                width="stretch",
             )
 
 
@@ -287,4 +287,4 @@ with history_tab:
                 "Son işlem", "Saha sonucu",
             ],
         )
-        st.dataframe(history, hide_index=True, use_container_width=True)
+        st.dataframe(history, hide_index=True, width="stretch")
