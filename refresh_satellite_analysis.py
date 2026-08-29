@@ -11,10 +11,10 @@ from scanner import connect
 
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
-# v13: Çeşme kutusu açık ilçe sınır zarfını kapsayacak biçimde güneye 38.18 ve
-# doğuya 26.53'e genişletildi; 2800 piksel tavanıyla yaklaşık 10 m ölçek korunur.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-same-orbit-uri-v13"
-# Sürüm etiketi, mevcut Sentinel çiftini yeni kapsama/ref seçimleriyle bir kez yeniden işler.
+# v14: PB04.00+ SCL=2 cast/topografik shadow doğrudan zemin değişimi kanıtından
+# çıkarıldı; SCL7 gerçek koyu toprak/dark feature olarak geçerli kalır. SCL2 körlüğü
+# temporal katmanlarda iki açık sahne ile geri kazanılır.
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-same-orbit-uri-scl2-shadow-v14"
 
 
 def _ensure_version_table(connection):
@@ -81,16 +81,14 @@ def _store_result(connection, report_date, region_key, result, older, latest, ne
 
 
 def _reset_temporal_state_if_present(connection, region_key):
-    """Analiz zarfı/algoritması değişince bulut-gölge yedeğini de bir kez yeniler."""
-    exists = connection.execute(
-        """SELECT 1 FROM sqlite_master
-        WHERE type='table' AND name='uydu_zaman_serisi' LIMIT 1"""
-    ).fetchone()
-    if exists:
-        connection.execute(
-            "DELETE FROM uydu_zaman_serisi WHERE bolge=?",
-            (region_key,),
-        )
+    """Ana analiz değişince her iki tamamlayıcı gölge/bulut cache'ini de yeniler."""
+    for table_name in ("uydu_zaman_serisi", "uydu_son_bulut_boslugu"):
+        exists = connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name=? LIMIT 1",
+            (table_name,),
+        ).fetchone()
+        if exists:
+            connection.execute(f"DELETE FROM {table_name} WHERE bolge=?", (region_key,))
 
 
 def refresh_if_needed():
@@ -142,9 +140,6 @@ def refresh_if_needed():
                     surum=excluded.surum,guncelleme=excluded.guncelleme""",
                     (region_key, ANALYSIS_VERSION, now.isoformat()),
                 )
-                # Zaman-serisi tablosu son Sentinel item + kendi sürümüyle cache'lenir.
-                # Bbox değişip latest item aynı kaldığında eski dar alan "zaten işlendi"
-                # sanılmamalı; yalnız bu bölgenin tamamlayıcı durumunu sıfırla.
                 _reset_temporal_state_if_present(connection, region_key)
                 refreshed.append(
                     (
