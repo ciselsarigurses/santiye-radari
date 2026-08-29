@@ -11,10 +11,10 @@ from scanner import connect
 
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
-# v15: Bölge başına toplam 24 aday tavanı değişmeden, yoğun görüntülerde güçlü
-# 250-800 m² küçük saha adaylarına ayrılan kota 6'dan 12'ye çıkarıldı. Amaç geniş
-# mevsimsel/yüzey kümelerinin erken hafriyat adaylarını tavan dışında bırakmaması.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-smallquota12-same-orbit-uri-scl2-shadow-v15"
+# v14: PB04.00+ SCL=2 cast/topografik shadow doğrudan zemin değişimi kanıtından
+# çıkarıldı; SCL7 gerçek koyu toprak/dark feature olarak geçerli kalır. SCL2 körlüğü
+# temporal katmanlarda iki açık sahne ile geri kazanılır.
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-same-orbit-uri-scl2-shadow-v14"
 
 
 def _ensure_version_table(connection):
@@ -60,8 +60,8 @@ def _store_result(connection, report_date, region_key, result, older, latest, ne
         son_tarih=excluded.son_tarih,onceki_item=excluded.onceki_item,
         son_item=excluded.son_item,yeni_goruntu=excluded.yeni_goruntu,
         degisim_km2=excluded.degisim_km2,degisim_yuzde=excluded.degisim_yuzde,
-        bulut_yuzde=excluded.bulut_yuzde,hareket_json=excluded.hareket_json,
-        hata=excluded.hata""",
+        bulut_yuzde=excluded.bulut_yuzde,
+        hareket_json=excluded.hareket_json,hata=excluded.hata""",
         (
             report_date,
             region_key,
