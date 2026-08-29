@@ -11,6 +11,7 @@ on:
       - "satellite.py"
       - "satellite_quality.py"
       - "candidate_capacity_audit.py"
+      - "rebalance_satellite_candidates.py"
       - "temporal_gap_scan.py"
       - "temporal_quality.py"
       - "latest_cloud_gap_scan.py"
@@ -107,6 +108,9 @@ jobs:
       - name: Günlük uydu ve radar raporunu oluştur
         run: python daily_report.py
 
+      - name: Şantiye ölçeği adaylarını toplam tavan içinde dengele
+        run: python rebalance_satellite_candidates.py
+
       - name: Uydu aday tavanı körlüğünü ölç
         run: python candidate_capacity_audit.py
 
@@ -165,6 +169,7 @@ jobs:
             python retain_recent_candidates.py
             python refresh_satellite_analysis.py
             python daily_report.py
+            python rebalance_satellite_candidates.py
             python candidate_capacity_audit.py
             python temporal_gap_scan.py
             python latest_cloud_gap_scan.py
