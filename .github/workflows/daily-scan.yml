@@ -21,6 +21,7 @@ on:
       - "reactivate_current_satellite.py"
       - "retain_recent_candidates.py"
       - "carry_forward_satellite_candidates.py"
+      - "dedupe_overlap_satellite.py"
       - "hydrate_persisted_satellite_metadata.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
@@ -95,6 +96,9 @@ jobs:
       - name: Yeni görüntü yokken bekleyen uydu aday ayrıntılarını koru
         run: python carry_forward_satellite_candidates.py
 
+      - name: Çakışan uydu kutularında mükerrer adayı ele
+        run: python dedupe_overlap_satellite.py
+
       - name: Mekânsal saha kalite kontrolü
         run: python spatial_quality.py
 
@@ -136,6 +140,7 @@ jobs:
             python daily_report.py
             python temporal_gap_scan.py
             python carry_forward_satellite_candidates.py
+            python dedupe_overlap_satellite.py
             python spatial_quality.py
             python reactivate_current_satellite.py
             python report_quality.py
