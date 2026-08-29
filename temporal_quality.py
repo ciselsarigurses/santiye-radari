@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from satellite import EXCLUDED_SCL_CLASSES
 from temporal_gap_scan import (
     DUPLICATE_METERS,
     EXCLUDED_CLASSES,
@@ -58,6 +59,10 @@ def check_fallback_selection():
 def check_transient_classes():
     transient = set(int(value) for value in TRANSIENT_OLDER_CLASSES.tolist())
     excluded = set(int(value) for value in EXCLUDED_CLASSES.tolist())
+    main_excluded = set(int(value) for value in EXCLUDED_SCL_CLASSES.tolist())
+    assert excluded == main_excluded, (
+        "Ana Sentinel motoru ile zaman-serisi SCL geçerlilik politikası ayrışmış."
+    )
     assert {2, 3, 8, 9, 10, 11}.issubset(transient), (
         "PB04.00+ SCL2 cast shadow zaman-serisiyle geri kazanılabilir geçici sınıf olmalı."
     )
@@ -89,7 +94,7 @@ def main():
     check_transient_classes()
     check_deduplication()
     print(
-        "Zaman serisi kalite kontrolü başarılı: SCL2 cast shadow doğrudan analizden dışlandı ve açık sahneyle geri kazanılıyor; tam-kapsam, aynı-yörünge ve 80 m mükerrer korumaları geçerli."
+        "Zaman serisi kalite kontrolü başarılı: SCL2 cast shadow doğrudan analizden dışlandı ve açık sahneyle geri kazanılıyor; ana/zaman-serisi politika uyumu, tam-kapsam, aynı-yörünge ve 80 m mükerrer korumaları geçerli."
     )
 
 
