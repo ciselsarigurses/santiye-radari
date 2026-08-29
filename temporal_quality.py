@@ -12,9 +12,10 @@ from temporal_gap_scan import (
 )
 
 
-TEST_BBOX = [26.25, 38.22, 26.47, 38.43]
-FULL_COVER = [26.20, 38.15, 26.52, 38.48]
-PARTIAL_COVER = [26.35, 38.25, 26.52, 38.48]
+# Güncel Çeşme analiz zarfı üzerinde tam/kısmi kapsam davranışını test et.
+TEST_BBOX = [26.22, 38.18, 26.53, 38.43]
+FULL_COVER = [26.20, 38.15, 26.56, 38.48]
+PARTIAL_COVER = [26.35, 38.25, 26.56, 38.48]
 
 
 def _item(item_id, date, tile="35SNC", orbit=7, footprint=None):
@@ -112,9 +113,9 @@ def main():
     check_transient_classes()
     check_deduplication()
     print(
-        "Zaman serisi kalite kontrolü başarılı: 7+ günlük tam-kapsam aynı-karo "
-        "yedeği, aynı göreli yörünge tercihi, yalnız geçici bulut/gölge boşluğu ve "
-        "80 m mükerrer koruması doğrulandı."
+        "Zaman serisi kalite kontrolü başarılı: geniş Çeşme zarfında 7+ günlük "
+        "tam-kapsam aynı-karo yedeği, aynı göreli yörünge tercihi, yalnız geçici "
+        "bulut/gölge boşluğu ve 80 m mükerrer koruması doğrulandı."
     )
 
 
