@@ -11,8 +11,9 @@ from scanner import connect
 
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
-# Böylece aynı Sentinel görüntüsü yeni algoritmayla bir kez yeniden analiz edilir.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-cap24-same-orbit-uri-v11"
+# v12: Çeşme batı sınırı 26.25'ten 26.22'ye genişletildi; Pırlanta/Altınkum'un
+# batısındaki Çiftlik kıyı koridoru aynı 10 m sınıfı analizle yeniden taranır.
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-west-buffer-cap24-same-orbit-uri-v12"
 # Sürüm etiketi, mevcut Sentinel çiftini yeni referans seçimiyle bir kez yeniden işler.
 
 
