@@ -17,6 +17,7 @@ from scanner import connect
 
 
 OVERDUE_FIELD_DAYS = 2
+EARLY_EVIDENCE_MAX_DAYS = 2
 FIELD_OUTCOME_KEYS = (
     "SANTIYE_KAZI",
     "YOL_ALTYAPI",
@@ -102,9 +103,32 @@ def _waiting_days(first_seen, report_date):
     return max((current_date - first_date).days, 0)
 
 
-def _is_early_excavation_candidate(item, waiting_days):
-    """Taze, küçük ve güçlü uydu sinyalini erken hafriyat saha sırasına al."""
+def _evidence_age_days(evidence_date, report_date):
+    """Uydu kanıtının rapor gününe göre takvim yaşını döndür; belirsizde None."""
+    raw = str(evidence_date or "").strip()
+    parsed = None
+    for fmt in ("%d.%m.%Y", "%Y-%m-%d"):
+        try:
+            parsed = datetime.strptime(raw[:10], fmt).date()
+            break
+        except (TypeError, ValueError):
+            continue
+    try:
+        current_date = datetime.fromisoformat(str(report_date or "")[:10]).date()
+    except (TypeError, ValueError):
+        return None
+    if parsed is None:
+        return None
+    age = (current_date - parsed).days
+    return age if age >= 0 else None
+
+
+def _is_early_excavation_candidate(item, waiting_days, report_date):
+    """Yalnız taze uydu kanıtlı küçük-güçlü sinyali erken hafriyat sırasına al."""
     if int(waiting_days or 0) >= OVERDUE_FIELD_DAYS:
+        return False
+    evidence_age = _evidence_age_days(item.get("son_tarih"), report_date)
+    if evidence_age is None or evidence_age > EARLY_EVIDENCE_MAX_DAYS:
         return False
     try:
         area_m2 = float(item.get("alan_m2") or 0)
@@ -117,23 +141,35 @@ def _is_early_excavation_candidate(item, waiting_days):
         and size_class == "KUCUK"
         and "küçük, güçlü" in signal
         and "son yeniden analizde tekrar görünmedi" not in signal
+        # En yeni sahne kapalıyken daha eski açık görüntüden geri kazanılan kanıt
+        # değerli olsa da gerçek kanıt tarihi satırın son_tarih alanından daha eskidir.
+        # Tarihi yapay biçimde taze göstermemek için bu katmanı ERKEN yapma.
+        and "son açık kanıt" not in signal
     )
 
 
 def _priority_policy_self_check():
-    """Erken-hafriyat önceliğinin alarm üretmeden dar kalmasını regresyonda korur."""
+    """Erken-hafriyat önceliğinin alarm üretmeden dar ve gerçekten taze kalmasını korur."""
     fresh_small = {
         "alan_m2": 600,
         "boyut_sinifi": "KUCUK",
         "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
+        "son_tarih": "28.08.2026",
     }
-    assert _is_early_excavation_candidate(fresh_small, 1)
-    assert not _is_early_excavation_candidate(fresh_small, OVERDUE_FIELD_DAYS)
+    assert _is_early_excavation_candidate(fresh_small, 1, "2026-08-29")
     assert not _is_early_excavation_candidate(
-        {**fresh_small, "alan_m2": 900}, 1
+        fresh_small, OVERDUE_FIELD_DAYS, "2026-08-29"
     )
     assert not _is_early_excavation_candidate(
-        {**fresh_small, "sinyal": "Bitişik yüzey/toprak değişimi adayı"}, 1
+        {**fresh_small, "son_tarih": "26.08.2026"}, 1, "2026-08-29"
+    ), "3 günlük uydu kanıtı sırf görev yeni açıldı diye ERKEN olmamalı."
+    assert not _is_early_excavation_candidate(
+        {**fresh_small, "alan_m2": 900}, 1, "2026-08-29"
+    )
+    assert not _is_early_excavation_candidate(
+        {**fresh_small, "sinyal": "Bitişik yüzey/toprak değişimi adayı"},
+        1,
+        "2026-08-29",
     )
     assert not _is_early_excavation_candidate(
         {
@@ -145,7 +181,20 @@ def _priority_policy_self_check():
             ),
         },
         1,
+        "2026-08-29",
     )
+    assert not _is_early_excavation_candidate(
+        {
+            **fresh_small,
+            "sinyal": (
+                "Zaman serisi 21.08.2026→24.08.2026; en yeni 28.08.2026 "
+                "görüntüsünde bulut/gölge, son açık kanıt · "
+                "Küçük, güçlü yüzey/toprak değişimi adayı"
+            ),
+        },
+        1,
+        "2026-08-29",
+    ), "Bulut altından daha eski açık kanıt ERKEN diye sunulmamalı."
 
 
 def _task_age_map(connection, task_ids, report_date):
@@ -277,21 +326,25 @@ def _active_hotspots(connection, report_date):
         item = dict(item)
         age = age_map.get(task_id, {})
         waiting_days = int(age.get("bekleme_gun") or 0)
+        evidence_age = _evidence_age_days(item.get("son_tarih"), report_date)
         item["ilk_gorulme"] = age.get("ilk_gorulme")
         item["bekleme_gun"] = waiting_days
         item["gecikmis"] = False
+        if evidence_age is not None:
+            item["uydu_kanit_yasi_gun"] = evidence_age
         if status == "TEKRAR_GIT":
             item["oncelik"] = "TEKRAR"
             item["takip_gorevi"] = True
             item["sinyal"] = "Tekrar saha kontrolü · " + str(item.get("sinyal") or "")
         elif status == "KONTROLE_GIT" and _is_early_excavation_candidate(
-            item, waiting_days
+            item, waiting_days, report_date
         ):
             item["uydu_onceligi"] = item.get("oncelik")
             item["oncelik"] = "ERKEN"
             item["erken_hafriyat"] = True
             item["oncelik_nedeni"] = (
-                "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali. "
+                "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali ve "
+                f"uydu kanıtı en fazla {EARLY_EVIDENCE_MAX_DAYS} günlük. "
                 + str(item.get("oncelik_nedeni") or "")
             ).strip()
         elif status == "KONTROLE_GIT" and waiting_days >= OVERDUE_FIELD_DAYS:
