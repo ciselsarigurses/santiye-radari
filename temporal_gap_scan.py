@@ -34,11 +34,13 @@ from satellite import (
 from scanner import connect
 
 
-TEMPORAL_VERSION = "cloud-shadow-gap-v3-scl2-cast-shadow"
+TEMPORAL_VERSION = "cloud-shadow-gap-v4-dedupe25m"
 FALLBACK_MIN_GAP_DAYS = 7
 TEMPORAL_ADDITION_LIMIT = 6
 TEMPORAL_SMALL_QUOTA = 3
-DUPLICATE_METERS = 80
+# 10 m sınıfı Sentinel merkez kayması için 2-3 piksel tolerans bırak; 80 m ise
+# komşu parseldeki ayrı kazıyı sessizce mükerrer sayabilecek kadar genişti.
+DUPLICATE_METERS = 25
 
 # PB04.00+ SCL=2 topografik/cast shadow'dur; gerçek koyu toprak SCL=7'ye taşındı.
 # Bu nedenle 2 ana karşılaştırmada geçersizdir ama açık bir eski/yeni sahne varsa
@@ -113,11 +115,23 @@ def _distance_m(first, second):
 
 def _select_additions(candidates, limit=TEMPORAL_ADDITION_LIMIT):
     """Bulut boşluğu adaylarını sınırlarken küçük güçlü şantiyeleri tamamen gömme."""
-    ranked = sorted(candidates, key=lambda item: float(item.get("alan_m2") or 0), reverse=True)
+    ranked = sorted(
+        candidates,
+        key=lambda item: float(item.get("alan_m2") or 0),
+        reverse=True,
+    )
     if len(ranked) <= limit:
         return ranked
-    small = [item for item in ranked if float(item.get("alan_m2") or 0) <= SMALL_HOTSPOT_MAX_M2]
-    standard = [item for item in ranked if float(item.get("alan_m2") or 0) > SMALL_HOTSPOT_MAX_M2]
+    small = [
+        item
+        for item in ranked
+        if float(item.get("alan_m2") or 0) <= SMALL_HOTSPOT_MAX_M2
+    ]
+    standard = [
+        item
+        for item in ranked
+        if float(item.get("alan_m2") or 0) > SMALL_HOTSPOT_MAX_M2
+    ]
     selected = standard[: max(limit - TEMPORAL_SMALL_QUOTA, 0)]
     selected.extend(small[:TEMPORAL_SMALL_QUOTA])
     if len(selected) < limit:
@@ -127,7 +141,13 @@ def _select_additions(candidates, limit=TEMPORAL_ADDITION_LIMIT):
 
 
 def merge_candidates(existing, recovered):
-    """Mevcut adayı korur; 80 m içindeki zaman-serisi sonucunu ikinci görev yapmaz."""
+    """Mevcut adayı korur; yalnız 25 m içindeki zaman-serisi sonucunu mükerrer sayar.
+
+    25-80 m bandındaki iki değişim, özellikle villa/parsel dokusunda ayrı hafriyatlar
+    olabilir. Bu nedenle zaman-serisi ve son-açık-kanıt katmanları artık bu bandı
+    tek göreve ezmez. 25 m eşiği yaklaşık 10 m piksellerde normal centroid kaymasını
+    tolere ederken komşu parsellere taşma riskini belirgin biçimde azaltır.
+    """
     merged = [item for item in existing if isinstance(item, dict)]
     additions = []
     for item in _select_additions([x for x in recovered if isinstance(x, dict)]):
@@ -168,8 +188,12 @@ def _gap_hotspots(region_key, primary, latest, fallback):
     if gap_pixels < 3:
         return [], gap_pixels, gap_percent
 
-    fallback_visual = _read_asset(fallback, "visual", bbox, height, width, "bilinear")[:3]
-    latest_visual = _read_asset(latest, "visual", bbox, height, width, "bilinear")[:3]
+    fallback_visual = _read_asset(
+        fallback, "visual", bbox, height, width, "bilinear"
+    )[:3]
+    latest_visual = _read_asset(
+        latest, "visual", bbox, height, width, "bilinear"
+    )[:3]
     fallback_red = _reflectance(
         _read_asset(fallback, "red", bbox, height, width, "bilinear")[0]
     )
