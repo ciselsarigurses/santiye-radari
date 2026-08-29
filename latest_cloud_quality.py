@@ -9,7 +9,7 @@ from latest_cloud_gap_scan import (
     TRANSIENT_LATEST_CLASSES,
     latest_gap_zone,
 )
-from temporal_gap_scan import EXCLUDED_CLASSES
+from temporal_gap_scan import DUPLICATE_METERS, EXCLUDED_CLASSES
 
 
 def check_latest_gap_zone():
@@ -61,14 +61,17 @@ def check_class_policy():
     assert 0 not in transient and 6 not in transient
     assert 7 not in excluded, "Gerçek koyu toprak/dark feature SCL7 doğrudan analizde geçerli kalmalı."
     assert transient.issubset(excluded)
-    assert LATEST_CLOUD_GAP_VERSION.startswith("latest-cloud-gap-v2")
+    assert DUPLICATE_METERS == 25, (
+        "Son-açık-kanıt katmanı temporal katmanla aynı 25 m mükerrer eşiğini kullanmalı."
+    )
+    assert LATEST_CLOUD_GAP_VERSION.startswith("latest-cloud-gap-v3-dedupe25m")
 
 
 def main():
     check_latest_gap_zone()
     check_class_policy()
     print(
-        "En yeni görüntü bulut-körlük kalite kontrolü başarılı: SCL2 cast shadow dahil geçici gölge/bulut pikselleri yalnız iki açık sahne kanıtıyla geri kazanılıyor; su/no-data korunuyor."
+        "En yeni görüntü bulut-körlük kalite kontrolü başarılı: SCL2 cast shadow dahil geçici gölge/bulut pikselleri yalnız iki açık sahne kanıtıyla geri kazanılıyor; su/no-data korunuyor; 25 m mükerrer eşiğiyle komşu parsel adayları ezilmiyor."
     )
 
 
