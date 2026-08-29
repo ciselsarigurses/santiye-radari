@@ -16,6 +16,7 @@ from scanner import connect
 
 ALLOWED_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT", "KONTROL_EDILDI"}
 SATELLITE_MATCH_METERS = 80
+COMPLETED_REUSE_METERS = 25
 LEGACY_DUPLICATE_METERS = 120
 INTERNAL_DUPLICATE_STATUS = "MUKERRER"
 INTERNAL_SUPERSEDED_STATUS = "ALGORITMA_ELENDI"
@@ -94,20 +95,21 @@ def _nearby_satellite_task(
     """Yeni görüntüde merkezi biraz kayan aynı saha görevini bulur.
 
     Aynı mevcut Sentinel listesinde başka bir kümeye zaten atanmış görevler
-    hariç tutulur. Aksi halde 25-80 m aralığındaki iki ayrı değişim kümesi sırayla
-    işlenirken ikinci küme birincinin görev kimliğini devralıp saha listesinden
-    sessizce kaybolabilir.
+    hariç tutulur. Açık/takip görevlerinde normal 80 m centroid kayması korunur;
+    ``KONTROL_EDILDI`` görevi ise yalnız 25 m içinde yeniden kullanılır. Böylece
+    kontrol edilmiş bir parselin hemen yanındaki yeni kazı eski kapalı göreve
+    bağlanıp saha listesinden sessizce kaybolmaz.
     """
     excluded_task_ids = {str(value) for value in (excluded_task_ids or ())}
     rows = connection.execute(
-        """SELECT gorev_id,enlem,boylam FROM saha_durumlari
+        """SELECT gorev_id,enlem,boylam,durum FROM saha_durumlari
         WHERE kaynak='uydu' AND kaynak_kimlik=?
         AND enlem IS NOT NULL AND boylam IS NOT NULL""",
         (source_key,),
     ).fetchall()
     nearest_id = None
     nearest_distance = None
-    for task_id, old_latitude, old_longitude in rows:
+    for task_id, old_latitude, old_longitude, status in rows:
         task_id = str(task_id)
         if task_id in excluded_task_ids:
             continue
@@ -120,12 +122,17 @@ def _nearby_satellite_task(
             )
         except (TypeError, ValueError):
             continue
+        match_limit = (
+            COMPLETED_REUSE_METERS
+            if str(status or "") == "KONTROL_EDILDI"
+            else SATELLITE_MATCH_METERS
+        )
+        if distance > match_limit:
+            continue
         if nearest_distance is None or distance < nearest_distance:
             nearest_id = task_id
             nearest_distance = distance
-    if nearest_distance is not None and nearest_distance <= SATELLITE_MATCH_METERS:
-        return nearest_id
-    return None
+    return nearest_id
 
 
 def _upsert_task(
@@ -179,21 +186,26 @@ def _upsert_task(
 
 
 def _existing_satellite_edges(connection, records):
-    """Mevcut görevlerle güncel hotspot'lar arasındaki 80 m eşleşme adaylarını çıkar."""
+    """Mevcut görevlerle güncel hotspot'ların güvenli eşleşme adaylarını çıkar.
+
+    Aktif ve takip edilen uydu görevlerinde 80 m Sentinel centroid toleransı
+    korunur. Saha tarafından ``KONTROL_EDILDI`` yapılmış görevler yalnız 25 m
+    içinde eşleşebilir; daha uzaktaki yeni değişim ayrı bir saha görevi olur.
+    """
     source_keys = sorted({record["source_key"] for record in records})
     if not source_keys:
         return []
 
     placeholders = ",".join("?" for _ in source_keys)
     rows = connection.execute(
-        f"""SELECT gorev_id,kaynak_kimlik,enlem,boylam FROM saha_durumlari
+        f"""SELECT gorev_id,kaynak_kimlik,enlem,boylam,durum FROM saha_durumlari
         WHERE kaynak='uydu' AND kaynak_kimlik IN ({placeholders})
         AND enlem IS NOT NULL AND boylam IS NOT NULL""",
         source_keys,
     ).fetchall()
 
     existing = []
-    for task_id, source_key, latitude, longitude in rows:
+    for task_id, source_key, latitude, longitude, status in rows:
         try:
             existing.append(
                 (
@@ -201,6 +213,7 @@ def _existing_satellite_edges(connection, records):
                     str(source_key or ""),
                     float(latitude),
                     float(longitude),
+                    str(status or ""),
                 )
             )
         except (TypeError, ValueError):
@@ -208,7 +221,7 @@ def _existing_satellite_edges(connection, records):
 
     edges = []
     for record in records:
-        for task_id, source_key, latitude, longitude in existing:
+        for task_id, source_key, latitude, longitude, status in existing:
             if source_key != record["source_key"]:
                 continue
             distance = _distance_m(
@@ -217,7 +230,12 @@ def _existing_satellite_edges(connection, records):
                 latitude,
                 longitude,
             )
-            if distance <= SATELLITE_MATCH_METERS:
+            match_limit = (
+                COMPLETED_REUSE_METERS
+                if status == "KONTROL_EDILDI"
+                else SATELLITE_MATCH_METERS
+            )
+            if distance <= match_limit:
                 edges.append((distance, record["index"], task_id))
     return sorted(edges, key=lambda value: (value[0], value[1], value[2]))
 
@@ -243,8 +261,9 @@ def sync_satellite_tasks(connection, hotspots, report_date):
     Eşleşme önce bütün mevcut görevler ve bütün güncel hotspot'lar arasında mesafeye
     göre tek-seferde yapılır. Böylece aynı görüntüde 25-80 m aralığındaki iki ayrı
     değişim kümesi, liste sırasına bağlı olarak tek 80 m görev kimliğinde ezilmez.
-    Yeni görevler yaklaşık 10 m sınıfındaki 4 ondalık koordinat hash'iyle başlar;
-    eski ~100 m kimlikler mesafe eşleşmesi sayesinde aynen yaşamaya devam eder.
+    Kontrol edilmiş görevler yalnız 25 m içinde yeniden kullanılır; yan parseldeki
+    yeni değişim ayrı görev kalır. Yeni görevler yaklaşık 10 m sınıfındaki 4
+    ondalık koordinat hash'iyle başlar; eski kimlikler mesafe eşleşmesiyle yaşar.
     """
     ensure_state_schema(connection)
     records = []
