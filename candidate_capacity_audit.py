@@ -1,9 +1,10 @@
 """Sentinel aday tavanının gerçek küçük/orta şantiye sinyallerini gizleyip gizlemediğini ölçer.
 
 Bu denetim alarm üretmez, saha görevi açmaz ve uydu eşiklerini değiştirmez. Ana motorun
-aynı 250 m² / 10 m / spektral kurallarıyla, yalnız aday sayısı tavanını geçici olarak
-kaldırıp kaç uygun kümenin 24'lük çıktı listesinin dışında kaldığını sayar. Böylece
-yoğun görüntülerde kota ayarı gerekiyorsa kanıta dayalı karar verilebilir.
+aynı 250 m² / 10 m / spektral kurallarıyla hem normal 24 adaylık çıktıyı hem de yalnız
+aday sayısı tavanı kaldırılmış çıktıyı aynı görüntü üzerinde yeniden hesaplar. Böylece
+çakışan bölge mükerrerlerinin sonradan elenmesi ile gerçek kapasite kaybı birbirine
+karıştırılmadan ölçülür.
 """
 
 from __future__ import annotations
@@ -85,6 +86,16 @@ def _candidate_key(item):
         return None
 
 
+def _difference(left, right):
+    """left içinde olup right içinde olmayan adayları deterministik koordinat+alanla bul."""
+    right_keys = {key for key in map(_candidate_key, right) if key is not None}
+    return [
+        item
+        for item in left
+        if (key := _candidate_key(item)) is not None and key not in right_keys
+    ]
+
+
 def _self_check():
     # 30 ayrı güçlü ~300 m² küme üret. Üretim yolu 24'te kesilmeli; denetim yolu
     # aynı eşiklerle 30'un tamamını görmeli. Böylece denetimin yanlışlıkla yeni bir
@@ -112,6 +123,9 @@ def _self_check():
     assert len(uncapped) == 30, (
         "Kapasite denetimi üretim eşiklerini değiştirmeden tavan dışı adayları göremiyor."
     )
+    assert len(_difference(uncapped, capped)) == 6, (
+        "Kapasite kaybı ile çıktı sonrası eleme ayrımı bozuldu."
+    )
     assert _scale_bucket({"alan_m2": 500}) == "kucuk_250_800"
     assert _scale_bucket({"alan_m2": 5000}) == "santiye_olcegi_800_10000"
     assert _scale_bucket({"alan_m2": 20000}) == "genis_10000_ustu"
@@ -127,7 +141,11 @@ def _stored_snapshot(report_date):
                 (report_date, region_key),
             ).fetchone()
             if not row:
-                snapshots[region_key] = {"son_item": None, "hareket": [], "hata": "rapor_yok"}
+                snapshots[region_key] = {
+                    "son_item": None,
+                    "hareket": [],
+                    "hata": "rapor_yok",
+                }
                 continue
             try:
                 movement = json.loads(row[1] or "[]")
@@ -141,6 +159,15 @@ def _stored_snapshot(report_date):
                 "hata": row[2],
             }
     return snapshots
+
+
+def _analyze_with_hotspot_function(region_key, pair, function):
+    original = satellite._hotspots
+    satellite._hotspots = function
+    try:
+        return satellite.analyze_sentinel_change(region_key, pair=pair)
+    finally:
+        satellite._hotspots = original
 
 
 def audit_capacity():
@@ -164,40 +191,55 @@ def audit_capacity():
             regions[region_key] = record
             continue
         try:
-            older, latest = satellite.sentinel_pair(region_key)
+            pair = satellite.sentinel_pair(region_key)
+            older, latest = pair
             record["latest_item"] = latest.get("id")
             if snapshot.get("son_item") != latest.get("id"):
                 record["durum"] = "gunluk_rapor_latest_ile_eslesmiyor"
                 regions[region_key] = record
                 continue
 
-            original = satellite._hotspots
-            satellite._hotspots = _uncapped_hotspots
-            try:
-                result = satellite.analyze_sentinel_change(
-                    region_key,
-                    pair=(older, latest),
-                )
-            finally:
-                satellite._hotspots = original
-
-            raw = [item for item in result.get("hotspots", []) if isinstance(item, dict)]
-            kept = list(snapshot.get("hareket") or [])
-            kept_keys = {key for key in map(_candidate_key, kept) if key is not None}
-            dropped = [
-                item for item in raw
-                if (key := _candidate_key(item)) is not None and key not in kept_keys
+            # Aynı sahneyi iki kez ölç: önce gerçek üretim 24 tavanıyla, sonra
+            # yalnız tavan kaldırılarak. DB'deki liste ise bölge-overlap dedupe gibi
+            # sonraki adımlardan geçmiş olabilir; onu ayrı kolon olarak tutuyoruz.
+            capped_result = _analyze_with_hotspot_function(
+                region_key,
+                pair,
+                _ORIGINAL_HOTSPOTS,
+            )
+            raw_result = _analyze_with_hotspot_function(
+                region_key,
+                pair,
+                _uncapped_hotspots,
+            )
+            capped = [
+                item for item in capped_result.get("hotspots", [])
+                if isinstance(item, dict)
             ]
+            raw = [
+                item for item in raw_result.get("hotspots", [])
+                if isinstance(item, dict)
+            ]
+            report_kept = list(snapshot.get("hareket") or [])
+            dropped_by_cap = _difference(raw, capped)
+            removed_after_cap = _difference(capped, report_kept)
+
             record.update(
                 {
                     "aday_tavani": satellite.HOTSPOT_LIMIT,
                     "ham_uygun_aday": len(raw),
-                    "uretim_listesindeki_aday": len(kept),
-                    "tavan_disinda_kalan": len(dropped),
-                    "tavana_ulasti": len(kept) >= satellite.HOTSPOT_LIMIT,
+                    "tavan_sonrasi_aday": len(capped),
+                    "raporda_kalan_aday": len(report_kept),
+                    "tavan_disinda_kalan": len(dropped_by_cap),
+                    "tavan_sonrasi_elenen": len(removed_after_cap),
+                    "tavana_ulasti": len(raw) > satellite.HOTSPOT_LIMIT,
                     "ham_olcek_dagilimi": _bucket_counts(raw),
-                    "uretim_olcek_dagilimi": _bucket_counts(kept),
-                    "tavan_disinda_olcek_dagilimi": _bucket_counts(dropped),
+                    "tavan_sonrasi_olcek_dagilimi": _bucket_counts(capped),
+                    "raporda_olcek_dagilimi": _bucket_counts(report_kept),
+                    "tavan_disinda_olcek_dagilimi": _bucket_counts(dropped_by_cap),
+                    "tavan_sonrasi_elenen_olcek_dagilimi": _bucket_counts(
+                        removed_after_cap
+                    ),
                 }
             )
         except Exception as exc:
@@ -210,7 +252,7 @@ def audit_capacity():
         "olusturma": now.strftime("%Y-%m-%d %H:%M %Z"),
         "amac": (
             "24 aday tavanının 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini "
-            "ölçmek; bu dosya alarm veya saha görevi üretmez."
+            "pre-dedupe ölçmek; bu dosya alarm veya saha görevi üretmez."
         ),
         "diagnostik_santiye_olcegi_m2": [
             CONSTRUCTION_SCALE_MIN_M2,
@@ -233,7 +275,7 @@ def main():
     if args.check_only:
         print(
             "Aday kapasite denetimi kalite kontrolü başarılı: üretim 24 tavanı korunuyor; "
-            "denetim aynı 250 m²+ filtrelerle tavan dışı uygun kümeleri yalnız ölçüyor."
+            "denetim aynı 250 m²+ filtrelerle pre-dedupe tavan kaybını ayrı ölçüyor."
         )
         return
 
@@ -245,8 +287,9 @@ def main():
             continue
         dropped_scale = item.get("tavan_disinda_olcek_dagilimi", {})
         summaries.append(
-            f"{key}: {item.get('uretim_listesindeki_aday', 0)}/{item.get('ham_uygun_aday', 0)} "
-            f"listede, tavan dışı {item.get('tavan_disinda_kalan', 0)} "
+            f"{key}: ham {item.get('ham_uygun_aday', 0)} → tavan "
+            f"{item.get('tavan_sonrasi_aday', 0)} → rapor {item.get('raporda_kalan_aday', 0)}; "
+            f"tavan dışı {item.get('tavan_disinda_kalan', 0)} "
             f"(250-800={dropped_scale.get('kucuk_250_800', 0)}, "
             f"800-10000={dropped_scale.get('santiye_olcegi_800_10000', 0)}, "
             f">10000={dropped_scale.get('genis_10000_ustu', 0)})"
