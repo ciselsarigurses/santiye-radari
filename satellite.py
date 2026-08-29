@@ -17,16 +17,18 @@ SMALL_HOTSPOT_MIN_PIXELS = 3
 HOTSPOT_LIMIT = 24
 SMALL_HOTSPOT_QUOTA = 6
 TARGET_PIXEL_SIZE_M = 10
-MAX_ANALYSIS_DIMENSION = 2400
+MAX_ANALYSIS_DIMENSION = 2800
 
 # Batı, güney, doğu, kuzey (WGS84)
 REGIONS = {
     "cesme": {
         "label": "Çeşme merkez · Alaçatı · Ilıca",
-        # Pırlanta/Altınkum'un batısındaki Çiftlik kıyı koridoru 26.25 sınırının
-        # dışında kalıyordu. 26.22 batı sınırı, yaklaşık 2.6 km ek kara koridorunu
-        # 10 m sınıfı analizi bozmadan taramaya dahil eder.
-        "bbox": [26.22, 38.22, 26.47, 38.43],
+        # Açık idari sınır zarfı yaklaşık 38.1896 N güney ve 26.5275 E doğuya
+        # uzanıyor. Eski 38.22/26.47 sınırları Ovacık-Alaçatı güney kıyısı ile
+        # Çeşme'nin güneydoğu kesiminde kör alan bırakıyordu. Küçük tamponlu bu
+        # zarf tüm Çeşme ilçe sınır kutusunu kapsar; 2800 piksel tavanı yaklaşık
+        # 10 m çözünürlüğü ve 250 m² küçük-saha yolunu korur.
+        "bbox": [26.22, 38.18, 26.53, 38.43],
     },
     "uzunkuyu": {
         "label": "Uzunkuyu · Germiyan · Ildır",
@@ -34,7 +36,7 @@ REGIONS = {
     },
     "all": {
         "label": "Tüm Çeşme + Uzunkuyu",
-        "bbox": [26.22, 38.22, 26.66, 38.43],
+        "bbox": [26.22, 38.18, 26.66, 38.43],
     },
 }
 

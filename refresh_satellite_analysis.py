@@ -11,10 +11,10 @@ from scanner import connect
 
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
-# v12: Çeşme batı sınırı 26.25'ten 26.22'ye genişletildi; Pırlanta/Altınkum'un
-# batısındaki Çiftlik kıyı koridoru aynı 10 m sınıfı analizle yeniden taranır.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-west-buffer-cap24-same-orbit-uri-v12"
-# Sürüm etiketi, mevcut Sentinel çiftini yeni referans seçimiyle bir kez yeniden işler.
+# v13: Çeşme kutusu açık ilçe sınır zarfını kapsayacak biçimde güneye 38.18 ve
+# doğuya 26.53'e genişletildi; 2800 piksel tavanıyla yaklaşık 10 m ölçek korunur.
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-same-orbit-uri-v13"
+# Sürüm etiketi, mevcut Sentinel çiftini yeni kapsama/ref seçimleriyle bir kez yeniden işler.
 
 
 def _ensure_version_table(connection):
@@ -80,6 +80,19 @@ def _store_result(connection, report_date, region_key, result, older, latest, ne
     )
 
 
+def _reset_temporal_state_if_present(connection, region_key):
+    """Analiz zarfı/algoritması değişince bulut-gölge yedeğini de bir kez yeniler."""
+    exists = connection.execute(
+        """SELECT 1 FROM sqlite_master
+        WHERE type='table' AND name='uydu_zaman_serisi' LIMIT 1"""
+    ).fetchone()
+    if exists:
+        connection.execute(
+            "DELETE FROM uydu_zaman_serisi WHERE bolge=?",
+            (region_key,),
+        )
+
+
 def refresh_if_needed():
     """Yeni analiz sürümünü mevcut son görüntüye uygular; aynı sürümü tekrarlamaz."""
     ensure_daily_schema()
@@ -129,6 +142,10 @@ def refresh_if_needed():
                     surum=excluded.surum,guncelleme=excluded.guncelleme""",
                     (region_key, ANALYSIS_VERSION, now.isoformat()),
                 )
+                # Zaman-serisi tablosu son Sentinel item + kendi sürümüyle cache'lenir.
+                # Bbox değişip latest item aynı kaldığında eski dar alan "zaten işlendi"
+                # sanılmamalı; yalnız bu bölgenin tamamlayıcı durumunu sıfırla.
+                _reset_temporal_state_if_present(connection, region_key)
                 refreshed.append(
                     (
                         region_key,

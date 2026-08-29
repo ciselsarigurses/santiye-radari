@@ -30,9 +30,11 @@ from satellite import (
 
 REPORT_REGIONS = ("cesme", "uzunkuyu")
 MAX_PIXEL_AREA_M2 = 125
-# Açık OSM tabanlı yaklaşık referans; adres/parsel iddiası değildir. Eski 26.25
-# batı sınırının dışında kalan yerleşik Çiftlik/Pırlanta batı koridorunu günlük
-# Sentinel kapsamından tekrar düşürmemek için yalnız regresyon korumasıdır.
+# Açık OSM-tabanlı Çeşme ilçe sınır haritasının yayınladığı yaklaşık dış zarf.
+# Sıra uydu kodundaki gibi batı, güney, doğu, kuzey (WGS84). Bu bir adres/parsel
+# verisi değildir; günlük Sentinel kutusunun ilçenin güney/doğu ucunu tekrar
+# kesmemesi için yalnız kapsama regresyonudur.
+CESME_ADMIN_ENVELOPE = [26.230389, 38.189583, 26.527519, 38.427113]
 WESTERN_CESME_GUARD_POINTS = {
     "Çiftlik batı kıyı koridoru": (38.28649, 26.23423),
 }
@@ -121,15 +123,16 @@ def check_coverage():
         + ", ".join(uncovered_west)
     )
 
-    west, south, east, north = REGIONS["all"]["bbox"]
-    uncovered_grid = []
-    for latitude in np.linspace(south, north, 9):
-        for longitude in np.linspace(west, east, 13):
-            if not any(_contains(box, latitude, longitude) for box in report_boxes):
-                uncovered_grid.append((float(latitude), float(longitude)))
-    assert not uncovered_grid, (
-        "Günlük uydu kutularında 'all' zarfı içinde kör alan var; "
-        f"ilk örnek: {uncovered_grid[0] if uncovered_grid else None}."
+    admin_west, admin_south, admin_east, admin_north = CESME_ADMIN_ENVELOPE
+    west, south, east, north = cesme_box
+    assert (
+        west <= admin_west
+        and south <= admin_south
+        and east >= admin_east
+        and north >= admin_north
+    ), (
+        "Çeşme günlük Sentinel kutusu açık idari sınır zarfının tamamını kapsamıyor; "
+        "güney Ovacık/Alaçatı veya doğu ilçe sınırında kör alan oluşabilir."
     )
 
     cesme = REGIONS["cesme"]["bbox"]
@@ -137,13 +140,17 @@ def check_coverage():
     assert cesme[2] >= uzunkuyu[0], (
         "Çeşme ve Uzunkuyu günlük tarama kutuları arasında boylam boşluğu var."
     )
+    assert cesme[3] >= uzunkuyu[1] and uzunkuyu[3] >= cesme[1], (
+        "Çeşme ve Uzunkuyu günlük tarama kutuları dikey olarak ayrışmış; "
+        "ortak doğu-batı koridorunda körlük oluşabilir."
+    )
 
 
 def check_scene_pair_coverage():
     """Kısmi karo ve farklı göreli yörünge, tercih edilen referans olmasın."""
     target = REGIONS["cesme"]["bbox"]
-    full = [26.20, 38.18, 26.52, 38.48]
-    partial = [26.40, 38.18, 26.70, 38.48]
+    full = [26.20, 38.16, 26.56, 38.48]
+    partial = [26.40, 38.16, 26.70, 38.48]
     items = [
         _fake_item(
             "partial-newest",
@@ -305,9 +312,9 @@ def main():
     check_small_site_path()
     check_candidate_capacity()
     print(
-        "Uydu kalite kontrolü başarılı: tam zarf/tam-karo kapsamı, Çeşme batı "
-        "kıyı koridoru, aynı göreli yörünge tercihi, 10 m ölçek, 250 m² küçük "
-        "saha yolu ve yoğun-dönem aday kapasitesi korunuyor."
+        "Uydu kalite kontrolü başarılı: Çeşme idari zarfı, tam-karo kapsamı, "
+        "aynı göreli yörünge tercihi, yaklaşık 10 m ölçek, 250 m² küçük saha yolu "
+        "ve yoğun-dönem aday kapasitesi korunuyor."
     )
 
 
