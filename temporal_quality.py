@@ -12,12 +12,19 @@ from temporal_gap_scan import (
 )
 
 
-def _item(item_id, date, tile="35SNC"):
+TEST_BBOX = [26.25, 38.22, 26.47, 38.43]
+FULL_COVER = [26.20, 38.15, 26.52, 38.48]
+PARTIAL_COVER = [26.35, 38.25, 26.52, 38.48]
+
+
+def _item(item_id, date, tile="35SNC", orbit=7, footprint=None):
     return {
         "id": item_id,
+        "bbox": footprint or FULL_COVER,
         "properties": {
             "datetime": f"{date}T08:30:00Z",
             "s2:mgrs_tile": tile,
+            "sat:relative_orbit": orbit,
         },
     }
 
@@ -27,16 +34,34 @@ def check_fallback_selection():
     primary = _item("primary", "2026-08-24")
     too_recent = _item("recent", "2026-08-21")
     wrong_tile = _item("wrong-tile", "2026-08-18", tile="35SND")
-    fallback = _item("fallback", "2026-08-19")
+    partial = _item(
+        "partial-newer",
+        "2026-08-19",
+        footprint=PARTIAL_COVER,
+    )
+    wrong_orbit = _item("wrong-orbit", "2026-08-18", orbit=36)
+    fallback = _item("fallback", "2026-08-17", orbit=7)
     selected = select_fallback(
-        [latest, primary, too_recent, wrong_tile, fallback],
+        [latest, primary, too_recent, wrong_tile, partial, wrong_orbit, fallback],
         latest,
         primary,
+        bbox=TEST_BBOX,
     )
     assert FALLBACK_MIN_GAP_DAYS == 7
     assert selected and selected["id"] == "fallback", (
-        "Zaman-serisi yedeği en az 7 gün eski ve aynı Sentinel karosunda seçilmeli."
+        "Zaman-serisi yedeği 7+ günlük, tam-kapsam aynı karoda olmalı ve mevcutsa "
+        "aynı göreli yörünge farklı-yörünge sahnesine tercih edilmeli."
     )
+
+    # Aynı-yörünge yedeği hiç yoksa tamamlayıcı katmanı tamamen kör bırakma;
+    # tam-kapsam aynı-karo farklı-yörünge sahnesine güvenli geri dönüş korunur.
+    selected_without_same_orbit = select_fallback(
+        [latest, primary, wrong_orbit],
+        latest,
+        primary,
+        bbox=TEST_BBOX,
+    )
+    assert selected_without_same_orbit and selected_without_same_orbit["id"] == "wrong-orbit"
 
 
 def check_transient_classes():
@@ -87,8 +112,9 @@ def main():
     check_transient_classes()
     check_deduplication()
     print(
-        "Zaman serisi kalite kontrolü başarılı: 7+ günlük aynı-karo yedeği, "
-        "yalnız geçici bulut/gölge boşluğu ve 80 m mükerrer koruması doğrulandı."
+        "Zaman serisi kalite kontrolü başarılı: 7+ günlük tam-kapsam aynı-karo "
+        "yedeği, aynı göreli yörünge tercihi, yalnız geçici bulut/gölge boşluğu ve "
+        "80 m mükerrer koruması doğrulandı."
     )
 
 
