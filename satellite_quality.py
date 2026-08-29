@@ -30,6 +30,12 @@ from satellite import (
 
 REPORT_REGIONS = ("cesme", "uzunkuyu")
 MAX_PIXEL_AREA_M2 = 125
+# Açık OSM tabanlı yaklaşık referans; adres/parsel iddiası değildir. Eski 26.25
+# batı sınırının dışında kalan yerleşik Çiftlik/Pırlanta batı koridorunu günlük
+# Sentinel kapsamından tekrar düşürmemek için yalnız regresyon korumasıdır.
+WESTERN_CESME_GUARD_POINTS = {
+    "Çiftlik batı kıyı koridoru": (38.28649, 26.23423),
+}
 
 
 def _contains(bbox, latitude, longitude):
@@ -104,6 +110,17 @@ def check_coverage():
         + ", ".join(uncovered)
     )
 
+    cesme_box = REGIONS["cesme"]["bbox"]
+    uncovered_west = [
+        name
+        for name, (latitude, longitude) in WESTERN_CESME_GUARD_POINTS.items()
+        if not _contains(cesme_box, latitude, longitude)
+    ]
+    assert not uncovered_west, (
+        "Çeşme batı kıyı koridoru tekrar günlük Sentinel kapsamı dışına düştü: "
+        + ", ".join(uncovered_west)
+    )
+
     west, south, east, north = REGIONS["all"]["bbox"]
     uncovered_grid = []
     for latitude in np.linspace(south, north, 9):
@@ -124,7 +141,7 @@ def check_coverage():
 
 def check_scene_pair_coverage():
     """Kısmi karo ve farklı göreli yörünge, tercih edilen referans olmasın."""
-    target = [26.25, 38.22, 26.47, 38.43]
+    target = REGIONS["cesme"]["bbox"]
     full = [26.20, 38.18, 26.52, 38.48]
     partial = [26.40, 38.18, 26.70, 38.48]
     items = [
@@ -288,9 +305,9 @@ def main():
     check_small_site_path()
     check_candidate_capacity()
     print(
-        "Uydu kalite kontrolü başarılı: tam zarf/tam-karo kapsamı, aynı göreli "
-        "yörünge tercihi, 10 m ölçek, 250 m² küçük saha yolu ve yoğun-dönem "
-        "aday kapasitesi korunuyor."
+        "Uydu kalite kontrolü başarılı: tam zarf/tam-karo kapsamı, Çeşme batı "
+        "kıyı koridoru, aynı göreli yörünge tercihi, 10 m ölçek, 250 m² küçük "
+        "saha yolu ve yoğun-dönem aday kapasitesi korunuyor."
     )
 
 
