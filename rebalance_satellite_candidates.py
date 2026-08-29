@@ -3,7 +3,10 @@
 Ana uydu motorunun 250 m², yaklaşık 10 m ve spektral eşiklerini değiştirmez. Yalnız
 ana motorun aynı görüntüde ürettiği tüm geçerli kümeler arasından 24 kayıt seçilirken
 250-800 m² güçlü küçük saha adaylarını korur, 800-10.000 m² aralığına sınırlı bir kota
-ayırır ve kalan kapasiteyi geniş değişimlere bırakır. Toplam aday tavanı artmaz.
+ayırır ve kalan kapasiteyi geniş değişimlere bırakır. Şantiye ölçeği kotasının bir
+bölümü bandın küçük ucundan seçilerek erken hafriyat adaylarının 9-10 bin m²'lik
+kümeler tarafından tamamen gömülmesi önlenir; kotanın kalan kısmı büyük uçtan seçilir.
+Toplam aday tavanı artmaz.
 
 Seçim yalnız yeni Sentinel görüntüsü geldiğinde veya bu seçimin sürümü değiştiğinde
 uygulanır. Böylece daha sonraki zaman-serisi/bulut tamamlama adayları aynı görüntüde
@@ -21,11 +24,12 @@ from daily_report import ISTANBUL, REPORT_REGIONS, build_daily_report, ensure_da
 from scanner import connect
 
 
-SELECTION_VERSION = "construction-scale-quota-v1"
+SELECTION_VERSION = "construction-scale-quota-v2"
 RAW_LIMIT = 1_000_000
 CONSTRUCTION_SCALE_MIN_M2 = satellite.SMALL_HOTSPOT_MAX_M2
 CONSTRUCTION_SCALE_MAX_M2 = 10_000
 CONSTRUCTION_SCALE_QUOTA = 6
+CONSTRUCTION_EARLY_QUOTA = 3
 _ORIGINAL_HOTSPOTS = satellite._hotspots
 
 
@@ -80,6 +84,7 @@ def _balanced_select(
     limit=satellite.HOTSPOT_LIMIT,
     small_quota=satellite.SMALL_HOTSPOT_QUOTA,
     construction_quota=CONSTRUCTION_SCALE_QUOTA,
+    construction_early_quota=CONSTRUCTION_EARLY_QUOTA,
 ):
     """Toplam tavanı büyütmeden küçük + şantiye ölçeği + geniş denge seçimi yap."""
     ranked = sorted(
@@ -105,9 +110,29 @@ def _balanced_select(
     selected.extend(small[: min(max(int(small_quota), 0), limit)])
 
     remaining = limit - len(selected)
-    selected.extend(
-        construction[: min(max(int(construction_quota), 0), remaining)]
+    construction_slots = min(max(int(construction_quota), 0), remaining)
+    early_slots = min(max(int(construction_early_quota), 0), construction_slots)
+    construction_asc = sorted(
+        construction,
+        key=lambda item: (
+            _area(item),
+            float(item.get("enlem") or 0),
+            float(item.get("boylam") or 0),
+        ),
     )
+    early_selected = construction_asc[:early_slots]
+    selected.extend(early_selected)
+
+    remaining_construction_slots = construction_slots - len(early_selected)
+    if remaining_construction_slots > 0:
+        early_keys = {
+            key for key in map(_candidate_key, early_selected) if key is not None
+        }
+        upper_construction = [
+            item for item in construction
+            if (key := _candidate_key(item)) is not None and key not in early_keys
+        ]
+        selected.extend(upper_construction[:remaining_construction_slots])
 
     remaining = limit - len(selected)
     selected.extend(wide[:remaining])
@@ -154,6 +179,12 @@ def _self_check():
     counts = _bucket_counts(selected)
     assert len(selected) == satellite.HOTSPOT_LIMIT
     assert counts == {"kucuk": 6, "santiye_olcegi": 6, "genis": 12}, counts
+    construction_areas = sorted(
+        int(_area(candidate))
+        for candidate in selected
+        if CONSTRUCTION_SCALE_MIN_M2 <= _area(candidate) <= CONSTRUCTION_SCALE_MAX_M2
+    )
+    assert construction_areas == [1000, 1500, 2000, 5500, 6000, 6500], construction_areas
 
     scarce = [item(100, 300), item(101, 1500)]
     scarce.extend(item(110 + i, 12000 + i * 1000) for i in range(30))
