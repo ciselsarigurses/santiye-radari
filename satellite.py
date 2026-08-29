@@ -109,13 +109,23 @@ def _same_mgrs_tile(first, second):
 
 
 def _relative_orbit(item):
-    value = item.get("properties", {}).get("sat:relative_orbit")
-    if value is None:
-        return None
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return None
+    properties = item.get("properties", {})
+    value = properties.get("sat:relative_orbit")
+    if value is not None:
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            pass
+
+    # Earth Search Sentinel ürünlerinde göreli yörünge çoğu zaman ayrı bir
+    # sat:relative_orbit alanı yerine s2:product_uri içindeki _Rxxx_ parçasında
+    # taşınır. Bunu okumazsak aynı-yörünge koruması canlı veride sessizce devre
+    # dışı kalır.
+    product_uri = str(properties.get("s2:product_uri") or "")
+    for token in product_uri.split("_"):
+        if len(token) == 4 and token.startswith("R") and token[1:].isdigit():
+            return int(token[1:])
+    return None
 
 
 def _choose_older(candidates, latest_time, minimum_gap_days):
