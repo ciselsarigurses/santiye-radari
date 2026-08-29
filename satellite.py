@@ -90,24 +90,76 @@ def _search_items(bbox, days=65, max_cloud=25):
     return usable
 
 
-def _pick_pair(items, minimum_gap_days=2):
-    latest = items[0]
+def _item_covers_bbox(item, bbox):
+    """STAC karosunun analiz kutusunu bütünüyle örttüğünü doğrular."""
+    footprint = item.get("bbox")
+    if not isinstance(footprint, (list, tuple)) or len(footprint) < 4:
+        return False
+    try:
+        item_west, item_south, item_east, item_north = map(float, footprint[:4])
+        west, south, east, north = map(float, bbox)
+    except (TypeError, ValueError):
+        return False
+    return (
+        item_west <= west
+        and item_south <= south
+        and item_east >= east
+        and item_north >= north
+    )
+
+
+def _same_mgrs_tile(first, second):
+    first_tile = first.get("properties", {}).get("s2:mgrs_tile")
+    second_tile = second.get("properties", {}).get("s2:mgrs_tile")
+    if first_tile and second_tile:
+        return first_tile == second_tile
+    return True
+
+
+def _pick_pair(items, minimum_gap_days=2, bbox=None):
+    """Aynı tam-kapsam karodan, yeterli zaman aralığı olan görüntü çiftini seçer.
+
+    STAC sorgusu analiz kutusuna yalnızca değen komşu Sentinel karolarını da
+    döndürebilir. En yeni kayıt böyle kısmi bir karo olursa onu tüm bölgeye
+    esnetmek sessiz kör alan yaratır. Bbox verildiğinde yalnız analiz kutusunu
+    bütünüyle örten karolar kullanılır ve eski/yeni görüntü aynı MGRS karosundan
+    seçilir.
+    """
+    candidates = list(items)
+    if bbox is not None:
+        candidates = [item for item in candidates if _item_covers_bbox(item, bbox)]
+        if len(candidates) < 2:
+            raise SatelliteError(
+                "Analiz alanını bütünüyle örten iki Sentinel görüntüsü bulunamadı."
+            )
+    if len(candidates) < 2:
+        raise SatelliteError("Karşılaştırılabilir iki Sentinel görüntüsü bulunamadı.")
+
+    latest = candidates[0]
     latest_time = datetime.fromisoformat(
         latest["properties"]["datetime"].replace("Z", "+00:00")
     )
-    for older in items[1:]:
+    fallback = None
+    for older in candidates[1:]:
+        if not _same_mgrs_tile(older, latest):
+            continue
+        if fallback is None:
+            fallback = older
         older_time = datetime.fromisoformat(
             older["properties"]["datetime"].replace("Z", "+00:00")
         )
         if (latest_time - older_time).total_seconds() >= minimum_gap_days * 86400:
             return older, latest
-    return items[1], latest
+    if fallback is not None:
+        return fallback, latest
+    raise SatelliteError("Aynı Sentinel karosundan karşılaştırılabilir eski görüntü bulunamadı.")
 
 
 def sentinel_pair(region_key):
     if region_key not in REGIONS:
         raise SatelliteError("Bilinmeyen uydu bölgesi.")
-    return _pick_pair(_search_items(REGIONS[region_key]["bbox"]))
+    bbox = REGIONS[region_key]["bbox"]
+    return _pick_pair(_search_items(bbox), bbox=bbox)
 
 
 def _output_shape(
