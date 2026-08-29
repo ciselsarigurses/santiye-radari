@@ -1,0 +1,63 @@
+{
+  "rapor_tarihi": "2026-08-29",
+  "olusturma": "2026-08-29 18:38 +03",
+  "amac": "24 aday tavanının 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
+  "diagnostik_santiye_olcegi_m2": [
+    800,
+    10000
+  ],
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "son_item": "S2B_T35SMC_20260829T090620_L2A",
+      "durum": "ok",
+      "latest_item": "S2B_T35SMC_20260829T090620_L2A",
+      "aday_tavani": 24,
+      "ham_uygun_aday": 378,
+      "uretim_listesindeki_aday": 23,
+      "tavan_disinda_kalan": 355,
+      "tavana_ulasti": false,
+      "ham_olcek_dagilimi": {
+        "kucuk_250_800": 6,
+        "santiye_olcegi_800_10000": 281,
+        "genis_10000_ustu": 91
+      },
+      "uretim_olcek_dagilimi": {
+        "kucuk_250_800": 6,
+        "santiye_olcegi_800_10000": 0,
+        "genis_10000_ustu": 17
+      },
+      "tavan_disinda_olcek_dagilimi": {
+        "kucuk_250_800": 0,
+        "santiye_olcegi_800_10000": 281,
+        "genis_10000_ustu": 74
+      }
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "son_item": "S2B_T35SMC_20260829T090620_L2A",
+      "durum": "ok",
+      "latest_item": "S2B_T35SMC_20260829T090620_L2A",
+      "aday_tavani": 24,
+      "ham_uygun_aday": 192,
+      "uretim_listesindeki_aday": 18,
+      "tavan_disinda_kalan": 174,
+      "tavana_ulasti": false,
+      "ham_olcek_dagilimi": {
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 144,
+        "genis_10000_ustu": 47
+      },
+      "uretim_olcek_dagilimi": {
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 0,
+        "genis_10000_ustu": 17
+      },
+      "tavan_disinda_olcek_dagilimi": {
+        "kucuk_250_800": 0,
+        "santiye_olcegi_800_10000": 144,
+        "genis_10000_ustu": 30
+      }
+    }
+  }
+}
