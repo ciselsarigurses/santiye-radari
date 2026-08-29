@@ -1,54 +1,8 @@
 {
   "rapor_tarihi": "2026-08-29",
-  "olusturma": "2026-08-29 15:41 +03",
+  "olusturma": "2026-08-29 16:36 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 20 · Geciken kontrol: 5",
   "saha_adaylari": [
-    {
-      "oncelik": "ERKEN",
-      "oncelik_nedeni": "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "mahalle": "Uzunkuyu",
-      "enlem": 38.334813,
-      "boylam": 26.602576,
-      "alan_m2": 800,
-      "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "KUCUK",
-      "bolge": "Uzunkuyu · Germiyan · Ildır",
-      "onceki_tarih": "24.08.2026",
-      "son_tarih": "26.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.334813,26.602576",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "U9DC48A6EA7",
-      "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 1,
-      "gecikmis": false,
-      "uydu_onceligi": "ORTA",
-      "erken_hafriyat": true
-    },
-    {
-      "oncelik": "ERKEN",
-      "oncelik_nedeni": "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "mahalle": "Dalyan",
-      "enlem": 38.355244,
-      "boylam": 26.302251,
-      "alan_m2": 600,
-      "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "KUCUK",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "24.08.2026",
-      "son_tarih": "26.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.355244,26.302251",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "UBC28A80DF1",
-      "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-08-28",
-      "bekleme_gun": 1,
-      "gecikmis": false,
-      "uydu_onceligi": "ORTA",
-      "erken_hafriyat": true
-    },
     {
       "oncelik": "GECİKEN",
       "oncelik_nedeni": "Geniş bitişik zemin/yüzey değişimi.",
@@ -69,6 +23,7 @@
       "ilk_gorulme": "2026-08-27",
       "bekleme_gun": 2,
       "gecikmis": true,
+      "uydu_kanit_yasi_gun": 3,
       "uydu_onceligi": "ORTA"
     },
     {
@@ -91,6 +46,7 @@
       "ilk_gorulme": "2026-08-27",
       "bekleme_gun": 2,
       "gecikmis": true,
+      "uydu_kanit_yasi_gun": 3,
       "uydu_onceligi": "ORTA"
     },
     {
@@ -113,6 +69,7 @@
       "ilk_gorulme": "2026-08-27",
       "bekleme_gun": 2,
       "gecikmis": true,
+      "uydu_kanit_yasi_gun": 3,
       "uydu_onceligi": "ORTA"
     },
     {
@@ -135,6 +92,7 @@
       "ilk_gorulme": "2026-08-27",
       "bekleme_gun": 2,
       "gecikmis": true,
+      "uydu_kanit_yasi_gun": 3,
       "uydu_onceligi": "NORMAL"
     },
     {
@@ -157,6 +115,7 @@
       "ilk_gorulme": "2026-08-27",
       "bekleme_gun": 2,
       "gecikmis": true,
+      "uydu_kanit_yasi_gun": 3,
       "uydu_onceligi": "NORMAL"
     },
     {
@@ -178,7 +137,52 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
       "bekleme_gun": 1,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
+    },
+    {
+      "oncelik": "ORTA",
+      "oncelik_nedeni": "Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "mahalle": "Uzunkuyu",
+      "enlem": 38.334813,
+      "boylam": 26.602576,
+      "alan_m2": 800,
+      "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "KUCUK",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.334813,26.602576",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U9DC48A6EA7",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-28",
+      "bekleme_gun": 1,
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
+    },
+    {
+      "oncelik": "ORTA",
+      "oncelik_nedeni": "Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "mahalle": "Dalyan",
+      "enlem": 38.355244,
+      "boylam": 26.302251,
+      "alan_m2": 600,
+      "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "KUCUK",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.355244,26.302251",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UBC28A80DF1",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-28",
+      "bekleme_gun": 1,
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "BEKLEYEN",
@@ -259,7 +263,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
       "bekleme_gun": 1,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "NORMAL",
@@ -280,7 +285,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
       "bekleme_gun": 1,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "NORMAL",
@@ -301,7 +307,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
       "bekleme_gun": 1,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "NORMAL",
@@ -322,7 +329,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
       "bekleme_gun": 1,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "NORMAL",
@@ -343,7 +351,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
       "bekleme_gun": 1,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "NORMAL",
@@ -364,7 +373,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
       "bekleme_gun": 1,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "NORMAL",
@@ -385,7 +395,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-28",
       "bekleme_gun": 1,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "NORMAL",
@@ -406,7 +417,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-29",
       "bekleme_gun": 0,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "NORMAL",
@@ -427,7 +439,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-29",
       "bekleme_gun": 0,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     },
     {
       "oncelik": "NORMAL",
@@ -448,7 +461,8 @@
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-29",
       "bekleme_gun": 0,
-      "gecikmis": false
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 3
     }
   ],
   "yeni_internet_bulgulari": [],

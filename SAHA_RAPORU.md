@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-29
-**Hazırlanma:** 2026-08-29 15:41 +03
+**Hazırlanma:** 2026-08-29 16:36 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 20 · Geciken kontrol: 5
 
@@ -9,27 +9,7 @@
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
-### 1. ERKEN — Uzunkuyu
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
-- **Koordinat:** `38.334813, 26.602576`
-- **Değişim alanı:** yaklaşık 800 m²
-- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
-- **Sinyal:** Küçük, güçlü yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334813,26.602576)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 2. ERKEN — Dalyan
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Dalyan
-- **Koordinat:** `38.355244, 26.302251`
-- **Değişim alanı:** yaklaşık 600 m²
-- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
-- **Sinyal:** Küçük, güçlü yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.355244,26.302251)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 3. GECİKEN — Ilıca
+### 1. GECİKEN — Ilıca
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ilıca
 - **Koordinat:** `38.297357, 26.355253`
 - **Değişim alanı:** yaklaşık 4.600 m²
@@ -39,7 +19,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297357,26.355253)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 4. GECİKEN — Ovacık
+### 2. GECİKEN — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.263439, 26.318163`
 - **Değişim alanı:** yaklaşık 3.800 m²
@@ -49,7 +29,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263439,26.318163)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 5. GECİKEN — Musalla
+### 3. GECİKEN — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.303146, 26.297443`
 - **Değişim alanı:** yaklaşık 2.000 m²
@@ -59,7 +39,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303146,26.297443)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 6. GECİKEN — Musalla
+### 4. GECİKEN — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.313366, 26.307173`
 - **Değişim alanı:** yaklaşık 1.900 m²
@@ -69,7 +49,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313366,26.307173)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 7. GECİKEN — Musalla
+### 5. GECİKEN — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.301156, 26.304197`
 - **Değişim alanı:** yaklaşık 1.500 m²
@@ -79,7 +59,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301156,26.304197)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 8. ORTA — Uzunkuyu
+### 6. ORTA — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
 - **Koordinat:** `38.333275, 26.652271`
 - **Değişim alanı:** yaklaşık 4.500 m²
@@ -87,6 +67,26 @@
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.333275,26.652271)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 7. ORTA — Uzunkuyu
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
+- **Koordinat:** `38.334813, 26.602576`
+- **Değişim alanı:** yaklaşık 800 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Küçük, güçlü yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334813,26.602576)
+- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
+
+### 8. ORTA — Dalyan
+- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Dalyan
+- **Koordinat:** `38.355244, 26.302251`
+- **Değişim alanı:** yaklaşık 600 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Küçük, güçlü yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.355244,26.302251)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 9. BEKLEYEN — Musalla
