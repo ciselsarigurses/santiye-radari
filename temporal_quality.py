@@ -12,7 +12,6 @@ from temporal_gap_scan import (
 )
 
 
-# Güncel Çeşme analiz zarfı üzerinde tam/kısmi kapsam davranışını test et.
 TEST_BBOX = [26.22, 38.18, 26.53, 38.43]
 FULL_COVER = [26.20, 38.15, 26.56, 38.48]
 PARTIAL_COVER = [26.35, 38.25, 26.56, 38.48]
@@ -35,11 +34,7 @@ def check_fallback_selection():
     primary = _item("primary", "2026-08-24")
     too_recent = _item("recent", "2026-08-21")
     wrong_tile = _item("wrong-tile", "2026-08-18", tile="35SND")
-    partial = _item(
-        "partial-newer",
-        "2026-08-19",
-        footprint=PARTIAL_COVER,
-    )
+    partial = _item("partial-newer", "2026-08-19", footprint=PARTIAL_COVER)
     wrong_orbit = _item("wrong-orbit", "2026-08-18", orbit=36)
     fallback = _item("fallback", "2026-08-17", orbit=7)
     selected = select_fallback(
@@ -54,13 +49,8 @@ def check_fallback_selection():
         "aynı göreli yörünge farklı-yörünge sahnesine tercih edilmeli."
     )
 
-    # Aynı-yörünge yedeği hiç yoksa tamamlayıcı katmanı tamamen kör bırakma;
-    # tam-kapsam aynı-karo farklı-yörünge sahnesine güvenli geri dönüş korunur.
     selected_without_same_orbit = select_fallback(
-        [latest, primary, wrong_orbit],
-        latest,
-        primary,
-        bbox=TEST_BBOX,
+        [latest, primary, wrong_orbit], latest, primary, bbox=TEST_BBOX
     )
     assert selected_without_same_orbit and selected_without_same_orbit["id"] == "wrong-orbit"
 
@@ -68,38 +58,24 @@ def check_fallback_selection():
 def check_transient_classes():
     transient = set(int(value) for value in TRANSIENT_OLDER_CLASSES.tolist())
     excluded = set(int(value) for value in EXCLUDED_CLASSES.tolist())
-    assert {3, 8, 9, 10, 11}.issubset(transient)
+    assert {2, 3, 8, 9, 10, 11}.issubset(transient), (
+        "PB04.00+ SCL2 cast shadow zaman-serisiyle geri kazanılabilir geçici sınıf olmalı."
+    )
+    assert 2 in excluded, "SCL2 doğrudan değişim kanıtında geçerli bırakılmamalı."
+    assert 7 not in excluded, (
+        "PB04.00+ gerçek koyu toprak/dark feature SCL7'ye taşındı; SCL7 yanlışlıkla dışlanmamalı."
+    )
     assert 0 not in transient and 6 not in transient, (
-        "No-data veya su sınıfı daha eski görüntüyle doldurulmamalı; kıyı/granül "
-        "yanlış pozitif riski artar."
+        "No-data veya su sınıfı daha eski görüntüyle doldurulmamalı; kıyı/granül yanlış pozitifi artar."
     )
     assert transient.issubset(excluded)
 
 
 def check_deduplication():
-    existing = [
-        {
-            "enlem": 38.300000,
-            "boylam": 26.300000,
-            "alan_m2": 1200,
-            "boyut_sinifi": "STANDART",
-        }
-    ]
+    existing = [{"enlem": 38.300000, "boylam": 26.300000, "alan_m2": 1200, "boyut_sinifi": "STANDART"}]
     recovered = [
-        {
-            # Yaklaşık 22 m: aynı saha ikinci görev olmamalı.
-            "enlem": 38.300200,
-            "boylam": 26.300000,
-            "alan_m2": 500,
-            "boyut_sinifi": "KUCUK",
-        },
-        {
-            # Yeterince uzakta: bağımsız aday korunmalı.
-            "enlem": 38.302000,
-            "boylam": 26.300000,
-            "alan_m2": 400,
-            "boyut_sinifi": "KUCUK",
-        },
+        {"enlem": 38.300200, "boylam": 26.300000, "alan_m2": 500, "boyut_sinifi": "KUCUK"},
+        {"enlem": 38.302000, "boylam": 26.300000, "alan_m2": 400, "boyut_sinifi": "KUCUK"},
     ]
     merged, additions = merge_candidates(existing, recovered)
     assert DUPLICATE_METERS == 80
@@ -113,9 +89,7 @@ def main():
     check_transient_classes()
     check_deduplication()
     print(
-        "Zaman serisi kalite kontrolü başarılı: geniş Çeşme zarfında 7+ günlük "
-        "tam-kapsam aynı-karo yedeği, aynı göreli yörünge tercihi, yalnız geçici "
-        "bulut/gölge boşluğu ve 80 m mükerrer koruması doğrulandı."
+        "Zaman serisi kalite kontrolü başarılı: SCL2 cast shadow doğrudan analizden dışlandı ve açık sahneyle geri kazanılıyor; tam-kapsam, aynı-yörünge ve 80 m mükerrer korumaları geçerli."
     )
 
 
