@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-29
-**Hazırlanma:** 2026-08-29 14:33 +03
+**Hazırlanma:** 2026-08-29 15:08 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 20 · Geciken kontrol: 5
 
