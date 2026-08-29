@@ -42,8 +42,10 @@ from temporal_gap_scan import (
 )
 
 
-LATEST_CLOUD_GAP_VERSION = "latest-cloud-gap-v1-last-clear-evidence"
-TRANSIENT_LATEST_CLASSES = np.array([3, 8, 9, 10, 11])
+LATEST_CLOUD_GAP_VERSION = "latest-cloud-gap-v2-scl2-cast-shadow"
+# PB04.00+ SCL=2 topografik/cast shadow'dur. En yeni sahnedeki 2 de bulut/gölge
+# gibi geçici körlük sayılır; yalnız primary ve fallback açık olduğunda geri kazanılır.
+TRANSIENT_LATEST_CLASSES = np.array([2, 3, 8, 9, 10, 11])
 
 
 def _item_time(item):
@@ -55,7 +57,7 @@ def _item_date(item):
 
 
 def latest_gap_zone(primary_scl, latest_scl, fallback_scl):
-    """Yalnız en yeni sahnede geçici atmosferik olarak kapanan pikselleri döndürür."""
+    """Yalnız en yeni sahnede geçici atmosferik/gölge kapanması olan pikselleri döndürür."""
     primary_valid = ~np.isin(primary_scl, EXCLUDED_CLASSES)
     fallback_valid = ~np.isin(fallback_scl, EXCLUDED_CLASSES)
     latest_transient = np.isin(latest_scl, TRANSIENT_LATEST_CLASSES)
@@ -113,9 +115,6 @@ def _latest_gap_hotspots(region_key, primary, latest, fallback):
     clear_ndvi = _ndvi(primary_red, primary_nir)
     vegetation_loss = older_ndvi - clear_ndvi
 
-    # Ana motor ve eski-görüntü zaman-serisi katmanıyla aynı spektral eşikler.
-    # Bu katmanın görevi alarmı artırmak değil, yalnız en yeni bulutun kapattığı
-    # alanda daha önce oluşmuş gerçek değişimi gecikmeden görünür tutmaktır.
     soil_signal = (
         gap_zone
         & (vegetation_loss > 0.14)
@@ -270,8 +269,6 @@ def scan_latest_cloud_gaps():
                     ),
                 )
             except Exception as exc:
-                # Tamamlayıcı katman ana radarı düşürmez. Durum yazılmadığı için
-                # geçici STAC/COG hatasında sonraki tarama yeniden dener.
                 errors.append(f"{region_key}: {type(exc).__name__}: {exc}")
 
     if changed:
