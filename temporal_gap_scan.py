@@ -22,17 +22,19 @@ from satellite import (
     SMALL_HOTSPOT_MAX_M2,
     _clean_mask,
     _hotspots,
+    _item_covers_bbox,
     _ndvi,
     _output_shape,
     _read_asset,
     _reflectance,
+    _relative_orbit,
     _search_items,
     sentinel_pair,
 )
 from scanner import connect
 
 
-TEMPORAL_VERSION = "cloud-shadow-gap-v1"
+TEMPORAL_VERSION = "cloud-shadow-gap-v2-full-cover-same-orbit"
 FALLBACK_MIN_GAP_DAYS = 7
 TEMPORAL_ADDITION_LIMIT = 6
 TEMPORAL_SMALL_QUOTA = 3
@@ -61,8 +63,21 @@ def _same_tile(first, second):
     return True
 
 
-def select_fallback(items, latest, primary, minimum_gap_days=FALLBACK_MIN_GAP_DAYS):
-    """Ana eski görüntüden daha derin, mümkünse aynı MGRS karosundaki sahneyi seçer."""
+def select_fallback(
+    items,
+    latest,
+    primary,
+    minimum_gap_days=FALLBACK_MIN_GAP_DAYS,
+    bbox=None,
+):
+    """7+ günlük, tam-kapsam aynı-karo yedeği seç; aynı yörüngeyi tercih et.
+
+    Zaman-serisi katmanı ana motorun bulut/gölge boşluğunu tamamladığı için kısmi
+    bir STAC karosunu yedek kabul etmek sessiz kör alan yaratabilir. Farklı göreli
+    yörünge de bina kenarı/paralaks farkını gerçek zemin değişimi gibi gösterebilir.
+    Bu nedenle yedek sahne analiz kutusunu bütünüyle örtmeli; aynı göreli yörünge
+    mevcutsa daha yeni farklı-yörünge sahnesinin önüne geçmelidir.
+    """
     latest_time = _item_time(latest)
     candidates = []
     for item in items:
@@ -70,10 +85,20 @@ def select_fallback(items, latest, primary, minimum_gap_days=FALLBACK_MIN_GAP_DA
             continue
         if not _same_tile(item, latest):
             continue
+        if bbox is not None and not _item_covers_bbox(item, bbox):
+            continue
         age_days = (latest_time - _item_time(item)).total_seconds() / 86400
         if age_days < minimum_gap_days:
             continue
         candidates.append(item)
+
+    latest_orbit = _relative_orbit(latest)
+    if latest_orbit is not None:
+        same_orbit = [
+            item for item in candidates if _relative_orbit(item) == latest_orbit
+        ]
+        if same_orbit:
+            return same_orbit[0]
     return candidates[0] if candidates else None
 
 
@@ -257,7 +282,12 @@ def scan_temporal_gaps():
                     continue
 
                 items = _search_items(REGIONS[region_key]["bbox"])
-                fallback = select_fallback(items, latest, primary)
+                fallback = select_fallback(
+                    items,
+                    latest,
+                    primary,
+                    bbox=REGIONS[region_key]["bbox"],
+                )
                 if fallback is None:
                     skipped.append(region_key)
                     continue
