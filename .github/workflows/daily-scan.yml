@@ -7,6 +7,7 @@ on:
       - "app.py"
       - "pages/**"
       - "scanner.py"
+      - "source_label_quality.py"
       - "satellite.py"
       - "satellite_quality.py"
       - "temporal_gap_scan.py"
@@ -90,6 +91,9 @@ jobs:
       - name: İnternet taramasını çalıştır
         run: python scanner.py
 
+      - name: İnternet kaynak etiketi kalite kontrolü
+        run: python source_label_quality.py
+
       - name: Taze internet adaylarını kısa süre koru
         run: python retain_recent_candidates.py
 
@@ -149,6 +153,7 @@ jobs:
             python latest_cloud_quality.py
             python field_state_quality.py
             python scanner.py
+            python source_label_quality.py
             python retain_recent_candidates.py
             python refresh_satellite_analysis.py
             python daily_report.py
