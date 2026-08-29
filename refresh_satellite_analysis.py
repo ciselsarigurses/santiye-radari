@@ -80,6 +80,19 @@ def _store_result(connection, report_date, region_key, result, older, latest, ne
     )
 
 
+def _reset_temporal_state_if_present(connection, region_key):
+    """Analiz zarfı/algoritması değişince bulut-gölge yedeğini de bir kez yeniler."""
+    exists = connection.execute(
+        """SELECT 1 FROM sqlite_master
+        WHERE type='table' AND name='uydu_zaman_serisi' LIMIT 1"""
+    ).fetchone()
+    if exists:
+        connection.execute(
+            "DELETE FROM uydu_zaman_serisi WHERE bolge=?",
+            (region_key,),
+        )
+
+
 def refresh_if_needed():
     """Yeni analiz sürümünü mevcut son görüntüye uygular; aynı sürümü tekrarlamaz."""
     ensure_daily_schema()
@@ -129,6 +142,10 @@ def refresh_if_needed():
                     surum=excluded.surum,guncelleme=excluded.guncelleme""",
                     (region_key, ANALYSIS_VERSION, now.isoformat()),
                 )
+                # Zaman-serisi tablosu son Sentinel item + kendi sürümüyle cache'lenir.
+                # Bbox değişip latest item aynı kaldığında eski dar alan "zaten işlendi"
+                # sanılmamalı; yalnız bu bölgenin tamamlayıcı durumunu sıfırla.
+                _reset_temporal_state_if_present(connection, region_key)
                 refreshed.append(
                     (
                         region_key,
