@@ -12,6 +12,7 @@ on:
       - "satellite_quality.py"
       - "candidate_capacity_audit.py"
       - "rebalance_satellite_candidates.py"
+      - "reconcile_selection_tasks.py"
       - "temporal_gap_scan.py"
       - "temporal_quality.py"
       - "latest_cloud_gap_scan.py"
@@ -135,6 +136,9 @@ jobs:
       - name: Günlük rapor kalite kontrolü
         run: python report_quality.py
 
+      - name: Aynı gün seçim dışı kalan dokunulmamış görevleri pasifleştir
+        run: python reconcile_selection_tasks.py
+
       - name: Açık uydu görevlerinin son güvenilir ölçüsünü koru
         run: python hydrate_persisted_satellite_metadata.py
 
@@ -178,6 +182,7 @@ jobs:
             python spatial_quality.py
             python reactivate_current_satellite.py
             python report_quality.py
+            python reconcile_selection_tasks.py
             python hydrate_persisted_satellite_metadata.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
