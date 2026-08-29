@@ -54,12 +54,21 @@ def ensure_state_schema(connection=None):
             connection.close()
 
 
-def satellite_task_id(item):
-    """Yaklaşık 100 m hücreye dayalı, koordinatı açığa çıkarmayan ilk kimlik."""
+def satellite_task_id(item, precision=3):
+    """Uydu görev kimliği üretir; varsayılan eski ~100 m hücreyi korur.
+
+    ``precision=3`` geçmiş görev kimlikleriyle uyumluluk içindir. Aynı gün iki
+    ayrı Sentinel kümesi bu kaba hücreye düştüğünde yalnız çakışan ikinci görev
+    için daha hassas 4-5 ondalık kimlik kullanılır; böylece iki gerçek saha tek
+    görevde ezilmez ve normal centroid kayması yine 80 m eşleştirmeyle korunur.
+    """
     latitude = float(item.get("enlem"))
     longitude = float(item.get("boylam"))
     region = str(item.get("bolge") or "uydu")
-    grid_key = f"{region}|{latitude:.3f}|{longitude:.3f}"
+    precision = max(3, min(int(precision), 6))
+    grid_key = (
+        f"{region}|{latitude:.{precision}f}|{longitude:.{precision}f}"
+    )
     digest = hashlib.sha1(grid_key.encode("utf-8")).hexdigest()[:10].upper()
     return f"U{digest}"
 
@@ -75,8 +84,21 @@ def _distance_m(lat1, lon1, lat2, lon2):
     return math.hypot(north, east)
 
 
-def _nearby_satellite_task(connection, source_key, latitude, longitude):
-    """Yeni görüntüde merkezi biraz kayan aynı saha görevini bulur."""
+def _nearby_satellite_task(
+    connection,
+    source_key,
+    latitude,
+    longitude,
+    excluded_task_ids=None,
+):
+    """Yeni görüntüde merkezi biraz kayan aynı saha görevini bulur.
+
+    Aynı mevcut Sentinel listesinde başka bir kümeye zaten atanmış görevler
+    hariç tutulur. Aksi halde 25-80 m aralığındaki iki ayrı değişim kümesi sırayla
+    işlenirken ikinci küme birincinin görev kimliğini devralıp saha listesinden
+    sessizce kaybolabilir.
+    """
+    excluded_task_ids = {str(value) for value in (excluded_task_ids or ())}
     rows = connection.execute(
         """SELECT gorev_id,enlem,boylam FROM saha_durumlari
         WHERE kaynak='uydu' AND kaynak_kimlik=?
@@ -86,6 +108,9 @@ def _nearby_satellite_task(connection, source_key, latitude, longitude):
     nearest_id = None
     nearest_distance = None
     for task_id, old_latitude, old_longitude in rows:
+        task_id = str(task_id)
+        if task_id in excluded_task_ids:
+            continue
         try:
             distance = _distance_m(
                 latitude,
@@ -96,7 +121,7 @@ def _nearby_satellite_task(connection, source_key, latitude, longitude):
         except (TypeError, ValueError):
             continue
         if nearest_distance is None or distance < nearest_distance:
-            nearest_id = str(task_id)
+            nearest_id = task_id
             nearest_distance = distance
     if nearest_distance is not None and nearest_distance <= SATELLITE_MATCH_METERS:
         return nearest_id
@@ -153,34 +178,116 @@ def _upsert_task(
     return "KONTROLE_GIT"
 
 
+def _existing_satellite_edges(connection, records):
+    """Mevcut görevlerle güncel hotspot'lar arasındaki 80 m eşleşme adaylarını çıkar."""
+    source_keys = sorted({record["source_key"] for record in records})
+    if not source_keys:
+        return []
+
+    placeholders = ",".join("?" for _ in source_keys)
+    rows = connection.execute(
+        f"""SELECT gorev_id,kaynak_kimlik,enlem,boylam FROM saha_durumlari
+        WHERE kaynak='uydu' AND kaynak_kimlik IN ({placeholders})
+        AND enlem IS NOT NULL AND boylam IS NOT NULL""",
+        source_keys,
+    ).fetchall()
+
+    existing = []
+    for task_id, source_key, latitude, longitude in rows:
+        try:
+            existing.append(
+                (
+                    str(task_id),
+                    str(source_key or ""),
+                    float(latitude),
+                    float(longitude),
+                )
+            )
+        except (TypeError, ValueError):
+            continue
+
+    edges = []
+    for record in records:
+        for task_id, source_key, latitude, longitude in existing:
+            if source_key != record["source_key"]:
+                continue
+            distance = _distance_m(
+                record["latitude"],
+                record["longitude"],
+                latitude,
+                longitude,
+            )
+            if distance <= SATELLITE_MATCH_METERS:
+                edges.append((distance, record["index"], task_id))
+    return sorted(edges, key=lambda value: (value[0], value[1], value[2]))
+
+
+def _new_precise_task_id(connection, item, reserved_task_ids):
+    """Yeni görevde 10 m sınıfı kimlik kullan; gerçek hash çakışmasında hassasiyeti artır."""
+    for precision in (4, 5, 6):
+        candidate = satellite_task_id(item, precision=precision)
+        if candidate in reserved_task_ids:
+            continue
+        exists = connection.execute(
+            "SELECT 1 FROM saha_durumlari WHERE gorev_id=?",
+            (candidate,),
+        ).fetchone()
+        if not exists:
+            return candidate
+    raise RuntimeError("Sentinel adayı için benzersiz görev kimliği üretilemedi.")
+
+
 def sync_satellite_tasks(connection, hotspots, report_date):
-    """Günlük uydu adaylarını durum tablosuna ekler; mevcut kararı bozmaz."""
+    """Günlük uydu adaylarını tekil saha görevlerine bağlar; mevcut kararı bozmaz.
+
+    Eşleşme önce bütün mevcut görevler ve bütün güncel hotspot'lar arasında mesafeye
+    göre tek-seferde yapılır. Böylece aynı görüntüde 25-80 m aralığındaki iki ayrı
+    değişim kümesi, liste sırasına bağlı olarak tek 80 m görev kimliğinde ezilmez.
+    Yeni görevler yaklaşık 10 m sınıfındaki 4 ondalık koordinat hash'iyle başlar;
+    eski ~100 m kimlikler mesafe eşleşmesi sayesinde aynen yaşamaya devam eder.
+    """
     ensure_state_schema(connection)
-    decorated = []
-    for item in hotspots:
+    records = []
+    for index, item in enumerate(hotspots):
         try:
             latitude = float(item.get("enlem"))
             longitude = float(item.get("boylam"))
         except (TypeError, ValueError):
             continue
-        source_key = str(item.get("bolge") or "")
-        generated_id = satellite_task_id(item)
-        exact = connection.execute(
-            "SELECT 1 FROM saha_durumlari WHERE gorev_id=?",
-            (generated_id,),
-        ).fetchone()
-        task_id = generated_id if exact else (
-            _nearby_satellite_task(connection, source_key, latitude, longitude)
-            or generated_id
+        records.append(
+            {
+                "index": index,
+                "item": item,
+                "latitude": latitude,
+                "longitude": longitude,
+                "source_key": str(item.get("bolge") or ""),
+            }
         )
+
+    assignments = {}
+    reserved_task_ids = set()
+    for _distance, index, task_id in _existing_satellite_edges(connection, records):
+        if index in assignments or task_id in reserved_task_ids:
+            continue
+        assignments[index] = task_id
+        reserved_task_ids.add(task_id)
+
+    decorated = []
+    for record in records:
+        item = record["item"]
+        task_id = assignments.get(record["index"])
+        if task_id is None:
+            task_id = _new_precise_task_id(connection, item, reserved_task_ids)
+            reserved_task_ids.add(task_id)
+
         status = _upsert_task(
             connection,
             task_id=task_id,
             source="uydu",
-            source_key=source_key,
+            source_key=record["source_key"],
             neighborhood=str(item.get("mahalle") or ""),
-            latitude=latitude,
-            longitude=longitude,
+            latitude=record["latitude"],
+            longitude=record["longitude"],
             seen_at=report_date,
         )
         updated = dict(item)
