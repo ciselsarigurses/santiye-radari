@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-29",
-  "olusturma": "2026-08-29 13:31 +03",
-  "ozet": "İnternet: 1 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 20 · Geciken kontrol: 5",
+  "olusturma": "2026-08-29 14:33 +03",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 20 · Geciken kontrol: 5",
   "saha_adaylari": [
     {
       "oncelik": "GECİKEN",
@@ -447,31 +447,7 @@
       "gecikmis": false
     }
   ],
-  "yeni_internet_bulgulari": [
-    {
-      "proje": "Çeşme’de turizm ruhsatı aldıktan sonra rezidans ve villa satışlarına başlayan Castello Fontana projesinde fiyatlar 780 bin Euro ile 5 milyon Euro arasında değişiyor. Projenin ÇED raporunda inşaat metrekare maliyeti 390 Euro olarak belirleni",
-      "bolge": "Çeşme",
-      "sinyal": "ruhsat, proje, inşaat",
-      "kaynak_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBpSUtxM3NiZmRRY2Y0NDlWV1NEVF9MU0hERnZ5Y1ZqUU5MQnI0cUVvYVg3UE5rbWxNandvanJRRkRna09EOENKMWxhd0xnSUxfb2c?oc=5",
-      "kaynak_tipi": "Google Haberler",
-      "skor": 8,
-      "durum": "KIRMIZI"
-    }
-  ],
-  "oncelikli_internet_firsatlari": [
-    {
-      "proje": "Çeşme’de turizm ruhsatı aldıktan sonra rezidans ve villa satışlarına başlayan Castello Fontana projesinde fiyatlar 780 bin Euro ile 5 milyon Euro arasında değişiyor. Projenin ÇED raporunda inşaat metrekare maliyeti 390 Euro olarak belirleni",
-      "firma": "news.google.com",
-      "bolge": "Çeşme",
-      "sinyal": "ruhsat, proje, inşaat",
-      "kaynak_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBpSUtxM3NiZmRRY2Y0NDlWV1NEVF9MU0hERnZ5Y1ZqUU5MQnI0cUVvYVg3UE5rbWxNandvanJRRkRna09EOENKMWxhd0xnSUxfb2c?oc=5",
-      "kaynak_tipi": "Google Haberler",
-      "skor": 8,
-      "durum": "KIRMIZI",
-      "ilk_gorulme": "2026-08-29 09:38 UTC",
-      "son_gorulme": "2026-08-29 09:38 UTC",
-      "yeni": true
-    }
-  ],
+  "yeni_internet_bulgulari": [],
+  "oncelikli_internet_firsatlari": [],
   "uyari": "Uydu koordinatları yaklaşık değişim merkezidir. Kesin adres/ada-parsel olarak kullanılmamalı; saha kontrolüyle doğrulanmalıdır."
 }
