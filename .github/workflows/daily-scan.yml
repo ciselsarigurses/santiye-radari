@@ -10,6 +10,7 @@ on:
       - "source_label_quality.py"
       - "satellite.py"
       - "satellite_quality.py"
+      - "candidate_capacity_audit.py"
       - "temporal_gap_scan.py"
       - "temporal_quality.py"
       - "latest_cloud_gap_scan.py"
@@ -64,6 +65,9 @@ jobs:
       - name: Uydu kapsama ve 250 m² kalite kontrolü
         run: python satellite_quality.py
 
+      - name: Aday kapasite körlüğü kalite kontrolü
+        run: python candidate_capacity_audit.py --check-only
+
       - name: Zaman serisi bulut-gölge kalite kontrolü
         run: python temporal_quality.py
 
@@ -103,6 +107,9 @@ jobs:
       - name: Günlük uydu ve radar raporunu oluştur
         run: python daily_report.py
 
+      - name: Uydu aday tavanı körlüğünü ölç
+        run: python candidate_capacity_audit.py
+
       - name: Eski görüntü bulut-gölge boşluklarını zaman serisiyle tamamla
         run: python temporal_gap_scan.py
 
@@ -129,7 +136,7 @@ jobs:
 
       - name: Tarama ve rapor sonuçlarını kaydet
         run: |
-          report_files="santiye.db SAHA_RAPORU.md latest_report.json"
+          report_files="santiye.db SAHA_RAPORU.md latest_report.json candidate_capacity_audit.json"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Yeni veya güncellenen bulgu/rapor yok."
             exit 0
@@ -149,6 +156,7 @@ jobs:
             git reset --hard origin/main
             pip install -r requirements.txt
             python satellite_quality.py
+            python candidate_capacity_audit.py --check-only
             python temporal_quality.py
             python latest_cloud_quality.py
             python field_state_quality.py
@@ -157,6 +165,7 @@ jobs:
             python retain_recent_candidates.py
             python refresh_satellite_analysis.py
             python daily_report.py
+            python candidate_capacity_audit.py
             python temporal_gap_scan.py
             python latest_cloud_gap_scan.py
             python carry_forward_satellite_candidates.py
