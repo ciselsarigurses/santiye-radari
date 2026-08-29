@@ -15,7 +15,10 @@ MIN_HOTSPOT_AREA_M2 = 250
 SMALL_HOTSPOT_MAX_M2 = 800
 SMALL_HOTSPOT_MIN_PIXELS = 3
 HOTSPOT_LIMIT = 24
-SMALL_HOTSPOT_QUOTA = 6
+# Yoğun görüntülerde toplam alarm tavanını artırmadan 250-800 m² güçlü küçük
+# sahalara daha fazla yer ayır. 29 Ağustos görüntüsünde iki bölge de 24 aday
+# tavanına ulaştı; çok büyük yüzey kümelerinin küçük hafriyatları kesmesini önle.
+SMALL_HOTSPOT_QUOTA = 12
 TARGET_PIXEL_SIZE_M = 10
 MAX_ANALYSIS_DIMENSION = 2800
 # Sentinel-2 PB04.00+ SCL=2 artık topografik/cast shadow sınıfıdır. Doğrudan
