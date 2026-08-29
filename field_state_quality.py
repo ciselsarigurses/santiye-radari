@@ -5,6 +5,7 @@ from __future__ import annotations
 import sqlite3
 
 from field_state import (
+    COMPLETED_REUSE_METERS,
     SATELLITE_MATCH_METERS,
     _distance_m,
     ensure_state_schema,
@@ -88,13 +89,87 @@ def check_single_centroid_drift_keeps_task():
     connection.close()
 
 
+def check_completed_task_does_not_hide_neighbor():
+    connection = sqlite3.connect(":memory:")
+    ensure_state_schema(connection)
+
+    checked = _item(38.32010, 26.30010)
+    neighbor = _item(38.32040, 26.30010)
+    distance = _distance_m(
+        checked["enlem"], checked["boylam"], neighbor["enlem"], neighbor["boylam"]
+    )
+    assert COMPLETED_REUSE_METERS < distance < SATELLITE_MATCH_METERS
+
+    completed = sync_satellite_tasks(connection, [checked], "2026-08-29")[0]
+    completed_id = completed["gorev_id"]
+    connection.execute(
+        "UPDATE saha_durumlari SET durum='KONTROL_EDILDI',kontrol_sayisi=1 "
+        "WHERE gorev_id=?",
+        (completed_id,),
+    )
+
+    current = sync_satellite_tasks(connection, [neighbor], "2026-08-30")[0]
+    assert current["gorev_id"] != completed_id, (
+        "Kontrol edilmiş uydu görevi 25-80 m uzaktaki yeni hotspot'u yuttu."
+    )
+    assert current["saha_durumu"] == "KONTROLE_GIT", (
+        "Kontrol edilmiş saha yanındaki yeni hotspot saha listesine yeni görev olarak girmedi."
+    )
+    old_row = connection.execute(
+        "SELECT enlem,boylam,durum FROM saha_durumlari WHERE gorev_id=?",
+        (completed_id,),
+    ).fetchone()
+    assert round(float(old_row[0]), 5) == round(checked["enlem"], 5)
+    assert round(float(old_row[1]), 5) == round(checked["boylam"], 5)
+    assert old_row[2] == "KONTROL_EDILDI", (
+        "Yeni komşu hotspot eski tamamlanmış görevin konumunu veya kararını değiştirdi."
+    )
+    assert connection.execute(
+        "SELECT COUNT(*) FROM saha_durumlari WHERE kaynak='uydu'"
+    ).fetchone()[0] == 2
+    connection.close()
+
+
+def check_completed_task_keeps_tiny_centroid_jitter():
+    connection = sqlite3.connect(":memory:")
+    ensure_state_schema(connection)
+
+    checked = _item(38.33010, 26.30010)
+    tiny_shift = _item(38.33020, 26.30010)
+    distance = _distance_m(
+        checked["enlem"], checked["boylam"], tiny_shift["enlem"], tiny_shift["boylam"]
+    )
+    assert distance < COMPLETED_REUSE_METERS
+
+    completed = sync_satellite_tasks(connection, [checked], "2026-08-29")[0]
+    completed_id = completed["gorev_id"]
+    connection.execute(
+        "UPDATE saha_durumlari SET durum='KONTROL_EDILDI',kontrol_sayisi=1 "
+        "WHERE gorev_id=?",
+        (completed_id,),
+    )
+
+    current = sync_satellite_tasks(connection, [tiny_shift], "2026-08-30")[0]
+    assert current["gorev_id"] == completed_id, (
+        "25 m altındaki normal centroid oynaması tamamlanmış aynı saha için yeni görev üretti."
+    )
+    assert current["saha_durumu"] == "KONTROL_EDILDI"
+    assert connection.execute(
+        "SELECT COUNT(*) FROM saha_durumlari WHERE kaynak='uydu'"
+    ).fetchone()[0] == 1
+    connection.close()
+
+
 def main():
     check_close_distinct_hotspots_stay_distinct()
     check_single_centroid_drift_keeps_task()
+    check_completed_task_does_not_hide_neighbor()
+    check_completed_task_keeps_tiny_centroid_jitter()
     print(
         "Saha görev ayrıştırma kalite kontrolü başarılı: 25-80 m yakın iki ayrı "
-        "hotspot tek göreve ezilmiyor; sıra değişse de fiziksel görev kimliği ve "
-        "tek saha centroid kayması korunuyor."
+        "hotspot tek göreve ezilmiyor; açık görevlerde normal centroid kayması "
+        "korunuyor; kontrol edilmiş görevler 25 m dışındaki yeni komşu hotspot'u "
+        "gizlemiyor."
     )
 
 
