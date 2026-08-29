@@ -181,6 +181,30 @@ def check_scene_pair_coverage():
     assert latest_no_orbit["id"] == "latest-no-orbit"
     assert older_no_orbit["id"] == "older-no-orbit"
 
+    # Earth Search'te göreli yörünge ayrı sat:relative_orbit alanı olmadan
+    # Sentinel ürün URI'sindeki _Rxxx_ parçasında gelebilir. Canlı akışta bu
+    # metadata biçimi aynı-yörünge korumasını devre dışı bırakmamalı.
+    product_uri_items = [
+        _fake_item("uri-latest", "2026-08-26T10:00:00Z", full, "35SMC"),
+        _fake_item("uri-different-orbit", "2026-08-24T10:00:00Z", full, "35SMC"),
+        _fake_item("uri-same-orbit", "2026-08-21T10:00:00Z", full, "35SMC"),
+    ]
+    product_uri_items[0]["properties"]["s2:product_uri"] = (
+        "S2A_MSIL2A_20260826T000000_N0511_R036_T35SMC_TEST.SAFE"
+    )
+    product_uri_items[1]["properties"]["s2:product_uri"] = (
+        "S2B_MSIL2A_20260824T000000_N0511_R079_T35SMC_TEST.SAFE"
+    )
+    product_uri_items[2]["properties"]["s2:product_uri"] = (
+        "S2B_MSIL2A_20260821T000000_N0511_R036_T35SMC_TEST.SAFE"
+    )
+    older_uri, latest_uri = _pick_pair(product_uri_items, bbox=target)
+    assert latest_uri["id"] == "uri-latest"
+    assert older_uri["id"] == "uri-same-orbit", (
+        "s2:product_uri içindeki göreli yörünge okunamadı; canlı Earth Search "
+        "verisinde aynı-yörünge koruması sessizce devre dışı kalabilir."
+    )
+
     try:
         _pick_pair(
             [
