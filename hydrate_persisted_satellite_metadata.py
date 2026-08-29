@@ -11,6 +11,11 @@ Açık bir güncel hotspot'u mevcut göreve bağlarken 80 m Sentinel centroid to
 uygundur; ancak eski bir alan/sinyal ölçüsünü göreve geri kopyalamak daha güçlü bir
 iddiadır. Bu nedenle tarihsel metadata eşleşmesi 25 m ile sınırlıdır. Böylece yakın
 iki ayrı parselden komşu şantiyenin eski ölçüsünü yanlış göreve taşıma riski azalır.
+
+Bu dosya aynı zamanda workflow'un son rapor-mutasyon adımıdır. Tarihsel ölçüler geri
+taşındıktan sonra kullanıcıya gerçekten yazılacak nihai saha listesini de doğrular;
+böylece önceki kalite adımlarından sonra oluşabilecek bozuk rota, mükerrer görev,
+250 m² altı uydu ölçüsü veya 25 m'yi aşan tarihsel eşleşme sessizce commit edilmez.
 """
 
 from __future__ import annotations
@@ -29,6 +34,17 @@ from scanner import connect
 
 MATCH_METERS = 25
 HISTORY_ROWS = 30
+MIN_SATELLITE_AREA_M2 = 250
+FINAL_PRIORITIES = {
+    "TEKRAR",
+    "ERKEN",
+    "GECİKEN",
+    "PARSEL",
+    "YÜKSEK",
+    "ORTA",
+    "BEKLEYEN",
+    "NORMAL",
+}
 
 
 def _distance_m(lat1, lon1, lat2, lon2):
@@ -99,6 +115,130 @@ def _historical_match(connection, item, report_date):
     return None
 
 
+def _validate_final_hotspots(hotspots):
+    """Commit edilecek nihai saha listesinin uydu görev bütünlüğünü doğrular."""
+    if not isinstance(hotspots, list):
+        raise AssertionError("Nihai saha adayları liste değil.")
+
+    task_ids = set()
+    satellite_count = 0
+    for index, item in enumerate(hotspots, start=1):
+        if not isinstance(item, dict):
+            raise AssertionError(f"Nihai aday #{index} sözlük değil.")
+
+        priority = str(item.get("oncelik") or "").strip()
+        if priority not in FINAL_PRIORITIES:
+            raise AssertionError(
+                f"Nihai aday #{index}: bilinmeyen saha önceliği {priority!r}."
+            )
+
+        task_id = str(item.get("gorev_id") or "").strip()
+        if task_id:
+            if task_id in task_ids:
+                raise AssertionError(
+                    f"Nihai saha listesinde mükerrer görev kimliği var: {task_id}"
+                )
+            task_ids.add(task_id)
+
+        if not task_id.startswith("U"):
+            continue
+        satellite_count += 1
+
+        latitude = _number(item.get("enlem"))
+        longitude = _number(item.get("boylam"))
+        if latitude is None or longitude is None:
+            raise AssertionError(
+                f"Nihai uydu görevi #{index} ({task_id}): koordinat eksik."
+            )
+        if not (-90 <= latitude <= 90 and -180 <= longitude <= 180):
+            raise AssertionError(
+                f"Nihai uydu görevi #{index} ({task_id}): koordinat geçersiz."
+            )
+
+        route = str(item.get("harita") or "")
+        coordinate_token = f"{latitude:.6f},{longitude:.6f}"
+        if coordinate_token not in route:
+            raise AssertionError(
+                f"Nihai uydu görevi #{index} ({task_id}): rota koordinatla eşleşmiyor."
+            )
+
+        area_m2 = _number(item.get("alan_m2"), 0) or 0
+        if area_m2 < 0 or (0 < area_m2 < MIN_SATELLITE_AREA_M2):
+            raise AssertionError(
+                f"Nihai uydu görevi #{index} ({task_id}): {area_m2:.0f} m²; "
+                f"{MIN_SATELLITE_AREA_M2} m² eşiğinin altında."
+            )
+
+        historical_distance = _number(item.get("tarihsel_esleme_mesafe_m"))
+        if historical_distance is not None and not (
+            0 <= historical_distance <= MATCH_METERS
+        ):
+            raise AssertionError(
+                f"Nihai uydu görevi #{index} ({task_id}): tarihsel ölçü "
+                f"{historical_distance:.1f} m uzaktan taşınmış; sınır {MATCH_METERS} m."
+            )
+
+        signal = str(item.get("sinyal") or "").casefold()
+        historical_or_stale = (
+            "son yeniden analizde tekrar görünmedi" in signal
+            or "son açık kanıt" in signal
+        )
+        if historical_or_stale and priority in {"ERKEN", "PARSEL"}:
+            raise AssertionError(
+                f"Nihai uydu görevi #{index} ({task_id}): tarihsel/eski kanıt "
+                f"yanlışlıkla {priority} önceliğine yükselmiş."
+            )
+
+    return len(hotspots), satellite_count
+
+
+def _final_quality_self_check():
+    valid = [
+        {
+            "oncelik": "ERKEN",
+            "gorev_id": "UTESTCURRENT",
+            "enlem": 38.250000,
+            "boylam": 26.400000,
+            "alan_m2": 600,
+            "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
+            "harita": (
+                "https://www.google.com/maps/dir/?api=1&destination="
+                "38.250000,26.400000"
+            ),
+        },
+        {
+            "oncelik": "GECİKEN",
+            "gorev_id": "UTESTHISTORY",
+            "enlem": 38.300000,
+            "boylam": 26.300000,
+            "alan_m2": 2200,
+            "sinyal": "Son yeniden analizde tekrar görünmedi · Bitişik yüzey/toprak değişimi adayı",
+            "harita": (
+                "https://www.google.com/maps/dir/?api=1&destination="
+                "38.300000,26.300000"
+            ),
+            "tarihsel_esleme_mesafe_m": 24.9,
+        },
+    ]
+    assert _validate_final_hotspots(valid) == (2, 2)
+
+    invalid_distance = [dict(valid[1], gorev_id="UTESTBAD", tarihsel_esleme_mesafe_m=25.1)]
+    try:
+        _validate_final_hotspots(invalid_distance)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("25 m üzerindeki tarihsel metadata eşleşmesi yakalanmadı.")
+
+    invalid_priority = [dict(valid[1], gorev_id="UTESTSTALE", oncelik="ERKEN")]
+    try:
+        _validate_final_hotspots(invalid_priority)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("Eski/tarihsel uydu kanıtının ERKEN yükselmesi yakalanmadı.")
+
+
 def hydrate_report():
     try:
         payload = json.loads(LATEST_REPORT_JSON.read_text(encoding="utf-8"))
@@ -163,12 +303,19 @@ def hydrate_report():
             )
             hydrated += 1
 
+    final_count, satellite_count = _validate_final_hotspots(hotspots)
+    print(
+        "Nihai saha raporu kalite kontrolü başarılı: "
+        f"{final_count} görev, {satellite_count} uydu görevi doğrulandı."
+    )
+
     if hydrated:
         _write_public_report(report_date, created, summary, hotspots, details)
     return hydrated
 
 
 if __name__ == "__main__":
+    _final_quality_self_check()
     count = hydrate_report()
     if count:
         print(f"Açık uydu görevlerinde {count} tarihsel aday ölçüsü rapora geri taşındı.")
