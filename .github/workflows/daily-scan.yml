@@ -17,6 +17,7 @@ on:
       - "temporal_quality.py"
       - "latest_cloud_gap_scan.py"
       - "latest_cloud_quality.py"
+      - "cloud_threshold_audit.py"
       - "spatial_quality.py"
       - "daily_report.py"
       - "report_quality.py"
@@ -75,6 +76,9 @@ jobs:
 
       - name: En yeni görüntü bulut-körlük kalite kontrolü
         run: python latest_cloud_quality.py
+
+      - name: Sentinel global bulut eşiği körlük denetimi
+        run: python cloud_threshold_audit.py
 
       - name: Saha görev ayrıştırma kalite kontrolü
         run: python field_state_quality.py
@@ -167,6 +171,7 @@ jobs:
             python candidate_capacity_audit.py --check-only
             python temporal_quality.py
             python latest_cloud_quality.py
+            python cloud_threshold_audit.py
             python field_state_quality.py
             python scanner.py
             python source_label_quality.py
