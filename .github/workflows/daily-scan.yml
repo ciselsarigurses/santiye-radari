@@ -11,6 +11,8 @@ on:
       - "satellite_quality.py"
       - "temporal_gap_scan.py"
       - "temporal_quality.py"
+      - "latest_cloud_gap_scan.py"
+      - "latest_cloud_quality.py"
       - "spatial_quality.py"
       - "daily_report.py"
       - "report_quality.py"
@@ -63,6 +65,9 @@ jobs:
       - name: Zaman serisi bulut-gölge kalite kontrolü
         run: python temporal_quality.py
 
+      - name: En yeni görüntü bulut-körlük kalite kontrolü
+        run: python latest_cloud_quality.py
+
       - name: Uygulama açılış testi
         if: github.event_name == 'push'
         run: |
@@ -92,6 +97,9 @@ jobs:
 
       - name: Eski görüntü bulut-gölge boşluklarını zaman serisiyle tamamla
         run: python temporal_gap_scan.py
+
+      - name: En yeni görüntü bulut-gölge körlüğünü son açık sahneyle tamamla
+        run: python latest_cloud_gap_scan.py
 
       - name: Yeni görüntü yokken bekleyen uydu aday ayrıntılarını koru
         run: python carry_forward_satellite_candidates.py
@@ -134,11 +142,13 @@ jobs:
             pip install -r requirements.txt
             python satellite_quality.py
             python temporal_quality.py
+            python latest_cloud_quality.py
             python scanner.py
             python retain_recent_candidates.py
             python refresh_satellite_analysis.py
             python daily_report.py
             python temporal_gap_scan.py
+            python latest_cloud_gap_scan.py
             python carry_forward_satellite_candidates.py
             python dedupe_overlap_satellite.py
             python spatial_quality.py
