@@ -23,7 +23,10 @@ MAX_ANALYSIS_DIMENSION = 2400
 REGIONS = {
     "cesme": {
         "label": "Çeşme merkez · Alaçatı · Ilıca",
-        "bbox": [26.25, 38.22, 26.47, 38.43],
+        # Pırlanta/Altınkum'un batısındaki Çiftlik kıyı koridoru 26.25 sınırının
+        # dışında kalıyordu. 26.22 batı sınırı, yaklaşık 2.6 km ek kara koridorunu
+        # 10 m sınıfı analizi bozmadan taramaya dahil eder.
+        "bbox": [26.22, 38.22, 26.47, 38.43],
     },
     "uzunkuyu": {
         "label": "Uzunkuyu · Germiyan · Ildır",
@@ -31,7 +34,7 @@ REGIONS = {
     },
     "all": {
         "label": "Tüm Çeşme + Uzunkuyu",
-        "bbox": [26.25, 38.22, 26.66, 38.43],
+        "bbox": [26.22, 38.22, 26.66, 38.43],
     },
 }
 
