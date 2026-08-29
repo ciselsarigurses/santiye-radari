@@ -17,6 +17,7 @@ on:
       - "daily_report.py"
       - "report_quality.py"
       - "field_state.py"
+      - "field_state_quality.py"
       - "field_outcome.py"
       - "apply_field_status.py"
       - "refresh_satellite_analysis.py"
@@ -67,6 +68,9 @@ jobs:
 
       - name: En yeni görüntü bulut-körlük kalite kontrolü
         run: python latest_cloud_quality.py
+
+      - name: Saha görev ayrıştırma kalite kontrolü
+        run: python field_state_quality.py
 
       - name: Uygulama açılış testi
         if: github.event_name == 'push'
@@ -143,6 +147,7 @@ jobs:
             python satellite_quality.py
             python temporal_quality.py
             python latest_cloud_quality.py
+            python field_state_quality.py
             python scanner.py
             python retain_recent_candidates.py
             python refresh_satellite_analysis.py
