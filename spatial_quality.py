@@ -3,8 +3,10 @@
 Bu kontrol adayları silmez veya önceliğini değiştirmez. Yanlış koordinat, 250 m²
 altı kayıt, bölge dışına taşmış nokta, bozuk rota ya da uydu motoruyla rapor
 önceliği arasındaki tutarsızlıkların canlı rapora sessizce girmesini engeller.
-Yakın mükerrer ve analiz kutusu sınırına yakın adaylar ise gerçek komşu şantiye
-olabileceği için yalnız uyarı olarak raporlanır.
+Yakın mükerrer ve toplam analiz kapsamasının dış sınırına yakın adaylar ise gerçek
+komşu şantiye veya küme kesilmesi riski olabileceği için yalnız uyarı olarak
+raporlanır. Bir bölgenin iç sınırı diğer analiz kutusuyla güvenli biçimde örtüşüyorsa
+kör alan sayılmaz.
 """
 
 from __future__ import annotations
@@ -21,6 +23,7 @@ REGION_LABEL_TO_KEY = {
     REGIONS["cesme"]["label"]: "cesme",
     REGIONS["uzunkuyu"]["label"]: "uzunkuyu",
 }
+ANALYZED_REGION_KEYS = tuple(REGION_LABEL_TO_KEY.values())
 DUPLICATE_WARNING_METERS = 80
 EDGE_WARNING_METERS = 200
 
@@ -58,6 +61,24 @@ def _edge_distance_m(bbox, latitude, longitude):
     return min(distances)
 
 
+def _coverage_edge_distance_m(latitude, longitude):
+    """Noktanın fiilen analiz edilen kutuların birleşik kapsamasındaki kenar payı.
+
+    Çeşme ve Uzunkuyu kutuları 26.45–26.53 E bandında bilinçli olarak örtüşür.
+    Bir aday Uzunkuyu kutusunun batı kenarına 25 m yakın görünse bile Çeşme
+    kutusunun binlerce metre içinde olabilir. Böyle bir iç örtüşme sınırını kör
+    alan diye raporlamak yanlış alarm üretir. Noktayı kapsayan analiz kutuları
+    arasındaki en büyük kenar payını kullanarak yalnız gerçek dış kapsama kenarını
+    uyarırız.
+    """
+    margins = []
+    for region_key in ANALYZED_REGION_KEYS:
+        bbox = REGIONS[region_key]["bbox"]
+        if _inside_bbox(bbox, latitude, longitude):
+            margins.append(_edge_distance_m(bbox, latitude, longitude))
+    return max(margins) if margins else 0.0
+
+
 def _expected_priority(area_m2, size_class, signal):
     strong_small = (
         str(size_class or "").upper() == "KUCUK"
@@ -70,6 +91,25 @@ def _expected_priority(area_m2, size_class, signal):
     if strong_small and area_m2 >= MIN_HOTSPOT_AREA_M2:
         return "ORTA"
     return "NORMAL"
+
+
+def _self_test_coverage_edges():
+    # Canlı raporda görülen örneğe benzer biçimde Uzunkuyu'nun batı iç sınırına
+    # ~25 m yakın bir nokta Çeşme kutusunun güvenli içindedir; kör alan değildir.
+    overlap_point = (38.232526, 26.450286)
+    source_margin = _edge_distance_m(REGIONS["uzunkuyu"]["bbox"], *overlap_point)
+    coverage_margin = _coverage_edge_distance_m(*overlap_point)
+    assert source_margin < 50, "İç örtüşme sınırı test noktası beklenen kenara yakın değil."
+    assert coverage_margin > EDGE_WARNING_METERS, (
+        "Diğer analiz kutusunun sağladığı kapsama payı iç sınırı kurtarmadı."
+    )
+
+    # Güney dış sınırı her iki kutuda da aynıdır; burada gerçekten küme kesilmesi
+    # riski vardır ve birleşik kapsama hesabı bunu gizlememelidir.
+    outer_edge_point = (38.180500, 26.300000)
+    assert _coverage_edge_distance_m(*outer_edge_point) < EDGE_WARNING_METERS, (
+        "Gerçek dış kapsama kenarı yanlışlıkla güvenli sayıldı."
+    )
 
 
 def validate_report(payload):
@@ -107,11 +147,12 @@ def validate_report(payload):
                 f"Aday #{index}: {latitude:.6f},{longitude:.6f} {region_key} analiz kutusunun dışında."
             )
 
-        edge_distance = _edge_distance_m(bbox, latitude, longitude)
+        edge_distance = _coverage_edge_distance_m(latitude, longitude)
         if edge_distance < EDGE_WARNING_METERS:
             warnings.append(
-                f"Aday #{index} analiz sınırına yaklaşık {edge_distance:.0f} m yakın; "
-                "küme kesilmesi ihtimali sonraki görüntüde kontrol edilmeli."
+                f"Aday #{index} toplam analiz kapsamasının dış sınırına yaklaşık "
+                f"{edge_distance:.0f} m yakın; küme kesilmesi ihtimali sonraki "
+                "görüntüde kontrol edilmeli."
             )
 
         size_class = str(item.get("boyut_sinifi") or "").upper()
@@ -167,6 +208,7 @@ def validate_report(payload):
 
 
 def main():
+    _self_test_coverage_edges()
     if not REPORT_FILE.exists():
         raise SystemExit("latest_report.json bulunamadı; mekânsal kalite kontrolü çalıştırılamadı.")
     payload = json.loads(REPORT_FILE.read_text(encoding="utf-8"))
@@ -177,7 +219,7 @@ def main():
         for warning in warnings:
             print(f"- {warning}")
     else:
-        print("Yakın mükerrer veya analiz sınırına aşırı yakın aday görülmedi.")
+        print("Yakın mükerrer veya toplam analiz kapsamasının dış sınırına aşırı yakın aday görülmedi.")
 
 
 if __name__ == "__main__":
