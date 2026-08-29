@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-29",
-  "olusturma": "2026-08-29 07:39 +03",
+  "olusturma": "2026-08-29 08:33 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 20 · Geciken kontrol: 5",
   "saha_adaylari": [
     {
@@ -202,14 +202,14 @@
       "mahalle": "Musalla",
       "enlem": 38.294658,
       "boylam": 26.31156,
-      "alan_m2": 0,
-      "sinyal": "Önceki uydu saha görevi: kontrol bekliyor",
+      "alan_m2": 400,
+      "sinyal": "Son yeniden analizde tekrar görünmedi · Küçük, güçlü yüzey/toprak değişimi adayı",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": null,
-      "son_tarih": null,
+      "onceki_tarih": "24.08.2026",
+      "son_tarih": "26.08.2026",
       "yeni_goruntu": false,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.294658,26.311560",
-      "konum_notu": "Yeni uydu sinyali olmasa da saha kontrolü tamamlanmadığı için aktif listede tutuluyor.",
+      "konum_notu": "Koordinat açık saha görevinin yaklaşık merkezidir. Alan ve sinyal son eşleşen uydu adayından taşınmıştır; son yeniden analizde küme tekrar görünmediği için saha teyidi beklenmektedir.",
       "gorev_id": "U7798D390CA",
       "saha_durumu": "KONTROLE_GIT",
       "takip_gorevi": false,
@@ -222,7 +222,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "boyut_sinifi": "KUCUK",
+      "uydu_onceligi": "ORTA",
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
     },
     {
       "oncelik": "NORMAL",

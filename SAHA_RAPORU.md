@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-29
-**Hazırlanma:** 2026-08-29 07:39 +03
+**Hazırlanma:** 2026-08-29 08:33 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 20 · Geciken kontrol: 5
 
@@ -102,10 +102,10 @@
 ### 10. BEKLEYEN — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.294658, 26.31156`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** Önceki uydu saha görevi: kontrol bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 400 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** Son yeniden analizde tekrar görünmedi · Küçük, güçlü yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294658,26.311560)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
