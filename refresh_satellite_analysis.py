@@ -12,7 +12,7 @@ from scanner import connect
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
 # Böylece aynı Sentinel görüntüsü yeni algoritmayla bir kez yeniden analiz edilir.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-cap24-same-orbit-v10"
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-cap24-same-orbit-uri-v11"
 # Sürüm etiketi, mevcut Sentinel çiftini yeni referans seçimiyle bir kez yeniden işler.
 
 
