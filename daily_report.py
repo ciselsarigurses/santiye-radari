@@ -7,7 +7,26 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from satellite import REGIONS, analyze_sentinel_change, sentinel_pair
+# Uydu modülü rapor üretiminin tamamını veya Streamlit açılışını düşürmemeli.
+# Bir dağıtım sırasında uydu dosyası geçici olarak uyumsuz kalırsa internet,
+# belediye ve saha geçmişi çalışmaya devam eder; uydu bölümleri açık hata döndürür.
+try:
+    from satellite import REGIONS, analyze_sentinel_change, sentinel_pair
+    SATELLITE_IMPORT_ERROR = None
+except ImportError as exc:
+    SATELLITE_IMPORT_ERROR = exc
+    REGIONS = {
+        "cesme": {"label": "Çeşme merkez · Alaçatı · Ilıca"},
+        "uzunkuyu": {"label": "Uzunkuyu · Germiyan · Ildır"},
+    }
+
+    def _satellite_unavailable(*args, **kwargs):
+        raise RuntimeError(
+            "Uydu modülü geçici olarak yüklenemedi; sonraki dağıtımda yeniden denenecek."
+        ) from SATELLITE_IMPORT_ERROR
+
+    sentinel_pair = _satellite_unavailable
+    analyze_sentinel_change = _satellite_unavailable
 from scanner import connect, ensure_schema
 
 
