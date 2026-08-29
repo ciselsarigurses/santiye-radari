@@ -2,8 +2,8 @@
 
 Bu test gerçek Sentinel servisine bağlanmaz. Ama günlük taramanın temel hedeflerini
 korur: Çeşme + Uzunkuyu kapsamasında boşluk oluşmaması, analizin yaklaşık 10 m
-piksel ölçeğinde kalması ve 250 m² sınıfındaki güçlü küçük saha sinyalinin
-algoritma değişiklikleri sırasında yanlışlıkla kaybolmaması.
+piksel ölçeğinde kalması, 250 m² sınıfındaki güçlü küçük saha sinyalinin ve tam
+kapsam Sentinel görüntü çifti seçiminin algoritma değişikliklerinde bozulmaması.
 """
 
 from __future__ import annotations
@@ -19,9 +19,11 @@ from satellite import (
     SMALL_HOTSPOT_MIN_PIXELS,
     SMALL_HOTSPOT_QUOTA,
     TARGET_PIXEL_SIZE_M,
+    SatelliteError,
     _clean_mask,
     _hotspots,
     _output_shape,
+    _pick_pair,
 )
 
 
@@ -43,6 +45,17 @@ def _pixel_area_m2(bbox):
     )
     pixel_height_m = (north - south) * 110570 / height
     return float(pixel_width_m * pixel_height_m), height, width
+
+
+def _fake_item(item_id, timestamp, bbox, tile):
+    return {
+        "id": item_id,
+        "bbox": bbox,
+        "properties": {
+            "datetime": timestamp,
+            "s2:mgrs_tile": tile,
+        },
+    }
 
 
 def check_configuration():
@@ -109,6 +122,41 @@ def check_coverage():
     )
 
 
+def check_scene_pair_coverage():
+    """En yeni kısmi/komşu karo tam bölge görüntüsü diye seçilmesin."""
+    target = [26.25, 38.22, 26.47, 38.43]
+    full = [26.20, 38.18, 26.52, 38.48]
+    partial = [26.40, 38.18, 26.70, 38.48]
+    items = [
+        _fake_item("partial-newest", "2026-08-28T10:00:00Z", partial, "35SNC"),
+        _fake_item("full-latest", "2026-08-26T10:00:00Z", full, "35SMC"),
+        _fake_item("full-wrong-tile", "2026-08-23T10:00:00Z", full, "35SNC"),
+        _fake_item("full-older", "2026-08-22T10:00:00Z", full, "35SMC"),
+    ]
+    older, latest = _pick_pair(items, bbox=target)
+    assert latest["id"] == "full-latest", (
+        "Analiz kutusunu yalnız kısmen örten en yeni Sentinel karosu seçildi."
+    )
+    assert older["id"] == "full-older", (
+        "Eski/yeni Sentinel görüntüleri farklı MGRS karolarından seçildi."
+    )
+
+    try:
+        _pick_pair(
+            [
+                _fake_item("partial", "2026-08-28T10:00:00Z", partial, "35SNC"),
+                _fake_item("only-one-full", "2026-08-25T10:00:00Z", full, "35SMC"),
+            ],
+            bbox=target,
+        )
+    except SatelliteError:
+        pass
+    else:
+        raise AssertionError(
+            "İki tam-kapsam görüntü yokken uydu motoru sessizce kısmi karo kabul etti."
+        )
+
+
 def check_small_site_path():
     # Yaklaşık 10 m piksellerde üç bitişik güçlü piksel ≈ 300 m². Bu, kullanıcının
     # 250 m² minimum hedefinin pratikte yakalanabildiğini garanti eden regresyon testidir.
@@ -165,9 +213,13 @@ def check_candidate_capacity():
 def main():
     check_configuration()
     check_coverage()
+    check_scene_pair_coverage()
     check_small_site_path()
     check_candidate_capacity()
-    print("Uydu kalite kontrolü başarılı: tam zarf kapsaması, 10 m ölçek, 250 m² küçük saha yolu ve yoğun-dönem aday kapasitesi korunuyor.")
+    print(
+        "Uydu kalite kontrolü başarılı: tam zarf ve tam-karo çift kapsamı, 10 m ölçek, "
+        "250 m² küçük saha yolu ve yoğun-dönem aday kapasitesi korunuyor."
+    )
 
 
 if __name__ == "__main__":
