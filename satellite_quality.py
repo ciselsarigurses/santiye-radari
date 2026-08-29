@@ -1,9 +1,10 @@
 """Şantiye Radarı uydu motorunun kritik mekânsal varsayımlarını doğrular.
 
-Bu test gerçek Sentinel servisine bağlanmaz. Ama günlük taramanın temel hedeflerini
+Bu test gerçek Sentinel servisine bağlanmaz. Günlük taramanın temel hedeflerini
 korur: Çeşme + Uzunkuyu kapsamasında boşluk oluşmaması, analizin yaklaşık 10 m
-piksel ölçeğinde kalması, 250 m² sınıfındaki güçlü küçük saha sinyalinin ve tam
-kapsam Sentinel görüntü çifti seçiminin algoritma değişikliklerinde bozulmaması.
+piksel ölçeğinde kalması, 250 m² sınıfındaki güçlü küçük saha sinyalinin, tam
+kapsam Sentinel görüntü çiftinin ve mümkün olduğunda aynı göreli yörünge
+referansının algoritma değişikliklerinde bozulmaması.
 """
 
 from __future__ import annotations
@@ -47,14 +48,17 @@ def _pixel_area_m2(bbox):
     return float(pixel_width_m * pixel_height_m), height, width
 
 
-def _fake_item(item_id, timestamp, bbox, tile):
+def _fake_item(item_id, timestamp, bbox, tile, orbit=None):
+    properties = {
+        "datetime": timestamp,
+        "s2:mgrs_tile": tile,
+    }
+    if orbit is not None:
+        properties["sat:relative_orbit"] = orbit
     return {
         "id": item_id,
         "bbox": bbox,
-        "properties": {
-            "datetime": timestamp,
-            "s2:mgrs_tile": tile,
-        },
+        "properties": properties,
     }
 
 
@@ -100,9 +104,6 @@ def check_coverage():
         + ", ".join(uncovered)
     )
 
-    # Sadece mahalle merkezlerini test etmek kör kıyı şeritlerini kaçırabilir.
-    # Günlük iki tarama kutusunun, tanımlı tüm Çeşme + Uzunkuyu zarfını noktasal
-    # bir ızgara üzerinde eksiksiz kapladığını da doğrula.
     west, south, east, north = REGIONS["all"]["bbox"]
     uncovered_grid = []
     for latitude in np.linspace(south, north, 9):
@@ -114,7 +115,6 @@ def check_coverage():
         f"ilk örnek: {uncovered_grid[0] if uncovered_grid else None}."
     )
 
-    # Çeşme kutusundan Uzunkuyu kutusuna doğu-batı yönünde kör şerit oluşmasın.
     cesme = REGIONS["cesme"]["bbox"]
     uzunkuyu = REGIONS["uzunkuyu"]["bbox"]
     assert cesme[2] >= uzunkuyu[0], (
@@ -123,29 +123,81 @@ def check_coverage():
 
 
 def check_scene_pair_coverage():
-    """En yeni kısmi/komşu karo tam bölge görüntüsü diye seçilmesin."""
+    """Kısmi karo ve farklı göreli yörünge, tercih edilen referans olmasın."""
     target = [26.25, 38.22, 26.47, 38.43]
     full = [26.20, 38.18, 26.52, 38.48]
     partial = [26.40, 38.18, 26.70, 38.48]
     items = [
-        _fake_item("partial-newest", "2026-08-28T10:00:00Z", partial, "35SNC"),
-        _fake_item("full-latest", "2026-08-26T10:00:00Z", full, "35SMC"),
-        _fake_item("full-wrong-tile", "2026-08-23T10:00:00Z", full, "35SNC"),
-        _fake_item("full-older", "2026-08-22T10:00:00Z", full, "35SMC"),
+        _fake_item(
+            "partial-newest",
+            "2026-08-28T10:00:00Z",
+            partial,
+            "35SNC",
+            orbit=79,
+        ),
+        _fake_item(
+            "full-latest",
+            "2026-08-26T10:00:00Z",
+            full,
+            "35SMC",
+            orbit=36,
+        ),
+        _fake_item(
+            "full-different-orbit",
+            "2026-08-24T10:00:00Z",
+            full,
+            "35SMC",
+            orbit=79,
+        ),
+        _fake_item(
+            "full-wrong-tile",
+            "2026-08-23T10:00:00Z",
+            full,
+            "35SNC",
+            orbit=36,
+        ),
+        _fake_item(
+            "full-same-orbit-older",
+            "2026-08-21T10:00:00Z",
+            full,
+            "35SMC",
+            orbit=36,
+        ),
     ]
     older, latest = _pick_pair(items, bbox=target)
     assert latest["id"] == "full-latest", (
         "Analiz kutusunu yalnız kısmen örten en yeni Sentinel karosu seçildi."
     )
-    assert older["id"] == "full-older", (
-        "Eski/yeni Sentinel görüntüleri farklı MGRS karolarından seçildi."
+    assert older["id"] == "full-same-orbit-older", (
+        "Aynı MGRS karosunda daha yeni fakat farklı göreli yörüngedeki görüntü, "
+        "aynı-yörünge referansının önüne geçti."
     )
+
+    no_orbit_items = [
+        _fake_item("latest-no-orbit", "2026-08-26T10:00:00Z", full, "35SMC"),
+        _fake_item("older-no-orbit", "2026-08-24T10:00:00Z", full, "35SMC"),
+    ]
+    older_no_orbit, latest_no_orbit = _pick_pair(no_orbit_items, bbox=target)
+    assert latest_no_orbit["id"] == "latest-no-orbit"
+    assert older_no_orbit["id"] == "older-no-orbit"
 
     try:
         _pick_pair(
             [
-                _fake_item("partial", "2026-08-28T10:00:00Z", partial, "35SNC"),
-                _fake_item("only-one-full", "2026-08-25T10:00:00Z", full, "35SMC"),
+                _fake_item(
+                    "partial",
+                    "2026-08-28T10:00:00Z",
+                    partial,
+                    "35SNC",
+                    orbit=79,
+                ),
+                _fake_item(
+                    "only-one-full",
+                    "2026-08-25T10:00:00Z",
+                    full,
+                    "35SMC",
+                    orbit=36,
+                ),
             ],
             bbox=target,
         )
@@ -158,8 +210,6 @@ def check_scene_pair_coverage():
 
 
 def check_small_site_path():
-    # Yaklaşık 10 m piksellerde üç bitişik güçlü piksel ≈ 300 m². Bu, kullanıcının
-    # 250 m² minimum hedefinin pratikte yakalanabildiğini garanti eden regresyon testidir.
     signal = np.zeros((9, 9), dtype=bool)
     signal[4, 3:6] = True
     cleaned = _clean_mask(signal, small_site_mask=signal)
@@ -177,7 +227,6 @@ def check_small_site_path():
     assert hotspots[0]["boyut_sinifi"] == "KUCUK"
     assert hotspots[0]["alan_m2"] == 300
 
-    # İki piksellik (~200 m²) gürültü ise minimum eşik altındadır ve görev üretmemeli.
     below = np.zeros((9, 9), dtype=bool)
     below[4, 3:5] = True
     cleaned_below = _clean_mask(below, small_site_mask=below)
@@ -192,8 +241,6 @@ def check_small_site_path():
 
 
 def check_candidate_capacity():
-    # Yoğun inşaat döneminde aynı bölgedeki 12'den fazla güçlü küçük adayın sırf
-    # sabit çıktı tavanı nedeniyle sessizce kaybolmadığını doğrula.
     signal = np.zeros((30, 8), dtype=bool)
     for index in range(14):
         row = 1 + index * 2
@@ -217,8 +264,9 @@ def main():
     check_small_site_path()
     check_candidate_capacity()
     print(
-        "Uydu kalite kontrolü başarılı: tam zarf ve tam-karo çift kapsamı, 10 m ölçek, "
-        "250 m² küçük saha yolu ve yoğun-dönem aday kapasitesi korunuyor."
+        "Uydu kalite kontrolü başarılı: tam zarf/tam-karo kapsamı, aynı göreli "
+        "yörünge tercihi, 10 m ölçek, 250 m² küçük saha yolu ve yoğun-dönem "
+        "aday kapasitesi korunuyor."
     )
 
 

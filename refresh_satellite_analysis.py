@@ -12,7 +12,7 @@ from scanner import connect
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
 # Böylece aynı Sentinel görüntüsü yeni algoritmayla bir kez yeniden analiz edilir.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-cap24-v9"
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-east-buffer-cap24-same-orbit-v10"
 
 
 def _ensure_version_table(connection):
@@ -108,7 +108,6 @@ def refresh_if_needed():
                     previous_latest = _previous_latest(connection, region_key, report_date)
                     new_image = int(previous_latest != latest_item)
                 else:
-                    # Aynı gün daha önce oluşmuş raporun yeni-görüntü semantiğini koru.
                     new_image = existing_flag
 
                 result = analyze_sentinel_change(region_key, pair=(older, latest))
@@ -128,10 +127,17 @@ def refresh_if_needed():
                     surum=excluded.surum,guncelleme=excluded.guncelleme""",
                     (region_key, ANALYSIS_VERSION, now.isoformat()),
                 )
-                refreshed.append((region_key, len(result["hotspots"])))
+                refreshed.append(
+                    (
+                        region_key,
+                        len(result["hotspots"]),
+                        result.get("older_relative_orbit"),
+                        result.get("latest_relative_orbit"),
+                        result.get("older_date"),
+                        result.get("latest_date"),
+                    )
+                )
             except Exception as exc:
-                # Sürüm işareti yazılmaz; geçici ağ/uydu hatasında sonraki çalışmada yeniden denenir.
-                # Günlük rapor kendi hata toleransıyla devam edeceği için workflow burada düşürülmez.
                 errors.append(f"{region_key}: {type(exc).__name__}: {exc}")
 
     return refreshed, skipped, errors
@@ -140,7 +146,22 @@ def refresh_if_needed():
 if __name__ == "__main__":
     refreshed, skipped, errors = refresh_if_needed()
     if refreshed:
-        text = ", ".join(f"{region}={count} aday" for region, count in refreshed)
+        text = ", ".join(
+            (
+                f"{region}={count} aday "
+                f"({older_date}→{latest_date}, göreli yörünge "
+                f"{older_orbit if older_orbit is not None else '?'}→"
+                f"{latest_orbit if latest_orbit is not None else '?'})"
+            )
+            for (
+                region,
+                count,
+                older_orbit,
+                latest_orbit,
+                older_date,
+                latest_date,
+            ) in refreshed
+        )
         print(f"Uydu analiz sürümü yenilendi ({ANALYSIS_VERSION}): {text}")
     else:
         print(f"Uydu analiz sürümü güncel ({ANALYSIS_VERSION}); yeniden işleme gerekmedi.")

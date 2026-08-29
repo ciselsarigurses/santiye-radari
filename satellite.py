@@ -1,4 +1,4 @@
-"""Ücretsiz Sentinel-2 görüntülerini bulur ve kaba arazi değişimini karşılaştırır."""
+"""Ücretsiz Sentinel-2 görüntülerini bulur ve arazi değişimini karşılaştırır."""
 
 from __future__ import annotations
 
@@ -14,9 +14,6 @@ EARTH_SEARCH_URL = "https://earth-search.aws.element84.com/v1/search"
 MIN_HOTSPOT_AREA_M2 = 250
 SMALL_HOTSPOT_MAX_M2 = 800
 SMALL_HOTSPOT_MIN_PIXELS = 3
-# Aynı görüntüde 12 adaya tam oturmak sessiz kesilme riski yaratıyordu. Filtreleri
-# gevşetmeden yalnızca çıktı tavanını iki katına çıkarıyoruz; böylece mevcut güçlü
-# 250 m²+ adaylar sırf sıralama kotası yüzünden kaybolmuyor.
 HOTSPOT_LIMIT = 24
 SMALL_HOTSPOT_QUOTA = 6
 TARGET_PIXEL_SIZE_M = 10
@@ -26,15 +23,10 @@ MAX_ANALYSIS_DIMENSION = 2400
 REGIONS = {
     "cesme": {
         "label": "Çeşme merkez · Alaçatı · Ilıca",
-        # Günlük iki bölge birlikte "all" zarfının tamamını kapsar. Kuzey kıyısı
-        # önceki 38.365 sınırında kör kalıyordu; 10 m hedef ölçek korunarak açıldı.
         "bbox": [26.25, 38.22, 26.47, 38.43],
     },
     "uzunkuyu": {
         "label": "Uzunkuyu · Germiyan · Ildır",
-        # 26.64 doğu sınırına 200 m'den yakın gerçek aday gözlendi. Kümenin sınırda
-        # kesilmesini ve hemen doğudaki Uzunkuyu/Urla geçişinin kör kalmasını önlemek
-        # için yaklaşık 1.7 km operasyonel tampon açıldı; 10 m hedef ölçek korunur.
         "bbox": [26.45, 38.22, 26.66, 38.43],
     },
     "all": {
@@ -116,14 +108,39 @@ def _same_mgrs_tile(first, second):
     return True
 
 
-def _pick_pair(items, minimum_gap_days=2, bbox=None):
-    """Aynı tam-kapsam karodan, yeterli zaman aralığı olan görüntü çiftini seçer.
+def _relative_orbit(item):
+    value = item.get("properties", {}).get("sat:relative_orbit")
+    if value is None:
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
 
-    STAC sorgusu analiz kutusuna yalnızca değen komşu Sentinel karolarını da
-    döndürebilir. En yeni kayıt böyle kısmi bir karo olursa onu tüm bölgeye
-    esnetmek sessiz kör alan yaratır. Bbox verildiğinde yalnız analiz kutusunu
-    bütünüyle örten karolar kullanılır ve eski/yeni görüntü aynı MGRS karosundan
-    seçilir.
+
+def _choose_older(candidates, latest_time, minimum_gap_days):
+    """Sıralı adaylarda önce yeterli zaman aralığını, yoksa en yakın tarihi seç."""
+    fallback = None
+    for older in candidates:
+        if fallback is None:
+            fallback = older
+        older_time = datetime.fromisoformat(
+            older["properties"]["datetime"].replace("Z", "+00:00")
+        )
+        if (latest_time - older_time).total_seconds() >= minimum_gap_days * 86400:
+            return older
+    return fallback
+
+
+def _pick_pair(items, minimum_gap_days=2, bbox=None):
+    """Tam-kapsam aynı karodan görüntü çifti seç; aynı göreli yörüngeyi tercih et.
+
+    Aynı MGRS karesi farklı Sentinel göreli yörüngelerinden görüntülenebilir.
+    Farklı bakış geometrileri bina/kenar parallaxı ve aydınlanma farkı üreterek
+    sahte zemin değişimi oluşturabilir. Bu nedenle en yeni görüntünün
+    ``sat:relative_orbit`` bilgisi varsa önce aynı göreli yörüngedeki eski sahne
+    seçilir. Uygun aynı-yörünge sahnesi yoksa taramayı kör bırakmamak için eski
+    aynı-MGRS davranışına güvenli şekilde geri düşülür.
     """
     candidates = list(items)
     if bbox is not None:
@@ -139,20 +156,30 @@ def _pick_pair(items, minimum_gap_days=2, bbox=None):
     latest_time = datetime.fromisoformat(
         latest["properties"]["datetime"].replace("Z", "+00:00")
     )
-    fallback = None
-    for older in candidates[1:]:
-        if not _same_mgrs_tile(older, latest):
-            continue
-        if fallback is None:
-            fallback = older
-        older_time = datetime.fromisoformat(
-            older["properties"]["datetime"].replace("Z", "+00:00")
+    same_tile = [
+        older for older in candidates[1:] if _same_mgrs_tile(older, latest)
+    ]
+    if not same_tile:
+        raise SatelliteError(
+            "Aynı Sentinel karosundan karşılaştırılabilir eski görüntü bulunamadı."
         )
-        if (latest_time - older_time).total_seconds() >= minimum_gap_days * 86400:
-            return older, latest
-    if fallback is not None:
-        return fallback, latest
-    raise SatelliteError("Aynı Sentinel karosundan karşılaştırılabilir eski görüntü bulunamadı.")
+
+    latest_orbit = _relative_orbit(latest)
+    if latest_orbit is not None:
+        same_orbit = [
+            older for older in same_tile
+            if _relative_orbit(older) == latest_orbit
+        ]
+        selected = _choose_older(same_orbit, latest_time, minimum_gap_days)
+        if selected is not None:
+            return selected, latest
+
+    selected = _choose_older(same_tile, latest_time, minimum_gap_days)
+    if selected is not None:
+        return selected, latest
+    raise SatelliteError(
+        "Aynı Sentinel karosundan karşılaştırılabilir eski görüntü bulunamadı."
+    )
 
 
 def sentinel_pair(region_key):
@@ -199,12 +226,6 @@ def _read_asset(item, asset_name, bbox, height, width, resampling_name):
     }
     with rasterio.Env(**environment):
         with rasterio.open(href) as source:
-            # Tüm tarih ve bantları aynı WGS84 hedef ızgarasına yeniden örnekle.
-            # Önceki yöntem UTM penceresini doğrudan diziye sıkıştırıp dizi satırını
-            # enlemle doğrusal eşliyordu; projeksiyon yakınsaması rota noktasını
-            # onlarca metre kaydırabiliyordu ve farklı granüllerde piksel hizasını
-            # garanti etmiyordu. Bu VRT hem değişim maskesini hem koordinatı aynı
-            # coğrafi ızgaraya sabitler.
             with WarpedVRT(
                 source,
                 crs="EPSG:4326",
@@ -270,7 +291,6 @@ def _connected_components(mask):
 
 
 def _retain_components(mask, minimum_pixels):
-    """Yalnızca yeterli sayıda bitişik piksel içeren kümeleri korur."""
     retained = np.zeros(mask.shape, dtype=bool)
     for component in _connected_components(mask):
         if len(component) < minimum_pixels:
@@ -294,9 +314,6 @@ def _clean_mask(mask, small_site_mask=None):
     if small_site_mask is None:
         return majority
 
-    # 10 m piksellerde 250 m² pratikte yaklaşık 3 piksele karşılık gelir.
-    # Genel maskeyi gevşetmek yerine yalnızca daha sert çoklu-spektral koşulu
-    # geçen bitişik 3+ piksellik kümeler korunur; tek/çift piksel gürültüsü elenir.
     strong_small = _retain_components(
         small_site_mask & mask,
         SMALL_HOTSPOT_MIN_PIXELS,
@@ -335,12 +352,7 @@ def _hotspots(
     limit=HOTSPOT_LIMIT,
     small_quota=SMALL_HOTSPOT_QUOTA,
 ):
-    """Bitişik değişim kümelerini saha adaylarına dönüştürür.
-
-    250-800 m² adaylarda yanlış pozitif riskini sınırlamak için kümenin en az
-    yarısının daha güçlü küçük-saha sinyalini taşıması gerekir. Toplam listede
-    küçük adaylar için sınırlı bir kota ayrılır; büyük hareketler ezilmez.
-    """
+    """Bitişik değişim kümelerini saha adaylarına dönüştürür."""
     components = _connected_components(change_mask)
     if not components:
         return []
@@ -369,8 +381,6 @@ def _hotspots(
         representative = pixels[int(np.argmin(distance_to_centroid))]
         row, column = int(representative[0]), int(representative[1])
 
-        # Ortalama koordinat iki ayrı saha arasına düşmesin: rota noktası mutlaka
-        # değişim maskesinin gerçekten işaretlediği bir piksel üzerinde tutulur.
         latitude = north - (row + 0.5) / height * (north - south)
         longitude = west + (column + 0.5) / width * (east - west)
         results.append(
@@ -445,7 +455,6 @@ def analyze_sentinel_change(region_key, pair=None):
         latest, "scl", bbox, height, width, "nearest"
     )[0]
 
-    # SCL: 0 veri yok, 1 doygun, 3 gölge, 6 su, 8-10 bulut, 11 kar.
     excluded_classes = np.array([0, 1, 3, 6, 8, 9, 10, 11])
     valid = ~np.isin(older_scl, excluded_classes)
     valid &= ~np.isin(latest_scl, excluded_classes)
@@ -465,10 +474,6 @@ def analyze_sentinel_change(region_key, pair=None):
         & (rgb_difference > 0.10)
     )
     strong_visual_change = valid & (rgb_difference > 0.24)
-
-    # Küçük alanlarda tek ölçütü gevşetmek yerine üç sinyali de sertleştiriyoruz.
-    # Böylece 250-800 m² sınıfında erken yakalama artarken mevsimsel/görüntü
-    # gürültüsünün saha görevi üretme ihtimali sınırlanıyor.
     small_site_signal = (
         valid
         & (vegetation_loss > 0.20)
@@ -519,4 +524,6 @@ def analyze_sentinel_change(region_key, pair=None):
         ),
         "latest_item": latest["id"],
         "older_item": older["id"],
+        "latest_relative_orbit": _relative_orbit(latest),
+        "older_relative_orbit": _relative_orbit(older),
     }
