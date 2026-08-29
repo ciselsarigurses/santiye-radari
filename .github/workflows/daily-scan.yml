@@ -21,6 +21,7 @@ on:
       - "reactivate_current_satellite.py"
       - "retain_recent_candidates.py"
       - "carry_forward_satellite_candidates.py"
+      - "hydrate_persisted_satellite_metadata.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
       - ".github/workflows/field-status.yml"
@@ -103,6 +104,9 @@ jobs:
       - name: Günlük rapor kalite kontrolü
         run: python report_quality.py
 
+      - name: Açık uydu görevlerinin son güvenilir ölçüsünü koru
+        run: python hydrate_persisted_satellite_metadata.py
+
       - name: Tarama ve rapor sonuçlarını kaydet
         run: |
           report_files="santiye.db SAHA_RAPORU.md latest_report.json"
@@ -135,6 +139,7 @@ jobs:
             python spatial_quality.py
             python reactivate_current_satellite.py
             python report_quality.py
+            python hydrate_persisted_satellite_metadata.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
               echo "Yeniden üretim sonrası kaydedilecek veri değişikliği yok."
