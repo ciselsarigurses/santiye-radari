@@ -102,6 +102,52 @@ def _waiting_days(first_seen, report_date):
     return max((current_date - first_date).days, 0)
 
 
+def _is_early_excavation_candidate(item, waiting_days):
+    """Taze, küçük ve güçlü uydu sinyalini erken hafriyat saha sırasına al."""
+    if int(waiting_days or 0) >= OVERDUE_FIELD_DAYS:
+        return False
+    try:
+        area_m2 = float(item.get("alan_m2") or 0)
+    except (TypeError, ValueError):
+        return False
+    size_class = str(item.get("boyut_sinifi") or "").upper()
+    signal = str(item.get("sinyal") or "").casefold()
+    return (
+        250 <= area_m2 <= 800
+        and size_class == "KUCUK"
+        and "küçük, güçlü" in signal
+        and "son yeniden analizde tekrar görünmedi" not in signal
+    )
+
+
+def _priority_policy_self_check():
+    """Erken-hafriyat önceliğinin alarm üretmeden dar kalmasını regresyonda korur."""
+    fresh_small = {
+        "alan_m2": 600,
+        "boyut_sinifi": "KUCUK",
+        "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
+    }
+    assert _is_early_excavation_candidate(fresh_small, 1)
+    assert not _is_early_excavation_candidate(fresh_small, OVERDUE_FIELD_DAYS)
+    assert not _is_early_excavation_candidate(
+        {**fresh_small, "alan_m2": 900}, 1
+    )
+    assert not _is_early_excavation_candidate(
+        {**fresh_small, "sinyal": "Bitişik yüzey/toprak değişimi adayı"}, 1
+    )
+    assert not _is_early_excavation_candidate(
+        {
+            **fresh_small,
+            "alan_m2": 400,
+            "sinyal": (
+                "Son yeniden analizde tekrar görünmedi · "
+                "Küçük, güçlü yüzey/toprak değişimi adayı"
+            ),
+        },
+        1,
+    )
+
+
 def _task_age_map(connection, task_ids, report_date):
     """Aktif görevlerin ilk görülme ve bekleme süresini tek sorguda getirir."""
     task_ids = sorted({str(task_id) for task_id in task_ids if str(task_id)})
@@ -238,6 +284,16 @@ def _active_hotspots(connection, report_date):
             item["oncelik"] = "TEKRAR"
             item["takip_gorevi"] = True
             item["sinyal"] = "Tekrar saha kontrolü · " + str(item.get("sinyal") or "")
+        elif status == "KONTROLE_GIT" and _is_early_excavation_candidate(
+            item, waiting_days
+        ):
+            item["uydu_onceligi"] = item.get("oncelik")
+            item["oncelik"] = "ERKEN"
+            item["erken_hafriyat"] = True
+            item["oncelik_nedeni"] = (
+                "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali. "
+                + str(item.get("oncelik_nedeni") or "")
+            ).strip()
         elif status == "KONTROLE_GIT" and waiting_days >= OVERDUE_FIELD_DAYS:
             item["uydu_onceligi"] = item.get("oncelik")
             item["oncelik"] = "GECİKEN"
@@ -252,11 +308,12 @@ def _active_hotspots(connection, report_date):
 
     priority = {
         "TEKRAR": 0,
-        "GECİKEN": 1,
-        "YÜKSEK": 2,
-        "ORTA": 3,
-        "BEKLEYEN": 4,
-        "NORMAL": 5,
+        "ERKEN": 1,
+        "GECİKEN": 2,
+        "YÜKSEK": 3,
+        "ORTA": 4,
+        "BEKLEYEN": 5,
+        "NORMAL": 6,
     }
     active.sort(
         key=lambda item: (
@@ -354,6 +411,7 @@ def normalize_daily_report(report_date=None):
 
 
 if __name__ == "__main__":
+    _priority_policy_self_check()
     result = normalize_daily_report()
     if result:
         print(
