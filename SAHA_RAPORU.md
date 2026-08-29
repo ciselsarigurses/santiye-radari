@@ -1,9 +1,9 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-29
-**Hazırlanma:** 2026-08-29 11:38 +03
+**Hazırlanma:** 2026-08-29 12:38 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 20 · Geciken kontrol: 5
+**Özet:** İnternet: 1 yeni aktif bulgu, 0 güncellendi. Instagram: 1 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 20 · Geciken kontrol: 5
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
@@ -211,11 +211,11 @@
 
 ## Bugünün yeni internet / sosyal medya bulguları
 
-Bugün ilk kez bulunan yeni internet sonucu yok.
+- **KIRMIZI · 8 puan · Çeşme:** [Çeşme’de turizm ruhsatı aldıktan sonra rezidans ve villa satışlarına başlayan Castello Fontana projesinde fiyatlar 780 bin Euro ile 5 milyon Euro arasında değişiyor. Projenin ÇED raporunda inşaat metrekare maliyeti 390 Euro olarak belirleni](https://news.google.com/rss/articles/CBMiUkFVX3lxTFBpSUtxM3NiZmRRY2Y0NDlWV1NEVF9MU0hERnZ5Y1ZqUU5MQnI0cUVvYVg3UE5rbWxNandvanJRRkRna09EOENKMWxhd0xnSUxfb2c?oc=5) — ruhsat, proje, inşaat
 
 ## Aktif güçlü internet fırsatları
 
-Şu anda aktif KIRMIZI internet fırsatı yok.
+- **YENİ · KIRMIZI · 8 puan · Çeşme:** [Çeşme’de turizm ruhsatı aldıktan sonra rezidans ve villa satışlarına başlayan Castello Fontana projesinde fiyatlar 780 bin Euro ile 5 milyon Euro arasında değişiyor. Projenin ÇED raporunda inşaat metrekare maliyeti 390 Euro olarak belirleni](https://news.google.com/rss/articles/CBMiUkFVX3lxTFBpSUtxM3NiZmRRY2Y0NDlWV1NEVF9MU0hERnZ5Y1ZqUU5MQnI0cUVvYVg3UE5rbWxNandvanJRRkRna09EOENKMWxhd0xnSUxfb2c?oc=5) — ruhsat, proje, inşaat
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması değildir; yanlış pozitifler saha kontrolüyle elenir.
