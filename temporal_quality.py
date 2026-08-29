@@ -7,6 +7,7 @@ from temporal_gap_scan import (
     DUPLICATE_METERS,
     EXCLUDED_CLASSES,
     FALLBACK_MIN_GAP_DAYS,
+    TEMPORAL_VERSION,
     TRANSIENT_OLDER_CLASSES,
     merge_candidates,
     select_fallback,
@@ -77,15 +78,45 @@ def check_transient_classes():
 
 
 def check_deduplication():
-    existing = [{"enlem": 38.300000, "boylam": 26.300000, "alan_m2": 1200, "boyut_sinifi": "STANDART"}]
+    existing = [
+        {
+            "enlem": 38.300000,
+            "boylam": 26.300000,
+            "alan_m2": 1200,
+            "boyut_sinifi": "STANDART",
+        }
+    ]
     recovered = [
-        {"enlem": 38.300200, "boylam": 26.300000, "alan_m2": 500, "boyut_sinifi": "KUCUK"},
-        {"enlem": 38.302000, "boylam": 26.300000, "alan_m2": 400, "boyut_sinifi": "KUCUK"},
+        # ~22 m: normal 10 m sınıfı centroid kayması; ikinci görev olmamalı.
+        {
+            "enlem": 38.300200,
+            "boylam": 26.300000,
+            "alan_m2": 500,
+            "boyut_sinifi": "KUCUK",
+        },
+        # ~50 m: komşu villa/parsel ölçeği olabilir; artık sessizce ezilmemeli.
+        {
+            "enlem": 38.300450,
+            "boylam": 26.300000,
+            "alan_m2": 450,
+            "boyut_sinifi": "KUCUK",
+        },
+        {
+            "enlem": 38.302000,
+            "boylam": 26.300000,
+            "alan_m2": 400,
+            "boyut_sinifi": "KUCUK",
+        },
     ]
     merged, additions = merge_candidates(existing, recovered)
-    assert DUPLICATE_METERS == 80
-    assert len(merged) == 2 and len(additions) == 1, (
-        "Zaman-serisi katmanı yakın mükerreri ikinci saha görevi yapmamalı."
+    assert DUPLICATE_METERS == 25
+    assert TEMPORAL_VERSION.startswith("cloud-shadow-gap-v4-dedupe25m")
+    assert len(merged) == 3 and len(additions) == 2, (
+        "Zaman-serisi katmanı 25 m içi centroid kaymasını mükerrer saymalı; "
+        "25-80 m bandındaki olası komşu şantiyeyi ise korumalı."
+    )
+    assert any(abs(float(item["enlem"]) - 38.300450) < 1e-9 for item in additions), (
+        "Yaklaşık 50 m uzaktaki ayrı parsel adayı yanlışlıkla mükerrer sayıldı."
     )
 
 
@@ -94,7 +125,7 @@ def main():
     check_transient_classes()
     check_deduplication()
     print(
-        "Zaman serisi kalite kontrolü başarılı: SCL2 cast shadow doğrudan analizden dışlandı ve açık sahneyle geri kazanılıyor; ana/zaman-serisi politika uyumu, tam-kapsam, aynı-yörünge ve 80 m mükerrer korumaları geçerli."
+        "Zaman serisi kalite kontrolü başarılı: SCL2 cast shadow doğrudan analizden dışlandı ve açık sahneyle geri kazanılıyor; ana/zaman-serisi politika uyumu, tam-kapsam, aynı-yörünge ve 25 m mükerrer koruması geçerli; 25-80 m komşu parsel adayları korunuyor."
     )
 
 
