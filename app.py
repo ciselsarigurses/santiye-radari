@@ -11,11 +11,34 @@ from bs4 import BeautifulSoup
 
 from daily_report import ensure_daily_schema
 from scanner import DB, INSTAGRAM_SEARCH_LINKS, connect, ensure_schema, scan_and_store
-from satellite import REGIONS, SatelliteError, analyze_sentinel_change
+# Uydu modülündeki geçici bir dağıtım/import sorunu bütün uygulamayı kapatmasın.
+try:
+    from satellite import REGIONS, SatelliteError, analyze_sentinel_change
+    SATELLITE_IMPORT_ERROR = None
+except ImportError as exc:
+    SATELLITE_IMPORT_ERROR = exc
+    REGIONS = {
+        "cesme": {"label": "Çeşme merkez · Alaçatı · Ilıca"},
+        "uzunkuyu": {"label": "Uzunkuyu · Germiyan · Ildır"},
+    }
+
+    class SatelliteError(RuntimeError):
+        pass
+
+    def analyze_sentinel_change(*args, **kwargs):
+        raise SatelliteError(
+            "Uydu modülü geçici olarak yüklenemedi; lütfen biraz sonra yeniden deneyin."
+        ) from SATELLITE_IMPORT_ERROR
 
 
 st.set_page_config(page_title="Şantiye Radarı", page_icon="📍", layout="wide")
 ensure_daily_schema()
+
+if SATELLITE_IMPORT_ERROR is not None:
+    st.warning(
+        "Uydu modülü geçici olarak yenileniyor. İnternet, belediye ve saha geçmişi "
+        "kullanılabilir; uydu kontrolü kısa süre sonra yeniden açılacaktır."
+    )
 
 SATELLITE_STYLE = (
     "https://raw.githubusercontent.com/ciselsarigurses/santiye-radari/"
