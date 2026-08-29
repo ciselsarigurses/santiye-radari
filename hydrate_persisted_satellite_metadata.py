@@ -3,9 +3,14 @@
 Bir bbox/çözünürlük/algoritma yeniden analizi aynı Sentinel görüntüsünü biraz farklı
 pikselleştirebilir. Saha görevi güvenlik nedeniyle açık tutulurken ``report_quality``
 bu kaydı 0 m² genel bir BEKLEYEN görev olarak gösterir. Bu yardımcı yalnızca açık
-uydu görevlerinde, aynı bölgede ve en fazla 80 m uzakta bulunan son tarihsel uydu
+uydu görevlerinde, aynı bölgede ve en fazla 25 m uzakta bulunan son tarihsel uydu
 adayının alan/sinyal/görüntü aralığını rapora geri taşır. Görevi otomatik olarak
 kapatmaz, yeni aday üretmez ve koordinatı değiştirmez.
+
+Açık bir güncel hotspot'u mevcut göreve bağlarken 80 m Sentinel centroid toleransı
+uygundur; ancak eski bir alan/sinyal ölçüsünü göreve geri kopyalamak daha güçlü bir
+iddiadır. Bu nedenle tarihsel metadata eşleşmesi 25 m ile sınırlıdır. Böylece yakın
+iki ayrı parselden komşu şantiyenin eski ölçüsünü yanlış göreve taşıma riski azalır.
 """
 
 from __future__ import annotations
@@ -22,7 +27,7 @@ from daily_report import (
 from scanner import connect
 
 
-MATCH_METERS = 80
+MATCH_METERS = 25
 HISTORY_ROWS = 30
 
 
@@ -143,6 +148,7 @@ def hydrate_report():
             item["boyut_sinifi"] = size_class or None
             item["onceki_tarih"] = historical.get("onceki_tarih")
             item["son_tarih"] = historical.get("son_tarih")
+            item["tarihsel_esleme_mesafe_m"] = historical.get("mesafe_m")
             item["uydu_onceligi"] = _field_priority(hist_area, size_class, hist_signal)
             item["oncelik_nedeni"] = (
                 "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için "
@@ -151,8 +157,9 @@ def hydrate_report():
             )
             item["konum_notu"] = (
                 "Koordinat açık saha görevinin yaklaşık merkezidir. Alan ve sinyal son "
-                "eşleşen uydu adayından taşınmıştır; son yeniden analizde küme tekrar "
-                "görünmediği için saha teyidi beklenmektedir."
+                "eşleşen uydu adayından en fazla 25 m tarihsel eşleşmeyle taşınmıştır; "
+                "son yeniden analizde küme tekrar görünmediği için saha teyidi "
+                "beklenmektedir."
             )
             hydrated += 1
 
