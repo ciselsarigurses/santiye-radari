@@ -42,7 +42,10 @@ from temporal_gap_scan import (
 )
 
 
-LATEST_CLOUD_GAP_VERSION = "latest-cloud-gap-v2-scl2-cast-shadow"
+# Dedupe politikası temporal_gap_scan.merge_candidates ile ortaktır. Sürüm artışı
+# mevcut Sentinel sahnesini de 25 m eşiğiyle yeniden değerlendirir; böylece daha
+# önce 25-80 m bandında sessizce ezilmiş olası komşu parsel adayları varsa geri gelir.
+LATEST_CLOUD_GAP_VERSION = "latest-cloud-gap-v3-dedupe25m"
 # PB04.00+ SCL=2 topografik/cast shadow'dur. En yeni sahnedeki 2 de bulut/gölge
 # gibi geçici körlük sayılır; yalnız primary ve fallback açık olduğunda geri kazanılır.
 TRANSIENT_LATEST_CLASSES = np.array([2, 3, 8, 9, 10, 11])
@@ -92,8 +95,12 @@ def _latest_gap_hotspots(region_key, primary, latest, fallback):
 
     # En yeni görüntü bu piksellerde kapalıdır. Bu nedenle spektral değişim en yeni
     # görüntüye karşı değil, son açık ana sahneye (primary) karşı ölçülür.
-    fallback_visual = _read_asset(fallback, "visual", bbox, height, width, "bilinear")[:3]
-    primary_visual = _read_asset(primary, "visual", bbox, height, width, "bilinear")[:3]
+    fallback_visual = _read_asset(
+        fallback, "visual", bbox, height, width, "bilinear"
+    )[:3]
+    primary_visual = _read_asset(
+        primary, "visual", bbox, height, width, "bilinear"
+    )[:3]
     fallback_red = _reflectance(
         _read_asset(fallback, "red", bbox, height, width, "bilinear")[0]
     )
