@@ -34,17 +34,17 @@ from satellite import (
 from scanner import connect
 
 
-TEMPORAL_VERSION = "cloud-shadow-gap-v2-full-cover-same-orbit"
+TEMPORAL_VERSION = "cloud-shadow-gap-v3-scl2-cast-shadow"
 FALLBACK_MIN_GAP_DAYS = 7
 TEMPORAL_ADDITION_LIMIT = 6
 TEMPORAL_SMALL_QUOTA = 3
 DUPLICATE_METERS = 80
 
-# Ana eski görüntüde yalnız geçici atmosferik sorunlar için daha eski sahneye düş.
-# Su/no-data/doygun pikseli başka tarihten doldurmak kıyı ve granül sınırı kaynaklı
-# yanlış pozitif üretebileceği için özellikle kapsam dışı bırakılır.
-TRANSIENT_OLDER_CLASSES = np.array([3, 8, 9, 10, 11])
-EXCLUDED_CLASSES = np.array([0, 1, 3, 6, 8, 9, 10, 11])
+# PB04.00+ SCL=2 topografik/cast shadow'dur; gerçek koyu toprak SCL=7'ye taşındı.
+# Bu nedenle 2 ana karşılaştırmada geçersizdir ama açık bir eski/yeni sahne varsa
+# zaman serisiyle geri kazanılabilecek geçici körlük sınıfıdır.
+TRANSIENT_OLDER_CLASSES = np.array([2, 3, 8, 9, 10, 11])
+EXCLUDED_CLASSES = np.array([0, 1, 2, 3, 6, 8, 9, 10, 11])
 
 
 def _item_time(item):
