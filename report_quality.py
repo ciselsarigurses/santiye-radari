@@ -18,6 +18,8 @@ from scanner import connect
 
 OVERDUE_FIELD_DAYS = 2
 EARLY_EVIDENCE_MAX_DAYS = 2
+PARCEL_SCALE_MIN_M2 = 800
+PARCEL_SCALE_MAX_M2 = 2000
 FIELD_OUTCOME_KEYS = (
     "SANTIYE_KAZI",
     "YOL_ALTYAPI",
@@ -148,6 +150,29 @@ def _is_early_excavation_candidate(item, waiting_days, report_date):
     )
 
 
+def _is_fresh_parcel_scale_candidate(item, waiting_days, report_date):
+    """Taze 800–2.000 m² parsel ölçeğini alarm üretmeden saha sırasında öne al."""
+    if int(waiting_days or 0) >= OVERDUE_FIELD_DAYS:
+        return False
+    if not bool(item.get("yeni_goruntu")):
+        return False
+    evidence_age = _evidence_age_days(item.get("son_tarih"), report_date)
+    if evidence_age is None or evidence_age > EARLY_EVIDENCE_MAX_DAYS:
+        return False
+    try:
+        area_m2 = float(item.get("alan_m2") or 0)
+    except (TypeError, ValueError):
+        return False
+    size_class = str(item.get("boyut_sinifi") or "").upper()
+    signal = str(item.get("sinyal") or "").casefold()
+    return (
+        PARCEL_SCALE_MIN_M2 <= area_m2 < PARCEL_SCALE_MAX_M2
+        and size_class != "KUCUK"
+        and "son yeniden analizde tekrar görünmedi" not in signal
+        and "son açık kanıt" not in signal
+    )
+
+
 def _priority_policy_self_check():
     """Erken-hafriyat önceliğinin alarm üretmeden dar ve gerçekten taze kalmasını korur."""
     fresh_small = {
@@ -195,6 +220,27 @@ def _priority_policy_self_check():
         1,
         "2026-08-29",
     ), "Bulut altından daha eski açık kanıt ERKEN diye sunulmamalı."
+
+    fresh_parcel = {
+        "alan_m2": 900,
+        "boyut_sinifi": "STANDART",
+        "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+        "son_tarih": "29.08.2026",
+        "yeni_goruntu": True,
+    }
+    assert _is_fresh_parcel_scale_candidate(fresh_parcel, 0, "2026-08-29")
+    assert _is_fresh_parcel_scale_candidate(
+        {**fresh_parcel, "alan_m2": 800}, 0, "2026-08-29"
+    )
+    assert not _is_fresh_parcel_scale_candidate(
+        {**fresh_parcel, "alan_m2": 2000}, 0, "2026-08-29"
+    )
+    assert not _is_fresh_parcel_scale_candidate(
+        {**fresh_parcel, "son_tarih": "26.08.2026"}, 0, "2026-08-29"
+    )
+    assert not _is_fresh_parcel_scale_candidate(
+        {**fresh_parcel, "yeni_goruntu": False}, 0, "2026-08-29"
+    )
 
 
 def _task_age_map(connection, task_ids, report_date):
@@ -355,6 +401,18 @@ def _active_hotspots(connection, report_date):
                 f"{waiting_days} gündür saha kontrolü bekliyor · "
                 + str(item.get("sinyal") or "")
             )
+        elif status == "KONTROLE_GIT" and _is_fresh_parcel_scale_candidate(
+            item, waiting_days, report_date
+        ):
+            item["uydu_onceligi"] = item.get("oncelik")
+            item["oncelik"] = "PARSEL"
+            item["erken_parsel"] = True
+            item["oncelik_nedeni"] = (
+                "Taze 800–2.000 m² parsel ölçeği: güçlü küçük-saha sınıfı kadar "
+                "kesin değil; ancak erken hafriyat hedefi için çok geniş arazi "
+                "hareketlerinden önce saha kontrolüne alınır. "
+                + str(item.get("oncelik_nedeni") or "")
+            ).strip()
         active.append(item)
 
     active.extend(_persisted_open_tasks(connection, known_task_ids, report_date))
@@ -363,16 +421,21 @@ def _active_hotspots(connection, report_date):
         "TEKRAR": 0,
         "ERKEN": 1,
         "GECİKEN": 2,
-        "YÜKSEK": 3,
-        "ORTA": 4,
-        "BEKLEYEN": 5,
-        "NORMAL": 6,
+        "PARSEL": 3,
+        "YÜKSEK": 4,
+        "ORTA": 5,
+        "BEKLEYEN": 6,
+        "NORMAL": 7,
     }
     active.sort(
         key=lambda item: (
             priority.get(str(item.get("oncelik")), 9),
             -int(item.get("bekleme_gun") or 0),
-            -float(item.get("alan_m2") or 0),
+            (
+                float(item.get("alan_m2") or 0)
+                if str(item.get("oncelik")) == "PARSEL"
+                else -float(item.get("alan_m2") or 0)
+            ),
         )
     )
     return active
