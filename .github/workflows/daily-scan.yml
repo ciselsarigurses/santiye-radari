@@ -150,4 +150,27 @@ jobs:
             fi
           fi
 
-          git push origin HEAD:main
+          # GitHub zaman zaman sunucu tarafında `fatal error in commit_refs` ile
+          # geçici bir ref güncelleme hatası döndürebiliyor. Aynı commit'i en fazla
+          # üç kez yeniden dene; fakat her denemeden önce main'in ilerlemediğini
+          # doğrula. Böylece geçici GitHub hatası raporu kaybettirmez, eşzamanlı
+          # başka bir commit varsa da eski SQLite verisiyle dalın üzerine yazılmaz.
+          push_ok=0
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Push öncesinde main değişti; veri kaybı riskine girmeden sonraki çalışmaya bırakıldı."
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              push_ok=1
+              break
+            fi
+            echo "GitHub push denemesi ${attempt}/3 başarısız; geçici hata için yeniden deneniyor."
+            sleep $((attempt * 2))
+          done
+
+          if [[ "$push_ok" -ne 1 ]]; then
+            echo "Üç güvenli push denemesi de başarısız oldu; veri yerelde kaldı ve sonraki çalışmada yeniden üretilecek."
+            exit 1
+          fi
