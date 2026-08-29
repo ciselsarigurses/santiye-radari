@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-30",
-  "olusturma": "2026-08-30 01:35 +03",
-  "amac": "24 aday tavanının 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini pre-dedupe ölçmek; bu dosya alarm veya saha görevi üretmez.",
+  "olusturma": "2026-08-30 02:30 +03",
+  "amac": "24 aday tavanının ve 8-komşu piksel geometrisinin 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
   "diagnostik_santiye_olcegi_m2": [
     800,
     10000
@@ -17,7 +17,7 @@
       "tavan_sonrasi_aday": 24,
       "raporda_kalan_aday": 24,
       "tavan_disinda_kalan": 354,
-      "tavan_sonrasi_elenen": 6,
+      "ham_secimden_farkli": 6,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
         "kucuk_250_800": 6,
@@ -39,10 +39,73 @@
         "santiye_olcegi_800_10000": 281,
         "genis_10000_ustu": 73
       },
-      "tavan_sonrasi_elenen_olcek_dagilimi": {
+      "ham_secimden_farkli_olcek_dagilimi": {
         "kucuk_250_800": 0,
         "santiye_olcegi_800_10000": 0,
         "genis_10000_ustu": 6
+      },
+      "baglanti_geometrisi": {
+        "sekiz_komsu_gecerli_aday": 378,
+        "dort_komsu_gecerli_aday": 400,
+        "diyagonal_birlesmis_ebeveyn": 20,
+        "ayrisan_kucuk_250_800": 0,
+        "ayrisan_santiye_olcegi_800_10000": 29,
+        "genis_ebeveynden_ayrisan_250_10000": 17,
+        "ornekler": [
+          {
+            "enlem": 38.349636,
+            "boylam": 26.478314,
+            "sekiz_komsu_alan_m2": 7301,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              2800,
+              4500
+            ]
+          },
+          {
+            "enlem": 38.344571,
+            "boylam": 26.475452,
+            "sekiz_komsu_alan_m2": 147614,
+            "dort_komsu_alt_aday_sayisi": 3,
+            "dort_komsu_alt_alanlar_m2": [
+              1200,
+              5100,
+              140513
+            ]
+          },
+          {
+            "enlem": 38.342672,
+            "boylam": 26.496974,
+            "sekiz_komsu_alan_m2": 20702,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              1800,
+              18802
+            ]
+          },
+          {
+            "enlem": 38.337697,
+            "boylam": 26.474994,
+            "sekiz_komsu_alan_m2": 20102,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              2600,
+              17502
+            ]
+          },
+          {
+            "enlem": 38.320241,
+            "boylam": 26.46618,
+            "sekiz_komsu_alan_m2": 87308,
+            "dort_komsu_alt_aday_sayisi": 3,
+            "dort_komsu_alt_alanlar_m2": [
+              3500,
+              25902,
+              57906
+            ]
+          }
+        ],
+        "yorum": "4-komşu değerleri üretim alarmı değildir; yalnız köşeden temasın 8-komşu kümeleri birleştirip birleştirmediğini ölçer."
       }
     },
     "uzunkuyu": {
@@ -55,7 +118,7 @@
       "tavan_sonrasi_aday": 24,
       "raporda_kalan_aday": 18,
       "tavan_disinda_kalan": 168,
-      "tavan_sonrasi_elenen": 11,
+      "ham_secimden_farkli": 11,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
         "kucuk_250_800": 1,
@@ -77,10 +140,71 @@
         "santiye_olcegi_800_10000": 144,
         "genis_10000_ustu": 24
       },
-      "tavan_sonrasi_elenen_olcek_dagilimi": {
+      "ham_secimden_farkli_olcek_dagilimi": {
         "kucuk_250_800": 0,
         "santiye_olcegi_800_10000": 0,
         "genis_10000_ustu": 11
+      },
+      "baglanti_geometrisi": {
+        "sekiz_komsu_gecerli_aday": 192,
+        "dort_komsu_gecerli_aday": 203,
+        "diyagonal_birlesmis_ebeveyn": 10,
+        "ayrisan_kucuk_250_800": 0,
+        "ayrisan_santiye_olcegi_800_10000": 13,
+        "genis_ebeveynden_ayrisan_250_10000": 11,
+        "ornekler": [
+          {
+            "enlem": 38.34458,
+            "boylam": 26.475477,
+            "sekiz_komsu_alan_m2": 144395,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              4500,
+              139095
+            ]
+          },
+          {
+            "enlem": 38.34666,
+            "boylam": 26.479599,
+            "sekiz_komsu_alan_m2": 4300,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              1700,
+              2600
+            ]
+          },
+          {
+            "enlem": 38.342952,
+            "boylam": 26.496775,
+            "sekiz_komsu_alan_m2": 18099,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              7600,
+              10500
+            ]
+          },
+          {
+            "enlem": 38.337707,
+            "boylam": 26.474905,
+            "sekiz_komsu_alan_m2": 19799,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              2500,
+              17299
+            ]
+          },
+          {
+            "enlem": 38.332552,
+            "boylam": 26.487156,
+            "sekiz_komsu_alan_m2": 30999,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              5700,
+              25099
+            ]
+          }
+        ],
+        "yorum": "4-komşu değerleri üretim alarmı değildir; yalnız köşeden temasın 8-komşu kümeleri birleştirip birleştirmediğini ölçer."
       }
     }
   }
