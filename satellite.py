@@ -18,6 +18,11 @@ HOTSPOT_LIMIT = 24
 SMALL_HOTSPOT_QUOTA = 6
 TARGET_PIXEL_SIZE_M = 10
 MAX_ANALYSIS_DIMENSION = 2800
+# Sentinel-2 PB04.00+ SCL=2 artık topografik/cast shadow sınıfıdır. Doğrudan
+# değişim kanıtı sayılmaz; koyu toprak gibi gerçek dark feature pikselleri SCL=7'ye
+# taşındığı için 7 geçerli kalır. Gölge pikselleri zaman-serisi katmanı açık sahneyle
+# ayrıca geri kazanır.
+EXCLUDED_SCL_CLASSES = np.array([0, 1, 2, 3, 6, 8, 9, 10, 11], dtype="uint8")
 
 # Batı, güney, doğu, kuzey (WGS84)
 REGIONS = {
@@ -470,9 +475,8 @@ def analyze_sentinel_change(region_key, pair=None):
         latest, "scl", bbox, height, width, "nearest"
     )[0]
 
-    excluded_classes = np.array([0, 1, 3, 6, 8, 9, 10, 11])
-    valid = ~np.isin(older_scl, excluded_classes)
-    valid &= ~np.isin(latest_scl, excluded_classes)
+    valid = ~np.isin(older_scl, EXCLUDED_SCL_CLASSES)
+    valid &= ~np.isin(latest_scl, EXCLUDED_SCL_CLASSES)
 
     old_rgb = np.moveaxis(older_visual, 0, 2).astype("float32") / 255
     new_rgb = np.moveaxis(latest_visual, 0, 2).astype("float32") / 255
