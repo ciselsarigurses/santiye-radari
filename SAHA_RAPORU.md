@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-30
-**Hazırlanma:** 2026-08-30 22:35 +03
+**Hazırlanma:** 2026-08-30 23:39 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17
 
@@ -17,9 +17,11 @@
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan en güçlü tek örnektir. Amaç sahada bir kez bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı kalibre etmektir.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
 1. **KALİBRASYON — Dalyan** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.323 · RGB Δ 0.136 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.355516,26.300190)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+2. **KALİBRASYON — Ildır** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.263 · RGB Δ 0.160 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.400924,26.621469)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları

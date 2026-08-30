@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-30",
-  "olusturma": "2026-08-30 22:35 +03",
+  "olusturma": "2026-08-30 23:39 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17",
   "saha_adaylari": [
     {
@@ -1645,7 +1645,28 @@
       "son_tarih": "29.08.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.355516,26.300190",
       "kalibrasyon_durumu": "ALARM_DEGIL"
+    },
+    {
+      "mahalle": "Ildır",
+      "enlem": 38.400924,
+      "boylam": 26.621469,
+      "alan_m2": 300,
+      "ortalama_bsi_degisim": 0.2634,
+      "ortalama_rgb_farki": 0.1599,
+      "uzun_kisa_orani": 3.0,
+      "kutu_doluluk_orani": 1.0,
+      "kompaktlik": 0.589,
+      "saha_benzeri_geometri": true,
+      "lineer_geometri_riski": false,
+      "yakindaki_kuru_degisim_120m": 0,
+      "izole_saha_benzeri": true,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.400924,26.621469",
+      "kalibrasyon_durumu": "ALARM_DEGIL"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında tek örnek seçilir."
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir."
 }
