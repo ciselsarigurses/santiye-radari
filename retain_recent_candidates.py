@@ -4,12 +4,19 @@ Ana taramaya ek olarak Çeşme Belediyesi'nin güncel mahalle listesini hedefley
 mevcut sonuçları pasife almayan tamamlayıcı bir internet taraması çalıştırır. Bu
 katman uydu alarmı üretmez; yalnız erken hafriyat/temel sinyallerinin web tarafında
 mahalle adı nedeniyle kaçmasını azaltır.
+
+Google Haberler bazen aylar önce gerçekleşmiş temel atma/hafriyat başlangıcı
+haberlerini yeniden üst sıralara taşıyabiliyor. Erken şantiye hedefi açısından bunlar
+"bugün yeni" değildir. Yayın tarihi açıkça 90 günden eski olan ve geçmişte kalmış
+başlangıç eylemi anlatan sonuçlar ek mahalle taramasında yeniden aktive edilmez.
 """
 
 from __future__ import annotations
 
 import hashlib
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 
 import requests
 
@@ -86,6 +93,18 @@ OFFICIAL_NEIGHBORHOOD_QUERIES = [
     "Ovacık", "Reisdere", "Sakarya", "Şehit Mehmet", "Şifne", "Üniversite", "Yalı",
 ]
 
+STALE_START_EVENT_DAYS = 90
+STALE_START_EVENT_PHRASES = (
+    "temel atma töreni",
+    "temeli atıldı",
+    "temel atıldı",
+    "hafriyat başladı",
+    "hafriyata başlandı",
+    "inşaata başladı",
+    "inşaata başlandı",
+    "şantiye kuruldu",
+)
+
 
 def _configure_specific_locations():
     """Özgül mahalleleri genel 'Çeşme' eşleşmesinden önce değerlendir.
@@ -107,12 +126,80 @@ def _query_for(neighborhood):
     )
 
 
+def _published_age_days(published, now=None):
+    if not published:
+        return None
+    try:
+        published_date = parsedate_to_datetime(published)
+        if published_date.tzinfo is None:
+            published_date = published_date.replace(tzinfo=timezone.utc)
+        reference = now or datetime.now(timezone.utc)
+        return max((reference - published_date).days, 0)
+    except (TypeError, ValueError, OverflowError):
+        return None
+
+
+def _stale_start_event(raw, now=None):
+    """Yayın tarihi açıkça eski ve geçmiş başlangıç eylemi olan haberi tanır."""
+    age_days = _published_age_days(raw.get("published"), now=now)
+    if age_days is None or age_days <= STALE_START_EVENT_DAYS:
+        return False
+    text = scanner._plain(
+        f"{raw.get('title', '')} {raw.get('snippet', '')}"
+    ).casefold()
+    return any(phrase in text for phrase in STALE_START_EVENT_PHRASES)
+
+
+def _deactivate_urls(urls):
+    urls = sorted({str(url or "").strip() for url in urls if str(url or "").strip()})
+    if not urls:
+        return 0
+    placeholders = ",".join("?" for _ in urls)
+    with scanner.connect() as connection:
+        cursor = connection.execute(
+            f"""UPDATE internet_adaylari SET aktif=0
+            WHERE kaynak_tipi IS NOT NULL AND kaynak_url IN ({placeholders})""",
+            urls,
+        )
+        return max(cursor.rowcount or 0, 0)
+
+
+def _self_check():
+    reference = datetime(2026, 8, 30, 12, 0, tzinfo=timezone.utc)
+    assert _stale_start_event(
+        {
+            "title": "Örnek proje temel atma töreni yapıldı",
+            "snippet": "",
+            "published": "Thu, 02 Apr 2026 12:00:00 GMT",
+        },
+        now=reference,
+    )
+    assert not _stale_start_event(
+        {
+            "title": "Örnek proje temel atma töreni yapıldı",
+            "snippet": "",
+            "published": "Sat, 29 Aug 2026 12:00:00 GMT",
+        },
+        now=reference,
+    )
+    assert not _stale_start_event(
+        {
+            "title": "Şantiye çalışmaları sürüyor",
+            "snippet": "",
+            "published": "Thu, 02 Apr 2026 12:00:00 GMT",
+        },
+        now=reference,
+    )
+
+
 def supplemental_neighborhood_scan():
     """Resmi mahallelerin tamamını düşük-riskli ek aramayla tara.
 
     Sonuç depolamada ``deactivate_missing=False`` kullanılır; bu nedenle ana
     taramadaki adayları bu ek tarama görmedi diye kapatmaz. Aynı URL yeniden
     bulunursa daha özgül mahalle etiketi mevcut kayda güvenli biçimde yazılabilir.
+    Yayın tarihi 90 günden eski geçmiş başlangıç haberleri ise gözlemlendiği URL
+    üzerinden ayrıca pasifleştirilir; güncel devam eden şantiye haberleri korunur.
     """
     _configure_specific_locations()
     scanner.ensure_schema()
@@ -127,6 +214,7 @@ def supplemental_neighborhood_scan():
         {"User-Agent": scanner.USER_AGENT, "Accept-Language": "tr-TR,tr;q=0.9"}
     )
     found = {}
+    stale_urls = set()
     errors = []
     jobs = []
 
@@ -142,6 +230,10 @@ def supplemental_neighborhood_scan():
             try:
                 for raw in future.result():
                     url = scanner._canonical_url(raw.get("url", ""))
+                    if _stale_start_event(raw):
+                        if url:
+                            stale_urls.add(url)
+                        continue
                     candidate = scanner._evaluate(
                         raw.get("title", ""),
                         raw.get("snippet", ""),
@@ -170,13 +262,21 @@ def supplemental_neighborhood_scan():
         "updated": updated_count,
         "errors": errors,
         "repaired_labels": repaired_labels,
+        "stale_urls": sorted(stale_urls),
     }
 
 
 def retain_recent_candidates():
-    """Mahalle kapsamasını tamamla ve mevcut tek-tur toleransını koru."""
+    """Mahalle kapsamasını tamamla, eski başlangıç haberini bastır ve toleransı koru."""
+    _self_check()
     supplemental = supplemental_neighborhood_scan()
     retention = scanner.apply_candidate_retention()
+    # Retention bir önceki turda görülen adayı tek tarama boyunca geri açabilir.
+    # Açık yayın tarihiyle eski olduğu bu turda tekrar doğrulanan başlangıç haberi
+    # bu toleranstan sonra yeniden pasifleştirilir.
+    stale_deactivated = _deactivate_urls(supplemental.get("stale_urls", []))
+    supplemental["stale_deactivated"] = stale_deactivated
+    supplemental.pop("stale_urls", None)
     return {"supplemental": supplemental, "retention": retention}
 
 
@@ -188,7 +288,8 @@ if __name__ == "__main__":
         "Resmi mahalle ek taraması: "
         f"{supplemental['found']} uygun sonuç, {supplemental['new']} yeni, "
         f"{supplemental['updated']} güncellendi, "
-        f"{supplemental['repaired_labels']} kaynak etiketi düzeltildi."
+        f"{supplemental['repaired_labels']} kaynak etiketi düzeltildi; "
+        f"{supplemental['stale_deactivated']} eski başlangıç haberi pasifleştirildi."
     )
     if supplemental["errors"]:
         print(
