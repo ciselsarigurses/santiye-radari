@@ -6,7 +6,13 @@ ana motorun aynı görüntüde ürettiği tüm geçerli kümeler arasından 24 k
 ayırır ve kalan kapasiteyi geniş değişimlere bırakır. Şantiye ölçeği kotasının bir
 bölümü bandın küçük ucundan seçilerek erken hafriyat adaylarının 9-10 bin m²'lik
 kümeler tarafından tamamen gömülmesi önlenir; kotanın kalan kısmı büyük uçtan seçilir.
-Toplam aday tavanı artmaz.
+
+8-komşuluk nedeniyle 10.000 m² üzerindeki geniş bir kümeye yalnız köşeden bağlanan
+800-10.000 m²'lik küçük bir yan küme varsa ve geniş kümenin 4-komşu ana gövdesi hâlâ
+10.000 m² üzerindeyse bu yan parça ayrıca ölçülür. Yan parçanın ebeveynin en fazla
+%35'i olması gerekir; böylece tek bir gerçek hafriyatın iki benzer yarıya bölünmesi
+engellenir. Toplam 24 aday ve 6 şantiye-ölçeği kotası artmaz; bu tür gömülü parseller
+için en fazla 1 şantiye-ölçeği yeri ayrılır.
 
 Seçim yalnız yeni Sentinel görüntüsü geldiğinde veya bu seçimin sürümü değiştiğinde
 uygulanır. Böylece daha sonraki zaman-serisi/bulut tamamlama adayları aynı görüntüde
@@ -19,17 +25,22 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 
+import numpy as np
+
 import satellite
 from daily_report import ISTANBUL, REPORT_REGIONS, build_daily_report, ensure_daily_schema
 from scanner import connect
 
 
-SELECTION_VERSION = "construction-scale-quota-v2"
+SELECTION_VERSION = "construction-scale-quota-v3-diagonal-sidecar"
 RAW_LIMIT = 1_000_000
 CONSTRUCTION_SCALE_MIN_M2 = satellite.SMALL_HOTSPOT_MAX_M2
 CONSTRUCTION_SCALE_MAX_M2 = 10_000
 CONSTRUCTION_SCALE_QUOTA = 6
 CONSTRUCTION_EARLY_QUOTA = 3
+DIAGONAL_SIDECAR_QUOTA = 1
+DIAGONAL_SIDECAR_MAX_PARENT_FRACTION = 0.35
+DIAGONAL_SIDECAR_TAG = "DIYAGONAL_YAN_KUME"
 _ORIGINAL_HOTSPOTS = satellite._hotspots
 
 
@@ -51,6 +62,110 @@ def _candidate_key(item):
         return None
 
 
+def _four_connected_components(mask):
+    """Yalnız kenardan temas eden pikselleri aynı kümede tutar."""
+    rows, columns = np.nonzero(mask)
+    if not len(rows):
+        return []
+
+    height, width = mask.shape
+    visited = np.zeros(mask.shape, dtype=bool)
+    neighbors = ((-1, 0), (0, -1), (0, 1), (1, 0))
+    components = []
+    for seed_row, seed_col in zip(rows.tolist(), columns.tolist()):
+        if visited[seed_row, seed_col]:
+            continue
+        visited[seed_row, seed_col] = True
+        stack = [(seed_row, seed_col)]
+        component = []
+        while stack:
+            row, column = stack.pop()
+            component.append((row, column))
+            for row_offset, col_offset in neighbors:
+                next_row = row + row_offset
+                next_col = column + col_offset
+                if not (0 <= next_row < height and 0 <= next_col < width):
+                    continue
+                if not mask[next_row, next_col] or visited[next_row, next_col]:
+                    continue
+                visited[next_row, next_col] = True
+                stack.append((next_row, next_col))
+        components.append(component)
+    return components
+
+
+def _component_candidate(component, bbox, shape, pixel_area_m2):
+    pixels = np.asarray(component, dtype="int32")
+    centroid = pixels.mean(axis=0)
+    representative = pixels[int(np.argmin(np.sum((pixels - centroid) ** 2, axis=1)))]
+    row, column = int(representative[0]), int(representative[1])
+    height, width = shape
+    west, south, east, north = bbox
+    latitude = north - (row + 0.5) / height * (north - south)
+    longitude = west + (column + 0.5) / width * (east - west)
+    return {
+        "mahalle": satellite._nearest_place(latitude, longitude),
+        "enlem": round(latitude, 6),
+        "boylam": round(longitude, 6),
+        "alan_m2": round(len(component) * pixel_area_m2),
+        "sinyal": (
+            "Geniş değişim kümesine yalnız köşeden bağlı parsel ölçekli "
+            "yüzey/toprak değişimi adayı"
+        ),
+        "boyut_sinifi": "STANDART",
+        "geometri_kaynagi": DIAGONAL_SIDECAR_TAG,
+    }
+
+
+def _diagonal_sidecar_candidates(change_mask, bbox, pixel_area_m2):
+    """Geniş 8-komşu kümenin içine gömülen küçük 4-komşu parsel parçalarını çıkarır."""
+    eight_components = satellite._connected_components(change_mask)
+    if not eight_components:
+        return []
+    four_components = _four_connected_components(change_mask)
+
+    parent_by_pixel = {}
+    parent_areas = {}
+    for parent_index, component in enumerate(eight_components):
+        parent_area = len(component) * pixel_area_m2
+        if parent_area <= CONSTRUCTION_SCALE_MAX_M2:
+            continue
+        parent_areas[parent_index] = parent_area
+        for pixel in component:
+            parent_by_pixel[pixel] = parent_index
+
+    children_by_parent = {}
+    for component in four_components:
+        parent_index = parent_by_pixel.get(component[0])
+        if parent_index is None:
+            continue
+        children_by_parent.setdefault(parent_index, []).append(component)
+
+    sidecars = []
+    for parent_index, children in children_by_parent.items():
+        if len(children) < 2:
+            continue
+        parent_area = parent_areas[parent_index]
+        child_areas = [len(component) * pixel_area_m2 for component in children]
+        # En az bir ana gövde hâlâ geniş sınıfta kalmalı. Bu şart, 7-8 bin m² gibi
+        # tek bir şantiye kümesinin iki orta parçaya bölünüp çoğalmasını engeller.
+        if not any(area > CONSTRUCTION_SCALE_MAX_M2 for area in child_areas):
+            continue
+        for component, child_area in zip(children, child_areas):
+            if not (
+                CONSTRUCTION_SCALE_MIN_M2
+                <= child_area
+                <= CONSTRUCTION_SCALE_MAX_M2
+            ):
+                continue
+            if child_area / parent_area > DIAGONAL_SIDECAR_MAX_PARENT_FRACTION:
+                continue
+            sidecars.append(
+                _component_candidate(component, bbox, change_mask.shape, pixel_area_m2)
+            )
+    return sidecars
+
+
 def _uncapped_hotspots(
     change_mask,
     bbox,
@@ -60,7 +175,7 @@ def _uncapped_hotspots(
     small_quota=satellite.SMALL_HOTSPOT_QUOTA,
 ):
     del limit, small_quota
-    return _ORIGINAL_HOTSPOTS(
+    base = _ORIGINAL_HOTSPOTS(
         change_mask,
         bbox,
         pixel_area_m2,
@@ -68,6 +183,8 @@ def _uncapped_hotspots(
         limit=RAW_LIMIT,
         small_quota=0,
     )
+    sidecars = _diagonal_sidecar_candidates(change_mask, bbox, pixel_area_m2)
+    return base + sidecars
 
 
 def _uncapped_analysis(region_key, pair):
@@ -85,6 +202,7 @@ def _balanced_select(
     small_quota=satellite.SMALL_HOTSPOT_QUOTA,
     construction_quota=CONSTRUCTION_SCALE_QUOTA,
     construction_early_quota=CONSTRUCTION_EARLY_QUOTA,
+    diagonal_sidecar_quota=DIAGONAL_SIDECAR_QUOTA,
 ):
     """Toplam tavanı büyütmeden küçük + şantiye ölçeği + geniş denge seçimi yap."""
     ranked = sorted(
@@ -106,14 +224,40 @@ def _balanced_select(
     ]
     wide = [item for item in ranked if _area(item) > CONSTRUCTION_SCALE_MAX_M2]
 
+    sidecars = [
+        item for item in construction
+        if item.get("geometri_kaynagi") == DIAGONAL_SIDECAR_TAG
+    ]
+    regular_construction = [
+        item for item in construction
+        if item.get("geometri_kaynagi") != DIAGONAL_SIDECAR_TAG
+    ]
+
     selected = []
     selected.extend(small[: min(max(int(small_quota), 0), limit)])
 
     remaining = limit - len(selected)
     construction_slots = min(max(int(construction_quota), 0), remaining)
-    early_slots = min(max(int(construction_early_quota), 0), construction_slots)
+
+    sidecar_slots = min(
+        max(int(diagonal_sidecar_quota), 0),
+        construction_slots,
+        len(sidecars),
+    )
+    sidecar_selected = sorted(
+        sidecars,
+        key=lambda item: (
+            _area(item),
+            float(item.get("enlem") or 0),
+            float(item.get("boylam") or 0),
+        ),
+    )[:sidecar_slots]
+    selected.extend(sidecar_selected)
+
+    regular_slots = construction_slots - len(sidecar_selected)
+    early_slots = min(max(int(construction_early_quota), 0), regular_slots)
     construction_asc = sorted(
-        construction,
+        regular_construction,
         key=lambda item: (
             _area(item),
             float(item.get("enlem") or 0),
@@ -123,13 +267,13 @@ def _balanced_select(
     early_selected = construction_asc[:early_slots]
     selected.extend(early_selected)
 
-    remaining_construction_slots = construction_slots - len(early_selected)
+    remaining_construction_slots = regular_slots - len(early_selected)
     if remaining_construction_slots > 0:
         early_keys = {
             key for key in map(_candidate_key, early_selected) if key is not None
         }
         upper_construction = [
-            item for item in construction
+            item for item in regular_construction
             if (key := _candidate_key(item)) is not None and key not in early_keys
         ]
         selected.extend(upper_construction[:remaining_construction_slots])
@@ -164,11 +308,12 @@ def _bucket_counts(items):
 
 
 def _self_check():
-    def item(index, area):
+    def item(index, area, **extra):
         return {
             "enlem": 38.20 + index * 0.0001,
             "boylam": 26.30 + index * 0.0001,
             "alan_m2": area,
+            **extra,
         }
 
     synthetic = []
@@ -185,6 +330,46 @@ def _self_check():
         if CONSTRUCTION_SCALE_MIN_M2 <= _area(candidate) <= CONSTRUCTION_SCALE_MAX_M2
     )
     assert construction_areas == [1000, 1500, 2000, 5500, 6000, 6500], construction_areas
+
+    with_sidecar = list(synthetic)
+    with_sidecar.append(
+        item(90, 1200, geometri_kaynagi=DIAGONAL_SIDECAR_TAG)
+    )
+    sidecar_selected = _balanced_select(with_sidecar)
+    selected_sidecars = [
+        candidate for candidate in sidecar_selected
+        if candidate.get("geometri_kaynagi") == DIAGONAL_SIDECAR_TAG
+    ]
+    assert len(sidecar_selected) == satellite.HOTSPOT_LIMIT
+    assert len(selected_sidecars) == 1, selected_sidecars
+    assert _bucket_counts(sidecar_selected) == {
+        "kucuk": 6,
+        "santiye_olcegi": 6,
+        "genis": 12,
+    }
+
+    # 11.000 m² ana gövdeye yalnız köşeden bağlı 1.200 m² yan küme, tek geniş
+    # 8-komşu ebeveyn içinden kontrollü bir parsel adayı olarak ayrışmalı.
+    diagonal = np.zeros((18, 18), dtype=bool)
+    diagonal[1:12, 1:11] = True  # 110 piksel = 11.000 m²
+    diagonal[12:15, 11:15] = True  # 12 piksel = 1.200 m², yalnız diyagonal temas
+    geometry_candidates = _diagonal_sidecar_candidates(
+        diagonal,
+        [26.30, 38.20, 26.32, 38.22],
+        100.0,
+    )
+    assert len(geometry_candidates) == 1, geometry_candidates
+    assert geometry_candidates[0]["alan_m2"] == 1200, geometry_candidates
+
+    # Ana gövdesi >10.000 m² kalmayan benzer iki orta parça ayrıştırılmamalı.
+    balanced_split = np.zeros((18, 18), dtype=bool)
+    balanced_split[1:7, 1:11] = True  # 6.000 m²
+    balanced_split[7:12, 11:21 if balanced_split.shape[1] > 21 else 18] = False
+    assert not _diagonal_sidecar_candidates(
+        balanced_split,
+        [26.30, 38.20, 26.32, 38.22],
+        100.0,
+    )
 
     scarce = [item(100, 300), item(101, 1500)]
     scarce.extend(item(110 + i, 12000 + i * 1000) for i in range(30))
