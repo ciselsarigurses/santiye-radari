@@ -1,20 +1,21 @@
 """Aktif saha görevlerinden günün ilk üç kontrolünü raporda görünür kılar.
 
 Bu katman yeni alarm üretmez, görev açmaz/kapatmaz ve Sentinel eşiklerini değiştirmez.
-``report_quality.py`` ve kalıcı uydu metadata hidrasyonu sonrasında oluşan sıralı aktif
-saha listesinin ilk üç eyleme dönük kaydını ayrı bir yönetim kısa listesi olarak yazar.
-Mevcut kalite sırası mümkün olduğunca korunur; hem Çeşme hem Uzunkuyu tarafında aktif
-uydu görevi varsa üç kişilik listede en az bir yer doğu-batı kapsama dengesi için
-karşı bölgeye ayrılır. Böylece onlarca açık görev varken sabah saha ekibine verilecek
-ilk işler net kalır ve tek analiz kutusunda yığılma nedeniyle diğer yarımada tarafı
-operasyonel olarak kör kalmaz.
+Tam saha listesi aynen korunur. Kısa liste ise erken hafriyat hedefine göre operasyonel
+olarak yeniden sıralanır: insan tarafından istenen tekrar kontrol ve taze ERKEN sinyali
+en üstte kalır; taze 800–2.000 m² PARSEL adayı gecikmiş eski kuyruğun önüne geçer.
+GECİKEN görevlerde 250–800 m² küçük-güçlü adaylar, sonra 800–2.000 m² parsel ölçeği,
+ardından daha geniş yüzey hareketleri gelir. Böylece saha backlog'u küçük kazı/temel
+sinyalini ilk üçten düşürmez.
+
+İki uydu bölgesi de aktifse kapsama dengesi korunmaya çalışılır; ancak daha zayıf
+bir bölge adayı daha yüksek öncelikli taze adayı sırf coğrafi denge için listeden
+çıkaramaz.
 
 Ayrıca üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, yalnız kompakt,
 izole ve lineer olmayan adaylardan uydu bölgesi başına en fazla bir, toplam iki
 ``alarm değil`` kalibrasyon noktası gösterir. Bu noktalar aktif görevlerin en az 120 m
-dışında olmalıdır. Amaç alarm sayısını büyütmek değil, mevcut filtrenin kaçırabileceği
-hafriyat tipini iki analiz bölgesinde de sahada ölçmek ve gelecek eşik ayarını gerçek
-saha geri bildirimiyle yapabilmektir.
+dışında olmalıdır.
 """
 
 from __future__ import annotations
@@ -36,6 +37,17 @@ SATELLITE_REGION_LABELS = (
     "Çeşme merkez · Alaçatı · Ilıca",
     "Uzunkuyu · Germiyan · Ildır",
 )
+ROUTE_PRIORITY = {
+    "TEKRAR": 0,
+    "ERKEN": 1,
+    "PARSEL": 2,
+    "GECİKEN": 3,
+    "YÜKSEK": 4,
+    "ORTA": 5,
+    "BEKLEYEN": 6,
+    "NORMAL": 7,
+}
+SATELLITE_PRIORITY = {"YÜKSEK": 0, "ORTA": 1, "NORMAL": 2}
 SECTION_TITLE = "## Günün ilk 3 kontrolü"
 CALIBRATION_SECTION_TITLE = "## Ek kuru zemin kalibrasyon kontrolü"
 NEXT_SECTION = "## Bugün sahada kontrol edilecek uydu adayları"
@@ -87,8 +99,59 @@ def _actionable_candidates(candidates):
     return eligible
 
 
+def _route_priority_value(item):
+    return ROUTE_PRIORITY.get(str(item.get("oncelik") or "").strip().upper(), 8)
+
+
+def _overdue_excavation_class(item):
+    """Gecikmiş backlog içinde erken şantiye ihtimaline yakın ölçeği öncele."""
+    if str(item.get("oncelik") or "").strip().upper() != "GECİKEN":
+        return 0
+    area = max(_number(item.get("alan_m2"), 0), 0)
+    size_class = str(item.get("boyut_sinifi") or "").strip().upper()
+    signal = str(item.get("sinyal") or "").casefold()
+    if 250 <= area <= 800 and (
+        size_class == "KUCUK" or "küçük, güçlü" in signal
+    ):
+        return 0
+    if 800 <= area < 2000:
+        return 1
+    if 2000 <= area < 10000:
+        return 2
+    if area >= 10000:
+        return 3
+    return 4
+
+
+def _route_sort_key(item, original_index):
+    priority = _route_priority_value(item)
+    is_overdue = str(item.get("oncelik") or "").strip().upper() == "GECİKEN"
+    if not is_overdue:
+        return (priority, 0, 0.0, 0, 0, original_index)
+
+    area = max(_number(item.get("alan_m2"), 0), 0)
+    satellite_priority = SATELLITE_PRIORITY.get(
+        str(item.get("uydu_onceligi") or "").strip().upper(), 3
+    )
+    waiting_days = max(int(_number(item.get("bekleme_gun"), 0)), 0)
+    return (
+        priority,
+        _overdue_excavation_class(item),
+        area,
+        satellite_priority,
+        -waiting_days,
+        original_index,
+    )
+
+
+def _rank_for_route(eligible):
+    indexed = list(enumerate(eligible))
+    indexed.sort(key=lambda pair: _route_sort_key(pair[1], pair[0]))
+    return [item for _, item in indexed]
+
+
 def _balance_satellite_regions(eligible, selected, limit):
-    """Kalite sırasını bozmadan eksik uydu bölgesine son listede tek yer aç."""
+    """Aynı/üst kalite seviyesinde mümkünse iki uydu bölgesinden temsil bırak."""
     if limit < 2 or len(selected) < 2:
         return selected
 
@@ -122,9 +185,14 @@ def _balance_satellite_regions(eligible, selected, limit):
             continue
 
         replace_index = None
+        candidate_priority = _route_priority_value(candidate)
         for index in range(len(selected) - 1, -1, -1):
             region = str(selected[index].get("bolge") or "")
-            if region in region_counts and region_counts.get(region, 0) > 1:
+            if (
+                region in region_counts
+                and region_counts.get(region, 0) > 1
+                and candidate_priority <= _route_priority_value(selected[index])
+            ):
                 replace_index = index
                 break
         if replace_index is None:
@@ -142,12 +210,12 @@ def _balance_satellite_regions(eligible, selected, limit):
 
 
 def select_shortlist(candidates, limit=SHORTLIST_LIMIT):
-    """İlk kalite sırasını koru; mümkünse Çeşme ve Uzunkuyu'dan temsil bırak."""
+    """Taze/erken saha değerini öne al; alarm sayısını ve ana rapor sırasını değiştirme."""
     cap = max(int(limit), 0)
     if cap <= 0:
         return []
 
-    eligible = _actionable_candidates(candidates)
+    eligible = _rank_for_route(_actionable_candidates(candidates))
     selected = [dict(item) for item in eligible[:cap]]
     selected = _balance_satellite_regions(eligible, selected, cap)
     for index, item in enumerate(selected, start=1):
@@ -196,16 +264,7 @@ def select_dry_ground_calibration(
     active_candidates,
     limit=CALIBRATION_LIMIT,
 ):
-    """Alarm dışı diagnostikten iki bölgeyi dengeli saha kalibrasyonuna çevir.
-
-    Yalnız üretim maskesinin dışında kalmış, 250-2.000 m², kompakt/site-benzeri,
-    120 m içinde başka kuru-zemin kümesi bulunmayan ve lineer yol/şerit karakteri
-    taşımayan örnekleri kullanır. Ayrıca mevcut aktif radar görevlerinin 120 m
-    çevresindeki noktaları dışarıda bırakır; böylece zaten gidilecek bir sahayı
-    ikinci kez kalibrasyon diye göstermeyiz. İki veya daha fazla yer varsa önce
-    farklı uydu bölgelerinden birer örnek seçilir; böylece Çeşme ve Uzunkuyu tarafı
-    aynı saha geri bildirim döngüsünde temsil edilir.
-    """
+    """Alarm dışı diagnostikten iki bölgeyi dengeli saha kalibrasyonuna çevir."""
     cap = max(int(limit), 0)
     if cap <= 0 or not isinstance(audit_payload, dict):
         return []
@@ -283,7 +342,11 @@ def select_dry_ground_calibration(
         if not _far_from_selected(item, selected):
             continue
         region_key = str(item.get("bolge_anahtari") or "")
-        if cap >= 2 and region_key and region_counts.get(region_key, 0) >= CALIBRATION_PER_REGION_LIMIT:
+        if (
+            cap >= 2
+            and region_key
+            and region_counts.get(region_key, 0) >= CALIBRATION_PER_REGION_LIMIT
+        ):
             continue
         selected.append(dict(item))
         if region_key:
@@ -297,7 +360,7 @@ def _shortlist_markdown(shortlist):
     lines = [
         SECTION_TITLE,
         "",
-        "> Bu bölüm yeni alarm üretmez; mevcut kalite sırasını mümkün olduğunca korur ve iki uydu bölgesinde de aktif iş varsa doğu-batı kapsamasını üç kontrol içinde dengeler.",
+        "> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.",
         "",
     ]
     if not shortlist:
@@ -312,7 +375,11 @@ def _shortlist_markdown(shortlist):
         area_text = f" · yaklaşık {int(area):,} m²".replace(",", ".") if area else ""
         task_id = str(item.get("gorev_id") or "-")
         route = str(item.get("harita") or "").strip()
-        route_text = f" · [Yol tarifi]({route})" if route.startswith(("http://", "https://")) else ""
+        route_text = (
+            f" · [Yol tarifi]({route})"
+            if route.startswith(("http://", "https://"))
+            else ""
+        )
         lines.append(
             f"{order}. **{priority} — {neighborhood}**{area_text} · Görev `{task_id}`{route_text}"
         )
@@ -398,11 +465,16 @@ def update_daily_shortlist():
     )
     payload["gunun_ilk_3_kontrolu"] = shortlist
     payload["gunun_ilk_3_notu"] = (
-        "Yeni alarm üretmez; kalite sırasını mümkün olduğunca korur ve iki uydu bölgesinde aktif görev varsa üç kontrolde doğu-batı temsili bırakır."
+        "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde "
+        "tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey "
+        "hareketlerinden önce kontrol ettirir; bölge dengesi daha yüksek öncelikli "
+        "adayı düşürmez."
     )
     payload["kuru_zemin_kalibrasyon_kontrolu"] = calibration
     payload["kuru_zemin_kalibrasyon_notu"] = (
-        "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir."
+        "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri "
+        "kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi "
+        "başına en fazla bir, toplam iki örnek seçilir."
     )
     REPORT_JSON.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
@@ -451,15 +523,82 @@ def _self_check():
         },
     ]
     chosen = select_shortlist(sample)
-    assert [item["gorev_id"] for item in chosen] == ["U1", "U3", "U5"]
+    assert [item["gorev_id"] for item in chosen] == ["U3", "U1", "U5"]
     assert [item["gunluk_sira"] for item in chosen] == [1, 2, 3]
     assert {item["bolge"] for item in chosen} == {west, east}
 
     one_region = select_shortlist(sample[:4])
-    assert [item["gorev_id"] for item in one_region] == ["U1", "U3", "U4"]
+    assert [item["gorev_id"] for item in one_region] == ["U3", "U1", "U4"]
 
     short_limit = select_shortlist(sample, limit=1)
-    assert [item["gorev_id"] for item in short_limit] == ["U1"]
+    assert [item["gorev_id"] for item in short_limit] == ["U3"]
+
+    backlog = [
+        {
+            "gorev_id": "OLD_BIG", "saha_durumu": "KONTROLE_GIT", "oncelik": "GECİKEN",
+            "mahalle": "Musalla", "enlem": 38.30, "boylam": 26.30, "alan_m2": 4800,
+            "bolge": west, "bekleme_gun": 4, "uydu_onceligi": "ORTA",
+            "boyut_sinifi": "STANDART", "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+        },
+        {
+            "gorev_id": "OLD_SMALL", "saha_durumu": "KONTROLE_GIT", "oncelik": "GECİKEN",
+            "mahalle": "Musalla", "enlem": 38.31, "boylam": 26.31, "alan_m2": 400,
+            "bolge": west, "bekleme_gun": 3, "uydu_onceligi": "ORTA",
+            "boyut_sinifi": "KUCUK", "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
+        },
+        {
+            "gorev_id": "OLD_PARCEL", "saha_durumu": "KONTROLE_GIT", "oncelik": "GECİKEN",
+            "mahalle": "Alaçatı", "enlem": 38.29, "boylam": 26.38, "alan_m2": 1200,
+            "bolge": west, "bekleme_gun": 3, "uydu_onceligi": "NORMAL",
+            "boyut_sinifi": "STANDART", "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+        },
+        {
+            "gorev_id": "EAST_PARCEL", "saha_durumu": "KONTROLE_GIT", "oncelik": "GECİKEN",
+            "mahalle": "Uzunkuyu", "enlem": 38.33, "boylam": 26.65, "alan_m2": 1000,
+            "bolge": east, "bekleme_gun": 3, "uydu_onceligi": "NORMAL",
+            "boyut_sinifi": "STANDART", "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+        },
+    ]
+    focused = select_shortlist(backlog)
+    assert focused[0]["gorev_id"] == "OLD_SMALL"
+    assert "OLD_BIG" not in {item["gorev_id"] for item in focused}
+    assert {item["bolge"] for item in focused} == {west, east}
+
+    fresh_over_backlog = select_shortlist(
+        [
+            backlog[0],
+            {
+                "gorev_id": "FRESH_PARCEL", "saha_durumu": "KONTROLE_GIT",
+                "oncelik": "PARSEL", "mahalle": "Ilıca", "enlem": 38.32,
+                "boylam": 26.36, "alan_m2": 900, "bolge": west,
+            },
+            backlog[3],
+        ],
+        limit=2,
+    )
+    assert fresh_over_backlog[0]["gorev_id"] == "FRESH_PARCEL"
+
+    no_weak_balance = select_shortlist(
+        [
+            {
+                "gorev_id": "W1", "saha_durumu": "KONTROLE_GIT", "oncelik": "ERKEN",
+                "mahalle": "Alaçatı", "enlem": 38.28, "boylam": 26.38, "alan_m2": 500,
+                "bolge": west,
+            },
+            {
+                "gorev_id": "W2", "saha_durumu": "KONTROLE_GIT", "oncelik": "ERKEN",
+                "mahalle": "Ilıca", "enlem": 38.30, "boylam": 26.35, "alan_m2": 600,
+                "bolge": west,
+            },
+            {
+                "gorev_id": "E1", "saha_durumu": "KONTROLE_GIT", "oncelik": "GECİKEN",
+                "mahalle": "Uzunkuyu", "enlem": 38.33, "boylam": 26.65, "alan_m2": 1000,
+                "bolge": east,
+            },
+        ],
+        limit=2,
+    )
+    assert [item["gorev_id"] for item in no_weak_balance] == ["W1", "W2"]
 
     audit = {
         "bolgeler": {
