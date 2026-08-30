@@ -1,14 +1,18 @@
 name: Uygulama Veri Sonrası Açılış Testi
 
 on:
+  # Günlük tarama kendi GITHUB_TOKEN'i ile rapor/veri commit'i attığında GitHub
+  # güvenlik gereği yeni bir push workflow'u zincirlemez. Bu yüzden asıl veri-sonrası
+  # doğrulama, Günlük Şantiye Taraması tamamlandığında workflow_run ile tetiklenir.
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  # Uygulama kodu veya bu kontrolün kendisi elle değiştiğinde de hemen test et.
   push:
     branches: [main]
     paths:
       - "app.py"
       - "pages/**"
-      - "santiye.db"
-      - "latest_report.json"
-      - "SAHA_RAPORU.md"
       - ".github/workflows/app-smoke.yml"
   workflow_dispatch:
 
@@ -21,11 +25,17 @@ concurrency:
 
 jobs:
   smoke:
+    # Başarısız bir günlük taramanın çıktısını 'sağlıklı' diye onaylamayalım.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
+        with:
+          # workflow_run olayı tamamlanan koşunun eski head SHA'sına işaret eder;
+          # tarama sonunda botun yazdığı güncel veri commit'ini test etmek için main'i al.
+          ref: main
 
       - name: Python kur
         uses: actions/setup-python@v6
