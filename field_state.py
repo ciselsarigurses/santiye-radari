@@ -16,6 +16,8 @@ from scanner import connect
 
 ALLOWED_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT", "KONTROL_EDILDI"}
 SATELLITE_MATCH_METERS = 80
+EARLY_SITE_MATCH_MAX_M2 = 2_000
+EARLY_SITE_MATCH_METERS = 25
 COMPLETED_REUSE_METERS = 25
 LEGACY_DUPLICATE_METERS = 120
 INTERNAL_DUPLICATE_STATUS = "MUKERRER"
@@ -61,7 +63,8 @@ def satellite_task_id(item, precision=3):
     ``precision=3`` geçmiş görev kimlikleriyle uyumluluk içindir. Aynı gün iki
     ayrı Sentinel kümesi bu kaba hücreye düştüğünde yalnız çakışan ikinci görev
     için daha hassas 4-5 ondalık kimlik kullanılır; böylece iki gerçek saha tek
-    görevde ezilmez ve normal centroid kayması yine 80 m eşleştirmeyle korunur.
+    görevde ezilmez ve normal centroid kayması yine güvenli mesafe eşleştirmesiyle
+    korunur.
     """
     latitude = float(item.get("enlem"))
     longitude = float(item.get("boylam"))
@@ -85,6 +88,13 @@ def _distance_m(lat1, lon1, lat2, lon2):
     return math.hypot(north, east)
 
 
+def _item_area_m2(item):
+    try:
+        return max(float(item.get("alan_m2") or 0), 0.0)
+    except (TypeError, ValueError, AttributeError):
+        return 0.0
+
+
 def _nearby_satellite_task(
     connection,
     source_key,
@@ -92,13 +102,11 @@ def _nearby_satellite_task(
     longitude,
     excluded_task_ids=None,
 ):
-    """Yeni görüntüde merkezi biraz kayan aynı saha görevini bulur.
+    """Eski uyumluluk yolu: yeni görüntüde merkezi kayan aynı saha görevini bulur.
 
-    Aynı mevcut Sentinel listesinde başka bir kümeye zaten atanmış görevler
-    hariç tutulur. Açık/takip görevlerinde normal 80 m centroid kayması korunur;
-    ``KONTROL_EDILDI`` görevi ise yalnız 25 m içinde yeniden kullanılır. Böylece
-    kontrol edilmiş bir parselin hemen yanındaki yeni kazı eski kapalı göreve
-    bağlanıp saha listesinden sessizce kaybolmaz.
+    Güncel çoklu-hotspot eşleştirmesi ``_existing_satellite_edges`` üzerinden
+    alan-duyarlı yapılır. Bu yardımcı işlev eski çağrılar için 80 m açık-görev /
+    25 m tamamlanmış-görev davranışını korur.
     """
     excluded_task_ids = {str(value) for value in (excluded_task_ids or ())}
     rows = connection.execute(
@@ -188,9 +196,12 @@ def _upsert_task(
 def _existing_satellite_edges(connection, records):
     """Mevcut görevlerle güncel hotspot'ların güvenli eşleşme adaylarını çıkar.
 
-    Aktif ve takip edilen uydu görevlerinde 80 m Sentinel centroid toleransı
-    korunur. Saha tarafından ``KONTROL_EDILDI`` yapılmış görevler yalnız 25 m
-    içinde eşleşebilir; daha uzaktaki yeni değişim ayrı bir saha görevi olur.
+    2.000 m² ve altındaki erken/parsel ölçekli güncel hotspot'larda 25 m eşleşme
+    kullanılır. Böylece bir gün yalnız A parseli görünürken sonraki görüntüde
+    25-80 m uzaktaki yeni B parseli A'nın açık görevini taşıyıp sessizce yutamaz.
+    Daha geniş açık görevlerde gerçek büyük küme centroid kaymasını tolere etmek
+    için 80 m korunur. ``KONTROL_EDILDI`` görevler her boyutta yalnız 25 m içinde
+    yeniden kullanılır.
     """
     source_keys = sorted({record["source_key"] for record in records})
     if not source_keys:
@@ -221,6 +232,11 @@ def _existing_satellite_edges(connection, records):
 
     edges = []
     for record in records:
+        active_match_limit = (
+            EARLY_SITE_MATCH_METERS
+            if float(record.get("area_m2") or 0) <= EARLY_SITE_MATCH_MAX_M2
+            else SATELLITE_MATCH_METERS
+        )
         for task_id, source_key, latitude, longitude, status in existing:
             if source_key != record["source_key"]:
                 continue
@@ -233,7 +249,7 @@ def _existing_satellite_edges(connection, records):
             match_limit = (
                 COMPLETED_REUSE_METERS
                 if status == "KONTROL_EDILDI"
-                else SATELLITE_MATCH_METERS
+                else active_match_limit
             )
             if distance <= match_limit:
                 edges.append((distance, record["index"], task_id))
@@ -259,11 +275,13 @@ def sync_satellite_tasks(connection, hotspots, report_date):
     """Günlük uydu adaylarını tekil saha görevlerine bağlar; mevcut kararı bozmaz.
 
     Eşleşme önce bütün mevcut görevler ve bütün güncel hotspot'lar arasında mesafeye
-    göre tek-seferde yapılır. Böylece aynı görüntüde 25-80 m aralığındaki iki ayrı
-    değişim kümesi, liste sırasına bağlı olarak tek 80 m görev kimliğinde ezilmez.
-    Kontrol edilmiş görevler yalnız 25 m içinde yeniden kullanılır; yan parseldeki
-    yeni değişim ayrı görev kalır. Yeni görevler yaklaşık 10 m sınıfındaki 4
-    ondalık koordinat hash'iyle başlar; eski kimlikler mesafe eşleşmesiyle yaşar.
+    göre tek-seferde yapılır. Aynı görüntüde yakın iki ayrı küme tek göreve ezilmez.
+    2.000 m² ve altındaki erken/parsel ölçekli güncel sinyaller açık eski görevi
+    yalnız 25 m içinde yeniden kullanır; 25-80 m uzaktaki yeni komşu kazı ayrı görev
+    olur. Daha geniş açık kümelerde 80 m normal centroid toleransı korunur.
+    Kontrol edilmiş görevler her boyutta yalnız 25 m içinde yeniden kullanılır.
+    Yeni görevler yaklaşık 10 m sınıfındaki 4 ondalık koordinat hash'iyle başlar;
+    eski kimlikler mesafe eşleşmesiyle yaşar.
     """
     ensure_state_schema(connection)
     records = []
@@ -279,6 +297,7 @@ def sync_satellite_tasks(connection, hotspots, report_date):
                 "item": item,
                 "latitude": latitude,
                 "longitude": longitude,
+                "area_m2": _item_area_m2(item),
                 "source_key": str(item.get("bolge") or ""),
             }
         )

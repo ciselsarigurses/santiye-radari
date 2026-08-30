@@ -6,6 +6,8 @@ import sqlite3
 
 from field_state import (
     COMPLETED_REUSE_METERS,
+    EARLY_SITE_MATCH_MAX_M2,
+    EARLY_SITE_MATCH_METERS,
     SATELLITE_MATCH_METERS,
     _distance_m,
     ensure_state_schema,
@@ -16,13 +18,13 @@ from field_state import (
 SOURCE = "Çeşme merkez · Alaçatı · Ilıca"
 
 
-def _item(latitude, longitude):
+def _item(latitude, longitude, area=300):
     return {
         "mahalle": "Musalla",
         "enlem": latitude,
         "boylam": longitude,
         "bolge": SOURCE,
-        "alan_m2": 300,
+        "alan_m2": area,
         "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
     }
 
@@ -39,7 +41,7 @@ def check_close_distinct_hotspots_stay_distinct():
     distance = _distance_m(
         first["enlem"], first["boylam"], second["enlem"], second["boylam"]
     )
-    assert 25 < distance < SATELLITE_MATCH_METERS
+    assert EARLY_SITE_MATCH_METERS < distance < SATELLITE_MATCH_METERS
 
     initial = sync_satellite_tasks(connection, [first, second], "2026-08-29")
     assert len({item["gorev_id"] for item in initial}) == 2, (
@@ -79,13 +81,69 @@ def check_single_centroid_drift_keeps_task():
     distance = _distance_m(
         first["enlem"], first["boylam"], shifted["enlem"], shifted["boylam"]
     )
-    assert distance < SATELLITE_MATCH_METERS
+    assert distance < EARLY_SITE_MATCH_METERS
 
     original = sync_satellite_tasks(connection, [first], "2026-08-29")[0]
     moved = sync_satellite_tasks(connection, [shifted], "2026-08-30")[0]
     assert moved["gorev_id"] == original["gorev_id"], (
-        "Tek bir şantiyenin normal Sentinel centroid kayması yeni görev üretti."
+        "Tek bir küçük şantiyenin 25 m altındaki normal Sentinel centroid kayması yeni görev üretti."
     )
+    connection.close()
+
+
+def check_open_small_task_does_not_hide_sequential_neighbor():
+    """Bir sonraki görüntüde yalnız komşu parsel kalırsa eski açık görevi taşıma."""
+    connection = sqlite3.connect(":memory:")
+    ensure_state_schema(connection)
+
+    first = _item(38.31510, 26.30010, area=800)
+    neighbor = _item(38.31540, 26.30010, area=800)
+    distance = _distance_m(
+        first["enlem"], first["boylam"], neighbor["enlem"], neighbor["boylam"]
+    )
+    assert EARLY_SITE_MATCH_METERS < distance < SATELLITE_MATCH_METERS
+
+    old = sync_satellite_tasks(connection, [first], "2026-08-29")[0]
+    old_id = old["gorev_id"]
+    current = sync_satellite_tasks(connection, [neighbor], "2026-08-30")[0]
+
+    assert current["gorev_id"] != old_id, (
+        "25-80 m uzaktaki ardışık küçük hotspot eski açık görevi taşıyıp yeni parseli yuttu."
+    )
+    assert current["saha_durumu"] == "KONTROLE_GIT"
+    old_row = connection.execute(
+        "SELECT enlem,boylam,durum FROM saha_durumlari WHERE gorev_id=?",
+        (old_id,),
+    ).fetchone()
+    assert round(float(old_row[0]), 5) == round(first["enlem"], 5)
+    assert round(float(old_row[1]), 5) == round(first["boylam"], 5)
+    assert old_row[2] == "KONTROLE_GIT"
+    assert connection.execute(
+        "SELECT COUNT(*) FROM saha_durumlari WHERE kaynak='uydu'"
+    ).fetchone()[0] == 2
+    connection.close()
+
+
+def check_large_open_task_keeps_wider_centroid_drift():
+    """Geniş kümelerde 25 m sınırı gereksiz yeni görev üretmesin."""
+    connection = sqlite3.connect(":memory:")
+    ensure_state_schema(connection)
+
+    first = _item(38.31710, 26.30010, area=EARLY_SITE_MATCH_MAX_M2 + 3000)
+    shifted = _item(38.31740, 26.30010, area=EARLY_SITE_MATCH_MAX_M2 + 3000)
+    distance = _distance_m(
+        first["enlem"], first["boylam"], shifted["enlem"], shifted["boylam"]
+    )
+    assert EARLY_SITE_MATCH_METERS < distance < SATELLITE_MATCH_METERS
+
+    original = sync_satellite_tasks(connection, [first], "2026-08-29")[0]
+    moved = sync_satellite_tasks(connection, [shifted], "2026-08-30")[0]
+    assert moved["gorev_id"] == original["gorev_id"], (
+        "Geniş açık kümenin 25-80 m normal centroid kayması gereksiz yeni görev üretti."
+    )
+    assert connection.execute(
+        "SELECT COUNT(*) FROM saha_durumlari WHERE kaynak='uydu'"
+    ).fetchone()[0] == 1
     connection.close()
 
 
@@ -163,13 +221,15 @@ def check_completed_task_keeps_tiny_centroid_jitter():
 def main():
     check_close_distinct_hotspots_stay_distinct()
     check_single_centroid_drift_keeps_task()
+    check_open_small_task_does_not_hide_sequential_neighbor()
+    check_large_open_task_keeps_wider_centroid_drift()
     check_completed_task_does_not_hide_neighbor()
     check_completed_task_keeps_tiny_centroid_jitter()
     print(
-        "Saha görev ayrıştırma kalite kontrolü başarılı: 25-80 m yakın iki ayrı "
-        "hotspot tek göreve ezilmiyor; açık görevlerde normal centroid kayması "
-        "korunuyor; kontrol edilmiş görevler 25 m dışındaki yeni komşu hotspot'u "
-        "gizlemiyor."
+        "Saha görev ayrıştırma kalite kontrolü başarılı: 2.000 m² ve altındaki "
+        "erken/parsel hotspot'ları 25 m dışında eski açık görevi taşımıyor; "
+        "25 m altı küçük centroid kayması ve geniş kümelerde 80 m tolerans korunuyor; "
+        "kontrol edilmiş görevler 25 m dışındaki yeni komşu hotspot'u gizlemiyor."
     )
 
 
