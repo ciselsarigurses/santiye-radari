@@ -23,6 +23,7 @@ on:
       - "cloud_threshold_audit.py"
       - "spatial_quality.py"
       - "daily_report.py"
+      - "daily_route_shortlist.py"
       - "report_quality.py"
       - "field_state.py"
       - "field_state_quality.py"
@@ -158,6 +159,9 @@ jobs:
       - name: Açık uydu görevlerinin son güvenilir ölçüsünü koru
         run: python hydrate_persisted_satellite_metadata.py
 
+      - name: Günün ilk üç saha kontrolünü sabitle
+        run: python daily_route_shortlist.py
+
       - name: Tarama ve rapor sonuçlarını kaydet
         run: |
           report_files="santiye.db SAHA_RAPORU.md latest_report.json candidate_capacity_audit.json shape_false_positive_audit.json"
@@ -204,6 +208,7 @@ jobs:
             python report_quality.py
             python reconcile_selection_tasks.py
             python hydrate_persisted_satellite_metadata.py
+            python daily_route_shortlist.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
               echo "Yeniden üretim sonrası kaydedilecek veri değişikliği yok."
