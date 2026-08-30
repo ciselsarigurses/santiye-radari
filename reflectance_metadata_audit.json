@@ -1,0 +1,66 @@
+{
+  "amac": "Seçili Sentinel-2 red/nir raster:bands scale-offset metadata'sını üretim reflektans varsayımıyla karşılaştırmak; alarm veya görev üretmez.",
+  "uretim_varsayimi": {
+    "scale": 0.0001,
+    "offset": -0.1,
+    "formul": "reflectance = DN * scale + offset"
+  },
+  "genel_durum": "MATCH",
+  "bolgeler": {
+    "cesme": {
+      "durum": "ok",
+      "onceki_item": "S2A_T35SMC_20260826T090624_L2A",
+      "son_item": "S2B_T35SMC_20260829T090620_L2A"
+    },
+    "uzunkuyu": {
+      "durum": "ok",
+      "onceki_item": "S2A_T35SMC_20260826T090624_L2A",
+      "son_item": "S2B_T35SMC_20260829T090620_L2A"
+    }
+  },
+  "itemlar": {
+    "S2A_T35SMC_20260826T090624_L2A": {
+      "item": "S2A_T35SMC_20260826T090624_L2A",
+      "tarih": "2026-08-26T09:10:01.380000Z",
+      "mgrs": "-",
+      "relative_orbit": 7,
+      "durum": "MATCH",
+      "bantlar": {
+        "red": {
+          "scale": 0.0001,
+          "offset": -0.1,
+          "metadata_status": "ok",
+          "hardcoded_varsayimla_uyumlu": true
+        },
+        "nir": {
+          "scale": 0.0001,
+          "offset": -0.1,
+          "metadata_status": "ok",
+          "hardcoded_varsayimla_uyumlu": true
+        }
+      }
+    },
+    "S2B_T35SMC_20260829T090620_L2A": {
+      "item": "S2B_T35SMC_20260829T090620_L2A",
+      "tarih": "2026-08-29T09:09:43.570000Z",
+      "mgrs": "-",
+      "relative_orbit": 7,
+      "durum": "MATCH",
+      "bantlar": {
+        "red": {
+          "scale": 0.0001,
+          "offset": -0.1,
+          "metadata_status": "ok",
+          "hardcoded_varsayimla_uyumlu": true
+        },
+        "nir": {
+          "scale": 0.0001,
+          "offset": -0.1,
+          "metadata_status": "ok",
+          "hardcoded_varsayimla_uyumlu": true
+        }
+      }
+    }
+  },
+  "uyarilar": []
+}
