@@ -1,11 +1,19 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-30
-**Hazırlanma:** 2026-08-30 08:36 +03
+**Hazırlanma:** 2026-08-30 10:31 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
+
+## Günün ilk 3 kontrolü
+
+> Bu bölüm yeni alarm üretmez; aktif saha listesinin mevcut kalite sırasındaki ilk üç görevidir.
+
+1. **ERKEN — Alaçatı** · yaklaşık 600 m² · Görev `U03AEB18369` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.225541,26.421191)
+2. **ERKEN — Ovacık** · yaklaşık 600 m² · Görev `U3794367C4D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.259188,26.310722)
+3. **ERKEN — Şifne** · yaklaşık 600 m² · Görev `UAB9324E212` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.342672,26.394633)
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
