@@ -246,13 +246,13 @@ def _self_check():
 
 
 def supplemental_neighborhood_scan():
-    """Resmi mahallelerin tamamını düşük-riskli ek aramayla tara.
+    """Resmi mahallelerin yayın-tarihli haber katmanını tamamlayıcı olarak tara.
 
-    Sonuç depolamada ``deactivate_missing=False`` kullanılır; bu nedenle ana
-    taramadaki adayları bu ek tarama görmedi diye kapatmaz. Aynı URL yeniden
-    bulunursa daha özgül mahalle etiketi mevcut kayda güvenli biçimde yazılabilir.
-    Yayın tarihi 90 günden eski geçmiş başlangıç haberleri ise gözlemlendiği URL
-    üzerinden ayrıca pasifleştirilir; güncel devam eden şantiye haberleri korunur.
+    Ana ``scanner`` aynı mahalleleri Google Haberler + açık web ile zaten tarar.
+    Burada yalnız Google Haberler tekrar kullanılır; benzersiz amaç yayın tarihinden
+    eski başlangıç olaylarını ayıklamak ve mahalle etiketini teyit etmektir. Böylece
+    açık-web kaynağı iki kez çağrılmaz. Sonuç depolamada ``deactivate_missing=False``
+    kullanılır; bu nedenle ana taramadaki adaylar bu ek katman görmedi diye kapanmaz.
     """
     _configure_specific_locations()
     scanner.ensure_schema()
@@ -268,15 +268,16 @@ def supplemental_neighborhood_scan():
     retry_recovered = 0
     jobs = []
 
+    # Ana scanner aynı mahallelerin açık-web/DuckDuckGo aramasını zaten yapıyor.
+    # Burada aynı işi ikinci kez tekrarlamak, canlı akışta ek rate-limit hataları
+    # üretiyordu. Tamamlayıcı katmanın benzersiz işi yayın tarihli Google Haberler
+    # sonuçlarıyla eski başlangıç haberlerini ayıklamak olduğundan yalnız onu çalıştır.
     with ThreadPoolExecutor(max_workers=SUPPLEMENTAL_MAX_WORKERS) as pool:
         for query in queries:
-            for engine_name, engine in (
-                ("Google Haberler", scanner._google_news),
-                ("Web", scanner._duckduckgo),
-            ):
-                jobs.append(
-                    (query, engine_name, pool.submit(_search_with_retry, engine, query))
-                )
+            engine_name, engine = "Google Haberler", scanner._google_news
+            jobs.append(
+                (query, engine_name, pool.submit(_search_with_retry, engine, query))
+            )
 
         for query, engine_name, future in jobs:
             raw_rows, attempts, error_name = future.result()
