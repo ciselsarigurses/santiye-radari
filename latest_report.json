@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-30",
-  "olusturma": "2026-08-30 19:07 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17",
+  "olusturma": "2026-08-30 21:39 +03",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. · Tarama uyarısı: 27 kaynak/arama hatası Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17",
   "saha_adaylari": [
     {
       "oncelik": "ERKEN",
@@ -1637,5 +1637,29 @@
       "gunluk_sira": 3
     }
   ],
-  "gunun_ilk_3_notu": "Yeni alarm üretmez; kalite sırasını mümkün olduğunca korur ve iki uydu bölgesinde aktif görev varsa üç kontrolde doğu-batı temsili bırakır."
+  "gunun_ilk_3_notu": "Yeni alarm üretmez; kalite sırasını mümkün olduğunca korur ve iki uydu bölgesinde aktif görev varsa üç kontrolde doğu-batı temsili bırakır.",
+  "kuru_zemin_kalibrasyon_kontrolu": [
+    {
+      "mahalle": "Dalyan",
+      "enlem": 38.355516,
+      "boylam": 26.30019,
+      "alan_m2": 300,
+      "ortalama_bsi_degisim": 0.3233,
+      "ortalama_rgb_farki": 0.1364,
+      "uzun_kisa_orani": 1.0,
+      "kutu_doluluk_orani": 0.75,
+      "kompaktlik": 0.589,
+      "saha_benzeri_geometri": true,
+      "lineer_geometri_riski": false,
+      "yakindaki_kuru_degisim_120m": 0,
+      "izole_saha_benzeri": true,
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.355516,26.300190",
+      "kalibrasyon_durumu": "ALARM_DEGIL"
+    }
+  ],
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında tek örnek seçilir."
 }
