@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-30",
-  "olusturma": "2026-08-30 15:37 +03",
+  "olusturma": "2026-08-30 16:38 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17",
   "saha_adaylari": [
     {
@@ -1544,7 +1544,21 @@
     }
   ],
   "yeni_internet_bulgulari": [],
-  "oncelikli_internet_firsatlari": [],
+  "oncelikli_internet_firsatlari": [
+    {
+      "proje": "SUMEN Olea — Urla Uzunkuyu yeni konut projesi",
+      "firma": "SUMEN™ / Sumen Group",
+      "bolge": "Uzunkuyu",
+      "sinyal": "2026 yeni konut projesi, yapım sürüyor, Aralık 2026 teslim hedefi",
+      "kaynak_url": "https://emlakkulisi.com/sumen-olea-urlada-115-milyon-tlye-yeni-proje/827889",
+      "kaynak_tipi": "Doğrulanmış proje haberi",
+      "skor": 9,
+      "durum": "KIRMIZI",
+      "ilk_gorulme": "2026-08-27 12:10 UTC",
+      "son_gorulme": "2026-08-30 13:38 UTC",
+      "yeni": false
+    }
+  ],
   "uyari": "Uydu koordinatları yaklaşık değişim merkezidir. Kesin adres/ada-parsel olarak kullanılmamalı; saha kontrolüyle doğrulanmalıdır.",
   "gunun_ilk_3_kontrolu": [
     {

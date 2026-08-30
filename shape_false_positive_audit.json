@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-30",
-  "olusturma": "2026-08-30 15:39 +03",
+  "olusturma": "2026-08-30 16:40 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; özellikle geniş adaylarda yol/altyapı gibi yanlış-pozitif olasılıklarının saha geri bildirimiyle kalibre edilmesini sağlamak.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
