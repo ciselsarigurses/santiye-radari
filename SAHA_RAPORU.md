@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-31
-**Hazırlanma:** 2026-08-31 00:42 +03
+**Hazırlanma:** 2026-08-31 01:37 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 59
 
@@ -9,11 +9,11 @@
 
 ## Günün ilk 3 kontrolü
 
-> Bu bölüm yeni alarm üretmez; mevcut kalite sırasını mümkün olduğunca korur ve iki uydu bölgesinde de aktif iş varsa doğu-batı kapsamasını üç kontrol içinde dengeler.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-1. **GECİKEN — Musalla** · yaklaşık 2.200 m² · Görev `U29A6385636` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.303146,26.297443)
-2. **GECİKEN — Musalla** · yaklaşık 1.300 m² · Görev `U424909649F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.301156,26.304197)
-3. **GECİKEN — Uzunkuyu** · yaklaşık 1.000 m² · Görev `U1CA0ACAC42` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.332190,26.652385)
+1. **PARSEL — Ovacık** · yaklaşık 800 m² · Görev `UFC823D369D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.223732,26.393030)
+2. **PARSEL — Germiyan** · yaklaşık 1.400 m² · Görev `UF8F1FB3E17` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.317087,26.467118)
+3. **GECİKEN — Şifne** · yaklaşık 300 m² · Görev `U611DAF934D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.346018,26.383414)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
