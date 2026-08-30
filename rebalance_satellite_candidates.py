@@ -3,9 +3,15 @@
 Ana uydu motorunun 250 m², yaklaşık 10 m ve spektral eşiklerini değiştirmez. Yalnız
 ana motorun aynı görüntüde ürettiği tüm geçerli kümeler arasından 24 kayıt seçilirken
 250-800 m² güçlü küçük saha adaylarını korur, 800-10.000 m² aralığına sınırlı bir kota
-ayırır ve kalan kapasiteyi geniş değişimlere bırakır. Şantiye ölçeği kotasının bir
-bölümü bandın küçük ucundan seçilerek erken hafriyat adaylarının 9-10 bin m²'lik
-kümeler tarafından tamamen gömülmesi önlenir; kotanın kalan kısmı büyük uçtan seçilir.
+ayırır ve kalan kapasiteyi geniş değişimlere bırakır.
+
+Şantiye ölçeği kotasında artık yalnız alan büyüklüğü kullanılmaz. Ana motorun zaten
+hesapladığı daha sert küçük-saha maskesinin her küme içindeki oranı, ek bir eşik veya
+alarm üretmeden seçim sinyali olarak taşınır. 800-2.000 m² erken-parsel havuzunda daha
+yüksek güçlü-piksel oranı önce gelir; kalan şantiye ölçeği yerlerinde de daha güçlü
+spektral kanıt tercih edilir. Eşit sinyalde eski alan sıralaması korunur. Böylece aynı
+24 alarm bütçesi içinde tarla/çok geniş yüzey değişimi yerine hafriyata daha çok
+benzeyen adayların seçilme ihtimali yükselir.
 
 8-komşuluk nedeniyle 10.000 m² üzerindeki geniş bir kümeye yalnız köşeden bağlanan
 800-10.000 m²'lik küçük bir yan küme varsa ve geniş kümenin 4-komşu ana gövdesi hâlâ
@@ -32,21 +38,31 @@ from daily_report import ISTANBUL, REPORT_REGIONS, build_daily_report, ensure_da
 from scanner import connect
 
 
-SELECTION_VERSION = "construction-scale-quota-v3-diagonal-sidecar"
+SELECTION_VERSION = "construction-scale-quota-v4-spectral-strength"
 RAW_LIMIT = 1_000_000
 CONSTRUCTION_SCALE_MIN_M2 = satellite.SMALL_HOTSPOT_MAX_M2
 CONSTRUCTION_SCALE_MAX_M2 = 10_000
+EARLY_PARCEL_MAX_M2 = 2_000
 CONSTRUCTION_SCALE_QUOTA = 6
 CONSTRUCTION_EARLY_QUOTA = 3
 DIAGONAL_SIDECAR_QUOTA = 1
 DIAGONAL_SIDECAR_MAX_PARENT_FRACTION = 0.35
 DIAGONAL_SIDECAR_TAG = "DIYAGONAL_YAN_KUME"
+STRONG_SIGNAL_FIELD = "guclu_sinyal_orani"
 _ORIGINAL_HOTSPOTS = satellite._hotspots
 
 
 def _area(item):
     try:
         return max(float(item.get("alan_m2") or 0), 0.0)
+    except (TypeError, ValueError, AttributeError):
+        return 0.0
+
+
+def _signal_strength(item):
+    """Ana motorun daha sert küçük-saha maskesinin küme içindeki 0-1 oranı."""
+    try:
+        return min(max(float(item.get(STRONG_SIGNAL_FIELD) or 0), 0.0), 1.0)
     except (TypeError, ValueError, AttributeError):
         return 0.0
 
@@ -94,7 +110,7 @@ def _four_connected_components(mask):
     return components
 
 
-def _component_candidate(component, bbox, shape, pixel_area_m2):
+def _component_location(component, bbox, shape):
     pixels = np.asarray(component, dtype="int32")
     centroid = pixels.mean(axis=0)
     representative = pixels[int(np.argmin(np.sum((pixels - centroid) ** 2, axis=1)))]
@@ -103,6 +119,37 @@ def _component_candidate(component, bbox, shape, pixel_area_m2):
     west, south, east, north = bbox
     latitude = north - (row + 0.5) / height * (north - south)
     longitude = west + (column + 0.5) / width * (east - west)
+    return latitude, longitude
+
+
+def _component_strength(component, small_site_mask):
+    if small_site_mask is None:
+        return 0.0
+    pixels = np.asarray(component, dtype="int32")
+    if not len(pixels):
+        return 0.0
+    return float(np.mean(small_site_mask[pixels[:, 0], pixels[:, 1]]))
+
+
+def _base_strength_map(change_mask, bbox, pixel_area_m2, small_site_mask):
+    """Orijinal 8-komşu adaylarını koordinat+alan anahtarıyla spektral oranla eşler."""
+    values = {}
+    for component in satellite._connected_components(change_mask):
+        area_m2 = len(component) * pixel_area_m2
+        if area_m2 < satellite.MIN_HOTSPOT_AREA_M2:
+            continue
+        strength = _component_strength(component, small_site_mask)
+        if area_m2 < satellite.SMALL_HOTSPOT_MAX_M2 and strength < 0.50:
+            continue
+        latitude, longitude = _component_location(component, bbox, change_mask.shape)
+        key = (round(latitude, 6), round(longitude, 6), round(area_m2))
+        values[key] = round(strength, 4)
+    return values
+
+
+def _component_candidate(component, bbox, shape, pixel_area_m2, small_site_mask=None):
+    latitude, longitude = _component_location(component, bbox, shape)
+    strength = _component_strength(component, small_site_mask)
     return {
         "mahalle": satellite._nearest_place(latitude, longitude),
         "enlem": round(latitude, 6),
@@ -114,10 +161,16 @@ def _component_candidate(component, bbox, shape, pixel_area_m2):
         ),
         "boyut_sinifi": "STANDART",
         "geometri_kaynagi": DIAGONAL_SIDECAR_TAG,
+        STRONG_SIGNAL_FIELD: round(strength, 4),
     }
 
 
-def _diagonal_sidecar_candidates(change_mask, bbox, pixel_area_m2):
+def _diagonal_sidecar_candidates(
+    change_mask,
+    bbox,
+    pixel_area_m2,
+    small_site_mask=None,
+):
     """Geniş 8-komşu kümenin içine gömülen küçük 4-komşu parsel parçalarını çıkarır."""
     eight_components = satellite._connected_components(change_mask)
     if not eight_components:
@@ -161,7 +214,13 @@ def _diagonal_sidecar_candidates(change_mask, bbox, pixel_area_m2):
             if child_area / parent_area > DIAGONAL_SIDECAR_MAX_PARENT_FRACTION:
                 continue
             sidecars.append(
-                _component_candidate(component, bbox, change_mask.shape, pixel_area_m2)
+                _component_candidate(
+                    component,
+                    bbox,
+                    change_mask.shape,
+                    pixel_area_m2,
+                    small_site_mask=small_site_mask,
+                )
             )
     return sidecars
 
@@ -183,8 +242,25 @@ def _uncapped_hotspots(
         limit=RAW_LIMIT,
         small_quota=0,
     )
-    sidecars = _diagonal_sidecar_candidates(change_mask, bbox, pixel_area_m2)
-    return base + sidecars
+    strength_map = _base_strength_map(
+        change_mask,
+        bbox,
+        pixel_area_m2,
+        small_site_mask,
+    )
+    decorated_base = []
+    for item in base:
+        updated = dict(item)
+        key = _candidate_key(updated)
+        updated[STRONG_SIGNAL_FIELD] = strength_map.get(key, 0.0)
+        decorated_base.append(updated)
+    sidecars = _diagonal_sidecar_candidates(
+        change_mask,
+        bbox,
+        pixel_area_m2,
+        small_site_mask=small_site_mask,
+    )
+    return decorated_base + sidecars
 
 
 def _uncapped_analysis(region_key, pair):
@@ -247,6 +323,7 @@ def _balanced_select(
     sidecar_selected = sorted(
         sidecars,
         key=lambda item: (
+            -_signal_strength(item),
             _area(item),
             float(item.get("enlem") or 0),
             float(item.get("boylam") or 0),
@@ -256,15 +333,38 @@ def _balanced_select(
 
     regular_slots = construction_slots - len(sidecar_selected)
     early_slots = min(max(int(construction_early_quota), 0), regular_slots)
-    construction_asc = sorted(
-        regular_construction,
+    early_pool = [
+        item for item in regular_construction
+        if _area(item) <= EARLY_PARCEL_MAX_M2
+    ]
+    early_ranked = sorted(
+        early_pool,
         key=lambda item: (
+            -_signal_strength(item),
             _area(item),
             float(item.get("enlem") or 0),
             float(item.get("boylam") or 0),
         ),
     )
-    early_selected = construction_asc[:early_slots]
+    early_selected = early_ranked[:early_slots]
+
+    if len(early_selected) < early_slots:
+        early_keys = {
+            key for key in map(_candidate_key, early_selected) if key is not None
+        }
+        fallback_early = sorted(
+            [
+                item for item in regular_construction
+                if (key := _candidate_key(item)) is not None and key not in early_keys
+            ],
+            key=lambda item: (
+                _area(item),
+                -_signal_strength(item),
+                float(item.get("enlem") or 0),
+                float(item.get("boylam") or 0),
+            ),
+        )
+        early_selected.extend(fallback_early[: early_slots - len(early_selected)])
     selected.extend(early_selected)
 
     remaining_construction_slots = regular_slots - len(early_selected)
@@ -276,7 +376,16 @@ def _balanced_select(
             item for item in regular_construction
             if (key := _candidate_key(item)) is not None and key not in early_keys
         ]
-        selected.extend(upper_construction[:remaining_construction_slots])
+        upper_ranked = sorted(
+            upper_construction,
+            key=lambda item: (
+                -_signal_strength(item),
+                -_area(item),
+                float(item.get("enlem") or 0),
+                float(item.get("boylam") or 0),
+            ),
+        )
+        selected.extend(upper_ranked[:remaining_construction_slots])
 
     remaining = limit - len(selected)
     selected.extend(wide[:remaining])
@@ -331,9 +440,31 @@ def _self_check():
     )
     assert construction_areas == [1000, 1500, 2000, 5500, 6000, 6500], construction_areas
 
+    # Aynı parsel ölçeğinde daha sert spektral maskeyi daha yüksek oranda taşıyan
+    # aday, yalnızca birkaç yüz m² daha küçük diye zayıf adayın arkasına düşmemeli.
+    spectral = list(synthetic)
+    spectral.extend(
+        [
+            item(80, 1100, **{STRONG_SIGNAL_FIELD: 0.10}),
+            item(81, 1900, **{STRONG_SIGNAL_FIELD: 0.85}),
+            item(82, 4500, **{STRONG_SIGNAL_FIELD: 0.75}),
+        ]
+    )
+    spectral_selected = _balanced_select(spectral)
+    spectral_keys = {_candidate_key(candidate) for candidate in spectral_selected}
+    assert _candidate_key(spectral[-2]) in spectral_keys, (
+        "Güçlü 1.900 m² erken-parsel adayı şantiye kotasında seçilmedi."
+    )
+    assert _candidate_key(spectral[-1]) in spectral_keys, (
+        "Güçlü 4.500 m² aday kalan şantiye kotasında seçilmedi."
+    )
+
     with_sidecar = list(synthetic)
-    with_sidecar.append(
-        item(90, 1200, geometri_kaynagi=DIAGONAL_SIDECAR_TAG)
+    with_sidecar.extend(
+        [
+            item(90, 1200, geometri_kaynagi=DIAGONAL_SIDECAR_TAG, **{STRONG_SIGNAL_FIELD: 0.20}),
+            item(91, 1800, geometri_kaynagi=DIAGONAL_SIDECAR_TAG, **{STRONG_SIGNAL_FIELD: 0.80}),
+        ]
     )
     sidecar_selected = _balanced_select(with_sidecar)
     selected_sidecars = [
@@ -342,6 +473,7 @@ def _self_check():
     ]
     assert len(sidecar_selected) == satellite.HOTSPOT_LIMIT
     assert len(selected_sidecars) == 1, selected_sidecars
+    assert round(_signal_strength(selected_sidecars[0]), 2) == 0.80, selected_sidecars
     assert _bucket_counts(sidecar_selected) == {
         "kucuk": 6,
         "santiye_olcegi": 6,
@@ -349,17 +481,22 @@ def _self_check():
     }
 
     # 11.000 m² ana gövdeye yalnız köşeden bağlı 1.200 m² yan küme, tek geniş
-    # 8-komşu ebeveyn içinden kontrollü bir parsel adayı olarak ayrışmalı.
+    # 8-komşu ebeveyn içinden kontrollü bir parsel adayı olarak ayrışmalı ve
+    # spektral güç oranını da taşımalı.
     diagonal = np.zeros((18, 18), dtype=bool)
     diagonal[1:12, 1:11] = True  # 110 piksel = 11.000 m²
     diagonal[12:15, 11:15] = True  # 12 piksel = 1.200 m², yalnız diyagonal temas
+    strong = np.zeros_like(diagonal)
+    strong[12:15, 11:15] = True
     geometry_candidates = _diagonal_sidecar_candidates(
         diagonal,
         [26.30, 38.20, 26.32, 38.22],
         100.0,
+        small_site_mask=strong,
     )
     assert len(geometry_candidates) == 1, geometry_candidates
     assert geometry_candidates[0]["alan_m2"] == 1200, geometry_candidates
+    assert geometry_candidates[0][STRONG_SIGNAL_FIELD] == 1.0, geometry_candidates
 
     # Ana gövdesi >10.000 m² kalmayan benzer iki orta parça ayrıştırılmamalı.
     balanced_split = np.zeros((18, 18), dtype=bool)
@@ -481,7 +618,18 @@ def rebalance_candidates():
                         datetime.now(timezone.utc).isoformat(),
                     ),
                 )
-                changed.append((region_key, len(raw), len(selected), counts))
+                construction_strengths = [
+                    _signal_strength(item)
+                    for item in selected
+                    if CONSTRUCTION_SCALE_MIN_M2 <= _area(item) <= CONSTRUCTION_SCALE_MAX_M2
+                ]
+                average_strength = (
+                    sum(construction_strengths) / len(construction_strengths)
+                    if construction_strengths else 0.0
+                )
+                changed.append(
+                    (region_key, len(raw), len(selected), counts, average_strength)
+                )
             except Exception as exc:
                 errors.append(f"{region_key}: {type(exc).__name__}: {exc}")
 
@@ -496,8 +644,9 @@ def main():
     if changed:
         detail = " | ".join(
             f"{region}: ham {raw} → {selected}; 250-800={counts['kucuk']}, "
-            f"800-10000={counts['santiye_olcegi']}, >10000={counts['genis']}"
-            for region, raw, selected, counts in changed
+            f"800-10000={counts['santiye_olcegi']}, >10000={counts['genis']}; "
+            f"seçilen 800-10000 güçlü-sinyal ort.={average_strength:.2f}"
+            for region, raw, selected, counts, average_strength in changed
         )
         print("Uydu aday dengesi: " + detail)
     else:
