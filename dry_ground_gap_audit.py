@@ -6,15 +6,19 @@ listesini burada değiştirmiyoruz. Yalnız mevcut değişim maskesinin dışın
 hem önce hem sonra düşük NDVI taşıyan ve Bare Soil Index (BSI) ile gerçek renk
 farkında eşzamanlı spektral değişim gösteren 250-2.000 m² kümeleri sayıyoruz.
 
-Bu dosyanın çıktısı yalnız diagnostiktir. Saha doğrulaması olmadan bu adaylar alarma
-veya saha görevine dönüştürülmez. Amaç özellikle kuru tarla/toprak üzerinde başlayan
-hafriyatların sistematik bir kör alan oluşturup oluşturmadığını ölçmektir.
+Ham kuru-zemin sinyali yaz sonunda çok sayıda tarla/toprak değişimi üretebildiği için
+bu diagnostik katman ayrıca küme geometrisini ölçer. Kompakt/dolgun ve aşırı lineer
+olmayan bileşenler "saha benzeri geometri" olarak işaretlenir; yakın çevredeki diğer
+kuru-zemin bileşenlerinin sayısı da kaydedilir. Bu etiketler yalnız kalibrasyon ve
+saha geri bildirimi içindir; hiçbir kayıt bu nedenle alarma/göreve dönüştürülmez,
+elenmez veya ana radar önceliği değiştirilmez.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
 from datetime import datetime
 from pathlib import Path
 
@@ -34,6 +38,15 @@ MAX_RGB_DIFFERENCE = 0.24
 MIN_ABS_BRIGHTNESS_CHANGE = 0.025
 MIN_ABS_BSI_CHANGE = 0.10
 EXAMPLE_LIMIT = 8
+
+# Bu eşikler üretim filtresi değildir. Ham kuru-zemin körlük havuzunu, saha sonucu
+# geldiğinde hangi şekil sinyalinin işe yaradığını ölçebilmek için alt gruplara ayırır.
+SITE_LIKE_MAX_ASPECT = 3.5
+SITE_LIKE_MIN_FILL = 0.35
+SITE_LIKE_MIN_COMPACTNESS = 0.18
+LINEAR_RISK_MIN_ASPECT = 4.0
+LINEAR_RISK_MAX_COMPACTNESS = 0.12
+LOCAL_CLUSTER_RADIUS_M = 120
 
 
 def _bsi(blue, red, nir, swir):
@@ -60,6 +73,56 @@ def _component_location(component, bbox, shape):
     return round(latitude, 6), round(longitude, 6)
 
 
+def _perimeter_edges(component):
+    pixels = set(component)
+    exposed = 0
+    for row, column in component:
+        exposed += (row - 1, column) not in pixels
+        exposed += (row + 1, column) not in pixels
+        exposed += (row, column - 1) not in pixels
+        exposed += (row, column + 1) not in pixels
+    return max(int(exposed), 1)
+
+
+def _shape_metrics(component):
+    pixels = np.asarray(component, dtype="int32")
+    rows = pixels[:, 0]
+    columns = pixels[:, 1]
+    row_span = int(rows.max() - rows.min() + 1)
+    col_span = int(columns.max() - columns.min() + 1)
+    short_span = max(min(row_span, col_span), 1)
+    long_span = max(row_span, col_span)
+    aspect_ratio = float(long_span / short_span)
+    fill_ratio = float(len(component) / max(row_span * col_span, 1))
+    perimeter = _perimeter_edges(component)
+    compactness = float(4 * math.pi * len(component) / (perimeter * perimeter))
+    site_like = (
+        aspect_ratio <= SITE_LIKE_MAX_ASPECT
+        and fill_ratio >= SITE_LIKE_MIN_FILL
+        and compactness >= SITE_LIKE_MIN_COMPACTNESS
+    )
+    linear_risk = (
+        aspect_ratio >= LINEAR_RISK_MIN_ASPECT
+        or compactness <= LINEAR_RISK_MAX_COMPACTNESS
+    )
+    return {
+        "uzun_kisa_orani": round(aspect_ratio, 2),
+        "kutu_doluluk_orani": round(fill_ratio, 3),
+        "kompaktlik": round(compactness, 3),
+        "saha_benzeri_geometri": bool(site_like),
+        "lineer_geometri_riski": bool(linear_risk),
+    }
+
+
+def _distance_m(first, second):
+    lat1, lon1 = first
+    lat2, lon2 = second
+    mean_lat = math.radians((lat1 + lat2) / 2)
+    north = (lat1 - lat2) * 110570
+    east = (lon1 - lon2) * 111320 * math.cos(mean_lat)
+    return math.hypot(north, east)
+
+
 def _records(mask, bbox, pixel_area_m2, bsi_delta, rgb_difference):
     records = []
     for component in satellite._connected_components(mask):
@@ -68,20 +131,39 @@ def _records(mask, bbox, pixel_area_m2, bsi_delta, rgb_difference):
             continue
         pixels = np.asarray(component, dtype="int32")
         latitude, longitude = _component_location(component, bbox, mask.shape)
-        records.append(
-            {
-                "mahalle": satellite._nearest_place(latitude, longitude),
-                "enlem": latitude,
-                "boylam": longitude,
-                "alan_m2": round(area_m2),
-                "ortalama_bsi_degisim": round(
-                    float(np.mean(bsi_delta[pixels[:, 0], pixels[:, 1]])), 4
-                ),
-                "ortalama_rgb_farki": round(
-                    float(np.mean(rgb_difference[pixels[:, 0], pixels[:, 1]])), 4
-                ),
-            }
+        record = {
+            "mahalle": satellite._nearest_place(latitude, longitude),
+            "enlem": latitude,
+            "boylam": longitude,
+            "alan_m2": round(area_m2),
+            "ortalama_bsi_degisim": round(
+                float(np.mean(bsi_delta[pixels[:, 0], pixels[:, 1]])), 4
+            ),
+            "ortalama_rgb_farki": round(
+                float(np.mean(rgb_difference[pixels[:, 0], pixels[:, 1]])), 4
+            ),
+        }
+        record.update(_shape_metrics(component))
+        record["yakindaki_kuru_degisim_120m"] = 0
+        records.append(record)
+
+    # Çok sayıda birbirine yakın küçük kuru-zemin parçası tarla sürümü, geniş alan
+    # hazırlığı veya görüntü/geometri etkisi olabilir. Bunu yalnız bağlamsal sinyal
+    # olarak ölçüyoruz; yakın kümeler gerçek bir toplu şantiye de olabilir.
+    for index, first in enumerate(records):
+        first_point = (float(first["enlem"]), float(first["boylam"]))
+        neighbors = 0
+        for second_index, second in enumerate(records):
+            if index == second_index:
+                continue
+            second_point = (float(second["enlem"]), float(second["boylam"]))
+            if _distance_m(first_point, second_point) <= LOCAL_CLUSTER_RADIUS_M:
+                neighbors += 1
+        first["yakindaki_kuru_degisim_120m"] = neighbors
+        first["izole_saha_benzeri"] = bool(
+            first.get("saha_benzeri_geometri") and neighbors == 0
         )
+
     return sorted(
         records,
         key=lambda item: (
@@ -201,6 +283,18 @@ def _analyze_region(region_key, pair):
         bsi_delta,
         rgb_difference,
     )
+    site_like = [item for item in records if item.get("saha_benzeri_geometri")]
+    isolated_site_like = [item for item in site_like if item.get("izole_saha_benzeri")]
+    linear_risk = [item for item in records if item.get("lineer_geometri_riski")]
+    site_like_examples = sorted(
+        site_like,
+        key=lambda item: (
+            int(item.get("yakindaki_kuru_degisim_120m") or 0),
+            -float(item.get("ortalama_bsi_degisim") or 0),
+            -float(item.get("ortalama_rgb_farki") or 0),
+        ),
+    )[:EXAMPLE_LIMIT]
+
     return {
         "bolge": region["label"],
         "onceki_item": older.get("id"),
@@ -209,7 +303,11 @@ def _analyze_region(region_key, pair):
         "son_tarih": satellite._item_date(latest),
         "durum": "ok",
         "potansiyel_kuru_zemin_korlugu": len(records),
+        "saha_benzeri_geometri": len(site_like),
+        "izole_saha_benzeri_geometri": len(isolated_site_like),
+        "lineer_geometri_riski": len(linear_risk),
         "ornekler": records[:EXAMPLE_LIMIT],
+        "saha_benzeri_ornekler": site_like_examples,
     }
 
 
@@ -243,6 +341,16 @@ def _self_check():
         weak, satellite.SMALL_HOTSPOT_MIN_PIXELS
     ).sum()) == 0
 
+    square = [(r, c) for r in range(3) for c in range(3)]
+    strip = [(0, c) for c in range(9)]
+    square_shape = _shape_metrics(square)
+    strip_shape = _shape_metrics(strip)
+    assert square_shape["saha_benzeri_geometri"], square_shape
+    assert not square_shape["lineer_geometri_riski"], square_shape
+    assert strip_shape["lineer_geometri_riski"], strip_shape
+    assert not strip_shape["saha_benzeri_geometri"], strip_shape
+    assert _distance_m((38.30, 26.30), (38.30, 26.30)) == 0
+
 
 def run_audit():
     _self_check()
@@ -252,7 +360,9 @@ def run_audit():
         "olusturma": datetime.now(ISTANBUL).strftime("%Y-%m-%d %H:%M %z"),
         "amac": (
             "Mevcut alarm üretim maskesinin dışında kalan düşük-NDVI 250-2.000 m² "
-            "kuru zemin spektral değişimlerini BSI ile ölçmek; alarm/görev üretmez."
+            "kuru zemin spektral değişimlerini BSI ile ölçmek; ayrıca kompaktlık, "
+            "uzun/kısa oranı ve 120 m yerel kümelenmeyi saha kalibrasyonu için kaydetmek; "
+            "alarm/görev üretmez."
         ),
         "esikler": {
             "alan_m2": [satellite.MIN_HOTSPOT_AREA_M2, MAX_AUDIT_AREA_M2],
@@ -261,7 +371,17 @@ def run_audit():
             "rgb_farki": [MIN_RGB_DIFFERENCE, MAX_RGB_DIFFERENCE],
             "min_mutlak_parlaklik_degisim": MIN_ABS_BRIGHTNESS_CHANGE,
             "min_mutlak_bsi_degisim": MIN_ABS_BSI_CHANGE,
+            "saha_benzeri_max_uzun_kisa": SITE_LIKE_MAX_ASPECT,
+            "saha_benzeri_min_kutu_doluluk": SITE_LIKE_MIN_FILL,
+            "saha_benzeri_min_kompaktlik": SITE_LIKE_MIN_COMPACTNESS,
+            "lineer_risk_min_uzun_kisa": LINEAR_RISK_MIN_ASPECT,
+            "lineer_risk_max_kompaktlik": LINEAR_RISK_MAX_COMPACTNESS,
+            "yerel_kume_yaricapi_m": LOCAL_CLUSTER_RADIUS_M,
         },
+        "uyari": (
+            "Geometri ve yakınlık etiketleri yalnız diagnostiktir; saha doğrulaması olmadan "
+            "hiçbir kuru-zemin kaydı alarm/görev değildir ve üretim radarı etkilenmez."
+        ),
         "bolgeler": {},
     }
 
@@ -310,7 +430,10 @@ def main():
     args = parser.parse_args()
     _self_check()
     if args.check_only:
-        print("Kuru zemin körlük denetimi öz testi başarılı; üretim alarmı değişmedi.")
+        print(
+            "Kuru zemin körlük denetimi öz testi başarılı; üretim alarmı değişmedi, "
+            "saha-benzeri geometri ve yerel kümelenme diagnostik olarak ölçülüyor."
+        )
         return
 
     payload = run_audit()
@@ -318,7 +441,10 @@ def main():
     for region_key, data in payload.get("bolgeler", {}).items():
         if data.get("durum") == "ok":
             counts.append(
-                f"{region_key}={int(data.get('potansiyel_kuru_zemin_korlugu') or 0)}"
+                f"{region_key}={int(data.get('potansiyel_kuru_zemin_korlugu') or 0)} "
+                f"(saha-benzeri={int(data.get('saha_benzeri_geometri') or 0)}, "
+                f"izole={int(data.get('izole_saha_benzeri_geometri') or 0)}, "
+                f"lineer-risk={int(data.get('lineer_geometri_riski') or 0)})"
             )
         else:
             counts.append(f"{region_key}={data.get('durum')}")
