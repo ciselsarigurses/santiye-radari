@@ -1,6 +1,18 @@
-"""Post-dedupe şantiye kotası katmanını regresyon testiyle çalıştırır."""
+"""Post-dedupe şantiye kotası katmanını regresyon testiyle çalıştırır.
+
+Erken hafriyat hedefi için toplam alarm sayısını büyütmeden 800-10.000 m²
+şantiye/parsel ölçeği tabanını 6'dan 8'e çıkarır. Ana Sentinel spektral eşikleri,
+250 m² alt sınırı ve küçük-saha kotası değişmez. Ek iki yer yalnız en zayıf geniş
+>10.000 m² adaylarla takas edilir ve politika mevcut Sentinel sahnesini geriye
+dönük karıştırmadan ilk yeni sahnede devreye girer.
+"""
 
 import post_dedupe_construction_quota as quota
+
+
+TARGET_CONSTRUCTION_QUOTA = 8
+quota.rebalance.CONSTRUCTION_SCALE_QUOTA = TARGET_CONSTRUCTION_QUOTA
+quota.POLICY_VERSION = "post-dedupe-construction-quota-v2-target8-next-scene"
 
 
 def _fixed_self_check():
@@ -18,17 +30,23 @@ def _fixed_self_check():
     current.extend(item(30 + i, 20000 + i * 1000, 0.1) for i in range(12))
 
     raw = list(current)
-    raw.append(item(80, 1800, 0.9))
+    raw.extend(
+        [
+            item(80, 1800, 0.90),
+            item(81, 3200, 0.85),
+            item(82, 4800, 0.80),
+        ]
+    )
     updated, swaps = quota._swap_without_growth(current, raw, current)
     assert len(updated) == len(current)
-    assert len(swaps) == 1
-    assert sum(quota._is_construction(candidate) for candidate in updated) == 6
-    assert sum(quota._is_wide(candidate) for candidate in updated) == 11
+    assert len(swaps) == 3
+    assert sum(quota._is_construction(candidate) for candidate in updated) == 8
+    assert sum(quota._is_wide(candidate) for candidate in updated) == 9
 
     duplicate_raw = list(current)
     duplicate_raw.append(
         {
-            **item(81, 950, 1.0),
+            **item(90, 950, 1.0),
             "enlem": current[1]["enlem"] + 0.00001,
             "boylam": current[1]["boylam"] + 0.00001,
         }
