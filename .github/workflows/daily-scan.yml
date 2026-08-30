@@ -13,6 +13,7 @@ on:
       - "candidate_capacity_audit.py"
       - "shape_false_positive_audit.py"
       - "dry_ground_gap_audit.py"
+      - "reflectance_metadata_audit.py"
       - "rebalance_satellite_candidates.py"
       - "post_dedupe_construction_quota.py"
       - "post_dedupe_construction_quota_runner.py"
@@ -90,6 +91,9 @@ jobs:
 
       - name: Sentinel global bulut eşiği körlük denetimi
         run: python cloud_threshold_audit.py
+
+      - name: Sentinel reflektans scale-offset metadata denetimi
+        run: python reflectance_metadata_audit.py
 
       - name: Saha görev ayrıştırma kalite kontrolü
         run: python field_state_quality.py
@@ -171,7 +175,7 @@ jobs:
 
       - name: Tarama ve rapor sonuçlarını kaydet
         run: |
-          report_files="santiye.db SAHA_RAPORU.md latest_report.json candidate_capacity_audit.json shape_false_positive_audit.json dry_ground_gap_audit.json"
+          report_files="santiye.db SAHA_RAPORU.md latest_report.json candidate_capacity_audit.json shape_false_positive_audit.json dry_ground_gap_audit.json reflectance_metadata_audit.json"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Yeni veya güncellenen bulgu/rapor yok."
             exit 0
@@ -197,6 +201,7 @@ jobs:
             python temporal_quality.py
             python latest_cloud_quality.py
             python cloud_threshold_audit.py
+            python reflectance_metadata_audit.py
             python field_state_quality.py
             python scanner.py
             python source_label_quality.py
