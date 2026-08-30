@@ -1,9 +1,9 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-30
-**Hazırlanma:** 2026-08-30 13:30 +03
+**Hazırlanma:** 2026-08-30 14:37 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17
+**Özet:** İnternet: 2 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
@@ -629,7 +629,8 @@
 
 ## Bugünün yeni internet / sosyal medya bulguları
 
-Bugün ilk kez bulunan yeni internet sonucu yok.
+- **TURUNCU · 7 puan · Çeşme:** ["Hanem Çeşme Kiralık Sosyal Konut Projesi” temel atma töreni... İzmir Büyükşehir Belediye Başkanı Tugay: "Birilerini zengin etmek için değil, halkımız için çalışacağız" - Anka Haber](https://news.google.com/rss/articles/CBMipwJBVV95cUxPc3VQZVZtcW1sZG1lemFrd1hUNlNrNThWSGZnR2NzbWp6cXNiZjVTanQ2MWEwVDlIazl6WFMxT1pKdF9mazMxWVl2M0ozbkJlWm5LUTlZZXRjN0x1N1pHUlNObGtXZnNWRE5jWXB5c2xrX1poQjJIaHhXZUxkSXlBem9aMng2T1FUdHhuOVZQT1RUVzlhWXFsX1FUbXc2WXAycjBNZ0tDQy10cDJ2eGs1MmN5aW9TUFBNczQ3Z1dZbU80U3RoRGNnenVGZHVwRlF4amF0ZFpQSEhJWnkzZFhsRzhoRXRxM01pUDJEb0Q2NTRleFhwOTZwSGNDT3k2Yy1sN3BhT3pnNmlCTU1wdzZ0bmRQM203WDZLdGc1R2lDNjJQNTVJWmp3?oc=5) — temel at, konut projesi, proje
+- **TURUNCU · 7 puan · Çeşme:** ["Hanem Çeşme Kiralık Sosyal Konut Projesi” temel atma töreni... Özgür Özel: İktidarımızda TOKİ'nin önüne, yılda 120 bin sosyal konut hedefi koyacağız - Anka Haber](https://news.google.com/rss/articles/CBMijwJBVV95cUxOWkYySFRaNjZlNHlfNkZlZWxSa1JwNFBNaV9Cc1cwd1lFdnJsZGZZUk9ma092MUh2U2d5b2xiYTJuOXc5VHd6VC1vMmVIQzB5a2JxazQ5eVBDN2dKVTduc25udW1yVWhaSndKWU9KS0FFSF9kVG1PNzVWYmYxcExCRGJfS25ZanRjLXdlNFptQXNnLXlJREw5dWNjVEJEbVZLVVR0ek92blR3cDV0SDc1SE1UV2FoM0dKUFhWTVIzZXExMHRxdHlDNWp0b1JvdS1PQW9MX2IxS01oUFBQeU5VSTNSZzZicU5FN2hZRUlFZElFbjFFQ29pVG9qR3duSFlibk5nd0g2YzdOcF95U0hZ?oc=5) — temel at, konut projesi, proje
 
 ## Aktif güçlü internet fırsatları
 
