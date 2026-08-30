@@ -20,10 +20,12 @@ benzeyen adayların seçilme ihtimali yükselir.
 engellenir. Toplam 24 aday ve 6 şantiye-ölçeği kotası artmaz; bu tür gömülü parseller
 için en fazla 1 şantiye-ölçeği yeri ayrılır.
 
-Seçim yalnız yeni Sentinel görüntüsü geldiğinde veya bu seçimin sürümü değiştiğinde
-uygulanır. Böylece daha sonraki zaman-serisi/bulut tamamlama adayları aynı görüntüde
-tekrar tekrar silinmez. Baz aday listesi değiştiğinde tamamlayıcı katmanların durum
-cache'leri sıfırlanır; aynı akışta güvenli biçimde yeniden değerlendirilebilirler.
+Yeni seçim politikası, daha önce işlenmiş aynı Sentinel sahnesine geriye dönük olarak
+yeni görevler üretmek için uygulanmaz. Aynı sahne hâlâ güncelse politika sürümü
+ilerletilir; yeni görüntü olmayan günde önceki günün aynı-sahne seçimi korunur. Böylece
+kod iyileştirmesi tek başına saha kuyruğunu şişirmez. Yeni spektral sıralama ilk yeni
+Sentinel sahnesinde devreye girer. Saha tarafından dokunulmuş görevler bu katmanda
+hiçbir zaman kapatılmaz.
 """
 
 from __future__ import annotations
@@ -38,7 +40,7 @@ from daily_report import ISTANBUL, REPORT_REGIONS, build_daily_report, ensure_da
 from scanner import connect
 
 
-SELECTION_VERSION = "construction-scale-quota-v4-spectral-strength"
+SELECTION_VERSION = "construction-scale-quota-v5-spectral-strength-next-scene"
 RAW_LIMIT = 1_000_000
 CONSTRUCTION_SCALE_MIN_M2 = satellite.SMALL_HOTSPOT_MAX_M2
 CONSTRUCTION_SCALE_MAX_M2 = 10_000
@@ -200,8 +202,6 @@ def _diagonal_sidecar_candidates(
             continue
         parent_area = parent_areas[parent_index]
         child_areas = [len(component) * pixel_area_m2 for component in children]
-        # En az bir ana gövde hâlâ geniş sınıfta kalmalı. Bu şart, 7-8 bin m² gibi
-        # tek bir şantiye kümesinin iki orta parçaya bölünüp çoğalmasını engeller.
         if not any(area > CONSTRUCTION_SCALE_MAX_M2 for area in child_areas):
             continue
         for component, child_area in zip(children, child_areas):
@@ -416,6 +416,33 @@ def _bucket_counts(items):
     return counts
 
 
+def _same_scene_policy_change(state, latest_item):
+    return bool(
+        state
+        and str(state[0] or "") == str(latest_item or "")
+        and str(state[1] or "") != SELECTION_VERSION
+    )
+
+
+def _previous_same_scene_selection(connection, region_key, report_date, latest_item):
+    row = connection.execute(
+        """SELECT hareket_json FROM gunluk_uydu_raporlari
+        WHERE bolge=? AND rapor_tarihi<? AND son_item=?
+        AND COALESCE(hata,'')=''
+        ORDER BY rapor_tarihi DESC LIMIT 1""",
+        (region_key, report_date, latest_item),
+    ).fetchone()
+    if not row:
+        return None
+    try:
+        movement = json.loads(row[0] or "[]")
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(movement, list):
+        return None
+    return [item for item in movement if isinstance(item, dict)]
+
+
 def _self_check():
     def item(index, area, **extra):
         return {
@@ -440,8 +467,6 @@ def _self_check():
     )
     assert construction_areas == [1000, 1500, 2000, 5500, 6000, 6500], construction_areas
 
-    # Aynı parsel ölçeğinde daha sert spektral maskeyi daha yüksek oranda taşıyan
-    # aday, yalnızca birkaç yüz m² daha küçük diye zayıf adayın arkasına düşmemeli.
     spectral = list(synthetic)
     spectral.extend(
         [
@@ -480,12 +505,9 @@ def _self_check():
         "genis": 12,
     }
 
-    # 11.000 m² ana gövdeye yalnız köşeden bağlı 1.200 m² yan küme, tek geniş
-    # 8-komşu ebeveyn içinden kontrollü bir parsel adayı olarak ayrışmalı ve
-    # spektral güç oranını da taşımalı.
     diagonal = np.zeros((18, 18), dtype=bool)
-    diagonal[1:12, 1:11] = True  # 110 piksel = 11.000 m²
-    diagonal[12:15, 11:15] = True  # 12 piksel = 1.200 m², yalnız diyagonal temas
+    diagonal[1:12, 1:11] = True
+    diagonal[12:15, 11:15] = True
     strong = np.zeros_like(diagonal)
     strong[12:15, 11:15] = True
     geometry_candidates = _diagonal_sidecar_candidates(
@@ -498,9 +520,8 @@ def _self_check():
     assert geometry_candidates[0]["alan_m2"] == 1200, geometry_candidates
     assert geometry_candidates[0][STRONG_SIGNAL_FIELD] == 1.0, geometry_candidates
 
-    # Ana gövdesi >10.000 m² kalmayan benzer iki orta parça ayrıştırılmamalı.
     balanced_split = np.zeros((18, 18), dtype=bool)
-    balanced_split[1:7, 1:11] = True  # 6.000 m²
+    balanced_split[1:7, 1:11] = True
     balanced_split[7:12, 11:21 if balanced_split.shape[1] > 21 else 18] = False
     assert not _diagonal_sidecar_candidates(
         balanced_split,
@@ -519,6 +540,16 @@ def _self_check():
 
     short = [item(200, 300), item(201, 1800), item(202, 15000)]
     assert _balanced_select(short) == sorted(short, key=lambda x: _area(x), reverse=True)
+
+    assert _same_scene_policy_change(
+        ("scene-a", "old-policy"), "scene-a"
+    )
+    assert not _same_scene_policy_change(
+        ("scene-b", "old-policy"), "scene-a"
+    )
+    assert not _same_scene_policy_change(
+        ("scene-a", SELECTION_VERSION), "scene-a"
+    )
 
 
 def _ensure_state_table(connection):
@@ -544,11 +575,42 @@ def _reset_complementary_state(connection, region_key):
             connection.execute(f"DELETE FROM {table_name} WHERE bolge=?", (region_key,))
 
 
+def _store_selection_state(
+    connection,
+    region_key,
+    latest_item,
+    raw_count,
+    selected,
+):
+    counts = _bucket_counts(selected)
+    connection.execute(
+        """INSERT INTO uydu_aday_secim_surumu
+        (bolge,son_item,surum,ham_aday,secilen_aday,santiye_olcegi_aday,guncelleme)
+        VALUES(?,?,?,?,?,?,?)
+        ON CONFLICT(bolge) DO UPDATE SET
+        son_item=excluded.son_item,surum=excluded.surum,
+        ham_aday=excluded.ham_aday,secilen_aday=excluded.secilen_aday,
+        santiye_olcegi_aday=excluded.santiye_olcegi_aday,
+        guncelleme=excluded.guncelleme""",
+        (
+            region_key,
+            latest_item,
+            SELECTION_VERSION,
+            int(raw_count or 0),
+            len(selected),
+            counts["santiye_olcegi"],
+            datetime.now(timezone.utc).isoformat(),
+        ),
+    )
+    return counts
+
+
 def rebalance_candidates():
     ensure_daily_schema()
     _self_check()
     report_date = datetime.now(ISTANBUL).strftime("%Y-%m-%d")
     changed = []
+    deferred = []
     skipped = []
     errors = []
 
@@ -557,7 +619,8 @@ def rebalance_candidates():
         for region_key in REPORT_REGIONS:
             try:
                 row = connection.execute(
-                    """SELECT son_item,hareket_json,hata FROM gunluk_uydu_raporlari
+                    """SELECT son_item,hareket_json,hata,yeni_goruntu
+                    FROM gunluk_uydu_raporlari
                     WHERE rapor_tarihi=? AND bolge=? LIMIT 1""",
                     (report_date, region_key),
                 ).fetchone()
@@ -567,12 +630,62 @@ def rebalance_candidates():
 
                 latest_item = str(row[0])
                 state = connection.execute(
-                    """SELECT son_item,surum FROM uydu_aday_secim_surumu
+                    """SELECT son_item,surum,ham_aday FROM uydu_aday_secim_surumu
                     WHERE bolge=? LIMIT 1""",
                     (region_key,),
                 ).fetchone()
                 if state and state[0] == latest_item and state[1] == SELECTION_VERSION:
                     skipped.append(region_key)
+                    continue
+
+                if _same_scene_policy_change(state, latest_item):
+                    current = []
+                    try:
+                        parsed = json.loads(row[1] or "[]")
+                        if isinstance(parsed, list):
+                            current = [item for item in parsed if isinstance(item, dict)]
+                    except (TypeError, ValueError, json.JSONDecodeError):
+                        current = []
+
+                    preserved = current
+                    restored_previous = False
+                    if not bool(row[3]):
+                        previous = _previous_same_scene_selection(
+                            connection,
+                            region_key,
+                            report_date,
+                            latest_item,
+                        )
+                        if previous is not None:
+                            preserved = previous
+                            restored_previous = True
+                            connection.execute(
+                                """UPDATE gunluk_uydu_raporlari SET hareket_json=?
+                                WHERE rapor_tarihi=? AND bolge=? AND son_item=?""",
+                                (
+                                    json.dumps(preserved, ensure_ascii=False),
+                                    report_date,
+                                    region_key,
+                                    latest_item,
+                                ),
+                            )
+                            _reset_complementary_state(connection, region_key)
+
+                    counts = _store_selection_state(
+                        connection,
+                        region_key,
+                        latest_item,
+                        state[2] if len(state) > 2 else 0,
+                        preserved,
+                    )
+                    deferred.append(
+                        (
+                            region_key,
+                            len(preserved),
+                            counts,
+                            restored_previous,
+                        )
+                    )
                     continue
 
                 pair = satellite.sentinel_pair(region_key)
@@ -599,24 +712,12 @@ def rebalance_candidates():
                     ),
                 )
                 _reset_complementary_state(connection, region_key)
-                connection.execute(
-                    """INSERT INTO uydu_aday_secim_surumu
-                    (bolge,son_item,surum,ham_aday,secilen_aday,santiye_olcegi_aday,guncelleme)
-                    VALUES(?,?,?,?,?,?,?)
-                    ON CONFLICT(bolge) DO UPDATE SET
-                    son_item=excluded.son_item,surum=excluded.surum,
-                    ham_aday=excluded.ham_aday,secilen_aday=excluded.secilen_aday,
-                    santiye_olcegi_aday=excluded.santiye_olcegi_aday,
-                    guncelleme=excluded.guncelleme""",
-                    (
-                        region_key,
-                        latest_item,
-                        SELECTION_VERSION,
-                        len(raw),
-                        len(selected),
-                        counts["santiye_olcegi"],
-                        datetime.now(timezone.utc).isoformat(),
-                    ),
+                _store_selection_state(
+                    connection,
+                    region_key,
+                    latest_item,
+                    len(raw),
+                    selected,
                 )
                 construction_strengths = [
                     _signal_strength(item)
@@ -633,14 +734,14 @@ def rebalance_candidates():
             except Exception as exc:
                 errors.append(f"{region_key}: {type(exc).__name__}: {exc}")
 
-    if changed:
+    if changed or any(item[3] for item in deferred):
         build_daily_report()
-    return changed, skipped, errors
+    return changed, deferred, skipped, errors
 
 
 def main():
     _self_check()
-    changed, skipped, errors = rebalance_candidates()
+    changed, deferred, skipped, errors = rebalance_candidates()
     if changed:
         detail = " | ".join(
             f"{region}: ham {raw} → {selected}; 250-800={counts['kucuk']}, "
@@ -649,7 +750,17 @@ def main():
             for region, raw, selected, counts, average_strength in changed
         )
         print("Uydu aday dengesi: " + detail)
-    else:
+    if deferred:
+        detail = " | ".join(
+            f"{region}: {selected} aday; "
+            + ("önceki aynı-sahne seçimi geri korundu" if restored else "mevcut aynı-sahne seçimi korundu")
+            for region, selected, _counts, restored in deferred
+        )
+        print(
+            "Seçim politikası yeni Sentinel sahnesine ertelendi; görev şişmesi önlendi: "
+            + detail
+        )
+    if not changed and not deferred:
         print("Uydu aday dengesi güncel; yeniden seçim gerekmedi.")
     if skipped:
         print("Atlanan/güncel bölgeler: " + ", ".join(skipped))
