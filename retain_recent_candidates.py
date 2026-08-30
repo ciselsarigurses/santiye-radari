@@ -14,6 +14,7 @@ başlangıç eylemi anlatan sonuçlar ek mahalle taramasında yeniden aktive edi
 from __future__ import annotations
 
 import hashlib
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
@@ -104,6 +105,9 @@ STALE_START_EVENT_PHRASES = (
     "inşaata başlandı",
     "şantiye kuruldu",
 )
+SUPPLEMENTAL_MAX_WORKERS = 3
+SUPPLEMENTAL_RETRY_ATTEMPTS = 2
+SUPPLEMENTAL_RETRY_DELAY_SECONDS = 1.5
 
 
 def _configure_specific_locations():
@@ -164,6 +168,36 @@ def _deactivate_urls(urls):
         return max(cursor.rowcount or 0, 0)
 
 
+def _new_session():
+    session = requests.Session()
+    session.headers.update(
+        {"User-Agent": scanner.USER_AGENT, "Accept-Language": "tr-TR,tr;q=0.9"}
+    )
+    return session
+
+
+def _search_with_retry(engine, query, attempts=SUPPLEMENTAL_RETRY_ATTEMPTS, delay=SUPPLEMENTAL_RETRY_DELAY_SECONDS):
+    """Arama motorunu bağımsız oturumla sınırlı sayıda yeniden dene.
+
+    ``requests.Session`` nesnesini eşzamanlı görevler arasında paylaşmıyoruz. İlk
+    denemede geçici HTTP/timeout hatası olursa yalnız bir kez, kısa gecikmeyle
+    yeniden denenir. Kalıcı hata sessizce yutulmaz; çağırana hata tipi döner.
+    """
+    tries = max(int(attempts), 1)
+    last_error = None
+    for attempt in range(1, tries + 1):
+        session = _new_session()
+        try:
+            return list(engine(session, query)), attempt, None
+        except Exception as exc:
+            last_error = exc
+        finally:
+            session.close()
+        if attempt < tries and delay > 0:
+            time.sleep(float(delay))
+    return [], tries, type(last_error).__name__ if last_error is not None else "UnknownError"
+
+
 def _self_check():
     reference = datetime(2026, 8, 30, 12, 0, tzinfo=timezone.utc)
     assert _stale_start_event(
@@ -191,6 +225,25 @@ def _self_check():
         now=reference,
     )
 
+    calls = {"count": 0}
+
+    def flaky_engine(session, query):
+        del session, query
+        calls["count"] += 1
+        if calls["count"] == 1:
+            raise requests.Timeout("geçici")
+        return [{"title": "ok"}]
+
+    rows, attempts, error = _search_with_retry(
+        flaky_engine,
+        "test",
+        attempts=2,
+        delay=0,
+    )
+    assert rows == [{"title": "ok"}]
+    assert attempts == 2
+    assert error is None
+
 
 def supplemental_neighborhood_scan():
     """Resmi mahallelerin tamamını düşük-riskli ek aramayla tara.
@@ -209,47 +262,49 @@ def supplemental_neighborhood_scan():
         'Uzunkuyu Urla "hafriyat" OR "temel" OR "yeni inşaat" OR "şantiye" OR "villa projesi"'
     )
 
-    session = requests.Session()
-    session.headers.update(
-        {"User-Agent": scanner.USER_AGENT, "Accept-Language": "tr-TR,tr;q=0.9"}
-    )
     found = {}
     stale_urls = set()
     errors = []
+    retry_recovered = 0
     jobs = []
 
-    with ThreadPoolExecutor(max_workers=6) as pool:
+    with ThreadPoolExecutor(max_workers=SUPPLEMENTAL_MAX_WORKERS) as pool:
         for query in queries:
             for engine_name, engine in (
                 ("Google Haberler", scanner._google_news),
                 ("Web", scanner._duckduckgo),
             ):
-                jobs.append((query, engine_name, pool.submit(engine, session, query)))
+                jobs.append(
+                    (query, engine_name, pool.submit(_search_with_retry, engine, query))
+                )
 
         for query, engine_name, future in jobs:
-            try:
-                for raw in future.result():
-                    url = scanner._canonical_url(raw.get("url", ""))
-                    if _stale_start_event(raw):
-                        if url:
-                            stale_urls.add(url)
-                        continue
-                    candidate = scanner._evaluate(
-                        raw.get("title", ""),
-                        raw.get("snippet", ""),
-                        url,
-                        raw.get("published"),
-                    )
-                    if not candidate:
-                        continue
-                    key = hashlib.sha1(
-                        candidate["kaynak_url"].encode("utf-8")
-                    ).hexdigest()
-                    old = found.get(key)
-                    if not old or candidate["skor"] > old["skor"]:
-                        found[key] = candidate
-            except Exception as exc:
-                errors.append(f"{engine_name} / {query}: {type(exc).__name__}")
+            raw_rows, attempts, error_name = future.result()
+            if error_name:
+                errors.append(f"{engine_name} / {query}: {error_name}")
+                continue
+            if attempts > 1:
+                retry_recovered += 1
+            for raw in raw_rows:
+                url = scanner._canonical_url(raw.get("url", ""))
+                if _stale_start_event(raw):
+                    if url:
+                        stale_urls.add(url)
+                    continue
+                candidate = scanner._evaluate(
+                    raw.get("title", ""),
+                    raw.get("snippet", ""),
+                    url,
+                    raw.get("published"),
+                )
+                if not candidate:
+                    continue
+                key = hashlib.sha1(
+                    candidate["kaynak_url"].encode("utf-8")
+                ).hexdigest()
+                old = found.get(key)
+                if not old or candidate["skor"] > old["skor"]:
+                    found[key] = candidate
 
     new_count, updated_count = scanner._store(
         list(found.values()),
@@ -261,6 +316,7 @@ def supplemental_neighborhood_scan():
         "new": new_count,
         "updated": updated_count,
         "errors": errors,
+        "retry_recovered": retry_recovered,
         "repaired_labels": repaired_labels,
         "stale_urls": sorted(stale_urls),
     }
@@ -291,10 +347,15 @@ if __name__ == "__main__":
         f"{supplemental['repaired_labels']} kaynak etiketi düzeltildi; "
         f"{supplemental['stale_deactivated']} eski başlangıç haberi pasifleştirildi."
     )
+    if supplemental["retry_recovered"]:
+        print(
+            f"Ek mahalle taramasında {supplemental['retry_recovered']} geçici kaynak/arama hatası "
+            "sınırlı yeniden denemeyle kurtarıldı."
+        )
     if supplemental["errors"]:
         print(
-            f"Ek mahalle taramasında {len(supplemental['errors'])} geçici kaynak/arama hatası oluştu; "
-            "ana tarama adayları pasife alınmadı."
+            f"Ek mahalle taramasında {len(supplemental['errors'])} kaynak/arama hatası "
+            "yeniden denemeden sonra da kaldı; ana tarama adayları pasife alınmadı."
         )
     if retention["skipped"]:
         print("Aday kalıcılığı: veri güvenliği nedeniyle bu turda aktiflik değiştirilmedi.")
