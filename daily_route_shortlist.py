@@ -10,10 +10,11 @@ ilk işler net kalır ve tek analiz kutusunda yığılma nedeniyle diğer yarım
 operasyonel olarak kör kalmaz.
 
 Ayrıca üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, yalnız kompakt,
-izole ve lineer olmayan bir adayı günlük tek bir ``alarm değil`` kalibrasyon noktası
-olarak gösterir. Bu nokta aktif görevlerin en az 120 m dışında olmalıdır. Amaç alarm
-sayısını büyütmek değil, mevcut filtrenin kaçırabileceği hafriyat tipini sahada ölçmek
-ve gelecek eşik ayarını gerçek saha geri bildirimiyle yapabilmektir.
+izole ve lineer olmayan adaylardan uydu bölgesi başına en fazla bir, toplam iki
+``alarm değil`` kalibrasyon noktası gösterir. Bu noktalar aktif görevlerin en az 120 m
+dışında olmalıdır. Amaç alarm sayısını büyütmek değil, mevcut filtrenin kaçırabileceği
+hafriyat tipini iki analiz bölgesinde de sahada ölçmek ve gelecek eşik ayarını gerçek
+saha geri bildirimiyle yapabilmektir.
 """
 
 from __future__ import annotations
@@ -27,7 +28,8 @@ REPORT_JSON = Path(__file__).with_name("latest_report.json")
 FIELD_REPORT_MD = Path(__file__).with_name("SAHA_RAPORU.md")
 DRY_GROUND_AUDIT = Path(__file__).with_name("dry_ground_gap_audit.json")
 SHORTLIST_LIMIT = 3
-CALIBRATION_LIMIT = 1
+CALIBRATION_LIMIT = 2
+CALIBRATION_PER_REGION_LIMIT = 1
 CALIBRATION_MIN_DISTANCE_METERS = 120
 ACTIVE_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT"}
 SATELLITE_REGION_LABELS = (
@@ -176,18 +178,33 @@ def _far_from_active(candidate, active_candidates, minimum_m=CALIBRATION_MIN_DIS
     return True
 
 
+def _far_from_selected(candidate, selected, minimum_m=CALIBRATION_MIN_DISTANCE_METERS):
+    point = _point(candidate)
+    if point is None:
+        return False
+    for old in selected or []:
+        old_point = _point(old)
+        if old_point is None:
+            continue
+        if _distance_m(point, old_point) < minimum_m:
+            return False
+    return True
+
+
 def select_dry_ground_calibration(
     audit_payload,
     active_candidates,
     limit=CALIBRATION_LIMIT,
 ):
-    """Alarm dışı diagnostikten günlük en fazla bir güçlü saha kalibrasyon noktası seç.
+    """Alarm dışı diagnostikten iki bölgeyi dengeli saha kalibrasyonuna çevir.
 
     Yalnız üretim maskesinin dışında kalmış, 250-2.000 m², kompakt/site-benzeri,
     120 m içinde başka kuru-zemin kümesi bulunmayan ve lineer yol/şerit karakteri
     taşımayan örnekleri kullanır. Ayrıca mevcut aktif radar görevlerinin 120 m
     çevresindeki noktaları dışarıda bırakır; böylece zaten gidilecek bir sahayı
-    ikinci kez kalibrasyon diye göstermeyiz.
+    ikinci kez kalibrasyon diye göstermeyiz. İki veya daha fazla yer varsa önce
+    farklı uydu bölgelerinden birer örnek seçilir; böylece Çeşme ve Uzunkuyu tarafı
+    aynı saha geri bildirim döngüsünde temsil edilir.
     """
     cap = max(int(limit), 0)
     if cap <= 0 or not isinstance(audit_payload, dict):
@@ -246,17 +263,31 @@ def select_dry_ground_calibration(
     )
 
     selected = []
+    region_counts = {}
+
+    if cap >= 2:
+        for item in ranked:
+            region_key = str(item.get("bolge_anahtari") or "")
+            if not region_key:
+                continue
+            if region_counts.get(region_key, 0) >= CALIBRATION_PER_REGION_LIMIT:
+                continue
+            if not _far_from_selected(item, selected):
+                continue
+            selected.append(dict(item))
+            region_counts[region_key] = region_counts.get(region_key, 0) + 1
+            if len(selected) >= cap:
+                return selected
+
     for item in ranked:
-        point = _point(item)
-        if point is None:
+        if not _far_from_selected(item, selected):
             continue
-        if any(
-            _distance_m(point, _point(old)) < CALIBRATION_MIN_DISTANCE_METERS
-            for old in selected
-            if _point(old) is not None
-        ):
+        region_key = str(item.get("bolge_anahtari") or "")
+        if cap >= 2 and region_key and region_counts.get(region_key, 0) >= CALIBRATION_PER_REGION_LIMIT:
             continue
         selected.append(dict(item))
+        if region_key:
+            region_counts[region_key] = region_counts.get(region_key, 0) + 1
         if len(selected) >= cap:
             break
     return selected
@@ -293,7 +324,7 @@ def _calibration_markdown(calibration):
     lines = [
         CALIBRATION_SECTION_TITLE,
         "",
-        "> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan en güçlü tek örnektir. Amaç sahada bir kez bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı kalibre etmektir.",
+        "> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.",
         "",
     ]
     if not calibration:
@@ -371,7 +402,7 @@ def update_daily_shortlist():
     )
     payload["kuru_zemin_kalibrasyon_kontrolu"] = calibration
     payload["kuru_zemin_kalibrasyon_notu"] = (
-        "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında tek örnek seçilir."
+        "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir."
     )
     REPORT_JSON.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
@@ -460,16 +491,42 @@ def _self_check():
                         "lineer_geometri_riski": True,
                     },
                 ],
-            }
+            },
+            "uzunkuyu": {
+                "durum": "ok",
+                "bolge": east,
+                "onceki_tarih": "26.08.2026",
+                "son_tarih": "29.08.2026",
+                "saha_benzeri_ornekler": [
+                    {
+                        "mahalle": "Ildır", "enlem": 38.4009, "boylam": 26.6215,
+                        "alan_m2": 300, "ortalama_bsi_degisim": 0.26,
+                        "ortalama_rgb_farki": 0.16, "kompaktlik": 0.59,
+                        "saha_benzeri_geometri": True, "izole_saha_benzeri": True,
+                        "lineer_geometri_riski": False,
+                    }
+                ],
+            },
         }
     }
     calibration = select_dry_ground_calibration(audit, _actionable_candidates(sample))
-    assert len(calibration) == 1
+    assert len(calibration) == 2
     assert calibration[0]["mahalle"] == "Dalyan"
-    assert calibration[0]["kalibrasyon_durumu"] == "ALARM_DEGIL"
+    assert {item["bolge_anahtari"] for item in calibration} == {"cesme", "uzunkuyu"}
+    assert all(item["kalibrasyon_durumu"] == "ALARM_DEGIL" for item in calibration)
     assert "destination=38.355500,26.300200" in calibration[0]["harita"]
+
+    single_calibration = select_dry_ground_calibration(
+        audit,
+        _actionable_candidates(sample),
+        limit=1,
+    )
+    assert len(single_calibration) == 1
+    assert single_calibration[0]["mahalle"] == "Dalyan"
+
     rendered = _calibration_markdown(calibration)
     assert "destination=38.355500,26.300200" in rendered
+    assert "Ildır" in rendered
 
     base = "# Rapor\n\n" + NEXT_SECTION + "\n\nAdaylar\n"
     once = _inject_markdown(base, _shortlist_markdown(chosen))
