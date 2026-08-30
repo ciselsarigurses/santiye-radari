@@ -154,8 +154,11 @@ def _is_fresh_parcel_scale_candidate(item, waiting_days, report_date):
     """Taze 800–2.000 m² parsel ölçeğini alarm üretmeden saha sırasında öne al."""
     if int(waiting_days or 0) >= OVERDUE_FIELD_DAYS:
         return False
-    if not bool(item.get("yeni_goruntu")):
-        return False
+    # ``yeni_goruntu`` yalnız rapor gününde yeni Sentinel sahnesi gelip gelmediğini
+    # anlatır. Gece yarısından sonra False olur; buna rağmen son_tarih kanıtı hâlâ
+    # 1–2 günlük ve güncel analiz kümesinde olabilir. PARSEL önceliğini takvim
+    # değişiminde düşürmek yerine gerçek kanıt yaşını ve stale/bulut işaretlerini
+    # kullan; böylece alarm sayısı artmadan günlük rota erken hafriyat odağını korur.
     evidence_age = _evidence_age_days(item.get("son_tarih"), report_date)
     if evidence_age is None or evidence_age > EARLY_EVIDENCE_MAX_DAYS:
         return False
@@ -232,6 +235,9 @@ def _priority_policy_self_check():
     assert _is_fresh_parcel_scale_candidate(
         {**fresh_parcel, "alan_m2": 800}, 0, "2026-08-29"
     )
+    assert _is_fresh_parcel_scale_candidate(
+        {**fresh_parcel, "yeni_goruntu": False}, 1, "2026-08-30"
+    ), "1 günlük güncel parsel kanıtı sırf gün değişti diye NORMAL'e düşmemeli."
     assert not _is_fresh_parcel_scale_candidate(
         {**fresh_parcel, "alan_m2": 2000}, 0, "2026-08-29"
     )
@@ -239,7 +245,16 @@ def _priority_policy_self_check():
         {**fresh_parcel, "son_tarih": "26.08.2026"}, 0, "2026-08-29"
     )
     assert not _is_fresh_parcel_scale_candidate(
-        {**fresh_parcel, "yeni_goruntu": False}, 0, "2026-08-29"
+        {
+            **fresh_parcel,
+            "yeni_goruntu": False,
+            "sinyal": (
+                "Son yeniden analizde tekrar görünmedi · "
+                "Bitişik yüzey/toprak değişimi adayı"
+            ),
+        },
+        1,
+        "2026-08-30",
     )
 
 
