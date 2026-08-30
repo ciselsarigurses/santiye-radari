@@ -61,6 +61,11 @@ jobs:
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
+        with:
+          # Push koşusu kuyrukta beklerken bot veri commit'i main'i ilerletebilir.
+          # Eski event SHA'sını almak, aynı taramayı birkaç dakika içinde ikinci kez
+          # çalıştırıp açık-web motorlarında gereksiz rate-limit hatası üretiyordu.
+          ref: main
 
       - name: Python kur
         uses: actions/setup-python@v6
