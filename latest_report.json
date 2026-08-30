@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-30",
-  "olusturma": "2026-08-30 11:07 +03",
+  "olusturma": "2026-08-30 11:31 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17",
   "saha_adaylari": [
     {
@@ -1600,19 +1600,19 @@
     {
       "oncelik": "ERKEN",
       "oncelik_nedeni": "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali ve uydu kanıtı en fazla 2 günlük. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "mahalle": "Şifne",
-      "enlem": 38.342672,
-      "boylam": 26.394633,
-      "alan_m2": 600,
+      "mahalle": "Ildır",
+      "enlem": 38.425704,
+      "boylam": 26.577385,
+      "alan_m2": 400,
       "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
       "boyut_sinifi": "KUCUK",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
       "onceki_tarih": "26.08.2026",
       "son_tarih": "29.08.2026",
       "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.342672,26.394633",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.425704,26.577385",
       "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "UAB9324E212",
+      "gorev_id": "U0359B073F0",
       "saha_durumu": "KONTROLE_GIT",
       "ilk_gorulme": "2026-08-29",
       "bekleme_gun": 1,
@@ -1623,5 +1623,5 @@
       "gunluk_sira": 3
     }
   ],
-  "gunun_ilk_3_notu": "Yeni alarm üretmez; aktif saha görevlerinin mevcut kalite sırasındaki ilk üç kaydıdır."
+  "gunun_ilk_3_notu": "Yeni alarm üretmez; kalite sırasını mümkün olduğunca korur ve iki uydu bölgesinde aktif görev varsa üç kontrolde doğu-batı temsili bırakır."
 }
