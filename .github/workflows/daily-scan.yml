@@ -11,6 +11,7 @@ on:
       - "satellite.py"
       - "satellite_quality.py"
       - "candidate_capacity_audit.py"
+      - "shape_false_positive_audit.py"
       - "rebalance_satellite_candidates.py"
       - "post_dedupe_construction_quota.py"
       - "post_dedupe_construction_quota_runner.py"
@@ -72,6 +73,9 @@ jobs:
 
       - name: Aday kapasite körlüğü kalite kontrolü
         run: python candidate_capacity_audit.py --check-only
+
+      - name: Geniş aday şekil yanlış-pozitif kalite kontrolü
+        run: python shape_false_positive_audit.py --check-only
 
       - name: Zaman serisi bulut-gölge kalite kontrolü
         run: python temporal_quality.py
@@ -136,6 +140,9 @@ jobs:
       - name: Uydu aday tavanı körlüğünü ölç
         run: python candidate_capacity_audit.py
 
+      - name: Geniş aday şekil yanlış-pozitif riskini ölç
+        run: python shape_false_positive_audit.py
+
       - name: Mekânsal saha kalite kontrolü
         run: python spatial_quality.py
 
@@ -153,7 +160,7 @@ jobs:
 
       - name: Tarama ve rapor sonuçlarını kaydet
         run: |
-          report_files="santiye.db SAHA_RAPORU.md latest_report.json candidate_capacity_audit.json"
+          report_files="santiye.db SAHA_RAPORU.md latest_report.json candidate_capacity_audit.json shape_false_positive_audit.json"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Yeni veya güncellenen bulgu/rapor yok."
             exit 0
@@ -174,6 +181,7 @@ jobs:
             pip install -r requirements.txt
             python satellite_quality.py
             python candidate_capacity_audit.py --check-only
+            python shape_false_positive_audit.py --check-only
             python temporal_quality.py
             python latest_cloud_quality.py
             python cloud_threshold_audit.py
@@ -190,6 +198,7 @@ jobs:
             python dedupe_overlap_satellite.py
             python post_dedupe_construction_quota_runner.py
             python candidate_capacity_audit.py
+            python shape_false_positive_audit.py
             python spatial_quality.py
             python reactivate_current_satellite.py
             python report_quality.py
