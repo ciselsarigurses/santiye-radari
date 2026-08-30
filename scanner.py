@@ -36,6 +36,23 @@ SEARCH_QUERIES = [
     'Ildır Çeşme yeni inşaat villa',
     'Paşalimanı Çeşme yeni inşaat villa',
     'Çakabey Çeşme yeni inşaat villa',
+    # Çeşme Belediyesi'nin güncel mahalle/muhtar listesinde yer alan ve önceki
+    # dar sorgu setinde ayrı aranmayan mahalleler. Amaç alarm üretmek değil,
+    # mahalle bazında açık-web doğrulama körlüğünü azaltmaktır.
+    'Altınkum Çeşme yeni inşaat villa hafriyat',
+    'Altınyunus Çeşme yeni inşaat villa',
+    'Ardıç Çeşme yeni inşaat villa hafriyat',
+    'Boyalık Çeşme yeni inşaat villa',
+    'Celal Bayar Çeşme yeni inşaat villa',
+    'Cumhuriyet Çeşme yeni inşaat villa hafriyat',
+    'Fahrettinpaşa Çeşme yeni inşaat villa',
+    'İsmet İnönü Çeşme yeni inşaat villa',
+    'Karaköy Çeşme yeni inşaat villa hafriyat',
+    '16 Eylül Çeşme yeni inşaat otel villa',
+    'Sakarya Çeşme yeni inşaat villa',
+    'Şehit Mehmet Çeşme yeni inşaat villa',
+    'Üniversite Çeşme yeni inşaat villa',
+    'Yalı Çeşme yeni inşaat villa hafriyat',
     'Uzunkuyu Urla inşaat proje',
     'site:cesme.bel.tr "yapı ruhsatı" Çeşme',
     'site:cesme.bel.tr "inşaata başlama" OR "temel atıldı"',
@@ -57,29 +74,65 @@ INSTAGRAM_SEARCH_LINKS = [
 ]
 
 LOCATIONS = {
+    # Önce spesifik mahalle/bölge anahtarları tutulur. "Çeşme" ilçe adı çoğu
+    # sonuçta mahalle adının yanında geçtiği için genel eşleşme en son fallback
+    # olmalıdır; aksi halde "Ovacık Çeşme" gibi kayıtlar yanlışlıkla Çeşme olur.
     "alaçatı": "Alaçatı",
     "alacati": "Alaçatı",
-    "çeşme": "Çeşme",
-    "cesme": "Çeşme",
-    "ılıca": "Ilıca",
-    "ilica": "Ilıca",
-    "reisdere": "Reisdere",
-    "ovacık": "Ovacık",
-    "ovacik": "Ovacık",
-    "dalyan": "Dalyan",
-    "çiftlikköy": "Çiftlikköy",
-    "ciftlikkoy": "Çiftlikköy",
-    "musalla": "Musalla",
-    "uzunkuyu": "Uzunkuyu",
+    "altınkum": "Altınkum",
+    "altinkum": "Altınkum",
+    "altınyunus": "Altınyunus",
+    "altinyunus": "Altınyunus",
+    "ardıç": "Ardıç",
+    "ardic": "Ardıç",
+    "boyalık": "Boyalık",
+    "boyalik": "Boyalık",
+    "celal bayar": "Celal Bayar",
+    "cumhuriyet": "Cumhuriyet",
     "çakabey": "Çakabey",
     "cakabey": "Çakabey",
-    "şifne": "Şifne",
-    "sifne": "Şifne",
+    "çiftlikköy": "Çiftlikköy",
+    "ciftlikkoy": "Çiftlikköy",
+    "çiftlik mahallesi": "Çiftlikköy",
+    "ciftlik mahallesi": "Çiftlikköy",
+    "dalyan": "Dalyan",
+    "fahrettinpaşa": "Fahrettinpaşa",
+    "fahrettinpasa": "Fahrettinpaşa",
     "germiyan": "Germiyan",
+    "ıldırı": "Ildır",
+    "ildiri": "Ildır",
     "ıldır": "Ildır",
     "ildir": "Ildır",
+    "ılıca": "Ilıca",
+    "ilica": "Ilıca",
+    "ismet inönü": "İsmet İnönü",
+    "ismet inonu": "İsmet İnönü",
+    "inönü mahallesi": "İsmet İnönü",
+    "inonu mahallesi": "İsmet İnönü",
+    "karaköy": "Karaköy",
+    "karakoy": "Karaköy",
+    "musalla": "Musalla",
+    "onaltı eylül": "16 Eylül",
+    "onalti eylul": "16 Eylül",
+    "16 eylül": "16 Eylül",
+    "16 eylul": "16 Eylül",
+    "ovacık": "Ovacık",
+    "ovacik": "Ovacık",
     "paşalimanı": "Paşalimanı",
     "pasalimani": "Paşalimanı",
+    "reisdere": "Reisdere",
+    "sakarya": "Sakarya",
+    "şehit mehmet": "Şehit Mehmet",
+    "sehit mehmet": "Şehit Mehmet",
+    "şifne": "Şifne",
+    "sifne": "Şifne",
+    "üniversite": "Üniversite",
+    "universite": "Üniversite",
+    "uzunkuyu": "Uzunkuyu",
+    "yalı": "Yalı",
+    "yali": "Yalı",
+    "çeşme": "Çeşme",
+    "cesme": "Çeşme",
 }
 
 SIGNALS = {
@@ -230,6 +283,22 @@ def _plain(text):
     return re.sub(r"\s+", " ", text).strip()
 
 
+def _detect_location(text):
+    """İlçe adından önce daha spesifik mahalle/bölge eşleşmesini döndürür."""
+    combined = _plain(text).lower()
+    matches = [
+        (len(key), label)
+        for key, label in LOCATIONS.items()
+        if label != "Çeşme" and key in combined
+    ]
+    if matches:
+        # Birden fazla özel ad geçerse daha uzun/özgül anahtar tercih edilir.
+        return max(matches, key=lambda item: item[0])[1]
+    if "çeşme" in combined or "cesme" in combined:
+        return "Çeşme"
+    return None
+
+
 def _canonical_url(url):
     if not url:
         return ""
@@ -264,7 +333,7 @@ def _evaluate(title, snippet, url, published=None):
     if any(word in combined for word in NOISE):
         return None
 
-    location = next((label for key, label in LOCATIONS.items() if key in combined), None)
+    location = _detect_location(combined)
     if not location:
         return None
 
@@ -569,7 +638,16 @@ def scan_and_store(progress_callback=None):
     }
 
 
+def _location_self_check():
+    assert _detect_location("Ovacık Mahallesi Çeşme yeni inşaat") == "Ovacık"
+    assert _detect_location("Boyalık Mahallesi Çeşme villa projesi") == "Boyalık"
+    assert _detect_location("16 Eylül Mahallesi Çeşme otel inşaatı") == "16 Eylül"
+    assert _detect_location("Urla Uzunkuyu yeni konut projesi") == "Uzunkuyu"
+    assert _detect_location("Çeşme yeni inşaat") == "Çeşme"
+
+
 if __name__ == "__main__":
+    _location_self_check()
     result = scan_and_store()
     print(
         f"Tarama tamamlandı: {result['found']} uygun sonuç, "
