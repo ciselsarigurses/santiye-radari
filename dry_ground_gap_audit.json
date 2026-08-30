@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-08-30",
-  "olusturma": "2026-08-30 12:35 +0300",
-  "amac": "Mevcut alarm üretim maskesinin dışında kalan düşük-NDVI 250-2.000 m² kuru zemin spektral değişimlerini BSI ile ölçmek; alarm/görev üretmez.",
+  "olusturma": "2026-08-30 13:32 +0300",
+  "amac": "Mevcut alarm üretim maskesinin dışında kalan düşük-NDVI 250-2.000 m² kuru zemin spektral değişimlerini BSI ile ölçmek; ayrıca kompaktlık, uzun/kısa oranı ve 120 m yerel kümelenmeyi saha kalibrasyonu için kaydetmek; alarm/görev üretmez.",
   "esikler": {
     "alan_m2": [
       250,
@@ -14,8 +14,15 @@
       0.24
     ],
     "min_mutlak_parlaklik_degisim": 0.025,
-    "min_mutlak_bsi_degisim": 0.1
+    "min_mutlak_bsi_degisim": 0.1,
+    "saha_benzeri_max_uzun_kisa": 3.5,
+    "saha_benzeri_min_kutu_doluluk": 0.35,
+    "saha_benzeri_min_kompaktlik": 0.18,
+    "lineer_risk_min_uzun_kisa": 4.0,
+    "lineer_risk_max_kompaktlik": 0.12,
+    "yerel_kume_yaricapi_m": 120
   },
+  "uyari": "Geometri ve yakınlık etiketleri yalnız diagnostiktir; saha doğrulaması olmadan hiçbir kuru-zemin kaydı alarm/görev değildir ve üretim radarı etkilenmez.",
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
@@ -25,6 +32,9 @@
       "son_tarih": "29.08.2026",
       "durum": "ok",
       "potansiyel_kuru_zemin_korlugu": 525,
+      "saha_benzeri_geometri": 430,
+      "izole_saha_benzeri_geometri": 131,
+      "lineer_geometri_riski": 25,
       "ornekler": [
         {
           "mahalle": "Alaçatı",
@@ -32,7 +42,14 @@
           "boylam": 26.384559,
           "alan_m2": 600,
           "ortalama_bsi_degisim": 0.4082,
-          "ortalama_rgb_farki": 0.1166
+          "ortalama_rgb_farki": 0.1166,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.375,
+          "kompaktlik": 0.295,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 1,
+          "izole_saha_benzeri": false
         },
         {
           "mahalle": "Alaçatı",
@@ -40,7 +57,14 @@
           "boylam": 26.383643,
           "alan_m2": 400,
           "ortalama_bsi_degisim": 0.3627,
-          "ortalama_rgb_farki": 0.1163
+          "ortalama_rgb_farki": 0.1163,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.785,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 1,
+          "izole_saha_benzeri": false
         },
         {
           "mahalle": "Dalyan",
@@ -48,7 +72,14 @@
           "boylam": 26.30019,
           "alan_m2": 300,
           "ortalama_bsi_degisim": 0.3233,
-          "ortalama_rgb_farki": 0.1364
+          "ortalama_rgb_farki": 0.1364,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
         },
         {
           "mahalle": "Alaçatı",
@@ -56,7 +87,14 @@
           "boylam": 26.400356,
           "alan_m2": 600,
           "ortalama_bsi_degisim": 0.2803,
-          "ortalama_rgb_farki": 0.1865
+          "ortalama_rgb_farki": 0.1865,
+          "uzun_kisa_orani": 6.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.385,
+          "saha_benzeri_geometri": false,
+          "lineer_geometri_riski": true,
+          "yakindaki_kuru_degisim_120m": 1,
+          "izole_saha_benzeri": false
         },
         {
           "mahalle": "Alaçatı",
@@ -64,7 +102,14 @@
           "boylam": 26.377576,
           "alan_m2": 400,
           "ortalama_bsi_degisim": 0.2381,
-          "ortalama_rgb_farki": 0.118
+          "ortalama_rgb_farki": 0.118,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 0.5,
+          "kompaktlik": 0.349,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
         },
         {
           "mahalle": "Ovacık",
@@ -72,7 +117,14 @@
           "boylam": 26.391771,
           "alan_m2": 500,
           "ortalama_bsi_degisim": 0.2378,
-          "ortalama_rgb_farki": 0.1088
+          "ortalama_rgb_farki": 0.1088,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 0.625,
+          "kompaktlik": 0.321,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 1,
+          "izole_saha_benzeri": false
         },
         {
           "mahalle": "Dalyan",
@@ -80,7 +132,14 @@
           "boylam": 26.323543,
           "alan_m2": 300,
           "ortalama_bsi_degisim": 0.2377,
-          "ortalama_rgb_farki": 0.1033
+          "ortalama_rgb_farki": 0.1033,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
         },
         {
           "mahalle": "Reisdere",
@@ -88,7 +147,136 @@
           "boylam": 26.399784,
           "alan_m2": 400,
           "ortalama_bsi_degisim": 0.2376,
-          "ortalama_rgb_farki": 0.1157
+          "ortalama_rgb_farki": 0.1157,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.444,
+          "kompaktlik": 0.349,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        }
+      ],
+      "saha_benzeri_ornekler": [
+        {
+          "mahalle": "Dalyan",
+          "enlem": 38.355516,
+          "boylam": 26.30019,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.3233,
+          "ortalama_rgb_farki": 0.1364,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Alaçatı",
+          "enlem": 38.266152,
+          "boylam": 26.377576,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.2381,
+          "ortalama_rgb_farki": 0.118,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 0.5,
+          "kompaktlik": 0.349,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Dalyan",
+          "enlem": 38.355787,
+          "boylam": 26.323543,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2377,
+          "ortalama_rgb_farki": 0.1033,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Reisdere",
+          "enlem": 38.32413,
+          "boylam": 26.399784,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.2376,
+          "ortalama_rgb_farki": 0.1157,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.444,
+          "kompaktlik": 0.349,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Şifne",
+          "enlem": 38.342581,
+          "boylam": 26.39509,
+          "alan_m2": 900,
+          "ortalama_bsi_degisim": 0.2304,
+          "ortalama_rgb_farki": 0.1426,
+          "uzun_kisa_orani": 3.5,
+          "kutu_doluluk_orani": 0.643,
+          "kompaktlik": 0.349,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Alaçatı",
+          "enlem": 38.240013,
+          "boylam": 26.406424,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2251,
+          "ortalama_rgb_farki": 0.1943,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Musalla",
+          "enlem": 38.321597,
+          "boylam": 26.299618,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2227,
+          "ortalama_rgb_farki": 0.115,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Alaçatı",
+          "enlem": 38.25358,
+          "boylam": 26.384559,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2152,
+          "ortalama_rgb_farki": 0.1403,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
         }
       ]
     },
@@ -100,6 +288,9 @@
       "son_tarih": "29.08.2026",
       "durum": "ok",
       "potansiyel_kuru_zemin_korlugu": 195,
+      "saha_benzeri_geometri": 163,
+      "izole_saha_benzeri_geometri": 60,
+      "lineer_geometri_riski": 12,
       "ornekler": [
         {
           "mahalle": "Ildır",
@@ -107,7 +298,14 @@
           "boylam": 26.621469,
           "alan_m2": 300,
           "ortalama_bsi_degisim": 0.2634,
-          "ortalama_rgb_farki": 0.1599
+          "ortalama_rgb_farki": 0.1599,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
         },
         {
           "mahalle": "Ildır",
@@ -115,7 +313,14 @@
           "boylam": 26.623073,
           "alan_m2": 400,
           "ortalama_bsi_degisim": 0.2601,
-          "ortalama_rgb_farki": 0.1797
+          "ortalama_rgb_farki": 0.1797,
+          "uzun_kisa_orani": 1.33,
+          "kutu_doluluk_orani": 0.333,
+          "kompaktlik": 0.256,
+          "saha_benzeri_geometri": false,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": false
         },
         {
           "mahalle": "Ildır",
@@ -123,7 +328,14 @@
           "boylam": 26.624905,
           "alan_m2": 400,
           "ortalama_bsi_degisim": 0.2355,
-          "ortalama_rgb_farki": 0.1386
+          "ortalama_rgb_farki": 0.1386,
+          "uzun_kisa_orani": 4.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.503,
+          "saha_benzeri_geometri": false,
+          "lineer_geometri_riski": true,
+          "yakindaki_kuru_degisim_120m": 1,
+          "izole_saha_benzeri": false
         },
         {
           "mahalle": "Uzunkuyu",
@@ -131,7 +343,14 @@
           "boylam": 26.641164,
           "alan_m2": 400,
           "ortalama_bsi_degisim": 0.2288,
-          "ortalama_rgb_farki": 0.1605
+          "ortalama_rgb_farki": 0.1605,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 0.5,
+          "kompaktlik": 0.349,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 1,
+          "izole_saha_benzeri": false
         },
         {
           "mahalle": "Ildır",
@@ -139,7 +358,14 @@
           "boylam": 26.482576,
           "alan_m2": 300,
           "ortalama_bsi_degisim": 0.2216,
-          "ortalama_rgb_farki": 0.1063
+          "ortalama_rgb_farki": 0.1063,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
         },
         {
           "mahalle": "Ildır",
@@ -147,7 +373,14 @@
           "boylam": 26.629256,
           "alan_m2": 300,
           "ortalama_bsi_degisim": 0.2169,
-          "ortalama_rgb_farki": 0.1582
+          "ortalama_rgb_farki": 0.1582,
+          "uzun_kisa_orani": 1.5,
+          "kutu_doluluk_orani": 0.5,
+          "kompaktlik": 0.377,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 1,
+          "izole_saha_benzeri": false
         },
         {
           "mahalle": "Uzunkuyu",
@@ -155,7 +388,14 @@
           "boylam": 26.637844,
           "alan_m2": 600,
           "ortalama_bsi_degisim": 0.2165,
-          "ortalama_rgb_farki": 0.1682
+          "ortalama_rgb_farki": 0.1682,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 0.5,
+          "kompaktlik": 0.295,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
         },
         {
           "mahalle": "Uzunkuyu",
@@ -163,7 +403,136 @@
           "boylam": 26.641508,
           "alan_m2": 500,
           "ortalama_bsi_degisim": 0.2144,
-          "ortalama_rgb_farki": 0.1963
+          "ortalama_rgb_farki": 0.1963,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.556,
+          "kompaktlik": 0.436,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 1,
+          "izole_saha_benzeri": false
+        }
+      ],
+      "saha_benzeri_ornekler": [
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.400924,
+          "boylam": 26.621469,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2634,
+          "ortalama_rgb_farki": 0.1599,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.376053,
+          "boylam": 26.482576,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2216,
+          "ortalama_rgb_farki": 0.1063,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Uzunkuyu",
+          "enlem": 38.378676,
+          "boylam": 26.637844,
+          "alan_m2": 600,
+          "ortalama_bsi_degisim": 0.2165,
+          "ortalama_rgb_farki": 0.1682,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 0.5,
+          "kompaktlik": 0.295,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Uzunkuyu",
+          "enlem": 38.372435,
+          "boylam": 26.644027,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.2029,
+          "ortalama_rgb_farki": 0.1683,
+          "uzun_kisa_orani": 1.5,
+          "kutu_doluluk_orani": 0.667,
+          "kompaktlik": 0.503,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.420187,
+          "boylam": 26.610935,
+          "alan_m2": 1100,
+          "ortalama_bsi_degisim": 0.2011,
+          "ortalama_rgb_farki": 0.1299,
+          "uzun_kisa_orani": 3.33,
+          "kutu_doluluk_orani": 0.367,
+          "kompaktlik": 0.204,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Uzunkuyu",
+          "enlem": 38.377862,
+          "boylam": 26.640706,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.2,
+          "ortalama_rgb_farki": 0.1529,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.444,
+          "kompaktlik": 0.349,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.38781,
+          "boylam": 26.626737,
+          "alan_m2": 500,
+          "ortalama_bsi_degisim": 0.1945,
+          "ortalama_rgb_farki": 0.1386,
+          "uzun_kisa_orani": 1.33,
+          "kutu_doluluk_orani": 0.417,
+          "kompaktlik": 0.321,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Germiyan",
+          "enlem": 38.331286,
+          "boylam": 26.47605,
+          "alan_m2": 500,
+          "ortalama_bsi_degisim": 0.1629,
+          "ortalama_rgb_farki": 0.1762,
+          "uzun_kisa_orani": 1.5,
+          "kutu_doluluk_orani": 0.833,
+          "kompaktlik": 0.628,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
         }
       ]
     }
