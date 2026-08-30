@@ -12,6 +12,7 @@ on:
       - "satellite_quality.py"
       - "candidate_capacity_audit.py"
       - "rebalance_satellite_candidates.py"
+      - "repair_selection_20260830.py"
       - "reconcile_selection_tasks.py"
       - "temporal_gap_scan.py"
       - "temporal_quality.py"
@@ -116,6 +117,9 @@ jobs:
       - name: Şantiye ölçeği adaylarını toplam tavan içinde dengele
         run: python rebalance_satellite_candidates.py
 
+      - name: Aynı-sahne seçim göçünü tek seferlik onar
+        run: python repair_selection_20260830.py
+
       - name: Uydu aday tavanı körlüğünü ölç
         run: python candidate_capacity_audit.py
 
@@ -179,6 +183,7 @@ jobs:
             python refresh_satellite_analysis.py
             python daily_report.py
             python rebalance_satellite_candidates.py
+            python repair_selection_20260830.py
             python candidate_capacity_audit.py
             python temporal_gap_scan.py
             python latest_cloud_gap_scan.py
