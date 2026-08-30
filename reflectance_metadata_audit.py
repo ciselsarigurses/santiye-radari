@@ -1,4 +1,4 @@
-"""Sentinel-2 reflektans ölçek/offset metadata varsayımını tanısal olarak denetler.
+"""Sentinel-2 reflektans ölçek/offset metadata varsayımını denetler.
 
 Üretim uydu motoru red/nir DN değerlerini şu anda 0.0001 ölçek ve -0.1 offset
 varsayımıyla reflektansa çeviriyor. Earth Search STAC varlıkları ise ölçek/offset
@@ -8,8 +8,9 @@ vegetation-loss ve latest-NDVI eşiklerini kaydırabilir.
 
 Bu dosya üretim alarmını, eşiğini veya saha görevini DEĞİŞTİRMEZ. Seçili güncel
 Sentinel çiftlerinin red/nir metadata'sını ölçer ve hard-coded varsayımla uyuşup
-uyuşmadığını görünür kılar. Sonuç, güvenli bir üretim değişikliğine geçmeden önce
-kanıt olarak kullanılır.
+uyuşmadığını görünür kılar. Kesin bir MISMATCH varsa yanlış NDVI ile yeni rapor
+üretilmemesi için taramayı güvenli biçimde başarısız sonlandırır. Metadata eksikse
+UNKNOWN olarak uyarır fakat veri kaynağını gereksiz yere kör bırakmaz.
 """
 
 from __future__ import annotations
@@ -153,6 +154,11 @@ def audit():
     }
 
 
+def _should_block(payload):
+    """Yalnız kesin metadata uyumsuzluğunda yanlış NDVI üretimini durdur."""
+    return isinstance(payload, dict) and payload.get("genel_durum") == "MISMATCH"
+
+
 def _self_check():
     exact = {"raster:bands": [{"scale": 0.0001, "offset": -0.1}]}
     scale, offset, status = _scale_offset_from_asset(exact)
@@ -170,6 +176,9 @@ def _self_check():
     assert _matches_expected(scale, offset) is None
 
     assert _scale_offset_from_asset({})[2] == "raster_bands_missing"
+    assert _should_block({"genel_durum": "MISMATCH"}) is True
+    assert _should_block({"genel_durum": "MATCH"}) is False
+    assert _should_block({"genel_durum": "UNKNOWN"}) is False
 
 
 def main():
@@ -181,7 +190,8 @@ def main():
     if args.check_only:
         print(
             "Reflektans metadata denetimi öz testi başarılı: scale/offset eşleşme, "
-            "uyuşmazlık ve eksik metadata yolları ayrıştırılıyor; üretim alarmı değişmiyor."
+            "uyuşmazlık ve eksik metadata yolları ayrıştırılıyor; kesin uyumsuzluk "
+            "yanlış NDVI ile taramaya devam etmiyor."
         )
         return
 
@@ -202,8 +212,8 @@ def main():
     if mismatch_count:
         print(
             "DİKKAT: Seçili Sentinel varlığında raster:bands scale/offset, üretimdeki "
-            "hard-coded 0.0001/-0.1 varsayımından farklı. NDVI tabanlı erken-hafriyat "
-            "eşikleri metadata-aware dönüşümle ayrıca doğrulanmalı."
+            "hard-coded 0.0001/-0.1 varsayımından farklı. Yanlış NDVI ile yeni saha "
+            "adayı üretilmemesi için bu tarama güvenli biçimde durdurulacak."
         )
     if unknown_count:
         print(
@@ -212,6 +222,12 @@ def main():
         )
     if payload["uyarilar"]:
         print("Metadata denetim uyarıları: " + " | ".join(payload["uyarilar"]))
+
+    if _should_block(payload):
+        raise SystemExit(
+            "Sentinel reflektans scale/offset metadata uyumsuzluğu: yanlış NDVI ile "
+            "radar raporu üretilmedi."
+        )
 
 
 if __name__ == "__main__":
