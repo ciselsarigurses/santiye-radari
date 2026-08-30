@@ -1,0 +1,171 @@
+{
+  "rapor_tarihi": "2026-08-30",
+  "olusturma": "2026-08-30 12:35 +0300",
+  "amac": "Mevcut alarm üretim maskesinin dışında kalan düşük-NDVI 250-2.000 m² kuru zemin spektral değişimlerini BSI ile ölçmek; alarm/görev üretmez.",
+  "esikler": {
+    "alan_m2": [
+      250,
+      2000
+    ],
+    "dusuk_ndvi_max": 0.35,
+    "max_ndvi_degisim": 0.12,
+    "rgb_farki": [
+      0.1,
+      0.24
+    ],
+    "min_mutlak_parlaklik_degisim": 0.025,
+    "min_mutlak_bsi_degisim": 0.1
+  },
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_item": "S2A_T35SMC_20260826T090624_L2A",
+      "son_item": "S2B_T35SMC_20260829T090620_L2A",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "durum": "ok",
+      "potansiyel_kuru_zemin_korlugu": 525,
+      "ornekler": [
+        {
+          "mahalle": "Alaçatı",
+          "enlem": 38.272936,
+          "boylam": 26.384559,
+          "alan_m2": 600,
+          "ortalama_bsi_degisim": 0.4082,
+          "ortalama_rgb_farki": 0.1166
+        },
+        {
+          "mahalle": "Alaçatı",
+          "enlem": 38.273117,
+          "boylam": 26.383643,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.3627,
+          "ortalama_rgb_farki": 0.1163
+        },
+        {
+          "mahalle": "Dalyan",
+          "enlem": 38.355516,
+          "boylam": 26.30019,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.3233,
+          "ortalama_rgb_farki": 0.1364
+        },
+        {
+          "mahalle": "Alaçatı",
+          "enlem": 38.242364,
+          "boylam": 26.400356,
+          "alan_m2": 600,
+          "ortalama_bsi_degisim": 0.2803,
+          "ortalama_rgb_farki": 0.1865
+        },
+        {
+          "mahalle": "Alaçatı",
+          "enlem": 38.266152,
+          "boylam": 26.377576,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.2381,
+          "ortalama_rgb_farki": 0.118
+        },
+        {
+          "mahalle": "Ovacık",
+          "enlem": 38.228978,
+          "boylam": 26.391771,
+          "alan_m2": 500,
+          "ortalama_bsi_degisim": 0.2378,
+          "ortalama_rgb_farki": 0.1088
+        },
+        {
+          "mahalle": "Dalyan",
+          "enlem": 38.355787,
+          "boylam": 26.323543,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2377,
+          "ortalama_rgb_farki": 0.1033
+        },
+        {
+          "mahalle": "Reisdere",
+          "enlem": 38.32413,
+          "boylam": 26.399784,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.2376,
+          "ortalama_rgb_farki": 0.1157
+        }
+      ]
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "onceki_item": "S2A_T35SMC_20260826T090624_L2A",
+      "son_item": "S2B_T35SMC_20260829T090620_L2A",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "durum": "ok",
+      "potansiyel_kuru_zemin_korlugu": 195,
+      "ornekler": [
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.400924,
+          "boylam": 26.621469,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2634,
+          "ortalama_rgb_farki": 0.1599
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.400924,
+          "boylam": 26.623073,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.2601,
+          "ortalama_rgb_farki": 0.1797
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.396854,
+          "boylam": 26.624905,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.2355,
+          "ortalama_rgb_farki": 0.1386
+        },
+        {
+          "mahalle": "Uzunkuyu",
+          "enlem": 38.376776,
+          "boylam": 26.641164,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.2288,
+          "ortalama_rgb_farki": 0.1605
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.376053,
+          "boylam": 26.482576,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2216,
+          "ortalama_rgb_farki": 0.1063
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.383831,
+          "boylam": 26.629256,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.2169,
+          "ortalama_rgb_farki": 0.1582
+        },
+        {
+          "mahalle": "Uzunkuyu",
+          "enlem": 38.378676,
+          "boylam": 26.637844,
+          "alan_m2": 600,
+          "ortalama_bsi_degisim": 0.2165,
+          "ortalama_rgb_farki": 0.1682
+        },
+        {
+          "mahalle": "Uzunkuyu",
+          "enlem": 38.376143,
+          "boylam": 26.641508,
+          "alan_m2": 500,
+          "ortalama_bsi_degisim": 0.2144,
+          "ortalama_rgb_farki": 0.1963
+        }
+      ]
+    }
+  }
+}
