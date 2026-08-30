@@ -303,15 +303,16 @@ def _calibration_markdown(calibration):
     for index, item in enumerate(calibration, start=1):
         neighborhood = str(item.get("mahalle") or "Yakın bölge")
         area = int(max(_number(item.get("alan_m2"), 0), 0))
+        area_text = f"{area:,}".replace(",", ".")
         route = str(item.get("harita") or "")
         bsi = abs(_number(item.get("ortalama_bsi_degisim"), 0))
         rgb = _number(item.get("ortalama_rgb_farki"), 0)
         start = str(item.get("onceki_tarih") or "?")
         end = str(item.get("son_tarih") or "?")
         lines.append(
-            f"{index}. **KALİBRASYON — {neighborhood}** · yaklaşık {area:,} m² · "
+            f"{index}. **KALİBRASYON — {neighborhood}** · yaklaşık {area_text} m² · "
             f"{start} → {end} · BSI Δ {bsi:.3f} · RGB Δ {rgb:.3f} · "
-            f"[Yol tarifi]({route})".replace(",", ".")
+            f"[Yol tarifi]({route})"
         )
         lines.append(
             "   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz."
@@ -467,12 +468,14 @@ def _self_check():
     assert calibration[0]["mahalle"] == "Dalyan"
     assert calibration[0]["kalibrasyon_durumu"] == "ALARM_DEGIL"
     assert "destination=38.355500,26.300200" in calibration[0]["harita"]
+    rendered = _calibration_markdown(calibration)
+    assert "destination=38.355500,26.300200" in rendered
 
     base = "# Rapor\n\n" + NEXT_SECTION + "\n\nAdaylar\n"
     once = _inject_markdown(base, _shortlist_markdown(chosen))
-    once = _inject_calibration_markdown(once, _calibration_markdown(calibration))
+    once = _inject_calibration_markdown(once, rendered)
     twice = _inject_markdown(once, _shortlist_markdown(chosen))
-    twice = _inject_calibration_markdown(twice, _calibration_markdown(calibration))
+    twice = _inject_calibration_markdown(twice, rendered)
     assert once == twice, "Kısa liste/kalibrasyon bölümü tekrar çalıştırmada çoğalmamalı."
     assert once.count(SECTION_TITLE) == 1
     assert once.count(CALIBRATION_SECTION_TITLE) == 1
