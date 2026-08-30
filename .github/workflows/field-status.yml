@@ -15,7 +15,8 @@ concurrency:
 jobs:
   apply-status:
     if: >-
-      startsWith(github.event.issue.title, '[SAHA] ') &&
+      (startsWith(github.event.issue.title, '[SAHA] ') ||
+      startsWith(github.event.issue.title, '[KALIBRASYON] ')) &&
       github.event.issue.user.login == github.repository_owner
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -32,7 +33,7 @@ jobs:
       - name: Bağımlılıkları kur
         run: pip install -r requirements.txt
 
-      - name: Saha durumunu uygula
+      - name: Saha veya kalibrasyon sonucunu uygula
         env:
           ISSUE_TITLE: ${{ github.event.issue.title }}
         run: python apply_field_status.py "$ISSUE_TITLE"
