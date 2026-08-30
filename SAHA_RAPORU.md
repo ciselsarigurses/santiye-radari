@@ -1,9 +1,9 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-08-30
-**Hazırlanma:** 2026-08-30 21:46 +03
+**Hazırlanma:** 2026-08-30 22:35 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. · Tarama uyarısı: 27 kaynak/arama hatası Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17
+**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 17
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
@@ -640,7 +640,7 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 
 ## Aktif güçlü internet fırsatları
 
-- **AKTİF · KIRMIZI · 9 puan · Uzunkuyu:** [SUMEN Olea — Urla Uzunkuyu yeni konut projesi](https://emlakkulisi.com/sumen-olea-urlada-115-milyon-tlye-yeni-proje/827889) — 2026 yeni konut projesi, yapım sürüyor, Aralık 2026 teslim hedefi
+Şu anda aktif KIRMIZI internet fırsatı yok.
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması değildir; yanlış pozitifler saha kontrolüyle elenir.
