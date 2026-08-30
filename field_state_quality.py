@@ -147,6 +147,31 @@ def check_large_open_task_keeps_wider_centroid_drift():
     connection.close()
 
 
+def check_early_match_boundary_stays_conservative():
+    """2.000 m² dahil erken sınıfta 25 m; üstünde geniş-küme toleransı kullan."""
+    small_connection = sqlite3.connect(":memory:")
+    ensure_state_schema(small_connection)
+    small_first = _item(38.31810, 26.30010, area=EARLY_SITE_MATCH_MAX_M2)
+    small_shifted = _item(38.31840, 26.30010, area=EARLY_SITE_MATCH_MAX_M2)
+    small_old = sync_satellite_tasks(small_connection, [small_first], "2026-08-29")[0]
+    small_new = sync_satellite_tasks(small_connection, [small_shifted], "2026-08-30")[0]
+    assert small_new["gorev_id"] != small_old["gorev_id"], (
+        "2.000 m² sınırındaki erken saha 25 m dışındaki komşu sinyale taşındı."
+    )
+    small_connection.close()
+
+    wide_connection = sqlite3.connect(":memory:")
+    ensure_state_schema(wide_connection)
+    wide_first = _item(38.31910, 26.30010, area=EARLY_SITE_MATCH_MAX_M2 + 1)
+    wide_shifted = _item(38.31940, 26.30010, area=EARLY_SITE_MATCH_MAX_M2 + 1)
+    wide_old = sync_satellite_tasks(wide_connection, [wide_first], "2026-08-29")[0]
+    wide_new = sync_satellite_tasks(wide_connection, [wide_shifted], "2026-08-30")[0]
+    assert wide_new["gorev_id"] == wide_old["gorev_id"], (
+        "2.000 m² üstündeki açık geniş küme 80 m centroid toleransını kaybetti."
+    )
+    wide_connection.close()
+
+
 def check_completed_task_does_not_hide_neighbor():
     connection = sqlite3.connect(":memory:")
     ensure_state_schema(connection)
@@ -223,6 +248,7 @@ def main():
     check_single_centroid_drift_keeps_task()
     check_open_small_task_does_not_hide_sequential_neighbor()
     check_large_open_task_keeps_wider_centroid_drift()
+    check_early_match_boundary_stays_conservative()
     check_completed_task_does_not_hide_neighbor()
     check_completed_task_keeps_tiny_centroid_jitter()
     print(
