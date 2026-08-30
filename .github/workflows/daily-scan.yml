@@ -4,8 +4,11 @@ on:
   push:
     branches: [main]
     paths:
-      - "app.py"
-      - "pages/**"
+      # Tam dış-kaynak + Sentinel taraması yalnız algılama/raporlama motoru
+      # değiştiğinde çalışsın. UI ve saha geri bildirim kodu ayrı smoke/issue
+      # workflow'larıyla test edilir; bunların her commit'inde tam tarama açmak
+      # arama motorlarını dakikalar içinde tekrar tekrar sorgulayıp rate-limit
+      # gürültüsü üretiyordu.
       - "scanner.py"
       - "source_label_quality.py"
       - "satellite.py"
@@ -29,8 +32,6 @@ on:
       - "report_quality.py"
       - "field_state.py"
       - "field_state_quality.py"
-      - "field_outcome.py"
-      - "apply_field_status.py"
       - "refresh_satellite_analysis.py"
       - "reactivate_current_satellite.py"
       - "retain_recent_candidates.py"
@@ -39,7 +40,6 @@ on:
       - "hydrate_persisted_satellite_metadata.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
-      - ".github/workflows/field-status.yml"
   schedule:
     # Türkiye saatiyle 11:00 ana tarama korunur. Sentinel görüntüsü sabah
     # taramasından sonra yayımlanırsa ertesi güne kalmaması için 15:00 ve 19:00'da
