@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-31",
-  "olusturma": "2026-08-31 11:31 +03",
+  "olusturma": "2026-08-31 12:32 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 59",
   "saha_adaylari": [
     {
@@ -1569,7 +1569,7 @@
       "skor": 9,
       "durum": "KIRMIZI",
       "ilk_gorulme": "2026-08-27 12:10 UTC",
-      "son_gorulme": "2026-08-31 08:31 UTC",
+      "son_gorulme": "2026-08-31 09:32 UTC",
       "yeni": false
     }
   ],
