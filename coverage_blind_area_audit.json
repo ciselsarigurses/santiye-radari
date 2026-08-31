@@ -1,0 +1,220 @@
+{
+  "olusturma": "2026-08-31 03:31 +0300",
+  "amac": "Ana Sentinel çifti ile mevcut eski/yeni bulut-gölge zaman-serisi tamamlamalarından sonra gözlemsiz kalan kara alanlarını ölçmek; alarm veya görev üretmez.",
+  "minimum_alan_m2": 250,
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "ana_onceki_item": "S2A_T35SMC_20260826T090624_L2A",
+      "ana_onceki_tarih": "26.08.2026",
+      "son_item": "S2B_T35SMC_20260829T090620_L2A",
+      "son_tarih": "29.08.2026",
+      "yedek_item": "S2B_T35SMC_20260819T090553_L2A",
+      "yedek_tarih": "19.08.2026",
+      "analiz_piksel_m_yaklasik": 10.0,
+      "kara_hedef_piksel": 3480377,
+      "ana_cift_kor_piksel": 183631,
+      "ana_cift_kor_yuzde": 5.2762,
+      "zaman_serisiyle_geri_kazanilan_piksel": 125038,
+      "zaman_serisiyle_geri_kazanilan_yuzde": 3.5927,
+      "kalan_kor_piksel": 58593,
+      "kalan_kor_yuzde": 1.6835,
+      "kalan_250m2_ustu_kume": 1226,
+      "en_buyuk_kalan_kor_alan_m2": 3385723,
+      "ornekler": [
+        {
+          "mahalle_yaklasik": "Ovacık",
+          "enlem": 38.189995,
+          "boylam": 26.399898,
+          "alan_m2": 3385723,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ovacık",
+          "enlem": 38.211702,
+          "boylam": 26.407454,
+          "alan_m2": 545052,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ovacık",
+          "enlem": 38.185563,
+          "boylam": 26.38204,
+          "alan_m2": 200619,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ovacık",
+          "enlem": 38.213783,
+          "boylam": 26.314729,
+          "alan_m2": 198219,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Alaçatı",
+          "enlem": 38.217401,
+          "boylam": 26.437446,
+          "alan_m2": 96409,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ovacık",
+          "enlem": 38.216406,
+          "boylam": 26.396464,
+          "alan_m2": 73207,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ovacık",
+          "enlem": 38.219029,
+          "boylam": 26.396121,
+          "alan_m2": 37004,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.425523,
+          "boylam": 26.511398,
+          "alan_m2": 30103,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ovacık",
+          "enlem": 38.224817,
+          "boylam": 26.389939,
+          "alan_m2": 28403,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Alaçatı",
+          "enlem": 38.244716,
+          "boylam": 26.401387,
+          "alan_m2": 24002,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ovacık",
+          "enlem": 38.227893,
+          "boylam": 26.36464,
+          "alan_m2": 23502,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Uzunkuyu",
+          "enlem": 38.181673,
+          "boylam": 26.521128,
+          "alan_m2": 13501,
+          "neden": "BULUT_GOLGE_KALICI"
+        }
+      ],
+      "durum": "ok"
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "ana_onceki_item": "S2A_T35SMC_20260826T090624_L2A",
+      "ana_onceki_tarih": "26.08.2026",
+      "son_item": "S2B_T35SMC_20260829T090620_L2A",
+      "son_tarih": "29.08.2026",
+      "yedek_item": "S2B_T35SMC_20260819T090553_L2A",
+      "yedek_tarih": "19.08.2026",
+      "analiz_piksel_m_yaklasik": 10.0,
+      "kara_hedef_piksel": 3760062,
+      "ana_cift_kor_piksel": 43922,
+      "ana_cift_kor_yuzde": 1.1681,
+      "zaman_serisiyle_geri_kazanilan_piksel": 40627,
+      "zaman_serisiyle_geri_kazanilan_yuzde": 1.0805,
+      "kalan_kor_piksel": 3295,
+      "kalan_kor_yuzde": 0.0876,
+      "kalan_250m2_ustu_kume": 292,
+      "en_buyuk_kalan_kor_alan_m2": 29999,
+      "ornekler": [
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.425523,
+          "boylam": 26.511431,
+          "alan_m2": 29999,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Uzunkuyu",
+          "enlem": 38.327397,
+          "boylam": 26.65834,
+          "alan_m2": 13599,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.388805,
+          "boylam": 26.464485,
+          "alan_m2": 12400,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.367642,
+          "boylam": 26.451546,
+          "alan_m2": 11900,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.420549,
+          "boylam": 26.606584,
+          "alan_m2": 10800,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.359955,
+          "boylam": 26.462424,
+          "alan_m2": 9200,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.401376,
+          "boylam": 26.496317,
+          "alan_m2": 8500,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.417384,
+          "boylam": 26.603034,
+          "alan_m2": 8000,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Uzunkuyu",
+          "enlem": 38.373159,
+          "boylam": 26.643912,
+          "alan_m2": 6600,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.423172,
+          "boylam": 26.588836,
+          "alan_m2": 6200,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.399748,
+          "boylam": 26.462538,
+          "alan_m2": 6000,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.427603,
+          "boylam": 26.584599,
+          "alan_m2": 5600,
+          "neden": "KARISIK_GECERSIZLIK"
+        }
+      ],
+      "durum": "ok"
+    }
+  },
+  "hatalar": []
+}
