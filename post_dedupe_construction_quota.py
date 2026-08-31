@@ -2,20 +2,22 @@
 
 Çeşme ve Uzunkuyu analiz kutuları bilinçli olarak örtüşür. İki kutuda seçilen aynı
 Sentinel kümesi daha sonra ``dedupe_overlap_satellite.py`` ile tek kayda indirilir.
-Bu doğru davranış, fakat elenen kayıt 800-10.000 m² şantiye ölçeği kotasındaysa bir
-bölge 6 yerine 5 şantiye ölçeği adayıyla kalabilir; buna karşılık çok geniş değişim
-adayları listede kalır.
+Bu doğru davranış, fakat elenen kayıt 800-10.000 m² şantiye ölçeği kotasındaysa
+şantiye ölçeği temsili azalabilir; buna karşılık çok geniş değişim adayları listede
+kalır.
 
-Bu katman yeni alarm üretmez ve eşikleri gevşetmez. Yalnız yeni Sentinel sahnesinde,
-çakışma temizliği sonrasında 6 kişilik şantiye ölçeği kotası eksilmişse aynı bölgedeki
-en zayıf/geniş >10.000 m² kaydı çıkarıp, mevcut 250 m²+ filtreleri zaten geçmiş ve
-başka seçili adayla 25 m içinde mükerrer olmayan en iyi 800-10.000 m² adayı koyar.
-Bölgenin ve toplam raporun aday sayısı değişmez. 250-800 m² güçlü küçük-saha adayları
-hiçbir zaman bu işlemle çıkarılmaz.
+31 Ağustos şekil denetiminde nihai geniş adayların önemli bölümünde düşük kompaktlık
+riski görülürken 800-10.000 m² şantiye ölçeği adaylarında bu risk belirgin biçimde
+daha düşüktü. Bu nedenle post-dedupe hedefini alarm sayısını artırmadan bölge başına
+8 şantiye ölçeği adaya çıkarıyoruz; bunların mümkünse 4'ü 800-2.000 m² erken-parsel
+aralığından seçilir. Aynı bölgedeki en zayıf/geniş >10.000 m² kayıtlar çıkarılıp,
+mevcut 250 m²+ üretim filtrelerini zaten geçmiş ve başka seçili adayla 25 m içinde
+mükerrer olmayan en iyi 800-10.000 m² adaylar konur. 250-800 m² güçlü küçük-saha
+adayları hiçbir zaman bu işlemle çıkarılmaz.
 
 Kod politikası değişiklikleri mevcut Sentinel sahnesini geriye dönük karıştırmaz.
-İlk çalışmada mevcut sahne yalnız taban çizgisi olarak kaydedilir; düzeltme ilk yeni
-Sentinel sahnesinde devreye girer.
+Mevcut sahne yalnız yeni politika sürümü için taban çizgisi olarak korunur; 8/4 kota
+ilk yeni Sentinel sahnesinde devreye girer.
 """
 
 from __future__ import annotations
@@ -30,10 +32,12 @@ from daily_report import ISTANBUL, REPORT_REGIONS, build_daily_report, ensure_da
 from scanner import connect
 
 
-POLICY_VERSION = "post-dedupe-construction-quota-v1-next-scene"
+POLICY_VERSION = "post-dedupe-construction-quota-v2-8-slots-next-scene"
 STATE_TABLE = "uydu_post_dedupe_kota_surumu"
 DUPLICATE_METERS = 25.0
 MIN_AREA_SIMILARITY = 0.70
+POST_DEDUPE_CONSTRUCTION_QUOTA = 8
+POST_DEDUPE_EARLY_QUOTA = 4
 
 
 def _area(item):
@@ -145,7 +149,7 @@ def _choose_additions(raw, current, selected_all, missing):
 
     current_early = sum(_is_early_construction(item) for item in current)
     early_needed = min(
-        max(rebalance.CONSTRUCTION_EARLY_QUOTA - current_early, 0),
+        max(POST_DEDUPE_EARLY_QUOTA - current_early, 0),
         missing,
     )
     additions = []
@@ -217,7 +221,7 @@ def _wide_removal_order(current):
 
 def _swap_without_growth(current, raw, selected_all):
     construction_count = sum(_is_construction(item) for item in current)
-    missing = max(rebalance.CONSTRUCTION_SCALE_QUOTA - construction_count, 0)
+    missing = max(POST_DEDUPE_CONSTRUCTION_QUOTA - construction_count, 0)
     if missing <= 0:
         return list(current), []
 
@@ -297,12 +301,19 @@ def _self_check():
     current.extend(item(10 + i, 1000 + i * 500, 0.5) for i in range(5))
     current.extend(item(30 + i, 20000 + i * 1000, 0.1) for i in range(12))
     raw = list(current)
-    raw.append(item(80, 1800, 0.9))
+    raw.extend(
+        [
+            item(80, 1800, 0.9),
+            item(82, 3200, 0.8),
+            item(83, 4500, 0.7),
+        ]
+    )
     updated, swaps = _swap_without_growth(current, raw, current)
     assert len(updated) == len(current)
-    assert len(swaps) == 1
-    assert sum(_is_construction(candidate) for candidate in updated) == 6
-    assert sum(_is_wide(candidate) for candidate in updated) == 11
+    assert len(swaps) == 3
+    assert sum(_is_construction(candidate) for candidate in updated) == 8
+    assert sum(_is_early_construction(candidate) for candidate in updated) >= 4
+    assert sum(_is_wide(candidate) for candidate in updated) == 9
 
     duplicate_raw = list(current)
     duplicate_raw.append(
