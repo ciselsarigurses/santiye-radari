@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-31",
-  "olusturma": "2026-08-31 15:39 +03",
+  "olusturma": "2026-08-31 19:07 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 59",
   "saha_adaylari": [
     {
@@ -1569,7 +1569,7 @@
       "skor": 9,
       "durum": "KIRMIZI",
       "ilk_gorulme": "2026-08-27 12:10 UTC",
-      "son_gorulme": "2026-08-31 12:39 UTC",
+      "son_gorulme": "2026-08-31 16:07 UTC",
       "yeni": false
     }
   ],
@@ -1695,38 +1695,5 @@
       "kalibrasyon_durumu": "ALARM_DEGIL"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir.",
-  "kor_alan_saha_devriyesi": [
-    {
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Dalyan",
-      "enlem": 38.363746,
-      "boylam": 26.314843,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.4347,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.363746,26.314843"
-    },
-    {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır",
-      "mahalle": "Ildır",
-      "enlem": 38.399654,
-      "boylam": 26.475363,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.1449,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.399654,26.475363"
-    }
-  ],
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük rotasyonla en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur ve güvenli alternatif varsa farklı mahallelerden seçilir."
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir."
 }
