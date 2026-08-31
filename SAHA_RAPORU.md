@@ -24,6 +24,15 @@
 2. **KALİBRASYON — Ildır** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.259 · RGB Δ 0.160 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.400921,26.621469)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
+## Kör alan saha devriyesi
+
+> **Alarm değildir.** Sentinel zaman serisinde kara olduğu bilinen fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır ve iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır. Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir.
+
+1. **KÖR ALAN — Ildır** · yaklaşık 4.800 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.399926,26.462631)
+   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+2. **KÖR ALAN — Uzunkuyu** · yaklaşık 4.001 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.181854,26.501469)
+   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 ### 1. GECİKEN — Musalla
