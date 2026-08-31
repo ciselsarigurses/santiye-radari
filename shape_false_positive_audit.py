@@ -2,11 +2,9 @@
 
 Bu denetim alarm üretmez, saha görevi açmaz ve üretim eşiklerini değiştirmez.
 Ana Sentinel motorunun oluşturduğu aynı değişim maskesindeki geçerli 250 m²+ kümelerin
-şekil özelliklerini ölçer. Amaç özellikle yol, altyapı veya uzun şerit biçimli yüzey
-değişimlerinin >10.000 m² geniş aday havuzunu baskılayıp baskılamadığını sayısal olarak
-görmektir. "Uzun-ince" veya "düşük kompaktlık" etiketi tek başına yol/yanlış pozitif
-kanıtı değildir; yalnız saha geri bildirimiyle ileride güvenli bir sıralama kuralı
-kalibre edilebilmesi için diagnostik sinyaldir.
+şekil özelliklerini ölçer. Hem ham motor seçimini hem de rebalance + overlap-dedupe
+sonrasında günlük raporda gerçekten kalan nihai adayları ayrı ayrı gösterir. Böylece
+şekil kalibrasyonu artık üretim öncesi 24'lük ara listeye bakıp yanlış sonuca varmaz.
 """
 
 from __future__ import annotations
@@ -119,6 +117,31 @@ def _candidate_key(item):
         return None
 
 
+def _match_records(records, candidates):
+    keys = {key for key in map(_candidate_key, candidates or []) if key is not None}
+    return [record for record in records if _candidate_key(record) in keys]
+
+
+def _flagged_wide(records):
+    return [
+        record
+        for record in records
+        if record["olcek"] == "genis_10000_ustu"
+        and (record["uzun_ince"] or record["dusuk_kompaktlik"])
+    ]
+
+
+def _examples(records):
+    return sorted(
+        records,
+        key=lambda item: (
+            not item["uzun_ince"],
+            not item["dusuk_kompaktlik"],
+            -item["alan_m2"],
+        ),
+    )[:EXAMPLE_LIMIT]
+
+
 def _summarize(records):
     buckets = {
         "kucuk_250_800": {"toplam": 0, "uzun_ince": 0, "dusuk_kompaktlik": 0},
@@ -153,20 +176,34 @@ def _self_check():
     assert _area_bucket(500) == "kucuk_250_800"
     assert _area_bucket(5000) == "santiye_olcegi_800_10000"
     assert _area_bucket(15000) == "genis_10000_ustu"
+    assert _match_records(
+        [square_record, strip_record],
+        [{"enlem": square_record["enlem"], "boylam": square_record["boylam"], "alan_m2": square_record["alan_m2"]}],
+    ) == [square_record]
 
 
 def _today_snapshot(connection, report_date, region_key):
     row = connection.execute(
-        """SELECT son_item,hata FROM gunluk_uydu_raporlari
+        """SELECT son_item,hareket_json,hata FROM gunluk_uydu_raporlari
         WHERE rapor_tarihi=? AND bolge=? LIMIT 1""",
         (report_date, region_key),
     ).fetchone()
     if not row:
-        return None, "rapor_yok"
-    return row[0], row[1]
+        return {"son_item": None, "hareket": [], "hata": "rapor_yok"}
+    try:
+        movement = json.loads(row[1] or "[]")
+    except (TypeError, ValueError, json.JSONDecodeError):
+        movement = []
+    if not isinstance(movement, list):
+        movement = []
+    return {
+        "son_item": row[0],
+        "hareket": [item for item in movement if isinstance(item, dict)],
+        "hata": row[2],
+    }
 
 
-def _analyze_region(region_key, pair):
+def _analyze_region(region_key, pair, final_candidates=None):
     captured = {"records": [], "selected": []}
 
     def audited_hotspots(
@@ -208,36 +245,25 @@ def _analyze_region(region_key, pair):
     finally:
         satellite._hotspots = original
 
-    selected_keys = {
-        key for key in map(_candidate_key, captured["selected"]) if key is not None
-    }
-    selected_records = [
-        record
-        for record in captured["records"]
-        if _candidate_key(record) in selected_keys
-    ]
-    flagged_selected_wide = [
-        record
-        for record in selected_records
-        if record["olcek"] == "genis_10000_ustu"
-        and (record["uzun_ince"] or record["dusuk_kompaktlik"])
-    ]
-    examples = sorted(
-        flagged_selected_wide,
-        key=lambda item: (
-            not item["uzun_ince"],
-            not item["dusuk_kompaktlik"],
-            -item["alan_m2"],
-        ),
-    )[:EXAMPLE_LIMIT]
+    raw_selected_records = _match_records(captured["records"], captured["selected"])
+    final_selected_records = _match_records(captured["records"], final_candidates or [])
+    raw_flagged = _flagged_wide(raw_selected_records)
+    final_flagged = _flagged_wide(final_selected_records)
 
     return {
         "ham_gecerli_aday": len(captured["records"]),
+        # Geriye uyumluluk: eski alanlar ham satellite._hotspots seçimini gösterir.
         "uretim_secimi": len(captured["selected"]),
         "ham_sekil_dagilimi": _summarize(captured["records"]),
-        "uretim_secimi_sekil_dagilimi": _summarize(selected_records),
-        "secili_genis_sekil_isaretli": len(flagged_selected_wide),
-        "secili_genis_sekil_ornekleri": examples,
+        "uretim_secimi_sekil_dagilimi": _summarize(raw_selected_records),
+        "secili_genis_sekil_isaretli": len(raw_flagged),
+        "secili_genis_sekil_ornekleri": _examples(raw_flagged),
+        # Asıl operasyonel çıktı: rebalance + dedupe sonrasında DB'de kalan adaylar.
+        "nihai_rapor_secimi": len(final_candidates or []),
+        "nihai_rapor_eslesen_geometri": len(final_selected_records),
+        "nihai_rapor_secimi_sekil_dagilimi": _summarize(final_selected_records),
+        "nihai_secili_genis_sekil_isaretli": len(final_flagged),
+        "nihai_secili_genis_sekil_ornekleri": _examples(final_flagged),
     }
 
 
@@ -250,26 +276,32 @@ def audit_shapes():
 
     with connect() as connection:
         for region_key in REPORT_REGIONS:
-            son_item, hata = _today_snapshot(connection, report_date, region_key)
+            snapshot = _today_snapshot(connection, report_date, region_key)
             record = {
                 "bolge": satellite.REGIONS[region_key]["label"],
-                "son_item": son_item,
+                "son_item": snapshot.get("son_item"),
                 "durum": "ok",
             }
-            if hata:
+            if snapshot.get("hata"):
                 record["durum"] = "gunluk_uydu_hatasi"
-                record["hata"] = str(hata)
+                record["hata"] = str(snapshot.get("hata"))
                 regions[region_key] = record
                 continue
             try:
                 pair = satellite.sentinel_pair(region_key)
                 latest_item = pair[1].get("id")
                 record["latest_item"] = latest_item
-                if not son_item or son_item != latest_item:
+                if not snapshot.get("son_item") or snapshot.get("son_item") != latest_item:
                     record["durum"] = "gunluk_rapor_latest_ile_eslesmiyor"
                     regions[region_key] = record
                     continue
-                record.update(_analyze_region(region_key, pair))
+                record.update(
+                    _analyze_region(
+                        region_key,
+                        pair,
+                        final_candidates=snapshot.get("hareket", []),
+                    )
+                )
             except Exception as exc:
                 record["durum"] = "denetim_hatasi"
                 record["hata"] = f"{type(exc).__name__}: {exc}"
@@ -280,9 +312,8 @@ def audit_shapes():
         "olusturma": now.strftime("%Y-%m-%d %H:%M %Z"),
         "amac": (
             "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve "
-            "düşük-kompaktlık geometrisini ölçmek; özellikle geniş adaylarda yol/altyapı "
-            "gibi yanlış-pozitif olasılıklarının saha geri bildirimiyle kalibre edilmesini "
-            "sağlamak."
+            "düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + "
+            "dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek."
         ),
         "esikler": {
             "uzun_ince_min_uzun_kisa_orani": LONG_THIN_ASPECT_MIN,
@@ -290,7 +321,8 @@ def audit_shapes():
         },
         "uyari": (
             "Şekil etiketi tek başına yol veya yanlış pozitif kanıtı değildir; hiçbir aday "
-            "bu denetim nedeniyle elenmez veya öncelik kaybetmez."
+            "bu denetim nedeniyle elenmez veya öncelik kaybetmez. Nihai karar için "
+            "nihai_rapor_* alanları kullanılmalıdır."
         ),
         "bolgeler": regions,
     }
@@ -308,8 +340,8 @@ def main():
     _self_check()
     if args.check_only:
         print(
-            "Şekil yanlış-pozitif denetimi kalite kontrolü başarılı: uzun-ince ve "
-            "kompaktlık ölçümleri üretim alarmına dokunmadan hesaplanıyor."
+            "Şekil yanlış-pozitif denetimi kalite kontrolü başarılı: ham ve nihai "
+            "aday geometrisi alarm üretmeden ayrı ölçülebiliyor."
         )
         return
 
@@ -319,13 +351,17 @@ def main():
         if item.get("durum") != "ok":
             summaries.append(f"{key}: {item.get('durum')}")
             continue
-        selected = item.get("uretim_secimi_sekil_dagilimi", {})
-        wide = selected.get("genis_10000_ustu", {})
+        raw_selected = item.get("uretim_secimi_sekil_dagilimi", {})
+        raw_wide = raw_selected.get("genis_10000_ustu", {})
+        final_selected = item.get("nihai_rapor_secimi_sekil_dagilimi", {})
+        final_wide = final_selected.get("genis_10000_ustu", {})
         summaries.append(
-            f"{key}: seçili >10000={wide.get('toplam', 0)}; "
-            f"uzun-ince={wide.get('uzun_ince', 0)}, "
-            f"düşük-kompaktlık={wide.get('dusuk_kompaktlik', 0)}, "
-            f"şekil-işaretli geniş={item.get('secili_genis_sekil_isaretli', 0)}"
+            f"{key}: ham >10000={raw_wide.get('toplam', 0)} / "
+            f"şekil-işaretli={item.get('secili_genis_sekil_isaretli', 0)}; "
+            f"nihai >10000={final_wide.get('toplam', 0)} / "
+            f"şekil-işaretli={item.get('nihai_secili_genis_sekil_isaretli', 0)}; "
+            f"nihai eşleşme={item.get('nihai_rapor_eslesen_geometri', 0)}/"
+            f"{item.get('nihai_rapor_secimi', 0)}"
         )
     print("Şekil yanlış-pozitif denetimi: " + " | ".join(summaries))
 
