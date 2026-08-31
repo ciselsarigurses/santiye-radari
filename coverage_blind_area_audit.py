@@ -1,11 +1,12 @@
 """Sentinel ana + zaman-serisi katmanlarından sonra kalan gerçek mekânsal kör alanı ölçer.
 
 Bu denetim alarm veya saha görevi üretmez. Ana Sentinel karşılaştırmasının göremediği
-piksellerden, mevcut temporal_gap_scan ve latest_cloud_gap_scan mantığıyla geri
-kazanılabilenleri düşer. Geriye kalan kara piksellerini yaklaşık 10 m analiz ölçeğinde
-bitişik kümeler halinde ölçerek 250 m² ve üzerindeki kalıcı/geçici kör alanları görünür
-kılar. Amaç "alarm yok" sonucunun gerçekten gözlem varlığına dayanıp dayanmadığını
-ölçmektir.
+piksellerden mevcut temporal_gap_scan ve latest_cloud_gap_scan mantığıyla geri
+kazanılabilenleri düşer. Deniz/bulut sınırını kara sanmamak için kara hedefi, aynı
+Sentinel karosundaki son açık tarihlerin SCL=4 (vegetation) veya SCL=5
+(non-vegetated) kanıtından bağımsız olarak kurulur. Böylece yalnız gerçekten daha
+önce kara olarak gözlenmiş 10 m piksellerde kalan 250 m²+ kör kümeler raporlanır;
+hiçbir referans sahnede kara/su olarak çözülemeyen yüzey ayrıca ölçülür.
 """
 
 from __future__ import annotations
@@ -22,9 +23,11 @@ from satellite import (
     MIN_HOTSPOT_AREA_M2,
     REGIONS,
     _connected_components,
+    _item_covers_bbox,
     _nearest_place,
     _output_shape,
     _read_asset,
+    _same_mgrs_tile,
     _search_items,
     sentinel_pair,
 )
@@ -34,7 +37,9 @@ from temporal_gap_scan import EXCLUDED_CLASSES, TRANSIENT_OLDER_CLASSES, select_
 OUTPUT_FILE = Path(__file__).with_name("coverage_blind_area_audit.json")
 MAX_EXAMPLES = 12
 MIN_COMPONENT_PIXELS = 3
+LAND_REFERENCE_SCENES = 8
 TRANSIENT_CLASSES = TRANSIENT_OLDER_CLASSES
+LAND_CLASSES = np.array([4, 5], dtype="uint8")
 WATER_CLASS = 6
 NO_DATA_CLASS = 0
 
@@ -55,6 +60,48 @@ def _item_date(item):
     return datetime.fromisoformat(
         item["properties"]["datetime"].replace("Z", "+00:00")
     ).strftime("%d.%m.%Y")
+
+
+def _reference_items(items, latest, bbox, limit=LAND_REFERENCE_SCENES):
+    refs = []
+    seen = set()
+    for item in items:
+        item_id = str(item.get("id") or "")
+        if not item_id or item_id in seen:
+            continue
+        if not _same_mgrs_tile(item, latest):
+            continue
+        if not _item_covers_bbox(item, bbox):
+            continue
+        refs.append(item)
+        seen.add(item_id)
+        if len(refs) >= limit:
+            break
+    return refs
+
+
+def _historical_surface_mask(items, latest, bbox, height, width):
+    """Yakın tarihlerden bağımsız kara/su kanıtı üretir.
+
+    SCL=7 unclassified bilinçli olarak kara kanıtı sayılmaz. En az bir açık SCL=4/5
+    gözlemi kara için yeterlidir; hiç kara kanıtı yokken en az bir SCL=6 gözlemi su
+    sayılır. Tüm referanslarda yalnız bulut/gölge/no-data vb. kalan piksel
+    `unknown_surface` olarak tutulur ve kara körlüğüne karıştırılmaz.
+    """
+    refs = _reference_items(items, latest, bbox)
+    land_seen = np.zeros((height, width), dtype=bool)
+    water_seen = np.zeros((height, width), dtype=bool)
+    dates = []
+    for item in refs:
+        scl = _read_asset(item, "scl", bbox, height, width, "nearest")[0]
+        land_seen |= np.isin(scl, LAND_CLASSES)
+        water_seen |= scl == WATER_CLASS
+        dates.append(_item_date(item))
+
+    known_land = land_seen
+    known_water = ~land_seen & water_seen
+    unknown_surface = ~land_seen & ~water_seen
+    return known_land, known_water, unknown_surface, refs, dates
 
 
 def _component_example(component, mask, bbox, pixel_area_m2, primary_scl, latest_scl, fallback_scl):
@@ -91,6 +138,29 @@ def _component_example(component, mask, bbox, pixel_area_m2, primary_scl, latest
     }
 
 
+def _component_summary(mask, bbox, pixel_area_m2, primary_scl, latest_scl, fallback_scl):
+    components = []
+    for component in _connected_components(mask):
+        if len(component) < MIN_COMPONENT_PIXELS:
+            continue
+        area_m2 = len(component) * pixel_area_m2
+        if area_m2 < MIN_HOTSPOT_AREA_M2:
+            continue
+        components.append(
+            _component_example(
+                component,
+                mask,
+                bbox,
+                pixel_area_m2,
+                primary_scl,
+                latest_scl,
+                fallback_scl,
+            )
+        )
+    components.sort(key=lambda item: item["alan_m2"], reverse=True)
+    return components
+
+
 def _analyze_region(region_key):
     bbox = REGIONS[region_key]["bbox"]
     primary, latest = sentinel_pair(region_key)
@@ -106,63 +176,42 @@ def _analyze_region(region_key):
     if fallback is not None:
         fallback_scl = _read_asset(fallback, "scl", bbox, height, width, "nearest")[0]
 
+    known_land, known_water, unknown_surface, refs, ref_dates = _historical_surface_mask(
+        items, latest, bbox, height, width
+    )
+    if not refs:
+        raise RuntimeError("Tarihsel kara/su referansı için tam-kapsam Sentinel sahnesi yok.")
+
     primary_valid = ~np.isin(primary_scl, EXCLUDED_CLASSES)
     latest_valid = ~np.isin(latest_scl, EXCLUDED_CLASSES)
     main_valid = primary_valid & latest_valid
 
-    # Deniz piksellerini "kör alan" diye sayma. En az bir sahnede su/no-data dışında
-    # sınıflanan piksel kara hedefidir; kıyıdaki sınıf değişimleri bu nedenle temkinli
-    # biçimde kapsam içinde kalır.
-    land_target = ~(
-        np.isin(primary_scl, [WATER_CLASS, NO_DATA_CLASS])
-        & np.isin(latest_scl, [WATER_CLASS, NO_DATA_CLASS])
-        & (
-            np.isin(fallback_scl, [WATER_CLASS, NO_DATA_CLASS])
-            if fallback_scl is not None
-            else True
-        )
-    )
-
-    pair_blind = land_target & ~main_valid
+    pair_blind = known_land & ~main_valid
     recovered = main_valid.copy()
 
     if fallback_scl is not None:
         fallback_valid = ~np.isin(fallback_scl, EXCLUDED_CLASSES)
         primary_transient = np.isin(primary_scl, TRANSIENT_CLASSES)
         latest_transient = np.isin(latest_scl, TRANSIENT_CLASSES)
-
-        # temporal_gap_scan: eski ana sahne kapalı, en yeni + yedek açık.
         recovered |= primary_transient & latest_valid & fallback_valid
-        # latest_cloud_gap_scan: en yeni sahne kapalı, ana eski + yedek açık.
         recovered |= latest_transient & primary_valid & fallback_valid
 
-    residual = land_target & ~recovered
+    residual = known_land & ~recovered
     recovered_from_pair_blind = pair_blind & recovered
 
-    components = []
-    for component in _connected_components(residual):
-        if len(component) < MIN_COMPONENT_PIXELS:
-            continue
-        area_m2 = len(component) * pixel_area_m2
-        if area_m2 < MIN_HOTSPOT_AREA_M2:
-            continue
-        components.append(
-            _component_example(
-                component,
-                residual,
-                bbox,
-                pixel_area_m2,
-                primary_scl,
-                latest_scl,
-                fallback_scl,
-            )
-        )
-    components.sort(key=lambda item: item["alan_m2"], reverse=True)
+    components = _component_summary(
+        residual, bbox, pixel_area_m2, primary_scl, latest_scl, fallback_scl
+    )
+    unknown_components = _component_summary(
+        unknown_surface, bbox, pixel_area_m2, primary_scl, latest_scl, fallback_scl
+    )
 
-    land_pixels = max(int(land_target.sum()), 1)
+    known_land_pixels = max(int(known_land.sum()), 1)
+    total_pixels = max(int(known_land.size), 1)
     pair_blind_pixels = int(pair_blind.sum())
     recovered_pixels = int(recovered_from_pair_blind.sum())
     residual_pixels = int(residual.sum())
+    unknown_pixels = int(unknown_surface.sum())
 
     return {
         "bolge": REGIONS[region_key]["label"],
@@ -173,16 +222,23 @@ def _analyze_region(region_key):
         "yedek_item": fallback["id"] if fallback is not None else None,
         "yedek_tarih": _item_date(fallback) if fallback is not None else None,
         "analiz_piksel_m_yaklasik": round(math.sqrt(pixel_area_m2), 2),
-        "kara_hedef_piksel": land_pixels,
+        "kara_referans_sahne_sayisi": len(refs),
+        "kara_referans_tarihleri": ref_dates,
+        "kara_hedef_piksel": known_land_pixels,
+        "su_referansli_piksel": int(known_water.sum()),
+        "cozumlenmemis_yuzey_piksel": unknown_pixels,
+        "cozumlenmemis_yuzey_yuzde": round(unknown_pixels / total_pixels * 100, 4),
+        "cozumlenmemis_250m2_ustu_kume": len(unknown_components),
         "ana_cift_kor_piksel": pair_blind_pixels,
-        "ana_cift_kor_yuzde": round(pair_blind_pixels / land_pixels * 100, 4),
+        "ana_cift_kor_yuzde": round(pair_blind_pixels / known_land_pixels * 100, 4),
         "zaman_serisiyle_geri_kazanilan_piksel": recovered_pixels,
-        "zaman_serisiyle_geri_kazanilan_yuzde": round(recovered_pixels / land_pixels * 100, 4),
+        "zaman_serisiyle_geri_kazanilan_yuzde": round(recovered_pixels / known_land_pixels * 100, 4),
         "kalan_kor_piksel": residual_pixels,
-        "kalan_kor_yuzde": round(residual_pixels / land_pixels * 100, 4),
+        "kalan_kor_yuzde": round(residual_pixels / known_land_pixels * 100, 4),
         "kalan_250m2_ustu_kume": len(components),
         "en_buyuk_kalan_kor_alan_m2": max((item["alan_m2"] for item in components), default=0),
         "ornekler": components[:MAX_EXAMPLES],
+        "cozumlenmemis_yuzey_ornekleri": unknown_components[:MAX_EXAMPLES],
         "durum": "ok" if fallback is not None else "yedek_sahne_yok",
     }
 
@@ -203,10 +259,12 @@ def _core_payload():
 
     return {
         "amac": (
-            "Ana Sentinel çifti ile mevcut eski/yeni bulut-gölge zaman-serisi "
-            "tamamlamalarından sonra gözlemsiz kalan kara alanlarını ölçmek; alarm veya görev üretmez."
+            "Son açık Sentinel tarihlerinde SCL=4/5 ile kara olduğu bağımsız olarak kanıtlanan "
+            "piksellerde, ana çift ve mevcut eski/yeni bulut-gölge zaman-serisi tamamlamalarından "
+            "sonra gözlemsiz kalan alanı ölçmek; alarm veya görev üretmez."
         ),
         "minimum_alan_m2": MIN_HOTSPOT_AREA_M2,
+        "kara_referans_sahne_tavani": LAND_REFERENCE_SCENES,
         "bolgeler": regions,
         "hatalar": errors,
     }
@@ -246,11 +304,12 @@ def main():
             print(f"{region_key}: HATA - {row.get('hata')}")
             continue
         print(
-            f"{region_key}: ana çift kör %{row['ana_cift_kor_yuzde']:.4f}; "
+            f"{region_key}: {row['kara_referans_sahne_sayisi']} kara referansı; "
+            f"ana çift kör %{row['ana_cift_kor_yuzde']:.4f}; "
             f"zaman serisi geri kazanım %{row['zaman_serisiyle_geri_kazanilan_yuzde']:.4f}; "
-            f"kalan kör %{row['kalan_kor_yuzde']:.4f}; "
+            f"kalan doğrulanmış-kara körlüğü %{row['kalan_kor_yuzde']:.4f}; "
             f"250m²+ kalan küme={row['kalan_250m2_ustu_kume']}; "
-            f"en büyük={row['en_buyuk_kalan_kor_alan_m2']} m²"
+            f"çözümlenmemiş yüzey %{row['cozumlenmemis_yuzey_yuzde']:.4f}"
         )
 
     if core["hatalar"]:
