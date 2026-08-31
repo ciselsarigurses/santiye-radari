@@ -22,7 +22,7 @@ SECTION_TITLE = "## Kör alan saha devriyesi"
 NEXT_SECTION = "## Bugün sahada kontrol edilecek uydu adayları"
 ACTIVE_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT"}
 MIN_AREA_M2 = 250
-TARGET_MAX_AREA_M2 = 6000
+TARGET_MAX_AREA_M2 = 6500
 ACTIVE_DISTANCE_M = 150
 CROSS_REGION_DISTANCE_M = 250
 MAX_PER_REGION = 1
@@ -144,10 +144,20 @@ def select_coverage_patrol(audit_payload, report_payload, limit=TOTAL_LIMIT):
         if not pool:
             continue
 
-        offset = _rotation_offset(report_payload, len(pool))
-        rotated = pool[offset:] + pool[:offset]
+        preferred = [item for item in pool if item["alan_m2"] <= TARGET_MAX_AREA_M2]
+        fallback = [item for item in pool if item["alan_m2"] > TARGET_MAX_AREA_M2]
+
+        def rotated(items):
+            if not items:
+                return []
+            offset = _rotation_offset(report_payload, len(items))
+            return items[offset:] + items[:offset]
+
+        # Günlük rotasyon, parsel/şantiye ölçeği tercih katmanının dışına taşmasın.
+        # Ancak o katmanda güvenli nokta kalmazsa daha geniş kör kümeye düş.
+        ordered = rotated(preferred) + rotated(fallback)
         picked = None
-        for item in rotated:
+        for item in ordered:
             point = _point(item)
             if point is None:
                 continue
@@ -272,6 +282,13 @@ def _self_check():
                         "alan_m2": 700,
                         "neden": "BULUT_GOLGE_KALICI",
                     },
+                    {
+                        "mahalle_yaklasik": "Geniş",
+                        "enlem": 38.3200,
+                        "boylam": 26.3200,
+                        "alan_m2": 15000,
+                        "neden": "KARISIK_GECERSIZLIK",
+                    },
                 ],
             },
             "east": {
@@ -307,6 +324,8 @@ def _self_check():
     assert all(item["alarm"] is False for item in chosen)
     assert all(item["durum"] == "KAPSAMA_KONTROLU" for item in chosen)
     assert not any(item["mahalle"] == "Yakın" for item in chosen)
+    west_choice = next(item for item in chosen if item["bolge_anahtari"] == "west")
+    assert west_choice["alan_m2"] <= TARGET_MAX_AREA_M2
 
     md = _inject("Başlık\n\n" + NEXT_SECTION + "\nAday\n", _markdown(chosen))
     assert md.count(SECTION_TITLE) == 1
