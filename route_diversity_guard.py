@@ -7,6 +7,12 @@ daraltır. Bu post-process katmanı alarm/görev üretmez, toplam nokta sayısı
 mevcut kör-alan seçimindeki mesafe/alan güvenliklerini değiştirmez. Yalnız güvenli bir
 alternatif varsa kör-alan havuzunda, kuru-zemin kalibrasyonunda zaten temsil edilen
 mahalleleri ikinci kez seçmemeyi tercih eder.
+
+Örtüşen iki Sentinel bölgesinden birinde alternatif mahalle sayısı azsa o bölge önce
+seçilir. Böylece örneğin doğu havuzunda kalibrasyon dışı tek mahalle Alaçatı iken batı
+havuzunda Ovacık/Alaçatı gibi birkaç seçenek varsa, batı önce Alaçatı'yı tüketip doğuyu
+aynı mahalleye zorlamaz. Bu yalnız sıralama tercihidir; mevcut mesafe ve güvenlik
+filtreleri aynen uygulanır.
 """
 
 from __future__ import annotations
@@ -26,7 +32,8 @@ NOTE = (
     "gözlem boşluklarından günlük rotasyonla en fazla iki insan kontrol noktası seçilir. "
     "Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Kuru zemin "
     "kalibrasyonunda aynı gün zaten temsil edilen mahalleler, güvenli alternatif varsa "
-    "kör alan devriyesinde tekrar seçilmez."
+    "kör alan devriyesinde tekrar seçilmez; mahalle seçeneği daha kısıtlı uydu bölgesi "
+    "önce değerlendirilir."
 )
 
 
@@ -43,10 +50,10 @@ def _neighborhoods_from_calibration(report_payload):
 
 def _prefer_other_neighborhoods(audit_payload, blocked_neighborhoods):
     """Her bölgede güvenli alternatif varsa kalibrasyon mahallesini havuzdan çıkar."""
-    if not blocked_neighborhoods:
-        return audit_payload
-
     adjusted = copy.deepcopy(audit_payload)
+    if not blocked_neighborhoods:
+        return adjusted
+
     regions = adjusted.get("bolgeler") or {}
     if not isinstance(regions, dict):
         return adjusted
@@ -72,21 +79,50 @@ def _prefer_other_neighborhoods(audit_payload, blocked_neighborhoods):
     return adjusted
 
 
+def _candidate_neighborhood_count(region_key, region_data):
+    """Mevcut güvenli aday havuzundaki yaklaşık mahalle çeşitliliğini say."""
+    pool = coverage._candidate_pool(region_key, region_data)
+    values = {
+        coverage._neighborhood_key(item.get("mahalle"))
+        for item in pool
+        if coverage._neighborhood_key(item.get("mahalle"))
+    }
+    return len(values)
+
+
+def _constrained_regions_first(audit_payload):
+    """Alternatifi az bölgeyi önce seçerek diğer bölgenin esnekliğini koru."""
+    adjusted = copy.deepcopy(audit_payload)
+    regions = adjusted.get("bolgeler") or {}
+    if not isinstance(regions, dict) or len(regions) <= 1:
+        return adjusted
+
+    ordered = sorted(
+        regions.items(),
+        key=lambda pair: (
+            _candidate_neighborhood_count(pair[0], pair[1]) or 10_000,
+            str(pair[0]),
+        ),
+    )
+    adjusted["bolgeler"] = dict(ordered)
+    return adjusted
+
+
 def select_diverse_coverage_patrol(audit_payload, report_payload, limit=coverage.TOTAL_LIMIT):
     blocked = _neighborhoods_from_calibration(report_payload)
     adjusted = _prefer_other_neighborhoods(audit_payload, blocked)
+    adjusted = _constrained_regions_first(adjusted)
     return coverage.select_coverage_patrol(adjusted, report_payload, limit=limit)
 
 
 def _markdown(items):
     section = coverage._markdown(items)
-    old = (
-        "Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir."
-    )
+    old = "Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir."
     new = (
         old
         + " Kuru zemin kalibrasyonunda aynı gün zaten temsil edilen mahalleler, "
-        "güvenli alternatif varsa burada tekrar seçilmez."
+        "güvenli alternatif varsa burada tekrar seçilmez; mahalle alternatifi daha "
+        "kısıtlı uydu bölgesi önce değerlendirilir."
     )
     return section.replace(old, new, 1)
 
@@ -175,6 +211,37 @@ def _self_check():
     assert {item["mahalle"] for item in selected} == {"Ovacık", "Germiyan"}, selected
     assert all(item["alarm"] is False for item in selected)
     assert len(selected) == coverage.TOTAL_LIMIT
+
+    # Gerçek veride görülen kenar durum: doğu bölgesinde kalibrasyon dışı tek
+    # mahalle Alaçatı, batıda ise Alaçatı yanında Ovacık da var. Kısıtlı doğu önce
+    # seçilmeli ki batı güvenli Ovacık alternatifine kayabilsin.
+    scarcity_audit = {
+        "bolgeler": {
+            "west": {
+                "durum": "ok",
+                "bolge": "Batı",
+                "kara_referans_sahne_sayisi": 8,
+                "kor_alan_devriye_ornekleri": [
+                    {"mahalle_yaklasik": "Alaçatı", "enlem": 38.20, "boylam": 26.40, "alan_m2": 400, "neden": "BULUT_GOLGE_KALICI"},
+                    {"mahalle_yaklasik": "Ovacık", "enlem": 38.25, "boylam": 26.33, "alan_m2": 400, "neden": "BULUT_GOLGE_KALICI"},
+                ],
+            },
+            "east": {
+                "durum": "ok",
+                "bolge": "Doğu",
+                "kara_referans_sahne_sayisi": 8,
+                "kor_alan_devriye_ornekleri": [
+                    {"mahalle_yaklasik": "Alaçatı", "enlem": 38.19, "boylam": 26.46, "alan_m2": 400, "neden": "BULUT_GOLGE_KALICI"},
+                ],
+            },
+        }
+    }
+    scarcity = select_diverse_coverage_patrol(
+        scarcity_audit,
+        {"rapor_tarihi": "2026-08-31", "saha_adaylari": [], "kuru_zemin_kalibrasyon_kontrolu": []},
+    )
+    assert [item["bolge_anahtari"] for item in scarcity] == ["east", "west"], scarcity
+    assert {item["mahalle"] for item in scarcity} == {"Alaçatı", "Ovacık"}, scarcity
 
     fallback_audit = {
         "bolgeler": {
