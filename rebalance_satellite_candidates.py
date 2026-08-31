@@ -13,6 +13,13 @@ spektral kanıt tercih edilir. Eşit sinyalde eski alan sıralaması korunur. B�
 24 alarm bütçesi içinde tarla/çok geniş yüzey değişimi yerine hafriyata daha çok
 benzeyen adayların seçilme ihtimali yükselir.
 
+Geniş (>10.000 m²) kotasında aday elenmez ve kota küçültülmez. Mevcut şekil denetimiyle
+aynı kompaktlık ölçüsü yalnız sıralama sinyali olarak taşınır: düşük-kompaktlık riski
+olmayan geniş kümeler önce, riskli olanlar sonra gelir; her grubun kendi içinde eski
+alan sıralaması korunur. Yeterli temiz geniş aday yoksa riskli adaylar yine boş yerleri
+doldurur. Böylece alarm sayısı değişmeden düzensiz büyük yüzeylerin saha bütçesini
+kaplama olasılığı azaltılır.
+
 8-komşuluk nedeniyle 10.000 m² üzerindeki geniş bir kümeye yalnız köşeden bağlanan
 800-10.000 m²'lik küçük bir yan küme varsa ve geniş kümenin 4-komşu ana gövdesi hâlâ
 10.000 m² üzerindeyse bu yan parça ayrıca ölçülür. Yan parçanın ebeveynin en fazla
@@ -23,14 +30,15 @@ için en fazla 1 şantiye-ölçeği yeri ayrılır.
 Yeni seçim politikası, daha önce işlenmiş aynı Sentinel sahnesine geriye dönük olarak
 yeni görevler üretmek için uygulanmaz. Aynı sahne hâlâ güncelse politika sürümü
 ilerletilir; yeni görüntü olmayan günde önceki günün aynı-sahne seçimi korunur. Böylece
-kod iyileştirmesi tek başına saha kuyruğunu şişirmez. Yeni spektral sıralama ilk yeni
-Sentinel sahnesinde devreye girer. Saha tarafından dokunulmuş görevler bu katmanda
-hiçbir zaman kapatılmaz.
+kod iyileştirmesi tek başına saha kuyruğunu şişirmez. Yeni spektral/geometri sıralaması
+ilk yeni Sentinel sahnesinde devreye girer. Saha tarafından dokunulmuş görevler bu
+katmanda hiçbir zaman kapatılmaz.
 """
 
 from __future__ import annotations
 
 import json
+import math
 from datetime import datetime, timezone
 
 import numpy as np
@@ -40,7 +48,7 @@ from daily_report import ISTANBUL, REPORT_REGIONS, build_daily_report, ensure_da
 from scanner import connect
 
 
-SELECTION_VERSION = "construction-scale-quota-v5-spectral-strength-next-scene"
+SELECTION_VERSION = "construction-scale-quota-v6-wide-shape-priority-next-scene"
 RAW_LIMIT = 1_000_000
 CONSTRUCTION_SCALE_MIN_M2 = satellite.SMALL_HOTSPOT_MAX_M2
 CONSTRUCTION_SCALE_MAX_M2 = 10_000
@@ -51,6 +59,9 @@ DIAGONAL_SIDECAR_QUOTA = 1
 DIAGONAL_SIDECAR_MAX_PARENT_FRACTION = 0.35
 DIAGONAL_SIDECAR_TAG = "DIYAGONAL_YAN_KUME"
 STRONG_SIGNAL_FIELD = "guclu_sinyal_orani"
+WIDE_COMPACTNESS_FIELD = "genis_kompaktlik"
+WIDE_SHAPE_RISK_FIELD = "genis_geometri_riski"
+WIDE_LOW_COMPACTNESS_MAX = 0.15
 _ORIGINAL_HOTSPOTS = satellite._hotspots
 
 
@@ -67,6 +78,14 @@ def _signal_strength(item):
         return min(max(float(item.get(STRONG_SIGNAL_FIELD) or 0), 0.0), 1.0)
     except (TypeError, ValueError, AttributeError):
         return 0.0
+
+
+def _wide_shape_risk(item):
+    """Geniş adayın ölçülmüş düşük-kompaktlık riskini üç durumlu döndürür."""
+    value = item.get(WIDE_SHAPE_RISK_FIELD)
+    if value is None:
+        return None
+    return bool(value)
 
 
 def _candidate_key(item):
@@ -133,6 +152,23 @@ def _component_strength(component, small_site_mask):
     return float(np.mean(small_site_mask[pixels[:, 0], pixels[:, 1]]))
 
 
+def _perimeter_edges(component):
+    """Şekil denetimiyle aynı 4-kenar çevre uzunluğunu piksel biriminde ölç."""
+    pixels = set(component)
+    exposed = 0
+    for row, column in component:
+        exposed += (row - 1, column) not in pixels
+        exposed += (row + 1, column) not in pixels
+        exposed += (row, column - 1) not in pixels
+        exposed += (row, column + 1) not in pixels
+    return max(int(exposed), 1)
+
+
+def _component_compactness(component):
+    perimeter = _perimeter_edges(component)
+    return float(4 * math.pi * len(component) / (perimeter * perimeter))
+
+
 def _base_strength_map(change_mask, bbox, pixel_area_m2, small_site_mask):
     """Orijinal 8-komşu adaylarını koordinat+alan anahtarıyla spektral oranla eşler."""
     values = {}
@@ -146,6 +182,29 @@ def _base_strength_map(change_mask, bbox, pixel_area_m2, small_site_mask):
         latitude, longitude = _component_location(component, bbox, change_mask.shape)
         key = (round(latitude, 6), round(longitude, 6), round(area_m2))
         values[key] = round(strength, 4)
+    return values
+
+
+def _base_geometry_map(change_mask, bbox, pixel_area_m2, small_site_mask):
+    """Üretim maskesindeki adayları denetimle aynı kompaktlık metriğiyle eşler."""
+    values = {}
+    for component in satellite._connected_components(change_mask):
+        area_m2 = len(component) * pixel_area_m2
+        if area_m2 < satellite.MIN_HOTSPOT_AREA_M2:
+            continue
+        strength = _component_strength(component, small_site_mask)
+        if area_m2 < satellite.SMALL_HOTSPOT_MAX_M2 and strength < 0.50:
+            continue
+        latitude, longitude = _component_location(component, bbox, change_mask.shape)
+        key = (round(latitude, 6), round(longitude, 6), round(area_m2))
+        compactness = _component_compactness(component)
+        values[key] = {
+            WIDE_COMPACTNESS_FIELD: round(compactness, 3),
+            WIDE_SHAPE_RISK_FIELD: bool(
+                area_m2 > CONSTRUCTION_SCALE_MAX_M2
+                and compactness <= WIDE_LOW_COMPACTNESS_MAX
+            ),
+        }
     return values
 
 
@@ -248,11 +307,19 @@ def _uncapped_hotspots(
         pixel_area_m2,
         small_site_mask,
     )
+    geometry_map = _base_geometry_map(
+        change_mask,
+        bbox,
+        pixel_area_m2,
+        small_site_mask,
+    )
     decorated_base = []
     for item in base:
         updated = dict(item)
         key = _candidate_key(updated)
         updated[STRONG_SIGNAL_FIELD] = strength_map.get(key, 0.0)
+        if key in geometry_map:
+            updated.update(geometry_map[key])
         decorated_base.append(updated)
     sidecars = _diagonal_sidecar_candidates(
         change_mask,
@@ -388,7 +455,18 @@ def _balanced_select(
         selected.extend(upper_ranked[:remaining_construction_slots])
 
     remaining = limit - len(selected)
-    selected.extend(wide[:remaining])
+    wide_ranked = sorted(
+        wide,
+        key=lambda item: (
+            0 if _wide_shape_risk(item) is False else (
+                1 if _wide_shape_risk(item) is None else 2
+            ),
+            -_area(item),
+            float(item.get("enlem") or 0),
+            float(item.get("boylam") or 0),
+        ),
+    )
+    selected.extend(wide_ranked[:remaining])
 
     if len(selected) < limit:
         selected_keys = {
@@ -483,6 +561,43 @@ def _self_check():
     assert _candidate_key(spectral[-1]) in spectral_keys, (
         "Güçlü 4.500 m² aday kalan şantiye kotasında seçilmedi."
     )
+
+    shape_synthetic = []
+    shape_synthetic.extend(item(300 + i, 300 + i * 50) for i in range(6))
+    shape_synthetic.extend(item(320 + i, 1000 + i * 500) for i in range(12))
+    risky_wide = [
+        item(
+            350 + i,
+            30000 + i * 10000,
+            **{WIDE_SHAPE_RISK_FIELD: True, WIDE_COMPACTNESS_FIELD: 0.08},
+        )
+        for i in range(15)
+    ]
+    clean_wide = [
+        item(
+            380 + i,
+            11000 + i * 1000,
+            **{WIDE_SHAPE_RISK_FIELD: False, WIDE_COMPACTNESS_FIELD: 0.24},
+        )
+        for i in range(2)
+    ]
+    shape_synthetic.extend(risky_wide + clean_wide)
+    shape_selected = _balanced_select(shape_synthetic)
+    shape_keys = {_candidate_key(candidate) for candidate in shape_selected}
+    assert _bucket_counts(shape_selected) == {
+        "kucuk": 6,
+        "santiye_olcegi": 6,
+        "genis": 12,
+    }
+    assert all(_candidate_key(candidate) in shape_keys for candidate in clean_wide), (
+        "Temiz geniş adaylar düşük-kompaktlık riskli adayların arkasında kaldı."
+    )
+    selected_risky_wide = [
+        candidate for candidate in shape_selected
+        if _area(candidate) > CONSTRUCTION_SCALE_MAX_M2
+        and _wide_shape_risk(candidate) is True
+    ]
+    assert len(selected_risky_wide) == 10, selected_risky_wide
 
     with_sidecar = list(synthetic)
     with_sidecar.extend(
