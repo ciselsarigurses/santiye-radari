@@ -1700,30 +1700,30 @@
     {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Alaçatı",
-      "enlem": 38.266152,
-      "boylam": 26.377347,
-      "alan_m2": 12501,
-      "neden": "KARISIK_GECERSIZLIK",
+      "mahalle": "Ildır",
+      "enlem": 38.399926,
+      "boylam": 26.462631,
+      "alan_m2": 4800,
+      "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 0.4347,
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.266152,26.377347"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.399926,26.462631"
     },
     {
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır",
-      "mahalle": "Ildır",
-      "enlem": 38.389253,
-      "boylam": 26.464485,
-      "alan_m2": 6002,
+      "mahalle": "Uzunkuyu",
+      "enlem": 38.181854,
+      "boylam": 26.501469,
+      "alan_m2": 4001,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 0.1449,
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.389253,26.464485"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.181854,26.501469"
     }
   ],
   "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; kalıcı Sentinel gözlem boşluklarından günlük rotasyonla en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur."
