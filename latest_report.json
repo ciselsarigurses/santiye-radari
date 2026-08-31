@@ -1695,5 +1695,36 @@
       "kalibrasyon_durumu": "ALARM_DEGIL"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir."
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir.",
+  "kor_alan_saha_devriyesi": [
+    {
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Alaçatı",
+      "enlem": 38.266152,
+      "boylam": 26.377347,
+      "alan_m2": 12501,
+      "neden": "KARISIK_GECERSIZLIK",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.4347,
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.266152,26.377347"
+    },
+    {
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "mahalle": "Ildır",
+      "enlem": 38.389253,
+      "boylam": 26.464485,
+      "alan_m2": 6002,
+      "neden": "BULUT_GOLGE_KALICI",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.1449,
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.389253,26.464485"
+    }
+  ],
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; kalıcı Sentinel gözlem boşluklarından günlük rotasyonla en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur."
 }
