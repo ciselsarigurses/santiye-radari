@@ -1,18 +1,21 @@
 """Post-dedupe şantiye kotası katmanını regresyon testiyle çalıştırır.
 
 Erken hafriyat hedefi için toplam alarm sayısını büyütmeden 800-10.000 m²
-şantiye/parsel ölçeği tabanını 6'dan 8'e çıkarır. Ana Sentinel spektral eşikleri,
-250 m² alt sınırı ve küçük-saha kotası değişmez. Ek iki yer yalnız en zayıf geniş
->10.000 m² adaylarla takas edilir ve politika mevcut Sentinel sahnesini geriye
-dönük karıştırmadan ilk yeni sahnede devreye girer.
+şantiye/parsel ölçeği tabanını 6'dan 8'e çıkarır. Bu sekiz yerin içinde
+800-2.000 m² erken-parsel tabanını da 3'ten 4'e yükseltir. Ana Sentinel spektral
+eşikleri, 250 m² alt sınırı ve küçük-saha kotası değişmez. Ek yerler yalnız en
+zayıf geniş >10.000 m² adaylarla takas edilir ve politika mevcut Sentinel sahnesini
+geriye dönük karıştırmadan ilk yeni sahnede devreye girer.
 """
 
 import post_dedupe_construction_quota as quota
 
 
 TARGET_CONSTRUCTION_QUOTA = 8
+TARGET_EARLY_QUOTA = 4
 quota.rebalance.CONSTRUCTION_SCALE_QUOTA = TARGET_CONSTRUCTION_QUOTA
-quota.POLICY_VERSION = "post-dedupe-construction-quota-v2-target8-next-scene"
+quota.rebalance.CONSTRUCTION_EARLY_QUOTA = TARGET_EARLY_QUOTA
+quota.POLICY_VERSION = "post-dedupe-construction-quota-v3-target8-early4-next-scene"
 
 
 def _fixed_self_check():
@@ -41,6 +44,7 @@ def _fixed_self_check():
     assert len(updated) == len(current)
     assert len(swaps) == 3
     assert sum(quota._is_construction(candidate) for candidate in updated) == 8
+    assert sum(quota._is_early_construction(candidate) for candidate in updated) >= 4
     assert sum(quota._is_wide(candidate) for candidate in updated) == 9
 
     duplicate_raw = list(current)
