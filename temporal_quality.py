@@ -7,8 +7,11 @@ from temporal_gap_scan import (
     DUPLICATE_METERS,
     EXCLUDED_CLASSES,
     FALLBACK_MIN_GAP_DAYS,
+    TEMPORAL_PARCEL_MAX_M2,
+    TEMPORAL_PARCEL_QUOTA,
     TEMPORAL_VERSION,
     TRANSIENT_OLDER_CLASSES,
+    _select_additions,
     merge_candidates,
     select_fallback,
 )
@@ -77,6 +80,32 @@ def check_transient_classes():
     assert transient.issubset(excluded)
 
 
+def check_temporal_parcel_quota():
+    """Geniş değişimler, bulut boşluğundaki 800-2.000 m² parselleri ezmemeli."""
+    candidates = [
+        {"id": "b1", "alan_m2": 50000},
+        {"id": "b2", "alan_m2": 40000},
+        {"id": "b3", "alan_m2": 30000},
+        {"id": "b4", "alan_m2": 15000},
+        {"id": "p1", "alan_m2": 1900},
+        {"id": "p2", "alan_m2": 1500},
+        {"id": "s1", "alan_m2": 700},
+        {"id": "s2", "alan_m2": 600},
+        {"id": "s3", "alan_m2": 500},
+    ]
+    selected = _select_additions(candidates, limit=6)
+    selected_ids = {item["id"] for item in selected}
+    assert TEMPORAL_PARCEL_MAX_M2 == 2000 and TEMPORAL_PARCEL_QUOTA == 2
+    assert len(selected) == 6
+    assert {"s1", "s2", "s3", "p1", "p2"}.issubset(selected_ids), (
+        "Zaman-serisi altı-aday bütçesinde küçük/parsel hafriyat adayları geniş arazi "
+        "hareketleri tarafından listeden düşürüldü."
+    )
+    assert len(selected_ids & {"b1", "b2", "b3", "b4"}) == 1, (
+        "Erken şantiye rezervi uygulanırken geniş değişim için ayrılan tek slot korunmalı."
+    )
+
+
 def check_deduplication():
     existing = [
         {
@@ -123,9 +152,10 @@ def check_deduplication():
 def main():
     check_fallback_selection()
     check_transient_classes()
+    check_temporal_parcel_quota()
     check_deduplication()
     print(
-        "Zaman serisi kalite kontrolü başarılı: SCL2 cast shadow doğrudan analizden dışlandı ve açık sahneyle geri kazanılıyor; ana/zaman-serisi politika uyumu, tam-kapsam, aynı-yörünge ve 25 m mükerrer koruması geçerli; 25-80 m komşu parsel adayları korunuyor."
+        "Zaman serisi kalite kontrolü başarılı: SCL2 cast shadow doğrudan analizden dışlandı ve açık sahneyle geri kazanılıyor; ana/zaman-serisi politika uyumu, tam-kapsam, aynı-yörünge ve 25 m mükerrer koruması geçerli; 25-80 m komşu parsel adayları korunuyor; bulut boşluğundaki 800-2.000 m² parseller geniş arazi hareketlerine karşı ayrılmış kotayı koruyor."
     )
 
 
