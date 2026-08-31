@@ -85,8 +85,17 @@ def _candidate_pool(region_key, region_data):
     if not isinstance(region_data, dict) or region_data.get("durum") != "ok":
         return []
 
+    # Yeni denetim sürümü devriye için yalnız tarihsel SCL=4/5 ile gerçekten kara
+    # olduğu kanıtlanmış, zaman-serisi sonrasında hâlâ kör kalan kümelerden ayrı bir
+    # erken-şantiye havuzu üretir. Eski raporlarla geriye uyumlulukta yine bilinen
+    # kara kalıntısı olan `ornekler` kullanılır. `cozumlenmemis_yuzey_ornekleri`
+    # bilinmeyen kara/su yüzeyidir ve devriye kaynağı yapılmaz.
+    source_examples = region_data.get("kor_alan_devriye_ornekleri") or []
+    if not source_examples:
+        source_examples = region_data.get("ornekler") or []
+
     rows = []
-    for raw in region_data.get("cozumlenmemis_yuzey_ornekleri") or []:
+    for raw in source_examples:
         if not isinstance(raw, dict):
             continue
         point = _point({"enlem": raw.get("enlem"), "boylam": raw.get("boylam")})
@@ -103,6 +112,7 @@ def _candidate_pool(region_key, region_data):
             "neden": str(raw.get("neden") or "GOZLEM_YOK"),
             "referans_sahne_sayisi": int(_number(region_data.get("kara_referans_sahne_sayisi"), 0)),
             "kalan_kor_yuzde": _number(region_data.get("kalan_kor_yuzde"), 0),
+            "kaynak_tipi": "BILINEN_KARA_KORLUGU",
             "alarm": False,
             "durum": "KAPSAMA_KONTROLU",
         }
@@ -182,7 +192,7 @@ def _markdown(items):
     lines = [
         SECTION_TITLE,
         "",
-        "> **Alarm değildir.** Sentinel zaman serisinde kara olduğu bilinen fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır ve iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır. Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir.",
+        "> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır ve iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır. Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir.",
         "",
     ]
     if not items:
@@ -241,9 +251,9 @@ def update_coverage_patrol():
 
     report["kor_alan_saha_devriyesi"] = selected
     report["kor_alan_saha_devriyesi_notu"] = (
-        "Alarm/görev değildir; kalıcı Sentinel gözlem boşluklarından günlük rotasyonla "
-        "en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, "
-        "birbirinden >=250 m uzakta tutulur."
+        "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı "
+        "gözlem boşluklarından günlük rotasyonla en fazla iki insan kontrol noktası seçilir. "
+        "Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur."
     )
     REPORT_JSON.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
@@ -267,7 +277,7 @@ def _self_check():
                 "bolge": "Batı",
                 "kara_referans_sahne_sayisi": 8,
                 "kalan_kor_yuzde": 0.4,
-                "cozumlenmemis_yuzey_ornekleri": [
+                "kor_alan_devriye_ornekleri": [
                     {
                         "mahalle_yaklasik": "Yakın",
                         "enlem": 38.3000,
@@ -290,13 +300,22 @@ def _self_check():
                         "neden": "KARISIK_GECERSIZLIK",
                     },
                 ],
+                "cozumlenmemis_yuzey_ornekleri": [
+                    {
+                        "mahalle_yaklasik": "Bilinmeyen",
+                        "enlem": 38.3300,
+                        "boylam": 26.3300,
+                        "alan_m2": 300,
+                        "neden": "BULUT_GOLGE_KALICI",
+                    }
+                ],
             },
             "east": {
                 "durum": "ok",
                 "bolge": "Doğu",
                 "kara_referans_sahne_sayisi": 8,
                 "kalan_kor_yuzde": 0.2,
-                "cozumlenmemis_yuzey_ornekleri": [
+                "kor_alan_devriye_ornekleri": [
                     {
                         "mahalle_yaklasik": "Doğu",
                         "enlem": 38.4000,
@@ -323,9 +342,43 @@ def _self_check():
     assert {item["bolge_anahtari"] for item in chosen} == {"west", "east"}
     assert all(item["alarm"] is False for item in chosen)
     assert all(item["durum"] == "KAPSAMA_KONTROLU" for item in chosen)
+    assert all(item["kaynak_tipi"] == "BILINEN_KARA_KORLUGU" for item in chosen)
     assert not any(item["mahalle"] == "Yakın" for item in chosen)
+    assert not any(item["mahalle"] == "Bilinmeyen" for item in chosen), (
+        "Kara/su olduğu çözümlenmemiş yüzey yanlışlıkla saha devriyesine girdi."
+    )
     west_choice = next(item for item in chosen if item["bolge_anahtari"] == "west")
     assert west_choice["alan_m2"] <= TARGET_MAX_AREA_M2
+
+    legacy = {
+        "bolgeler": {
+            "legacy": {
+                "durum": "ok",
+                "bolge": "Eski",
+                "kara_referans_sahne_sayisi": 8,
+                "ornekler": [
+                    {
+                        "mahalle_yaklasik": "Bilinen kara",
+                        "enlem": 38.5000,
+                        "boylam": 26.5000,
+                        "alan_m2": 1800,
+                        "neden": "BULUT_GOLGE_KALICI",
+                    }
+                ],
+                "cozumlenmemis_yuzey_ornekleri": [
+                    {
+                        "mahalle_yaklasik": "Bilinmeyen yüzey",
+                        "enlem": 38.5100,
+                        "boylam": 26.5100,
+                        "alan_m2": 300,
+                        "neden": "BULUT_GOLGE_KALICI",
+                    }
+                ],
+            }
+        }
+    }
+    legacy_choice = select_coverage_patrol(legacy, {"rapor_tarihi": "2026-08-31", "saha_adaylari": []}, limit=1)
+    assert legacy_choice and legacy_choice[0]["mahalle"] == "Bilinen kara"
 
     md = _inject("Başlık\n\n" + NEXT_SECTION + "\nAday\n", _markdown(chosen))
     assert md.count(SECTION_TITLE) == 1
