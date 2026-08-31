@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-31",
-  "olusturma": "2026-08-31 21:37 +03",
+  "olusturma": "2026-08-31 22:43 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -8,7 +8,7 @@
     "nihai_yaklasik_esleme_max_m": 25,
     "nihai_yaklasik_esleme_min_alan_benzerligi": 0.6
   },
-  "uyari": "Şekil etiketi tek başına yol veya yanlış pozitif kanıtı değildir; hiçbir aday bu denetim nedeniyle elenmez veya öncelik kaybetmez. Yaklaşık eşleşme yalnız bbox/çözünürlük yeniden-pikselleştirme provenansını ölçer ve alarm/rota kararında kullanılmaz.",
+  "uyari": "Şekil etiketi tek başına yol veya yanlış pozitif kanıtı değildir; hiçbir aday bu denetim nedeniyle elenmez veya öncelik kaybetmez. 4-komşu yan-küme geometrisi yalnız mevcut rebalance adayının provenansını doğrular. Yaklaşık eşleşme yalnız bbox/çözünürlük yeniden-pikselleştirme provenansını ölçer ve alarm/rota kararında kullanılmaz.",
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
@@ -16,6 +16,7 @@
       "durum": "ok",
       "latest_item": "S2B_T35SMC_20260829T090620_L2A",
       "ham_gecerli_aday": 378,
+      "diyagonal_yan_kume_geometri": 15,
       "uretim_secimi": 24,
       "ham_sekil_dagilimi": {
         "kucuk_250_800": {
@@ -139,10 +140,11 @@
         }
       ],
       "nihai_rapor_secimi": 24,
-      "nihai_rapor_eslesen_geometri": 23,
+      "nihai_rapor_eslesen_geometri": 24,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 1,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 23,
-      "nihai_rapor_cozulemeyen_geometri": 1,
+      "nihai_rapor_cozulen_geometri": 24,
+      "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
@@ -152,7 +154,7 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 5,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -169,7 +171,7 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 5,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -267,16 +269,7 @@
           "dusuk_kompaktlik": true
         }
       ],
-      "nihai_cozulemeyen_geometri_ornekleri": [
-        {
-          "enlem": 38.223732,
-          "boylam": 26.39303,
-          "alan_m2": 800,
-          "durum": "eslesmedi",
-          "en_yakin_mesafe_m": 90.6,
-          "en_yakin_alan_benzerligi": 0.031
-        }
-      ]
+      "nihai_cozulemeyen_geometri_ornekleri": []
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır",
@@ -284,6 +277,7 @@
       "durum": "ok",
       "latest_item": "S2B_T35SMC_20260829T090620_L2A",
       "ham_gecerli_aday": 224,
+      "diyagonal_yan_kume_geometri": 11,
       "uretim_secimi": 24,
       "ham_sekil_dagilimi": {
         "kucuk_250_800": {
@@ -408,9 +402,10 @@
       ],
       "nihai_rapor_secimi": 18,
       "nihai_rapor_eslesen_geometri": 1,
-      "nihai_rapor_yaklasik_eslesen_geometri": 16,
-      "nihai_rapor_cozulen_geometri": 17,
-      "nihai_rapor_cozulemeyen_geometri": 1,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
+      "nihai_rapor_yaklasik_eslesen_geometri": 17,
+      "nihai_rapor_cozulen_geometri": 18,
+      "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
@@ -437,7 +432,7 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 3,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -450,16 +445,7 @@
       "nihai_secili_genis_sekil_isaretli": 0,
       "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 8,
       "nihai_secili_genis_sekil_ornekleri": [],
-      "nihai_cozulemeyen_geometri_ornekleri": [
-        {
-          "enlem": 38.317087,
-          "boylam": 26.467118,
-          "alan_m2": 1400,
-          "durum": "eslesmedi",
-          "en_yakin_mesafe_m": 59.6,
-          "en_yakin_alan_benzerligi": 0.095
-        }
-      ]
+      "nihai_cozulemeyen_geometri_ornekleri": []
     }
   }
 }
