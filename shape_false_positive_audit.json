@@ -1,12 +1,14 @@
 {
   "rapor_tarihi": "2026-08-31",
-  "olusturma": "2026-08-31 07:34 +03",
+  "olusturma": "2026-08-31 08:36 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
-    "dusuk_kompaktlik_max": 0.15
+    "dusuk_kompaktlik_max": 0.15,
+    "nihai_yaklasik_esleme_max_m": 25,
+    "nihai_yaklasik_esleme_min_alan_benzerligi": 0.6
   },
-  "uyari": "Şekil etiketi tek başına yol veya yanlış pozitif kanıtı değildir; hiçbir aday bu denetim nedeniyle elenmez veya öncelik kaybetmez. Nihai karar için nihai_rapor_* alanları kullanılmalıdır.",
+  "uyari": "Şekil etiketi tek başına yol veya yanlış pozitif kanıtı değildir; hiçbir aday bu denetim nedeniyle elenmez veya öncelik kaybetmez. Yaklaşık eşleşme yalnız bbox/çözünürlük yeniden-pikselleştirme provenansını ölçer ve alarm/rota kararında kullanılmaz.",
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
@@ -138,6 +140,11 @@
       ],
       "nihai_rapor_secimi": 24,
       "nihai_rapor_eslesen_geometri": 23,
+      "nihai_rapor_yaklasik_eslesen_geometri": 0,
+      "nihai_rapor_cozulen_geometri": 23,
+      "nihai_rapor_cozulemeyen_geometri": 1,
+      "nihai_rapor_yaklasik_esleme_esigi_m": 25,
+      "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
           "toplam": 6,
@@ -155,7 +162,25 @@
           "dusuk_kompaktlik": 10
         }
       },
+      "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": {
+        "kucuk_250_800": {
+          "toplam": 6,
+          "uzun_ince": 0,
+          "dusuk_kompaktlik": 0
+        },
+        "santiye_olcegi_800_10000": {
+          "toplam": 5,
+          "uzun_ince": 0,
+          "dusuk_kompaktlik": 0
+        },
+        "genis_10000_ustu": {
+          "toplam": 12,
+          "uzun_ince": 0,
+          "dusuk_kompaktlik": 10
+        }
+      },
       "nihai_secili_genis_sekil_isaretli": 10,
+      "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 10,
       "nihai_secili_genis_sekil_ornekleri": [
         {
           "enlem": 38.253128,
@@ -240,6 +265,16 @@
           "kompaktlik": 0.133,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
+        }
+      ],
+      "nihai_cozulemeyen_geometri_ornekleri": [
+        {
+          "enlem": 38.223732,
+          "boylam": 26.39303,
+          "alan_m2": 800,
+          "durum": "eslesmedi",
+          "en_yakin_mesafe_m": 90.6,
+          "en_yakin_alan_benzerligi": 0.031
         }
       ]
     },
@@ -373,6 +408,11 @@
       ],
       "nihai_rapor_secimi": 18,
       "nihai_rapor_eslesen_geometri": 1,
+      "nihai_rapor_yaklasik_eslesen_geometri": 16,
+      "nihai_rapor_cozulen_geometri": 17,
+      "nihai_rapor_cozulemeyen_geometri": 1,
+      "nihai_rapor_yaklasik_esleme_esigi_m": 25,
+      "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
           "toplam": 1,
@@ -390,8 +430,36 @@
           "dusuk_kompaktlik": 0
         }
       },
+      "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": {
+        "kucuk_250_800": {
+          "toplam": 1,
+          "uzun_ince": 0,
+          "dusuk_kompaktlik": 0
+        },
+        "santiye_olcegi_800_10000": {
+          "toplam": 3,
+          "uzun_ince": 0,
+          "dusuk_kompaktlik": 0
+        },
+        "genis_10000_ustu": {
+          "toplam": 13,
+          "uzun_ince": 0,
+          "dusuk_kompaktlik": 8
+        }
+      },
       "nihai_secili_genis_sekil_isaretli": 0,
-      "nihai_secili_genis_sekil_ornekleri": []
+      "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 8,
+      "nihai_secili_genis_sekil_ornekleri": [],
+      "nihai_cozulemeyen_geometri_ornekleri": [
+        {
+          "enlem": 38.317087,
+          "boylam": 26.467118,
+          "alan_m2": 1400,
+          "durum": "eslesmedi",
+          "en_yakin_mesafe_m": 59.6,
+          "en_yakin_alan_benzerligi": 0.095
+        }
+      ]
     }
   }
 }
