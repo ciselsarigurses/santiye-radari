@@ -81,6 +81,11 @@ def _rotation_offset(report_payload, size):
     return day.toordinal() % size
 
 
+def _neighborhood_key(value):
+    """İki örtüşen uydu kutusunun aynı mahalleyi devriye için iki kez seçmesini azalt."""
+    return " ".join(str(value or "").strip().casefold().split())
+
+
 def _candidate_pool(region_key, region_data):
     if not isinstance(region_data, dict) or region_data.get("durum") != "ok":
         return []
@@ -146,6 +151,7 @@ def select_coverage_patrol(audit_payload, report_payload, limit=TOTAL_LIMIT):
     active_points = _active_points(report_payload)
     selected = []
     selected_points = []
+    selected_neighborhoods = set()
 
     for region_key, region_data in regions.items():
         if len(selected) >= cap:
@@ -166,7 +172,7 @@ def select_coverage_patrol(audit_payload, report_payload, limit=TOTAL_LIMIT):
         # Günlük rotasyon, parsel/şantiye ölçeği tercih katmanının dışına taşmasın.
         # Ancak o katmanda güvenli nokta kalmazsa daha geniş kör kümeye düş.
         ordered = rotated(preferred) + rotated(fallback)
-        picked = None
+        eligible = []
         for item in ordered:
             point = _point(item)
             if point is None:
@@ -175,13 +181,27 @@ def select_coverage_patrol(audit_payload, report_payload, limit=TOTAL_LIMIT):
                 continue
             if not _far_enough(point, selected_points, CROSS_REGION_DISTANCE_M):
                 continue
-            picked = dict(item)
-            break
+            eligible.append(item)
 
-        if picked is None:
+        if not eligible:
             continue
+
+        # Çeşme ve Uzunkuyu analiz kutuları örtüştüğü için iki bölgenin günlük kör
+        # alan seçimi aynı mahalleye düşebilir. Mümkünse ikinci nokta farklı mahalleden
+        # seçilir; güvenli alternatif yoksa mevcut davranış korunur. Böylece alarm
+        # sayısı artmadan insan devriyesinin yarımada üzerindeki mekânsal kapsaması artar.
+        picked = next(
+            (
+                dict(item)
+                for item in eligible
+                if _neighborhood_key(item.get("mahalle")) not in selected_neighborhoods
+            ),
+            dict(eligible[0]),
+        )
+
         selected.append(picked)
         selected_points.append(_point(picked))
+        selected_neighborhoods.add(_neighborhood_key(picked.get("mahalle")))
         if sum(1 for x in selected if x["bolge_anahtari"] == str(region_key)) >= MAX_PER_REGION:
             continue
 
@@ -192,7 +212,7 @@ def _markdown(items):
     lines = [
         SECTION_TITLE,
         "",
-        "> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır ve iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır. Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir.",
+        "> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir.",
         "",
     ]
     if not items:
@@ -253,7 +273,8 @@ def update_coverage_patrol():
     report["kor_alan_saha_devriyesi_notu"] = (
         "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı "
         "gözlem boşluklarından günlük rotasyonla en fazla iki insan kontrol noktası seçilir. "
-        "Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur."
+        "Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur ve güvenli "
+        "alternatif varsa farklı mahallelerden seçilir."
     )
     REPORT_JSON.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
@@ -317,12 +338,19 @@ def _self_check():
                 "kalan_kor_yuzde": 0.2,
                 "kor_alan_devriye_ornekleri": [
                     {
-                        "mahalle_yaklasik": "Doğu",
+                        "mahalle_yaklasik": "Uzak",
                         "enlem": 38.4000,
                         "boylam": 26.6000,
                         "alan_m2": 1200,
                         "neden": "KARISIK_GECERSIZLIK",
-                    }
+                    },
+                    {
+                        "mahalle_yaklasik": "Doğu",
+                        "enlem": 38.4100,
+                        "boylam": 26.6100,
+                        "alan_m2": 1300,
+                        "neden": "KARISIK_GECERSIZLIK",
+                    },
                 ],
             },
         }
@@ -349,6 +377,9 @@ def _self_check():
     )
     west_choice = next(item for item in chosen if item["bolge_anahtari"] == "west")
     assert west_choice["alan_m2"] <= TARGET_MAX_AREA_M2
+    assert len({_neighborhood_key(item["mahalle"]) for item in chosen}) == 2, (
+        "Güvenli alternatif varken iki kör alan devriye noktası aynı mahalleye düştü."
+    )
 
     legacy = {
         "bolgeler": {
