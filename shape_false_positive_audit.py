@@ -5,6 +5,13 @@ Ana Sentinel motorunun oluşturduğu aynı değişim maskesindeki geçerli 250 m
 şekil özelliklerini ölçer. Hem ham motor seçimini hem de rebalance + overlap-dedupe
 sonrasında günlük raporda gerçekten kalan nihai adayları ayrı ayrı gösterir. Böylece
 şekil kalibrasyonu artık üretim öncesi 24'lük ara listeye bakıp yanlış sonuca varmaz.
+
+Nihai adaylar, bbox/çözünürlük yeniden analizinden sonra aynı sahne korunmuşsa mevcut
+raster geometrisiyle birebir anahtar eşleşmesini kaybedebilir. Bu nedenle tam eşleşmeye
+ek olarak yalnız denetim amaçlı 25 m + %60 alan-benzerliği toleranslı bir yaklaşık
+eşleşme metriği de üretilir. Yaklaşık eşleşme alarm, görev, öncelik veya filtre kararında
+kullanılmaz; yalnız provenans/yeniden-pikselleştirme farkını gerçek geometri kaybından
+ayırmaya yardım eder.
 """
 
 from __future__ import annotations
@@ -25,6 +32,8 @@ from scanner import connect
 AUDIT_FILE = Path(__file__).with_name("shape_false_positive_audit.json")
 LONG_THIN_ASPECT_MIN = 5.0
 LOW_COMPACTNESS_MAX = 0.15
+FINAL_APPROX_MATCH_METERS = 25
+FINAL_APPROX_MIN_AREA_SIMILARITY = 0.60
 EXAMPLE_LIMIT = 6
 _ORIGINAL_HOTSPOTS = satellite._hotspots
 
@@ -117,9 +126,130 @@ def _candidate_key(item):
         return None
 
 
+def _number(value, default=None):
+    try:
+        return float(value)
+    except (TypeError, ValueError, AttributeError):
+        return default
+
+
+def _distance_m(first, second):
+    lat1 = _number(first.get("enlem"))
+    lon1 = _number(first.get("boylam"))
+    lat2 = _number(second.get("enlem"))
+    lon2 = _number(second.get("boylam"))
+    if None in (lat1, lon1, lat2, lon2):
+        return None
+    mean_lat = math.radians((lat1 + lat2) / 2)
+    north = (lat1 - lat2) * 110570
+    east = (lon1 - lon2) * 111320 * math.cos(mean_lat)
+    return math.hypot(north, east)
+
+
+def _area_similarity(first, second):
+    first_area = _number(first.get("alan_m2"), 0) or 0
+    second_area = _number(second.get("alan_m2"), 0) or 0
+    larger = max(first_area, second_area)
+    if larger <= 0:
+        return 0.0
+    return min(first_area, second_area) / larger
+
+
 def _match_records(records, candidates):
     keys = {key for key in map(_candidate_key, candidates or []) if key is not None}
     return [record for record in records if _candidate_key(record) in keys]
+
+
+def _approximate_match_records(
+    records,
+    candidates,
+    max_distance_m=FINAL_APPROX_MATCH_METERS,
+    min_area_similarity=FINAL_APPROX_MIN_AREA_SIMILARITY,
+):
+    """Tam eşleşmeyen nihai adayları yalnız denetim için yakın geometriyle eşleştir.
+
+    Her raster kaydı en fazla bir nihai adaya atanır. Bu eşleşme operasyonel değildir;
+    bbox/çözünürlük yeniden pikselleştirmesi nedeniyle oluşan küçük centroid/alan
+    oynamalarını ölçmek içindir.
+    """
+    exact_keys = {key for key in map(_candidate_key, candidates or []) if key is not None}
+    used_record_indexes = {
+        index
+        for index, record in enumerate(records)
+        if _candidate_key(record) in exact_keys
+    }
+    exact_candidate_keys = {
+        _candidate_key(record)
+        for index, record in enumerate(records)
+        if index in used_record_indexes
+    }
+
+    approximate_records = []
+    diagnostics = []
+    for candidate in candidates or []:
+        candidate_key = _candidate_key(candidate)
+        if candidate_key is None or candidate_key in exact_candidate_keys:
+            continue
+
+        best_index = None
+        best_distance = None
+        best_similarity = 0.0
+        nearest_distance = None
+        nearest_similarity = 0.0
+        for index, record in enumerate(records):
+            distance = _distance_m(record, candidate)
+            if distance is None:
+                continue
+            similarity = _area_similarity(record, candidate)
+            if nearest_distance is None or distance < nearest_distance:
+                nearest_distance = distance
+                nearest_similarity = similarity
+            if index in used_record_indexes:
+                continue
+            if distance > max_distance_m or similarity < min_area_similarity:
+                continue
+            if (
+                best_distance is None
+                or distance < best_distance
+                or (
+                    abs(distance - best_distance) < 0.01
+                    and similarity > best_similarity
+                )
+            ):
+                best_index = index
+                best_distance = distance
+                best_similarity = similarity
+
+        if best_index is not None:
+            used_record_indexes.add(best_index)
+            approximate_records.append(records[best_index])
+            diagnostics.append(
+                {
+                    "enlem": _number(candidate.get("enlem")),
+                    "boylam": _number(candidate.get("boylam")),
+                    "alan_m2": round(_number(candidate.get("alan_m2"), 0) or 0),
+                    "durum": "yaklasik_eslesti",
+                    "mesafe_m": round(best_distance, 1),
+                    "alan_benzerligi": round(best_similarity, 3),
+                }
+            )
+        else:
+            diagnostics.append(
+                {
+                    "enlem": _number(candidate.get("enlem")),
+                    "boylam": _number(candidate.get("boylam")),
+                    "alan_m2": round(_number(candidate.get("alan_m2"), 0) or 0),
+                    "durum": "eslesmedi",
+                    "en_yakin_mesafe_m": (
+                        round(nearest_distance, 1)
+                        if nearest_distance is not None
+                        else None
+                    ),
+                    "en_yakin_alan_benzerligi": round(nearest_similarity, 3),
+                }
+            )
+
+    return approximate_records, diagnostics
 
 
 def _flagged_wide(records):
@@ -180,6 +310,30 @@ def _self_check():
         [square_record, strip_record],
         [{"enlem": square_record["enlem"], "boylam": square_record["boylam"], "alan_m2": square_record["alan_m2"]}],
     ) == [square_record]
+
+    shifted_candidate = {
+        "enlem": square_record["enlem"] + 0.00005,
+        "boylam": square_record["boylam"] + 0.00005,
+        "alan_m2": round(square_record["alan_m2"] * 0.92),
+    }
+    approximate, diagnostics = _approximate_match_records(
+        [square_record],
+        [shifted_candidate],
+    )
+    assert approximate == [square_record], diagnostics
+    assert diagnostics[0]["durum"] == "yaklasik_eslesti", diagnostics
+    assert diagnostics[0]["mesafe_m"] < FINAL_APPROX_MATCH_METERS, diagnostics
+
+    far_candidate = dict(
+        shifted_candidate,
+        enlem=shifted_candidate["enlem"] + 0.001,
+    )
+    approximate, diagnostics = _approximate_match_records(
+        [square_record],
+        [far_candidate],
+    )
+    assert not approximate, diagnostics
+    assert diagnostics[0]["durum"] == "eslesmedi", diagnostics
 
 
 def _today_snapshot(connection, report_date, region_key):
@@ -245,10 +399,24 @@ def _analyze_region(region_key, pair, final_candidates=None):
     finally:
         satellite._hotspots = original
 
+    final_candidates = final_candidates or []
     raw_selected_records = _match_records(captured["records"], captured["selected"])
-    final_selected_records = _match_records(captured["records"], final_candidates or [])
+    final_selected_records = _match_records(captured["records"], final_candidates)
+    approximate_records, match_diagnostics = _approximate_match_records(
+        captured["records"],
+        final_candidates,
+    )
+    resolved_records = final_selected_records + approximate_records
+
     raw_flagged = _flagged_wide(raw_selected_records)
     final_flagged = _flagged_wide(final_selected_records)
+    resolved_flagged = _flagged_wide(resolved_records)
+    approximate_match_count = sum(
+        1 for item in match_diagnostics if item.get("durum") == "yaklasik_eslesti"
+    )
+    unresolved = [
+        item for item in match_diagnostics if item.get("durum") == "eslesmedi"
+    ]
 
     return {
         "ham_gecerli_aday": len(captured["records"]),
@@ -259,11 +427,21 @@ def _analyze_region(region_key, pair, final_candidates=None):
         "secili_genis_sekil_isaretli": len(raw_flagged),
         "secili_genis_sekil_ornekleri": _examples(raw_flagged),
         # Asıl operasyonel çıktı: rebalance + dedupe sonrasında DB'de kalan adaylar.
-        "nihai_rapor_secimi": len(final_candidates or []),
+        "nihai_rapor_secimi": len(final_candidates),
         "nihai_rapor_eslesen_geometri": len(final_selected_records),
+        "nihai_rapor_yaklasik_eslesen_geometri": approximate_match_count,
+        "nihai_rapor_cozulen_geometri": len(resolved_records),
+        "nihai_rapor_cozulemeyen_geometri": len(unresolved),
+        "nihai_rapor_yaklasik_esleme_esigi_m": FINAL_APPROX_MATCH_METERS,
+        "nihai_rapor_yaklasik_min_alan_benzerligi": FINAL_APPROX_MIN_AREA_SIMILARITY,
         "nihai_rapor_secimi_sekil_dagilimi": _summarize(final_selected_records),
+        "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": _summarize(
+            resolved_records
+        ),
         "nihai_secili_genis_sekil_isaretli": len(final_flagged),
+        "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": len(resolved_flagged),
         "nihai_secili_genis_sekil_ornekleri": _examples(final_flagged),
+        "nihai_cozulemeyen_geometri_ornekleri": unresolved[:EXAMPLE_LIMIT],
     }
 
 
@@ -318,11 +496,16 @@ def audit_shapes():
         "esikler": {
             "uzun_ince_min_uzun_kisa_orani": LONG_THIN_ASPECT_MIN,
             "dusuk_kompaktlik_max": LOW_COMPACTNESS_MAX,
+            "nihai_yaklasik_esleme_max_m": FINAL_APPROX_MATCH_METERS,
+            "nihai_yaklasik_esleme_min_alan_benzerligi": (
+                FINAL_APPROX_MIN_AREA_SIMILARITY
+            ),
         },
         "uyari": (
             "Şekil etiketi tek başına yol veya yanlış pozitif kanıtı değildir; hiçbir aday "
-            "bu denetim nedeniyle elenmez veya öncelik kaybetmez. Nihai karar için "
-            "nihai_rapor_* alanları kullanılmalıdır."
+            "bu denetim nedeniyle elenmez veya öncelik kaybetmez. Yaklaşık eşleşme yalnız "
+            "bbox/çözünürlük yeniden-pikselleştirme provenansını ölçer ve alarm/rota "
+            "kararında kullanılmaz."
         ),
         "bolgeler": regions,
     }
@@ -340,8 +523,8 @@ def main():
     _self_check()
     if args.check_only:
         print(
-            "Şekil yanlış-pozitif denetimi kalite kontrolü başarılı: ham ve nihai "
-            "aday geometrisi alarm üretmeden ayrı ölçülebiliyor."
+            "Şekil yanlış-pozitif denetimi kalite kontrolü başarılı: ham, nihai tam "
+            "eşleşme ve yalnız-denetim yaklaşık geometri eşleşmesi ölçülebiliyor."
         )
         return
 
@@ -353,15 +536,20 @@ def main():
             continue
         raw_selected = item.get("uretim_secimi_sekil_dagilimi", {})
         raw_wide = raw_selected.get("genis_10000_ustu", {})
-        final_selected = item.get("nihai_rapor_secimi_sekil_dagilimi", {})
+        final_selected = item.get(
+            "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil", {}
+        )
         final_wide = final_selected.get("genis_10000_ustu", {})
         summaries.append(
             f"{key}: ham >10000={raw_wide.get('toplam', 0)} / "
             f"şekil-işaretli={item.get('secili_genis_sekil_isaretli', 0)}; "
             f"nihai >10000={final_wide.get('toplam', 0)} / "
-            f"şekil-işaretli={item.get('nihai_secili_genis_sekil_isaretli', 0)}; "
-            f"nihai eşleşme={item.get('nihai_rapor_eslesen_geometri', 0)}/"
-            f"{item.get('nihai_rapor_secimi', 0)}"
+            f"şekil-işaretli="
+            f"{item.get('nihai_secili_genis_sekil_isaretli_yaklasik_dahil', 0)}; "
+            f"tam={item.get('nihai_rapor_eslesen_geometri', 0)} + "
+            f"yaklaşık={item.get('nihai_rapor_yaklasik_eslesen_geometri', 0)} / "
+            f"{item.get('nihai_rapor_secimi', 0)}; "
+            f"çözülemeyen={item.get('nihai_rapor_cozulemeyen_geometri', 0)}"
         )
     print("Şekil yanlış-pozitif denetimi: " + " | ".join(summaries))
 
