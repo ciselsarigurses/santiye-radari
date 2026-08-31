@@ -50,6 +50,8 @@ MAX_EXAMPLES = 12
 MIN_COMPONENT_PIXELS = 3
 LAND_REFERENCE_SCENES = 8
 MULTI_FALLBACK_SCENES = 4
+PATROL_EARLY_MAX_AREA_M2 = 2000
+PATROL_TARGET_MAX_AREA_M2 = 6500
 TRANSIENT_CLASSES = TRANSIENT_OLDER_CLASSES
 LAND_CLASSES = np.array([4, 5], dtype="uint8")
 WATER_CLASS = 6
@@ -216,6 +218,29 @@ def _component_summary(mask, bbox, pixel_area_m2, primary_scl, latest_scl, fallb
     return components
 
 
+def _patrol_component_examples(components):
+    """Bilinen-kara körlüğünden erken şantiye ölçeğini devriye için görünür tutar.
+
+    Ana diagnostik listeler en büyük kümeleri göstermeye devam eder. Devriye havuzu
+    ise 250-2.000 m² erken/parsel ölçeğini, ardından 2.000-6.500 m² saha ölçeğini
+    öne alır. Bu yalnız alarm-dışı insan kontrol havuzudur; üretim maskesini veya
+    aday sayısını değiştirmez.
+    """
+    def sort_key(item):
+        area = float(item.get("alan_m2") or 0)
+        if area <= PATROL_EARLY_MAX_AREA_M2:
+            scale_rank = 0
+        elif area <= PATROL_TARGET_MAX_AREA_M2:
+            scale_rank = 1
+        else:
+            scale_rank = 2
+        reason_rank = 0 if item.get("neden") == "BULUT_GOLGE_KALICI" else 1
+        area_rank = area if scale_rank < 2 else -area
+        return (scale_rank, reason_rank, area_rank, str(item.get("mahalle_yaklasik") or ""))
+
+    return sorted(components, key=sort_key)[:MAX_EXAMPLES]
+
+
 def _analyze_region(region_key):
     bbox = REGIONS[region_key]["bbox"]
     primary, latest = sentinel_pair(region_key)
@@ -325,6 +350,7 @@ def _analyze_region(region_key):
             (item["alan_m2"] for item in multi_components), default=0
         ),
         "ornekler": components[:MAX_EXAMPLES],
+        "kor_alan_devriye_ornekleri": _patrol_component_examples(components),
         "coklu_yedek_sonrasi_ornekler": multi_components[:MAX_EXAMPLES],
         "cozumlenmemis_yuzey_ornekleri": unknown_components[:MAX_EXAMPLES],
         "durum": "ok" if fallback is not None else "yedek_sahne_yok",
