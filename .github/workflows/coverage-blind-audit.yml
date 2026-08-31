@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "coverage_blind_area_audit.py"
+      - "coverage_patrol_shortlist.py"
       - ".github/workflows/coverage-blind-audit.yml"
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
@@ -41,17 +42,21 @@ jobs:
       - name: Sentinel kör alanını ölç
         run: python coverage_blind_area_audit.py
 
+      - name: Kör alan saha devriyesini güncelle
+        run: python coverage_patrol_shortlist.py
+
       - name: Değişen kör alan raporunu kaydet
         run: |
-          if [[ -z "$(git status --porcelain -- coverage_blind_area_audit.json)" ]]; then
-            echo "Kör alan ölçümü değişmedi."
+          report_files="coverage_blind_area_audit.json latest_report.json SAHA_RAPORU.md"
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+            echo "Kör alan ölçümü ve saha devriyesi değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add coverage_blind_area_audit.json
-          git commit -m "Radar: Sentinel kör alan raporunu güncelle"
+          git add $report_files
+          git commit -m "Radar: Sentinel kör alan raporunu ve devriyeyi güncelle"
 
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
