@@ -6,6 +6,7 @@ on:
     paths:
       - "coverage_blind_area_audit.py"
       - "coverage_patrol_shortlist.py"
+      - "calibration_rotation_guard.py"
       - "route_diversity_guard.py"
       - ".github/workflows/coverage-blind-audit.yml"
   workflow_run:
@@ -45,6 +46,9 @@ jobs:
 
       - name: Kör alan saha devriyesini güncelle
         run: python coverage_patrol_shortlist.py
+
+      - name: Kuru zemin kalibrasyon noktalarını döndür
+        run: python calibration_rotation_guard.py
 
       - name: Alarm dışı saha kontrolünü mahalle bazında çeşitlendir
         run: python route_diversity_guard.py
