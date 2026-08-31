@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-31",
-  "olusturma": "2026-08-31 02:36 +03",
+  "olusturma": "2026-08-31 05:38 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 59",
   "saha_adaylari": [
     {
@@ -1569,7 +1569,7 @@
       "skor": 9,
       "durum": "KIRMIZI",
       "ilk_gorulme": "2026-08-27 12:10 UTC",
-      "son_gorulme": "2026-08-30 23:36 UTC",
+      "son_gorulme": "2026-08-31 02:38 UTC",
       "yeni": false
     }
   ],
@@ -1675,10 +1675,10 @@
     },
     {
       "mahalle": "Ildır",
-      "enlem": 38.400924,
+      "enlem": 38.400921,
       "boylam": 26.621469,
       "alan_m2": 300,
-      "ortalama_bsi_degisim": 0.2634,
+      "ortalama_bsi_degisim": 0.2585,
       "ortalama_rgb_farki": 0.1599,
       "uzun_kisa_orani": 3.0,
       "kutu_doluluk_orani": 1.0,
@@ -1691,7 +1691,7 @@
       "bolge": "Uzunkuyu · Germiyan · Ildır",
       "onceki_tarih": "26.08.2026",
       "son_tarih": "29.08.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.400924,26.621469",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.400921,26.621469",
       "kalibrasyon_durumu": "ALARM_DEGIL"
     }
   ],

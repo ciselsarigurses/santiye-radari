@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-31",
-  "olusturma": "2026-08-31 02:38 +03",
+  "olusturma": "2026-08-31 05:40 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; özellikle geniş adaylarda yol/altyapı gibi yanlış-pozitif olasılıklarının saha geri bildirimiyle kalibre edilmesini sağlamak.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -142,7 +142,7 @@
       "son_item": "S2B_T35SMC_20260829T090620_L2A",
       "durum": "ok",
       "latest_item": "S2B_T35SMC_20260829T090620_L2A",
-      "ham_gecerli_aday": 192,
+      "ham_gecerli_aday": 224,
       "uretim_secimi": 24,
       "ham_sekil_dagilimi": {
         "kucuk_250_800": {
@@ -151,14 +151,14 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 144,
+          "toplam": 171,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 47,
+          "toplam": 52,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 23
+          "dusuk_kompaktlik": 26
         }
       },
       "uretim_secimi_sekil_dagilimi": {
@@ -181,11 +181,11 @@
       "secili_genis_sekil_isaretli": 16,
       "secili_genis_sekil_ornekleri": [
         {
-          "enlem": 38.335988,
+          "enlem": 38.335979,
           "boylam": 26.483836,
-          "alan_m2": 145295,
+          "alan_m2": 145250,
           "olcek": "genis_10000_ustu",
-          "piksel": 1453,
+          "piksel": 1452,
           "satir_span": 57,
           "sutun_span": 76,
           "uzun_kisa_orani": 1.33,
@@ -195,72 +195,72 @@
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.34458,
+          "enlem": 38.344571,
           "boylam": 26.475477,
-          "alan_m2": 144395,
+          "alan_m2": 144049,
           "olcek": "genis_10000_ustu",
-          "piksel": 1444,
+          "piksel": 1440,
           "satir_span": 76,
           "sutun_span": 73,
           "uzun_kisa_orani": 1.04,
           "kutu_doluluk_orani": 0.26,
-          "kompaktlik": 0.025,
+          "kompaktlik": 0.024,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.329748,
+          "enlem": 38.329738,
           "boylam": 26.48979,
-          "alan_m2": 143895,
+          "alan_m2": 142849,
           "olcek": "genis_10000_ustu",
-          "piksel": 1439,
+          "piksel": 1428,
           "satir_span": 64,
           "sutun_span": 54,
           "uzun_kisa_orani": 1.19,
-          "kutu_doluluk_orani": 0.416,
+          "kutu_doluluk_orani": 0.413,
           "kompaktlik": 0.058,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.320161,
+          "enlem": 38.32015,
           "boylam": 26.466775,
-          "alan_m2": 123795,
+          "alan_m2": 125043,
           "olcek": "genis_10000_ustu",
-          "piksel": 1238,
+          "piksel": 1250,
           "satir_span": 55,
           "sutun_span": 59,
           "uzun_kisa_orani": 1.07,
-          "kutu_doluluk_orani": 0.382,
-          "kompaktlik": 0.032,
+          "kutu_doluluk_orani": 0.385,
+          "kompaktlik": 0.034,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.308947,
-          "boylam": 26.462538,
-          "alan_m2": 120395,
+          "enlem": 38.308663,
+          "boylam": 26.462996,
+          "alan_m2": 120241,
           "olcek": "genis_10000_ustu",
-          "piksel": 1204,
+          "piksel": 1202,
           "satir_span": 52,
           "sutun_span": 49,
           "uzun_kisa_orani": 1.06,
-          "kutu_doluluk_orani": 0.473,
+          "kutu_doluluk_orani": 0.472,
           "kompaktlik": 0.059,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.307862,
+          "enlem": 38.307849,
           "boylam": 26.471126,
-          "alan_m2": 104096,
+          "alan_m2": 104236,
           "olcek": "genis_10000_ustu",
-          "piksel": 1041,
-          "satir_span": 44,
+          "piksel": 1042,
+          "satir_span": 45,
           "sutun_span": 71,
-          "uzun_kisa_orani": 1.61,
-          "kutu_doluluk_orani": 0.333,
-          "kompaktlik": 0.051,
+          "uzun_kisa_orani": 1.58,
+          "kutu_doluluk_orani": 0.326,
+          "kompaktlik": 0.047,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         }

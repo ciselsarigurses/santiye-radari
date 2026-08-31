@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-08-31",
-  "olusturma": "2026-08-31 02:37 +03",
+  "olusturma": "2026-08-31 05:38 +03",
   "amac": "24 aday tavanının ve 8-komşu piksel geometrisinin 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
   "diagnostik_santiye_olcegi_m2": [
     800,
@@ -114,16 +114,16 @@
       "durum": "ok",
       "latest_item": "S2B_T35SMC_20260829T090620_L2A",
       "aday_tavani": 24,
-      "ham_uygun_aday": 192,
+      "ham_uygun_aday": 224,
       "tavan_sonrasi_aday": 24,
       "raporda_kalan_aday": 18,
-      "tavan_disinda_kalan": 168,
-      "ham_secimden_farkli": 11,
+      "tavan_disinda_kalan": 200,
+      "ham_secimden_farkli": 23,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
         "kucuk_250_800": 1,
-        "santiye_olcegi_800_10000": 144,
-        "genis_10000_ustu": 47
+        "santiye_olcegi_800_10000": 171,
+        "genis_10000_ustu": 52
       },
       "tavan_sonrasi_olcek_dagilimi": {
         "kucuk_250_800": 1,
@@ -137,70 +137,71 @@
       },
       "tavan_disinda_olcek_dagilimi": {
         "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 144,
-        "genis_10000_ustu": 24
+        "santiye_olcegi_800_10000": 171,
+        "genis_10000_ustu": 29
       },
       "ham_secimden_farkli_olcek_dagilimi": {
         "kucuk_250_800": 0,
         "santiye_olcegi_800_10000": 0,
-        "genis_10000_ustu": 11
+        "genis_10000_ustu": 23
       },
       "baglanti_geometrisi": {
-        "sekiz_komsu_gecerli_aday": 192,
-        "dort_komsu_gecerli_aday": 203,
-        "diyagonal_birlesmis_ebeveyn": 10,
+        "sekiz_komsu_gecerli_aday": 224,
+        "dort_komsu_gecerli_aday": 239,
+        "diyagonal_birlesmis_ebeveyn": 14,
         "ayrisan_kucuk_250_800": 0,
-        "ayrisan_santiye_olcegi_800_10000": 13,
-        "genis_ebeveynden_ayrisan_250_10000": 11,
+        "ayrisan_santiye_olcegi_800_10000": 22,
+        "genis_ebeveynden_ayrisan_250_10000": 14,
         "ornekler": [
           {
-            "enlem": 38.34458,
+            "enlem": 38.344571,
             "boylam": 26.475477,
-            "sekiz_komsu_alan_m2": 144395,
-            "dort_komsu_alt_aday_sayisi": 2,
+            "sekiz_komsu_alan_m2": 144049,
+            "dort_komsu_alt_aday_sayisi": 3,
             "dort_komsu_alt_alanlar_m2": [
-              4500,
-              139095
+              900,
+              4502,
+              137847
             ]
           },
           {
-            "enlem": 38.34666,
+            "enlem": 38.346652,
             "boylam": 26.479599,
-            "sekiz_komsu_alan_m2": 4300,
+            "sekiz_komsu_alan_m2": 4301,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              1700,
-              2600
+              1901,
+              2401
             ]
           },
           {
-            "enlem": 38.342952,
+            "enlem": 38.342943,
             "boylam": 26.496775,
-            "sekiz_komsu_alan_m2": 18099,
+            "sekiz_komsu_alan_m2": 18406,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              7600,
-              10500
+              7903,
+              10504
             ]
           },
           {
-            "enlem": 38.337707,
+            "enlem": 38.337697,
             "boylam": 26.474905,
-            "sekiz_komsu_alan_m2": 19799,
+            "sekiz_komsu_alan_m2": 20307,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              2500,
-              17299
+              2501,
+              17806
             ]
           },
           {
-            "enlem": 38.332552,
+            "enlem": 38.332542,
             "boylam": 26.487156,
-            "sekiz_komsu_alan_m2": 30999,
+            "sekiz_komsu_alan_m2": 31511,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              5700,
-              25099
+              6102,
+              25209
             ]
           }
         ],
