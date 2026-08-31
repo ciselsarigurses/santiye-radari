@@ -7,7 +7,7 @@ from urllib.parse import urlencode
 import pandas as pd
 import streamlit as st
 
-from calibration_outcome import calibration_id, calibration_outcome_map
+from calibration_outcome import calibration_id, calibration_id_aliases, calibration_outcome_map
 from field_outcome import OUTCOME_LABELS
 
 
@@ -106,10 +106,16 @@ def calibration_card(item):
         )
 
 
+def item_recorded(item, recorded):
+    """Yeni nokta kimliğini ve eski bölge+tarih kimliğini birlikte tanı."""
+    return any(key in recorded for key in calibration_id_aliases(item))
+
+
 st.title("🧪 Alarm Dışı Kalibrasyon Kontrolü")
 st.caption(
-    "Kuru-zemin körlüğünü gerçek saha verisiyle ölç. Aynı uydu bölgesi ve Sentinel tarih çifti "
-    "için sonuç bir kez kaydedildiğinde aynı kalibrasyon tekrar aktif listede gösterilmez."
+    "Kuru-zemin körlüğünü gerçek saha verisiyle ölç. Kalibrasyon kimliği artık Sentinel tarih "
+    "çiftinin yanı sıra yaklaşık saha noktasına da bağlıdır; böylece geri bildirim başka bir "
+    "noktaya yanlışlıkla yazılmaz. Eski kayıtlar da tanınmaya devam eder."
 )
 
 report = read_report()
@@ -119,12 +125,12 @@ items = [
     for item in report.get("kuru_zemin_kalibrasyon_kontrolu", []) or []
     if isinstance(item, dict)
 ]
-active = [item for item in items if calibration_id(item) not in recorded]
-current_done = [item for item in items if calibration_id(item) in recorded]
+active = [item for item in items if not item_recorded(item, recorded)]
+current_done = [item for item in items if item_recorded(item, recorded)]
 
 m1, m2, m3 = st.columns(3)
 m1.metric("Bugün açık kalibrasyon", len(active))
-m2.metric("Bu Sentinel çiftinde tamamlanan", len(current_done))
+m2.metric("Bu noktalar içinde tamamlanan", len(current_done))
 m3.metric("Toplam kalibrasyon sonucu", len(recorded))
 
 if not items:
