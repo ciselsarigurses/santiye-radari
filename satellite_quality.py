@@ -45,6 +45,47 @@ def _contains(bbox, latitude, longitude):
     return west <= longitude <= east and south <= latitude <= north
 
 
+def _uncovered_union_cells(target_bbox, boxes):
+    """Hedef zarfı rapor kutularının birleşiminin tamamen örttüğünü hücre bazında ölç.
+
+    Yalnız kutuların birbirine değmesi/kesişmesi yeterli değildir: iki kutu kısmen
+    örtüşürken hedef zarfın başka bir köşesinde boşluk kalabilir. Hedef ve tüm kutu
+    kenarlarını koordinat eksenlerinde bölerek oluşan her dikdörtgen hücrenin orta
+    noktasını test etmek, eksen hizalı bbox birleşiminde gerçek bir boşluğu kesin
+    olarak yakalar. Bu yalnız kalite/regresyon kontrolüdür; alarm üretmez.
+    """
+    target_west, target_south, target_east, target_north = map(float, target_bbox)
+    x_edges = {target_west, target_east}
+    y_edges = {target_south, target_north}
+
+    for bbox in boxes:
+        west, south, east, north = map(float, bbox)
+        if (
+            east <= target_west
+            or west >= target_east
+            or north <= target_south
+            or south >= target_north
+        ):
+            continue
+        x_edges.update((max(west, target_west), min(east, target_east)))
+        y_edges.update((max(south, target_south), min(north, target_north)))
+
+    x_edges = sorted(x_edges)
+    y_edges = sorted(y_edges)
+    uncovered = []
+    for left, right in zip(x_edges, x_edges[1:]):
+        if right <= left:
+            continue
+        longitude = (left + right) / 2
+        for bottom, top in zip(y_edges, y_edges[1:]):
+            if top <= bottom:
+                continue
+            latitude = (bottom + top) / 2
+            if not any(_contains(box, latitude, longitude) for box in boxes):
+                uncovered.append((left, bottom, right, top))
+    return uncovered
+
+
 def _pixel_area_m2(bbox):
     west, south, east, north = bbox
     height, width = _output_shape(bbox)
@@ -110,6 +151,31 @@ def check_coverage():
     assert not uncovered, (
         "Günlük uydu taramasının dışında kalan takip merkezi var: "
         + ", ".join(uncovered)
+    )
+
+    # Takip merkezi örneklerinin veya iki kutunun genel olarak kesişmesinin geçmesi,
+    # birleşik hedef zarfında sessiz bir köşe boşluğu kalmadığını kanıtlamaz. Önceki
+    # Uzunkuyu 38.22 N güney sınırı tam olarak bunu yaptı: 26.53-26.66 E /
+    # 38.18-38.22 N şeridi hiçbir günlük kutuda değildi. Artık `all` zarfının her
+    # hücresi en az bir üretim kutusu tarafından örtülmek zorunda.
+    uncovered_cells = _uncovered_union_cells(REGIONS["all"]["bbox"], report_boxes)
+    assert not uncovered_cells, (
+        "Çeşme+Uzunkuyu günlük Sentinel kutularının birleşimi 'all' kapsama "
+        "zarfında boşluk bırakıyor: "
+        + "; ".join(
+            f"{west:.2f}-{east:.2f} E / {south:.2f}-{north:.2f} N"
+            for west, south, east, north in uncovered_cells[:4]
+        )
+    )
+
+    # Regresyon testinin gerçekten tarihsel hatayı yakaladığını da doğrula. Bu eski
+    # sentetik yapı üretimde kullanılmaz; yalnız testin kendisinin körleşmesini önler.
+    historical_gap_boxes = [
+        [26.22, 38.18, 26.53, 38.43],
+        [26.45, 38.22, 26.66, 38.43],
+    ]
+    assert _uncovered_union_cells(REGIONS["all"]["bbox"], historical_gap_boxes), (
+        "Birleşik kapsama regresyonu tarihsel güneydoğu boşluğunu yakalayamıyor."
     )
 
     cesme_box = REGIONS["cesme"]["bbox"]
@@ -312,9 +378,9 @@ def main():
     check_small_site_path()
     check_candidate_capacity()
     print(
-        "Uydu kalite kontrolü başarılı: Çeşme idari zarfı, tam-karo kapsamı, "
-        "aynı göreli yörünge tercihi, yaklaşık 10 m ölçek, 250 m² küçük saha yolu "
-        "ve yoğun-dönem aday kapasitesi korunuyor."
+        "Uydu kalite kontrolü başarılı: Çeşme idari zarfı, Çeşme+Uzunkuyu birleşik "
+        "kapsama zarfı, tam-karo kapsamı, aynı göreli yörünge tercihi, yaklaşık "
+        "10 m ölçek, 250 m² küçük saha yolu ve yoğun-dönem aday kapasitesi korunuyor."
     )
 
 
