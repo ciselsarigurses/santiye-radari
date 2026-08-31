@@ -6,6 +6,11 @@ Ana Sentinel motorunun oluşturduğu aynı değişim maskesindeki geçerli 250 m
 sonrasında günlük raporda gerçekten kalan nihai adayları ayrı ayrı gösterir. Böylece
 şekil kalibrasyonu artık üretim öncesi 24'lük ara listeye bakıp yanlış sonuca varmaz.
 
+Rebalance katmanı, geniş bir 8-komşu kümeye yalnız köşeden bağlı 800-10.000 m² parsel
+ölçekli yan kümeyi kontrollü olarak ayrı aday yapabilir. Şekil denetimi bu 4-komşu yan
+kümeleri de aynı raster üzerinde yeniden kurar; böylece özellikle günlük rotada PARSEL
+olarak öne çıkan yan-küme adayları 'geometri çözülemedi' diye yanlış raporlanmaz.
+
 Nihai adaylar, bbox/çözünürlük yeniden analizinden sonra aynı sahne korunmuşsa mevcut
 raster geometrisiyle birebir anahtar eşleşmesini kaybedebilir. Bu nedenle tam eşleşmeye
 ek olarak yalnız denetim amaçlı 25 m + %60 alan-benzerliği toleranslı bir yaklaşık
@@ -24,6 +29,7 @@ from pathlib import Path
 
 import numpy as np
 
+import rebalance_satellite_candidates as rebalance
 import satellite
 from daily_report import ISTANBUL, REPORT_REGIONS, ensure_daily_schema
 from scanner import connect
@@ -124,6 +130,33 @@ def _candidate_key(item):
         )
     except (TypeError, ValueError, AttributeError):
         return None
+
+
+def _sidecar_shape_records(change_mask, bbox, pixel_area_m2, small_site_mask=None):
+    """Rebalance'ın 4-komşu yan-küme adaylarını şekil kaydına dönüştür."""
+    sidecars = rebalance._diagonal_sidecar_candidates(
+        change_mask,
+        bbox,
+        pixel_area_m2,
+        small_site_mask=small_site_mask,
+    )
+    keys = {key for key in map(_candidate_key, sidecars) if key is not None}
+    if not keys:
+        return []
+
+    records = []
+    for component in rebalance._four_connected_components(change_mask):
+        record = _shape_record(
+            component,
+            bbox,
+            change_mask.shape,
+            pixel_area_m2,
+        )
+        if _candidate_key(record) not in keys:
+            continue
+        record["geometri_kaynagi"] = rebalance.DIAGONAL_SIDECAR_TAG
+        records.append(record)
+    return records
 
 
 def _number(value, default=None):
@@ -240,6 +273,7 @@ def _approximate_match_records(
                     "boylam": _number(candidate.get("boylam")),
                     "alan_m2": round(_number(candidate.get("alan_m2"), 0) or 0),
                     "durum": "eslesmedi",
+                    "geometri_kaynagi": candidate.get("geometri_kaynagi"),
                     "en_yakin_mesafe_m": (
                         round(nearest_distance, 1)
                         if nearest_distance is not None
@@ -335,6 +369,21 @@ def _self_check():
     assert not approximate, diagnostics
     assert diagnostics[0]["durum"] == "eslesmedi", diagnostics
 
+    sidecar_mask = np.zeros((20, 20), dtype=bool)
+    sidecar_mask[2:13, 2:12] = True
+    sidecar_mask[13:15, 12:16] = True
+    sidecar_records = _sidecar_shape_records(
+        sidecar_mask,
+        bbox,
+        100.0,
+    )
+    assert len(sidecar_records) == 1, sidecar_records
+    assert sidecar_records[0]["alan_m2"] == 800, sidecar_records
+    assert (
+        sidecar_records[0].get("geometri_kaynagi")
+        == rebalance.DIAGONAL_SIDECAR_TAG
+    ), sidecar_records
+
 
 def _today_snapshot(connection, report_date, region_key):
     row = connection.execute(
@@ -358,7 +407,12 @@ def _today_snapshot(connection, report_date, region_key):
 
 
 def _analyze_region(region_key, pair, final_candidates=None):
-    captured = {"records": [], "selected": []}
+    captured = {
+        "base_records": [],
+        "sidecar_records": [],
+        "records": [],
+        "selected": [],
+    }
 
     def audited_hotspots(
         change_mask,
@@ -368,11 +422,11 @@ def _analyze_region(region_key, pair, final_candidates=None):
         limit=satellite.HOTSPOT_LIMIT,
         small_quota=satellite.SMALL_HOTSPOT_QUOTA,
     ):
-        records = []
+        base_records = []
         for component in satellite._connected_components(change_mask):
             if not _eligible(component, pixel_area_m2, small_site_mask):
                 continue
-            records.append(
+            base_records.append(
                 _shape_record(
                     component,
                     bbox,
@@ -380,6 +434,12 @@ def _analyze_region(region_key, pair, final_candidates=None):
                     pixel_area_m2,
                 )
             )
+        sidecar_records = _sidecar_shape_records(
+            change_mask,
+            bbox,
+            pixel_area_m2,
+            small_site_mask=small_site_mask,
+        )
         selected = _ORIGINAL_HOTSPOTS(
             change_mask,
             bbox,
@@ -388,7 +448,9 @@ def _analyze_region(region_key, pair, final_candidates=None):
             limit=limit,
             small_quota=small_quota,
         )
-        captured["records"] = records
+        captured["base_records"] = base_records
+        captured["sidecar_records"] = sidecar_records
+        captured["records"] = base_records + sidecar_records
         captured["selected"] = [item for item in selected if isinstance(item, dict)]
         return selected
 
@@ -400,7 +462,10 @@ def _analyze_region(region_key, pair, final_candidates=None):
         satellite._hotspots = original
 
     final_candidates = final_candidates or []
-    raw_selected_records = _match_records(captured["records"], captured["selected"])
+    raw_selected_records = _match_records(
+        captured["base_records"],
+        captured["selected"],
+    )
     final_selected_records = _match_records(captured["records"], final_candidates)
     approximate_records, match_diagnostics = _approximate_match_records(
         captured["records"],
@@ -417,18 +482,25 @@ def _analyze_region(region_key, pair, final_candidates=None):
     unresolved = [
         item for item in match_diagnostics if item.get("durum") == "eslesmedi"
     ]
+    exact_sidecars = [
+        record
+        for record in final_selected_records
+        if record.get("geometri_kaynagi") == rebalance.DIAGONAL_SIDECAR_TAG
+    ]
 
     return {
-        "ham_gecerli_aday": len(captured["records"]),
+        "ham_gecerli_aday": len(captured["base_records"]),
+        "diyagonal_yan_kume_geometri": len(captured["sidecar_records"]),
         # Geriye uyumluluk: eski alanlar ham satellite._hotspots seçimini gösterir.
         "uretim_secimi": len(captured["selected"]),
-        "ham_sekil_dagilimi": _summarize(captured["records"]),
+        "ham_sekil_dagilimi": _summarize(captured["base_records"]),
         "uretim_secimi_sekil_dagilimi": _summarize(raw_selected_records),
         "secili_genis_sekil_isaretli": len(raw_flagged),
         "secili_genis_sekil_ornekleri": _examples(raw_flagged),
         # Asıl operasyonel çıktı: rebalance + dedupe sonrasında DB'de kalan adaylar.
         "nihai_rapor_secimi": len(final_candidates),
         "nihai_rapor_eslesen_geometri": len(final_selected_records),
+        "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": len(exact_sidecars),
         "nihai_rapor_yaklasik_eslesen_geometri": approximate_match_count,
         "nihai_rapor_cozulen_geometri": len(resolved_records),
         "nihai_rapor_cozulemeyen_geometri": len(unresolved),
@@ -503,9 +575,10 @@ def audit_shapes():
         },
         "uyari": (
             "Şekil etiketi tek başına yol veya yanlış pozitif kanıtı değildir; hiçbir aday "
-            "bu denetim nedeniyle elenmez veya öncelik kaybetmez. Yaklaşık eşleşme yalnız "
-            "bbox/çözünürlük yeniden-pikselleştirme provenansını ölçer ve alarm/rota "
-            "kararında kullanılmaz."
+            "bu denetim nedeniyle elenmez veya öncelik kaybetmez. 4-komşu yan-küme "
+            "geometrisi yalnız mevcut rebalance adayının provenansını doğrular. Yaklaşık "
+            "eşleşme yalnız bbox/çözünürlük yeniden-pikselleştirme provenansını ölçer ve "
+            "alarm/rota kararında kullanılmaz."
         ),
         "bolgeler": regions,
     }
@@ -523,8 +596,9 @@ def main():
     _self_check()
     if args.check_only:
         print(
-            "Şekil yanlış-pozitif denetimi kalite kontrolü başarılı: ham, nihai tam "
-            "eşleşme ve yalnız-denetim yaklaşık geometri eşleşmesi ölçülebiliyor."
+            "Şekil yanlış-pozitif denetimi kalite kontrolü başarılı: ham, 4-komşu "
+            "yan-küme, nihai tam eşleşme ve yalnız-denetim yaklaşık geometri "
+            "eşleşmesi ölçülebiliyor."
         )
         return
 
@@ -546,7 +620,8 @@ def main():
             f"nihai >10000={final_wide.get('toplam', 0)} / "
             f"şekil-işaretli="
             f"{item.get('nihai_secili_genis_sekil_isaretli_yaklasik_dahil', 0)}; "
-            f"tam={item.get('nihai_rapor_eslesen_geometri', 0)} + "
+            f"tam={item.get('nihai_rapor_eslesen_geometri', 0)} "
+            f"(yan-küme={item.get('nihai_rapor_diyagonal_yan_kume_eslesen_geometri', 0)}) + "
             f"yaklaşık={item.get('nihai_rapor_yaklasik_eslesen_geometri', 0)} / "
             f"{item.get('nihai_rapor_secimi', 0)}; "
             f"çözülemeyen={item.get('nihai_rapor_cozulemeyen_geometri', 0)}"
