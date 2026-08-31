@@ -1,0 +1,61 @@
+name: Sentinel Kör Alan Denetimi
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "coverage_blind_area_audit.py"
+      - ".github/workflows/coverage-blind-audit.yml"
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-coverage-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Sentinel kör alanını ölç
+        run: python coverage_blind_area_audit.py
+
+      - name: Değişen kör alan raporunu kaydet
+        run: |
+          if [[ -z "$(git status --porcelain -- coverage_blind_area_audit.json)" ]]; then
+            echo "Kör alan ölçümü değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add coverage_blind_area_audit.json
+          git commit -m "Radar: Sentinel kör alan raporunu güncelle"
+
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal değişti; eski ölçümü üzerine yazmadan sonraki çalışmaya bırakılıyor."
+            exit 1
+          fi
+          git push origin HEAD:main
