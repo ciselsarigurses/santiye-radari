@@ -2,11 +2,15 @@
 
 Bu kayıtlar ``saha_durumlari`` veya normal ``saha_sonuclari`` tablolarına girmez;
 böylece kalibrasyon ziyareti üretim alarmı/görevi sayısını ve saha doğruluk
-istatistiğini şişirmez. Kimlik, aynı uydu bölgesi + Sentinel tarih çifti için
-sabittir; aynı görüntü çifti tekrar raporlansa bile ekip aynı kalibrasyonu yeniden
-yapmaya yönlendirilmez.
+istatistiğini şişirmez.
 
-Kalibrasyon sonucu artık yalnız sınıf etiketi değildir. Sonucun üretildiği BSI/RGB
+Kalibrasyon kimliği bölge + Sentinel tarih çifti + yaklaşık nokta koordinatına
+bağlıdır. Böylece aynı görüntü çifti yeniden sıralandığında başka bir noktanın saha
+sonucu yanlış koordinat/spektral özelliklerle eşleşmez. Eski bölge+tarih kimlikleri
+okuma tarafında takma ad olarak korunur; daha önce açılmış geri bildirim bağlantıları
+bozulmaz.
+
+Kalibrasyon sonucu yalnız sınıf etiketi değildir. Sonucun üretildiği BSI/RGB
 spektral değişimi ile temel geometri ve yerel-kümelenme ölçüleri de aynı kayıtla
 saklanır. Böylece yeterli saha örneği biriktiğinde kuru-zemin eşikleri gerçek Çeşme
 saha verisiyle ölçülebilir; bu modül kendi başına alarm eşiğini değiştirmez.
@@ -41,16 +45,17 @@ def _now():
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
 
-def calibration_id(item):
-    """Bir bölge ve Sentinel tarih çifti için kararlı kalibrasyon kimliği üret."""
+def _identity_parts(item):
     item = item if isinstance(item, dict) else {}
     region = str(item.get("bolge_anahtari") or item.get("bolge") or "").strip()
     start = str(item.get("onceki_tarih") or "").strip()
     end = str(item.get("son_tarih") or "").strip()
+    return item, region, start, end
 
-    # Günlük rota şu anda bölge başına tek kalibrasyon noktası seçiyor. Tarih çifti
-    # varsa koordinatı kimliğe katmamak, aynı sahne tekrar üretildiğinde örnek sırası
-    # değişse bile aynı bölgenin ikinci kez kalibrasyona çıkmasını engeller.
+
+def legacy_calibration_id(item):
+    """31 Ağustos öncesi bölge+tarih kimliğini geriye dönük uyumluluk için üret."""
+    item, region, start, end = _identity_parts(item)
     if region and start and end:
         key = f"{CALIBRATION_KIND}|{region}|{start}|{end}"
     else:
@@ -59,6 +64,33 @@ def calibration_id(item):
         key = f"{CALIBRATION_KIND}|{region}|{start}|{end}|{latitude}|{longitude}"
     digest = hashlib.sha1(key.encode("utf-8")).hexdigest()[:10].upper()
     return f"K{digest}"
+
+
+def calibration_id(item):
+    """Sentinel çifti içindeki yaklaşık saha noktasına bağlı kararlı kimlik üret."""
+    item, region, start, end = _identity_parts(item)
+    try:
+        # 5 ondalık derece yaklaşık 1 m mertebesindedir. Sentinel'in 10 m sınıfı
+        # çözünürlüğünden daha hassas bir anlam yüklemeden küçük yeniden-örnekleme
+        # jitter'ını da aynı kimlikte tutar.
+        latitude = f"{float(item.get('enlem')):.5f}"
+        longitude = f"{float(item.get('boylam')):.5f}"
+    except (TypeError, ValueError):
+        return legacy_calibration_id(item)
+
+    key = (
+        f"{CALIBRATION_KIND}|{region}|{start}|{end}|"
+        f"{latitude}|{longitude}"
+    )
+    digest = hashlib.sha1(key.encode("utf-8")).hexdigest()[:10].upper()
+    return f"K{digest}"
+
+
+def calibration_id_aliases(item):
+    """Yeni nokta kimliği ve varsa eski bölge+tarih kimliğini birlikte döndür."""
+    current = calibration_id(item)
+    legacy = legacy_calibration_id(item)
+    return (current,) if current == legacy else (current, legacy)
 
 
 def _columns(connection, table):
@@ -248,10 +280,16 @@ def _self_check():
         "boylam": 26.300190,
     }
     first = calibration_id(sample)
-    moved_example = {**sample, "enlem": 38.355700, "boylam": 26.300400}
-    assert first == calibration_id(moved_example), (
-        "Aynı bölge+tarih çiftinde örnek koordinatı değişse de kalibrasyon kimliği sabit kalmalı."
+    tiny_jitter = {**sample, "enlem": 38.355517, "boylam": 26.300191}
+    another_point = {**sample, "enlem": 38.356700, "boylam": 26.301400}
+    assert first == calibration_id(tiny_jitter), (
+        "Sentinel çözünürlüğünün çok altındaki koordinat jitter'ı kimliği değiştirmemeli."
     )
+    assert first != calibration_id(another_point), (
+        "Aynı bölge+tarih çiftindeki farklı saha noktaları aynı kalibrasyon kimliğini paylaşmamalı."
+    )
+    assert legacy_calibration_id(sample) in calibration_id_aliases(sample)
+    assert first in calibration_id_aliases(sample)
     assert CALIBRATION_ID_PATTERN.fullmatch(first)
     assert first != calibration_id({**sample, "son_tarih": "01.09.2026"})
     assert _bool_or_none({"izole_saha_benzeri": True}, "izole_saha_benzeri") == 1
