@@ -37,7 +37,12 @@ REGIONS = {
     },
     "uzunkuyu": {
         "label": "Uzunkuyu · Germiyan · Ildır",
-        "bbox": [26.45, 38.22, 26.66, 38.43],
+        # Çeşme kutusu 26.53 E'de biterken eski 38.22 N güney sınırı,
+        # birleşik "all" zarfının 26.53-26.66 E / 38.18-38.22 N bölümünü
+        # iki günlük tarama kutusunun da dışında bırakıyordu. Güney sınırını
+        # 38.18 N'ye indirerek bu iç kapsama boşluğunu kapatıyoruz; 2800 piksel
+        # tavanında yaklaşık 10 m analiz ölçeği korunur.
+        "bbox": [26.45, 38.18, 26.66, 38.43],
     },
     "all": {
         "label": "Tüm Çeşme + Uzunkuyu",
