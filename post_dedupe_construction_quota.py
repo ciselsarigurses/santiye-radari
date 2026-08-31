@@ -10,14 +10,17 @@ kalır.
 riski görülürken 800-10.000 m² şantiye ölçeği adaylarında bu risk belirgin biçimde
 daha düşüktü. Bu nedenle post-dedupe hedefini alarm sayısını artırmadan bölge başına
 8 şantiye ölçeği adaya çıkarıyoruz; bunların mümkünse 4'ü 800-2.000 m² erken-parsel
-aralığından seçilir. Aynı bölgedeki en zayıf/geniş >10.000 m² kayıtlar çıkarılıp,
-mevcut 250 m²+ üretim filtrelerini zaten geçmiş ve başka seçili adayla 25 m içinde
-mükerrer olmayan en iyi 800-10.000 m² adaylar konur. 250-800 m² güçlü küçük-saha
+aralığından seçilir. Aynı bölgedeki >10.000 m² kayıtlar arasından öncelikle ölçülmüş
+düşük-kompaktlık riskli olanlar, sonra geometrisi bilinmeyenler, en son temiz-geometri
+adaylar takasa çıkarılır; her grubun içinde en zayıf spektral kanıt ve daha geniş alan
+önce gelir. Böylece rebalance katmanında kazanılan şekil önceliği post-dedupe takasında
+bozulmaz. Mevcut 250 m²+ üretim filtrelerini zaten geçmiş ve başka seçili adayla 25 m
+içinde mükerrer olmayan en iyi 800-10.000 m² adaylar konur. 250-800 m² güçlü küçük-saha
 adayları hiçbir zaman bu işlemle çıkarılmaz.
 
 Kod politikası değişiklikleri mevcut Sentinel sahnesini geriye dönük karıştırmaz.
 Mevcut sahne yalnız yeni politika sürümü için taban çizgisi olarak korunur; 8/4 kota
-ilk yeni Sentinel sahnesinde devreye girer.
+ve şekil-duyarlı geniş aday takası ilk yeni Sentinel sahnesinde devreye girer.
 """
 
 from __future__ import annotations
@@ -32,7 +35,7 @@ from daily_report import ISTANBUL, REPORT_REGIONS, build_daily_report, ensure_da
 from scanner import connect
 
 
-POLICY_VERSION = "post-dedupe-construction-quota-v2-8-slots-next-scene"
+POLICY_VERSION = "post-dedupe-construction-quota-v3-shape-aware-removal-next-scene"
 STATE_TABLE = "uydu_post_dedupe_kota_surumu"
 DUPLICATE_METERS = 25.0
 MIN_AREA_SIMILARITY = 0.70
@@ -46,6 +49,10 @@ def _area(item):
 
 def _strength(item):
     return rebalance._signal_strength(item)
+
+
+def _wide_shape_risk(item):
+    return rebalance._wide_shape_risk(item)
 
 
 def _distance_m(first, second):
@@ -207,10 +214,13 @@ def _choose_additions(raw, current, selected_all, missing):
 
 
 def _wide_removal_order(current):
-    """En zayıf spektral kanıtlı, eşitse en geniş yüzey değişimini önce çıkar."""
+    """Riskli geniş geometriyi, sonra zayıf spektral kanıtı takasa önce çıkar."""
     return sorted(
         [item for item in current if _is_wide(item)],
         key=lambda item: (
+            0 if _wide_shape_risk(item) is True else (
+                1 if _wide_shape_risk(item) is None else 2
+            ),
             _strength(item),
             -_area(item),
             float(item.get("enlem") or 0),
@@ -314,6 +324,40 @@ def _self_check():
     assert sum(_is_construction(candidate) for candidate in updated) == 8
     assert sum(_is_early_construction(candidate) for candidate in updated) >= 4
     assert sum(_is_wide(candidate) for candidate in updated) == 9
+
+    shape_current = [item(100, 400, 0.9)]
+    shape_current.extend(item(110 + i, 1000 + i * 500, 0.5) for i in range(5))
+    risky_wide = item(
+        130,
+        22000,
+        0.8,
+        **{rebalance.WIDE_SHAPE_RISK_FIELD: True},
+    )
+    clean_wide = item(
+        131,
+        52000,
+        0.0,
+        **{rebalance.WIDE_SHAPE_RISK_FIELD: False},
+    )
+    unknown_wide = item(132, 42000, 0.0)
+    shape_current.extend([clean_wide, unknown_wide, risky_wide])
+    shape_current.extend(item(140 + i, 25000 + i * 1000, 0.2) for i in range(9))
+    shape_raw = list(shape_current)
+    shape_raw.extend(
+        [
+            item(180, 1800, 0.9),
+            item(181, 3200, 0.8),
+            item(182, 4500, 0.7),
+        ]
+    )
+    _, shape_swaps = _swap_without_growth(shape_current, shape_raw, shape_current)
+    removed_keys = [rebalance._candidate_key(pair[0]) for pair in shape_swaps]
+    assert rebalance._candidate_key(risky_wide) in removed_keys, (
+        "Düşük-kompaktlık riskli geniş aday post-dedupe takasında korunmamalı."
+    )
+    assert rebalance._candidate_key(clean_wide) not in removed_keys, (
+        "Temiz geniş geometri, riskli aday varken önce takasa çıkarıldı."
+    )
 
     duplicate_raw = list(current)
     duplicate_raw.append(
