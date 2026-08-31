@@ -38,6 +38,8 @@ TEMPORAL_VERSION = "cloud-shadow-gap-v4-dedupe25m"
 FALLBACK_MIN_GAP_DAYS = 7
 TEMPORAL_ADDITION_LIMIT = 6
 TEMPORAL_SMALL_QUOTA = 3
+TEMPORAL_PARCEL_QUOTA = 2
+TEMPORAL_PARCEL_MAX_M2 = 2000
 # 10 m sınıfı Sentinel merkez kayması için 2-3 piksel tolerans bırak; 80 m ise
 # komşu parseldeki ayrı kazıyı sessizce mükerrer sayabilecek kadar genişti.
 DUPLICATE_METERS = 25
@@ -114,30 +116,49 @@ def _distance_m(first, second):
 
 
 def _select_additions(candidates, limit=TEMPORAL_ADDITION_LIMIT):
-    """Bulut boşluğu adaylarını sınırlarken küçük güçlü şantiyeleri tamamen gömme."""
+    """Bulut boşluğunda küçük/parsel ölçeğini geniş arazi hareketine ezdirme."""
     ranked = sorted(
         candidates,
         key=lambda item: float(item.get("alan_m2") or 0),
         reverse=True,
     )
-    if len(ranked) <= limit:
+    cap = max(int(limit), 0)
+    if cap <= 0:
+        return []
+    if len(ranked) <= cap:
         return ranked
+
     small = [
         item
         for item in ranked
-        if float(item.get("alan_m2") or 0) <= SMALL_HOTSPOT_MAX_M2
+        if float(item.get("alan_m2") or 0) < SMALL_HOTSPOT_MAX_M2
     ]
-    standard = [
+    parcel = [
         item
         for item in ranked
-        if float(item.get("alan_m2") or 0) > SMALL_HOTSPOT_MAX_M2
+        if SMALL_HOTSPOT_MAX_M2 <= float(item.get("alan_m2") or 0) <= TEMPORAL_PARCEL_MAX_M2
     ]
-    selected = standard[: max(limit - TEMPORAL_SMALL_QUOTA, 0)]
-    selected.extend(small[:TEMPORAL_SMALL_QUOTA])
-    if len(selected) < limit:
-        leftovers = [item for item in ranked if item not in selected]
-        selected.extend(leftovers[: limit - len(selected)])
-    return selected[:limit]
+    broad = [
+        item
+        for item in ranked
+        if float(item.get("alan_m2") or 0) > TEMPORAL_PARCEL_MAX_M2
+    ]
+
+    small_slots = min(TEMPORAL_SMALL_QUOTA, cap)
+    parcel_slots = min(TEMPORAL_PARCEL_QUOTA, max(cap - small_slots, 0))
+    broad_slots = max(cap - small_slots - parcel_slots, 0)
+
+    selected = small[:small_slots]
+    selected.extend(parcel[:parcel_slots])
+    selected.extend(broad[:broad_slots])
+    if len(selected) < cap:
+        leftovers = (
+            small[small_slots:]
+            + parcel[parcel_slots:]
+            + broad[broad_slots:]
+        )
+        selected.extend(leftovers[: cap - len(selected)])
+    return selected[:cap]
 
 
 def merge_candidates(existing, recovered):
@@ -242,12 +263,17 @@ def _gap_hotspots(region_key, primary, latest, fallback):
     pixel_height_m = (north - south) * 110570 / height
     pixel_area_m2 = pixel_width_m * pixel_height_m
 
+    # _hotspots tüm bileşenleri zaten hesaplıyor; burada altı adaya erken kırpmak,
+    # üç büyük standart değişim bulunduğunda 800-2.000 m² parsel adayını daha
+    # _select_additions görmeden kaybedebiliyordu. Maske piksel sayısını limit
+    # vererek aday havuzunu eksiksiz al; nihai altı-aday bütçesini aşağıdaki seçim
+    # politikası uygulasın. Bu alarm sayısını veya Sentinel eşiklerini artırmaz.
     hotspots = _hotspots(
         change_mask,
         bbox,
         pixel_area_m2,
         small_site_mask=small_site_signal,
-        limit=TEMPORAL_ADDITION_LIMIT,
+        limit=int(change_mask.size),
         small_quota=TEMPORAL_SMALL_QUOTA,
     )
     interval = f"{_item_date(fallback)}→{_item_date(latest)}"
