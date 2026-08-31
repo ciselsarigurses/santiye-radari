@@ -7,7 +7,7 @@ import re
 import sys
 from pathlib import Path
 
-from calibration_outcome import calibration_id, save_calibration_outcome
+from calibration_outcome import calibration_id_aliases, save_calibration_outcome
 from field_outcome import clear_outcome, save_outcome
 from field_state import apply_status
 from report_quality import normalize_daily_report
@@ -33,7 +33,7 @@ def _calibration_item(calibration_key):
     for item in payload.get("kuru_zemin_kalibrasyon_kontrolu", []) or []:
         if not isinstance(item, dict):
             continue
-        if calibration_id(item) == calibration_key:
+        if calibration_key in calibration_id_aliases(item):
             return item
     return None
 
