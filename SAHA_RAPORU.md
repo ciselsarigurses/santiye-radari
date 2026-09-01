@@ -9,7 +9,7 @@
 
 ## Günün ilk 3 kontrolü
 
-> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
+> Yeni alarm üretmez; TEKRAR/ERKEN/PARSEL öncelikleri aynen korunur. Yalnız bütün kısa liste gecikmiş kuyruğa kaldığında, en güçlü küçük-güçlü güncel Sentinel adayı çapa olarak sabit tutulur; kalan iki slot aynı kanıt sınıfındaki adaylar arasında günlük döner. Mümkünse farklı mahalle ve iki uydu bölgesi temsil edilir. Tam saha kuyruğu ve görev durumları değişmez.
 
 1. **GECİKEN — Şifne** · yaklaşık 300 m² · Görev `U611DAF934D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.346018,26.383414)
 2. **GECİKEN — Alaçatı** · yaklaşık 400 m² · Görev `UDB761099F7` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.242726,26.400585)
@@ -17,7 +17,7 @@
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli örnekleri en güçlü dört mahalle-çeşitli temporal havuzda günlük döndürür. 250-900 m² adayda güvenilir yaygın çevre değişimi görülürse aday temporal acil havuzdan çıkarılır, normal güvenli rotasyonda korunur; bu yine alarm değildir. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
 1. **KALİBRASYON — Musalla** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.223 · RGB Δ 0.115 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.321597,26.299618)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
