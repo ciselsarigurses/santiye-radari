@@ -1700,9 +1700,9 @@
     {
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır",
-      "mahalle": "Ildır",
-      "enlem": 38.399654,
-      "boylam": 26.475363,
+      "mahalle": "Alaçatı",
+      "enlem": 38.192346,
+      "boylam": 26.458531,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -1710,7 +1710,7 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.399654,26.475363"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.192346,26.458531"
     },
     {
       "bolge_anahtari": "cesme",
