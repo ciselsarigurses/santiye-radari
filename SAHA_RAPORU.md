@@ -28,9 +28,9 @@
 
 > **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir. Kuru zemin kalibrasyonunda aynı gün zaten temsil edilen mahalleler, güvenli alternatif varsa burada tekrar seçilmez; mahalle alternatifi daha kısıtlı uydu bölgesi önce değerlendirilir.
 
-1. **KÖR ALAN — Alaçatı** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.192346,26.458531)
+1. **KÖR ALAN — Ildır** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.399654,26.475363)
    - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
-2. **KÖR ALAN — Ovacık** · yaklaşık 300 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.219571,26.396464)
+2. **KÖR ALAN — Dalyan** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.356691,26.317476)
    - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
 
 ## Bugün sahada kontrol edilecek uydu adayları

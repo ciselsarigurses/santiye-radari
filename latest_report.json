@@ -1700,9 +1700,9 @@
     {
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır",
-      "mahalle": "Alaçatı",
-      "enlem": 38.192346,
-      "boylam": 26.458531,
+      "mahalle": "Ildır",
+      "enlem": 38.399654,
+      "boylam": 26.475363,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -1710,22 +1710,22 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.192346,26.458531"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.399654,26.475363"
     },
     {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Ovacık",
-      "enlem": 38.219571,
-      "boylam": 26.396464,
-      "alan_m2": 300,
+      "mahalle": "Dalyan",
+      "enlem": 38.356691,
+      "boylam": 26.317476,
+      "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 0.4347,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.219571,26.396464"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.356691,26.317476"
     }
   ],
   "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük rotasyonla en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Kuru zemin kalibrasyonunda aynı gün zaten temsil edilen mahalleler, güvenli alternatif varsa kör alan devriyesinde tekrar seçilmez; mahalle seçeneği daha kısıtlı uydu bölgesi önce değerlendirilir."
