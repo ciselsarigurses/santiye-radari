@@ -6,6 +6,7 @@ on:
     paths:
       - "dry_ground_temporal_audit.py"
       - "temporal_orbit_guard.py"
+      - "temporal_candidate_pool.py"
       - ".github/workflows/dry-ground-temporal-audit.yml"
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
@@ -39,6 +40,15 @@ jobs:
       - name: Bağımlılıkları kur
         run: pip install -r requirements.txt
 
+      - name: Geniş zaman serisi aday havuzu öz testi
+        run: python temporal_candidate_pool.py --check-only
+
+      - name: Zaman serisi aday havuzunu aynı Sentinel çiftinde genişlet
+        run: python temporal_candidate_pool.py
+
+      - name: Geniş aday havuzunu bu çalışma için güvenli uygula
+        run: python temporal_candidate_pool.py --apply
+
       - name: Zaman serisi öz testi
         run: python dry_ground_temporal_audit.py --check-only
 
@@ -51,17 +61,20 @@ jobs:
       - name: Üç Sentinel sahnesinin bakış geometrisini doğrula
         run: python temporal_orbit_guard.py
 
+      - name: Kanonik kuru zemin raporunu geri yükle
+        run: git checkout -- dry_ground_gap_audit.json
+
       - name: Diagnostik raporu kaydet
         run: |
-          report_file="dry_ground_temporal_audit.json"
-          if [[ -z "$(git status --porcelain -- $report_file)" ]]; then
+          report_files="dry_ground_temporal_pool.json dry_ground_temporal_audit.json"
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Kuru zemin zaman serisi raporu değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add $report_file
+          git add $report_files
           git commit -m "Radar: kuru zemin zaman serisi raporunu güncelle"
 
           git fetch origin main
