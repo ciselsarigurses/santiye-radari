@@ -143,6 +143,24 @@ def _patch_slices(row, column, shape):
     )
 
 
+def _paired_patch_means(previous_delta, current_delta, valid_mask, row_slice, col_slice):
+    """İki Sentinel dönemini aynı piksel yaması ve aynı geçerli piksellerle ölç."""
+    patch_valid = valid_mask[row_slice, col_slice]
+    total = int(patch_valid.size)
+    valid_count = int(patch_valid.sum())
+    valid_fraction = valid_count / max(total, 1)
+    if not valid_count:
+        return None, None, valid_fraction
+
+    previous_patch = previous_delta[row_slice, col_slice]
+    current_patch = current_delta[row_slice, col_slice]
+    return (
+        float(np.mean(previous_patch[patch_valid])),
+        float(np.mean(current_patch[patch_valid])),
+        valid_fraction,
+    )
+
+
 def _classify(current_bsi_delta, previous_bsi_delta, valid_fraction):
     current = abs(float(current_bsi_delta or 0))
     previous = abs(float(previous_bsi_delta or 0))
@@ -183,10 +201,17 @@ def _analyze_region(region_key, region_data):
     bbox = satellite.REGIONS[region_key]["bbox"]
     items = satellite._search_items(bbox)
     older = _find_item(items, region_data.get("onceki_item"))
+    latest = _find_item(items, region_data.get("son_item"))
     if older is None:
         return {
             "durum": "atlandi",
             "neden": "onceki_sentinel_sahnesi_bulunamadi",
+        }
+    if latest is None:
+        return {
+            "durum": "atlandi",
+            "neden": "son_sentinel_sahnesi_bulunamadi",
+            "onceki_item": older.get("id"),
         }
 
     previous = _previous_scene(items, older, bbox)
@@ -200,9 +225,17 @@ def _analyze_region(region_key, region_data):
     height, width = satellite._output_shape(bbox)
     previous_bsi, previous_scl = _bsi_for_item(previous, bbox, height, width)
     older_bsi, older_scl = _bsi_for_item(older, bbox, height, width)
+    latest_bsi, latest_scl = _bsi_for_item(latest, bbox, height, width)
     previous_delta = np.abs(older_bsi - previous_bsi)
-    previous_valid = ~np.isin(previous_scl, satellite.EXCLUDED_SCL_CLASSES)
-    previous_valid &= ~np.isin(older_scl, satellite.EXCLUDED_SCL_CLASSES)
+    current_delta = np.abs(latest_bsi - older_bsi)
+
+    # İki dönemin ortalaması aynı 3x3 Sentinel yamasından ve üç sahnenin tamamında
+    # geçerli olan aynı piksellerden alınır. Böylece son çiftte bileşen ortalaması,
+    # önceki dönemde çevre yaması ortalaması kıyaslanarak sahte "ani başlangıç"
+    # üretilmez.
+    temporal_valid = ~np.isin(previous_scl, satellite.EXCLUDED_SCL_CLASSES)
+    temporal_valid &= ~np.isin(older_scl, satellite.EXCLUDED_SCL_CLASSES)
+    temporal_valid &= ~np.isin(latest_scl, satellite.EXCLUDED_SCL_CLASSES)
 
     rows = []
     for raw in _unique_candidates(region_data):
@@ -212,31 +245,33 @@ def _analyze_region(region_key, region_data):
         row_slice, col_slice = _patch_slices(
             row, column, previous_delta.shape
         )
-        patch_valid = previous_valid[row_slice, col_slice]
-        total = int(patch_valid.size)
-        valid_count = int(patch_valid.sum())
-        valid_fraction = valid_count / max(total, 1)
-        patch_delta = previous_delta[row_slice, col_slice]
-        previous_mean = (
-            float(np.mean(patch_delta[patch_valid]))
-            if valid_count
-            else None
+        previous_mean, current_mean, valid_fraction = _paired_patch_means(
+            previous_delta,
+            current_delta,
+            temporal_valid,
+            row_slice,
+            col_slice,
         )
-        current_mean = float(raw.get("ortalama_bsi_degisim") or 0)
         ratio, abrupt, unstable = _classify(
             current_mean,
             previous_mean,
             valid_fraction,
         )
+        source_component_mean = float(raw.get("ortalama_bsi_degisim") or 0)
         item = {
             "mahalle": raw.get("mahalle"),
             "enlem": raw.get("enlem"),
             "boylam": raw.get("boylam"),
             "alan_m2": raw.get("alan_m2"),
-            "son_cift_bsi_degisim": round(current_mean, 4),
+            "son_cift_bsi_degisim": (
+                round(current_mean, 4) if current_mean is not None else None
+            ),
+            "kaynak_bilesen_bsi_degisim": round(source_component_mean, 4),
             "onceki_donem_bsi_degisim": (
                 round(previous_mean, 4) if previous_mean is not None else None
             ),
+            "uc_sahne_gecerli_oran": round(valid_fraction, 3),
+            # Eski tüketiciler için alanı koru; artık üç sahnenin ortak geçerli oranıdır.
             "onceki_donem_gecerli_oran": round(valid_fraction, 3),
             "ani_baslangic_orani": ratio,
             "ani_baslangic_destegi": abrupt,
@@ -269,8 +304,9 @@ def _analyze_region(region_key, region_data):
         "degisim_oncesi_tarih": satellite._item_date(previous),
         "onceki_item": older.get("id"),
         "onceki_tarih": satellite._item_date(older),
-        "son_item": region_data.get("son_item"),
-        "son_tarih": region_data.get("son_tarih"),
+        "son_item": latest.get("id"),
+        "son_tarih": satellite._item_date(latest),
+        "temporal_ornekleme": "ayni_3x3_yama_uc_sahne_ortak_gecerli_piksel",
         "degisim_oncesi_aralik_gun": gap_days,
         "olculen_aday": len(rows),
         "ani_baslangic_destegi": sum(
@@ -302,6 +338,22 @@ def _self_check():
     assert not abrupt
     assert not unstable
 
+    # Önceki ve son dönem kesinlikle aynı ortak geçerli piksellerden ölçülmelidir.
+    previous = np.arange(9, dtype="float32").reshape(3, 3) / 100
+    current = previous + 0.20
+    valid = np.ones((3, 3), dtype=bool)
+    valid[0, :3] = False
+    previous_mean, current_mean, valid_fraction = _paired_patch_means(
+        previous,
+        current,
+        valid,
+        slice(0, 3),
+        slice(0, 3),
+    )
+    assert valid_fraction == 6 / 9
+    assert previous_mean is not None and current_mean is not None
+    assert abs((current_mean - previous_mean) - 0.20) < 1e-6
+
 
 def run_audit():
     _self_check()
@@ -314,8 +366,9 @@ def run_audit():
         "olusturma": datetime.now(ISTANBUL).strftime("%Y-%m-%d %H:%M %z"),
         "amac": (
             "Kuru-zemin saha-benzeri kalibrasyon örneklerinde son değişimden önceki "
-            "Sentinel döneminin BSI kararlılığını ölçmek; ani başlangıç desteği ve "
-            "istikrarsız zemin riskini yalnız diagnostik olarak işaretlemek."
+            "Sentinel döneminin BSI kararlılığını aynı 3x3 piksel yamasında ölçmek; "
+            "ani başlangıç desteği ve istikrarsız zemin riskini yalnız diagnostik "
+            "olarak işaretlemek."
         ),
         "esikler": {
             "patch_yaricap_piksel": PATCH_RADIUS_PIXELS,
