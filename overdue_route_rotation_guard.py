@@ -6,9 +6,11 @@ dokunmaz. Yalnız bütün aktif öncelik gecikmiş kuyruğa düştüğünde ve a
 sahnesinden birden fazla eşdeğer küçük-güçlü (250-800 m²) aday varsa çalışır.
 
 En güçlü aday "çapa" olarak her gün korunur. Kalan iki slot, aynı kanıt sınıfındaki
-adaylar arasında rapor tarihine göre deterministik döner. Mümkünse farklı mahalle ve iki
-uydu bölgesi temsil edilir. Böylece 61 gibi büyüyen gecikmiş kuyrukta aynı üç adresi tekrar
-tekrar göstermek yerine, erken hafriyat niteliğini düşürmeden saha kapsaması genişler.
+adaylar arasında Çeşme'nin yerel takvim gününe göre deterministik döner. Rapor bir önceki
+günün verisini taşısa bile gece yarısından sonra rota eski tarihte kilitli kalmaz. Mümkünse
+farklı mahalle ve iki uydu bölgesi temsil edilir. Böylece 61 gibi büyüyen gecikmiş kuyrukta
+aynı üç adresi tekrar tekrar göstermek yerine, erken hafriyat niteliğini düşürmeden saha
+kapsaması genişler.
 
 Not: Bu yalnız rapordaki ``gunun_ilk_3_kontrolu`` görünümünü değiştirir; tam saha listesi
 ve görev durumları aynen kalır.
@@ -17,27 +19,44 @@ ve görev durumları aynen kalır.
 from __future__ import annotations
 
 import argparse
-from datetime import date
+from datetime import date, datetime
 import json
+from zoneinfo import ZoneInfo
 
 import daily_route_shortlist as route
 import daily_route_freshness_guard as fresh
 
 
+LOCAL_TZ = ZoneInfo("Europe/Istanbul")
+
 NOTE = (
     "Yeni alarm üretmez; TEKRAR/ERKEN/PARSEL öncelikleri aynen korunur. Yalnız bütün "
     "kısa liste gecikmiş kuyruğa kaldığında, en güçlü küçük-güçlü güncel Sentinel adayı "
     "çapa olarak sabit tutulur; kalan iki slot aynı kanıt sınıfındaki adaylar arasında "
-    "günlük döner. Mümkünse farklı mahalle ve iki uydu bölgesi temsil edilir. Tam saha "
-    "kuyruğu ve görev durumları değişmez."
+    "Çeşme yerel takvim gününe göre günlük döner. Mümkünse farklı mahalle ve iki uydu "
+    "bölgesi temsil edilir. Tam saha kuyruğu ve görev durumları değişmez."
 )
 
 
-def _report_ordinal(report_date):
+def _parse_date(value):
     try:
-        return date.fromisoformat(str(report_date)).toordinal()
+        return date.fromisoformat(str(value))
     except (TypeError, ValueError):
-        return 0
+        return None
+
+
+def _report_ordinal(report_date):
+    parsed = _parse_date(report_date)
+    return parsed.toordinal() if parsed else 0
+
+
+def _effective_rotation_date(report_date, local_today=None):
+    """Rotasyonu bayat rapor tarihine kilitlemeden güvenli, deterministik günü seç."""
+    report_day = _parse_date(report_date)
+    today = local_today or datetime.now(LOCAL_TZ).date()
+    if report_day is None:
+        return today
+    return max(report_day, today)
 
 
 def _is_higher_than_overdue(item):
@@ -83,7 +102,7 @@ def _small_current_band(ranked):
     return pool
 
 
-def _rotate_after_anchor(pool, report_date, limit):
+def _rotate_after_anchor(pool, rotation_date, limit):
     if not pool or limit <= 0:
         return []
     anchor = dict(pool[0])
@@ -94,7 +113,7 @@ def _rotate_after_anchor(pool, report_date, limit):
     if not alternatives:
         return [anchor]
 
-    offset = _report_ordinal(report_date) % len(alternatives)
+    offset = _report_ordinal(rotation_date) % len(alternatives)
     circular = alternatives[offset:] + alternatives[:offset]
     selected = [anchor]
     used_ids = {str(anchor.get("gorev_id") or "")}
@@ -126,7 +145,7 @@ def _rotate_after_anchor(pool, report_date, limit):
     return selected
 
 
-def select_rotated_shortlist(candidates, report_date, limit=route.SHORTLIST_LIMIT):
+def select_rotated_shortlist(candidates, rotation_date, limit=route.SHORTLIST_LIMIT):
     cap = max(int(limit), 0)
     if cap <= 0:
         return []
@@ -146,12 +165,12 @@ def select_rotated_shortlist(candidates, report_date, limit=route.SHORTLIST_LIMI
     if len(pool) <= 2:
         return fresh.select_fresh_shortlist(candidates, limit=cap)
 
-    selected = _rotate_after_anchor(pool, report_date, cap)
+    selected = _rotate_after_anchor(pool, rotation_date, cap)
     # İki bölge aynı kalite düzeyinde mevcutsa mevcut bölge dengelemesini koru.
     selected = route._balance_satellite_regions(pool, selected, cap)
 
     pool_ids = {str(item.get("gorev_id") or "") for item in pool}
-    ordinal = _report_ordinal(report_date)
+    ordinal = _report_ordinal(rotation_date)
     for index, item in enumerate(selected, start=1):
         item["gunluk_sira"] = index
         if str(item.get("gorev_id") or "") in pool_ids:
@@ -177,7 +196,8 @@ def update_rotated_shortlist():
     payload = json.loads(route.REPORT_JSON.read_text(encoding="utf-8"))
     candidates = payload.get("saha_adaylari", [])
     report_date = payload.get("rapor_tarihi")
-    shortlist = select_rotated_shortlist(candidates, report_date)
+    rotation_date = _effective_rotation_date(report_date)
+    shortlist = select_rotated_shortlist(candidates, rotation_date.isoformat())
 
     payload["gunun_ilk_3_kontrolu"] = shortlist
     payload["gunun_ilk_3_notu"] = NOTE
@@ -187,12 +207,15 @@ def update_rotated_shortlist():
         else "gerekmedi",
         "kural": (
             "Yalniz gecikmis kuyrukta, ayni guncel Sentinel kalite bandindaki "
-            "kucuk-guclu adaylarda en guclu capa korunur; kalan slotlar gunluk doner."
+            "kucuk-guclu adaylarda en guclu capa korunur; kalan slotlar Cesme yerel "
+            "takvim gunune gore gunluk doner."
         ),
         "havuz": max(
             (int(item.get("gecikmis_rota_rotasyon_havuzu") or 0) for item in shortlist),
             default=0,
         ),
+        "rapor_tarihi": str(report_date or ""),
+        "rotasyon_tarihi": rotation_date.isoformat(),
     }
     route.REPORT_JSON.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
@@ -249,6 +272,14 @@ def _self_check():
     assert len({entry["mahalle"] for entry in day2}) == 3, day2
     assert [entry["gorev_id"] for entry in day1] != [entry["gorev_id"] for entry in day2]
     assert all(entry.get("gecikmis_rota_rotasyonu") for entry in day1)
+
+    # Bayat rapor gece yarısından sonra rotasyonu eski günde tutmamalı.
+    effective = _effective_rotation_date("2026-09-01", date(2026, 9, 2))
+    assert effective.isoformat() == "2026-09-02"
+    future_safe = _effective_rotation_date("2026-09-03", date(2026, 9, 2))
+    assert future_safe.isoformat() == "2026-09-03"
+    missing_safe = _effective_rotation_date(None, date(2026, 9, 2))
+    assert missing_safe.isoformat() == "2026-09-02"
 
     early = dict(sample[1])
     early.update({"gorev_id": "EARLY", "oncelik": "ERKEN"})
