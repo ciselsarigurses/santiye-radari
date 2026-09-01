@@ -9,6 +9,7 @@ on:
       - "coverage_patrol_shortlist.py"
       - "calibration_rotation_guard.py"
       - "temporal_calibration_rotation_guard.py"
+      - "calibration_note_guard.py"
       - "route_diversity_guard.py"
       - "coverage_overlap_rotation_guard.py"
       - "final_calibration_diversity_guard.py"
@@ -77,6 +78,12 @@ jobs:
 
       - name: Nihai kör alan rotasına göre kalibrasyon tekrarını azalt
         run: python final_calibration_diversity_guard.py
+
+      - name: Kalibrasyon açıklama tutarlılığı öz testi
+        run: python calibration_note_guard.py --check-only
+
+      - name: Kalibrasyon açıklamasını gerçek temporal rotasyonla eşleştir
+        run: python calibration_note_guard.py
 
       - name: Kanonik kuru zemin raporunu geri yükle
         run: git checkout -- dry_ground_gap_audit.json
