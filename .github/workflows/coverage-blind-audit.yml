@@ -13,7 +13,13 @@ on:
       - "final_calibration_diversity_guard.py"
       - ".github/workflows/coverage-blind-audit.yml"
   workflow_run:
-    workflows: ["Günlük Şantiye Taraması"]
+    # Normal günlük zincirde önce tarama dry_ground_gap_audit.json'u üretir,
+    # ardından Kuru Zemin Zaman Serisi Denetimi aynı Sentinel çiftini geçmiş
+    # sahneyle karşılaştırır. Kör-alan/kalibrasyon rotası bu ikinci adım bittikten
+    # sonra çalışsın ki ani-başlangıç önceliği eski temporal JSON ile yarışmasın.
+    # Temporal çıktı eski/uyuşmayan olursa calibration_rotation_guard zaten güvenli
+    # biçimde normal rotasyona geri düşer.
+    workflows: ["Kuru Zemin Zaman Serisi Denetimi"]
     types: [completed]
   workflow_dispatch:
 
