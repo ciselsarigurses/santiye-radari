@@ -7,6 +7,7 @@ on:
       - "dry_ground_temporal_audit.py"
       - "temporal_orbit_guard.py"
       - "temporal_candidate_pool.py"
+      - "coordinate_precision_audit.py"
       - ".github/workflows/dry-ground-temporal-audit.yml"
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
@@ -61,21 +62,27 @@ jobs:
       - name: Üç Sentinel sahnesinin bakış geometrisini doğrula
         run: python temporal_orbit_guard.py
 
+      - name: Koordinat hassasiyetini öz test et
+        run: python coordinate_precision_audit.py --check-only
+
+      - name: Geometrik merkez ile sinyal-ağırlıklı Sentinel koordinatını karşılaştır
+        run: python coordinate_precision_audit.py
+
       - name: Kanonik kuru zemin raporunu geri yükle
         run: git checkout -- dry_ground_gap_audit.json
 
       - name: Diagnostik raporu kaydet
         run: |
-          report_files="dry_ground_temporal_pool.json dry_ground_temporal_audit.json"
+          report_files="dry_ground_temporal_pool.json dry_ground_temporal_audit.json coordinate_precision_audit.json"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "Kuru zemin zaman serisi raporu değişmedi."
+            echo "Kuru zemin zaman serisi ve koordinat hassasiyet raporu değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
           git add $report_files
-          git commit -m "Radar: kuru zemin zaman serisi raporunu güncelle"
+          git commit -m "Radar: kuru zemin zaman serisi ve koordinat raporunu güncelle"
 
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
