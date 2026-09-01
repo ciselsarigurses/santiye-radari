@@ -9,11 +9,11 @@
 
 ## Günün ilk 3 kontrolü
 
-> Yeni alarm üretmez; TEKRAR/ERKEN/PARSEL öncelikleri aynen korunur. Yalnız bütün kısa liste gecikmiş kuyruğa kaldığında, en güçlü küçük-güçlü güncel Sentinel adayı çapa olarak sabit tutulur; kalan iki slot aynı kanıt sınıfındaki adaylar arasında günlük döner. Mümkünse farklı mahalle ve iki uydu bölgesi temsil edilir. Tam saha kuyruğu ve görev durumları değişmez.
+> Yeni alarm üretmez; TEKRAR/ERKEN/PARSEL öncelikleri aynen korunur. Yalnız bütün kısa liste gecikmiş kuyruğa kaldığında, en güçlü küçük-güçlü güncel Sentinel adayı çapa olarak sabit tutulur; kalan iki slot aynı kanıt sınıfındaki adaylar arasında Çeşme yerel takvim gününe göre günlük döner. Mümkünse farklı mahalle ve iki uydu bölgesi temsil edilir. Tam saha kuyruğu ve görev durumları değişmez.
 
 1. **GECİKEN — Şifne** · yaklaşık 300 m² · Görev `U611DAF934D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.346018,26.383414)
-2. **GECİKEN — Alaçatı** · yaklaşık 400 m² · Görev `UDB761099F7` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.242726,26.400585)
-3. **GECİKEN — Ildır** · yaklaşık 400 m² · Görev `U0359B073F0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.425704,26.577385)
+2. **GECİKEN — Ildır** · yaklaşık 400 m² · Görev `U0359B073F0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.425704,26.577385)
+3. **GECİKEN — Alaçatı** · yaklaşık 500 m² · Görev `U00743985AF` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.256836,26.382613)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
