@@ -10,6 +10,7 @@ on:
       - "calibration_rotation_guard.py"
       - "temporal_calibration_rotation_guard.py"
       - "completed_calibration_guard.py"
+      - "overdue_route_rotation_guard.py"
       - "calibration_note_guard.py"
       - "route_diversity_guard.py"
       - "coverage_overlap_rotation_guard.py"
@@ -91,6 +92,12 @@ jobs:
 
       - name: Kalibrasyon açıklamasını gerçek temporal rotasyonla eşleştir
         run: python calibration_note_guard.py
+
+      - name: Gecikmiş günlük rota rotasyonu öz testi
+        run: python overdue_route_rotation_guard.py --check-only
+
+      - name: Gecikmiş ilk üç saha kontrolünü eş kalite bandında döndür
+        run: python overdue_route_rotation_guard.py
 
       - name: Kanonik kuru zemin raporunu geri yükle
         run: git checkout -- dry_ground_gap_audit.json
