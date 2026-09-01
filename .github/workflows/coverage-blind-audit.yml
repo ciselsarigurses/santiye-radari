@@ -8,6 +8,7 @@ on:
       - "coverage_blind_area_runner.py"
       - "coverage_patrol_shortlist.py"
       - "calibration_rotation_guard.py"
+      - "temporal_calibration_rotation_guard.py"
       - "route_diversity_guard.py"
       - "coverage_overlap_rotation_guard.py"
       - "final_calibration_diversity_guard.py"
@@ -61,6 +62,12 @@ jobs:
 
       - name: Kuru zemin kalibrasyon noktalarını döndür
         run: python calibration_rotation_guard.py
+
+      - name: Temporal kalibrasyon rotasyonu öz testi
+        run: python temporal_calibration_rotation_guard.py --check-only
+
+      - name: Temporal ani başlangıç kalibrasyonunu yerellik riskiyle döndür
+        run: python temporal_calibration_rotation_guard.py
 
       - name: Alarm dışı saha kontrolünü mahalle bazında çeşitlendir
         run: python route_diversity_guard.py
