@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "dry_ground_temporal_audit.py"
+      - "temporal_orbit_guard.py"
       - ".github/workflows/dry-ground-temporal-audit.yml"
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
@@ -43,6 +44,12 @@ jobs:
 
       - name: Kuru zemin adaylarının değişim öncesi kararlılığını ölç
         run: python dry_ground_temporal_audit.py
+
+      - name: Göreli yörünge korumasını öz test et
+        run: python temporal_orbit_guard.py --check-only
+
+      - name: Üç Sentinel sahnesinin bakış geometrisini doğrula
+        run: python temporal_orbit_guard.py
 
       - name: Diagnostik raporu kaydet
         run: |
