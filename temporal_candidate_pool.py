@@ -309,7 +309,7 @@ def _self_check() -> None:
         "alaçatı",
         "ovacık",
         "germiyan",
-        "ıldır",
+        "ildır",
     }, diversified
     assert len({_candidate_key(item) for item in diversified}) == len(diversified)
 
