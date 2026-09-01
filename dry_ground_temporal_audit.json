@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-01",
-  "olusturma": "2026-09-01 19:46 +0300",
+  "olusturma": "2026-09-01 20:35 +0300",
   "amac": "Kuru-zemin saha-benzeri kalibrasyon örneklerinde son değişimden önceki Sentinel döneminin BSI kararlılığını aynı 3x3 piksel yamasında ölçmek; ani başlangıç desteği ve istikrarsız zemin riskini yalnız diagnostik olarak işaretlemek.",
   "esikler": {
     "patch_yaricap_piksel": 1,
@@ -26,7 +26,7 @@
       "temporal_ornekleme": "ayni_3x3_yama_uc_sahne_ortak_gecerli_piksel",
       "degisim_oncesi_aralik_gun": 2.0,
       "olculen_aday": 24,
-      "ani_baslangic_destegi": 12,
+      "ani_baslangic_destegi": 11,
       "istikrarsiz_zemin_riski": 4,
       "adaylar": [
         {
@@ -44,6 +44,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0101,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0128,
+          "uzun_temporal_ani_baslangic_orani": 14.23,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -61,6 +67,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0055,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0164,
+          "uzun_temporal_ani_baslangic_orani": 11.69,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -78,6 +90,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0038,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0212,
+          "uzun_temporal_ani_baslangic_orani": 11.61,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -95,6 +113,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0047,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0146,
+          "uzun_temporal_ani_baslangic_orani": 10.78,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -112,6 +136,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0059,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0165,
+          "uzun_temporal_ani_baslangic_orani": 10.75,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -129,6 +159,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0063,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0166,
+          "uzun_temporal_ani_baslangic_orani": 10.41,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -146,6 +182,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0053,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0178,
+          "uzun_temporal_ani_baslangic_orani": 9.81,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -163,6 +205,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0075,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0188,
+          "uzun_temporal_ani_baslangic_orani": 9.09,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -180,6 +228,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0118,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0121,
+          "uzun_temporal_ani_baslangic_orani": 8.31,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -193,10 +247,17 @@
           "uc_sahne_gecerli_oran": 0.778,
           "onceki_donem_gecerli_oran": 0.778,
           "ani_baslangic_orani": 7.58,
-          "ani_baslangic_destegi": true,
+          "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0805,
+          "ikinci_onceki_donem_gecerli_oran": 0.778,
+          "temporal_baseline_maks_bsi_degisim": 0.0805,
+          "uzun_temporal_ani_baslangic_orani": 3.8,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "ani_baslangic_nedeni": "IKINCI_ONCEKI_DONEM_ZATEN_HAREKETLI",
+          "uzun_temporal_koruma": "ASAGI_SINIFLANDIRILDI",
           "yorunge_geometri_riski": false
         },
         {
@@ -214,6 +275,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0036,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0186,
+          "uzun_temporal_ani_baslangic_orani": 6.66,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -231,6 +298,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.027,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0556,
+          "uzun_temporal_ani_baslangic_orani": 2.73,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -248,6 +321,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0212,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0247,
+          "uzun_temporal_ani_baslangic_orani": 3.8,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -265,6 +344,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0746,
+          "ikinci_onceki_donem_gecerli_oran": 0.444,
+          "temporal_baseline_maks_bsi_degisim": 0.0746,
+          "uzun_temporal_ani_baslangic_orani": null,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "YETERSIZ_GECERLI_PIKSEL",
           "yorunge_geometri_riski": false
         },
         {
@@ -282,6 +367,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0214,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.164,
+          "uzun_temporal_ani_baslangic_orani": 1.89,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -299,6 +390,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0472,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.1006,
+          "uzun_temporal_ani_baslangic_orani": 1.52,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -316,6 +413,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0115,
+          "ikinci_onceki_donem_gecerli_oran": 0.444,
+          "temporal_baseline_maks_bsi_degisim": 0.1148,
+          "uzun_temporal_ani_baslangic_orani": null,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "YETERSIZ_GECERLI_PIKSEL",
           "yorunge_geometri_riski": false
         },
         {
@@ -333,6 +436,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0287,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.1662,
+          "uzun_temporal_ani_baslangic_orani": 1.36,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -350,6 +459,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0594,
+          "ikinci_onceki_donem_gecerli_oran": 0.333,
+          "temporal_baseline_maks_bsi_degisim": 0.2332,
+          "uzun_temporal_ani_baslangic_orani": null,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "YETERSIZ_GECERLI_PIKSEL",
           "yorunge_geometri_riski": false
         },
         {
@@ -367,6 +482,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.031,
+          "ikinci_onceki_donem_gecerli_oran": 0.667,
+          "temporal_baseline_maks_bsi_degisim": 0.1696,
+          "uzun_temporal_ani_baslangic_orani": 1.31,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -384,6 +505,12 @@
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.013,
+          "ikinci_onceki_donem_gecerli_oran": 0.889,
+          "temporal_baseline_maks_bsi_degisim": 0.1182,
+          "uzun_temporal_ani_baslangic_orani": 1.24,
+          "uzun_temporal_istikrarsiz_zemin_riski": true,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -401,6 +528,12 @@
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0316,
+          "ikinci_onceki_donem_gecerli_oran": 0.667,
+          "temporal_baseline_maks_bsi_degisim": 0.1638,
+          "uzun_temporal_ani_baslangic_orani": 1.22,
+          "uzun_temporal_istikrarsiz_zemin_riski": true,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -418,6 +551,12 @@
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0214,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.1247,
+          "uzun_temporal_ani_baslangic_orani": 1.1,
+          "uzun_temporal_istikrarsiz_zemin_riski": true,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -435,9 +574,27 @@
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0941,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.1195,
+          "uzun_temporal_ani_baslangic_orani": 1.01,
+          "uzun_temporal_istikrarsiz_zemin_riski": true,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         }
       ],
+      "uzun_temporal_goreli_yorungeler": {
+        "ikinci_onceki": 7,
+        "degisim_oncesi": 7,
+        "onceki": 7,
+        "son": 7
+      },
+      "uzun_temporal_yorunge_tutarliligi": "AYNI",
+      "ikinci_onceki_item": "S2B_T35SMC_20260819T090553_L2A",
+      "ikinci_onceki_tarih": "19.08.2026",
+      "uzun_temporal_durum": "UYGULANDI",
+      "uzun_temporal_olculen_aday": 24,
+      "uzun_temporal_asagi_siniflanan": 1,
       "goreli_yorungeler": {
         "degisim_oncesi": 7,
         "onceki": 7,
@@ -476,6 +633,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0071,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0104,
+          "uzun_temporal_ani_baslangic_orani": 13.1,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -493,6 +656,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0044,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0157,
+          "uzun_temporal_ani_baslangic_orani": 8.97,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -510,6 +679,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0025,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0187,
+          "uzun_temporal_ani_baslangic_orani": 8.19,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -527,6 +702,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0036,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0165,
+          "uzun_temporal_ani_baslangic_orani": 7.98,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -544,6 +725,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0048,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0203,
+          "uzun_temporal_ani_baslangic_orani": 7.26,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -561,6 +748,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0078,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0203,
+          "uzun_temporal_ani_baslangic_orani": 7.02,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -578,6 +771,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0043,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0196,
+          "uzun_temporal_ani_baslangic_orani": 6.8,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -595,6 +794,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0019,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0201,
+          "uzun_temporal_ani_baslangic_orani": 6.2,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -612,6 +817,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0085,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0251,
+          "uzun_temporal_ani_baslangic_orani": 6.18,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -629,6 +840,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.004,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0233,
+          "uzun_temporal_ani_baslangic_orani": 6.15,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -646,6 +863,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0134,
+          "ikinci_onceki_donem_gecerli_oran": 0.667,
+          "temporal_baseline_maks_bsi_degisim": 0.0257,
+          "uzun_temporal_ani_baslangic_orani": 4.32,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -663,6 +886,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0068,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0349,
+          "uzun_temporal_ani_baslangic_orani": 3.66,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -680,6 +909,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0092,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0317,
+          "uzun_temporal_ani_baslangic_orani": 3.54,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -697,6 +932,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0053,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0207,
+          "uzun_temporal_ani_baslangic_orani": 4.1,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -714,6 +955,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0025,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0275,
+          "uzun_temporal_ani_baslangic_orani": 3.6,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -731,6 +978,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0183,
+          "ikinci_onceki_donem_gecerli_oran": 0.667,
+          "temporal_baseline_maks_bsi_degisim": 0.0284,
+          "uzun_temporal_ani_baslangic_orani": 2.75,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -748,6 +1001,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.018,
+          "ikinci_onceki_donem_gecerli_oran": 0.778,
+          "temporal_baseline_maks_bsi_degisim": 0.0423,
+          "uzun_temporal_ani_baslangic_orani": 2.35,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -765,6 +1024,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.013,
+          "ikinci_onceki_donem_gecerli_oran": 0.778,
+          "temporal_baseline_maks_bsi_degisim": 0.0646,
+          "uzun_temporal_ani_baslangic_orani": 1.73,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -782,6 +1047,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0225,
+          "ikinci_onceki_donem_gecerli_oran": 0.667,
+          "temporal_baseline_maks_bsi_degisim": 0.0774,
+          "uzun_temporal_ani_baslangic_orani": 1.4,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -799,6 +1070,12 @@
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0744,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.2047,
+          "uzun_temporal_ani_baslangic_orani": 1.29,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -816,6 +1093,12 @@
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0977,
+          "ikinci_onceki_donem_gecerli_oran": 0.778,
+          "temporal_baseline_maks_bsi_degisim": 0.1894,
+          "uzun_temporal_ani_baslangic_orani": 1.17,
+          "uzun_temporal_istikrarsiz_zemin_riski": true,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -833,6 +1116,12 @@
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.1189,
+          "ikinci_onceki_donem_gecerli_oran": 0.778,
+          "temporal_baseline_maks_bsi_degisim": 0.2724,
+          "uzun_temporal_ani_baslangic_orani": 1.0,
+          "uzun_temporal_istikrarsiz_zemin_riski": true,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -850,6 +1139,12 @@
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0741,
+          "ikinci_onceki_donem_gecerli_oran": 0.333,
+          "temporal_baseline_maks_bsi_degisim": 0.1996,
+          "uzun_temporal_ani_baslangic_orani": null,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "YETERSIZ_GECERLI_PIKSEL",
           "yorunge_geometri_riski": false
         },
         {
@@ -867,9 +1162,27 @@
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0819,
+          "ikinci_onceki_donem_gecerli_oran": 0.778,
+          "temporal_baseline_maks_bsi_degisim": 0.1977,
+          "uzun_temporal_ani_baslangic_orani": 0.94,
+          "uzun_temporal_istikrarsiz_zemin_riski": true,
+          "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
         }
       ],
+      "uzun_temporal_goreli_yorungeler": {
+        "ikinci_onceki": 7,
+        "degisim_oncesi": 7,
+        "onceki": 7,
+        "son": 7
+      },
+      "uzun_temporal_yorunge_tutarliligi": "AYNI",
+      "ikinci_onceki_item": "S2B_T35SMC_20260819T090553_L2A",
+      "ikinci_onceki_tarih": "19.08.2026",
+      "uzun_temporal_durum": "UYGULANDI",
+      "uzun_temporal_olculen_aday": 24,
+      "uzun_temporal_asagi_siniflanan": 0,
       "goreli_yorungeler": {
         "degisim_oncesi": 7,
         "onceki": 7,
@@ -878,5 +1191,6 @@
       "yorunge_tutarliligi": "AYNI",
       "yorunge_notu": "Üç Sentinel sahnesi aynı göreli yörüngede; zaman-serisi ani başlangıç kanıtı bakış geometrisi açısından destekleniyor."
     }
-  }
+  },
+  "uzun_temporal_koruma_notu": "İkinci bir eski Sentinel aralığı yalnız aynı göreli yörünge ve yeterli geçerli piksel doğrulandığında mevcut ani-başlangıç desteğini aşağı sınıflandırabilir; yetersiz veri mevcut kanıtı değiştirmez, yeni alarm veya yeni ani-başlangıç etiketi üretmez."
 }
