@@ -9,10 +9,16 @@ havuzunu dolduruyorsa, güvenli başka mahalleler varken bu tekrarlar havuzun d�
 alınır. Yeni Sentinel sahnesi geldiğinde rotasyon sıfırlanır ve yine en güçlü örnekten
 başlanır.
 
+Ayrıca `dry_ground_temporal_audit.json` aynı rapor günü ve aynı Sentinel tarih çiftiyle
+eşleşiyorsa, değişimden önce sakin olup son çiftte birden güçlenen güvenli aday bölge
+içindeki normal rotasyonun önüne alınır. Bu yalnız saha kalibrasyon önceliğidir; üretim
+alarmı, görev, eşik veya günlük kalibrasyon nokta sayısı değişmez. Eski/uyuşmayan zaman
+serisi raporu varsa normal rotasyon aynen korunur.
+
 Amaç aynı uydu çifti değişmeden beklerken aynı birkaç sokağı tekrar tekrar kontrol etmek
-yerine daha fazla mahalleden saha etiketi toplamaktır. Üretim eşiği, 250 m² alt sınırı,
-aktif görev mesafesi, günlük kalibrasyon nokta sayısı ve kuru-zemin geometri filtreleri
-değişmez.
+yerine daha fazla mahalleden saha etiketi toplamak ve güçlü ani başlangıç sinyalini saha
+teyidine daha erken taşımaktır. Üretim eşiği, 250 m² alt sınırı, aktif görev mesafesi,
+günlük kalibrasyon nokta sayısı ve kuru-zemin geometri filtreleri değişmez.
 """
 
 from __future__ import annotations
@@ -25,6 +31,7 @@ import daily_route_shortlist as route
 
 
 DRY_GROUND_AUDIT = Path(__file__).with_name("dry_ground_gap_audit.json")
+DRY_GROUND_TEMPORAL_AUDIT = Path(__file__).with_name("dry_ground_temporal_audit.json")
 REPORT_JSON = Path(__file__).with_name("latest_report.json")
 FIELD_REPORT_MD = Path(__file__).with_name("SAHA_RAPORU.md")
 ROTATION_POOL_PER_REGION = 4
@@ -110,6 +117,84 @@ def _neighborhood_key(value):
     return " ".join(str(value or "").casefold().split())
 
 
+def _point_key(item):
+    point = route._point(item)
+    if point is None:
+        return None
+    return round(point[0], 5), round(point[1], 5)
+
+
+def _temporal_region_map(temporal_payload, region_key, region_data, report_date):
+    """Yalnız aynı rapor günü ve aynı Sentinel çiftine ait zaman-serisi ölçüsünü kabul et."""
+    if not isinstance(temporal_payload, dict) or not isinstance(region_data, dict):
+        return {}
+    if str(temporal_payload.get("rapor_tarihi") or "") != str(report_date or ""):
+        return {}
+
+    regions = temporal_payload.get("bolgeler") or {}
+    temporal_region = regions.get(region_key) if isinstance(regions, dict) else None
+    if not isinstance(temporal_region, dict) or temporal_region.get("durum") != "ok":
+        return {}
+    if str(temporal_region.get("onceki_tarih") or "") != str(region_data.get("onceki_tarih") or ""):
+        return {}
+    if str(temporal_region.get("son_tarih") or "") != str(region_data.get("son_tarih") or ""):
+        return {}
+
+    mapped = {}
+    for raw in temporal_region.get("adaylar") or []:
+        if not isinstance(raw, dict):
+            continue
+        key = _point_key(raw)
+        if key is not None:
+            mapped[key] = dict(raw)
+    return mapped
+
+
+def _attach_temporal_evidence(items, temporal_map):
+    """Aynı koordinattaki diagnostik zaman-serisi ölçüsünü kalibrasyon kaydına ekle."""
+    decorated = []
+    for item in items:
+        updated = dict(item)
+        raw = temporal_map.get(_point_key(item)) if temporal_map else None
+        if isinstance(raw, dict):
+            updated["zaman_serisi_ani_baslangic_destegi"] = bool(
+                raw.get("ani_baslangic_destegi")
+            )
+            updated["zaman_serisi_ani_baslangic_orani"] = route._number(
+                raw.get("ani_baslangic_orani"), 0
+            )
+            updated["zaman_serisi_onceki_bsi_degisim"] = raw.get(
+                "onceki_donem_bsi_degisim"
+            )
+            updated["zaman_serisi_gecerli_oran"] = raw.get(
+                "onceki_donem_gecerli_oran"
+            )
+            updated["zaman_serisi_istikrarsiz_zemin_riski"] = bool(
+                raw.get("istikrarsiz_zemin_riski")
+            )
+        decorated.append(updated)
+    return decorated
+
+
+def _temporally_prioritized_order(items, rotated):
+    """Güvenli ani-başlangıç adayını normal günlük rotasyonun önüne al."""
+    urgent = [
+        item
+        for item in items
+        if bool(item.get("zaman_serisi_ani_baslangic_destegi"))
+        and not bool(item.get("zaman_serisi_istikrarsiz_zemin_riski"))
+    ]
+    urgent.sort(
+        key=lambda item: (
+            -route._number(item.get("zaman_serisi_ani_baslangic_orani"), 0),
+            -abs(route._number(item.get("ortalama_bsi_degisim"), 0)),
+            route._number(item.get("alan_m2"), 0),
+        )
+    )
+    urgent_keys = {_point_key(item) for item in urgent}
+    return urgent + [item for item in rotated if _point_key(item) not in urgent_keys]
+
+
 def _diverse_top_pool(items, pool_size=ROTATION_POOL_PER_REGION):
     """Güç sırasını koruyarak havuzda önce farklı mahalleleri temsil et."""
     cap = max(int(pool_size), 1)
@@ -151,8 +236,13 @@ def _rotated_order(items, offset, pool_size=ROTATION_POOL_PER_REGION):
     return top[shift:] + top[:shift] + rest
 
 
-def select_rotating_calibration(audit_payload, report_payload, limit=route.CALIBRATION_LIMIT):
-    """Aynı sahnede güçlü güvenli kalibrasyonları döndür; yeni sahnede en güçlüye dön."""
+def select_rotating_calibration(
+    audit_payload,
+    report_payload,
+    temporal_payload=None,
+    limit=route.CALIBRATION_LIMIT,
+):
+    """Aynı sahnede güvenli kalibrasyonları döndür; ani başlangıcı saha teyidine öne al."""
     cap = max(int(limit), 0)
     if cap <= 0 or not isinstance(audit_payload, dict) or not isinstance(report_payload, dict):
         return []
@@ -171,8 +261,16 @@ def select_rotating_calibration(audit_payload, report_payload, limit=route.CALIB
         ranked = _eligible_region_items(region_key, region_data, active)
         if not ranked:
             continue
+        temporal_map = _temporal_region_map(
+            temporal_payload,
+            region_key,
+            region_data,
+            report_date,
+        )
+        ranked = _attach_temporal_evidence(ranked, temporal_map)
         age_days = _days_since_scene(report_date, region_data.get("son_tarih"))
-        ordered = _rotated_order(ranked, age_days)
+        rotated = _rotated_order(ranked, age_days)
+        ordered = _temporally_prioritized_order(ranked, rotated)
         picked = next(
             (item for item in ordered if route._far_from_selected(item, selected)),
             None,
@@ -184,6 +282,8 @@ def select_rotating_calibration(audit_payload, report_payload, limit=route.CALIB
         picked["kalibrasyon_rotasyon_havuzu"] = min(
             len(ranked), ROTATION_POOL_PER_REGION
         )
+        if bool(picked.get("zaman_serisi_ani_baslangic_destegi")):
+            picked["kalibrasyon_nedeni"] = "ZAMAN_SERISI_ANI_BASLANGIC"
         selected.append(picked)
         if len(selected) >= cap:
             return selected
@@ -200,12 +300,24 @@ def _rotation_markdown(items):
     new = (
         "Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten "
         "başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük "
-        "rotasyonla değiştirilir. Güvenli farklı mahalleler varken aynı mahalleden ikinci "
-        "aday bu dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek "
-        "hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de "
-        "kalibre etmektir."
+        "rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi "
+        "denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli bir örnek "
+        "bulursa o örnek saha teyidi için rotasyonun önüne alınır; bu yine alarm değildir. "
+        "Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu "
+        "dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha "
+        "etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir."
     )
     return section.replace(old, new, 1)
+
+
+def _load_temporal_payload():
+    if not DRY_GROUND_TEMPORAL_AUDIT.exists():
+        return None
+    try:
+        value = json.loads(DRY_GROUND_TEMPORAL_AUDIT.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    return value if isinstance(value, dict) else None
 
 
 def update_calibration_rotation():
@@ -214,7 +326,8 @@ def update_calibration_rotation():
 
     audit = json.loads(DRY_GROUND_AUDIT.read_text(encoding="utf-8"))
     report = json.loads(REPORT_JSON.read_text(encoding="utf-8"))
-    selected = select_rotating_calibration(audit, report)
+    temporal = _load_temporal_payload()
+    selected = select_rotating_calibration(audit, report, temporal_payload=temporal)
 
     report["kuru_zemin_kalibrasyon_kontrolu"] = selected
     report["kuru_zemin_kalibrasyon_notu"] = (
@@ -222,8 +335,10 @@ def update_calibration_rotation():
         "değişimlerinden aktif görevlerin en az 120 m dışında bölge başına en fazla bir, "
         "toplam iki örnek seçilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; "
         "sahne değişmezse en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. "
-        "Güvenli farklı mahalleler varken aynı mahalleden ikinci aday ilk dört kişilik "
-        "kalibrasyon havuzuna alınmaz."
+        "Aynı rapor günü ve aynı Sentinel tarih çiftine ait zaman-serisi denetimi güvenli "
+        "ani başlangıç desteği verirse bu örnek saha teyidi için rotasyonun önüne alınır; "
+        "alarm/görev statüsü değişmez. Güvenli farklı mahalleler varken aynı mahalleden "
+        "ikinci aday ilk dört kişilik kalibrasyon havuzuna alınmaz."
     )
     REPORT_JSON.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
@@ -258,6 +373,7 @@ def _self_check():
         }
 
     audit = {
+        "rapor_tarihi": "2026-09-01",
         "bolgeler": {
             "cesme": {
                 "durum": "ok",
@@ -314,6 +430,50 @@ def _self_check():
     assert [row["mahalle"] for row in diverse_pool] == ["A", "B", "C", "D"], diverse_pool
     diverse_rotation = _rotated_order(duplicate_neighborhoods, 3, pool_size=4)
     assert [row["mahalle"] for row in diverse_rotation[:4]] == ["D", "A", "B", "C"], diverse_rotation
+
+    # Aynı gün ve aynı Sentinel çiftindeki güçlü ani-başlangıç kanıtı, alarm üretmeden
+    # normal günlük rotasyonun önüne geçmeli.
+    temporal = {
+        "rapor_tarihi": "2026-09-01",
+        "bolgeler": {
+            "cesme": {
+                "durum": "ok",
+                "onceki_tarih": "26.08.2026",
+                "son_tarih": "29.08.2026",
+                "adaylar": [
+                    {
+                        "mahalle": "W5",
+                        "enlem": 38.28,
+                        "boylam": 26.38,
+                        "ani_baslangic_destegi": True,
+                        "ani_baslangic_orani": 8.0,
+                        "onceki_donem_bsi_degisim": 0.03,
+                        "onceki_donem_gecerli_oran": 1.0,
+                        "istikrarsiz_zemin_riski": False,
+                    }
+                ],
+            }
+        },
+    }
+    temporal_priority = select_rotating_calibration(
+        audit,
+        {"rapor_tarihi": "2026-09-01", "saha_adaylari": []},
+        temporal_payload=temporal,
+        limit=1,
+    )
+    assert temporal_priority and temporal_priority[0]["mahalle"] == "W5", temporal_priority
+    assert temporal_priority[0]["kalibrasyon_durumu"] == "ALARM_DEGIL"
+    assert temporal_priority[0]["kalibrasyon_nedeni"] == "ZAMAN_SERISI_ANI_BASLANGIC"
+
+    stale_temporal = json.loads(json.dumps(temporal))
+    stale_temporal["rapor_tarihi"] = "2026-08-31"
+    stale_result = select_rotating_calibration(
+        audit,
+        {"rapor_tarihi": "2026-09-01", "saha_adaylari": []},
+        temporal_payload=stale_temporal,
+        limit=1,
+    )
+    assert stale_result and stale_result[0]["mahalle"] == "W4", stale_result
 
     reset_audit = json.loads(json.dumps(audit))
     for region in reset_audit["bolgeler"].values():
