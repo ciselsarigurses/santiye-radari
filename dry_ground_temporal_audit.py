@@ -26,7 +26,9 @@ from daily_report import ISTANBUL
 SOURCE_AUDIT = Path(__file__).with_name("dry_ground_gap_audit.json")
 OUTPUT_AUDIT = Path(__file__).with_name("dry_ground_temporal_audit.json")
 PATCH_RADIUS_PIXELS = 1
-MIN_VALID_FRACTION = 0.67
+# 3x3 yamada 6/9 geçerli pikseli tam olarak kabul et; 0.67 yazmak 6/9=0.666...
+# örneklerini yanlışlıkla sınırın altında bırakıyordu.
+MIN_VALID_FRACTION = 2 / 3
 PRECHANGE_ABS_BSI_CAP = 0.08
 PRECHANGE_RELATIVE_MAX = 0.50
 ABRUPT_RATIO_MIN = 2.0
@@ -291,7 +293,12 @@ def _self_check():
     assert not abrupt
     assert unstable
 
-    ratio, abrupt, unstable = _classify(0.24, 0.04, 0.4)
+    # 3x3 yamanın tam 6/9 geçerli pikseli sınırı geçmelidir.
+    ratio, abrupt, unstable = _classify(0.24, 0.04, 6 / 9)
+    assert abrupt
+    assert not unstable
+
+    ratio, abrupt, unstable = _classify(0.24, 0.04, 5 / 9)
     assert not abrupt
     assert not unstable
 
