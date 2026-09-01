@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-01",
-  "olusturma": "2026-09-01 15:31 +0300",
+  "olusturma": "2026-09-01 16:32 +0300",
   "amac": "Kuru-zemin saha-benzeri kalibrasyon örneklerinde son değişimden önceki Sentinel döneminin BSI kararlılığını aynı 3x3 piksel yamasında ölçmek; ani başlangıç desteği ve istikrarsız zemin riskini yalnız diagnostik olarak işaretlemek.",
   "esikler": {
     "patch_yaricap_piksel": 1,
@@ -43,7 +43,8 @@
           "ani_baslangic_destegi": true,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Alaçatı",
@@ -59,7 +60,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Alaçatı",
@@ -75,7 +77,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Şifne",
@@ -91,7 +94,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Reisdere",
@@ -107,7 +111,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Dalyan",
@@ -123,7 +128,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Dalyan",
@@ -139,7 +145,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Musalla",
@@ -155,9 +162,17 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         }
-      ]
+      ],
+      "goreli_yorungeler": {
+        "degisim_oncesi": 7,
+        "onceki": 7,
+        "son": 7
+      },
+      "yorunge_tutarliligi": "AYNI",
+      "yorunge_notu": "Üç Sentinel sahnesi aynı göreli yörüngede; zaman-serisi ani başlangıç kanıtı bakış geometrisi açısından destekleniyor."
     },
     "uzunkuyu": {
       "durum": "ok",
@@ -188,7 +203,8 @@
           "ani_baslangic_destegi": true,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Ildır",
@@ -204,7 +220,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Ildır",
@@ -220,7 +237,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Ildır",
@@ -236,7 +254,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Uzunkuyu",
@@ -252,7 +271,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Uzunkuyu",
@@ -268,7 +288,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Ildır",
@@ -284,7 +305,8 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         },
         {
           "mahalle": "Uzunkuyu",
@@ -300,9 +322,17 @@
           "ani_baslangic_destegi": false,
           "istikrarsiz_zemin_riski": true,
           "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false
+          "lineer_geometri_riski": false,
+          "yorunge_geometri_riski": false
         }
-      ]
+      ],
+      "goreli_yorungeler": {
+        "degisim_oncesi": 7,
+        "onceki": 7,
+        "son": 7
+      },
+      "yorunge_tutarliligi": "AYNI",
+      "yorunge_notu": "Üç Sentinel sahnesi aynı göreli yörüngede; zaman-serisi ani başlangıç kanıtı bakış geometrisi açısından destekleniyor."
     }
   }
 }
