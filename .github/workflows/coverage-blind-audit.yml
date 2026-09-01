@@ -56,6 +56,9 @@ jobs:
       - name: Kör alan saha devriyesini güncelle
         run: python coverage_patrol_shortlist.py
 
+      - name: Geniş temporal aday havuzunu aynı Sentinel çiftiyse uygula
+        run: python temporal_candidate_pool.py --apply
+
       - name: Kuru zemin kalibrasyon noktalarını döndür
         run: python calibration_rotation_guard.py
 
@@ -67,6 +70,9 @@ jobs:
 
       - name: Nihai kör alan rotasına göre kalibrasyon tekrarını azalt
         run: python final_calibration_diversity_guard.py
+
+      - name: Kanonik kuru zemin raporunu geri yükle
+        run: git checkout -- dry_ground_gap_audit.json
 
       - name: Değişen kör alan raporunu kaydet
         run: |
