@@ -9,6 +9,7 @@ on:
       - "coverage_patrol_shortlist.py"
       - "calibration_rotation_guard.py"
       - "route_diversity_guard.py"
+      - "coverage_overlap_rotation_guard.py"
       - ".github/workflows/coverage-blind-audit.yml"
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
@@ -53,6 +54,9 @@ jobs:
 
       - name: Alarm dışı saha kontrolünü mahalle bazında çeşitlendir
         run: python route_diversity_guard.py
+
+      - name: Çekirdek korumasında örtüşme ceplerini dönüşümlü kapat
+        run: python coverage_overlap_rotation_guard.py
 
       - name: Değişen kör alan raporunu kaydet
         run: |
