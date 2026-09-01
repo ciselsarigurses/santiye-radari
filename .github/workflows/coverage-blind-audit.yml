@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "coverage_blind_area_audit.py"
+      - "coverage_blind_area_runner.py"
       - "coverage_patrol_shortlist.py"
       - "calibration_rotation_guard.py"
       - "route_diversity_guard.py"
@@ -41,8 +42,8 @@ jobs:
       - name: Bağımlılıkları kur
         run: pip install -r requirements.txt
 
-      - name: Sentinel kör alanını ölç
-        run: python coverage_blind_area_audit.py
+      - name: Sentinel kör alanını ölç ve devriye havuzunu çeşitlendir
+        run: python coverage_blind_area_runner.py
 
       - name: Kör alan saha devriyesini güncelle
         run: python coverage_patrol_shortlist.py
