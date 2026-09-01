@@ -1672,15 +1672,15 @@
       "kalibrasyon_rotasyon_havuzu": 4
     },
     {
-      "mahalle": "Uzunkuyu",
-      "enlem": 38.338602,
-      "boylam": 26.646546,
-      "alan_m2": 400,
-      "ortalama_bsi_degisim": 0.2003,
-      "ortalama_rgb_farki": 0.1592,
-      "uzun_kisa_orani": 2.0,
-      "kutu_doluluk_orani": 0.5,
-      "kompaktlik": 0.349,
+      "mahalle": "Ildır",
+      "enlem": 38.400921,
+      "boylam": 26.621469,
+      "alan_m2": 300,
+      "ortalama_bsi_degisim": 0.2585,
+      "ortalama_rgb_farki": 0.1599,
+      "uzun_kisa_orani": 3.0,
+      "kutu_doluluk_orani": 1.0,
+      "kompaktlik": 0.589,
       "saha_benzeri_geometri": true,
       "lineer_geometri_riski": false,
       "yakindaki_kuru_degisim_120m": 0,
@@ -1689,13 +1689,13 @@
       "bolge": "Uzunkuyu · Germiyan · Ildır",
       "onceki_tarih": "26.08.2026",
       "son_tarih": "29.08.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.338602,26.646546",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.400921,26.621469",
       "kalibrasyon_durumu": "ALARM_DEGIL",
       "kalibrasyon_rotasyon_gun": 3,
       "kalibrasyon_rotasyon_havuzu": 4
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında bölge başına en fazla bir, toplam iki örnek seçilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; sahne değişmezse en güçlü ilk dört güvenli örnek günlük rotasyonla değiştirilir.",
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin dışında bölge başına en fazla bir, toplam iki örnek tutulur. Nihai Sentinel kör-alan devriyesi aynı mahalleyi de seçmişse güvenli bir kuru-zemin alternatifi tercih edilir; alternatif yoksa mevcut kalibrasyon korunur.",
   "kor_alan_saha_devriyesi": [
     {
       "bolge_anahtari": "uzunkuyu",
