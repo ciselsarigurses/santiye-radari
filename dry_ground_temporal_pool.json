@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-01",
-  "olusturma": "2026-09-01 17:40 +0300",
+  "olusturma": "2026-09-01 18:34 +0300",
   "amac": "Mevcut alarm üretim maskesinin dışında kalan düşük-NDVI 250-2.000 m² kuru zemin spektral değişimlerini BSI ile ölçmek; ayrıca kompaktlık, uzun/kısa oranı ve 120 m yerel kümelenmeyi saha kalibrasyonu için kaydetmek; alarm/görev üretmez.",
   "esikler": {
     "alan_m2": [
@@ -579,6 +579,51 @@
           "izole_saha_benzeri": true
         },
         {
+          "mahalle": "Germiyan",
+          "enlem": 38.348099,
+          "boylam": 26.492624,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.1708,
+          "ortalama_rgb_farki": 0.1758,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.785,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Uzunkuyu",
+          "enlem": 38.220204,
+          "boylam": 26.49125,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.1556,
+          "ortalama_rgb_farki": 0.1364,
+          "uzun_kisa_orani": 1.5,
+          "kutu_doluluk_orani": 0.5,
+          "kompaktlik": 0.377,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.352169,
+          "boylam": 26.467668,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.1416,
+          "ortalama_rgb_farki": 0.1734,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
           "mahalle": "Alaçatı",
           "enlem": 38.251138,
           "boylam": 26.423023,
@@ -699,21 +744,6 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Germiyan",
-          "enlem": 38.348099,
-          "boylam": 26.492624,
-          "alan_m2": 400,
-          "ortalama_bsi_degisim": 0.1708,
-          "ortalama_rgb_farki": 0.1758,
-          "uzun_kisa_orani": 1.0,
-          "kutu_doluluk_orani": 1.0,
-          "kompaktlik": 0.785,
-          "saha_benzeri_geometri": true,
-          "lineer_geometri_riski": false,
-          "yakindaki_kuru_degisim_120m": 0,
-          "izole_saha_benzeri": true
-        },
-        {
           "mahalle": "Ovacık",
           "enlem": 38.218667,
           "boylam": 26.406881,
@@ -723,36 +753,6 @@
           "uzun_kisa_orani": 1.6,
           "kutu_doluluk_orani": 0.45,
           "kompaktlik": 0.289,
-          "saha_benzeri_geometri": true,
-          "lineer_geometri_riski": false,
-          "yakindaki_kuru_degisim_120m": 0,
-          "izole_saha_benzeri": true
-        },
-        {
-          "mahalle": "Alaçatı",
-          "enlem": 38.212969,
-          "boylam": 26.424167,
-          "alan_m2": 300,
-          "ortalama_bsi_degisim": 0.1666,
-          "ortalama_rgb_farki": 0.1381,
-          "uzun_kisa_orani": 3.0,
-          "kutu_doluluk_orani": 1.0,
-          "kompaktlik": 0.589,
-          "saha_benzeri_geometri": true,
-          "lineer_geometri_riski": false,
-          "yakindaki_kuru_degisim_120m": 0,
-          "izole_saha_benzeri": true
-        },
-        {
-          "mahalle": "Alaçatı",
-          "enlem": 38.241098,
-          "boylam": 26.437904,
-          "alan_m2": 400,
-          "ortalama_bsi_degisim": 0.1658,
-          "ortalama_rgb_farki": 0.1641,
-          "uzun_kisa_orani": 1.5,
-          "kutu_doluluk_orani": 0.667,
-          "kompaktlik": 0.503,
           "saha_benzeri_geometri": true,
           "lineer_geometri_riski": false,
           "yakindaki_kuru_degisim_120m": 0,
@@ -1315,6 +1315,21 @@
           "izole_saha_benzeri": true
         },
         {
+          "mahalle": "Reisdere",
+          "enlem": 38.304683,
+          "boylam": 26.454065,
+          "alan_m2": 500,
+          "ortalama_bsi_degisim": 0.1111,
+          "ortalama_rgb_farki": 0.1948,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 0.625,
+          "kompaktlik": 0.436,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
           "mahalle": "Germiyan",
           "enlem": 38.334984,
           "boylam": 26.484981,
@@ -1478,28 +1493,15 @@
           "lineer_geometri_riski": false,
           "yakindaki_kuru_degisim_120m": 0,
           "izole_saha_benzeri": true
-        },
-        {
-          "mahalle": "Uzunkuyu",
-          "enlem": 38.299166,
-          "boylam": 26.551737,
-          "alan_m2": 1300,
-          "ortalama_bsi_degisim": 0.1352,
-          "ortalama_rgb_farki": 0.1998,
-          "uzun_kisa_orani": 1.2,
-          "kutu_doluluk_orani": 0.433,
-          "kompaktlik": 0.242,
-          "saha_benzeri_geometri": true,
-          "lineer_geometri_riski": false,
-          "yakindaki_kuru_degisim_120m": 0,
-          "izole_saha_benzeri": true
         }
       ]
     }
   },
   "zaman_serisi_aday_havuzu": {
-    "durum": "genisletildi",
+    "durum": "genisletildi_ve_mahalle_dengeli",
+    "tarama_limiti": 96,
     "ornek_limiti": 24,
+    "guclu_cekirdek": 12,
     "kanonik_aday_sayilari": {
       "cesme": 8,
       "uzunkuyu": 8
@@ -1508,6 +1510,10 @@
       "cesme": 24,
       "uzunkuyu": 24
     },
-    "not": "Yalnız diagnostik zaman-serisi ve saha kalibrasyonu içindir; alarm/görev/eşik üretmez."
+    "temsil_edilen_mahalle_sayilari": {
+      "cesme": 9,
+      "uzunkuyu": 6
+    },
+    "not": "Yalnız diagnostik zaman-serisi ve saha kalibrasyonu içindir; alarm/görev/eşik üretmez. En güçlü çekirdek korunur, kalan slotlar mümkün olduğunda farklı mahallelere yayılır."
   }
 }
