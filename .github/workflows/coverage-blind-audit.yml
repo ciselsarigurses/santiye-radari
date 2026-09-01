@@ -10,6 +10,7 @@ on:
       - "calibration_rotation_guard.py"
       - "route_diversity_guard.py"
       - "coverage_overlap_rotation_guard.py"
+      - "final_calibration_diversity_guard.py"
       - ".github/workflows/coverage-blind-audit.yml"
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
@@ -57,6 +58,9 @@ jobs:
 
       - name: Çekirdek korumasında örtüşme ceplerini dönüşümlü kapat
         run: python coverage_overlap_rotation_guard.py
+
+      - name: Nihai kör alan rotasına göre kalibrasyon tekrarını azalt
+        run: python final_calibration_diversity_guard.py
 
       - name: Değişen kör alan raporunu kaydet
         run: |
