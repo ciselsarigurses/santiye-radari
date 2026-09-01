@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-01",
-  "olusturma": "2026-09-01 11:15 +03",
+  "olusturma": "2026-09-01 15:18 +03",
   "ozet": "İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 61",
   "saha_adaylari": [
     {
@@ -1556,21 +1556,7 @@
     }
   ],
   "yeni_internet_bulgulari": [],
-  "oncelikli_internet_firsatlari": [
-    {
-      "proje": "SUMEN Olea — Urla Uzunkuyu yeni konut projesi",
-      "firma": "SUMEN™ / Sumen Group",
-      "bolge": "Uzunkuyu",
-      "sinyal": "2026 yeni konut projesi, yapım sürüyor, Aralık 2026 teslim hedefi",
-      "kaynak_url": "https://emlakkulisi.com/sumen-olea-urlada-115-milyon-tlye-yeni-proje/827889",
-      "kaynak_tipi": "Doğrulanmış proje haberi",
-      "skor": 9,
-      "durum": "KIRMIZI",
-      "ilk_gorulme": "2026-08-27 12:10 UTC",
-      "son_gorulme": "2026-09-01 03:31 UTC",
-      "yeni": false
-    }
-  ],
+  "oncelikli_internet_firsatlari": [],
   "uyari": "Uydu koordinatları yaklaşık değişim merkezidir. Kesin adres/ada-parsel olarak kullanılmamalı; saha kontrolüyle doğrulanmalıdır.",
   "gunun_ilk_3_kontrolu": [
     {
@@ -1649,12 +1635,12 @@
   "gunun_ilk_3_notu": "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; aynı ölçek sınıfında güncel Sentinel kümesinde görünen aday, yalnız tarihsel ölçüsü geri taşınmış adaya tercih edilir. Bölge dengesi daha yüksek öncelikli adayı düşürmez.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
-      "mahalle": "Alaçatı",
-      "enlem": 38.240013,
-      "boylam": 26.406424,
+      "mahalle": "Dalyan",
+      "enlem": 38.355516,
+      "boylam": 26.30019,
       "alan_m2": 300,
-      "ortalama_bsi_degisim": 0.2251,
-      "ortalama_rgb_farki": 0.1943,
+      "ortalama_bsi_degisim": 0.3233,
+      "ortalama_rgb_farki": 0.1364,
       "uzun_kisa_orani": 1.0,
       "kutu_doluluk_orani": 0.75,
       "kompaktlik": 0.589,
@@ -1666,27 +1652,19 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "26.08.2026",
       "son_tarih": "29.08.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.240013,26.406424",
-      "kalibrasyon_durumu": "ALARM_DEGIL",
-      "zaman_serisi_ani_baslangic_destegi": true,
-      "zaman_serisi_ani_baslangic_orani": 14.87,
-      "zaman_serisi_onceki_bsi_degisim": 0.0151,
-      "zaman_serisi_gecerli_oran": 1.0,
-      "zaman_serisi_istikrarsiz_zemin_riski": false,
-      "kalibrasyon_rotasyon_gun": 3,
-      "kalibrasyon_rotasyon_havuzu": 4,
-      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.355516,26.300190",
+      "kalibrasyon_durumu": "ALARM_DEGIL"
     },
     {
       "mahalle": "Ildır",
-      "enlem": 38.420186,
-      "boylam": 26.610935,
-      "alan_m2": 1100,
-      "ortalama_bsi_degisim": 0.2009,
-      "ortalama_rgb_farki": 0.13,
-      "uzun_kisa_orani": 3.33,
-      "kutu_doluluk_orani": 0.367,
-      "kompaktlik": 0.204,
+      "enlem": 38.400921,
+      "boylam": 26.621469,
+      "alan_m2": 300,
+      "ortalama_bsi_degisim": 0.2585,
+      "ortalama_rgb_farki": 0.1599,
+      "uzun_kisa_orani": 3.0,
+      "kutu_doluluk_orani": 1.0,
+      "kompaktlik": 0.589,
       "saha_benzeri_geometri": true,
       "lineer_geometri_riski": false,
       "yakindaki_kuru_degisim_120m": 0,
@@ -1695,50 +1673,9 @@
       "bolge": "Uzunkuyu · Germiyan · Ildır",
       "onceki_tarih": "26.08.2026",
       "son_tarih": "29.08.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.420186,26.610935",
-      "kalibrasyon_durumu": "ALARM_DEGIL",
-      "zaman_serisi_ani_baslangic_destegi": true,
-      "zaman_serisi_ani_baslangic_orani": 7.07,
-      "zaman_serisi_onceki_bsi_degisim": 0.0284,
-      "zaman_serisi_gecerli_oran": 0.667,
-      "zaman_serisi_istikrarsiz_zemin_riski": false,
-      "kalibrasyon_rotasyon_gun": 3,
-      "kalibrasyon_rotasyon_havuzu": 4,
-      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.400921,26.621469",
+      "kalibrasyon_durumu": "ALARM_DEGIL"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin dışında bölge başına en fazla bir, toplam iki örnek tutulur. Nihai Sentinel kör-alan devriyesi aynı mahalleyi de seçmişse güvenli bir kuru-zemin alternatifi tercih edilir; alternatif yoksa mevcut kalibrasyon korunur.",
-  "kor_alan_saha_devriyesi": [
-    {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır",
-      "mahalle": "Uzunkuyu",
-      "enlem": 38.185472,
-      "boylam": 26.532156,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.1449,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.185472,26.532156"
-    },
-    {
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Uzunkuyu",
-      "enlem": 38.180588,
-      "boylam": 26.501667,
-      "alan_m2": 300,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.4347,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180588,26.501667"
-    }
-  ],
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez."
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir."
 }
