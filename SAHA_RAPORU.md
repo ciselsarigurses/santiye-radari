@@ -21,7 +21,7 @@
 
 1. **KALİBRASYON — Alaçatı** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.225 · RGB Δ 0.194 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.240013,26.406424)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Ildır** · yaklaşık 1.100 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.201 · RGB Δ 0.130 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.420186,26.610935)
+2. **KALİBRASYON — Alaçatı** · yaklaşık 400 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.178 · RGB Δ 0.125 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.201843,26.451660)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları
