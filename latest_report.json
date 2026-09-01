@@ -1649,12 +1649,12 @@
   "gunun_ilk_3_notu": "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; aynı ölçek sınıfında güncel Sentinel kümesinde görünen aday, yalnız tarihsel ölçüsü geri taşınmış adaya tercih edilir. Bölge dengesi daha yüksek öncelikli adayı düşürmez.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
-      "mahalle": "Musalla",
-      "enlem": 38.321597,
-      "boylam": 26.299618,
+      "mahalle": "Alaçatı",
+      "enlem": 38.240013,
+      "boylam": 26.406424,
       "alan_m2": 300,
-      "ortalama_bsi_degisim": 0.2227,
-      "ortalama_rgb_farki": 0.115,
+      "ortalama_bsi_degisim": 0.2251,
+      "ortalama_rgb_farki": 0.1943,
       "uzun_kisa_orani": 1.0,
       "kutu_doluluk_orani": 0.75,
       "kompaktlik": 0.589,
@@ -1666,10 +1666,16 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "26.08.2026",
       "son_tarih": "29.08.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.321597,26.299618",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.240013,26.406424",
       "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": true,
+      "zaman_serisi_ani_baslangic_orani": 14.87,
+      "zaman_serisi_onceki_bsi_degisim": 0.0151,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
       "kalibrasyon_rotasyon_gun": 3,
-      "kalibrasyon_rotasyon_havuzu": 4
+      "kalibrasyon_rotasyon_havuzu": 4,
+      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC"
     },
     {
       "mahalle": "Ildır",
@@ -1691,8 +1697,14 @@
       "son_tarih": "29.08.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.420186,26.610935",
       "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": true,
+      "zaman_serisi_ani_baslangic_orani": 7.07,
+      "zaman_serisi_onceki_bsi_degisim": 0.0284,
+      "zaman_serisi_gecerli_oran": 0.667,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
       "kalibrasyon_rotasyon_gun": 3,
-      "kalibrasyon_rotasyon_havuzu": 4
+      "kalibrasyon_rotasyon_havuzu": 4,
+      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC"
     }
   ],
   "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin dışında bölge başına en fazla bir, toplam iki örnek tutulur. Nihai Sentinel kör-alan devriyesi aynı mahalleyi de seçmişse güvenli bir kuru-zemin alternatifi tercih edilir; alternatif yoksa mevcut kalibrasyon korunur.",
@@ -1715,17 +1727,17 @@
     {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Alaçatı",
-      "enlem": 38.192346,
-      "boylam": 26.45851,
-      "alan_m2": 400,
+      "mahalle": "Uzunkuyu",
+      "enlem": 38.180588,
+      "boylam": 26.501667,
+      "alan_m2": 300,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 0.4347,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.192346,26.458510"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180588,26.501667"
     }
   ],
   "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez."
