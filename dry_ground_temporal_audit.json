@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-01",
-  "olusturma": "2026-09-01 20:35 +0300",
+  "olusturma": "2026-09-01 20:39 +0300",
   "amac": "Kuru-zemin saha-benzeri kalibrasyon örneklerinde son değişimden önceki Sentinel döneminin BSI kararlılığını aynı 3x3 piksel yamasında ölçmek; ani başlangıç desteği ve istikrarsız zemin riskini yalnız diagnostik olarak işaretlemek.",
   "esikler": {
     "patch_yaricap_piksel": 1,
@@ -26,7 +26,7 @@
       "temporal_ornekleme": "ayni_3x3_yama_uc_sahne_ortak_gecerli_piksel",
       "degisim_oncesi_aralik_gun": 2.0,
       "olculen_aday": 24,
-      "ani_baslangic_destegi": 11,
+      "ani_baslangic_destegi": 12,
       "istikrarsiz_zemin_riski": 4,
       "adaylar": [
         {
@@ -247,7 +247,7 @@
           "uc_sahne_gecerli_oran": 0.778,
           "onceki_donem_gecerli_oran": 0.778,
           "ani_baslangic_orani": 7.58,
-          "ani_baslangic_destegi": false,
+          "ani_baslangic_destegi": true,
           "istikrarsiz_zemin_riski": false,
           "izole_saha_benzeri": true,
           "lineer_geometri_riski": false,
@@ -256,8 +256,7 @@
           "temporal_baseline_maks_bsi_degisim": 0.0805,
           "uzun_temporal_ani_baslangic_orani": 3.8,
           "uzun_temporal_istikrarsiz_zemin_riski": false,
-          "ani_baslangic_nedeni": "IKINCI_ONCEKI_DONEM_ZATEN_HAREKETLI",
-          "uzun_temporal_koruma": "ASAGI_SINIFLANDIRILDI",
+          "uzun_temporal_koruma": "SINIRDA_KORUNDU",
           "yorunge_geometri_riski": false
         },
         {
@@ -594,7 +593,8 @@
       "ikinci_onceki_tarih": "19.08.2026",
       "uzun_temporal_durum": "UYGULANDI",
       "uzun_temporal_olculen_aday": 24,
-      "uzun_temporal_asagi_siniflanan": 1,
+      "uzun_temporal_asagi_siniflanan": 0,
+      "uzun_temporal_sinirda_korunan": 1,
       "goreli_yorungeler": {
         "degisim_oncesi": 7,
         "onceki": 7,
@@ -1183,6 +1183,7 @@
       "uzun_temporal_durum": "UYGULANDI",
       "uzun_temporal_olculen_aday": 24,
       "uzun_temporal_asagi_siniflanan": 0,
+      "uzun_temporal_sinirda_korunan": 0,
       "goreli_yorungeler": {
         "degisim_oncesi": 7,
         "onceki": 7,
@@ -1192,5 +1193,9 @@
       "yorunge_notu": "Üç Sentinel sahnesi aynı göreli yörüngede; zaman-serisi ani başlangıç kanıtı bakış geometrisi açısından destekleniyor."
     }
   },
-  "uzun_temporal_koruma_notu": "İkinci bir eski Sentinel aralığı yalnız aynı göreli yörünge ve yeterli geçerli piksel doğrulandığında mevcut ani-başlangıç desteğini aşağı sınıflandırabilir; yetersiz veri mevcut kanıtı değiştirmez, yeni alarm veya yeni ani-başlangıç etiketi üretmez."
+  "uzun_temporal_koruma_notu": "İkinci bir eski Sentinel aralığı yalnız aynı göreli yörünge, yeterli geçerli piksel ve belirgin tekrar hareketi doğrulandığında mevcut ani-başlangıç desteğini aşağı sınıflandırabilir. Eşik çevresindeki küçük farklar ve yetersiz veri mevcut kanıtı değiştirmez; yeni alarm veya yeni ani-başlangıç etiketi üretilmez.",
+  "uzun_temporal_dusurme_esikleri": {
+    "ikinci_onceki_mutlak_bsi_min": 0.1,
+    "ikinci_onceki_guncel_harekete_oran_min": 0.6
+  }
 }
