@@ -17,11 +17,11 @@
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli bir örnek bulursa o örnek saha teyidi için rotasyonun önüne alınır; bu yine alarm değildir. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Dalyan** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.323 · RGB Δ 0.136 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.355516,26.300190)
+1. **KALİBRASYON — Ovacık** · yaklaşık 1.800 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.168 · RGB Δ 0.163 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.218667,26.406881)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Ildır** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.259 · RGB Δ 0.160 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.400921,26.621469)
+2. **KALİBRASYON — Ildır** · yaklaşık 1.100 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.137 · RGB Δ 0.194 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.350993,26.467805)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları
