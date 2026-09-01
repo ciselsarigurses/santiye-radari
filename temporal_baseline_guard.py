@@ -68,19 +68,28 @@ def _guard_row(row, older_baseline, older_valid_fraction):
         or updated.get("onceki_donem_gecerli_oran")
         or 0
     )
-    joint_valid = min(existing_valid, float(older_valid_fraction or 0))
+    older_valid = float(older_valid_fraction or 0)
+    joint_valid = min(existing_valid, older_valid)
     baseline_max = max(first_baseline, second_baseline)
+
+    updated["ikinci_onceki_donem_bsi_degisim"] = round(second_baseline, 4)
+    updated["ikinci_onceki_donem_gecerli_oran"] = round(older_valid, 3)
+    updated["temporal_baseline_maks_bsi_degisim"] = round(baseline_max, 4)
+
+    # Ek eski sahnede 3x3 yamanın en az 6/9'u güvenilir değilse mevcut üç-sahne
+    # kanıtını değiştirme. Eksik veri yanlış-pozitif kanıtı değildir; yalnız ek
+    # doğrulamanın yapılamadığını gösterir.
+    if joint_valid < temporal.MIN_VALID_FRACTION:
+        updated["uzun_temporal_ani_baslangic_orani"] = None
+        updated["uzun_temporal_istikrarsiz_zemin_riski"] = False
+        updated["uzun_temporal_koruma"] = "YETERSIZ_GECERLI_PIKSEL"
+        return updated, False
+
     ratio, abrupt_long, unstable_long = temporal._classify(
         current,
         baseline_max,
         joint_valid,
     )
-
-    updated["ikinci_onceki_donem_bsi_degisim"] = round(second_baseline, 4)
-    updated["ikinci_onceki_donem_gecerli_oran"] = round(
-        float(older_valid_fraction or 0), 3
-    )
-    updated["temporal_baseline_maks_bsi_degisim"] = round(baseline_max, 4)
     updated["uzun_temporal_ani_baslangic_orani"] = ratio
     updated["uzun_temporal_istikrarsiz_zemin_riski"] = bool(unstable_long)
 
@@ -216,9 +225,10 @@ def guard_payload(payload):
                 region_data["uzun_temporal_durum"] = "HATA"
                 region_data["uzun_temporal_neden"] = str(exc)
     payload["uzun_temporal_koruma_notu"] = (
-        "İkinci bir eski Sentinel aralığı yalnız aynı göreli yörünge doğrulandığında "
-        "mevcut ani-başlangıç desteğini aşağı sınıflandırabilir; yeni alarm veya yeni "
-        "ani-başlangıç etiketi üretmez."
+        "İkinci bir eski Sentinel aralığı yalnız aynı göreli yörünge ve yeterli geçerli "
+        "piksel doğrulandığında mevcut ani-başlangıç desteğini aşağı sınıflandırabilir; "
+        "yetersiz veri mevcut kanıtı değiştirmez, yeni alarm veya yeni ani-başlangıç "
+        "etiketi üretmez."
     )
     return payload
 
@@ -247,10 +257,12 @@ def _self_check():
     assert guarded["istikrarsiz_zemin_riski"] is True
     assert down is True
 
+    # Ek eski sahne düşük kaliteli olduğunda mevcut üç-sahne kanıtını silmemeliyiz.
     insufficient = dict(stable)
     guarded, down = _guard_row(insufficient, 0.03, 5 / 9)
-    assert guarded["ani_baslangic_destegi"] is False
-    assert down is True
+    assert guarded["ani_baslangic_destegi"] is True
+    assert guarded["uzun_temporal_koruma"] == "YETERSIZ_GECERLI_PIKSEL"
+    assert down is False
 
 
 def run_guard():
