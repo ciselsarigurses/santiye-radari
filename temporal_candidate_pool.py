@@ -232,6 +232,10 @@ def _build_pool() -> int:
             f"{type(exc).__name__}: {exc}"
         )
     finally:
+        # run_audit() EXAMPLE_LIMIT kadar örneği kanonik dosyaya da yazar. Geniş tarama
+        # yalnız diagnostik olmalı; sonraki --apply adımının tabanı ve repo çalışma ağacı
+        # mutlaka tarama öncesindeki kanonik rapora geri dönsün.
+        _atomic_write(SOURCE_REPORT, base)
         gap_audit.EXAMPLE_LIMIT = original_limit
 
     return 0
