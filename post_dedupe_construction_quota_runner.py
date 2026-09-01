@@ -13,6 +13,13 @@ geriye dönük karıştırmadan ilk yeni sahnede devreye girer.
 üst-parsel adaylarından önce değerlendirilir. Erken 800-2.000 m² düzenli adaylar yine
 önceliklidir; toplam alarm sayısı ve en fazla bir diyagonal yan-küme sınırı değişmez.
 
+Çakışma temizliği toplam 8 şantiye-ölçeği adayı korusa bile 800-2.000 m² erken-parsel
+sayısını 4'ün altına düşürebilir. Bu durumda kullanılmayan düzenli erken-parsel adayı
+yalnız yerini alacağı 2.000-10.000 m² aday kadar veya daha güçlü Sentinel kanıtı
+taşıyorsa bire bir takas edilir. Böylece erken-parsel tabanı gerçekten korunurken
+daha güçlü bir adayı sırf alanı küçük diye düşürmeyiz; toplam aday, şantiye-ölçeği,
+küçük-saha ve geniş aday sayıları değişmez.
+
 250-800 m² küçük-saha kotası dolu olduğunda da alan büyüklüğü tek başına belirleyici
 olmaz. Ana motorun zaten hesapladığı sert küçük-saha piksel oranı belirgin biçimde
 daha yüksek bir ham aday varsa, seçili en zayıf küçük adayla bire bir takas edilir.
@@ -26,10 +33,11 @@ import post_dedupe_construction_quota as quota
 
 TARGET_CONSTRUCTION_QUOTA = 8
 TARGET_EARLY_QUOTA = 4
+MIN_EARLY_STRENGTH_GAIN = 0.0
 MIN_SMALL_STRENGTH_GAIN = 0.05
 quota.rebalance.CONSTRUCTION_SCALE_QUOTA = TARGET_CONSTRUCTION_QUOTA
 quota.rebalance.CONSTRUCTION_EARLY_QUOTA = TARGET_EARLY_QUOTA
-quota.POLICY_VERSION = "post-dedupe-construction-quota-v5-small-strength-next-scene"
+quota.POLICY_VERSION = "post-dedupe-construction-quota-v6-early-strength-floor-next-scene"
 
 
 _ORIGINAL_SWAP_WITHOUT_GROWTH = quota._swap_without_growth
@@ -112,6 +120,95 @@ def _is_small(item):
 
 def _small_strength(item):
     return quota.rebalance._signal_strength(item)
+
+
+def _improve_early_selection(current, raw, selected_all):
+    """8 toplam şantiye adayı varken eksilen erken-parsel tabanını güvenle onar."""
+    updated = list(current)
+    construction_count = sum(quota._is_construction(item) for item in updated)
+    current_early = sum(quota._is_early_construction(item) for item in updated)
+    early_missing = max(TARGET_EARLY_QUOTA - current_early, 0)
+    if construction_count < TARGET_CONSTRUCTION_QUOTA or early_missing <= 0:
+        return updated, []
+
+    current_keys = {
+        key for key in map(quota.rebalance._candidate_key, updated) if key is not None
+    }
+    raw_early = [
+        item for item in raw
+        if quota._is_early_construction(item)
+        and item.get("geometri_kaynagi") != quota.rebalance.DIAGONAL_SIDECAR_TAG
+        and quota.rebalance._candidate_key(item) not in current_keys
+    ]
+    removable_upper = [
+        item for item in updated
+        if quota._is_construction(item)
+        and not quota._is_early_construction(item)
+        and item.get("geometri_kaynagi") != quota.rebalance.DIAGONAL_SIDECAR_TAG
+    ]
+    if not raw_early or not removable_upper:
+        return updated, []
+
+    strongest_early = sorted(
+        raw_early,
+        key=lambda item: (
+            -quota._strength(item),
+            quota._area(item),
+            float(item.get("enlem") or 0),
+            float(item.get("boylam") or 0),
+        ),
+    )
+    weakest_upper = sorted(
+        removable_upper,
+        key=lambda item: (
+            quota._strength(item),
+            -quota._area(item),
+            float(item.get("enlem") or 0),
+            float(item.get("boylam") or 0),
+        ),
+    )
+
+    swaps = []
+    for candidate in strongest_early:
+        if len(swaps) >= early_missing or not weakest_upper:
+            break
+        removed = weakest_upper[0]
+        if quota._strength(candidate) < quota._strength(removed) + MIN_EARLY_STRENGTH_GAIN:
+            break
+
+        removed_key = quota.rebalance._candidate_key(removed)
+        comparison_selected = [
+            item for item in selected_all
+            if quota.rebalance._candidate_key(item) != removed_key
+        ]
+        comparison_selected.extend(
+            item for item in updated
+            if quota.rebalance._candidate_key(item) != removed_key
+        )
+        if not quota._candidate_available(candidate, comparison_selected, []):
+            continue
+
+        updated = [
+            item for item in updated
+            if quota.rebalance._candidate_key(item) != removed_key
+        ]
+        updated.append(candidate)
+        swaps.append((removed, candidate))
+        weakest_upper = weakest_upper[1:]
+
+    updated = sorted(updated, key=lambda item: quota._area(item), reverse=True)
+    assert len(updated) == len(current), "Erken-parsel takası aday sayısını değiştirdi."
+    assert sum(quota._is_construction(item) for item in updated) == construction_count, (
+        "Erken-parsel takası şantiye-ölçeği aday sayısını değiştirdi."
+    )
+    assert sum(_is_small(item) for item in updated) == sum(
+        _is_small(item) for item in current
+    ), "Erken-parsel takası küçük-saha aday sayısını değiştirdi."
+    assert sum(quota._is_wide(item) for item in updated) == sum(
+        quota._is_wide(item) for item in current
+    ), "Erken-parsel takası geniş aday sayısını değiştirdi."
+    assert sum(quota._is_early_construction(item) for item in updated) == current_early + len(swaps)
+    return updated, swaps
 
 
 def _improve_small_selection(current, raw, selected_all):
@@ -208,10 +305,13 @@ def _swap_with_small_strength_priority(current, raw, selected_all):
     updated, construction_swaps = _ORIGINAL_SWAP_WITHOUT_GROWTH(
         current, raw, selected_all
     )
-    small_updated, small_swaps = _improve_small_selection(
+    early_updated, early_swaps = _improve_early_selection(
         updated, raw, selected_all
     )
-    return small_updated, construction_swaps + small_swaps
+    small_updated, small_swaps = _improve_small_selection(
+        early_updated, raw, selected_all
+    )
+    return small_updated, construction_swaps + early_swaps + small_swaps
 
 
 quota._swap_without_growth = _swap_with_small_strength_priority
@@ -269,6 +369,48 @@ def _fixed_self_check():
     )
     assert len(unchanged) == len(current)
     assert not duplicate_swaps, duplicate_swaps
+
+    early_short = [item(200 + i, 300 + i * 50, 0.8) for i in range(6)]
+    early_short.extend(
+        [
+            item(220, 1000, 0.80),
+            item(221, 1500, 0.70),
+            item(222, 2600, 0.60),
+            item(223, 3200, 0.55),
+            item(224, 4200, 0.50),
+            item(225, 5200, 0.45),
+            item(226, 6200, 0.40),
+            item(227, 7200, 0.35),
+        ]
+    )
+    early_short.extend(item(240 + i, 20000 + i * 1000, 0.1) for i in range(10))
+    early_raw = list(early_short) + [
+        item(270, 1800, 0.65),
+        item(271, 1900, 0.46),
+    ]
+    early_updated, early_swaps = quota._swap_without_growth(
+        early_short, early_raw, early_short
+    )
+    assert len(early_updated) == len(early_short)
+    assert len(early_swaps) == 2, early_swaps
+    assert sum(quota._is_construction(candidate) for candidate in early_updated) == 8
+    assert sum(quota._is_early_construction(candidate) for candidate in early_updated) == 4
+    assert sum(quota._is_wide(candidate) for candidate in early_updated) == 10
+    assert min(
+        quota._strength(candidate)
+        for candidate in early_updated
+        if quota._is_early_construction(candidate)
+    ) >= 0.46
+
+    weak_early_raw = list(early_short) + [item(272, 1800, 0.30)]
+    weak_early_updated, weak_early_swaps = quota._swap_without_growth(
+        early_short, weak_early_raw, early_short
+    )
+    assert len(weak_early_updated) == len(early_short)
+    assert not weak_early_swaps, weak_early_swaps
+    assert sum(
+        quota._is_early_construction(candidate) for candidate in weak_early_updated
+    ) == 2
 
     crowded_small = [
         item(100 + i, 300 + i * 70, 0.50 + i * 0.03)
