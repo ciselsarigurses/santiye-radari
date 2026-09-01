@@ -11,8 +11,9 @@ okuma tarafında takma ad olarak korunur; daha önce açılmış geri bildirim b
 bozulmaz.
 
 Kalibrasyon sonucu yalnız sınıf etiketi değildir. Sonucun üretildiği BSI/RGB
-spektral değişimi ile temel geometri ve yerel-kümelenme ölçüleri de aynı kayıtla
-saklanır. Böylece yeterli saha örneği biriktiğinde kuru-zemin eşikleri gerçek Çeşme
+spektral değişimi, temel geometri, zaman-serisi ani başlangıç kanıtı ve küçük
+adaylardaki merkez/çevre yerellik ölçüleri aynı kayıtla saklanır. Böylece yeterli saha
+örneği biriktiğinde kuru-zemin eşikleri ve yanlış-pozitif filtreleri gerçek Çeşme
 saha verisiyle ölçülebilir; bu modül kendi başına alarm eşiğini değiştirmez.
 """
 
@@ -38,6 +39,16 @@ FEATURE_COLUMNS = {
     "izole_saha_benzeri": "INTEGER",
     "saha_benzeri_geometri": "INTEGER",
     "lineer_geometri_riski": "INTEGER",
+    "zaman_serisi_ani_baslangic_destegi": "INTEGER",
+    "zaman_serisi_ani_baslangic_orani": "REAL",
+    "zaman_serisi_onceki_bsi_degisim": "REAL",
+    "zaman_serisi_gecerli_oran": "REAL",
+    "zaman_serisi_istikrarsiz_zemin_riski": "INTEGER",
+    "yerellik_lokal_ani_baslangic_destegi": "INTEGER",
+    "yerellik_yaygin_cevre_degisim_riski": "INTEGER",
+    "yerellik_orani": "REAL",
+    "yerellik_cevre_halka_son_bsi_degisim": "REAL",
+    "yerellik_cevre_halka_gecerli_oran": "REAL",
 }
 
 
@@ -171,8 +182,15 @@ def save_calibration_outcome(calibration_key, outcome, item=None):
              onceki_tarih,son_tarih,kayit_zamani,bsi_degisim,rgb_farki,
              uzun_kisa_orani,kutu_doluluk_orani,kompaktlik,
              yakindaki_kuru_degisim_120m,izole_saha_benzeri,
-             saha_benzeri_geometri,lineer_geometri_riski)
-            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+             saha_benzeri_geometri,lineer_geometri_riski,
+             zaman_serisi_ani_baslangic_destegi,zaman_serisi_ani_baslangic_orani,
+             zaman_serisi_onceki_bsi_degisim,zaman_serisi_gecerli_oran,
+             zaman_serisi_istikrarsiz_zemin_riski,
+             yerellik_lokal_ani_baslangic_destegi,
+             yerellik_yaygin_cevre_degisim_riski,yerellik_orani,
+             yerellik_cevre_halka_son_bsi_degisim,
+             yerellik_cevre_halka_gecerli_oran)
+            VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             ON CONFLICT(kalibrasyon_id) DO UPDATE SET
             sonuc=excluded.sonuc,bolge=excluded.bolge,mahalle=excluded.mahalle,
             enlem=excluded.enlem,boylam=excluded.boylam,alan_m2=excluded.alan_m2,
@@ -184,7 +202,17 @@ def save_calibration_outcome(calibration_key, outcome, item=None):
             yakindaki_kuru_degisim_120m=excluded.yakindaki_kuru_degisim_120m,
             izole_saha_benzeri=excluded.izole_saha_benzeri,
             saha_benzeri_geometri=excluded.saha_benzeri_geometri,
-            lineer_geometri_riski=excluded.lineer_geometri_riski""",
+            lineer_geometri_riski=excluded.lineer_geometri_riski,
+            zaman_serisi_ani_baslangic_destegi=excluded.zaman_serisi_ani_baslangic_destegi,
+            zaman_serisi_ani_baslangic_orani=excluded.zaman_serisi_ani_baslangic_orani,
+            zaman_serisi_onceki_bsi_degisim=excluded.zaman_serisi_onceki_bsi_degisim,
+            zaman_serisi_gecerli_oran=excluded.zaman_serisi_gecerli_oran,
+            zaman_serisi_istikrarsiz_zemin_riski=excluded.zaman_serisi_istikrarsiz_zemin_riski,
+            yerellik_lokal_ani_baslangic_destegi=excluded.yerellik_lokal_ani_baslangic_destegi,
+            yerellik_yaygin_cevre_degisim_riski=excluded.yerellik_yaygin_cevre_degisim_riski,
+            yerellik_orani=excluded.yerellik_orani,
+            yerellik_cevre_halka_son_bsi_degisim=excluded.yerellik_cevre_halka_son_bsi_degisim,
+            yerellik_cevre_halka_gecerli_oran=excluded.yerellik_cevre_halka_gecerli_oran""",
             (
                 calibration_key,
                 CALIBRATION_KIND,
@@ -206,6 +234,16 @@ def save_calibration_outcome(calibration_key, outcome, item=None):
                 _bool_or_none(item, "izole_saha_benzeri"),
                 _bool_or_none(item, "saha_benzeri_geometri"),
                 _bool_or_none(item, "lineer_geometri_riski"),
+                _bool_or_none(item, "zaman_serisi_ani_baslangic_destegi"),
+                _float_or_none(item.get("zaman_serisi_ani_baslangic_orani")),
+                _float_or_none(item.get("zaman_serisi_onceki_bsi_degisim")),
+                _float_or_none(item.get("zaman_serisi_gecerli_oran")),
+                _bool_or_none(item, "zaman_serisi_istikrarsiz_zemin_riski"),
+                _bool_or_none(item, "yerellik_lokal_ani_baslangic_destegi"),
+                _bool_or_none(item, "yerellik_yaygin_cevre_degisim_riski"),
+                _float_or_none(item.get("yerellik_orani")),
+                _float_or_none(item.get("yerellik_cevre_halka_son_bsi_degisim")),
+                _float_or_none(item.get("yerellik_cevre_halka_gecerli_oran")),
             ),
         )
     return outcome
@@ -219,7 +257,14 @@ def calibration_outcome_map():
             onceki_tarih,son_tarih,kayit_zamani,bsi_degisim,rgb_farki,
             uzun_kisa_orani,kutu_doluluk_orani,kompaktlik,
             yakindaki_kuru_degisim_120m,izole_saha_benzeri,
-            saha_benzeri_geometri,lineer_geometri_riski
+            saha_benzeri_geometri,lineer_geometri_riski,
+            zaman_serisi_ani_baslangic_destegi,zaman_serisi_ani_baslangic_orani,
+            zaman_serisi_onceki_bsi_degisim,zaman_serisi_gecerli_oran,
+            zaman_serisi_istikrarsiz_zemin_riski,
+            yerellik_lokal_ani_baslangic_destegi,
+            yerellik_yaygin_cevre_degisim_riski,yerellik_orani,
+            yerellik_cevre_halka_son_bsi_degisim,
+            yerellik_cevre_halka_gecerli_oran
             FROM kalibrasyon_sonuclari ORDER BY kayit_zamani DESC"""
         ).fetchall()
     return {
@@ -243,6 +288,16 @@ def calibration_outcome_map():
             "izole_saha_benzeri": None if row[16] is None else bool(row[16]),
             "saha_benzeri_geometri": None if row[17] is None else bool(row[17]),
             "lineer_geometri_riski": None if row[18] is None else bool(row[18]),
+            "zaman_serisi_ani_baslangic_destegi": None if row[19] is None else bool(row[19]),
+            "zaman_serisi_ani_baslangic_orani": row[20],
+            "zaman_serisi_onceki_bsi_degisim": row[21],
+            "zaman_serisi_gecerli_oran": row[22],
+            "zaman_serisi_istikrarsiz_zemin_riski": None if row[23] is None else bool(row[23]),
+            "yerellik_lokal_ani_baslangic_destegi": None if row[24] is None else bool(row[24]),
+            "yerellik_yaygin_cevre_degisim_riski": None if row[25] is None else bool(row[25]),
+            "yerellik_orani": row[26],
+            "yerellik_cevre_halka_son_bsi_degisim": row[27],
+            "yerellik_cevre_halka_gecerli_oran": row[28],
         }
         for row in rows
     }
@@ -253,6 +308,8 @@ def calibration_feedback_summary():
     records = calibration_outcome_map()
     by_outcome = {key: 0 for key in ALLOWED_OUTCOMES}
     feature_rows = 0
+    temporal_rows = 0
+    locality_rows = 0
     for record in records.values():
         outcome = str(record.get("sonuc") or "")
         if outcome in by_outcome:
@@ -263,9 +320,15 @@ def calibration_feedback_summary():
             and record.get("kompaktlik") is not None
         ):
             feature_rows += 1
+        if record.get("zaman_serisi_ani_baslangic_orani") is not None:
+            temporal_rows += 1
+        if record.get("yerellik_orani") is not None:
+            locality_rows += 1
     return {
         "toplam": len(records),
         "ozellikli_kayit": feature_rows,
+        "temporal_ozellikli_kayit": temporal_rows,
+        "yerellik_ozellikli_kayit": locality_rows,
         "sonuclar": by_outcome,
     }
 
@@ -294,6 +357,11 @@ def _self_check():
     assert first != calibration_id({**sample, "son_tarih": "01.09.2026"})
     assert _bool_or_none({"izole_saha_benzeri": True}, "izole_saha_benzeri") == 1
     assert _bool_or_none({}, "izole_saha_benzeri") is None
+    assert _bool_or_none(
+        {"zaman_serisi_ani_baslangic_destegi": True},
+        "zaman_serisi_ani_baslangic_destegi",
+    ) == 1
+    assert _float_or_none(1.75) == 1.75
 
 
 if __name__ == "__main__":
