@@ -15,6 +15,7 @@ on:
       - "satellite_quality.py"
       - "candidate_capacity_audit.py"
       - "diagonal_sidecar_audit.py"
+      - "adaptive_sidecar_guard.py"
       - "shape_false_positive_audit.py"
       - "dry_ground_gap_audit.py"
       - "reflectance_metadata_audit.py"
@@ -87,6 +88,9 @@ jobs:
       - name: Diyagonal parsel yan-küme kalite kontrolü
         run: python diagonal_sidecar_audit.py --check-only
 
+      - name: Uyarlamalı ikinci yan-küme kalite kontrolü
+        run: python adaptive_sidecar_guard.py --check-only
+
       - name: Geniş aday şekil yanlış-pozitif kalite kontrolü
         run: python shape_false_positive_audit.py --check-only
 
@@ -141,6 +145,9 @@ jobs:
       - name: Şantiye ölçeği adaylarını toplam tavan içinde dengele
         run: python rebalance_satellite_candidates.py
 
+      - name: İkinci diyagonal parseli yalnız daha güçlü ise terfi ettir
+        run: python adaptive_sidecar_guard.py
+
       - name: Eski görüntü bulut-gölge boşluklarını zaman serisiyle tamamla
         run: python temporal_gap_scan.py
 
@@ -158,9 +165,6 @@ jobs:
 
       - name: Uydu aday tavanı körlüğünü ölç
         run: python candidate_capacity_audit.py
-
-      - name: Diyagonal parsel yan-küme kotasını ölç
-        run: python diagonal_sidecar_audit.py
 
       - name: Geniş aday şekil yanlış-pozitif riskini ölç
         run: python shape_false_positive_audit.py
@@ -213,6 +217,7 @@ jobs:
             python satellite_quality.py
             python candidate_capacity_audit.py --check-only
             python diagonal_sidecar_audit.py --check-only
+            python adaptive_sidecar_guard.py --check-only
             python shape_false_positive_audit.py --check-only
             python dry_ground_gap_audit.py --check-only
             python temporal_quality.py
@@ -226,13 +231,13 @@ jobs:
             python refresh_satellite_analysis.py
             python daily_report.py
             python rebalance_satellite_candidates.py
+            python adaptive_sidecar_guard.py
             python temporal_gap_scan.py
             python latest_cloud_gap_scan.py
             python carry_forward_satellite_candidates.py
             python dedupe_overlap_satellite.py
             python post_dedupe_construction_quota_runner.py
             python candidate_capacity_audit.py
-            python diagonal_sidecar_audit.py
             python shape_false_positive_audit.py
             python dry_ground_gap_audit.py
             python spatial_quality.py
