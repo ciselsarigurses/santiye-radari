@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "dry_ground_temporal_audit.py"
+      - "temporal_baseline_guard.py"
       - "temporal_orbit_guard.py"
       - "temporal_candidate_pool.py"
       - "coordinate_precision_audit.py"
@@ -25,7 +26,7 @@ jobs:
   audit:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
@@ -55,6 +56,12 @@ jobs:
 
       - name: Kuru zemin adaylarının değişim öncesi kararlılığını ölç
         run: python dry_ground_temporal_audit.py
+
+      - name: Uzun zaman serisi taban korumasını öz test et
+        run: python temporal_baseline_guard.py --check-only
+
+      - name: İkinci eski Sentinel aralığında tekrar eden zemin hareketini ele
+        run: python temporal_baseline_guard.py
 
       - name: Göreli yörünge korumasını öz test et
         run: python temporal_orbit_guard.py --check-only
