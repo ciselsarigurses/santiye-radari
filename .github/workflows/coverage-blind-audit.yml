@@ -9,6 +9,7 @@ on:
       - "coverage_patrol_shortlist.py"
       - "calibration_rotation_guard.py"
       - "temporal_calibration_rotation_guard.py"
+      - "completed_calibration_guard.py"
       - "calibration_note_guard.py"
       - "route_diversity_guard.py"
       - "coverage_overlap_rotation_guard.py"
@@ -69,6 +70,12 @@ jobs:
 
       - name: Temporal ani başlangıç kalibrasyonunu yerellik riskiyle döndür
         run: python temporal_calibration_rotation_guard.py
+
+      - name: Tamamlanan kalibrasyon koruması öz testi
+        run: python completed_calibration_guard.py --check-only
+
+      - name: Saha etiketi tamamlanan kalibrasyonu yeni güvenli noktayla değiştir
+        run: python completed_calibration_guard.py
 
       - name: Alarm dışı saha kontrolünü mahalle bazında çeşitlendir
         run: python route_diversity_guard.py
