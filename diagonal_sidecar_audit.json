@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-09-01",
-  "olusturma": "2026-09-01 03:35 +03",
-  "amac": "Geniş 8-komşu kümelerden güvenli biçimde ayrıştırılan 800-10.000 m² diyagonal yan-kümelerde ikinci kota yerinin koordinat değerini alarm sayısını artırmadan ölçmek; bu dosya alarm veya saha görevi üretmez.",
+  "olusturma": "2026-09-01 04:40 +03",
+  "amac": "İkinci diyagonal 800-10.000 m² yan-kümeyi yalnız yerini aldığı normal şantiye-ölçeği adayından daha güçlü Sentinel kanıtı taşıyorsa, toplam 24 aday ve ölçek dağılımını değiştirmeden terfi ettirmek; mevcut sahneyi geriye dönük değiştirmemek.",
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
@@ -26,6 +26,9 @@
         "santiye_olcegi": 6,
         "genis": 12
       },
+      "uyarlamali_karar": "ikinci_yan_kume_terfi",
+      "sahne_politikasi": "mevcut_sahne_korundu",
+      "uygulanan_karar": "mevcut_sahne_korundu",
       "eklenen": [
         {
           "mahalle": "Germiyan",
@@ -112,6 +115,9 @@
         "santiye_olcegi": 6,
         "genis": 17
       },
+      "uyarlamali_karar": "ikinci_yan_kume_daha_guclu_degil",
+      "sahne_politikasi": "mevcut_sahne_korundu",
+      "uygulanan_karar": "mevcut_sahne_korundu",
       "eklenen": [
         {
           "mahalle": "Germiyan",

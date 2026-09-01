@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-09-01
-**Hazırlanma:** 2026-09-01 03:32 +03
+**Hazırlanma:** 2026-09-01 04:40 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 61 · Geciken kontrol: 61
 
@@ -17,21 +17,12 @@
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü ilk dört güvenli örnek günlük rotasyonla değiştirilir. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Reisdere** · yaklaşık 400 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.238 · RGB Δ 0.116 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.324130,26.399784)
+1. **KALİBRASYON — Dalyan** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.323 · RGB Δ 0.136 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.355516,26.300190)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Uzunkuyu** · yaklaşık 400 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.200 · RGB Δ 0.159 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.338602,26.646546)
+2. **KALİBRASYON — Ildır** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.259 · RGB Δ 0.160 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.400921,26.621469)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-
-## Kör alan saha devriyesi
-
-> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir. Kuru zemin kalibrasyonunda aynı gün zaten temsil edilen mahalleler, güvenli alternatif varsa burada tekrar seçilmez; mahalle alternatifi daha kısıtlı uydu bölgesi önce değerlendirilir.
-
-1. **KÖR ALAN — Alaçatı** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.192346,26.458531)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
-2. **KÖR ALAN — Ovacık** · yaklaşık 300 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.219571,26.396464)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
@@ -651,7 +642,7 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 
 ## Aktif güçlü internet fırsatları
 
-Şu anda aktif KIRMIZI internet fırsatı yok.
+- **AKTİF · KIRMIZI · 9 puan · Uzunkuyu:** [SUMEN Olea — Urla Uzunkuyu yeni konut projesi](https://emlakkulisi.com/sumen-olea-urlada-115-milyon-tlye-yeni-proje/827889) — 2026 yeni konut projesi, yapım sürüyor, Aralık 2026 teslim hedefi
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması değildir; yanlış pozitifler saha kontrolüyle elenir.
