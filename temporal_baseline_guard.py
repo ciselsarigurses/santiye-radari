@@ -7,8 +7,9 @@ desteği verebilir.
 
 Bu koruma, mevcut değişim-öncesi sahneden daha eski ve aynı MGRS / göreli yörüngedeki
 bir Sentinel sahnesini bulur. Aynı 3x3 konumda ikinci bir eski BSI değişim aralığını
-ölçer. İkinci eski aralık zaten hareketliyse mevcut ani-başlangıç etiketini yalnız
-kalibrasyon önceliğinde aşağı sınıflandırır. Yeni ani-başlangıç etiketi üretmez.
+ölçer. İkinci eski aralık belirgin biçimde hareketliyse mevcut ani-başlangıç etiketini
+yalnız kalibrasyon önceliğinde aşağı sınıflandırır. Eşik çevresindeki küçük farkları
+kanıt saymaz ve yeni ani-başlangıç etiketi üretmez.
 
 Üretim alarmı, saha görevi, 250 m² alt sınırı ve ana Sentinel eşikleri değişmez.
 """
@@ -26,6 +27,12 @@ import satellite
 
 
 AUDIT_FILE = Path(__file__).with_name("dry_ground_temporal_audit.json")
+# Bu katman sadece mevcut bir kanıtı düşürebildiği için ana eşikten daha konservatif
+# davranır. 0.0800 ile 0.0805 gibi tek-piksel / yeniden örnekleme seviyesindeki farklar
+# saha önceliğini değiştirmesin; eski hareket en az 0.10 BSI ya da güncel hareketin
+# en az %60'ı kadar güçlü olmalı.
+DOWNCLASS_ABS_BSI_MIN = 0.10
+DOWNCLASS_RELATIVE_MIN = 0.60
 
 
 def _patch_mean(delta, valid_mask, row_slice, col_slice):
@@ -93,13 +100,27 @@ def _guard_row(row, older_baseline, older_valid_fraction):
     updated["uzun_temporal_ani_baslangic_orani"] = ratio
     updated["uzun_temporal_istikrarsiz_zemin_riski"] = bool(unstable_long)
 
-    downclassified = bool(updated.get("ani_baslangic_destegi")) and not abrupt_long
+    # Mevcut üç-sahne ani-başlangıç kanıtını ancak ikinci eski aralıkta belirgin
+    # tekrar varsa düşür. Ana sınıflandırmadaki 0.08 sınırının milimetrik aşılması
+    # tek başına yeterli değildir; bu koruma geri döndürülemez kanıt eklememeli.
+    material_repeat = bool(
+        second_baseline >= DOWNCLASS_ABS_BSI_MIN
+        or (
+            current > 0
+            and second_baseline >= current * DOWNCLASS_RELATIVE_MIN
+        )
+    )
+    downclassified = bool(updated.get("ani_baslangic_destegi")) and material_repeat
     if downclassified:
         updated["ani_baslangic_destegi"] = False
         updated["ani_baslangic_nedeni"] = (
-            "IKINCI_ONCEKI_DONEM_ZATEN_HAREKETLI"
+            "IKINCI_ONCEKI_DONEM_BELIRGIN_TEKRAR_HAREKETI"
         )
         updated["uzun_temporal_koruma"] = "ASAGI_SINIFLANDIRILDI"
+    elif bool(updated.get("ani_baslangic_destegi")) and not abrupt_long:
+        # Ana 0.08 eşiği gibi sert bir sınır yalnız çok az aşılmış olabilir. Bu
+        # durumu görünür kıl fakat mevcut saha önceliğini silme.
+        updated["uzun_temporal_koruma"] = "SINIRDA_KORUNDU"
     else:
         updated["uzun_temporal_koruma"] = "KORUNDU"
 
@@ -164,6 +185,7 @@ def _guard_region(region_key, region_data):
 
     rows = []
     downclassified = 0
+    borderline = 0
     measured = 0
     for raw in region_data.get("adaylar") or []:
         if not isinstance(raw, dict):
@@ -189,12 +211,15 @@ def _guard_region(region_key, region_data):
         )
         if was_downclassified:
             downclassified += 1
+        if updated.get("uzun_temporal_koruma") == "SINIRDA_KORUNDU":
+            borderline += 1
         rows.append(updated)
 
     region_data["adaylar"] = rows
     region_data["uzun_temporal_durum"] = "UYGULANDI"
     region_data["uzun_temporal_olculen_aday"] = measured
     region_data["uzun_temporal_asagi_siniflanan"] = downclassified
+    region_data["uzun_temporal_sinirda_korunan"] = borderline
     region_data["ani_baslangic_destegi"] = sum(
         1
         for row in rows
@@ -225,11 +250,16 @@ def guard_payload(payload):
                 region_data["uzun_temporal_durum"] = "HATA"
                 region_data["uzun_temporal_neden"] = str(exc)
     payload["uzun_temporal_koruma_notu"] = (
-        "İkinci bir eski Sentinel aralığı yalnız aynı göreli yörünge ve yeterli geçerli "
-        "piksel doğrulandığında mevcut ani-başlangıç desteğini aşağı sınıflandırabilir; "
-        "yetersiz veri mevcut kanıtı değiştirmez, yeni alarm veya yeni ani-başlangıç "
-        "etiketi üretmez."
+        "İkinci bir eski Sentinel aralığı yalnız aynı göreli yörünge, yeterli geçerli "
+        "piksel ve belirgin tekrar hareketi doğrulandığında mevcut ani-başlangıç "
+        "desteğini aşağı sınıflandırabilir. Eşik çevresindeki küçük farklar ve yetersiz "
+        "veri mevcut kanıtı değiştirmez; yeni alarm veya yeni ani-başlangıç etiketi "
+        "üretilmez."
     )
+    payload["uzun_temporal_dusurme_esikleri"] = {
+        "ikinci_onceki_mutlak_bsi_min": DOWNCLASS_ABS_BSI_MIN,
+        "ikinci_onceki_guncel_harekete_oran_min": DOWNCLASS_RELATIVE_MIN,
+    }
     return payload
 
 
@@ -256,6 +286,20 @@ def _self_check():
     assert guarded["ani_baslangic_destegi"] is False
     assert guarded["istikrarsiz_zemin_riski"] is True
     assert down is True
+
+    # 0.08 ana eşiğini yalnız 0.0005 aşan eski hareket Sentinel ölçüm marjı içinde
+    # kabul edilir; mevcut güçlü saha önceliği korunur ve yalnız sınırda işaretlenir.
+    borderline = {
+        "son_cift_bsi_degisim": 0.306,
+        "onceki_donem_bsi_degisim": 0.0404,
+        "uc_sahne_gecerli_oran": 0.778,
+        "ani_baslangic_destegi": True,
+        "istikrarsiz_zemin_riski": False,
+    }
+    guarded, down = _guard_row(borderline, 0.0805, 0.778)
+    assert guarded["ani_baslangic_destegi"] is True
+    assert guarded["uzun_temporal_koruma"] == "SINIRDA_KORUNDU"
+    assert down is False
 
     # Ek eski sahne düşük kaliteli olduğunda mevcut üç-sahne kanıtını silmemeliyiz.
     insufficient = dict(stable)
@@ -295,7 +339,8 @@ def main():
         parts.append(
             f"{region_key}={data.get('uzun_temporal_durum')} "
             f"(ani={int(data.get('ani_baslangic_destegi') or 0)}, "
-            f"asagi={int(data.get('uzun_temporal_asagi_siniflanan') or 0)})"
+            f"asagi={int(data.get('uzun_temporal_asagi_siniflanan') or 0)}, "
+            f"sinirda={int(data.get('uzun_temporal_sinirda_korunan') or 0)})"
         )
     print(
         "Uzun zaman-serisi taban koruması tamamlandı: "
