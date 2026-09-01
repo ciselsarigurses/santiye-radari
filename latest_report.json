@@ -1692,7 +1692,7 @@
       "kalibrasyon_nedeni": "ZAMAN_SERISI_LOKAL_ANI_BASLANGIC_ROTASYON"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin dışında bölge başına en fazla bir, toplam iki örnek tutulur. Nihai Sentinel kör-alan devriyesi aynı mahalleyi de seçmişse güvenli bir kuru-zemin alternatifi tercih edilir; alternatif yoksa mevcut kalibrasyon korunur.",
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin dışında bölge başına en fazla bir, toplam iki örnek tutulur. Nihai Sentinel kör-alan devriyesi aynı mahalleyi de seçmişse güvenli bir kuru-zemin alternatifi tercih edilir; alternatif yoksa mevcut kalibrasyon korunur. Temporal ani-başlangıç desteği olan güvenli adaylar aynı Sentinel sahnesinde en güçlü dört mahalle-çeşitli aday arasında günlük döner; 250-900 m² adayda güvenilir yaygın çevre değişimi varsa temporal acil havuzdan çıkarılır ve normal güvenli rotasyonda kalır.",
   "kor_alan_saha_devriyesi": [
     {
       "bolge_anahtari": "uzunkuyu",
