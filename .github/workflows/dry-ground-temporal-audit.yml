@@ -1,0 +1,84 @@
+name: Kuru Zemin Zaman Serisi Denetimi
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dry_ground_temporal_audit.py"
+      - ".github/workflows/dry-ground-temporal-audit.yml"
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-dry-ground-temporal
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Zaman serisi öz testi
+        run: python dry_ground_temporal_audit.py --check-only
+
+      - name: Kuru zemin adaylarının değişim öncesi kararlılığını ölç
+        run: python dry_ground_temporal_audit.py
+
+      - name: Diagnostik raporu kaydet
+        run: |
+          report_file="dry_ground_temporal_audit.json"
+          if [[ -z "$(git status --porcelain -- $report_file)" ]]; then
+            echo "Kuru zemin zaman serisi raporu değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add $report_file
+          git commit -m "Radar: kuru zemin zaman serisi raporunu güncelle"
+
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal değişti; eski diagnostik raporu üzerine yazmadan sonraki çalışmaya bırakılıyor."
+            exit 0
+          fi
+
+          push_ok=0
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              push_ok=1
+              break
+            fi
+            echo "GitHub push denemesi ${attempt}/3 başarısız; yeniden deneniyor."
+            sleep $((attempt * 2))
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Main ilerledi; eski diagnostik rapor güvenli biçimde atlandı."
+              exit 0
+            fi
+          done
+
+          if [[ "$push_ok" -ne 1 ]]; then
+            echo "Diagnostik rapor üç denemede kaydedilemedi."
+            exit 1
+          fi
