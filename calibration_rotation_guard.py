@@ -4,12 +4,15 @@
 iki alarm-dışı kalibrasyon noktası seçer. Sentinel sahnesi birkaç gün aynı kaldığında
 saf güç sıralaması her çalışmada aynı noktaları gösterebilir. Bu katman yeni alarm veya
 görev üretmeden, aynı güvenlik filtrelerini koruyarak bölge başına en güçlü ilk birkaç
-uygun örneği gün gün döndürür. Yeni Sentinel sahnesi geldiğinde rotasyon sıfırlanır ve
-yine en güçlü örnekten başlanır.
+uygun örneği gün gün döndürür. Aynı mahalleden birden fazla güçlü aday ilk rotasyon
+havuzunu dolduruyorsa, güvenli başka mahalleler varken bu tekrarlar havuzun dışına
+alınır. Yeni Sentinel sahnesi geldiğinde rotasyon sıfırlanır ve yine en güçlü örnekten
+başlanır.
 
-Amaç aynı uydu çifti değişmeden beklerken aynı iki noktayı tekrar tekrar kontrol etmek
-yerine daha fazla sokak/mahalleden saha etiketi toplamaktır. Üretim eşiği, 250 m² alt
-sınırı, aktif görev mesafesi ve kuru-zemin geometri filtreleri değişmez.
+Amaç aynı uydu çifti değişmeden beklerken aynı birkaç sokağı tekrar tekrar kontrol etmek
+yerine daha fazla mahalleden saha etiketi toplamaktır. Üretim eşiği, 250 m² alt sınırı,
+aktif görev mesafesi, günlük kalibrasyon nokta sayısı ve kuru-zemin geometri filtreleri
+değişmez.
 """
 
 from __future__ import annotations
@@ -103,11 +106,45 @@ def _eligible_region_items(region_key, region_data, active_candidates):
     )
 
 
+def _neighborhood_key(value):
+    return " ".join(str(value or "").casefold().split())
+
+
+def _diverse_top_pool(items, pool_size=ROTATION_POOL_PER_REGION):
+    """Güç sırasını koruyarak havuzda önce farklı mahalleleri temsil et."""
+    cap = max(int(pool_size), 1)
+    selected = []
+    seen_neighborhoods = set()
+
+    # İlk geçişte her yaklaşık mahalleden en güçlü adayı al. Böylece aynı mahalledeki
+    # ikinci güçlü sinyal, başka güvenli mahalleleri dört günlük kalibrasyon döngüsünden
+    # çıkarmasın.
+    for item in items:
+        key = _neighborhood_key(item.get("mahalle")) if isinstance(item, dict) else ""
+        if key and key in seen_neighborhoods:
+            continue
+        selected.append(item)
+        if key:
+            seen_neighborhoods.add(key)
+        if len(selected) >= cap:
+            return selected
+
+    # Mahalle sayısı havuzu doldurmaya yetmiyorsa eski davranışa güvenli biçimde dön:
+    # kalan en güçlü adayları ekle; hiçbir kalibrasyon slotunu sırf çeşitlilik için silme.
+    for item in items:
+        if item in selected:
+            continue
+        selected.append(item)
+        if len(selected) >= cap:
+            break
+    return selected
+
+
 def _rotated_order(items, offset, pool_size=ROTATION_POOL_PER_REGION):
     if not items:
         return []
-    top = list(items[: max(int(pool_size), 1)])
-    rest = list(items[len(top) :])
+    top = _diverse_top_pool(items, pool_size=pool_size)
+    rest = [item for item in items if item not in top]
     if len(top) <= 1:
         return top + rest
     shift = max(int(offset), 0) % len(top)
@@ -162,9 +199,11 @@ def _rotation_markdown(items):
     )
     new = (
         "Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten "
-        "başlanır; aynı sahne kaldıkça bölge başına en güçlü ilk dört güvenli örnek günlük "
-        "rotasyonla değiştirilir. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış "
-        "pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir."
+        "başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük "
+        "rotasyonla değiştirilir. Güvenli farklı mahalleler varken aynı mahalleden ikinci "
+        "aday bu dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek "
+        "hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de "
+        "kalibre etmektir."
     )
     return section.replace(old, new, 1)
 
@@ -182,7 +221,9 @@ def update_calibration_rotation():
         "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin "
         "değişimlerinden aktif görevlerin en az 120 m dışında bölge başına en fazla bir, "
         "toplam iki örnek seçilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; "
-        "sahne değişmezse en güçlü ilk dört güvenli örnek günlük rotasyonla değiştirilir."
+        "sahne değişmezse en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. "
+        "Güvenli farklı mahalleler varken aynı mahalleden ikinci aday ilk dört kişilik "
+        "kalibrasyon havuzuna alınmaz."
     )
     REPORT_JSON.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
@@ -259,6 +300,20 @@ def _self_check():
         audit, {"rapor_tarihi": "2026-09-01", "saha_adaylari": []}
     )
     assert [row["mahalle"] for row in next_cycle] == ["W4", "E2"], next_cycle
+
+    # Aynı mahallenin iki güçlü adayı ilk dört havuzu işgal etmemeli. Spektral güç
+    # sırası korunarak güvenli dört farklı mahalle rotasyona girmeli.
+    duplicate_neighborhoods = [
+        item("A", 38.20, 26.30, 0.40),
+        item("A", 38.21, 26.31, 0.39),
+        item("B", 38.22, 26.32, 0.38),
+        item("C", 38.23, 26.33, 0.37),
+        item("D", 38.24, 26.34, 0.36),
+    ]
+    diverse_pool = _diverse_top_pool(duplicate_neighborhoods, pool_size=4)
+    assert [row["mahalle"] for row in diverse_pool] == ["A", "B", "C", "D"], diverse_pool
+    diverse_rotation = _rotated_order(duplicate_neighborhoods, 3, pool_size=4)
+    assert [row["mahalle"] for row in diverse_rotation[:4]] == ["D", "A", "B", "C"], diverse_rotation
 
     reset_audit = json.loads(json.dumps(audit))
     for region in reset_audit["bolgeler"].values():
