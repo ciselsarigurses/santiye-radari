@@ -1,0 +1,204 @@
+{
+  "olusturma": "2026-09-02 11:34 +0300",
+  "amac": "Saha doğrulamalı Sentinel yanlış pozitiflerini mevcut 30 m ve yalnız diagnostik 40/50/60 m SCL-su tamponlarında karşılaştırmak; üretimi değiştirmez.",
+  "uretim_degistirildi": false,
+  "mevcut_tampon_piksel": 3,
+  "denenen_tampon_piksel": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "sentinel_yanlis_pozitif_toplam": 1,
+  "mevcut_sahneyle_analiz_edilen": 1,
+  "karar_kurali": "Tek saha etiketiyle küresel tampon büyütülmez. Ölçüm, aynı mekanizma birden fazla saha sonucunda tekrar ederse ve erken/parsel aday kaybı göstermiyorsa manuel üretim değişikliği incelemesine veri sağlar.",
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mevcut_cift": [
+        "26.08.2026",
+        "29.08.2026"
+      ],
+      "analiz_piksel_m_yaklasik": 10.0,
+      "ayni_sahne_yanlis_pozitif": 1,
+      "farkli_sahne_etiketi": 0,
+      "senaryolar": {
+        "3": {
+          "tampon_m_yaklasik": 30,
+          "ham_aday": 381,
+          "secili_aday": 24,
+          "ham_olcek": {
+            "kucuk_250_800": 3,
+            "erken_800_2000": 137,
+            "santiye_2000_10000": 152,
+            "genis_10000_ustu": 89
+          },
+          "secili_olcek": {
+            "kucuk_250_800": 3,
+            "erken_800_2000": 3,
+            "santiye_2000_10000": 3,
+            "genis_10000_ustu": 15
+          }
+        },
+        "4": {
+          "tampon_m_yaklasik": 40,
+          "ham_aday": 379,
+          "secili_aday": 24,
+          "ham_olcek": {
+            "kucuk_250_800": 2,
+            "erken_800_2000": 137,
+            "santiye_2000_10000": 151,
+            "genis_10000_ustu": 89
+          },
+          "secili_olcek": {
+            "kucuk_250_800": 2,
+            "erken_800_2000": 3,
+            "santiye_2000_10000": 3,
+            "genis_10000_ustu": 16
+          }
+        },
+        "5": {
+          "tampon_m_yaklasik": 50,
+          "ham_aday": 378,
+          "secili_aday": 24,
+          "ham_olcek": {
+            "kucuk_250_800": 2,
+            "erken_800_2000": 137,
+            "santiye_2000_10000": 150,
+            "genis_10000_ustu": 89
+          },
+          "secili_olcek": {
+            "kucuk_250_800": 2,
+            "erken_800_2000": 3,
+            "santiye_2000_10000": 3,
+            "genis_10000_ustu": 16
+          }
+        },
+        "6": {
+          "tampon_m_yaklasik": 60,
+          "ham_aday": 375,
+          "secili_aday": 24,
+          "ham_olcek": {
+            "kucuk_250_800": 2,
+            "erken_800_2000": 135,
+            "santiye_2000_10000": 149,
+            "genis_10000_ustu": 89
+          },
+          "secili_olcek": {
+            "kucuk_250_800": 2,
+            "erken_800_2000": 3,
+            "santiye_2000_10000": 3,
+            "genis_10000_ustu": 16
+          }
+        }
+      },
+      "yanlis_pozitifler": [
+        {
+          "gorev_id": "U611DAF934D",
+          "enlem": 38.346018,
+          "boylam": 26.383414,
+          "alan_m2": 300.0,
+          "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+          "onceki_tarih": "26.08.2026",
+          "son_tarih": "29.08.2026",
+          "boyut_sinifi": "KUCUK",
+          "kayit_zamani": "2026-09-02 07:59 UTC",
+          "yaricap_sonuclari": {
+            "3": {
+              "su_tamponunda": true,
+              "ham_en_yakin": {
+                "eslesti": false,
+                "mesafe_m": 6317.6,
+                "aday": {
+                  "enlem": 38.338783,
+                  "boylam": 26.311638,
+                  "alan_m2": 400,
+                  "boyut_sinifi": "KUCUK"
+                }
+              },
+              "secili_en_yakin": {
+                "eslesti": false,
+                "mesafe_m": 6317.6,
+                "aday": {
+                  "enlem": 38.338783,
+                  "boylam": 26.311638,
+                  "alan_m2": 400,
+                  "boyut_sinifi": "KUCUK"
+                }
+              }
+            },
+            "4": {
+              "su_tamponunda": true,
+              "ham_en_yakin": {
+                "eslesti": false,
+                "mesafe_m": 6536.5,
+                "aday": {
+                  "enlem": 38.309025,
+                  "boylam": 26.441797,
+                  "alan_m2": 5601,
+                  "boyut_sinifi": "STANDART"
+                }
+              },
+              "secili_en_yakin": {
+                "eslesti": false,
+                "mesafe_m": 7700.2,
+                "aday": {
+                  "enlem": 38.32223,
+                  "boylam": 26.466294,
+                  "alan_m2": 3500,
+                  "boyut_sinifi": "STANDART"
+                }
+              }
+            },
+            "5": {
+              "su_tamponunda": true,
+              "ham_en_yakin": {
+                "eslesti": false,
+                "mesafe_m": 6536.5,
+                "aday": {
+                  "enlem": 38.309025,
+                  "boylam": 26.441797,
+                  "alan_m2": 5601,
+                  "boyut_sinifi": "STANDART"
+                }
+              },
+              "secili_en_yakin": {
+                "eslesti": false,
+                "mesafe_m": 7700.2,
+                "aday": {
+                  "enlem": 38.32223,
+                  "boylam": 26.466294,
+                  "alan_m2": 3500,
+                  "boyut_sinifi": "STANDART"
+                }
+              }
+            },
+            "6": {
+              "su_tamponunda": true,
+              "ham_en_yakin": {
+                "eslesti": false,
+                "mesafe_m": 6536.5,
+                "aday": {
+                  "enlem": 38.309025,
+                  "boylam": 26.441797,
+                  "alan_m2": 5601,
+                  "boyut_sinifi": "STANDART"
+                }
+              },
+              "secili_en_yakin": {
+                "eslesti": false,
+                "mesafe_m": 7700.2,
+                "aday": {
+                  "enlem": 38.32223,
+                  "boylam": 26.466294,
+                  "alan_m2": 3500,
+                  "boyut_sinifi": "STANDART"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
