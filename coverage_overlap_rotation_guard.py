@@ -34,10 +34,11 @@ NOTE = (
     "gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif "
     "radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve "
     "Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın "
-    "diye üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir "
-    "gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. "
-    "Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin "
-    "kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez."
+    "diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme "
+    "slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu "
+    "slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine "
+    "geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif "
+    "varsa tekrar seçilmez."
 )
 
 
@@ -49,9 +50,9 @@ def _report_day(report_payload):
         return None
 
 
-def _rotation_target(report_payload):
+def _rotation_target(report_payload, rotation_day=None):
     """Üç günde bir iki çekirdeği koru; diğer iki günde hedef bölgeyi sırayla döndür."""
-    day = _report_day(report_payload)
+    day = rotation_day or _report_day(report_payload)
     if day is None:
         return None
     phase = day.toordinal() % 3
@@ -126,7 +127,13 @@ def _region_item(items, region_key):
     )
 
 
-def _eligible_overlap_candidates(audit_payload, report_payload, target_region, retained):
+def _eligible_overlap_candidates(
+    audit_payload,
+    report_payload,
+    target_region,
+    retained,
+    rotation_day=None,
+):
     overlap_audit = _overlap_only_audit(audit_payload, target_region)
     blocked = route._neighborhoods_from_calibration(report_payload)
     overlap_audit = route._prefer_other_neighborhoods(overlap_audit, blocked)
@@ -141,7 +148,11 @@ def _eligible_overlap_candidates(audit_payload, report_payload, target_region, r
     def rotated(items):
         if not items:
             return []
-        offset = coverage._rotation_offset(report_payload, len(items))
+        offset = coverage._rotation_offset(
+            report_payload,
+            len(items),
+            rotation_day=rotation_day,
+        )
         return items[offset:] + items[:offset]
 
     active_points = coverage._active_points(report_payload)
@@ -175,12 +186,17 @@ def _eligible_overlap_candidates(audit_payload, report_payload, target_region, r
     return different or eligible
 
 
-def select_overlap_rotated_patrol(audit_payload, report_payload, baseline=None):
+def select_overlap_rotated_patrol(
+    audit_payload,
+    report_payload,
+    baseline=None,
+    rotation_day=None,
+):
     baseline = list(baseline or _baseline_patrol(audit_payload, report_payload))
     if len(baseline) < 2:
         return baseline
 
-    target = _rotation_target(report_payload)
+    target = _rotation_target(report_payload, rotation_day=rotation_day)
     if target not in ROTATION_REGIONS:
         return baseline
     retained_region = "uzunkuyu" if target == "cesme" else "cesme"
@@ -199,6 +215,7 @@ def select_overlap_rotated_patrol(audit_payload, report_payload, baseline=None):
         report_payload,
         target,
         retained,
+        rotation_day=rotation_day,
     )
     if not candidates:
         return baseline
@@ -233,10 +250,17 @@ def update_overlap_rotation():
 
     audit = json.loads(AUDIT_JSON.read_text(encoding="utf-8"))
     report = json.loads(REPORT_JSON.read_text(encoding="utf-8"))
+    rotation_day = coverage._rotation_day(report)
     baseline = _baseline_patrol(audit, report)
-    selected = select_overlap_rotated_patrol(audit, report, baseline=baseline)
+    selected = select_overlap_rotated_patrol(
+        audit,
+        report,
+        baseline=baseline,
+        rotation_day=rotation_day,
+    )
 
     report["kor_alan_saha_devriyesi"] = selected
+    report["kor_alan_saha_devriyesi_rotasyon_tarihi"] = rotation_day.isoformat()
     report["kor_alan_saha_devriyesi_notu"] = NOTE
     REPORT_JSON.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
@@ -305,6 +329,17 @@ def _self_check():
     third = select_overlap_rotated_patrol(audit, third_report, third_baseline)
     assert _is_overlap_example(_region_item(third, "uzunkuyu")), third
     assert route._is_region_core_example("cesme", _region_item(third, "cesme")), third
+
+    # Bayat rapor 01.09'da kalsa bile 02.09 yerel gününde örtüşme fazı dünde kalmamalı.
+    stale_day = date(2026, 9, 2)
+    assert _rotation_target(first_report, rotation_day=stale_day) is None
+    stale = select_overlap_rotated_patrol(
+        audit,
+        first_report,
+        first_baseline,
+        rotation_day=stale_day,
+    )
+    assert stale == first_baseline, (stale, first_baseline)
 
     # Örtüşme havuzu yoksa mevcut iki çekirdek seçimi bozulmamalı.
     no_overlap = copy.deepcopy(audit)
