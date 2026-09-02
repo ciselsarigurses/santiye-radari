@@ -15,6 +15,7 @@ on:
       - "pages/**"
       - "calibration_outcome.py"
       - "field_outcome.py"
+      - "field_feedback_audit.py"
       - "apply_field_status.py"
       - ".github/workflows/app-smoke.yml"
   workflow_dispatch:
@@ -49,9 +50,10 @@ jobs:
       - name: Bağımlılıkları kur
         run: pip install -r requirements.txt
 
-      - name: Saha geri bildirim şema öz testi
+      - name: Saha geri bildirim şema ve kalibrasyon kilidi öz testi
         run: |
           python field_outcome.py --check-only
+          python field_feedback_audit.py --check-only
           python -m py_compile apply_field_status.py
 
       - name: Güncel veri ile uygulama açılış testi
