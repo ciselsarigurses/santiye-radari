@@ -6,6 +6,8 @@ on:
     paths:
       - "micro_site_temporal_guard.py"
       - "micro_site_locality_guard.py"
+      - "micro_site_decision_guard.py"
+      - "micro_site_field_review.json"
       - "micro_site_shortlist.json"
       - "micro_site_audit.json"
       - ".github/workflows/micro-site-temporal.yml"
@@ -49,11 +51,17 @@ jobs:
       - name: Mikro yerel-kontekst öz testini çalıştır
         run: python micro_site_locality_guard.py --check-only
 
+      - name: Mikro kanıt birleştirme öz testini çalıştır
+        run: python micro_site_decision_guard.py --check-only
+
       - name: Üç Sentinel sahnesinde mikro adayları ölç
         run: python micro_site_temporal_guard.py
 
       - name: Mikro adayın çevresel yaygınlığını ölç
         run: python micro_site_locality_guard.py
+
+      - name: Mikro kanıtları tek diagnostik kararda birleştir
+        run: python micro_site_decision_guard.py
 
       - name: Diagnostik sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
@@ -78,15 +86,15 @@ jobs:
             fi
           fi
 
-          if [[ -z "$(git status --porcelain -- micro_site_temporal_review.json micro_site_locality_review.json)" ]]; then
+          if [[ -z "$(git status --porcelain -- micro_site_temporal_review.json micro_site_locality_review.json micro_site_decision_review.json)" ]]; then
             echo "Mikro diagnostik sonuçlar değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_temporal_review.json micro_site_locality_review.json
-          git commit -m "Radar: mikro temporal ve lokalite incelemesini güncelle"
+          git add micro_site_temporal_review.json micro_site_locality_review.json micro_site_decision_review.json
+          git commit -m "Radar: mikro kanıt sentezini güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
             echo "Ana dal değişti; eski diagnostik sonucu üzerine yazmadan sonraki çalışmaya bırakılıyor."
