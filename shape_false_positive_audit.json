@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-02",
-  "olusturma": "2026-09-02 11:07 +03",
+  "olusturma": "2026-09-02 11:18 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
