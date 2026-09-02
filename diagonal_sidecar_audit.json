@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-02",
-  "olusturma": "2026-09-02 19:14 +03",
+  "rapor_tarihi": "2026-09-03",
+  "olusturma": "2026-09-03 02:14 +03",
   "amac": "İkinci diyagonal 800-10.000 m² yan-kümeyi yalnız yerini aldığı normal şantiye-ölçeği adayından daha güçlü Sentinel kanıtı taşıyorsa, toplam 24 aday ve ölçek dağılımını değiştirmeden terfi ettirmek; mevcut sahneyi geriye dönük değiştirmemek.",
   "bolgeler": {
     "cesme": {
@@ -93,12 +93,12 @@
       ]
     },
     "uzunkuyu": {
-      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "durum": "ok",
       "latest_item": "S2B_T35SMC_20260829T090620_L2A",
-      "ham_aday": 234,
+      "ham_aday": 229,
       "guvenli_diyagonal_yan_kume_havuzu": 11,
-      "erken_parsel_yan_kume": 3,
+      "erken_parsel_yan_kume": 5,
       "mevcut_kota": 1,
       "mevcut_secili_yan_kume": 1,
       "simulasyon_kota": 2,
@@ -106,14 +106,14 @@
       "toplam_aday_mevcut": 24,
       "toplam_aday_simulasyon": 24,
       "olcek_dagilimi_mevcut": {
-        "kucuk": 1,
+        "kucuk": 0,
         "santiye_olcegi": 6,
-        "genis": 17
+        "genis": 18
       },
       "olcek_dagilimi_simulasyon": {
-        "kucuk": 1,
+        "kucuk": 0,
         "santiye_olcegi": 6,
-        "genis": 17
+        "genis": 18
       },
       "uyarlamali_karar": "ikinci_yan_kume_daha_guclu_degil",
       "sahne_politikasi": "mevcut_sahne_korundu",
@@ -122,19 +122,19 @@
         {
           "mahalle": "Germiyan",
           "enlem": 38.319879,
-          "boylam": 26.470095,
-          "alan_m2": 2001,
-          "guclu_sinyal_orani": 0.05,
+          "boylam": 26.470088,
+          "alan_m2": 2100,
+          "guclu_sinyal_orani": 0.0476,
           "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
         }
       ],
       "cikarilan": [
         {
-          "mahalle": "Uzunkuyu",
-          "enlem": 38.297267,
-          "boylam": 26.548874,
-          "alan_m2": 7102,
-          "guclu_sinyal_orani": 0.2254,
+          "mahalle": "Germiyan",
+          "enlem": 38.311105,
+          "boylam": 26.469974,
+          "alan_m2": 4700,
+          "guclu_sinyal_orani": 0.1915,
           "geometri_kaynagi": null
         }
       ],
@@ -142,39 +142,39 @@
         {
           "mahalle": "Germiyan",
           "enlem": 38.32223,
-          "boylam": 26.466317,
-          "alan_m2": 3501,
+          "boylam": 26.466311,
+          "alan_m2": 3500,
           "guclu_sinyal_orani": 0.5143,
           "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
         },
         {
           "mahalle": "Germiyan",
           "enlem": 38.319879,
-          "boylam": 26.470095,
-          "alan_m2": 2001,
-          "guclu_sinyal_orani": 0.05,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        },
-        {
-          "mahalle": "Germiyan",
-          "enlem": 38.300975,
-          "boylam": 26.514981,
-          "alan_m2": 5502,
-          "guclu_sinyal_orani": 0.0182,
+          "boylam": 26.470088,
+          "alan_m2": 2100,
+          "guclu_sinyal_orani": 0.0476,
           "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
         },
         {
           "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.34638,
-          "boylam": 26.473416,
-          "alan_m2": 900,
+          "enlem": 38.216496,
+          "boylam": 26.452118,
+          "alan_m2": 1000,
+          "guclu_sinyal_orani": 0.0,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        },
+        {
+          "mahalle": "Germiyan",
+          "enlem": 38.317165,
+          "boylam": 26.467112,
+          "alan_m2": 1200,
           "guclu_sinyal_orani": 0.0,
           "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
         },
         {
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.310924,
-          "boylam": 26.464943,
+          "boylam": 26.464938,
           "alan_m2": 1400,
           "guclu_sinyal_orani": 0.0,
           "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
