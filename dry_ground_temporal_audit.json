@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-02",
-  "olusturma": "2026-09-02 05:35 +0300",
+  "olusturma": "2026-09-02 11:09 +0300",
   "amac": "Kuru-zemin saha-benzeri kalibrasyon örneklerinde son değişimden önceki Sentinel döneminin BSI kararlılığını aynı 3x3 piksel yamasında ölçmek; ani başlangıç desteği ve istikrarsız zemin riskini yalnız diagnostik olarak işaretlemek.",
   "esikler": {
     "patch_yaricap_piksel": 1,
@@ -30,7 +30,7 @@
       "istikrarsiz_zemin_riski": 4,
       "adaylar": [
         {
-          "mahalle": "Ovacık",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.218667,
           "boylam": 26.406881,
           "alan_m2": 1800,
@@ -53,30 +53,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ovacık",
-          "enlem": 38.210707,
-          "boylam": 26.415238,
-          "alan_m2": 400,
-          "son_cift_bsi_degisim": 0.1413,
-          "kaynak_bilesen_bsi_degisim": 0.1415,
-          "onceki_donem_bsi_degisim": 0.0044,
-          "uc_sahne_gecerli_oran": 0.667,
-          "onceki_donem_gecerli_oran": 0.667,
-          "ani_baslangic_orani": 14.13,
-          "ani_baslangic_destegi": true,
-          "istikrarsiz_zemin_riski": false,
-          "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false,
-          "ikinci_onceki_donem_bsi_degisim": 0.0127,
-          "ikinci_onceki_donem_gecerli_oran": 1.0,
-          "temporal_baseline_maks_bsi_degisim": 0.0127,
-          "uzun_temporal_ani_baslangic_orani": 11.09,
-          "uzun_temporal_istikrarsiz_zemin_riski": false,
-          "uzun_temporal_koruma": "KORUNDU",
-          "yorunge_geometri_riski": false
-        },
-        {
-          "mahalle": "Ovacık",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.216677,
           "boylam": 26.416383,
           "alan_m2": 400,
@@ -99,7 +76,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.256746,
           "boylam": 26.418558,
           "alan_m2": 400,
@@ -122,7 +99,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.251138,
           "boylam": 26.423023,
           "alan_m2": 900,
@@ -145,7 +122,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.255841,
           "boylam": 26.439049,
           "alan_m2": 600,
@@ -168,7 +145,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.26163,
           "boylam": 26.430463,
           "alan_m2": 600,
@@ -191,7 +168,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.240013,
           "boylam": 26.406424,
           "alan_m2": 300,
@@ -214,7 +191,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.255208,
           "boylam": 26.415811,
           "alan_m2": 500,
@@ -237,7 +214,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.239651,
           "boylam": 26.4355,
           "alan_m2": 1500,
@@ -260,7 +237,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.246073,
           "boylam": 26.409629,
           "alan_m2": 1400,
@@ -283,7 +260,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.253218,
           "boylam": 26.422336,
           "alan_m2": 600,
@@ -329,7 +306,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.264434,
           "boylam": 26.424396,
           "alan_m2": 300,
@@ -352,7 +329,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.242183,
           "boylam": 26.437675,
           "alan_m2": 500,
@@ -375,7 +352,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.352169,
           "boylam": 26.467668,
           "alan_m2": 300,
@@ -398,7 +375,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.210707,
           "boylam": 26.480375,
           "alan_m2": 700,
@@ -421,7 +398,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.241098,
           "boylam": 26.437904,
           "alan_m2": 400,
@@ -444,7 +421,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ovacık",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.206185,
           "boylam": 26.418672,
           "alan_m2": 500,
@@ -490,7 +467,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ovacık",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.229702,
           "boylam": 26.401158,
           "alan_m2": 800,
@@ -513,7 +490,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.220204,
           "boylam": 26.49125,
           "alan_m2": 300,
@@ -536,7 +513,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.208356,
           "boylam": 26.478543,
           "alan_m2": 400,
@@ -582,6 +559,29 @@
           "yorunge_geometri_riski": false
         },
         {
+          "mahalle": "Ildır",
+          "enlem": 38.358953,
+          "boylam": 26.496745,
+          "alan_m2": 700,
+          "son_cift_bsi_degisim": 0.1417,
+          "kaynak_bilesen_bsi_degisim": 0.1385,
+          "onceki_donem_bsi_degisim": 0.0231,
+          "uc_sahne_gecerli_oran": 1.0,
+          "onceki_donem_gecerli_oran": 1.0,
+          "ani_baslangic_orani": 6.14,
+          "ani_baslangic_destegi": true,
+          "istikrarsiz_zemin_riski": false,
+          "izole_saha_benzeri": true,
+          "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0029,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0231,
+          "uzun_temporal_ani_baslangic_orani": 6.13,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
+          "yorunge_geometri_riski": false
+        },
+        {
           "mahalle": "Germiyan",
           "enlem": 38.347918,
           "boylam": 26.493997,
@@ -605,7 +605,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.217943,
           "boylam": 26.451756,
           "alan_m2": 500,
@@ -628,7 +628,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Reisdere",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.272755,
           "boylam": 26.437675,
           "alan_m2": 300,
@@ -720,7 +720,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.201753,
           "boylam": 26.451756,
           "alan_m2": 300,
@@ -743,7 +743,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.25358,
           "boylam": 26.384559,
           "alan_m2": 300,
@@ -812,7 +812,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.212969,
           "boylam": 26.424167,
           "alan_m2": 300,
@@ -881,7 +881,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Şifne",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.342581,
           "boylam": 26.39509,
           "alan_m2": 900,
@@ -927,7 +927,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.238475,
           "boylam": 26.401387,
           "alan_m2": 400,
@@ -1019,7 +1019,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.214144,
           "boylam": 26.42348,
           "alan_m2": 500,
@@ -1042,7 +1042,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.260816,
           "boylam": 26.391542,
           "alan_m2": 500,
@@ -1167,11 +1167,11 @@
       "temporal_ornekleme": "ayni_3x3_yama_uc_sahne_ortak_gecerli_piksel",
       "degisim_oncesi_aralik_gun": 2.0,
       "olculen_aday": 48,
-      "ani_baslangic_destegi": 31,
+      "ani_baslangic_destegi": 32,
       "istikrarsiz_zemin_riski": 4,
       "adaylar": [
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.350993,
           "boylam": 26.467805,
           "alan_m2": 1100,
@@ -1240,7 +1240,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Şifne",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.343305,
           "boylam": 26.462767,
           "alan_m2": 300,
@@ -1258,6 +1258,29 @@
           "ikinci_onceki_donem_gecerli_oran": 1.0,
           "temporal_baseline_maks_bsi_degisim": 0.0157,
           "uzun_temporal_ani_baslangic_orani": 8.97,
+          "uzun_temporal_istikrarsiz_zemin_riski": false,
+          "uzun_temporal_koruma": "KORUNDU",
+          "yorunge_geometri_riski": false
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.371344,
+          "boylam": 26.486469,
+          "alan_m2": 700,
+          "son_cift_bsi_degisim": 0.1549,
+          "kaynak_bilesen_bsi_degisim": 0.1492,
+          "onceki_donem_bsi_degisim": 0.0175,
+          "uc_sahne_gecerli_oran": 1.0,
+          "onceki_donem_gecerli_oran": 1.0,
+          "ani_baslangic_orani": 8.87,
+          "ani_baslangic_destegi": true,
+          "istikrarsiz_zemin_riski": false,
+          "izole_saha_benzeri": false,
+          "lineer_geometri_riski": false,
+          "ikinci_onceki_donem_bsi_degisim": 0.0039,
+          "ikinci_onceki_donem_gecerli_oran": 1.0,
+          "temporal_baseline_maks_bsi_degisim": 0.0175,
+          "uzun_temporal_ani_baslangic_orani": 8.85,
           "uzun_temporal_istikrarsiz_zemin_riski": false,
           "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
@@ -1286,7 +1309,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.214597,
           "boylam": 26.460134,
           "alan_m2": 300,
@@ -1309,7 +1332,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.210707,
           "boylam": 26.480401,
           "alan_m2": 700,
@@ -1378,7 +1401,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.293287,
           "boylam": 26.480401,
           "alan_m2": 400,
@@ -1424,7 +1447,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.351536,
           "boylam": 26.47834,
           "alan_m2": 500,
@@ -1470,7 +1493,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.217943,
           "boylam": 26.451889,
           "alan_m2": 400,
@@ -1516,7 +1539,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.218848,
           "boylam": 26.492195,
           "alan_m2": 300,
@@ -1608,7 +1631,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.350179,
           "boylam": 26.494485,
           "alan_m2": 300,
@@ -1631,7 +1654,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.208356,
           "boylam": 26.478454,
           "alan_m2": 300,
@@ -1654,7 +1677,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.301065,
           "boylam": 26.520363,
           "alan_m2": 900,
@@ -1677,7 +1700,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.220204,
           "boylam": 26.491393,
           "alan_m2": 300,
@@ -1700,7 +1723,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.208808,
           "boylam": 26.480401,
           "alan_m2": 600,
@@ -1723,7 +1746,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.307578,
           "boylam": 26.461508,
           "alan_m2": 1501,
@@ -1746,7 +1769,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.201843,
           "boylam": 26.45166,
           "alan_m2": 400,
@@ -1769,7 +1792,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.334441,
           "boylam": 26.651011,
           "alan_m2": 600,
@@ -1861,7 +1884,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.345928,
           "boylam": 26.472042,
           "alan_m2": 400,
@@ -1884,7 +1907,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.35235,
           "boylam": 26.467691,
           "alan_m2": 500,
@@ -1953,7 +1976,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.209622,
           "boylam": 26.479485,
           "alan_m2": 300,
@@ -1976,7 +1999,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.214777,
           "boylam": 26.454866,
           "alan_m2": 600,
@@ -1999,7 +2022,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.245711,
           "boylam": 26.491279,
           "alan_m2": 300,
@@ -2017,29 +2040,6 @@
           "ikinci_onceki_donem_gecerli_oran": 1.0,
           "temporal_baseline_maks_bsi_degisim": 0.0162,
           "uzun_temporal_ani_baslangic_orani": 3.93,
-          "uzun_temporal_istikrarsiz_zemin_riski": false,
-          "uzun_temporal_koruma": "KORUNDU",
-          "yorunge_geometri_riski": false
-        },
-        {
-          "mahalle": "Reisdere",
-          "enlem": 38.304683,
-          "boylam": 26.454065,
-          "alan_m2": 500,
-          "son_cift_bsi_degisim": 0.0991,
-          "kaynak_bilesen_bsi_degisim": 0.1111,
-          "onceki_donem_bsi_degisim": 0.0275,
-          "uc_sahne_gecerli_oran": 1.0,
-          "onceki_donem_gecerli_oran": 1.0,
-          "ani_baslangic_orani": 3.6,
-          "ani_baslangic_destegi": false,
-          "istikrarsiz_zemin_riski": false,
-          "izole_saha_benzeri": true,
-          "lineer_geometri_riski": false,
-          "ikinci_onceki_donem_bsi_degisim": 0.0025,
-          "ikinci_onceki_donem_gecerli_oran": 1.0,
-          "temporal_baseline_maks_bsi_degisim": 0.0275,
-          "uzun_temporal_ani_baslangic_orani": 3.6,
           "uzun_temporal_istikrarsiz_zemin_riski": false,
           "uzun_temporal_koruma": "KORUNDU",
           "yorunge_geometri_riski": false
@@ -2068,7 +2068,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.420186,
           "boylam": 26.610935,
           "alan_m2": 1100,
@@ -2091,7 +2091,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.385816,
           "boylam": 26.628225,
           "alan_m2": 1000,
@@ -2114,7 +2114,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.387806,
           "boylam": 26.626737,
           "alan_m2": 500,
@@ -2137,7 +2137,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.204285,
           "boylam": 26.451546,
           "alan_m2": 300,
@@ -2160,7 +2160,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.338602,
           "boylam": 26.646546,
           "alan_m2": 400,
@@ -2183,7 +2183,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.372429,
           "boylam": 26.644027,
           "alan_m2": 400,
@@ -2206,7 +2206,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.400921,
           "boylam": 26.621469,
           "alan_m2": 300,
@@ -2229,7 +2229,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.424528,
           "boylam": 26.585859,
           "alan_m2": 300,
@@ -2252,7 +2252,7 @@
           "yorunge_geometri_riski": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.377856,
           "boylam": 26.640706,
           "alan_m2": 500,

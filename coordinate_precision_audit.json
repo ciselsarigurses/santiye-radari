@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-02",
-  "olusturma": "2026-09-02 05:36 +0300",
+  "olusturma": "2026-09-02 11:10 +0300",
   "amac": "Mevcut Sentinel aday koordinatının geometrik temsil pikseli ile aynı bağlı bileşendeki BSI×RGB değişim gücüne göre sinyal-ağırlıklı temsil pikseli arasındaki farkı ölçmek; koordinatı otomatik değiştirmeden 10 m sınıfı hassasiyet iyileştirmesini doğrulamak.",
   "uyari": "Bu çıktı alarm/görev/eşik değiştirmez. Sinyal-ağırlıklı koordinat yalnız diagnostiktir; saha doğrulaması olmadan kesin adres veya parsel değildir.",
   "bolgeler": {
@@ -16,7 +16,7 @@
       "maksimum_kayma_m": 14.1,
       "adaylar": [
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 1400,
           "mevcut_enlem": 38.246073,
           "mevcut_boylam": 26.409629,
@@ -64,7 +64,7 @@
           "bilesen_piksel": 6
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.241098,
           "mevcut_boylam": 26.437904,
@@ -76,7 +76,7 @@
           "bilesen_piksel": 4
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.256746,
           "mevcut_boylam": 26.418558,
@@ -88,7 +88,7 @@
           "bilesen_piksel": 4
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.238475,
           "mevcut_boylam": 26.401387,
@@ -112,7 +112,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.217943,
           "mevcut_boylam": 26.451756,
@@ -160,7 +160,7 @@
           "bilesen_piksel": 4
         },
         {
-          "mahalle": "Şifne",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 900,
           "mevcut_enlem": 38.342581,
           "mevcut_boylam": 26.39509,
@@ -172,7 +172,7 @@
           "bilesen_piksel": 9
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.240013,
           "mevcut_boylam": 26.406424,
@@ -196,7 +196,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.25358,
           "mevcut_boylam": 26.384559,
@@ -220,7 +220,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Ovacık",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.206185,
           "mevcut_boylam": 26.418672,
@@ -244,7 +244,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.255208,
           "mevcut_boylam": 26.415811,
@@ -256,31 +256,19 @@
           "bilesen_piksel": 5
         },
         {
-          "mahalle": "Uzunkuyu",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.220204,
-          "mevcut_boylam": 26.49125,
-          "geometrik_enlem": 38.220204,
-          "geometrik_boylam": 26.49125,
-          "sinyal_agirlikli_enlem": 38.220204,
-          "sinyal_agirlikli_boylam": 26.49125,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
-        },
-        {
           "mahalle": "Ildır",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.352169,
-          "mevcut_boylam": 26.467668,
-          "geometrik_enlem": 38.352169,
-          "geometrik_boylam": 26.467668,
-          "sinyal_agirlikli_enlem": 38.352169,
-          "sinyal_agirlikli_boylam": 26.467668,
+          "alan_m2": 700,
+          "mevcut_enlem": 38.358953,
+          "mevcut_boylam": 26.496745,
+          "geometrik_enlem": 38.358953,
+          "geometrik_boylam": 26.496745,
+          "sinyal_agirlikli_enlem": 38.358953,
+          "sinyal_agirlikli_boylam": 26.496745,
           "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
+          "bilesen_piksel": 7
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 900,
           "mevcut_enlem": 38.251138,
           "mevcut_boylam": 26.423023,
@@ -292,7 +280,7 @@
           "bilesen_piksel": 9
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 600,
           "mevcut_enlem": 38.26163,
           "mevcut_boylam": 26.430463,
@@ -304,7 +292,7 @@
           "bilesen_piksel": 6
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 600,
           "mevcut_enlem": 38.253218,
           "mevcut_boylam": 26.422336,
@@ -316,7 +304,7 @@
           "bilesen_piksel": 6
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.260816,
           "mevcut_boylam": 26.391542,
@@ -340,7 +328,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.201753,
           "mevcut_boylam": 26.451756,
@@ -352,7 +340,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Ovacık",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 1800,
           "mevcut_enlem": 38.218667,
           "mevcut_boylam": 26.406881,
@@ -364,7 +352,7 @@
           "bilesen_piksel": 18
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.212969,
           "mevcut_boylam": 26.424167,
@@ -376,7 +364,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 600,
           "mevcut_enlem": 38.255841,
           "mevcut_boylam": 26.439049,
@@ -388,7 +376,7 @@
           "bilesen_piksel": 6
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.242183,
           "mevcut_boylam": 26.437675,
@@ -400,7 +388,7 @@
           "bilesen_piksel": 5
         },
         {
-          "mahalle": "Ovacık",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.216677,
           "mevcut_boylam": 26.416383,
@@ -436,7 +424,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Ovacık",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 800,
           "mevcut_enlem": 38.229702,
           "mevcut_boylam": 26.401158,
@@ -448,7 +436,7 @@
           "bilesen_piksel": 8
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 1500,
           "mevcut_enlem": 38.239651,
           "mevcut_boylam": 26.4355,
@@ -460,7 +448,19 @@
           "bilesen_piksel": 15
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.220204,
+          "mevcut_boylam": 26.49125,
+          "geometrik_enlem": 38.220204,
+          "geometrik_boylam": 26.49125,
+          "sinyal_agirlikli_enlem": 38.220204,
+          "sinyal_agirlikli_boylam": 26.49125,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.214144,
           "mevcut_boylam": 26.42348,
@@ -520,7 +520,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.208356,
           "mevcut_boylam": 26.478543,
@@ -544,7 +544,7 @@
           "bilesen_piksel": 15
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.264434,
           "mevcut_boylam": 26.424396,
@@ -556,7 +556,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Reisdere",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.272755,
           "mevcut_boylam": 26.437675,
@@ -568,7 +568,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 700,
           "mevcut_enlem": 38.210707,
           "mevcut_boylam": 26.480375,
@@ -580,16 +580,16 @@
           "bilesen_piksel": 7
         },
         {
-          "mahalle": "Ovacık",
-          "alan_m2": 400,
-          "mevcut_enlem": 38.210707,
-          "mevcut_boylam": 26.415238,
-          "geometrik_enlem": 38.210707,
-          "geometrik_boylam": 26.415238,
-          "sinyal_agirlikli_enlem": 38.210707,
-          "sinyal_agirlikli_boylam": 26.415238,
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.352169,
+          "mevcut_boylam": 26.467668,
+          "geometrik_enlem": 38.352169,
+          "geometrik_boylam": 26.467668,
+          "sinyal_agirlikli_enlem": 38.352169,
+          "sinyal_agirlikli_boylam": 26.467668,
           "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 4
+          "bilesen_piksel": 3
         }
       ]
     },
@@ -605,7 +605,7 @@
       "maksimum_kayma_m": 20.0,
       "adaylar": [
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.35235,
           "mevcut_boylam": 26.467691,
@@ -617,7 +617,7 @@
           "bilesen_piksel": 5
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.377856,
           "mevcut_boylam": 26.640706,
@@ -629,7 +629,7 @@
           "bilesen_piksel": 5
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 600,
           "mevcut_enlem": 38.334441,
           "mevcut_boylam": 26.651011,
@@ -641,7 +641,7 @@
           "bilesen_piksel": 6
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 600,
           "mevcut_enlem": 38.214777,
           "mevcut_boylam": 26.454866,
@@ -653,7 +653,7 @@
           "bilesen_piksel": 6
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 1000,
           "mevcut_enlem": 38.385816,
           "mevcut_boylam": 26.628225,
@@ -665,7 +665,7 @@
           "bilesen_piksel": 10
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.201843,
           "mevcut_boylam": 26.45166,
@@ -689,7 +689,7 @@
           "bilesen_piksel": 6
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 1100,
           "mevcut_enlem": 38.350993,
           "mevcut_boylam": 26.467805,
@@ -701,7 +701,7 @@
           "bilesen_piksel": 11
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.293287,
           "mevcut_boylam": 26.480401,
@@ -713,7 +713,7 @@
           "bilesen_piksel": 4
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.345928,
           "mevcut_boylam": 26.472042,
@@ -725,7 +725,7 @@
           "bilesen_piksel": 4
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.400921,
           "mevcut_boylam": 26.621469,
@@ -737,7 +737,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 1100,
           "mevcut_enlem": 38.420186,
           "mevcut_boylam": 26.610935,
@@ -749,7 +749,7 @@
           "bilesen_piksel": 11
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.338602,
           "mevcut_boylam": 26.646546,
@@ -761,7 +761,7 @@
           "bilesen_piksel": 4
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.372429,
           "mevcut_boylam": 26.644027,
@@ -773,7 +773,7 @@
           "bilesen_piksel": 4
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.387806,
           "mevcut_boylam": 26.626737,
@@ -821,7 +821,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.204285,
           "mevcut_boylam": 26.451546,
@@ -833,19 +833,31 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Reisdere",
-          "alan_m2": 500,
-          "mevcut_enlem": 38.304683,
-          "mevcut_boylam": 26.454065,
-          "geometrik_enlem": 38.304683,
-          "geometrik_boylam": 26.454065,
-          "sinyal_agirlikli_enlem": 38.304683,
-          "sinyal_agirlikli_boylam": 26.454065,
+          "mahalle": "Uzunkuyu",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.298262,
+          "mevcut_boylam": 26.552538,
+          "geometrik_enlem": 38.298262,
+          "geometrik_boylam": 26.552538,
+          "sinyal_agirlikli_enlem": 38.298262,
+          "sinyal_agirlikli_boylam": 26.552538,
           "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 5
+          "bilesen_piksel": 3
         },
         {
           "mahalle": "Ildır",
+          "alan_m2": 700,
+          "mevcut_enlem": 38.371344,
+          "mevcut_boylam": 26.486469,
+          "geometrik_enlem": 38.371344,
+          "geometrik_boylam": 26.486469,
+          "sinyal_agirlikli_enlem": 38.371344,
+          "sinyal_agirlikli_boylam": 26.486469,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 7
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.424528,
           "mevcut_boylam": 26.585859,
@@ -869,7 +881,7 @@
           "bilesen_piksel": 7
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.217943,
           "mevcut_boylam": 26.451889,
@@ -881,7 +893,7 @@
           "bilesen_piksel": 4
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 700,
           "mevcut_enlem": 38.210707,
           "mevcut_boylam": 26.480401,
@@ -905,7 +917,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Şifne",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.343305,
           "mevcut_boylam": 26.462767,
@@ -930,18 +942,6 @@
         },
         {
           "mahalle": "Uzunkuyu",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.298262,
-          "mevcut_boylam": 26.552538,
-          "geometrik_enlem": 38.298262,
-          "geometrik_boylam": 26.552538,
-          "sinyal_agirlikli_enlem": 38.298262,
-          "sinyal_agirlikli_boylam": 26.552538,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
-        },
-        {
-          "mahalle": "Uzunkuyu",
           "alan_m2": 1300,
           "mevcut_enlem": 38.299166,
           "mevcut_boylam": 26.551737,
@@ -953,7 +953,7 @@
           "bilesen_piksel": 13
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.220204,
           "mevcut_boylam": 26.491393,
@@ -965,7 +965,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.350179,
           "mevcut_boylam": 26.494485,
@@ -977,7 +977,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
           "mevcut_enlem": 38.351536,
           "mevcut_boylam": 26.47834,
@@ -1001,7 +1001,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.208356,
           "mevcut_boylam": 26.478454,
@@ -1025,7 +1025,7 @@
           "bilesen_piksel": 7
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.218848,
           "mevcut_boylam": 26.492195,
@@ -1085,7 +1085,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 600,
           "mevcut_enlem": 38.208808,
           "mevcut_boylam": 26.480401,
@@ -1121,7 +1121,7 @@
           "bilesen_piksel": 13
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.209622,
           "mevcut_boylam": 26.479485,
@@ -1133,7 +1133,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.245711,
           "mevcut_boylam": 26.491279,
@@ -1145,7 +1145,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 300,
           "mevcut_enlem": 38.214597,
           "mevcut_boylam": 26.460134,
@@ -1157,7 +1157,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 1501,
           "mevcut_enlem": 38.307578,
           "mevcut_boylam": 26.461508,
@@ -1169,7 +1169,7 @@
           "bilesen_piksel": 15
         },
         {
-          "mahalle": "Germiyan",
+          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 900,
           "mevcut_enlem": 38.301065,
           "mevcut_boylam": 26.520363,
