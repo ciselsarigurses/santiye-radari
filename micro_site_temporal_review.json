@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-02 17:05 +0300",
+  "olusturma": "2026-09-03 00:02 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -78,7 +78,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "ANI_BASLANGIC_DESTEGI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -121,7 +122,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "ANI_BASLANGIC_DESTEGI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -165,7 +167,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "ANI_BASLANGIC_DESTEGI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -208,7 +211,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "ANI_BASLANGIC_DESTEGI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -251,7 +255,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "ANI_BASLANGIC_DESTEGI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -294,7 +299,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "TEK_DONEM_SINYALI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -337,9 +343,17 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "TEK_DONEM_SINYALI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         }
-      ]
+      ],
+      "goreli_yorungeler": {
+        "degisim_oncesi": 7,
+        "onceki": 7,
+        "son": 7
+      },
+      "yorunge_tutarliligi": "AYNI",
+      "yorunge_notu": "Üç Sentinel sahnesi aynı göreli yörüngede; mikro ani başlangıç kanıtı bakış geometrisi açısından destekleniyor."
     },
     "uzunkuyu": {
       "durum": "ok",
@@ -400,7 +414,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "ANI_BASLANGIC_DESTEGI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -443,7 +458,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "ANI_BASLANGIC_DESTEGI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -486,7 +502,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "ANI_BASLANGIC_DESTEGI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -529,7 +546,8 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "ANI_BASLANGIC_DESTEGI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -573,9 +591,17 @@
           "devam_eden_hareket_destegi": false,
           "onceki_zemin_hareketli_riski": false,
           "temporal_sinif": "YETERSIZ_GECERLI_VERI",
-          "gulbahce_cevre": false
+          "gulbahce_cevre": false,
+          "yorunge_geometri_riski": false
         }
-      ]
+      ],
+      "goreli_yorungeler": {
+        "degisim_oncesi": 7,
+        "onceki": 7,
+        "son": 7
+      },
+      "yorunge_tutarliligi": "AYNI",
+      "yorunge_notu": "Üç Sentinel sahnesi aynı göreli yörüngede; mikro ani başlangıç kanıtı bakış geometrisi açısından destekleniyor."
     }
   },
   "toplam": {
