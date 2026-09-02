@@ -1,0 +1,82 @@
+name: Aday Tavanı Şantiye Devriyesi
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "capacity_watchlist.py"
+      - ".github/workflows/capacity-watchlist.yml"
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-db-write
+  cancel-in-progress: false
+
+jobs:
+  watchlist:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Kapasite devriyesi kalite kontrolü
+        run: python capacity_watchlist.py --check-only
+
+      - name: Mevcut sahne kapasite devriyesini üret
+        run: python capacity_watchlist.py
+
+      - name: Rapor değişikliğini kaydet
+        run: |
+          report_files="SAHA_RAPORU.md latest_report.json"
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+            echo "Kapasite devriyesi raporunda değişiklik yok."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add $report_files
+          git commit -m "Radar: aday tavanı şantiye devriyesini güncelle"
+
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal ilerledi; en güncel rapor üzerinde kapasite devriyesi yeniden üretiliyor."
+            git reset --hard origin/main
+            pip install -r requirements.txt
+            python capacity_watchlist.py --check-only
+            python capacity_watchlist.py
+
+            if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+              echo "Yeniden üretim sonrası kaydedilecek değişiklik yok."
+              exit 0
+            fi
+
+            git add $report_files
+            git commit -m "Radar: aday tavanı şantiye devriyesini güncelle"
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Ana dal yeniden ilerledi; ikili/veri çakışması riski nedeniyle güvenli biçimde çıkılıyor."
+              exit 0
+            fi
+          fi
+
+          git push origin HEAD:main
