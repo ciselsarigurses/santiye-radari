@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-02",
-  "olusturma": "2026-09-02 04:40 +03",
+  "olusturma": "2026-09-02 10:56 +03",
   "amac": "24 aday tavanının ve 8-komşu piksel geometrisinin 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
   "diagnostik_santiye_olcegi_m2": [
     800,
@@ -13,44 +13,44 @@
       "durum": "ok",
       "latest_item": "S2B_T35SMC_20260829T090620_L2A",
       "aday_tavani": 24,
-      "ham_uygun_aday": 378,
+      "ham_uygun_aday": 366,
       "tavan_sonrasi_aday": 24,
-      "raporda_kalan_aday": 24,
-      "tavan_disinda_kalan": 354,
-      "ham_secimden_farkli": 6,
+      "raporda_kalan_aday": 22,
+      "tavan_disinda_kalan": 342,
+      "ham_secimden_farkli": 2,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
-        "kucuk_250_800": 6,
-        "santiye_olcegi_800_10000": 281,
-        "genis_10000_ustu": 91
+        "kucuk_250_800": 3,
+        "santiye_olcegi_800_10000": 274,
+        "genis_10000_ustu": 89
       },
       "tavan_sonrasi_olcek_dagilimi": {
-        "kucuk_250_800": 6,
+        "kucuk_250_800": 3,
         "santiye_olcegi_800_10000": 0,
-        "genis_10000_ustu": 18
+        "genis_10000_ustu": 21
       },
       "raporda_olcek_dagilimi": {
-        "kucuk_250_800": 6,
-        "santiye_olcegi_800_10000": 6,
-        "genis_10000_ustu": 12
+        "kucuk_250_800": 3,
+        "santiye_olcegi_800_10000": 0,
+        "genis_10000_ustu": 19
       },
       "tavan_disinda_olcek_dagilimi": {
         "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 281,
-        "genis_10000_ustu": 73
+        "santiye_olcegi_800_10000": 274,
+        "genis_10000_ustu": 68
       },
       "ham_secimden_farkli_olcek_dagilimi": {
         "kucuk_250_800": 0,
         "santiye_olcegi_800_10000": 0,
-        "genis_10000_ustu": 6
+        "genis_10000_ustu": 2
       },
       "baglanti_geometrisi": {
-        "sekiz_komsu_gecerli_aday": 378,
-        "dort_komsu_gecerli_aday": 400,
-        "diyagonal_birlesmis_ebeveyn": 20,
+        "sekiz_komsu_gecerli_aday": 366,
+        "dort_komsu_gecerli_aday": 387,
+        "diyagonal_birlesmis_ebeveyn": 19,
         "ayrisan_kucuk_250_800": 0,
-        "ayrisan_santiye_olcegi_800_10000": 29,
-        "genis_ebeveynden_ayrisan_250_10000": 17,
+        "ayrisan_santiye_olcegi_800_10000": 27,
+        "genis_ebeveynden_ayrisan_250_10000": 15,
         "ornekler": [
           {
             "enlem": 38.349636,
@@ -114,15 +114,15 @@
       "durum": "ok",
       "latest_item": "S2B_T35SMC_20260829T090620_L2A",
       "aday_tavani": 24,
-      "ham_uygun_aday": 224,
+      "ham_uygun_aday": 223,
       "tavan_sonrasi_aday": 24,
-      "raporda_kalan_aday": 18,
-      "tavan_disinda_kalan": 200,
-      "ham_secimden_farkli": 23,
+      "raporda_kalan_aday": 19,
+      "tavan_disinda_kalan": 199,
+      "ham_secimden_farkli": 5,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
         "kucuk_250_800": 1,
-        "santiye_olcegi_800_10000": 171,
+        "santiye_olcegi_800_10000": 170,
         "genis_10000_ustu": 52
       },
       "tavan_sonrasi_olcek_dagilimi": {
@@ -132,22 +132,22 @@
       },
       "raporda_olcek_dagilimi": {
         "kucuk_250_800": 1,
-        "santiye_olcegi_800_10000": 5,
-        "genis_10000_ustu": 12
+        "santiye_olcegi_800_10000": 0,
+        "genis_10000_ustu": 18
       },
       "tavan_disinda_olcek_dagilimi": {
         "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 171,
+        "santiye_olcegi_800_10000": 170,
         "genis_10000_ustu": 29
       },
       "ham_secimden_farkli_olcek_dagilimi": {
         "kucuk_250_800": 0,
         "santiye_olcegi_800_10000": 0,
-        "genis_10000_ustu": 23
+        "genis_10000_ustu": 5
       },
       "baglanti_geometrisi": {
-        "sekiz_komsu_gecerli_aday": 224,
-        "dort_komsu_gecerli_aday": 239,
+        "sekiz_komsu_gecerli_aday": 223,
+        "dort_komsu_gecerli_aday": 238,
         "diyagonal_birlesmis_ebeveyn": 14,
         "ayrisan_kucuk_250_800": 0,
         "ayrisan_santiye_olcegi_800_10000": 22,

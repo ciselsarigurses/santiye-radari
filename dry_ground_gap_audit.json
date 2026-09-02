@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-02",
-  "olusturma": "2026-09-02 04:41 +0300",
+  "olusturma": "2026-09-02 10:58 +0300",
   "amac": "Mevcut alarm üretim maskesinin dışında kalan düşük-NDVI 250-2.000 m² kuru zemin spektral değişimlerini BSI ile ölçmek; ayrıca kompaktlık, uzun/kısa oranı ve 120 m yerel kümelenmeyi saha kalibrasyonu için kaydetmek; alarm/görev üretmez.",
   "esikler": {
     "alan_m2": [
@@ -82,7 +82,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.242364,
           "boylam": 26.400356,
           "alan_m2": 600,
@@ -112,7 +112,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Ovacık",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.228978,
           "boylam": 26.391771,
           "alan_m2": 500,
@@ -219,7 +219,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Şifne",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.342581,
           "boylam": 26.39509,
           "alan_m2": 900,
@@ -234,7 +234,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.240013,
           "boylam": 26.406424,
           "alan_m2": 300,
@@ -264,7 +264,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.25358,
           "boylam": 26.384559,
           "alan_m2": 300,
@@ -293,7 +293,7 @@
       "lineer_geometri_riski": 10,
       "ornekler": [
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.400921,
           "boylam": 26.621469,
           "alan_m2": 300,
@@ -308,7 +308,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.400921,
           "boylam": 26.623073,
           "alan_m2": 400,
@@ -323,7 +323,7 @@
           "izole_saha_benzeri": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.376138,
           "boylam": 26.641622,
           "alan_m2": 400,
@@ -338,7 +338,7 @@
           "izole_saha_benzeri": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.378851,
           "boylam": 26.638416,
           "alan_m2": 300,
@@ -353,7 +353,7 @@
           "izole_saha_benzeri": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.376771,
           "boylam": 26.641164,
           "alan_m2": 400,
@@ -368,7 +368,7 @@
           "izole_saha_benzeri": false
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.377856,
           "boylam": 26.640706,
           "alan_m2": 500,
@@ -383,7 +383,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.383826,
           "boylam": 26.629256,
           "alan_m2": 300,
@@ -398,7 +398,7 @@
           "izole_saha_benzeri": false
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.420186,
           "boylam": 26.610935,
           "alan_m2": 1100,
@@ -415,7 +415,7 @@
       ],
       "saha_benzeri_ornekler": [
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.400921,
           "boylam": 26.621469,
           "alan_m2": 300,
@@ -430,7 +430,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.377856,
           "boylam": 26.640706,
           "alan_m2": 500,
@@ -445,7 +445,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.420186,
           "boylam": 26.610935,
           "alan_m2": 1100,
@@ -460,7 +460,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.338602,
           "boylam": 26.646546,
           "alan_m2": 400,
@@ -475,7 +475,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Uzunkuyu",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.372429,
           "boylam": 26.644027,
           "alan_m2": 400,
@@ -490,7 +490,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.387806,
           "boylam": 26.626737,
           "alan_m2": 500,
@@ -505,7 +505,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Ildır",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.385816,
           "boylam": 26.628225,
           "alan_m2": 1000,
@@ -520,7 +520,7 @@
           "izole_saha_benzeri": true
         },
         {
-          "mahalle": "Alaçatı",
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.201843,
           "boylam": 26.45166,
           "alan_m2": 400,
