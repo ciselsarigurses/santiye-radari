@@ -67,10 +67,8 @@ def _group_summary(rows, key_index, outcome_index=0):
     }
 
 
-def _read_production_rows(connection):
-    # Eski DB'lerde saha_durumlari bulunmasa bile şema kurulmuş olmalı; normal
-    # uygulama bu tabloyu zaten field_state üzerinden yaratır. Test/boş DB için
-    # minimal uyumlu tabloyu burada kuruyoruz.
+def _ensure_field_state_stub(connection):
+    """Boş/test DB'de saha kaynağı join'i için gereken asgari şemayı kur."""
     connection.execute(
         """CREATE TABLE IF NOT EXISTS saha_durumlari (
         gorev_id TEXT PRIMARY KEY,
@@ -85,7 +83,11 @@ def _read_production_rows(connection):
         son_gorulme TEXT,
         son_islem TEXT)"""
     )
-    rows = connection.execute(
+
+
+def _read_production_rows(connection):
+    _ensure_field_state_stub(connection)
+    return connection.execute(
         """SELECT s.sonuc,s.alan_m2,s.boyut_sinifi,s.uydu_onceligi,
         s.uydu_kanit_yasi_gun,s.tarihsel_esleme_mesafe_m,s.geometri_kaynagi,
         COALESCE(d.kaynak,'') AS kaynak
@@ -93,7 +95,6 @@ def _read_production_rows(connection):
         LEFT JOIN saha_durumlari d ON d.gorev_id=s.gorev_id
         ORDER BY s.kayit_zamani"""
     ).fetchall()
-    return rows
 
 
 def _read_calibration_rows(connection):
@@ -125,18 +126,12 @@ def feedback_audit_summary(connection=None):
         calibration_positive = calibration_counts.get(POSITIVE_OUTCOME, 0)
         calibration_negative = calibration_total - calibration_positive
 
-        size_rows = [
-            (row[0], _size_bucket(row[1]))
-            for row in satellite_rows
-        ]
-        calibration_size_rows = [
-            (row[0], _size_bucket(row[1]))
-            for row in calibration_rows
-        ]
+        size_rows = [(row[0], _size_bucket(row[1])) for row in satellite_rows]
+        calibration_size_rows = [(row[0], _size_bucket(row[1])) for row in calibration_rows]
 
-        # İnce ayar için her iki sınıftan da örnek gerekir. Bu sınır istatistiksel
-        # güven aralığı iddiası değildir; erken aşamada birkaç etikete aşırı uyumu
-        # engelleyen muhafazakâr operasyonel kilittir.
+        # Bu sınır bir istatistiksel güven aralığı iddiası değildir. Yalnızca birkaç
+        # etikete aşırı uyum sağlayıp üretim filtresini bozmayı engelleyen muhafazakâr
+        # operasyonel bir kilittir.
         review_ready = (
             production_total >= MIN_TOTAL_FOR_REVIEW
             and production_positive >= MIN_CLASS_FOR_REVIEW
@@ -202,7 +197,7 @@ def _insert_field(connection, task_id, outcome, area, size_class, priority, sour
     connection.execute(
         """INSERT INTO saha_sonuclari
         (gorev_id,sonuc,kayit_zamani,alan_m2,boyut_sinifi,uydu_onceligi)
-        VALUES(?,?,?, ?,?,?)""",
+        VALUES(?,?,?,?,?,?)""",
         (task_id, outcome, "2026-09-02 07:00 UTC", area, size_class, priority),
     )
 
@@ -212,9 +207,19 @@ def _self_check():
     try:
         ensure_outcome_schema(connection)
         ensure_calibration_schema(connection)
+        _ensure_field_state_stub(connection)
+
         # Önce yetersiz örnek: uydu dışı sonuç uydu doğruluk paydasına girmemeli.
         _insert_field(connection, "U1", "SANTIYE_KAZI", 300, "KUCUK", "YUKSEK")
-        _insert_field(connection, "S1", "YANLIS_POZITIF", 900, "STANDART", "NORMAL", source="internet")
+        _insert_field(
+            connection,
+            "S1",
+            "YANLIS_POZITIF",
+            900,
+            "STANDART",
+            "NORMAL",
+            source="internet",
+        )
         summary = feedback_audit_summary(connection)
         assert summary["sentinel_uretim"]["toplam"] == 1, summary
         assert summary["uydu_disi_saha_sonucu"] == 1, summary
