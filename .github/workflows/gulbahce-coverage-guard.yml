@@ -1,0 +1,66 @@
+name: Gülbahçe Kapsama Koruması
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "satellite.py"
+      - "gulbahce_coverage_guard.py"
+      - ".github/workflows/gulbahce-coverage-guard.yml"
+  workflow_run:
+    workflows: ["Sentinel Kör Alan Denetimi"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-gulbahce-coverage
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Gülbahçe kapsama koruması öz testi
+        run: python gulbahce_coverage_guard.py --self-check
+
+      - name: Gülbahçe operasyon tamponunu ölç
+        run: python gulbahce_coverage_guard.py
+
+      - name: Yalnız değişiklik varsa denetim sonucunu kaydet
+        run: |
+          if [[ -z "$(git status --porcelain -- gulbahce_coverage_guard.json)" ]]; then
+            echo "Gülbahçe kapsama sonucu değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add gulbahce_coverage_guard.json
+          git commit -m "Radar: Gülbahçe kapsama denetimini güncelle"
+
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal değişti; eski kapsama sonucunu üzerine yazmadan sonraki çalışmaya bırakılıyor."
+            exit 1
+          fi
+          git push origin HEAD:main
