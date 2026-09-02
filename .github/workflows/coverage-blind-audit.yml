@@ -15,6 +15,7 @@ on:
       - "route_diversity_guard.py"
       - "coverage_overlap_rotation_guard.py"
       - "final_calibration_diversity_guard.py"
+      - "calibration_cross_layer_diversity_guard.py"
       - ".github/workflows/coverage-blind-audit.yml"
   workflow_run:
     # Normal günlük zincirde önce tarama dry_ground_gap_audit.json'u üretir,
@@ -86,6 +87,12 @@ jobs:
 
       - name: Nihai kör alan rotasına göre kalibrasyon tekrarını azalt
         run: python final_calibration_diversity_guard.py
+
+      - name: Katmanlar arası kalibrasyon çeşitliliği öz testi
+        run: python calibration_cross_layer_diversity_guard.py --check-only
+
+      - name: Ana rota ve kör alanla aynı mahalledeki eş kalite kalibrasyonu çeşitlendir
+        run: python calibration_cross_layer_diversity_guard.py
 
       - name: Kalibrasyon açıklama tutarlılığı öz testi
         run: python calibration_note_guard.py --check-only
