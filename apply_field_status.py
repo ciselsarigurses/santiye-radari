@@ -25,16 +25,36 @@ CALIBRATION_TITLE_PATTERN = re.compile(
 )
 
 
-def _calibration_item(calibration_key):
+def _report_payload():
     try:
         payload = json.loads(REPORT_FILE.read_text(encoding="utf-8"))
     except (OSError, TypeError, ValueError, json.JSONDecodeError):
-        return None
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _calibration_item(calibration_key):
+    payload = _report_payload()
     for item in payload.get("kuru_zemin_kalibrasyon_kontrolu", []) or []:
         if not isinstance(item, dict):
             continue
         if calibration_key in calibration_id_aliases(item):
             return item
+    return None
+
+
+def _field_item(task_id):
+    """Sonucu işlenen Sentinel görevinin kullanıcıya gösterilen özelliklerini bul."""
+    task_id = str(task_id or "").strip().upper()
+    if not task_id.startswith("U"):
+        return None
+    payload = _report_payload()
+    for item in payload.get("saha_adaylari", []) or []:
+        if not isinstance(item, dict):
+            continue
+        candidate_id = str(item.get("gorev_id") or "").strip().upper()
+        if candidate_id == task_id:
+            return dict(item)
     return None
 
 
@@ -68,9 +88,12 @@ def apply_issue_title(title):
     if outcome and status != "KONTROL_EDILDI":
         raise ValueError("Saha sonucu yalnızca KONTROL_EDILDI durumuyla kaydedilebilir.")
 
+    # KONTROL_EDILDI işlemi günlük raporu yeniden normalize edip görevi listeden
+    # çıkarabilir. Bu nedenle Sentinel özellik snapshot'ını durum değişmeden önce al.
+    field_item = _field_item(task_id) if outcome else None
     result = apply_status(task_id, status)
     if outcome:
-        result["sonuc"] = save_outcome(task_id, outcome)
+        result["sonuc"] = save_outcome(task_id, outcome, field_item)
     elif status != "KONTROL_EDILDI":
         clear_outcome(task_id)
 
