@@ -2,8 +2,8 @@
 
 Seçim mantığını değiştirmez. `final_calibration_diversity_guard.py` son kalibrasyon
 noktasını yazarken temel açıklamayı yeniden üretir; temporal ani-başlangıç adayları artık
-günlük döndüğü için eski "rotasyonun önüne alınır" ifadesinin kullanıcıyı yanıltmaması
-amacıyla yalnız açıklama metnini günceller.
+günlük döndüğü ve küçük adaylarda pozitif yerellik kanıtı saha kalibrasyonunda öne
+alındığı için eski açıklamanın kullanıcıyı yanıltmaması amacıyla yalnız metni günceller.
 """
 
 from __future__ import annotations
@@ -20,30 +20,49 @@ OLD_SENTENCE = (
     "sakin olup sonradan birden güçlenen güvenli bir örnek bulursa o örnek saha teyidi "
     "için rotasyonun önüne alınır; bu yine alarm değildir."
 )
-NEW_SENTENCE = (
+PREVIOUS_SENTENCE = (
     "Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi "
     "sakin olup sonradan birden güçlenen güvenli örnekleri en güçlü dört mahalle-çeşitli "
     "temporal havuzda günlük döndürür. 250-900 m² adayda güvenilir yaygın çevre değişimi "
     "görülürse aday temporal acil havuzdan çıkarılır, normal güvenli rotasyonda korunur; "
     "bu yine alarm değildir."
 )
-REPORT_APPEND = (
+NEW_SENTENCE = (
+    "Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi "
+    "sakin olup sonradan birden güçlenen güvenli örnekleri en güçlü dört mahalle-çeşitli "
+    "temporal havuzda günlük döndürür. 250-900 m² adayda güvenilir yaygın çevre değişimi "
+    "görülürse aday temporal acil havuzdan çıkarılır; aynı boyut sınıfında 3x3 merkez "
+    "değişimi 5x5 çevre halkasına göre belirgin biçimde lokal kalan aday saha "
+    "kalibrasyonunda önce gelir. Bunların hiçbiri tek başına alarm değildir."
+)
+OLD_REPORT_APPEND = (
     " Temporal ani-başlangıç desteği olan güvenli adaylar aynı Sentinel sahnesinde en "
     "güçlü dört mahalle-çeşitli aday arasında günlük döner; 250-900 m² adayda güvenilir "
     "yaygın çevre değişimi varsa temporal acil havuzdan çıkarılır ve normal güvenli "
     "rotasyonda kalır."
 )
+REPORT_APPEND = (
+    " Temporal ani-başlangıç desteği olan güvenli adaylar aynı Sentinel sahnesinde en "
+    "güçlü dört mahalle-çeşitli aday arasında günlük döner; 250-900 m² adayda güvenilir "
+    "yaygın çevre değişimi varsa temporal acil havuzdan çıkarılır. Aynı boyut sınıfında "
+    "3x3 merkez değişimi 5x5 çevre halkasına göre belirgin biçimde lokal kalan aday saha "
+    "kalibrasyonunda önce gelir; bu yine alarm değildir."
+)
 
 
 def _updated_markdown(text):
-    if OLD_SENTENCE not in text:
-        return text
-    return text.replace(OLD_SENTENCE, NEW_SENTENCE, 1)
+    value = str(text or "")
+    for old in (OLD_SENTENCE, PREVIOUS_SENTENCE):
+        if old in value:
+            return value.replace(old, NEW_SENTENCE, 1)
+    return value
 
 
 def _updated_note(note):
     base = str(note or "").strip()
-    if "Temporal ani-başlangıç desteği olan güvenli adaylar" in base:
+    if OLD_REPORT_APPEND.strip() in base:
+        return base.replace(OLD_REPORT_APPEND.strip(), REPORT_APPEND.strip(), 1)
+    if REPORT_APPEND.strip() in base:
         return base
     return base + REPORT_APPEND
 
@@ -77,16 +96,21 @@ def update_note():
 
 
 def _self_check():
-    sample = "başlangıç " + OLD_SENTENCE + " bitiş"
-    updated = _updated_markdown(sample)
-    assert OLD_SENTENCE not in updated
-    assert NEW_SENTENCE in updated
+    for old in (OLD_SENTENCE, PREVIOUS_SENTENCE):
+        sample = "başlangıç " + old + " bitiş"
+        updated = _updated_markdown(sample)
+        assert old not in updated
+        assert NEW_SENTENCE in updated
 
     note = "Alarm/görev değildir."
     first = _updated_note(note)
     second = _updated_note(first)
     assert first == second
-    assert "Temporal ani-başlangıç desteği" in first
+    assert "3x3 merkez değişimi 5x5 çevre halkasına göre" in first
+
+    migrated = _updated_note("Alarm/görev değildir." + OLD_REPORT_APPEND)
+    assert OLD_REPORT_APPEND.strip() not in migrated
+    assert REPORT_APPEND.strip() in migrated
 
 
 def main():
