@@ -10,8 +10,9 @@ from __future__ import annotations
 
 import json
 import math
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 
 AUDIT_JSON = Path(__file__).with_name("coverage_blind_area_audit.json")
@@ -27,6 +28,7 @@ ACTIVE_DISTANCE_M = 150
 CROSS_REGION_DISTANCE_M = 250
 MAX_PER_REGION = 1
 TOTAL_LIMIT = 2
+LOCAL_TZ = ZoneInfo("Europe/Istanbul")
 
 
 def _number(value, default=0.0):
@@ -70,14 +72,36 @@ def _far_enough(point, points, minimum_m):
     return all(_distance_m(point, old) >= minimum_m for old in points)
 
 
-def _rotation_offset(report_payload, size):
-    if size <= 1:
-        return 0
+def _local_day(now=None):
+    """Çeşme devriyesi için saat diliminden bağımsız yerel takvim gününü üret."""
+    if now is None:
+        return datetime.now(LOCAL_TZ).date()
+    if isinstance(now, datetime):
+        if now.tzinfo is None:
+            now = now.replace(tzinfo=LOCAL_TZ)
+        else:
+            now = now.astimezone(LOCAL_TZ)
+        return now.date()
+    if isinstance(now, date):
+        return now
+    raise TypeError("now date veya datetime olmalı")
+
+
+def _rotation_day(report_payload, now=None):
+    """Gecikmiş rapor devriyeyi dünde kilitlemesin; ileri rapor tarihini de geriye alma."""
+    local_day = _local_day(now)
     raw = str((report_payload or {}).get("rapor_tarihi") or "")
     try:
-        day = date.fromisoformat(raw)
+        report_day = date.fromisoformat(raw)
     except ValueError:
+        return local_day
+    return max(local_day, report_day)
+
+
+def _rotation_offset(report_payload, size, rotation_day=None):
+    if size <= 1:
         return 0
+    day = rotation_day or _rotation_day(report_payload)
     return day.toordinal() % size
 
 
@@ -139,7 +163,7 @@ def _candidate_pool(region_key, region_data):
     return rows
 
 
-def select_coverage_patrol(audit_payload, report_payload, limit=TOTAL_LIMIT):
+def select_coverage_patrol(audit_payload, report_payload, limit=TOTAL_LIMIT, rotation_day=None):
     cap = max(int(limit), 0)
     if cap <= 0 or not isinstance(audit_payload, dict):
         return []
@@ -152,6 +176,7 @@ def select_coverage_patrol(audit_payload, report_payload, limit=TOTAL_LIMIT):
     selected = []
     selected_points = []
     selected_neighborhoods = set()
+    effective_rotation_day = rotation_day or _rotation_day(report_payload)
 
     for region_key, region_data in regions.items():
         if len(selected) >= cap:
@@ -166,7 +191,11 @@ def select_coverage_patrol(audit_payload, report_payload, limit=TOTAL_LIMIT):
         def rotated(items):
             if not items:
                 return []
-            offset = _rotation_offset(report_payload, len(items))
+            offset = _rotation_offset(
+                report_payload,
+                len(items),
+                rotation_day=effective_rotation_day,
+            )
             return items[offset:] + items[:offset]
 
         # Günlük rotasyon, parsel/şantiye ölçeği tercih katmanının dışına taşmasın.
@@ -212,7 +241,7 @@ def _markdown(items):
     lines = [
         SECTION_TITLE,
         "",
-        "> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar günlük rotasyonla değişir.",
+        "> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.",
         "",
     ]
     if not items:
@@ -267,14 +296,20 @@ def update_coverage_patrol():
 
     audit = json.loads(AUDIT_JSON.read_text(encoding="utf-8"))
     report = json.loads(REPORT_JSON.read_text(encoding="utf-8"))
-    selected = select_coverage_patrol(audit, report)
+    rotation_day = _rotation_day(report)
+    selected = select_coverage_patrol(
+        audit,
+        report,
+        rotation_day=rotation_day,
+    )
 
     report["kor_alan_saha_devriyesi"] = selected
+    report["kor_alan_saha_devriyesi_rotasyon_tarihi"] = rotation_day.isoformat()
     report["kor_alan_saha_devriyesi_notu"] = (
         "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı "
-        "gözlem boşluklarından günlük rotasyonla en fazla iki insan kontrol noktası seçilir. "
-        "Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur ve güvenli "
-        "alternatif varsa farklı mahallelerden seçilir."
+        "gözlem boşluklarından Çeşme yerel takvim gününe göre günlük rotasyonla en fazla "
+        "iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden "
+        ">=250 m uzakta tutulur ve güvenli alternatif varsa farklı mahallelerden seçilir."
     )
     REPORT_JSON.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
@@ -365,7 +400,11 @@ def _self_check():
             }
         ],
     }
-    chosen = select_coverage_patrol(audit, report)
+    chosen = select_coverage_patrol(
+        audit,
+        report,
+        rotation_day=date(2026, 8, 31),
+    )
     assert len(chosen) == 2
     assert {item["bolge_anahtari"] for item in chosen} == {"west", "east"}
     assert all(item["alarm"] is False for item in chosen)
@@ -408,8 +447,49 @@ def _self_check():
             }
         }
     }
-    legacy_choice = select_coverage_patrol(legacy, {"rapor_tarihi": "2026-08-31", "saha_adaylari": []}, limit=1)
+    legacy_choice = select_coverage_patrol(
+        legacy,
+        {"rapor_tarihi": "2026-08-31", "saha_adaylari": []},
+        limit=1,
+        rotation_day=date(2026, 8, 31),
+    )
     assert legacy_choice and legacy_choice[0]["mahalle"] == "Bilinen kara"
+
+    stale_report = {"rapor_tarihi": "2026-09-01", "saha_adaylari": []}
+    simulated_now = datetime(2026, 9, 2, 0, 5, tzinfo=LOCAL_TZ)
+    assert _rotation_day(stale_report, now=simulated_now) == date(2026, 9, 2), (
+        "Gecikmiş rapor tarihi kör alan rotasyonunu dünde kilitledi."
+    )
+
+    rotation_audit = {
+        "bolgeler": {
+            "one": {
+                "durum": "ok",
+                "bolge": "Tek bölge",
+                "kara_referans_sahne_sayisi": 8,
+                "kor_alan_devriye_ornekleri": [
+                    {"mahalle_yaklasik": "A", "enlem": 38.10, "boylam": 26.10, "alan_m2": 300, "neden": "BULUT_GOLGE_KALICI"},
+                    {"mahalle_yaklasik": "B", "enlem": 38.20, "boylam": 26.20, "alan_m2": 400, "neden": "BULUT_GOLGE_KALICI"},
+                    {"mahalle_yaklasik": "C", "enlem": 38.30, "boylam": 26.30, "alan_m2": 500, "neden": "BULUT_GOLGE_KALICI"},
+                ],
+            }
+        }
+    }
+    first_day = select_coverage_patrol(
+        rotation_audit,
+        stale_report,
+        limit=1,
+        rotation_day=date(2026, 9, 1),
+    )
+    second_day = select_coverage_patrol(
+        rotation_audit,
+        stale_report,
+        limit=1,
+        rotation_day=date(2026, 9, 2),
+    )
+    assert first_day and second_day and first_day[0]["mahalle"] != second_day[0]["mahalle"], (
+        "Kör alan devriyesi yerel gün değişince dönmedi."
+    )
 
     md = _inject("Başlık\n\n" + NEXT_SECTION + "\nAday\n", _markdown(chosen))
     assert md.count(SECTION_TITLE) == 1
