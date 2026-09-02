@@ -36,7 +36,14 @@ jobs:
       - name: Saha veya kalibrasyon sonucunu uygula
         env:
           ISSUE_TITLE: ${{ github.event.issue.title }}
-        run: python apply_field_status.py "$ISSUE_TITLE"
+        run: |
+          python apply_field_status.py "$ISSUE_TITLE"
+          # normalize_daily_report açık ama o gün tekrar görünmeyen uydu
+          # görevlerini 0 m² metadatasız bırakabilir. Son güvenilir ölçüyü geri
+          # yükleyip telefon kısa listesini aynı işlem içinde yeniden kur.
+          python hydrate_persisted_satellite_metadata.py
+          python daily_route_shortlist.py
+          python daily_route_freshness_guard.py
 
       - name: Durumu kalıcı kaydet
         env:
@@ -53,6 +60,9 @@ jobs:
             echo "Ana dal saha işlemi sırasında değişti; karar en güncel veri üzerinde yeniden uygulanıyor."
             git reset --hard origin/main
             python apply_field_status.py "$ISSUE_TITLE"
+            python hydrate_persisted_satellite_metadata.py
+            python daily_route_shortlist.py
+            python daily_route_freshness_guard.py
           fi
 
           git add santiye.db SAHA_RAPORU.md latest_report.json

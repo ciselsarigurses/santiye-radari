@@ -43,6 +43,7 @@ on:
       - "hydrate_persisted_satellite_metadata.py"
       - "requirements.txt"
       - ".github/workflows/daily-scan.yml"
+      - ".github/workflows/field-status.yml"
   schedule:
     # Türkiye saatiyle 11:00 ana tarama korunur. Sentinel görüntüsü sabah
     # taramasından sonra yayımlanırsa ertesi güne kalmaması için 15:00 ve 19:00'da
