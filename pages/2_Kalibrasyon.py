@@ -8,6 +8,7 @@ import pandas as pd
 import streamlit as st
 
 from calibration_outcome import calibration_id, calibration_id_aliases, calibration_outcome_map
+from field_feedback_audit import feedback_audit_summary
 from field_outcome import OUTCOME_LABELS
 
 
@@ -95,11 +96,7 @@ def calibration_card(item):
         st.markdown("**Sahada gördüğün gerçek nedeni seç:**")
         columns = st.columns(4)
         for column, (outcome, label) in zip(columns, OUTCOME_BUTTONS.items()):
-            column.link_button(
-                label,
-                issue_link(item, outcome),
-                width="stretch",
-            )
+            column.link_button(label, issue_link(item, outcome), width="stretch")
         st.caption(
             "Seçim GitHub'da hazır bir kayıt açar. Açılan sayfada yeşil ‘Submit new issue’ "
             "düğmesine basıldığında sonuç ayrı kalibrasyon tablosuna kaydedilir; alarm istatistiğine girmez."
@@ -113,13 +110,14 @@ def item_recorded(item, recorded):
 
 st.title("🧪 Alarm Dışı Kalibrasyon Kontrolü")
 st.caption(
-    "Kuru-zemin körlüğünü gerçek saha verisiyle ölç. Kalibrasyon kimliği artık Sentinel tarih "
-    "çiftinin yanı sıra yaklaşık saha noktasına da bağlıdır; böylece geri bildirim başka bir "
-    "noktaya yanlışlıkla yazılmaz. Eski kayıtlar da tanınmaya devam eder."
+    "Kuru-zemin körlüğünü gerçek saha verisiyle ölç. Kalibrasyon kimliği Sentinel tarih "
+    "çiftinin yanı sıra yaklaşık saha noktasına da bağlıdır; böylece geri bildirim başka "
+    "bir noktaya yanlışlıkla yazılmaz. Eski kayıtlar da tanınmaya devam eder."
 )
 
 report = read_report()
 recorded = calibration_outcome_map()
+feedback = feedback_audit_summary()
 items = [
     item
     for item in report.get("kuru_zemin_kalibrasyon_kontrolu", []) or []
@@ -132,6 +130,29 @@ m1, m2, m3 = st.columns(3)
 m1.metric("Bugün açık kalibrasyon", len(active))
 m2.metric("Bu noktalar içinde tamamlanan", len(current_done))
 m3.metric("Toplam kalibrasyon sonucu", len(recorded))
+
+st.markdown("## Saha geri bildirim kalibrasyon kilidi")
+production = feedback.get("sentinel_uretim", {})
+calibration_feedback = feedback.get("alarm_disi_kalibrasyon", {})
+f1, f2, f3, f4 = st.columns(4)
+f1.metric("Sentinel üretim etiketi", int(production.get("toplam") or 0))
+f2.metric("Gerçek şantiye / kazı", int(production.get("gercek_santiye") or 0))
+f3.metric("Alarm-dışı kalibrasyon", int(calibration_feedback.get("toplam") or 0))
+f4.metric("Otomatik eşik değişimi", "Kapalı")
+
+if feedback.get("manuel_inceleme_hazir"):
+    st.success(
+        "Saha etiketi iki sınıfta da asgari örnek seviyesine ulaştı. Boyut bandı ve uydu "
+        "önceliği bazında manuel karşılaştırma yapılabilir; üretim eşikleri otomatik değişmez."
+    )
+else:
+    st.info(str(feedback.get("neden") or "Saha etiketi henüz manuel eşik incelemesi için yeterli değil."))
+
+st.caption(
+    "Yalnız kaynağı Sentinel uydu görevi olan saha sonuçları üretim doğruluğu hesabına girer. "
+    "İnternet/belediye kaynaklı saha sonuçları bu paydaya karıştırılmaz. 250 m² üretim alt "
+    "sınırı ve mevcut alarm eşikleri bu ekranda değiştirilmez."
+)
 
 if not items:
     st.success("Bugün için güvenli alarm-dışı kuru zemin kalibrasyon noktası seçilmedi.")
@@ -154,9 +175,7 @@ else:
                 "Bölge": value.get("bolge") or "-",
                 "Yaklaşık mevki": value.get("mahalle") or "-",
                 "Alan m²": value.get("alan_m2"),
-                "Sentinel": (
-                    f"{value.get('onceki_tarih') or '?'} → {value.get('son_tarih') or '?'}"
-                ),
+                "Sentinel": f"{value.get('onceki_tarih') or '?'} → {value.get('son_tarih') or '?'}",
                 "Kayıt": value.get("kayit_zamani") or "-",
             }
         )
