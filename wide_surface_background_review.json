@@ -1,0 +1,17 @@
+{
+  "rapor_tarihi": "2026-09-02",
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_sentinel_esigi_m2": 250,
+  "kural": {
+    "min_alan_m2": 10000,
+    "genis_geometri_riski": true,
+    "dusuk_kompaktlik_max": 0.15,
+    "rapor_esleme_m": 90,
+    "manuel_tekrar_override": true
+  },
+  "arka_plan_aday_sayisi": 0,
+  "operasyonel_listeden_ayrilan": 0,
+  "manuel_tekrar_korunan": 0,
+  "adaylar": []
+}
