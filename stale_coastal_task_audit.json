@@ -1,0 +1,68 @@
+{
+  "olusturma": "2026-09-02 11:36 +0300",
+  "amac": "Sahada doğrulanmış kıyı yanlış pozitif mekanizmasının görüldüğü bölgelerde, güncel 30 m sert kıyı filtresine düşen tarihsel açık görevleri bulmak; bu dosya görev veya rota değiştirmez.",
+  "uretim_degistirildi": false,
+  "dogrulanmis_kiyi_mekanizmali_bolge": [
+    "cesme"
+  ],
+  "guncel_kiyi_tamponundaki_eski_acik_gorev_toplam": 5,
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "tarihsel_acik_gorev": 20,
+      "guncel_kiyi_tamponunda": 5,
+      "gorevler": [
+        {
+          "gorev_id": "UBC28A80DF1",
+          "mahalle": "Dalyan",
+          "enlem": 38.355244,
+          "boylam": 26.302251,
+          "alan_m2": 600,
+          "oncelik": "GECİKEN",
+          "bekleme_gun": 5,
+          "tarihsel_esleme_mesafe_m": 2.7
+        },
+        {
+          "gorev_id": "U02BDD66A44",
+          "mahalle": "Çiftlikköy",
+          "enlem": 38.290212,
+          "boylam": 26.271915,
+          "alan_m2": 1900,
+          "oncelik": "GECİKEN",
+          "bekleme_gun": 5,
+          "tarihsel_esleme_mesafe_m": 24.4
+        },
+        {
+          "gorev_id": "UDB761099F7",
+          "mahalle": "Alaçatı",
+          "enlem": 38.242726,
+          "boylam": 26.400585,
+          "alan_m2": 400,
+          "oncelik": "GECİKEN",
+          "bekleme_gun": 4,
+          "tarihsel_esleme_mesafe_m": 0.0
+        },
+        {
+          "gorev_id": "U00743985AF",
+          "mahalle": "Alaçatı",
+          "enlem": 38.256836,
+          "boylam": 26.382613,
+          "alan_m2": 500,
+          "oncelik": "GECİKEN",
+          "bekleme_gun": 4,
+          "tarihsel_esleme_mesafe_m": 0.0
+        },
+        {
+          "gorev_id": "UAB9324E212",
+          "mahalle": "Şifne",
+          "enlem": 38.342672,
+          "boylam": 26.394633,
+          "alan_m2": 600,
+          "oncelik": "GECİKEN",
+          "bekleme_gun": 4,
+          "tarihsel_esleme_mesafe_m": 0.0
+        }
+      ]
+    }
+  }
+}
