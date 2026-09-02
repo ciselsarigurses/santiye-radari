@@ -44,13 +44,16 @@ REGIONS = {
         "bbox": [26.22, 38.18, 26.53, 38.43],
     },
     "uzunkuyu": {
-        "label": "Uzunkuyu · Germiyan · Ildır",
+        "label": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
         # Çeşme kutusu 26.53 E'de biterken eski 38.22 N güney sınırı,
         # birleşik "all" zarfının 26.53-26.66 E / 38.18-38.22 N bölümünü
         # iki günlük tarama kutusunun da dışında bırakıyordu. Güney sınırını
-        # 38.18 N'ye indirerek bu iç kapsama boşluğunu kapatıyoruz; 2800 piksel
-        # tavanında yaklaşık 10 m analiz ölçeği korunur.
-        "bbox": [26.45, 38.18, 26.66, 38.43],
+        # 38.18 N'ye indirerek bu iç kapsama boşluğu kapatıldı. Gülbahçe'nin
+        # 2 km operasyon tamponunda kalan doğu kör şerit de ayrı diagnostik
+        # taramada aynı Sentinel T35SMC karesi ve göreli yörüngeyle doğrulandığı
+        # için doğu sınırı 26.67 E'ye genişletildi. 2800 piksel tavanında yaklaşık
+        # 10 m analiz ölçeği korunur.
+        "bbox": [26.45, 38.18, 26.67, 38.43],
     },
     "all": {
         "label": "Tüm Çeşme + Uzunkuyu",
@@ -71,6 +74,8 @@ PLACE_CENTERS = {
     "Germiyan": (38.3220, 26.4970),
     "Uzunkuyu": (38.2843, 26.5510),
     "Ildır": (38.3840, 26.4840),
+    # Operasyonel mahalle referansıdır; idari/kadastral sınır veya ada/parsel değildir.
+    "Gülbahçe": (38.33278, 26.64556),
 }
 
 
