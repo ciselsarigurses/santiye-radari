@@ -1,0 +1,70 @@
+{
+  "olusturma": "2026-09-02 22:03 +0300",
+  "amac": "Mevcut Uzunkuyu 26.66 E doğu sınırının dışında kalan Gülbahçe operasyon şeridini ayrı Sentinel taramasıyla kör bırakmamak. Alarm veya otomatik saha görevi üretmez.",
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "eski_uzunkuyu_dogu_siniri": 26.66,
+  "serit_bbox": [
+    26.66,
+    38.3,
+    26.672,
+    38.353
+  ],
+  "analiz_grid": {
+    "height": 586,
+    "width": 105,
+    "pixel_width_m": 9.98,
+    "pixel_height_m": 10.0,
+    "pixel_edge_max_m": 10.0
+  },
+  "referanslar": {
+    "coverage_guard": {
+      "enlem": 38.33278,
+      "boylam": 26.64556,
+      "eski_dogu_sinira_mesafe_m": 1261,
+      "yeni_serit_dogu_kenara_mesafe_m": 2309,
+      "serit_guney_marj_m": 3624,
+      "serit_kuzey_marj_m": 2236
+    },
+    "micro_audit": {
+      "enlem": 38.319473,
+      "boylam": 26.646463,
+      "eski_dogu_sinira_mesafe_m": 1182,
+      "yeni_serit_dogu_kenara_mesafe_m": 2230,
+      "serit_guney_marj_m": 2153,
+      "serit_kuzey_marj_m": 3707
+    }
+  },
+  "sentinel_cifti": {
+    "onceki_tarih": "26.08.2026",
+    "son_tarih": "29.08.2026",
+    "onceki_item": "S2A_T35SMC_20260826T090624_L2A",
+    "son_item": "S2B_T35SMC_20260829T090620_L2A",
+    "onceki_orbit": 7,
+    "son_orbit": 7
+  },
+  "ana_250_plus_aday_sayisi": 0,
+  "ana_250_plus_adaylar": [],
+  "yeni_dogu_serit_ana_aday_sayisi": 0,
+  "yeni_dogu_serit_ana_adaylar": [],
+  "ham_mikro_150_249_aday_sayisi": 0,
+  "ham_mikro_150_249_adaylar": [],
+  "yeni_dogu_serit_ham_mikro_aday_sayisi": 0,
+  "yeni_dogu_serit_ham_mikro_adaylar": [],
+  "tam_uzunkuyu_bbox_genisletme_probe": {
+    "durum": "uygun",
+    "tam_kutu_genisletme_guvenli_adayi": true,
+    "onceki_tarih": "26.08.2026",
+    "son_tarih": "29.08.2026",
+    "onceki_item": "S2A_T35SMC_20260826T090624_L2A",
+    "son_item": "S2B_T35SMC_20260829T090620_L2A",
+    "onceki_orbit": 7,
+    "son_orbit": 7
+  },
+  "not": "Mikro satırlar ham diagnostiktir; temporal/lokalite kanıt birleştirme kapısını geçmeden saha adayına yükseltilmez. Koordinatlar ada/parsel veya hukuki statü doğrulaması değildir."
+}
