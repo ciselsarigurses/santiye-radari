@@ -19,6 +19,19 @@ Bugün ekip göndermeyi gerektiren güçlü yeni aday yok.
 
 Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
+<!-- capacity-watchlist:start -->
+## Aday tavanı şantiye ölçeği devriyesi
+
+> **Alarm veya saha görevi değildir.** Aynı 250 m²+ / yaklaşık 10 m Sentinel üretim maskesini geçmiş, fakat ana 24-aday kapasitesinin dışında kalmış 800–10.000 m² adaylardan seçilir. Mevcut görevlerden uzakta en fazla iki nokta gösterilir. Amaç mevcut sahnedeki ölçülmüş kapasite körlüğünü sahada kalibre etmektir; üretim eşikleri ve alarm sayısı değişmez.
+
+1. **KAPASİTE — Germiyan** · yaklaşık 5,000 m² · 26.08.2026 → 29.08.2026 · güçlü-piksel oranı 0.14 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.319969,26.473850)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka neden ise onu yaz.
+2. **KAPASİTE — Mevki doğrulanmadı** · yaklaşık 1,400 m² · 26.08.2026 → 29.08.2026 · güçlü-piksel oranı 0.21 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.318432,26.612653)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka neden ise onu yaz.
+
+_Kapasite özeti: cesme: üretimde 0, tavan dışında uygun havuz 249 · uzunkuyu: üretimde 0, tavan dışında uygun havuz 142_
+<!-- capacity-watchlist:end -->
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 ### 1. GECİKEN — Musalla
