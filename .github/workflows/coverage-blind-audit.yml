@@ -7,6 +7,7 @@ on:
       - "coverage_blind_area_audit.py"
       - "coverage_blind_area_runner.py"
       - "coverage_patrol_shortlist.py"
+      - "coastal_false_positive_audit.py"
       - "calibration_rotation_guard.py"
       - "temporal_calibration_rotation_guard.py"
       - "completed_calibration_guard.py"
@@ -57,6 +58,9 @@ jobs:
 
       - name: Sentinel kör alanını ölç ve devriye havuzunu çeşitlendir
         run: python coverage_blind_area_runner.py
+
+      - name: Saha doğrulamalı kıyı yanlış pozitiflerini tampon senaryolarıyla ölç
+        run: python coastal_false_positive_audit.py
 
       - name: Kör alan saha devriyesini güncelle
         run: python coverage_patrol_shortlist.py
@@ -114,9 +118,9 @@ jobs:
 
       - name: Değişen kör alan raporunu kaydet
         run: |
-          report_files="coverage_blind_area_audit.json latest_report.json SAHA_RAPORU.md"
+          report_files="coverage_blind_area_audit.json coastal_false_positive_audit.json latest_report.json SAHA_RAPORU.md"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "Kör alan ölçümü ve saha devriyesi değişmedi."
+            echo "Kör alan ölçümü, kıyı yanlış pozitif auditi ve saha devriyesi değişmedi."
             exit 0
           fi
 
