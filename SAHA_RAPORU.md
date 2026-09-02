@@ -9,19 +9,19 @@
 
 ## Günün ilk 3 kontrolü
 
-> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
+> Yeni alarm üretmez; TEKRAR/ERKEN/PARSEL öncelikleri aynen korunur. Yalnız bütün kısa liste gecikmiş kuyruğa kaldığında, en güçlü küçük-güçlü güncel Sentinel adayı çapa olarak sabit tutulur; kalan iki slot aynı kanıt sınıfındaki adaylar arasında Çeşme yerel takvim gününe göre günlük döner. Mümkünse farklı mahalle ve iki uydu bölgesi temsil edilir. Tam saha kuyruğu ve görev durumları değişmez.
 
 1. **GECİKEN — Dalyan** · yaklaşık 400 m² · Görev `UF1F116D82A` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.338783,26.311638)
-2. **GECİKEN — Ovacık** · yaklaşık 600 m² · Görev `U3794367C4D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.259188,26.310722)
-3. **GECİKEN — Uzunkuyu** · yaklaşık 800 m² · Görev `U9DC48A6EA7` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.334813,26.602576)
+2. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 600 m² · Görev `U03AEB18369` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.225541,26.421191)
+3. **GECİKEN — Ovacık** · yaklaşık 600 m² · Görev `U3794367C4D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.259188,26.310722)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli örnekleri en güçlü dört mahalle-çeşitli temporal havuzda günlük döndürür. 250-900 m² adayda güvenilir yaygın çevre değişimi görülürse aday temporal acil havuzdan çıkarılır; aynı boyut sınıfında 3x3 merkez değişimi 5x5 çevre halkasına göre belirgin biçimde lokal kalan aday saha kalibrasyonunda önce gelir. Bunların hiçbiri tek başına alarm değildir. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Dalyan** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.323 · RGB Δ 0.136 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.355516,26.300190)
+1. **KALİBRASYON — Germiyan** · yaklaşık 500 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.154 · RGB Δ 0.168 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.331275,26.476025)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.259 · RGB Δ 0.160 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.400921,26.621469)
+2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.118 · RGB Δ 0.178 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.214597,26.460134)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları
