@@ -1,0 +1,67 @@
+name: Gülbahçe Doğu Kör Şerit Taraması
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "satellite.py"
+      - "micro_site_audit.py"
+      - "gulbahce_east_strip_scan.py"
+      - ".github/workflows/gulbahce-east-strip-scan.yml"
+  schedule:
+    # Ana Sentinel kontrollerinden 20 dakika sonra; aynı ücretsiz kaynakları
+    # gereksiz eşzamanlı yüklemeden Gülbahçe doğu kör şeridini yeniden kontrol eder.
+    - cron: "20 8,12,16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-db-write
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Gülbahçe şerit öz testi
+        run: python gulbahce_east_strip_scan.py --self-check
+
+      - name: Gülbahçe doğu kör şeridini tara
+        run: python gulbahce_east_strip_scan.py
+
+      - name: Yalnız sonuç değiştiyse kaydet
+        run: |
+          if [[ -z "$(git status --porcelain -- gulbahce_east_strip_scan.json)" ]]; then
+            echo "Gülbahçe doğu şerit sonucu değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add gulbahce_east_strip_scan.json
+          git commit -m "Radar: Gülbahçe doğu şerit Sentinel sonucunu güncelle"
+
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal değişti; eski sonucu üzerine yazmadan sonraki çalışmaya bırakılıyor."
+            exit 1
+          fi
+          git push origin HEAD:main
