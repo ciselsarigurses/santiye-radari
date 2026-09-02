@@ -1,12 +1,17 @@
 """Geniş ve düşük-kompaktlık Sentinel hareketlerini operasyon listesinden ayırır.
 
 Bu katman algılama yapmaz, Sentinel eşiklerini değiştirmez ve ham radar adaylarını
-silmez. ``gunluk_uydu_raporlari.hareket_json`` içinde zaten ölçülmüş
-``genis_geometri_riski`` + ``genis_kompaktlik`` kanıtını kullanır. 10.000 m² üstünde
-ve düşük-kompaktlık riski doğrulanmış geniş hareketler tarla/toprak temizliği,
-doğal/kırsal yüzey değişimi veya başka geniş arazi müdahaleleri olabileceği için
-satış/saha operasyon listesinden ayrılır; ayrı bir arka-plan diagnostik listesinde
-koordinatlarıyla korunur.
+silmez. Önce ``gunluk_uydu_raporlari.hareket_json`` içinde taşınan ölçülmüş
+``genis_geometri_riski`` + ``genis_kompaktlik`` kanıtını kullanır. Aynı-sahne seçim
+koruması nedeniyle bu metadata eski seçime henüz taşınmamışsa, üretim maskesini
+bağımsız yeniden ölçen ``shape_false_positive_audit.json`` içindeki nihai rapor
+seçimi örneklerini yüksek-güvenli fallback olarak kullanır.
+
+10.000 m² üstünde ve düşük-kompaktlık riski doğrulanmış geniş hareketler tarla/toprak
+temizliği, doğal/kırsal yüzey değişimi veya başka geniş arazi müdahaleleri olabileceği
+için satış/saha operasyon listesinden ayrılır; ayrı bir arka-plan diagnostik listesinde
+koordinatlarıyla korunur. Şekil etiketi tek başına ``yanlış pozitif`` hükmü değildir;
+yalnız geniş yüzey riskini operasyonel şantiye alarmından ayırır.
 
 İnsan tarafından ``TEKRAR_GIT`` denmiş bir kayıt bu katman tarafından gizlenmez.
 Kural yalnız rapor/UI sunumunu etkiler; SQLite radar hafızası ve 250 m² ana alarm
@@ -28,6 +33,7 @@ DB_PATH = ROOT / "santiye.db"
 REPORT_JSON = ROOT / "latest_report.json"
 REPORT_MD = ROOT / "SAHA_RAPORU.md"
 REVIEW_JSON = ROOT / "wide_surface_background_review.json"
+SHAPE_AUDIT_JSON = ROOT / "shape_false_positive_audit.json"
 
 BACKGROUND_MIN_M2 = 10_000
 LOW_COMPACTNESS_MAX = 0.15
@@ -110,6 +116,7 @@ def _candidate_payload(raw, region_key, region_label):
         "genis_kompaktlik": round(compactness, 3),
         "genis_geometri_riski": True,
         "sinyal": str(raw.get("sinyal") or "Geniş yüzey/toprak değişimi"),
+        "kanit_kaynagi": str(raw.get("kanit_kaynagi") or "hareket_json"),
         "harita": (
             "https://www.google.com/maps/dir/?api=1&destination="
             f"{latitude:.6f},{longitude:.6f}"
@@ -154,10 +161,15 @@ def _dedupe_candidates(candidates):
         for region in candidate.get("kaynak_bolgeler") or []:
             if region and region not in duplicate["kaynak_bolgeler"]:
                 duplicate["kaynak_bolgeler"].append(region)
+        if (
+            duplicate.get("kanit_kaynagi") != "hareket_json"
+            and candidate.get("kanit_kaynagi") == "hareket_json"
+        ):
+            duplicate["kanit_kaynagi"] = "hareket_json"
     return selected
 
 
-def load_background_candidates(report_date):
+def _movement_metadata_candidates(report_date):
     if not DB_PATH.exists():
         return []
     candidates = []
@@ -180,10 +192,74 @@ def load_background_candidates(report_date):
         for raw in movement:
             if not is_background_candidate(raw):
                 continue
-            payload = _candidate_payload(raw, region_key, region_label)
+            enriched = dict(raw)
+            enriched["kanit_kaynagi"] = "hareket_json"
+            payload = _candidate_payload(enriched, region_key, region_label)
             if payload:
                 candidates.append(payload)
-    return _dedupe_candidates(candidates)
+    return candidates
+
+
+def _shape_audit_candidates(report_date):
+    """Aynı-sahne seçiminde metadata eksikse bağımsız şekil denetimini kullan."""
+    if not SHAPE_AUDIT_JSON.exists():
+        return []
+    try:
+        audit = json.loads(SHAPE_AUDIT_JSON.read_text(encoding="utf-8"))
+    except (OSError, TypeError, ValueError, json.JSONDecodeError):
+        return []
+    if not isinstance(audit, dict):
+        return []
+    if str(audit.get("rapor_tarihi") or "") != str(report_date or ""):
+        return []
+
+    regions = audit.get("bolgeler") or {}
+    if not isinstance(regions, dict):
+        return []
+    candidates = []
+    for region_key, region_data in regions.items():
+        if not isinstance(region_data, dict) or region_data.get("durum") != "ok":
+            continue
+        examples = region_data.get("nihai_secili_genis_sekil_ornekleri") or []
+        if not isinstance(examples, list):
+            continue
+        for raw in examples:
+            if not isinstance(raw, dict):
+                continue
+            area = max(_number(raw.get("alan_m2"), 0.0) or 0.0, 0.0)
+            compactness = _number(raw.get("kompaktlik"))
+            if not (
+                area > BACKGROUND_MIN_M2
+                and raw.get("dusuk_kompaktlik") is True
+                and compactness is not None
+                and compactness <= LOW_COMPACTNESS_MAX
+            ):
+                continue
+            normalized = {
+                **raw,
+                "genis_kompaktlik": compactness,
+                "genis_geometri_riski": True,
+                "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+                "kanit_kaynagi": "shape_false_positive_audit",
+            }
+            payload = _candidate_payload(
+                normalized,
+                region_key,
+                region_data.get("bolge") or region_key,
+            )
+            if payload:
+                candidates.append(payload)
+    return candidates
+
+
+def load_background_candidates(report_date):
+    # Birincil kaynak üretim seçiminin kendi metadata'sıdır. Aynı-sahne koruması
+    # alanları henüz taşımıyorsa bağımsız şekil auditinin nihai örnekleri boşluğu
+    # kapatır. Her iki kaynak da yalnız ölçülmüş geometri kullanır.
+    return _dedupe_candidates(
+        _movement_metadata_candidates(report_date)
+        + _shape_audit_candidates(report_date)
+    )
 
 
 def _manual_repeat(item):
@@ -273,6 +349,7 @@ def annotate_json(backgrounds):
         "min_alan_m2": BACKGROUND_MIN_M2,
         "dusuk_kompaktlik_max": LOW_COMPACTNESS_MAX,
         "manuel_tekrar_override": True,
+        "kanit": "hareket_json; metadata yoksa aynı tarihli bağımsız şekil denetimi",
         "aciklama": (
             "Yalnız 10.000 m² üstü + ölçülmüş düşük-kompaktlık riski birlikteyse "
             "operasyon listesinden ayrılır. Ham Sentinel/radar kaydı silinmez."
@@ -407,6 +484,7 @@ def annotate_markdown(payload, backgrounds):
                 f"- **{item['mahalle']} · yaklaşık {area_text} m²** — "
                 f"kompaktlık {item['genis_kompaktlik']:.3f}; "
                 f"koordinat `{item['enlem']}, {item['boylam']}` · "
+                f"kanıt `{item['kanit_kaynagi']}` · "
                 f"[Harita]({item['harita']}) · "
                 f"[Parsel ön kontrol]({item['parsel_on_kontrol']})",
             ])
@@ -415,6 +493,10 @@ def annotate_markdown(payload, backgrounds):
 
 
 def write_review(report_date, backgrounds, separated, manual_overrides):
+    source_counts = {}
+    for item in backgrounds:
+        source = str(item.get("kanit_kaynagi") or "bilinmiyor")
+        source_counts[source] = source_counts.get(source, 0) + 1
     review = {
         "rapor_tarihi": str(report_date or ""),
         "alarm": False,
@@ -430,6 +512,7 @@ def write_review(report_date, backgrounds, separated, manual_overrides):
         "arka_plan_aday_sayisi": len(backgrounds),
         "operasyonel_listeden_ayrilan": len(separated),
         "manuel_tekrar_korunan": len(manual_overrides),
+        "kanit_kaynagi_sayilari": source_counts,
         "adaylar": backgrounds,
     }
     REVIEW_JSON.write_text(
