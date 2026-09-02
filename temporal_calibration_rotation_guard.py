@@ -11,7 +11,9 @@ alarmı, görev, 250 m² eşiği veya Sentinel ana filtresi değişmez. Aynı ra
 aynı Sentinel çifti için temporal kanıt varsa güçlü ani-başlangıç adayları da en fazla
 dört kişilik mahalle-çeşitli havuzda gün gün döner. 250-900 m² adayda güncel yerellik
 denetimi çevre değişiminin yaygın olduğunu güvenilir biçimde gösteriyorsa aday temporal
-"acil" havuzundan düşürülür; normal güvenli rotasyonda kalmaya devam eder.
+"acil" havuzundan düşürülür; normal güvenli rotasyonda kalmaya devam eder. Aynı sınıfta
+3x3 merkez değişimi 5x5 çevre halkasına göre belirgin biçimde lokal kalan adaylar,
+saha kalibrasyonunda lokal kanıtı olmayan ani-başlangıç adaylarının önüne alınır.
 """
 
 from __future__ import annotations
@@ -104,11 +106,13 @@ def _temporal_urgent(item):
 
 
 def _ordered_candidates(ranked, age_days):
-    """Ani başlangıç havuzunu da günlük döndür; sonra normal güvenli rotasyona dön."""
+    """Lokal ani başlangıcı öne alıp güçlü havuzu günlük döndür; sonra normale dön."""
     urgent = [item for item in ranked if _temporal_urgent(item)]
     urgent.sort(
         key=lambda item: (
+            not bool(item.get("yerellik_lokal_ani_baslangic_destegi")),
             -calibration.route._number(item.get("zaman_serisi_ani_baslangic_orani"), 0),
+            -calibration.route._number(item.get("yerellik_orani"), 0),
             -abs(calibration.route._number(item.get("ortalama_bsi_degisim"), 0)),
             calibration.route._number(item.get("alan_m2"), 0),
         )
@@ -265,7 +269,9 @@ def update_temporal_rotation():
             "Ani-baslangic destekli alarm-disi kalibrasyonlar ayni Sentinel sahnesinde "
             "en guclu dort mahalle-cesitli aday arasinda gunluk doner; 250-900 m2 "
             "adayda guvenilir yaygin cevre degisim riski temporal acil havuzundan "
-            "dusurulur, normal guvenli rotasyonda korunur."
+            "dusurulur. Ayni boyut sinifinda merkez degisimi cevre halkasina gore "
+            "belirgin lokal kalan adaylar saha kalibrasyonunda once gelir; normal "
+            "guvenli rotasyon korunur."
         ),
     }
     calibration.REPORT_JSON.write_text(
@@ -391,6 +397,31 @@ def _self_check():
         fresh_locality,
     )
     assert fresh and fresh[0]["mahalle"] == "W1", fresh
+
+    # Aynı temporal sınıfta lokal kanıt, daha yüksek oranlı fakat yerellik desteği
+    # olmayan adayı saha kalibrasyonunda geçmelidir. Bu yalnız ALARM_DEGIL sırasıdır.
+    local_first = _ordered_candidates(
+        [
+            {
+                **rows[0],
+                "zaman_serisi_ani_baslangic_destegi": True,
+                "zaman_serisi_istikrarsiz_zemin_riski": False,
+                "zaman_serisi_ani_baslangic_orani": 20.0,
+                "yerellik_lokal_ani_baslangic_destegi": False,
+                "yerellik_orani": 1.2,
+            },
+            {
+                **rows[1],
+                "zaman_serisi_ani_baslangic_destegi": True,
+                "zaman_serisi_istikrarsiz_zemin_riski": False,
+                "zaman_serisi_ani_baslangic_orani": 5.0,
+                "yerellik_lokal_ani_baslangic_destegi": True,
+                "yerellik_orani": 1.8,
+            },
+        ],
+        0,
+    )
+    assert local_first and local_first[0]["mahalle"] == "W2", local_first
 
     # Eski temporal çıktı varsa mevcut güvenli seçim korunmalı.
     stale_temporal = json.loads(json.dumps(temporal_payload))
