@@ -19,9 +19,9 @@
 
 > **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Ovacık** · yaklaşık 1.800 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.168 · RGB Δ 0.163 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.218667,26.406881)
+1. **KALİBRASYON — Alaçatı** · yaklaşık 400 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.160 · RGB Δ 0.159 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.256746,26.418558)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Ildır** · yaklaşık 1.100 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.137 · RGB Δ 0.194 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.350993,26.467805)
+2. **KALİBRASYON — Alaçatı** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.118 · RGB Δ 0.178 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.214597,26.460134)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları
