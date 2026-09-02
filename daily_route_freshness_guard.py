@@ -7,17 +7,31 @@ bu açık provenans işareti bulunan adayları, halen güncel Sentinel kümesind
 adayların arkasına koyar. Ölçek sınıfı önceliği korunur: tarihsel küçük-güçlü aday,
 güncel ama daha geniş bir parsel adayının sırf eski olduğu için arkasına düşmez.
 
-Amaç saha ekibinin sınırlı ilk üç ziyaretini mümkün olduğunca halen görünen zemin
-hareketine ayırmak; eski açık görevi ise tam listede saha teyidi beklemeye devam
-ettirmektir.
+15 Eylül 2026 öncesindeki kalibrasyon döneminde saha rotası ayrıca sıkılaştırılır:
+eski/gecikmiş taşınmış adaylar yalnız backlog'da kalır; ilk üçe ancak insanın açıkça
+TEKRAR_GIT dediği kayıt veya yeni Sentinel görüntüsünde ortaya çıkan güçlü kompakt
+erken/parsel sinyali girebilir. Kuru-zemin diagnostik kalibrasyon noktaları bu dönemde
+saha ziyareti olarak önerilmez. 15 Eylül ve sonrasında normal taze-kazı rotası otomatik
+olarak geri açılır.
+
+Amaç sınırlı saha zamanını mevcut zemin hareketine ayırmak ve inşaat yasağı döneminde
+eski kuyruğun ekibi gereksiz yere dolaştırmasını önlemektir.
 """
 
 from __future__ import annotations
 
+from datetime import date, datetime
 import json
+from zoneinfo import ZoneInfo
 
 import daily_route_shortlist as route
 
+
+ISTANBUL = ZoneInfo("Europe/Istanbul")
+FULL_OPERATION_START = date(2026, 9, 15)
+PRESEASON_STRONG_PRIORITIES = {"ERKEN", "PARSEL"}
+PRESEASON_SMALL_MAX_M2 = 800
+PRESEASON_ALLOWED_SATELLITE_PRIORITIES = {"YÜKSEK", "ORTA"}
 
 NOTE = (
     "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde "
@@ -26,6 +40,41 @@ NOTE = (
     "kümesinde görünen aday, yalnız tarihsel ölçüsü geri taşınmış adaya tercih edilir. "
     "Bölge dengesi daha yüksek öncelikli adayı düşürmez."
 )
+
+PRESEASON_NOTE = (
+    "15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına "
+    "çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya yeni Sentinel görüntüsünde "
+    "beliren güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar "
+    "arka planda izlenmeye devam eder."
+)
+
+PRESEASON_CALIBRATION_NOTE = (
+    "15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; "
+    "sırf veri toplamak için ekip rotasına eklenmez."
+)
+
+
+def _number(value, default=0.0):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _local_day(value=None):
+    if value is None:
+        return datetime.now(ISTANBUL).date()
+    if isinstance(value, datetime):
+        if value.tzinfo is None:
+            return value.date()
+        return value.astimezone(ISTANBUL).date()
+    if isinstance(value, date):
+        return value
+    raise TypeError("local_day date/datetime olmalı.")
+
+
+def _preseason_mode(local_day=None):
+    return _local_day(local_day) < FULL_OPERATION_START
 
 
 def _historical_evidence_rank(item):
@@ -43,6 +92,37 @@ def _historical_evidence_rank(item):
     return 0
 
 
+def _fresh_preseason_candidate(item):
+    """Yasak döneminde ancak yeni ve güçlü kanıtı veya insan talebi olan adayı geçir."""
+    if not isinstance(item, dict):
+        return False
+
+    status = str(item.get("saha_durumu") or "").strip().upper()
+    priority = str(item.get("oncelik") or "").strip().upper()
+    if status == "TEKRAR_GIT" or priority == "TEKRAR":
+        return True
+
+    # Aynı eski Sentinel ölçüsünün günlerce taşınması saha rotası nedeni değildir.
+    if item.get("yeni_goruntu") is not True:
+        return False
+    if _historical_evidence_rank(item) != 0:
+        return False
+
+    if priority in PRESEASON_STRONG_PRIORITIES:
+        return True
+
+    area = max(_number(item.get("alan_m2"), 0), 0)
+    size_class = str(item.get("boyut_sinifi") or "").strip().upper()
+    satellite_priority = str(item.get("uydu_onceligi") or "").strip().upper()
+    signal = str(item.get("sinyal") or "").casefold()
+    strong_small = (
+        250 <= area <= PRESEASON_SMALL_MAX_M2
+        and (size_class == "KUCUK" or "küçük, güçlü" in signal)
+        and satellite_priority in PRESEASON_ALLOWED_SATELLITE_PRIORITIES
+    )
+    return strong_small
+
+
 def _fresh_route_sort_key(item, original_index):
     base = route._route_sort_key(item, original_index)
     is_overdue = str(item.get("oncelik") or "").strip().upper() == "GECİKEN"
@@ -52,12 +132,15 @@ def _fresh_route_sort_key(item, original_index):
     return (base[0], base[1], freshness, *base[2:])
 
 
-def select_fresh_shortlist(candidates, limit=route.SHORTLIST_LIMIT):
+def select_fresh_shortlist(candidates, limit=route.SHORTLIST_LIMIT, local_day=None):
     cap = max(int(limit), 0)
     if cap <= 0:
         return []
 
     eligible = route._actionable_candidates(candidates)
+    if _preseason_mode(local_day):
+        eligible = [item for item in eligible if _fresh_preseason_candidate(item)]
+
     indexed = list(enumerate(eligible))
     indexed.sort(key=lambda pair: _fresh_route_sort_key(pair[1], pair[0]))
     ranked = [item for _, item in indexed]
@@ -69,12 +152,58 @@ def select_fresh_shortlist(candidates, limit=route.SHORTLIST_LIMIT):
     return selected
 
 
-def update_fresh_shortlist():
+def _shortlist_markdown(shortlist, note, empty_message):
+    lines = [route.SECTION_TITLE, "", f"> {note}", ""]
+    if not shortlist:
+        lines.extend([empty_message, ""])
+        return "\n".join(lines)
+
+    for item in shortlist:
+        order = int(item.get("gunluk_sira") or 0)
+        priority = str(item.get("oncelik") or "KONTROL")
+        neighborhood = str(item.get("mahalle") or "Konum araştırılıyor")
+        area = max(_number(item.get("alan_m2"), 0), 0)
+        area_text = f" · yaklaşık {int(area):,} m²".replace(",", ".") if area else ""
+        task_id = str(item.get("gorev_id") or "-")
+        map_url = str(item.get("harita") or "").strip()
+        route_text = (
+            f" · [Yol tarifi]({map_url})"
+            if map_url.startswith(("http://", "https://"))
+            else ""
+        )
+        lines.append(
+            f"{order}. **{priority} — {neighborhood}**{area_text} · Görev `{task_id}`{route_text}"
+        )
+    lines.append("")
+    return "\n".join(lines)
+
+
+def _preseason_calibration_markdown():
+    return "\n".join(
+        [
+            route.CALIBRATION_SECTION_TITLE,
+            "",
+            f"> {PRESEASON_CALIBRATION_NOTE}",
+            "",
+            "Bugün ekip gönderilecek ek kalibrasyon noktası yok.",
+            "",
+        ]
+    )
+
+
+def update_fresh_shortlist(local_day=None):
+    day = _local_day(local_day)
+    preseason = _preseason_mode(day)
     payload = json.loads(route.REPORT_JSON.read_text(encoding="utf-8"))
     candidates = payload.get("saha_adaylari", [])
-    shortlist = select_fresh_shortlist(candidates)
+    shortlist = select_fresh_shortlist(candidates, local_day=day)
     payload["gunun_ilk_3_kontrolu"] = shortlist
-    payload["gunun_ilk_3_notu"] = NOTE
+    payload["gunun_ilk_3_notu"] = PRESEASON_NOTE if preseason else NOTE
+
+    if preseason:
+        payload["kuru_zemin_kalibrasyon_kontrolu"] = []
+        payload["kuru_zemin_kalibrasyon_notu"] = PRESEASON_CALIBRATION_NOTE
+
     route.REPORT_JSON.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -82,14 +211,30 @@ def update_fresh_shortlist():
 
     if route.FIELD_REPORT_MD.exists():
         current = route.FIELD_REPORT_MD.read_text(encoding="utf-8")
-        updated = route._inject_markdown(current, route._shortlist_markdown(shortlist))
-        # _inject_markdown kısa liste ile ana aday bölümü arasındaki alanı yeniler;
-        # mevcut kuru-zemin kalibrasyonunu aynı içerikle tekrar ekleyerek kaybetme.
-        calibration = payload.get("kuru_zemin_kalibrasyon_kontrolu") or []
-        updated = route._inject_calibration_markdown(
-            updated,
-            route._calibration_markdown(calibration),
+        empty_message = (
+            "Bugün ekip göndermeyi gerektiren güçlü yeni aday yok."
+            if preseason
+            else "Bugün için eyleme dönük aktif uydu görevi yok."
         )
+        updated = route._inject_markdown(
+            current,
+            _shortlist_markdown(
+                shortlist,
+                PRESEASON_NOTE if preseason else NOTE,
+                empty_message,
+            ),
+        )
+        if preseason:
+            updated = route._inject_calibration_markdown(
+                updated,
+                _preseason_calibration_markdown(),
+            )
+        else:
+            calibration = payload.get("kuru_zemin_kalibrasyon_kontrolu") or []
+            updated = route._inject_calibration_markdown(
+                updated,
+                route._calibration_markdown(calibration),
+            )
         route.FIELD_REPORT_MD.write_text(updated, encoding="utf-8")
     return shortlist
 
@@ -157,9 +302,11 @@ def _self_check():
         "sinyal": "2 gündür saha kontrolü bekliyor · parsel ölçekli yüzey/toprak değişimi adayı",
     }
 
+    # 15 Eylül ve sonrasında önceki güncellik sıralaması aynen korunur.
     chosen = select_fresh_shortlist(
         [historical_small, current_small, current_east, current_parcel],
         limit=3,
+        local_day=date(2026, 9, 15),
     )
     ids = [item["gorev_id"] for item in chosen]
     assert ids[:2] == ["CURRENT_SMALL", "CURRENT_EAST"], ids
@@ -167,10 +314,50 @@ def _self_check():
     assert "CURRENT_PARCEL" not in ids, "Küçük-güçlü sınıf parsel sınıfının arkasına düşmemeli."
     assert all(item["gunluk_sira"] == index for index, item in enumerate(chosen, 1))
 
-    # Aynı tek bölgede de güncellik, tarihsel adayı aynı sınıfta alan farkına
-    # rağmen geriye iter; bu tam saha listesini değil yalnız ilk üçü etkiler.
-    one_region = select_fresh_shortlist([historical_small, current_small], limit=2)
+    one_region = select_fresh_shortlist(
+        [historical_small, current_small],
+        limit=2,
+        local_day=date(2026, 9, 15),
+    )
     assert [item["gorev_id"] for item in one_region] == ["CURRENT_SMALL", "HIST_SMALL"]
+
+    # 15 Eylül öncesi eski/gecikmiş ölçü rota nedeni değildir. İnsan TEKRAR_GIT
+    # ve yeni görüntüdeki güçlü kompakt aday ise kaçırılmamalıdır.
+    fresh_early = {
+        "gorev_id": "FRESH_EARLY",
+        "saha_durumu": "KONTROLE_GIT",
+        "oncelik": "ERKEN",
+        "mahalle": "Gülbahçe",
+        "enlem": 38.3195,
+        "boylam": 26.6465,
+        "alan_m2": 600,
+        "bolge": east,
+        "uydu_onceligi": "YÜKSEK",
+        "boyut_sinifi": "KUCUK",
+        "yeni_goruntu": True,
+    }
+    manual_repeat = {
+        "gorev_id": "MANUAL_REPEAT",
+        "saha_durumu": "TEKRAR_GIT",
+        "oncelik": "TEKRAR",
+        "mahalle": "Alaçatı",
+        "enlem": 38.2848,
+        "boylam": 26.3745,
+        "alan_m2": 500,
+        "bolge": west,
+        "yeni_goruntu": False,
+    }
+    preseason = select_fresh_shortlist(
+        [historical_small, current_small, fresh_early, manual_repeat],
+        limit=3,
+        local_day=date(2026, 9, 2),
+    )
+    preseason_ids = [item["gorev_id"] for item in preseason]
+    assert preseason_ids == ["MANUAL_REPEAT", "FRESH_EARLY"], preseason_ids
+    assert "HIST_SMALL" not in preseason_ids
+    assert "CURRENT_SMALL" not in preseason_ids
+    assert _preseason_mode(date(2026, 9, 14)) is True
+    assert _preseason_mode(date(2026, 9, 15)) is False
 
 
 if __name__ == "__main__":
@@ -178,5 +365,5 @@ if __name__ == "__main__":
     chosen = update_fresh_shortlist()
     print(
         "Günün ilk kontrolünde güncel uydu kanıtı önceliklendirildi: "
-        + (", ".join(str(item.get("gorev_id")) for item in chosen) or "aktif görev yok")
+        + (", ".join(str(item.get("gorev_id")) for item in chosen) or "güçlü yeni saha adayı yok")
     )
