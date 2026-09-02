@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "micro_site_temporal_guard.py"
+      - "micro_site_orbit_guard.py"
       - "micro_site_locality_guard.py"
       - "micro_site_decision_guard.py"
       - "micro_site_field_review.json"
@@ -48,6 +49,9 @@ jobs:
       - name: Mikro zaman-serisi öz testini çalıştır
         run: python micro_site_temporal_guard.py --check-only
 
+      - name: Mikro yörünge geometrisi öz testini çalıştır
+        run: python micro_site_orbit_guard.py --check-only
+
       - name: Mikro yerel-kontekst öz testini çalıştır
         run: python micro_site_locality_guard.py --check-only
 
@@ -56,6 +60,9 @@ jobs:
 
       - name: Üç Sentinel sahnesinde mikro adayları ölç
         run: python micro_site_temporal_guard.py
+
+      - name: Mikro ani başlangıç kanıtını yörünge geometrisiyle doğrula
+        run: python micro_site_orbit_guard.py
 
       - name: Mikro adayın çevresel yaygınlığını ölç
         run: python micro_site_locality_guard.py
