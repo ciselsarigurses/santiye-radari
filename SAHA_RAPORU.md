@@ -1,28 +1,27 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-09-02
-**Hazırlanma:** 2026-09-02 10:54 +03
+**Hazırlanma:** 2026-09-02 11:04 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 75 · Geciken kontrol: 70 · Saha sonucu: 1 kontrol (0 şantiye/kazı, 0 yol/altyapı, 0 tarla/bitki, 1 yanlış pozitif)
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
-## Kör alan saha devriyesi
+## Günün ilk 3 kontrolü
 
-> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-1. **KÖR ALAN — Mevki doğrulanmadı** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.189723,26.625706)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
-2. **KÖR ALAN — Dalyan** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.341948,26.287140)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+1. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · Görev `U0359B073F0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.425704,26.577385)
+2. **GECİKEN — Dalyan** · yaklaşık 400 m² · Görev `UF1F116D82A` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.338783,26.311638)
+3. **GECİKEN — Ovacık** · yaklaşık 600 m² · Görev `U3794367C4D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.259188,26.310722)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli örnekleri en güçlü dört mahalle-çeşitli temporal havuzda günlük döndürür. 250-900 m² adayda güvenilir yaygın çevre değişimi görülürse aday temporal acil havuzdan çıkarılır; aynı boyut sınıfında 3x3 merkez değişimi 5x5 çevre halkasına göre belirgin biçimde lokal kalan aday saha kalibrasyonunda önce gelir. Bunların hiçbiri tek başına alarm değildir. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Alaçatı** · yaklaşık 400 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.160 · RGB Δ 0.159 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.256746,26.418558)
+1. **KALİBRASYON — Dalyan** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.323 · RGB Δ 0.136 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.355516,26.300190)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Ildır** · yaklaşık 500 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.129 · RGB Δ 0.137 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.351536,26.478340)
+2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.259 · RGB Δ 0.160 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.400921,26.621469)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları
@@ -30,110 +29,110 @@
 ### 1. GECİKEN — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.303146, 26.297443`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 6 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 2.200 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303146,26.297443)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 2. GECİKEN — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.301156, 26.304197`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 6 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 1.300 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301156,26.304197)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 3. GECİKEN — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.313366, 26.307173`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 6 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 1.700 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313366,26.307173)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 4. GECİKEN — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.263439, 26.318163`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 6 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 3.901 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263439,26.318163)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 5. GECİKEN — Ilıca
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ilıca
 - **Koordinat:** `38.297357, 26.355253`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 6 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 4.801 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297357,26.355253)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 6. GECİKEN — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.294734, 26.311523`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 400 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294734,26.311523)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 7. GECİKEN — Alaçatı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
 - **Koordinat:** `38.285689, 26.38433`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 1.200 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285689,26.384330)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 8. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
 - **Koordinat:** `38.33219, 26.652385`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 1.000 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.332190,26.652385)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 9. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
 - **Koordinat:** `38.334541, 26.651698`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 1.900 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334541,26.651698)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 10. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
 - **Koordinat:** `38.333275, 26.652271`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 4.500 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.333275,26.652271)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 11. GECİKEN — Dalyan
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Dalyan
 - **Koordinat:** `38.34638, 26.30122`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 1.200 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.346380,26.301220)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
@@ -150,50 +149,50 @@
 ### 13. GECİKEN — Dalyan
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Dalyan
 - **Koordinat:** `38.355244, 26.302251`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 600 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.355244,26.302251)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 14. GECİKEN — Çiftlikköy
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
 - **Koordinat:** `38.290212, 26.271915`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 1.900 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.290212,26.271915)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 15. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
 - **Koordinat:** `38.313469, 26.638073`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 900 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313469,26.638073)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 16. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
 - **Koordinat:** `38.333094, 26.610019`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 1.000 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.333094,26.610019)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 17. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
 - **Koordinat:** `38.334813, 26.602576`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 5 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 800 m²
+- **Görüntü aralığı:** 24.08.2026 → 26.08.2026
+- **Sinyal:** 5 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334813,26.602576)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
@@ -550,150 +549,150 @@
 ### 53. GECİKEN — Alaçatı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
 - **Koordinat:** `38.220838, 26.435386`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 800 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.220838,26.435386)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 54. GECİKEN — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.219843, 26.40608`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 800 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.219843,26.406080)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 55. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Uzunkuyu
 - **Koordinat:** `38.208446, 26.480489`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 800 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.208446,26.480489)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 56. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
 - **Koordinat:** `38.262913, 26.573034`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 900 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.262913,26.573034)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 57. GECİKEN — Alaçatı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Alaçatı
 - **Koordinat:** `38.249076, 26.452004`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 900 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.249076,26.452004)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 58. GECİKEN — Alaçatı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Alaçatı
 - **Koordinat:** `38.232526, 26.450286`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 900 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.232526,26.450286)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 59. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Uzunkuyu
 - **Koordinat:** `38.201482, 26.484496`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 9.401 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.201482,26.484496)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 60. GECİKEN — Uzunkuyu
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Uzunkuyu
 - **Koordinat:** `38.30542, 26.536966`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 9.500 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.305420,26.536966)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 61. GECİKEN — Alaçatı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
 - **Koordinat:** `38.246435, 26.410087`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 9.501 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.246435,26.410087)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 62. GECİKEN — Germiyan
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Germiyan
 - **Koordinat:** `38.319427, 26.476025`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 9.701 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.319427,26.476025)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 63. GECİKEN — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Germiyan
 - **Koordinat:** `38.325859, 26.469179`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 10.000 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.325859,26.469179)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 64. GECİKEN — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Germiyan
 - **Koordinat:** `38.344761, 26.46895`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 60.798 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.344761,26.468950)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 65. GECİKEN — Alaçatı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
 - **Koordinat:** `38.242726, 26.400585`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 400 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.242726,26.400585)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 66. GECİKEN — Alaçatı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Alaçatı
 - **Koordinat:** `38.256836, 26.382613`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 500 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.256836,26.382613)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 67. GECİKEN — Şifne
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Şifne
 - **Koordinat:** `38.342672, 26.394633`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 4 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 600 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 4 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.342672,26.394633)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
@@ -710,20 +709,20 @@
 ### 69. GECİKEN — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.223732, 26.39303`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 3 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 800 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 3 gündür saha kontrolü bekliyor · Geniş değişim kümesine yalnız köşeden bağlı parsel ölçekli yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.223732,26.393030)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 70. GECİKEN — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Germiyan
 - **Koordinat:** `38.317087, 26.467118`
-- **Değişim alanı:** yaklaşık 0 m²
-- **Görüntü aralığı:** - → -
-- **Sinyal:** 3 gündür saha kontrolü bekliyor
-- **Öncelik nedeni:** -
+- **Değişim alanı:** yaklaşık 1.400 m²
+- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
+- **Sinyal:** 3 gündür saha kontrolü bekliyor · Geniş değişim kümesine yalnız köşeden bağlı parsel ölçekli yüzey/toprak değişimi adayı
+- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.317087,26.467118)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
