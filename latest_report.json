@@ -1710,8 +1710,8 @@
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır",
       "mahalle": "Uzunkuyu",
-      "enlem": 38.185472,
-      "boylam": 26.532156,
+      "enlem": 38.189723,
+      "boylam": 26.625706,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -1719,14 +1719,14 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.185472,26.532156"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.189723,26.625706"
     },
     {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "mahalle": "Ildır",
-      "enlem": 38.367364,
-      "boylam": 26.451756,
+      "enlem": 38.373605,
+      "boylam": 26.476368,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -1734,7 +1734,7 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.367364,26.451756"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.373605,26.476368"
     }
   ],
   "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
@@ -1749,5 +1749,6 @@
     "havuz": 7,
     "rapor_tarihi": "2026-09-01",
     "rotasyon_tarihi": "2026-09-02"
-  }
+  },
+  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-02"
 }
