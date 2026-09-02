@@ -11,10 +11,11 @@ from scanner import connect
 
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
-# v14: PB04.00+ SCL=2 cast/topografik shadow doğrudan zemin değişimi kanıtından
-# çıkarıldı; SCL7 gerçek koyu toprak/dark feature olarak geçerli kalır. SCL2 körlüğü
-# temporal katmanlarda iki açık sahne ile geri kazanılır.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-same-orbit-uri-scl2-shadow-v14"
+# v15: SCL su sınıfının çevresine yaklaşık 30 m kıyı tamponu eklenir. Böylece
+# dalga, ıslak kaya, kıyı platformu ve kara/deniz karma pikselleri toprak hareketi
+# olarak saha görevi üretmez. Mahalle merkezinden 3 km uzaktaki yaklaşık etiketler
+# de kesin mahalle adı yerine doğrulanmamış mevki olarak işaretlenir.
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-same-orbit-uri-scl2-shadow-coast30-place3km-v15"
 
 
 def _ensure_version_table(connection):

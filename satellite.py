@@ -18,6 +18,14 @@ HOTSPOT_LIMIT = 24
 SMALL_HOTSPOT_QUOTA = 6
 TARGET_PIXEL_SIZE_M = 10
 MAX_ANALYSIS_DIMENSION = 2800
+# SCL su sınıfına komşu karma pikseller dalga, ıslak kaya, kıyı platformu ve
+# deniz-gölge farklarını çıplak zemin gibi gösterebilir. Yaklaşık 30 m kıyı
+# tamponu, doğrudan saha alarmı üretmeden önce bu karma pikselleri dışarıda tutar.
+COASTAL_WATER_BUFFER_PIXELS = 3
+# Mahalle sınırı verisi olmadan yalnız en yakın merkez adı kullanılmaktadır.
+# Merkezden çok uzaktaki noktaya yanlış mahalle adı vermek yerine etiketi açıkça
+# doğrulanmamış bırakıyoruz.
+MAX_PLACE_LABEL_DISTANCE_M = 3_000
 # Sentinel-2 PB04.00+ SCL=2 artık topografik/cast shadow sınıfıdır. Doğrudan
 # değişim kanıtı sayılmaz; koyu toprak gibi gerçek dark feature pikselleri SCL=7'ye
 # taşındığı için 7 geçerli kalır. Gölge pikselleri zaman-serisi katmanı açık sahneyle
@@ -325,6 +333,25 @@ def _retain_components(mask, minimum_pixels):
     return retained
 
 
+def _dilate_mask(mask, radius):
+    """İkili maskeyi verilen piksel yarıçapı kadar güvenli biçimde genişletir."""
+    mask = np.asarray(mask, dtype=bool)
+    radius = max(int(radius), 0)
+    if radius == 0:
+        return mask.copy()
+
+    height, width = mask.shape
+    padded = np.pad(mask, radius, mode="constant", constant_values=False)
+    expanded = np.zeros(mask.shape, dtype=bool)
+    for row_offset in range(radius * 2 + 1):
+        for col_offset in range(radius * 2 + 1):
+            expanded |= padded[
+                row_offset:row_offset + height,
+                col_offset:col_offset + width,
+            ]
+    return expanded
+
+
 def _clean_mask(mask, small_site_mask=None):
     """Genel gürültüyü azaltır; güçlü 3+ piksellik küçük saha sinyalini korur."""
     padded = np.pad(mask.astype("uint8"), 1, mode="constant")
@@ -360,13 +387,19 @@ def _item_date(item):
 
 def _nearest_place(latitude, longitude):
     cosine = np.cos(np.radians(latitude))
-    return min(
+    nearest = min(
         PLACE_CENTERS,
         key=lambda name: (
             (PLACE_CENTERS[name][0] - latitude) ** 2
             + ((PLACE_CENTERS[name][1] - longitude) * cosine) ** 2
         ),
     )
+    center_latitude, center_longitude = PLACE_CENTERS[nearest]
+    north_m = (center_latitude - latitude) * 110570
+    east_m = (center_longitude - longitude) * 111320 * cosine
+    if float(np.hypot(north_m, east_m)) > MAX_PLACE_LABEL_DISTANCE_M:
+        return "Mevki doğrulanmadı"
+    return nearest
 
 
 def _hotspots(
@@ -482,6 +515,9 @@ def analyze_sentinel_change(region_key, pair=None):
 
     valid = ~np.isin(older_scl, EXCLUDED_SCL_CLASSES)
     valid &= ~np.isin(latest_scl, EXCLUDED_SCL_CLASSES)
+    water = (older_scl == 6) | (latest_scl == 6)
+    coastal_buffer = _dilate_mask(water, COASTAL_WATER_BUFFER_PIXELS)
+    valid &= ~coastal_buffer
 
     old_rgb = np.moveaxis(older_visual, 0, 2).astype("float32") / 255
     new_rgb = np.moveaxis(latest_visual, 0, 2).astype("float32") / 255
@@ -540,6 +576,7 @@ def analyze_sentinel_change(region_key, pair=None):
         "change_png": _png_bytes(overlay),
         "changed_km2": changed_km2,
         "changed_percent": float(change_mask.sum() / valid_pixels * 100),
+        "coastal_water_buffer_m": COASTAL_WATER_BUFFER_PIXELS * TARGET_PIXEL_SIZE_M,
         "hotspots": _hotspots(
             change_mask,
             bbox,

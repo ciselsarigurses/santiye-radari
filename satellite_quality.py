@@ -12,6 +12,7 @@ from __future__ import annotations
 import numpy as np
 
 from satellite import (
+    COASTAL_WATER_BUFFER_PIXELS,
     HOTSPOT_LIMIT,
     MAX_ANALYSIS_DIMENSION,
     MIN_HOTSPOT_AREA_M2,
@@ -22,7 +23,9 @@ from satellite import (
     TARGET_PIXEL_SIZE_M,
     SatelliteError,
     _clean_mask,
+    _dilate_mask,
     _hotspots,
+    _nearest_place,
     _output_shape,
     _pick_pair,
 )
@@ -129,6 +132,9 @@ def check_configuration():
     )
     assert SMALL_HOTSPOT_QUOTA >= 6, (
         "Yoğun görüntüde küçük ve güçlü hafriyat adayları için ayrılan kota yetersiz."
+    )
+    assert COASTAL_WATER_BUFFER_PIXELS >= 3, (
+        "Kıyı karma piksellerini dışlamak için en az yaklaşık 30 m su tamponu korunmalı."
     )
 
     for region_key in REPORT_REGIONS:
@@ -354,6 +360,24 @@ def check_small_site_path():
     ), "Yaklaşık 200 m² eşik-altı sinyal yanlış saha görevi üretiyor."
 
 
+def check_coastal_false_positive_guard():
+    water = np.zeros((15, 15), dtype=bool)
+    water[:, :5] = True
+    coastal_buffer = _dilate_mask(water, COASTAL_WATER_BUFFER_PIXELS)
+    assert coastal_buffer[7, 7], (
+        "Su kıyısından yaklaşık 30 m içerdeki karma piksel kıyı tamponuna girmiyor."
+    )
+    assert not coastal_buffer[7, 9], (
+        "Kıyı tamponu 30 m'den uzak iç araziyi gereksiz biçimde dışlıyor."
+    )
+
+    # Kullanıcının sahada kıyı/kayalık olarak doğruladığı eski yanlış alarm.
+    # En yakın merkez Şifne olsa da 3 km'den uzakta; kesin mahalle gibi sunulmamalı.
+    assert _nearest_place(38.346018, 26.383414) == "Mevki doğrulanmadı", (
+        "Kıyıdaki doğrulanmış yanlış alarm yeniden Şifne diye etiketleniyor."
+    )
+
+
 def check_candidate_capacity():
     signal = np.zeros((30, 8), dtype=bool)
     for index in range(14):
@@ -376,6 +400,7 @@ def main():
     check_coverage()
     check_scene_pair_coverage()
     check_small_site_path()
+    check_coastal_false_positive_guard()
     check_candidate_capacity()
     print(
         "Uydu kalite kontrolü başarılı: Çeşme idari zarfı, Çeşme+Uzunkuyu birleşik "
