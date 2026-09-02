@@ -88,10 +88,19 @@ jobs:
       - name: Nihai kör alan rotasına göre kalibrasyon tekrarını azalt
         run: python final_calibration_diversity_guard.py
 
+      # Katmanlar-arası koruma günlük ilk-3 rotasının sonucunu okur. Bu yüzden önce
+      # gecikmiş görev rotasını kesinleştiriyoruz; aksi halde gece yarısından sonra
+      # kalibrasyon dünkü ilk-3 listesine göre çeşitlenebilirdi.
+      - name: Gecikmiş günlük rota rotasyonu öz testi
+        run: python overdue_route_rotation_guard.py --check-only
+
+      - name: Gecikmiş ilk üç saha kontrolünü eş kalite bandında döndür
+        run: python overdue_route_rotation_guard.py
+
       - name: Katmanlar arası kalibrasyon çeşitliliği öz testi
         run: python calibration_cross_layer_diversity_guard.py --check-only
 
-      - name: Ana rota ve kör alanla aynı mahalledeki eş kalite kalibrasyonu çeşitlendir
+      - name: Nihai ana rota ve kör alanla aynı mahalledeki eş kalite kalibrasyonu çeşitlendir
         run: python calibration_cross_layer_diversity_guard.py
 
       - name: Kalibrasyon açıklama tutarlılığı öz testi
@@ -99,12 +108,6 @@ jobs:
 
       - name: Kalibrasyon açıklamasını gerçek temporal rotasyonla eşleştir
         run: python calibration_note_guard.py
-
-      - name: Gecikmiş günlük rota rotasyonu öz testi
-        run: python overdue_route_rotation_guard.py --check-only
-
-      - name: Gecikmiş ilk üç saha kontrolünü eş kalite bandında döndür
-        run: python overdue_route_rotation_guard.py
 
       - name: Kanonik kuru zemin raporunu geri yükle
         run: git checkout -- dry_ground_gap_audit.json
