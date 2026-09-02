@@ -8,6 +8,7 @@ on:
       - "coverage_blind_area_runner.py"
       - "coverage_patrol_shortlist.py"
       - "coastal_false_positive_audit.py"
+      - "stale_coastal_task_audit.py"
       - "calibration_rotation_guard.py"
       - "temporal_calibration_rotation_guard.py"
       - "completed_calibration_guard.py"
@@ -61,6 +62,9 @@ jobs:
 
       - name: Saha doğrulamalı kıyı yanlış pozitiflerini tampon senaryolarıyla ölç
         run: python coastal_false_positive_audit.py
+
+      - name: Güncel kıyı filtresine düşen eski açık görevleri ölç
+        run: python stale_coastal_task_audit.py
 
       - name: Kör alan saha devriyesini güncelle
         run: python coverage_patrol_shortlist.py
@@ -118,9 +122,9 @@ jobs:
 
       - name: Değişen kör alan raporunu kaydet
         run: |
-          report_files="coverage_blind_area_audit.json coastal_false_positive_audit.json latest_report.json SAHA_RAPORU.md"
+          report_files="coverage_blind_area_audit.json coastal_false_positive_audit.json stale_coastal_task_audit.json latest_report.json SAHA_RAPORU.md"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "Kör alan ölçümü, kıyı yanlış pozitif auditi ve saha devriyesi değişmedi."
+            echo "Kör alan ölçümü, kıyı yanlış pozitif auditleri ve saha devriyesi değişmedi."
             exit 0
           fi
 
