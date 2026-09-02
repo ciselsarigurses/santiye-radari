@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "micro_site_temporal_guard.py"
+      - "micro_site_locality_guard.py"
       - "micro_site_shortlist.json"
       - "micro_site_audit.json"
       - ".github/workflows/micro-site-temporal.yml"
@@ -45,32 +46,47 @@ jobs:
       - name: Mikro zaman-serisi öz testini çalıştır
         run: python micro_site_temporal_guard.py --check-only
 
+      - name: Mikro yerel-kontekst öz testini çalıştır
+        run: python micro_site_locality_guard.py --check-only
+
       - name: Üç Sentinel sahnesinde mikro adayları ölç
         run: python micro_site_temporal_guard.py
 
-      - name: Diagnostik sonucu yalnız anlamlı değişiklikte kaydet
+      - name: Mikro adayın çevresel yaygınlığını ölç
+        run: python micro_site_locality_guard.py
+
+      - name: Diagnostik sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
           if git ls-files --error-unmatch micro_site_temporal_review.json >/dev/null 2>&1; then
-            meaningful="$(git diff -- micro_site_temporal_review.json \
+            meaningful_temporal="$(git diff -- micro_site_temporal_review.json \
               | grep -E '^[+-]' \
               | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
-            if [[ -z "$meaningful" ]]; then
-              echo "Yalnız çalışma zamanı değişti; gereksiz diagnostik commit yapılmıyor."
+            if [[ -z "$meaningful_temporal" ]]; then
+              echo "Temporal çıktıda yalnız çalışma zamanı değişti."
               git checkout -- micro_site_temporal_review.json
-              exit 0
             fi
           fi
 
-          if [[ -z "$(git status --porcelain -- micro_site_temporal_review.json)" ]]; then
-            echo "Mikro temporal sonuç değişmedi."
+          if git ls-files --error-unmatch micro_site_locality_review.json >/dev/null 2>&1; then
+            meaningful_locality="$(git diff -- micro_site_locality_review.json \
+              | grep -E '^[+-]' \
+              | grep -vE '^(---|\+\+\+|[-+]  "kaynak_temporal_olusturma":)' || true)"
+            if [[ -z "$meaningful_locality" ]]; then
+              echo "Lokalite çıktıda yalnız kaynak çalışma zamanı değişti."
+              git checkout -- micro_site_locality_review.json
+            fi
+          fi
+
+          if [[ -z "$(git status --porcelain -- micro_site_temporal_review.json micro_site_locality_review.json)" ]]; then
+            echo "Mikro diagnostik sonuçlar değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_temporal_review.json
-          git commit -m "Radar: mikro şantiye temporal incelemesini güncelle"
+          git add micro_site_temporal_review.json micro_site_locality_review.json
+          git commit -m "Radar: mikro temporal ve lokalite incelemesini güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
             echo "Ana dal değişti; eski diagnostik sonucu üzerine yazmadan sonraki çalışmaya bırakılıyor."
