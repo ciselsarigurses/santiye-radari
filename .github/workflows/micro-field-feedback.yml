@@ -1,0 +1,58 @@
+name: Mikro Şantiye Saha Geri Bildirim Koruması
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "micro_site_shortlist.json"
+      - "micro_site_audit.json"
+      - "santiye.db"
+      - "micro_site_field_guard.py"
+      - ".github/workflows/micro-field-feedback.yml"
+  schedule:
+    # Mikro kısa listeden kısa süre sonra çalışır.
+    - cron: "45 8,12,16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-db-write
+  cancel-in-progress: false
+
+jobs:
+  field-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Mikro saha geri bildirim korumasını çalıştır
+        run: python micro_site_field_guard.py
+
+      - name: Sonucu yalnız değişiklikte kaydet
+        shell: bash
+        run: |
+          if [[ -z "$(git status --porcelain -- micro_site_field_review.json)" ]]; then
+            echo "Mikro saha geri bildirim sonucu değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add micro_site_field_review.json
+          git commit -m "Radar: mikro saha geri bildirim sonucunu güncelle"
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            git rebase origin/main
+          fi
+          git push origin HEAD:main
