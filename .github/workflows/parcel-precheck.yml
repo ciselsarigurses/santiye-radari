@@ -1,0 +1,86 @@
+name: Parsel Ön Kontrol Bağlantıları
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "parcel_precheck_links.py"
+      - ".github/workflows/parcel-precheck.yml"
+  workflow_run:
+    workflows:
+      - "Günlük Şantiye Taraması"
+      - "Aday Tavanı Şantiye Devriyesi"
+      - "Sentinel Kör Alan Denetimi"
+      - "Mikro Şantiye Zaman Serisi Denetimi"
+      - "Mikro Şantiye Saha Geri Bildirim Koruması"
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-parsel-precheck
+  cancel-in-progress: false
+
+jobs:
+  annotate:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Parsel ön kontrol katmanı öz testi
+        run: python parcel_precheck_links.py --self-check
+
+      - name: Manuel TKGM ön kontrol bağlantılarını ekle
+        run: python parcel_precheck_links.py
+
+      - name: Yalnız değişiklik varsa güvenli biçimde kaydet
+        run: |
+          if [[ -z "$(git status --porcelain -- latest_report.json SAHA_RAPORU.md)" ]]; then
+            echo "Parsel ön kontrol bağlantıları zaten güncel."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          # Rapor üreten başka bir workflow aynı anda main'i ilerletmiş olabilir.
+          # En güncel main üzerinde katmanı yeniden üret; SQLite veya algılama
+          # dosyalarına dokunma.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python parcel_precheck_links.py --self-check
+            python parcel_precheck_links.py
+
+            if [[ -z "$(git status --porcelain -- latest_report.json SAHA_RAPORU.md)" ]]; then
+              echo "En güncel main üzerinde ek değişiklik gerekmiyor."
+              exit 0
+            fi
+
+            git add latest_report.json SAHA_RAPORU.md
+            git commit -m "Radar: manuel parsel ön kontrol linklerini güncelle"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Main değişti veya geçici push hatası oluştu; güncel rapor üzerinde yeniden deneniyor (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Parsel ön kontrol katmanı üç güvenli denemede kaydedilemedi."
+          exit 1
