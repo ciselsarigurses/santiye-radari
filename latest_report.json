@@ -2801,5 +2801,56 @@
     "manuel_tekrar_override": true,
     "kanit": "hareket_json; metadata yoksa aynı tarihli bağımsız şekil denetimi",
     "aciklama": "Yalnız 10.000 m² üstü + ölçülmüş düşük-kompaktlık riski birlikteyse operasyon listesinden ayrılır. Ham Sentinel/radar kaydı silinmez."
+  },
+  "kapasite_santiye_devriyesi": [
+    {
+      "oncelik": "KAPASITE_DIAGNOSTIK",
+      "mahalle": "Germiyan",
+      "enlem": 38.319969,
+      "boylam": 26.47385,
+      "alan_m2": 5000,
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "guclu_sinyal_orani": 0.14,
+      "geometri_kaynagi": null,
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319969,26.473850",
+      "neden": "Aynı 250 m²+ / yaklaşık 10 m Sentinel değişim maskesini geçti; ana 24-aday tavanının dışında kaldığı için üretim alarmı değildir. Mevcut saha görevlerinden uzakta, şantiye ölçeği kapasite kalibrasyonu için seçildi."
+    },
+    {
+      "oncelik": "KAPASITE_DIAGNOSTIK",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.318432,
+      "boylam": 26.612596,
+      "alan_m2": 1200,
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "guclu_sinyal_orani": 0.3333,
+      "geometri_kaynagi": null,
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.318432,26.612596",
+      "neden": "Aynı 250 m²+ / yaklaşık 10 m Sentinel değişim maskesini geçti; ana 24-aday tavanının dışında kaldığı için üretim alarmı değildir. Mevcut saha görevlerinden uzakta, şantiye ölçeği kapasite kalibrasyonu için seçildi."
+    }
+  ],
+  "kapasite_santiye_devriyesi_meta": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "olusturma": "2026-09-03 02:20 +0300",
+    "bolgeler": {
+      "cesme": {
+        "durum": "ok",
+        "uretim_santiye_olcegi": 0,
+        "tavan_disinda_uygun_havuz": 250
+      },
+      "uzunkuyu": {
+        "durum": "ok",
+        "uretim_santiye_olcegi": 0,
+        "tavan_disinda_uygun_havuz": 142
+      }
+    }
   }
 }
