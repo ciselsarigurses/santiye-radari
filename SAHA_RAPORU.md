@@ -9,19 +9,19 @@
 
 ## Günün ilk 3 kontrolü
 
-> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
+> Yeni alarm üretmez; TEKRAR/ERKEN/PARSEL öncelikleri aynen korunur. Yalnız bütün kısa liste gecikmiş kuyruğa kaldığında, en güçlü küçük-güçlü güncel Sentinel adayı çapa olarak sabit tutulur; kalan iki slot aynı kanıt sınıfındaki adaylar arasında Çeşme yerel takvim gününe göre günlük döner. Mümkünse farklı mahalle ve iki uydu bölgesi temsil edilir. Tam saha kuyruğu ve görev durumları değişmez.
 
 1. **GECİKEN — Şifne** · yaklaşık 300 m² · Görev `U611DAF934D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.346018,26.383414)
-2. **GECİKEN — Alaçatı** · yaklaşık 400 m² · Görev `UDB761099F7` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.242726,26.400585)
-3. **GECİKEN — Ildır** · yaklaşık 400 m² · Görev `U0359B073F0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.425704,26.577385)
+2. **GECİKEN — Ildır** · yaklaşık 400 m² · Görev `U0359B073F0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.425704,26.577385)
+3. **GECİKEN — Alaçatı** · yaklaşık 500 m² · Görev `U00743985AF` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.256836,26.382613)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
 > **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Dalyan** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.323 · RGB Δ 0.136 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.355516,26.300190)
+1. **KALİBRASYON — Ovacık** · yaklaşık 1.800 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.168 · RGB Δ 0.163 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.218667,26.406881)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Ildır** · yaklaşık 300 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.259 · RGB Δ 0.160 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.400921,26.621469)
+2. **KALİBRASYON — Ildır** · yaklaşık 1.100 m² · 26.08.2026 → 29.08.2026 · BSI Δ 0.137 · RGB Δ 0.194 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.350993,26.467805)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları
