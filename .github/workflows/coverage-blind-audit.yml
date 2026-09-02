@@ -9,6 +9,7 @@ on:
       - "coverage_patrol_shortlist.py"
       - "coastal_false_positive_audit.py"
       - "stale_coastal_task_audit.py"
+      - "coastal_route_guard.py"
       - "calibration_rotation_guard.py"
       - "temporal_calibration_rotation_guard.py"
       - "completed_calibration_guard.py"
@@ -104,6 +105,9 @@ jobs:
 
       - name: Gecikmiş ilk üç saha kontrolünü eş kalite bandında döndür
         run: python overdue_route_rotation_guard.py
+
+      - name: Güncel kıyı filtresine düşen eski görevi ilk üçten koru
+        run: python coastal_route_guard.py
 
       - name: Katmanlar arası kalibrasyon çeşitliliği öz testi
         run: python calibration_cross_layer_diversity_guard.py --check-only
