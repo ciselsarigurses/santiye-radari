@@ -28,7 +28,7 @@ import dry_ground_gap_audit as gap_audit
 
 SOURCE_REPORT = Path(__file__).with_name("dry_ground_gap_audit.json")
 POOL_REPORT = Path(__file__).with_name("dry_ground_temporal_pool.json")
-TARGET_EXAMPLE_LIMIT = 24
+TARGET_EXAMPLE_LIMIT = 48
 SCAN_EXAMPLE_LIMIT = 96
 CORE_STRENGTH_LIMIT = 12
 PAIR_KEYS = ("onceki_item", "son_item")
