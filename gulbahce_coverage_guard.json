@@ -1,0 +1,43 @@
+{
+  "olusturma": "2026-09-02 21:06 +0300",
+  "amac": "Gülbahçe merkezli 2 km operasyonel diagnostik tamponun mevcut Sentinel üretim kutusundaki geometrik kapsamasını ve mahalle etiketleme görünürlüğünü ölçmek; alarm veya saha görevi üretmez.",
+  "referans": {
+    "ad": "Gülbahçe, Urla",
+    "enlem": 38.33278,
+    "boylam": 26.64556,
+    "not": "Operasyonel referans noktasıdır; idari/kadastral sınır veya ada-parsel değildir."
+  },
+  "operasyon_tampon_m": 2000,
+  "uretim_bolgesi": "uzunkuyu",
+  "uretim_bolge_etiketi": "Uzunkuyu · Germiyan · Ildır",
+  "uretim_bbox": [
+    26.45,
+    38.18,
+    26.66,
+    38.43
+  ],
+  "merkez_bbox_icinde": true,
+  "tampon_tamamen_bbox_icinde": false,
+  "tampon_kapsama_yuzde": 87.29,
+  "tampon_disinda_yuzde": 12.71,
+  "kenar_mesafeleri_m": {
+    "bati": 17077,
+    "dogu": 1261,
+    "guney": 16893,
+    "kuzey": 10750
+  },
+  "mevcut_mahalle_etiketi": "Mevki doğrulanmadı",
+  "gulbahce_etiketi_acik": false,
+  "analiz_grid": {
+    "height": 2764,
+    "width": 1834,
+    "pixel_width_m": 10.0,
+    "pixel_height_m": 10.0,
+    "pixel_edge_max_m": 10.0
+  },
+  "durum": "dikkat_gerekiyor",
+  "sorunlar": [
+    "GULBAHCE_2KM_TAMPONU_TAM_KAPSANMIYOR",
+    "GULBAHCE_MAHALLE_ETIKETI_ACIK_DEGIL"
+  ]
+}
