@@ -2195,18 +2195,18 @@
   "kapasite_santiye_devriyesi": [
     {
       "oncelik": "KAPASITE_DIAGNOSTIK",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.227712,
-      "boylam": 26.399898,
-      "alan_m2": 800,
+      "mahalle": "Germiyan",
+      "enlem": 38.319969,
+      "boylam": 26.47385,
+      "alan_m2": 5000,
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "26.08.2026",
       "son_tarih": "29.08.2026",
-      "guclu_sinyal_orani": 0.0,
+      "guclu_sinyal_orani": 0.14,
       "geometri_kaynagi": null,
       "alarm": false,
       "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.227712,26.399898",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319969,26.473850",
       "neden": "Aynı 250 m²+ / yaklaşık 10 m Sentinel değişim maskesini geçti; ana 24-aday tavanının dışında kaldığı için üretim alarmı değildir. Mevcut saha görevlerinden uzakta, şantiye ölçeği kapasite kalibrasyonu için seçildi."
     },
     {
@@ -2229,7 +2229,7 @@
   "kapasite_santiye_devriyesi_meta": {
     "alarm": false,
     "saha_gorevi": false,
-    "olusturma": "2026-09-02 13:39 +0300",
+    "olusturma": "2026-09-02 13:42 +0300",
     "bolgeler": {
       "cesme": {
         "durum": "ok",
@@ -2239,7 +2239,7 @@
       "uzunkuyu": {
         "durum": "ok",
         "uretim_santiye_olcegi": 0,
-        "tavan_disinda_uygun_havuz": 146
+        "tavan_disinda_uygun_havuz": 142
       }
     }
   }
