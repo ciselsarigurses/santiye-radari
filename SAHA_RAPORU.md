@@ -3,7 +3,7 @@
 **Rapor tarihi:** 2026-09-02
 **Hazırlanma:** 2026-09-02 19:14 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 74 · Geciken kontrol: 69 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)
+**Özet:** İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır: yeni uydu görüntüsü yok · Aktif saha görevi: 60 · Geciken kontrol: 56 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif) · Arka plan geniş yüzey: 12
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
@@ -193,66 +193,6 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334813,26.602576) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334813/26.602576)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 18. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.253128, 26.424511`
-- **Değişim alanı:** yaklaşık 204.420 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.253128,26.424511) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 19. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.344571, 26.475452`
-- **Değişim alanı:** yaklaşık 147.614 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.344571,26.475452) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 20. GECİKEN — Germiyan
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Germiyan
-- **Koordinat:** `38.335979, 26.483809`
-- **Değişim alanı:** yaklaşık 146.314 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.335979,26.483809) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 21. GECİKEN — Germiyan
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Germiyan
-- **Koordinat:** `38.329738, 26.489876`
-- **Değişim alanı:** yaklaşık 145.014 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.329738,26.489876) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 22. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.24146, 26.40608`
-- **Değişim alanı:** yaklaşık 137.513 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.241460,26.406080) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 23. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.2193, 26.413864`
-- **Değişim alanı:** yaklaşık 136.813 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.219300,26.413864) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
 ### 24. GECİKEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.233229, 26.443399`
@@ -271,26 +211,6 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.240736,26.438133) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.240736/26.438133)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 26. GECİKEN — Germiyan
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Germiyan
-- **Koordinat:** `38.32015, 26.466775`
-- **Değişim alanı:** yaklaşık 125.043 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 27. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.309025, 26.462631`
-- **Değişim alanı:** yaklaşık 119.511 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.309025,26.462631) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.309025/26.462631)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 28. GECİKEN — Mevki doğrulanmadı
@@ -333,26 +253,6 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.247520,26.432638) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247520/26.432638)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 32. GECİKEN — Germiyan
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Germiyan
-- **Koordinat:** `38.320241, 26.46618`
-- **Değişim alanı:** yaklaşık 87.308 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.320241,26.466180) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320241/26.466180)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 33. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Mevki doğrulanmadı
-- **Koordinat:** `38.24761, 26.561355`
-- **Değişim alanı:** yaklaşık 85.629 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.247610,26.561355) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247610/26.561355)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
 ### 34. GECİKEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.254665, 26.43985`
@@ -391,36 +291,6 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.326843,26.494828) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.326843/26.494828)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 38. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Mevki doğrulanmadı
-- **Koordinat:** `38.349546, 26.492767`
-- **Değişim alanı:** yaklaşık 51.618 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.349546,26.492767) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.349546/26.492767)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 39. GECİKEN — Germiyan
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Germiyan
-- **Koordinat:** `38.330823, 26.479828`
-- **Değişim alanı:** yaklaşık 43.515 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.330823,26.479828) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.330823/26.479828)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 40. GECİKEN — Germiyan
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Germiyan
-- **Koordinat:** `38.331275, 26.484866`
-- **Değişim alanı:** yaklaşık 40.414 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 4 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.331275,26.484866) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331275/26.484866)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 41. GECİKEN — Mevki doğrulanmadı
@@ -713,16 +583,6 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.317087,26.467118) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.317087/26.467118)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 70. YÜKSEK — Mevki doğrulanmadı
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır / Mevki doğrulanmadı
-- **Koordinat:** `38.308663, 26.462996`
-- **Değişim alanı:** yaklaşık 120.241 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
 ### 71. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.227531, 26.428861`
@@ -776,4 +636,17 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 
 ## Arka planda izlenen geniş yüzey hareketleri
 
-Bu raporda ölçülmüş düşük-kompaktlık kuralına giren geniş yüzey hareketi yok.
+> Bu bölüm **şantiye alarmı veya saha görevi değildir**. 10.000 m² üstü ve ölçülen düşük-kompaktlık riski taşıyan geniş değişimler; tarım, toprak temizliği, doğal/kırsal yüzey hareketi veya başka geniş arazi müdahalesi olasılığı nedeniyle operasyon listesinden ayrılır. Ham radar kaydı silinmez; yeni görüntüde kompakt/parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa yeniden değerlendirilir.
+
+- **Mevki doğrulanmadı · yaklaşık 204.420 m²** — kompaktlık 0.071; koordinat `38.253128, 26.424511` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.253128,26.424511) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511)
+- **Mevki doğrulanmadı · yaklaşık 147.614 m²** — kompaktlık 0.024; koordinat `38.344571, 26.475452` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.344571,26.475452) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452)
+- **Mevki doğrulanmadı · yaklaşık 146.314 m²** — kompaktlık 0.094; koordinat `38.335979, 26.483809` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.335979,26.483809) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809)
+- **Mevki doğrulanmadı · yaklaşık 145.014 m²** — kompaktlık 0.059; koordinat `38.329738, 26.489876` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.329738,26.489876) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876)
+- **Mevki doğrulanmadı · yaklaşık 137.513 m²** — kompaktlık 0.133; koordinat `38.24146, 26.40608` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.241460,26.406080) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080)
+- **Mevki doğrulanmadı · yaklaşık 136.813 m²** — kompaktlık 0.133; koordinat `38.2193, 26.413864` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.219300,26.413864) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864)
+- **Mevki doğrulanmadı · yaklaşık 125.043 m²** — kompaktlık 0.034; koordinat `38.32015, 26.466775` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775)
+- **Mevki doğrulanmadı · yaklaşık 120.241 m²** — kompaktlık 0.059; koordinat `38.308663, 26.462996` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996)
+- **Mevki doğrulanmadı · yaklaşık 85.629 m²** — kompaktlık 0.085; koordinat `38.24761, 26.561355` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.247610,26.561355) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247610/26.561355)
+- **Mevki doğrulanmadı · yaklaşık 51.618 m²** — kompaktlık 0.114; koordinat `38.349546, 26.492767` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.349546,26.492767) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.349546/26.492767)
+- **Mevki doğrulanmadı · yaklaşık 43.515 m²** — kompaktlık 0.142; koordinat `38.330823, 26.479828` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.330823,26.479828) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.330823/26.479828)
+- **Mevki doğrulanmadı · yaklaşık 40.414 m²** — kompaktlık 0.147; koordinat `38.331275, 26.484866` · kanıt `shape_false_positive_audit` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.331275,26.484866) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331275/26.484866)

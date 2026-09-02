@@ -10,8 +10,264 @@
     "rapor_esleme_m": 90,
     "manuel_tekrar_override": true
   },
-  "arka_plan_aday_sayisi": 0,
-  "operasyonel_listeden_ayrilan": 0,
+  "arka_plan_aday_sayisi": 12,
+  "operasyonel_listeden_ayrilan": 14,
   "manuel_tekrar_korunan": 0,
-  "adaylar": []
+  "kanit_kaynagi_sayilari": {
+    "shape_false_positive_audit": 12
+  },
+  "adaylar": [
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.253128,
+      "boylam": 26.424511,
+      "alan_m2": 204420,
+      "genis_kompaktlik": 0.071,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.253128,26.424511",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "cesme"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.344571,
+      "boylam": 26.475452,
+      "alan_m2": 147614,
+      "genis_kompaktlik": 0.024,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.344571,26.475452",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "cesme"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.335979,
+      "boylam": 26.483809,
+      "alan_m2": 146314,
+      "genis_kompaktlik": 0.094,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.335979,26.483809",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "cesme"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.329738,
+      "boylam": 26.489876,
+      "alan_m2": 145014,
+      "genis_kompaktlik": 0.059,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.329738,26.489876",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "cesme"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.24146,
+      "boylam": 26.40608,
+      "alan_m2": 137513,
+      "genis_kompaktlik": 0.133,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.241460,26.406080",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "cesme"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.2193,
+      "boylam": 26.413864,
+      "alan_m2": 136813,
+      "genis_kompaktlik": 0.133,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.219300,26.413864",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "cesme"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.32015,
+      "boylam": 26.466775,
+      "alan_m2": 125043,
+      "genis_kompaktlik": 0.034,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.308663,
+      "boylam": 26.462996,
+      "alan_m2": 120241,
+      "genis_kompaktlik": 0.059,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.24761,
+      "boylam": 26.561355,
+      "alan_m2": 85629,
+      "genis_kompaktlik": 0.085,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.247610,26.561355",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247610/26.561355",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.349546,
+      "boylam": 26.492767,
+      "alan_m2": 51618,
+      "genis_kompaktlik": 0.114,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.349546,26.492767",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.349546/26.492767",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.330823,
+      "boylam": 26.479828,
+      "alan_m2": 43515,
+      "genis_kompaktlik": 0.142,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.330823,26.479828",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.330823/26.479828",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.331275,
+      "boylam": 26.484866,
+      "alan_m2": 40414,
+      "genis_kompaktlik": 0.147,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.331275,26.484866",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331275/26.484866",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ]
+    }
+  ]
 }
