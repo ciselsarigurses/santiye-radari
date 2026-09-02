@@ -80,15 +80,28 @@ def _can_anchor_pair(candidate, broad_items, bbox):
     return latest.get("id") == candidate.get("id")
 
 
+def _rows_newest_first(timed_rows):
+    """DD.MM.YYYY metnini değil gerçek UTC zamanı sıralama anahtarı yapar."""
+    return [
+        row
+        for _, row in sorted(
+            timed_rows,
+            key=lambda pair: pair[0],
+            reverse=True,
+        )
+    ]
+
+
 def audit_region(region_key):
     bbox = satellite.REGIONS[region_key]["bbox"]
     _, production_latest = satellite.sentinel_pair(region_key)
     production_time = _item_time(production_latest)
     broad_items = satellite._search_items(bbox, max_cloud=AUDIT_MAX_CLOUD)
 
-    newer = []
+    newer_timed = []
     for item in broad_items:
-        if _item_time(item) <= production_time:
+        item_time = _item_time(item)
+        if item_time <= production_time:
             continue
         if not satellite._item_covers_bbox(item, bbox):
             continue
@@ -98,17 +111,20 @@ def audit_region(region_key):
         if not _can_anchor_pair(item, broad_items, bbox):
             continue
         local_blocked = _local_blocked_percent(item, bbox)
-        newer.append(
-            {
-                "item": str(item.get("id") or "-"),
-                "tarih": _item_time(item).strftime("%d.%m.%Y %H:%MZ"),
-                "global_bulut": round(_global_cloud(item), 2),
-                "aoi_kapali": round(local_blocked, 2),
-                "aoi_yeterince_acik": local_blocked <= LOCAL_BLOCKED_MAX_PERCENT,
-            }
+        newer_timed.append(
+            (
+                item_time,
+                {
+                    "item": str(item.get("id") or "-"),
+                    "tarih": item_time.strftime("%d.%m.%Y %H:%MZ"),
+                    "global_bulut": round(_global_cloud(item), 2),
+                    "aoi_kapali": round(local_blocked, 2),
+                    "aoi_yeterince_acik": local_blocked <= LOCAL_BLOCKED_MAX_PERCENT,
+                },
+            )
         )
 
-    newer.sort(key=lambda row: row["tarih"], reverse=True)
+    newer = _rows_newest_first(newer_timed)
     return {
         "region": region_key,
         "production_item": str(production_latest.get("id") or "-"),
@@ -128,6 +144,14 @@ def _self_check():
 
     shadow = np.full((10, 10), 2, dtype="uint8")
     assert _blocked_percent(shadow) == 100.0
+
+    # İnsan-okur tarih metni DD.MM.YYYY olduğundan ay değişiminde leksikografik
+    # sıralama yanlış sonuç verir (31.08, 01.09'un önüne geçer). Gerçek zaman anahtarı
+    # 5 Eylül hedefindeki Ağustos→Eylül sınırında özellikle korunmalı.
+    aug31 = datetime.fromisoformat("2026-08-31T09:00:00+00:00")
+    sep01 = datetime.fromisoformat("2026-09-01T09:00:00+00:00")
+    rows = _rows_newest_first([(aug31, {"id": "old"}), (sep01, {"id": "new"})])
+    assert [row["id"] for row in rows] == ["new", "old"]
 
 
 def main():
