@@ -132,9 +132,11 @@ def _stored_snapshot(report_date):
 
 def _rank_key(item):
     area = _area(item)
+    strength = rebalance._signal_strength(item)
     return (
+        0 if strength > 0 else 1,
         0 if area <= EARLY_MAX_M2 else 1,
-        -rebalance._signal_strength(item),
+        -strength,
         area,
         float(item.get("enlem") or 0),
         float(item.get("boylam") or 0),
@@ -264,8 +266,10 @@ def _write_reports(report, items, diagnostics):
 def _self_check():
     early = {"enlem": 38.20, "boylam": 26.30, "alan_m2": 1200, rebalance.STRONG_SIGNAL_FIELD: 0.8}
     upper = {"enlem": 38.21, "boylam": 26.31, "alan_m2": 4200, rebalance.STRONG_SIGNAL_FIELD: 0.9}
+    zero_signal = {"enlem": 38.205, "boylam": 26.305, "alan_m2": 1000, rebalance.STRONG_SIGNAL_FIELD: 0.0}
     small = {"enlem": 38.22, "boylam": 26.32, "alan_m2": 500}
-    assert _rank_key(early) < _rank_key(upper), "Erken-parsel sınıfı önce gelmeli."
+    assert _rank_key(early) < _rank_key(upper), "Pozitif güçlü-sinyalli erken-parsel sınıfı önce gelmeli."
+    assert _rank_key(upper) < _rank_key(zero_signal), "Sıfır güçlü-sinyalli aday, pozitif kanıtlı adayın önüne geçmemeli."
     assert _construction_count([early, upper, small]) == 2
     assert _distance_m((38.20, 26.30), (38.20, 26.30)) == 0
     assert not _far_enough(
