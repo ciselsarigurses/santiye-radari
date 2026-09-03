@@ -2836,7 +2836,10 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180588,26.501566"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180588,26.501566",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.180588/26.501566",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "bolge_anahtari": "cesme",
@@ -2851,7 +2854,10 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346652,26.322856"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346652,26.322856",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.346652/26.322856",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-03",
