@@ -8,7 +8,7 @@ on:
       - ".github/workflows/parcel-precheck.yml"
   workflow_run:
     workflows:
-      - "Günlük Şantiye Taraması"
+      - "Geniş Yüzey Arka Plan Koruması"
       - "Aday Tavanı Şantiye Devriyesi"
       - "Sentinel Kör Alan Denetimi"
       - "Mikro Şantiye Zaman Serisi Denetimi"
