@@ -1,0 +1,83 @@
+name: 15 Eylül Taze Kazı Öncelik Koruması
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "postseason_excavation_priority_guard.py"
+      - ".github/workflows/postseason-excavation-priority.yml"
+  workflow_run:
+    workflows:
+      - "Parsel Ön Kontrol Bağlantıları"
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-postseason-excavation-priority
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: 15 Eylül taze kazı önceliği öz testi
+        run: python postseason_excavation_priority_guard.py --self-check
+
+      - name: Sezon durumuna göre operasyon önceliğini uygula
+        run: python postseason_excavation_priority_guard.py
+
+      - name: Yalnız değişiklik varsa güvenli biçimde kaydet
+        run: |
+          report_files="latest_report.json SAHA_RAPORU.md"
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+            echo "15 Eylül taze kazı öncelik katmanı için rapor değişikliği gerekmiyor."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          # Başka bir rapor workflow'u aynı anda main'i ilerletirse en güncel rapor
+          # üzerinde yeniden üret. Algılama koduna, SQLite'a ve Sentinel eşiklerine
+          # dokunma; yalnız operasyon sırasını ve görünür rapor notunu güncelle.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python postseason_excavation_priority_guard.py --self-check
+            python postseason_excavation_priority_guard.py
+
+            if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+              echo "En güncel main üzerinde ek değişiklik gerekmiyor."
+              exit 0
+            fi
+
+            git add $report_files
+            git commit -m "Radar: 15 Eylül sonrası taze kazıyı rotada öne al"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Main değişti veya geçici push hatası oluştu; güncel raporda yeniden deneniyor (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "15 Eylül taze kazı öncelik katmanı üç güvenli denemede kaydedilemedi."
+          exit 1
