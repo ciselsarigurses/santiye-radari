@@ -17,6 +17,7 @@ on:
       - "field_outcome.py"
       - "field_feedback_audit.py"
       - "apply_field_status.py"
+      - "micro_site_footprint_priority_review.json"
       - ".github/workflows/app-smoke.yml"
   workflow_dispatch:
 
@@ -66,6 +67,11 @@ jobs:
           report = json.loads(Path("latest_report.json").read_text(encoding="utf-8"))
           assert isinstance(report.get("saha_adaylari"), list), "latest_report saha_adaylari listesi eksik"
 
+          micro = json.loads(Path("micro_site_footprint_priority_review.json").read_text(encoding="utf-8"))
+          assert micro.get("ana_uretim_esigi_m2") == 250, "Mikro katman ana 250 m² eşiğini değiştiremez"
+          assert micro.get("mikro_aralik_m2") == [150, 249], "Mikro diagnostik bandı 150-249 m² olmalı"
+          assert micro.get("alarm") is False and micro.get("saha_gorevi") is False, "Mikro katman alarm/görev üretmemeli"
+
           app = AppTest.from_file("app.py")
           app.run(timeout=45)
           assert not app.exception, app.exception
@@ -77,4 +83,8 @@ jobs:
           calibration_page = AppTest.from_file("pages/2_Kalibrasyon.py")
           calibration_page.run(timeout=45)
           assert not calibration_page.exception, calibration_page.exception
+
+          micro_page = AppTest.from_file("pages/3_Mikro_Santiye.py")
+          micro_page.run(timeout=45)
+          assert not micro_page.exception, micro_page.exception
           PY
