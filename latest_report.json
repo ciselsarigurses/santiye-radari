@@ -3027,6 +3027,13 @@
       "minimum_alan_benzerligi": 0.6,
       "kanit": "aynı-gün shape_false_positive_audit üretim seçimi",
       "aciklama": "Yalnız tarihsel/gecikmiş geniş görev, güncel düşük-kompaktlık geometriyle güvenli provenans sınırında yeniden eşleşirse arka plana ayrılır. Taze görev ve insanın TEKRAR_GIT kararı korunur."
+    },
+    "tekrar_calistirma_koruması": {
+      "aktif": true,
+      "yalniz_ayni_rapor_tarihi": true,
+      "alarm": false,
+      "saha_gorevi": false,
+      "aciklama": "Aynı günlük rapor yeniden işlendiğinde daha önce arka plana ayrılmış geniş-yüzey diagnostik kayıtları sessizce düşürülmez."
     }
   },
   "parsel_on_kontrol_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
