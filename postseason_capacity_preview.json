@@ -1,0 +1,60 @@
+{
+  "rapor_tarihi": "2026-09-03",
+  "olusturma": "2026-09-03 20:08 +0300",
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_santiye_araligi_m2": [
+    150,
+    249
+  ],
+  "santiye_olcegi_m2": [
+    800,
+    10000
+  ],
+  "tam_operasyon_baslangici": "2026-09-15",
+  "diagnostik_senaryo_notu": "10 aday yalnız karar-destek senaryosudur; üretim kotası değildir. Toplam alarm sayısını artırmak yerine >10.000 m² adaylarla bire bir takas kapasitesi ölçülür.",
+  "saha_kaniti": {
+    "kontrol": 2,
+    "dogrulanmis_santiye_kazi": 0,
+    "politika_icin_yeterli": false,
+    "asgari_kontrol": 5,
+    "asgari_dogrulanmis_santiye_kazi": 3
+  },
+  "veri_tazeligi": {
+    "gunluk_rapor_tarihi": "2026-09-03",
+    "kapasite_denetim_tarihi": "2026-09-03",
+    "ayni_gun": true
+  },
+  "bolgeler": {
+    "cesme": {
+      "durum": "ok",
+      "latest_item": "S2C_T35SMC_20260903T090747_L2A",
+      "ham_800_10000": 298,
+      "raporda_800_10000": 6,
+      "raporda_10000_ustu": 9,
+      "mevcut_post_dedupe_hedefi": 8,
+      "diagnostik_15eylul_senaryosu": 10,
+      "senaryoya_eksik": 4,
+      "bire_bir_takasla_teorik_ek_kapasite": 4,
+      "teorik_son_800_10000": 10,
+      "senaryo_kapasite_acisindan_mumkun": true
+    },
+    "uzunkuyu": {
+      "durum": "ok",
+      "latest_item": "S2C_T35SMC_20260903T090747_L2A",
+      "ham_800_10000": 183,
+      "raporda_800_10000": 5,
+      "raporda_10000_ustu": 17,
+      "mevcut_post_dedupe_hedefi": 8,
+      "diagnostik_15eylul_senaryosu": 10,
+      "senaryoya_eksik": 5,
+      "bire_bir_takasla_teorik_ek_kapasite": 5,
+      "teorik_son_800_10000": 10,
+      "senaryo_kapasite_acisindan_mumkun": true
+    }
+  },
+  "kapasite_senaryosu_iki_bolgede_mumkun": true,
+  "onerilen_eylem": "URETIME_DOKUNMA",
+  "neden": "Saha doğrulama örneklemi politika değişikliği için yetersiz. 15 Eylül senaryosu yalnız kapasite diagnostikidir; eşik/kota/alarm değiştirilmez."
+}
