@@ -200,7 +200,8 @@ def _gulbahce_observability(
     }
 
 
-def _strict_micro_mask(older, latest, bbox, height, width):
+def _strict_micro_mask(older, latest, bbox, height, width, include_quality=False):
+    """Güçlü mikro maskeyi üret; varsayılan dört-dönüşlü API geriye uyumludur."""
     older_visual = satellite._read_asset(
         older, "visual", bbox, height, width, "bilinear"
     )[:3]
@@ -248,15 +249,10 @@ def _strict_micro_mask(older, latest, bbox, height, width):
         & (brightness_gain > 0.055)
         & (rgb_difference > 0.14)
     )
-    return (
-        strict,
-        rgb_difference,
-        vegetation_loss,
-        brightness_gain,
-        quality_valid,
-        water,
-        valid,
-    )
+    base = (strict, rgb_difference, vegetation_loss, brightness_gain)
+    if include_quality:
+        return (*base, quality_valid, water, valid)
+    return base
 
 
 def _micro_candidates(region_key, pair=None):
@@ -271,7 +267,9 @@ def _micro_candidates(region_key, pair=None):
         quality_valid,
         water,
         final_valid,
-    ) = _strict_micro_mask(older, latest, bbox, height, width)
+    ) = _strict_micro_mask(
+        older, latest, bbox, height, width, include_quality=True
+    )
     pixel_area = _pixel_area_m2(bbox, height, width)
 
     rows = []
