@@ -24,6 +24,7 @@ ARCHIVED_LABEL_TRANSITION_SOURCE = (
     "Uzunkuyu · Germiyan · Ildır · Gülbahçe · ETIKET_GECIS_KOPYASI"
 )
 INTERNAL_SUPERSEDED_STATUS = "ALGORITMA_ELENDI"
+ACTIVE_OPEN_STATUS = "KONTROLE_GIT"
 
 
 def _ensure_version_table(connection):
@@ -43,10 +44,12 @@ def _normalize_legacy_satellite_source_labels(connection):
     sanılabildi ve yeni Sentinel görüntüsü olmadan ikinci bir görev açılabildi.
 
     Eski etiketi güncel etikete taşır. Etiket geçişi sırasında oluşmuş, koordinatı
-    altı ondalıkta birebir aynı ve hiç saha işlemi görmemiş açık görevler varsa en
-    eski görev korunur; yalnız daha yeni otomasyon kopyaları ALGORITMA_ELENDI yapılır
-    ve aktif Sentinel kaynak kimliğinin dışına arşivlenir. Bu son adım önemlidir:
-    güncel-hotspot geri-açma katmanı aynı kopyayı tekrar seçip açamaz.
+    altı ondalıkta birebir aynı ve hiç saha işlemi görmemiş görevler varsa en eski
+    görev geçmişin taşıyıcısı kabul edilir. Bir sonraki seçim katmanı daha yeni
+    kopyayı kısa süreliğine geri açmış olsa bile eski görev yeniden aktif yapılır;
+    daha yeni otomasyon kopyaları ALGORITMA_ELENDI yapılıp aktif Sentinel kaynak
+    kimliğinin dışına arşivlenir. Böylece ``ilk_gorulme`` geçmişi kaybolmaz ve aynı
+    eski Sentinel sahnesi 3 Eylül'de yeni saha gibi görünmez.
 
     TEKRAR_GIT, KONTROL_EDILDI veya kullanıcı işlemi görmüş kayıtlar değiştirilmez.
     """
@@ -64,11 +67,12 @@ def _normalize_legacy_satellite_source_labels(connection):
 
     rows = connection.execute(
         """SELECT gorev_id,mahalle,enlem,boylam,ilk_gorulme,son_gorulme,
-        son_islem,COALESCE(kontrol_sayisi,0)
+        son_islem,COALESCE(kontrol_sayisi,0),durum
         FROM saha_durumlari
-        WHERE kaynak='uydu' AND kaynak_kimlik=? AND durum='KONTROLE_GIT'
+        WHERE kaynak='uydu' AND kaynak_kimlik=?
+        AND durum IN (?,?)
         AND enlem IS NOT NULL AND boylam IS NOT NULL""",
-        (CURRENT_UZUNKUYU_LABEL,),
+        (CURRENT_UZUNKUYU_LABEL, ACTIVE_OPEN_STATUS, INTERNAL_SUPERSEDED_STATUS),
     ).fetchall()
 
     groups = {}
@@ -88,6 +92,10 @@ def _normalize_legacy_satellite_source_labels(connection):
     for duplicates in groups.values():
         if len(duplicates) < 2:
             continue
+        # Yalnız gerçekten açık bir eş kopya varsa geçmişi onar. Böylece geçmişte
+        # algoritma tarafından tek başına elenmiş kayıtları sebepsiz yere açmayız.
+        if not any(str(row[8] or "") == ACTIVE_OPEN_STATUS for row in duplicates):
+            continue
         # En eski görev kimliği saha geçmişinin taşıyıcısıdır. Tarih eşitse DB
         # görevi deterministik kalsın diye görev kimliği ikinci anahtardır.
         ordered = sorted(
@@ -97,22 +105,41 @@ def _normalize_legacy_satellite_source_labels(connection):
                 str(row[0] or ""),
             ),
         )
-        keep_id = str(ordered[0][0] or "")
+        keep = ordered[0]
+        keep_id = str(keep[0] or "")
+        keep_controls = int(keep[7] or 0)
+        keep_status = str(keep[8] or "")
+        if (
+            keep_id
+            and keep_controls == 0
+            and keep_status == INTERNAL_SUPERSEDED_STATUS
+        ):
+            connection.execute(
+                """UPDATE saha_durumlari SET durum=?
+                WHERE gorev_id=? AND durum=? AND COALESCE(kontrol_sayisi,0)=0""",
+                (ACTIVE_OPEN_STATUS, keep_id, INTERNAL_SUPERSEDED_STATUS),
+            )
+
         for row in ordered[1:]:
             task_id = str(row[0] or "")
             control_count = int(row[7] or 0)
+            status = str(row[8] or "")
             if not task_id or task_id == keep_id or control_count:
+                continue
+            if status not in {ACTIVE_OPEN_STATUS, INTERNAL_SUPERSEDED_STATUS}:
                 continue
             cursor = connection.execute(
                 """UPDATE saha_durumlari
                 SET durum=?,son_islem=?,kaynak_kimlik=?
-                WHERE gorev_id=? AND durum='KONTROLE_GIT'
+                WHERE gorev_id=? AND durum IN (?,?)
                 AND COALESCE(kontrol_sayisi,0)=0""",
                 (
                     INTERNAL_SUPERSEDED_STATUS,
                     datetime.now(ISTANBUL).isoformat(),
                     ARCHIVED_LABEL_TRANSITION_SOURCE,
                     task_id,
+                    ACTIVE_OPEN_STATUS,
+                    INTERNAL_SUPERSEDED_STATUS,
                 ),
             )
             superseded += int(cursor.rowcount or 0)
@@ -134,12 +161,12 @@ def _source_label_compatibility_self_check():
             [
                 (
                     "UOLD", "uydu", LEGACY_UZUNKUYU_LABEL, "Germiyan",
-                    38.331275, 26.484866, "KONTROLE_GIT", 0,
+                    38.331275, 26.484866, INTERNAL_SUPERSEDED_STATUS, 0,
                     "2026-08-29", "2026-09-02", "2026-08-29",
                 ),
                 (
                     "UNEW", "uydu", CURRENT_UZUNKUYU_LABEL, "Germiyan",
-                    38.331275, 26.484866, "KONTROLE_GIT", 0,
+                    38.331275, 26.484866, ACTIVE_OPEN_STATUS, 0,
                     "2026-09-03", "2026-09-03", "2026-09-03",
                 ),
                 (
@@ -147,24 +174,33 @@ def _source_label_compatibility_self_check():
                     38.331275, 26.484866, "TEKRAR_GIT", 1,
                     "2026-08-30", "2026-09-03", "2026-09-03",
                 ),
+                (
+                    "USOLO", "uydu", LEGACY_UZUNKUYU_LABEL, "Ildır",
+                    38.360000, 26.500000, INTERNAL_SUPERSEDED_STATUS, 0,
+                    "2026-08-28", "2026-08-29", "2026-08-29",
+                ),
             ],
         )
         migrated, superseded = _normalize_legacy_satellite_source_labels(connection)
-        assert migrated == 2, migrated
+        assert migrated == 3, migrated
         assert superseded == 1, superseded
         assert connection.execute(
             "SELECT COUNT(*) FROM saha_durumlari WHERE kaynak_kimlik=?",
             (LEGACY_UZUNKUYU_LABEL,),
         ).fetchone()[0] == 0
         assert connection.execute(
-            "SELECT durum,kaynak_kimlik FROM saha_durumlari WHERE gorev_id='UOLD'"
-        ).fetchone() == ("KONTROLE_GIT", CURRENT_UZUNKUYU_LABEL)
+            "SELECT durum,kaynak_kimlik,ilk_gorulme FROM saha_durumlari WHERE gorev_id='UOLD'"
+        ).fetchone() == (ACTIVE_OPEN_STATUS, CURRENT_UZUNKUYU_LABEL, "2026-08-29")
         assert connection.execute(
             "SELECT durum,kaynak_kimlik FROM saha_durumlari WHERE gorev_id='UNEW'"
         ).fetchone() == (INTERNAL_SUPERSEDED_STATUS, ARCHIVED_LABEL_TRANSITION_SOURCE)
         assert connection.execute(
             "SELECT durum,kaynak_kimlik FROM saha_durumlari WHERE gorev_id='UREPEAT'"
         ).fetchone() == ("TEKRAR_GIT", CURRENT_UZUNKUYU_LABEL)
+        # Tek başına geçmişte elenmiş görev, yanında açık kopya yoksa geri açılmaz.
+        assert connection.execute(
+            "SELECT durum,kaynak_kimlik FROM saha_durumlari WHERE gorev_id='USOLO'"
+        ).fetchone() == (INTERNAL_SUPERSEDED_STATUS, CURRENT_UZUNKUYU_LABEL)
     finally:
         connection.close()
 
