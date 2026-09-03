@@ -1,0 +1,85 @@
+name: Gülbahçe Kör Alan Devriye Koruması
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "gulbahce_blind_patrol_guard.py"
+      - ".github/workflows/gulbahce-blind-patrol.yml"
+  workflow_run:
+    workflows: ["Sentinel Kör Alan Denetimi"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-gulbahce-blind-patrol
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Gülbahçe kör alan temsil koruması öz testi
+        run: python gulbahce_blind_patrol_guard.py --check-only
+
+      - name: Gülbahçe kör alan temsilini uygula
+        run: python gulbahce_blind_patrol_guard.py
+
+      - name: Güvenli rapor değişikliğini kaydet
+        run: |
+          report_files="latest_report.json SAHA_RAPORU.md"
+
+          refresh_guard() {
+            python gulbahce_blind_patrol_guard.py --check-only
+            python gulbahce_blind_patrol_guard.py
+          }
+
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+            echo "Gülbahçe kör alan temsilinde değişiklik gerekmiyor."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+              echo "Main ilerledi; Gülbahçe kör alan koruması güncel raporda yeniden uygulanıyor (${attempt}/3)."
+              git reset --hard origin/main
+              refresh_guard
+            fi
+
+            if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+              echo "En güncel main üzerinde ek Gülbahçe değişikliği gerekmiyor."
+              exit 0
+            fi
+
+            git add $report_files
+            git commit -m "Radar: Gülbahçe kör alan devriyesini güncelle"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Main yeniden ilerledi veya geçici push hatası oluştu; tekrar deneniyor (${attempt}/3)."
+            git reset --hard HEAD~1
+            sleep $((attempt * 2))
+          done
+
+          echo "Gülbahçe kör alan devriyesi üç güvenli denemede kaydedilemedi."
+          exit 1
