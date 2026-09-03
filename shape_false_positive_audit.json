@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-03",
-  "olusturma": "2026-09-03 17:27 +03",
+  "olusturma": "2026-09-03 18:09 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -154,12 +154,12 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 8,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 7,
+          "toplam": 9,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
@@ -171,12 +171,12 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 8,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 7,
+          "toplam": 9,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
@@ -317,7 +317,7 @@
       ],
       "nihai_rapor_secimi": 22,
       "nihai_rapor_eslesen_geometri": 22,
-      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 1,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
       "nihai_rapor_cozulen_geometri": 22,
       "nihai_rapor_cozulemeyen_geometri": 0,
@@ -330,12 +330,12 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 8,
+          "toplam": 5,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 14,
+          "toplam": 17,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
@@ -347,12 +347,12 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 8,
+          "toplam": 5,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 14,
+          "toplam": 17,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }

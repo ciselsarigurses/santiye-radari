@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-03",
-  "olusturma": "2026-09-03 17:23 +03",
+  "olusturma": "2026-09-03 18:06 +03",
   "amac": "İkinci diyagonal 800-10.000 m² yan-kümeyi yalnız yerini aldığı normal şantiye-ölçeği adayından daha güçlü Sentinel kanıtı taşıyorsa, toplam 24 aday ve ölçek dağılımını değiştirmeden terfi ettirmek; mevcut sahneyi geriye dönük değiştirmemek.",
   "bolgeler": {
     "cesme": {
@@ -27,7 +27,7 @@
         "genis": 12
       },
       "uyarlamali_karar": "ikinci_yan_kume_daha_guclu_degil",
-      "sahne_politikasi": "yeni_sahne",
+      "sahne_politikasi": "ayni_yeni_sahne_tekrar",
       "uygulanan_karar": "ikinci_yan_kume_daha_guclu_degil",
       "eklenen": [
         {
@@ -116,7 +116,7 @@
         "genis": 18
       },
       "uyarlamali_karar": "ikinci_yan_kume_daha_guclu_degil",
-      "sahne_politikasi": "yeni_sahne",
+      "sahne_politikasi": "ayni_yeni_sahne_tekrar",
       "uygulanan_karar": "ikinci_yan_kume_daha_guclu_degil",
       "eklenen": [
         {
