@@ -3223,5 +3223,56 @@
       "aciklama": "BBox/yeniden-pikselleştirme nedeniyle birkaç metre kayan düşük-kompaktlık geniş kümeler yalnız şekil denetiminin kendi 25 m / 0.60 güven sınırında arka plana ayrılır."
     }
   },
-  "parsel_on_kontrol_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+  "parsel_on_kontrol_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+  "kapasite_santiye_devriyesi": [
+    {
+      "oncelik": "KAPASITE_DIAGNOSTIK",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.26362,
+      "boylam": 26.446948,
+      "alan_m2": 1200,
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "29.08.2026",
+      "son_tarih": "03.09.2026",
+      "guclu_sinyal_orani": 0.5833,
+      "geometri_kaynagi": null,
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.263620,26.446948",
+      "neden": "Aynı 250 m²+ / yaklaşık 10 m Sentinel değişim maskesini geçti; ana 24-aday tavanının dışında kaldığı için üretim alarmı değildir. Mevcut saha görevlerinden uzakta, şantiye ölçeği kapasite kalibrasyonu için seçildi."
+    },
+    {
+      "oncelik": "KAPASITE_DIAGNOSTIK",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.220385,
+      "boylam": 26.491264,
+      "alan_m2": 2000,
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_tarih": "29.08.2026",
+      "son_tarih": "03.09.2026",
+      "guclu_sinyal_orani": 0.15,
+      "geometri_kaynagi": null,
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.220385,26.491264",
+      "neden": "Aynı 250 m²+ / yaklaşık 10 m Sentinel değişim maskesini geçti; ana 24-aday tavanının dışında kaldığı için üretim alarmı değildir. Mevcut saha görevlerinden uzakta, şantiye ölçeği kapasite kalibrasyonu için seçildi."
+    }
+  ],
+  "kapasite_santiye_devriyesi_meta": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "olusturma": "2026-09-03 18:14 +0300",
+    "bolgeler": {
+      "cesme": {
+        "durum": "ok",
+        "uretim_santiye_olcegi": 6,
+        "tavan_disinda_uygun_havuz": 260
+      },
+      "uzunkuyu": {
+        "durum": "ok",
+        "uretim_santiye_olcegi": 5,
+        "tavan_disinda_uygun_havuz": 150
+      }
+    }
+  }
 }
