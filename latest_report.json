@@ -3141,10 +3141,10 @@
       "uydu_kanit_yasi_gun": 0,
       "uydu_onceligi": "ORTA",
       "erken_hafriyat": true,
-      "gunluk_sira": 1,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297809/26.307975",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "gunluk_sira": 1
     },
     {
       "oncelik": "ERKEN",
@@ -3169,10 +3169,10 @@
       "uydu_kanit_yasi_gun": 0,
       "uydu_onceligi": "ORTA",
       "erken_hafriyat": true,
-      "gunluk_sira": 2,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.243088/26.419016",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "gunluk_sira": 2
     },
     {
       "oncelik": "ERKEN",
@@ -3197,10 +3197,10 @@
       "uydu_kanit_yasi_gun": 0,
       "uydu_onceligi": "ORTA",
       "erken_hafriyat": true,
-      "gunluk_sira": 3,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.257288/26.329839",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "gunluk_sira": 3
     }
   ],
   "gunun_ilk_3_notu": "15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya yeni Sentinel görüntüsünde beliren güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.",
@@ -3280,5 +3280,70 @@
         "tavan_disinda_uygun_havuz": 150
       }
     }
+  },
+  "kor_alan_saha_devriyesi": [
+    {
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Ildır",
+      "enlem": 38.399383,
+      "boylam": 26.462648,
+      "alan_m2": 800,
+      "neden": "BULUT_GOLGE_KALICI",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.1435,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.399383,26.462648"
+    },
+    {
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.187372,
+      "boylam": 26.437103,
+      "alan_m2": 400,
+      "neden": "BULUT_GOLGE_KALICI",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.4182,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.187372,26.437103"
+    }
+  ],
+  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-03",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
+  "temporal_kalibrasyon_rotasyonu": {
+    "durum": "uygulandi",
+    "slot_sayisi": 2,
+    "kural": "Ani-baslangic destekli alarm-disi kalibrasyonlar ayni Sentinel sahnesinde en guclu dort mahalle-cesitli aday arasinda gunluk doner; 250-900 m2 adayda guvenilir yaygin cevre degisim riski temporal acil havuzundan dusurulur. Ayni boyut sinifinda merkez degisimi cevre halkasina gore belirgin lokal kalan adaylar saha kalibrasyonunda once gelir; normal guvenli rotasyon korunur."
+  },
+  "gecikmis_rota_rotasyonu": {
+    "durum": "gerekmedi",
+    "kural": "Yalniz gecikmis kuyrukta, ayni guncel Sentinel kalite bandindaki kucuk-guclu adaylarda en guclu capa korunur; kalan slotlar Cesme yerel takvim gunune gore gunluk doner.",
+    "havuz": 0,
+    "rapor_tarihi": "2026-09-03",
+    "rotasyon_tarihi": "2026-09-03"
+  },
+  "kalibrasyon_katmanlar_arasi_cesitlilik": {
+    "durum": "uygulandi",
+    "engellenen_mahalleler": [
+      "ildır",
+      "mevki doğrulanmadı",
+      "musalla",
+      "ovacık"
+    ],
+    "secilen_mahalleler": [
+      "Çiftlikköy",
+      "Şifne"
+    ],
+    "kural": "Ana ilk-3 veya kor-alan devriyesi mahallesini, ayni temporal/yerellik kalite sinifinda guvenli alternatif varsa alarm-disi kalibrasyonda tekrar etme."
+  },
+  "preseason_route_final_guard": {
+    "durum": "uygulandi",
+    "tarih": "2026-09-03",
+    "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
   }
 }
