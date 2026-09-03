@@ -5,9 +5,12 @@ on:
     branches: [main]
     paths:
       - "micro_site_temporal_footprint_audit.py"
+      - "micro_site_footprint_priority_review.py"
       - "micro_site_audit.py"
       - "micro_site_shortlist.json"
       - "micro_site_temporal_review.json"
+      - "micro_site_locality_review.json"
+      - "micro_site_field_review.json"
       - ".github/workflows/micro-site-footprint-audit.yml"
   schedule:
     # Mikro zaman-serisi sentezinden sonra yalnız diagnostik karşılaştırma.
@@ -49,7 +52,13 @@ jobs:
       - name: 3x3 temporal örneklemeyi gerçek mikro bileşen iziyle karşılaştır
         run: python micro_site_temporal_footprint_audit.py
 
-      - name: Sonucu yalnız anlamlı değişiklikte kaydet
+      - name: Footprint mikro öncelik öz testini çalıştır
+        run: python micro_site_footprint_priority_review.py --check-only
+
+      - name: Bileşen temporal ve lokal kanıtını güvenli diagnostik öncelikte birleştir
+        run: python micro_site_footprint_priority_review.py
+
+      - name: Sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
           if git ls-files --error-unmatch micro_site_temporal_footprint_audit.json >/dev/null 2>&1; then
@@ -59,22 +68,21 @@ jobs:
             if [[ -z "$meaningful" ]]; then
               echo "Bileşen-izi audit çıktısında yalnız çalışma zamanı değişti."
               git checkout -- micro_site_temporal_footprint_audit.json
-              exit 0
             fi
           fi
 
-          if [[ -z "$(git status --porcelain -- micro_site_temporal_footprint_audit.json)" ]]; then
-            echo "Bileşen-izi audit sonucu değişmedi."
+          if [[ -z "$(git status --porcelain -- micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json)" ]]; then
+            echo "Footprint mikro diagnostik sonuçları değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_temporal_footprint_audit.json
-          git commit -m "Radar: mikro temporal bileşen-izi audit sonucunu güncelle"
+          git add micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json
+          git commit -m "Radar: footprint mikro diagnostik önceliğini güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
-            echo "Ana dal değişti; eski diagnostik sonucu üzerine yazılmayacak."
+            echo "Ana dal değişti; eski diagnostik sonuç üzerine yazılmayacak."
             exit 0
           fi
           git push origin HEAD:main
