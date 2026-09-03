@@ -5,10 +5,12 @@ on:
     branches: [main]
     paths:
       - "postseason_excavation_priority_guard.py"
+      - "postseason_dry_ground_confirmation_guard.py"
       - ".github/workflows/postseason-excavation-priority.yml"
   workflow_run:
     workflows:
       - "Parsel Ön Kontrol Bağlantıları"
+      - "Kuru Zemin Zaman Serisi Denetimi"
     types: [completed]
   workflow_dispatch:
 
@@ -41,14 +43,19 @@ jobs:
       - name: 15 Eylül taze kazı önceliği öz testi
         run: python postseason_excavation_priority_guard.py --self-check
 
+      - name: 15 Eylül kuru zemin teyit geçidi öz testi
+        run: python postseason_dry_ground_confirmation_guard.py --self-check
+
       - name: Sezon durumuna göre operasyon önceliğini uygula
-        run: python postseason_excavation_priority_guard.py
+        run: |
+          python postseason_excavation_priority_guard.py
+          python postseason_dry_ground_confirmation_guard.py
 
       - name: Yalnız değişiklik varsa güvenli biçimde kaydet
         run: |
           report_files="latest_report.json SAHA_RAPORU.md"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "15 Eylül taze kazı öncelik katmanı için rapor değişikliği gerekmiyor."
+            echo "15 Eylül taze kazı/kuru zemin teyit katmanı için rapor değişikliği gerekmiyor."
             exit 0
           fi
 
@@ -62,7 +69,9 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python postseason_excavation_priority_guard.py --self-check
+            python postseason_dry_ground_confirmation_guard.py --self-check
             python postseason_excavation_priority_guard.py
+            python postseason_dry_ground_confirmation_guard.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
               echo "En güncel main üzerinde ek değişiklik gerekmiyor."
@@ -70,7 +79,7 @@ jobs:
             fi
 
             git add $report_files
-            git commit -m "Radar: 15 Eylül sonrası taze kazıyı rotada öne al"
+            git commit -m "Radar: 15 Eylül sonrası taze kazı ve kuru zemin teyidini öne al"
             if git push origin HEAD:main; then
               exit 0
             fi
@@ -79,5 +88,5 @@ jobs:
             sleep $((attempt * 2))
           done
 
-          echo "15 Eylül taze kazı öncelik katmanı üç güvenli denemede kaydedilemedi."
+          echo "15 Eylül taze kazı/kuru zemin teyit katmanı üç güvenli denemede kaydedilemedi."
           exit 1
