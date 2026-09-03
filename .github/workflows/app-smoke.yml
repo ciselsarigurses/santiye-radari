@@ -13,6 +13,7 @@ on:
     paths:
       - "app.py"
       - "pages/**"
+      - "coordinate_navigation.py"
       - "calibration_outcome.py"
       - "field_outcome.py"
       - "field_feedback_audit.py"
@@ -55,6 +56,7 @@ jobs:
         run: |
           python field_outcome.py --check-only
           python field_feedback_audit.py --check-only
+          python coordinate_navigation.py --check-only
           python -m py_compile apply_field_status.py
 
       - name: Güncel veri ile uygulama açılış testi
