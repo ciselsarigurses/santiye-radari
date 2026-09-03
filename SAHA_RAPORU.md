@@ -1133,3 +1133,7 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması değildir; yanlış pozitifler saha kontrolüyle elenir.
+
+## Arka planda izlenen geniş yüzey hareketleri
+
+Bu raporda ölçülmüş düşük-kompaktlık kuralına giren geniş yüzey hareketi yok.

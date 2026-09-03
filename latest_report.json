@@ -3024,5 +3024,22 @@
   ],
   "gunun_ilk_3_notu": "15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya yeni Sentinel görüntüsünde beliren güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.",
   "kuru_zemin_kalibrasyon_kontrolu": [],
-  "kuru_zemin_kalibrasyon_notu": "15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez."
+  "kuru_zemin_kalibrasyon_notu": "15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.",
+  "arka_plan_genis_yuzey_hareketleri": [],
+  "arka_plan_kurali": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "min_alan_m2": 10000,
+    "dusuk_kompaktlik_max": 0.15,
+    "manuel_tekrar_override": true,
+    "kanit": "hareket_json; metadata yoksa aynı tarihli bağımsız şekil denetimi",
+    "aciklama": "Yalnız 10.000 m² üstü + ölçülmüş düşük-kompaktlık riski birlikteyse operasyon listesinden ayrılır. Ham Sentinel/radar kaydı silinmez.",
+    "yaklasik_provenans": {
+      "aktif": true,
+      "maksimum_esleme_m": 25.0,
+      "minimum_alan_benzerligi": 0.6,
+      "kanit": "shape_false_positive_audit üretim seçimi + nihai yaklaşık provenans doğrulaması",
+      "aciklama": "BBox/yeniden-pikselleştirme nedeniyle birkaç metre kayan düşük-kompaktlık geniş kümeler yalnız şekil denetiminin kendi 25 m / 0.60 güven sınırında arka plana ayrılır."
+    }
+  }
 }
