@@ -13,9 +13,9 @@
 
 > 15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya yeni Sentinel görüntüsünde beliren güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.
 
-1. **ERKEN — Musalla** · yaklaşık 700 m² · Görev `U2F54175B4A` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.297809,26.307975) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297809/26.307975)
-2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 600 m² · Görev `UB3F54E7281` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.243088,26.419016) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.243088/26.419016)
-3. **ERKEN — Ovacık** · yaklaşık 500 m² · Görev `U284F6603BF` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.257288,26.329839) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.257288/26.329839)
+1. **ERKEN — Musalla** · yaklaşık 700 m² · Görev `U2F54175B4A` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.297809,26.307975)
+2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 600 m² · Görev `UB3F54E7281` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.243088,26.419016)
+3. **ERKEN — Ovacık** · yaklaşık 500 m² · Görev `U284F6603BF` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.257288,26.329839)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 

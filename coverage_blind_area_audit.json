@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-03 03:02 +0300",
+  "olusturma": "2026-09-03 17:34 +0300",
   "amac": "Son açık Sentinel tarihlerinde SCL=4/5 ile kara olduğu bağımsız olarak kanıtlanan piksellerde, ana çift ve mevcut eski/yeni bulut-gölge zaman-serisi tamamlamalarından sonra gözlemsiz kalan alanı ve üretime dokunmadan çoklu uygun yedek sahnelerin yalnız kapsama bakımından sağlayabileceği ek geri kazanımı ölçmek; alarm veya görev üretmez.",
   "minimum_alan_m2": 250,
   "kara_referans_sahne_tavani": 8,
@@ -7,134 +7,134 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "ana_onceki_item": "S2A_T35SMC_20260826T090624_L2A",
-      "ana_onceki_tarih": "26.08.2026",
-      "son_item": "S2B_T35SMC_20260829T090620_L2A",
-      "son_tarih": "29.08.2026",
-      "yedek_item": "S2B_T35SMC_20260819T090553_L2A",
-      "yedek_tarih": "19.08.2026",
+      "ana_onceki_item": "S2B_T35SMC_20260829T090620_L2A",
+      "ana_onceki_tarih": "29.08.2026",
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "son_tarih": "03.09.2026",
+      "yedek_item": "S2A_T35SMC_20260826T090624_L2A",
+      "yedek_tarih": "26.08.2026",
       "coklu_yedek_sahne_sayisi": 4,
       "coklu_yedek_tarihleri": [
+        "26.08.2026",
+        "24.08.2026",
         "19.08.2026",
-        "16.08.2026",
-        "14.08.2026",
-        "09.08.2026"
+        "16.08.2026"
       ],
       "analiz_piksel_m_yaklasik": 10.0,
       "kara_referans_sahne_sayisi": 8,
       "kara_referans_tarihleri": [
+        "03.09.2026",
         "29.08.2026",
         "26.08.2026",
         "24.08.2026",
         "19.08.2026",
         "16.08.2026",
         "14.08.2026",
-        "09.08.2026",
-        "06.08.2026"
+        "09.08.2026"
       ],
-      "kara_hedef_piksel": 3436322,
-      "su_referansli_piksel": 4047056,
-      "cozumlenmemis_yuzey_piksel": 1534,
-      "cozumlenmemis_yuzey_yuzde": 0.0205,
+      "kara_hedef_piksel": 3436090,
+      "su_referansli_piksel": 4047336,
+      "cozumlenmemis_yuzey_piksel": 1486,
+      "cozumlenmemis_yuzey_yuzde": 0.0199,
       "cozumlenmemis_250m2_ustu_kume": 96,
-      "ana_cift_kor_piksel": 139905,
-      "ana_cift_kor_yuzde": 4.0714,
-      "zaman_serisiyle_geri_kazanilan_piksel": 124966,
-      "zaman_serisiyle_geri_kazanilan_yuzde": 3.6366,
-      "kalan_kor_piksel": 14939,
-      "kalan_kor_yuzde": 0.4347,
-      "kalan_250m2_ustu_kume": 1301,
-      "en_buyuk_kalan_kor_alan_m2": 26403,
-      "coklu_yedek_toplam_geri_kazanilan_piksel": 125448,
-      "coklu_yedek_ek_geri_kazanilan_piksel": 482,
-      "coklu_yedek_ek_geri_kazanilan_yuzde": 0.014,
-      "coklu_yedek_sonrasi_kalan_kor_piksel": 14457,
-      "coklu_yedek_sonrasi_kalan_kor_yuzde": 0.4207,
-      "coklu_yedek_sonrasi_250m2_ustu_kume": 1290,
-      "coklu_yedek_sonrasi_en_buyuk_kor_alan_m2": 26002,
+      "ana_cift_kor_piksel": 139403,
+      "ana_cift_kor_yuzde": 4.057,
+      "zaman_serisiyle_geri_kazanilan_piksel": 125032,
+      "zaman_serisiyle_geri_kazanilan_yuzde": 3.6388,
+      "kalan_kor_piksel": 14371,
+      "kalan_kor_yuzde": 0.4182,
+      "kalan_250m2_ustu_kume": 1216,
+      "en_buyuk_kalan_kor_alan_m2": 25602,
+      "coklu_yedek_toplam_geri_kazanilan_piksel": 125606,
+      "coklu_yedek_ek_geri_kazanilan_piksel": 574,
+      "coklu_yedek_ek_geri_kazanilan_yuzde": 0.0167,
+      "coklu_yedek_sonrasi_kalan_kor_piksel": 13797,
+      "coklu_yedek_sonrasi_kalan_kor_yuzde": 0.4015,
+      "coklu_yedek_sonrasi_250m2_ustu_kume": 1191,
+      "coklu_yedek_sonrasi_en_buyuk_kor_alan_m2": 25602,
       "ornekler": [
         {
           "mahalle_yaklasik": "Dalyan",
-          "enlem": 38.358048,
-          "boylam": 26.318735,
-          "alan_m2": 26403,
+          "enlem": 38.357867,
+          "boylam": 26.318506,
+          "alan_m2": 25602,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Şifne",
-          "enlem": 38.337788,
-          "boylam": 26.399784,
-          "alan_m2": 26002,
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.212788,
+          "boylam": 26.424625,
+          "alan_m2": 22802,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Dalyan",
-          "enlem": 38.376952,
-          "boylam": 26.314958,
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.201029,
+          "boylam": 26.451756,
+          "alan_m2": 22802,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.194607,
+          "boylam": 26.463318,
           "alan_m2": 20802,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.212607,
-          "boylam": 26.42474,
-          "alan_m2": 19302,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.243992,
+          "enlem": 38.243902,
           "boylam": 26.401387,
-          "alan_m2": 18402,
+          "alan_m2": 16802,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Reisdere",
-          "enlem": 38.324582,
-          "boylam": 26.398296,
-          "alan_m2": 18302,
+          "mahalle_yaklasik": "Dalyan",
+          "enlem": 38.376952,
+          "boylam": 26.314958,
+          "alan_m2": 16402,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Şifne",
+          "enlem": 38.337788,
+          "boylam": 26.399555,
+          "alan_m2": 15601,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.206366,
+          "enlem": 38.206456,
           "boylam": 26.451412,
-          "alan_m2": 12601,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Çiftlikköy",
-          "enlem": 38.261087,
-          "boylam": 26.29149,
-          "alan_m2": 12001,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.201301,
-          "boylam": 26.451184,
-          "alan_m2": 12001,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.194698,
-          "boylam": 26.464577,
-          "alan_m2": 11601,
+          "alan_m2": 13401,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Ildır",
           "enlem": 38.401192,
           "boylam": 26.490678,
+          "alan_m2": 11601,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Dalyan",
+          "enlem": 38.349727,
+          "boylam": 26.321941,
           "alan_m2": 11201,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Şifne",
-          "enlem": 38.344571,
-          "boylam": 26.440537,
-          "alan_m2": 11201,
+          "mahalle_yaklasik": "Ilıca",
+          "enlem": 38.312372,
+          "boylam": 26.359489,
+          "alan_m2": 10401,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.217401,
+          "boylam": 26.421649,
+          "alan_m2": 10401,
           "neden": "KARISIK_GECERSIZLIK"
         }
       ],
@@ -148,8 +148,8 @@
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.219571,
-          "boylam": 26.396464,
+          "enlem": 38.236937,
+          "boylam": 26.37334,
           "alan_m2": 300,
           "neden": "BULUT_GOLGE_KALICI"
         },
@@ -169,15 +169,15 @@
         },
         {
           "mahalle_yaklasik": "Dalyan",
-          "enlem": 38.35235,
-          "boylam": 26.283133,
+          "enlem": 38.349998,
+          "boylam": 26.283362,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Dalyan",
-          "enlem": 38.356691,
-          "boylam": 26.317476,
+          "enlem": 38.355063,
+          "boylam": 26.283591,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
@@ -185,13 +185,6 @@
           "mahalle_yaklasik": "Ildır",
           "enlem": 38.373605,
           "boylam": 26.476368,
-          "alan_m2": 400,
-          "neden": "BULUT_GOLGE_KALICI"
-        },
-        {
-          "mahalle_yaklasik": "Ildır",
-          "enlem": 38.399745,
-          "boylam": 26.475338,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
@@ -210,30 +203,44 @@
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.186286,
-          "boylam": 26.436416,
+          "mahalle_yaklasik": "Ilıca",
+          "enlem": 38.314,
+          "boylam": 26.357886,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.188366,
-          "boylam": 26.48896,
+          "enlem": 38.18312,
+          "boylam": 26.487587,
+          "alan_m2": 400,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.187372,
+          "boylam": 26.437103,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Musalla",
-          "enlem": 38.317798,
-          "boylam": 26.291719,
+          "enlem": 38.298804,
+          "boylam": 26.280958,
+          "alan_m2": 400,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Reisdere",
+          "enlem": 38.290031,
+          "boylam": 26.418444,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Çeşme",
-          "enlem": 38.337788,
-          "boylam": 26.291261,
+          "enlem": 38.338149,
+          "boylam": 26.291032,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
@@ -260,9 +267,23 @@
         },
         {
           "mahalle_yaklasik": "Çiftlikköy",
-          "enlem": 38.267961,
-          "boylam": 26.251309,
+          "enlem": 38.267599,
+          "boylam": 26.277638,
           "alan_m2": 400,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Şifne",
+          "enlem": 38.341315,
+          "boylam": 26.430692,
+          "alan_m2": 400,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.399383,
+          "boylam": 26.462631,
+          "alan_m2": 800,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
@@ -273,23 +294,23 @@
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Reisdere",
-          "enlem": 38.325848,
-          "boylam": 26.386276,
+          "mahalle_yaklasik": "Ilıca",
+          "enlem": 38.321869,
+          "boylam": 26.385131,
           "alan_m2": 800,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Ilıca",
-          "enlem": 38.331094,
-          "boylam": 26.341974,
-          "alan_m2": 1200,
+          "mahalle_yaklasik": "Şifne",
+          "enlem": 38.332723,
+          "boylam": 26.40173,
+          "alan_m2": 800,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Şifne",
-          "enlem": 38.344209,
-          "boylam": 26.433783,
+          "mahalle_yaklasik": "Alaçatı",
+          "enlem": 38.263258,
+          "boylam": 26.379865,
           "alan_m2": 1200,
           "neden": "BULUT_GOLGE_KALICI"
         },
@@ -301,30 +322,30 @@
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Alaçatı",
-          "enlem": 38.260997,
-          "boylam": 26.390168,
-          "alan_m2": 300,
-          "neden": "KARISIK_GECERSIZLIK"
+          "mahalle_yaklasik": "Çeşme",
+          "enlem": 38.326753,
+          "boylam": 26.324459,
+          "alan_m2": 1600,
+          "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Alaçatı",
-          "enlem": 38.258283,
-          "boylam": 26.381468,
+          "enlem": 38.260816,
+          "boylam": 26.385131,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Alaçatı",
-          "enlem": 38.262625,
-          "boylam": 26.376202,
+          "enlem": 38.282433,
+          "boylam": 26.405966,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Alaçatı",
-          "enlem": 38.282614,
-          "boylam": 26.406424,
+          "enlem": 38.289398,
+          "boylam": 26.405622,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         },
@@ -337,22 +358,8 @@
         },
         {
           "mahalle_yaklasik": "Ilıca",
-          "enlem": 38.308301,
-          "boylam": 26.362465,
-          "alan_m2": 400,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Ilıca",
-          "enlem": 38.308301,
-          "boylam": 26.37002,
-          "alan_m2": 400,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Musalla",
-          "enlem": 38.298442,
-          "boylam": 26.280729,
+          "enlem": 38.307759,
+          "boylam": 26.36361,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         },
@@ -364,16 +371,16 @@
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Reisdere",
-          "enlem": 38.289307,
-          "boylam": 26.420504,
+          "mahalle_yaklasik": "Musalla",
+          "enlem": 38.317256,
+          "boylam": 26.286682,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Reisdere",
-          "enlem": 38.294463,
-          "boylam": 26.405164,
+          "enlem": 38.295186,
+          "boylam": 26.405393,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         },
@@ -385,9 +392,16 @@
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
+          "mahalle_yaklasik": "Reisdere",
+          "enlem": 38.297357,
+          "boylam": 26.411575,
+          "alan_m2": 400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
           "mahalle_yaklasik": "Çeşme",
-          "enlem": 38.320783,
-          "boylam": 26.302709,
+          "enlem": 38.321145,
+          "boylam": 26.30248,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         },
@@ -399,126 +413,112 @@
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Çeşme",
-          "enlem": 38.325215,
-          "boylam": 26.32961,
+          "mahalle_yaklasik": "Şifne",
+          "enlem": 38.332542,
+          "boylam": 26.415582,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Şifne",
-          "enlem": 38.331818,
-          "boylam": 26.417871,
-          "alan_m2": 400,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Şifne",
-          "enlem": 38.334079,
-          "boylam": 26.401387,
-          "alan_m2": 400,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Şifne",
-          "enlem": 38.33616,
-          "boylam": 26.421305,
+          "enlem": 38.332542,
+          "boylam": 26.42245,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         }
       ],
       "coklu_yedek_sonrasi_ornekler": [
         {
-          "mahalle_yaklasik": "Şifne",
-          "enlem": 38.337788,
-          "boylam": 26.399784,
-          "alan_m2": 26002,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
           "mahalle_yaklasik": "Dalyan",
-          "enlem": 38.358048,
-          "boylam": 26.318735,
+          "enlem": 38.357867,
+          "boylam": 26.318506,
           "alan_m2": 25602,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.212607,
-          "boylam": 26.42474,
-          "alan_m2": 19302,
+          "enlem": 38.212788,
+          "boylam": 26.424625,
+          "alan_m2": 22802,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.201029,
+          "boylam": 26.451756,
+          "alan_m2": 22802,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.194607,
+          "boylam": 26.463318,
+          "alan_m2": 20802,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Dalyan",
           "enlem": 38.376952,
           "boylam": 26.314958,
-          "alan_m2": 18802,
+          "alan_m2": 16402,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Reisdere",
-          "enlem": 38.324582,
-          "boylam": 26.398296,
-          "alan_m2": 18302,
+          "mahalle_yaklasik": "Şifne",
+          "enlem": 38.337788,
+          "boylam": 26.399555,
+          "alan_m2": 15601,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.243902,
-          "boylam": 26.401387,
-          "alan_m2": 17202,
-          "neden": "BULUT_GOLGE_KALICI"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.206366,
+          "enlem": 38.206456,
           "boylam": 26.451412,
-          "alan_m2": 12601,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Çiftlikköy",
-          "enlem": 38.261087,
-          "boylam": 26.29149,
-          "alan_m2": 12001,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.201301,
-          "boylam": 26.451184,
-          "alan_m2": 12001,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.194698,
-          "boylam": 26.464577,
-          "alan_m2": 11601,
+          "alan_m2": 13401,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Ildır",
           "enlem": 38.401192,
           "boylam": 26.490678,
+          "alan_m2": 11601,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Dalyan",
+          "enlem": 38.349727,
+          "boylam": 26.321941,
           "alan_m2": 11201,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Şifne",
-          "enlem": 38.344571,
-          "boylam": 26.440537,
-          "alan_m2": 11201,
+          "mahalle_yaklasik": "Ilıca",
+          "enlem": 38.312372,
+          "boylam": 26.359489,
+          "alan_m2": 10401,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.217401,
+          "boylam": 26.421649,
+          "alan_m2": 10401,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.425975,
+          "boylam": 26.459426,
+          "alan_m2": 10001,
           "neden": "KARISIK_GECERSIZLIK"
         }
       ],
       "cozumlenmemis_yuzey_ornekleri": [
         {
           "mahalle_yaklasik": "Alaçatı",
-          "enlem": 38.266152,
+          "enlem": 38.266243,
           "boylam": 26.377347,
-          "alan_m2": 12501,
+          "alan_m2": 12901,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
@@ -585,16 +585,16 @@
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.181854,
-          "boylam": 26.501438,
-          "alan_m2": 4000,
+          "mahalle_yaklasik": "Reisdere",
+          "enlem": 38.326301,
+          "boylam": 26.386161,
+          "alan_m2": 3600,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.360309,
-          "boylam": 26.462631,
+          "enlem": 38.181673,
+          "boylam": 26.492853,
           "alan_m2": 3600,
           "neden": "BULUT_GOLGE_KALICI"
         }
@@ -603,135 +603,135 @@
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "ana_onceki_item": "S2A_T35SMC_20260826T090624_L2A",
-      "ana_onceki_tarih": "26.08.2026",
-      "son_item": "S2B_T35SMC_20260829T090620_L2A",
-      "son_tarih": "29.08.2026",
-      "yedek_item": "S2B_T35SMC_20260819T090553_L2A",
-      "yedek_tarih": "19.08.2026",
+      "ana_onceki_item": "S2B_T35SMC_20260829T090620_L2A",
+      "ana_onceki_tarih": "29.08.2026",
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "son_tarih": "03.09.2026",
+      "yedek_item": "S2A_T35SMC_20260826T090624_L2A",
+      "yedek_tarih": "26.08.2026",
       "coklu_yedek_sahne_sayisi": 4,
       "coklu_yedek_tarihleri": [
+        "26.08.2026",
+        "24.08.2026",
         "19.08.2026",
-        "16.08.2026",
-        "14.08.2026",
-        "09.08.2026"
+        "16.08.2026"
       ],
       "analiz_piksel_m_yaklasik": 10.0,
       "kara_referans_sahne_sayisi": 8,
       "kara_referans_tarihleri": [
+        "03.09.2026",
         "29.08.2026",
         "26.08.2026",
         "24.08.2026",
         "19.08.2026",
         "16.08.2026",
         "14.08.2026",
-        "09.08.2026",
-        "06.08.2026"
+        "09.08.2026"
       ],
-      "kara_hedef_piksel": 4549860,
-      "su_referansli_piksel": 760821,
-      "cozumlenmemis_yuzey_piksel": 1727,
+      "kara_hedef_piksel": 4549834,
+      "su_referansli_piksel": 760849,
+      "cozumlenmemis_yuzey_piksel": 1725,
       "cozumlenmemis_yuzey_yuzde": 0.0325,
-      "cozumlenmemis_250m2_ustu_kume": 98,
-      "ana_cift_kor_piksel": 50776,
-      "ana_cift_kor_yuzde": 1.116,
-      "zaman_serisiyle_geri_kazanilan_piksel": 44096,
-      "zaman_serisiyle_geri_kazanilan_yuzde": 0.9692,
-      "kalan_kor_piksel": 6680,
-      "kalan_kor_yuzde": 0.1468,
-      "kalan_250m2_ustu_kume": 489,
-      "en_buyuk_kalan_kor_alan_m2": 21200,
-      "coklu_yedek_toplam_geri_kazanilan_piksel": 44220,
-      "coklu_yedek_ek_geri_kazanilan_piksel": 124,
-      "coklu_yedek_ek_geri_kazanilan_yuzde": 0.0027,
-      "coklu_yedek_sonrasi_kalan_kor_piksel": 6556,
-      "coklu_yedek_sonrasi_kalan_kor_yuzde": 0.1441,
-      "coklu_yedek_sonrasi_250m2_ustu_kume": 488,
-      "coklu_yedek_sonrasi_en_buyuk_kor_alan_m2": 21200,
+      "cozumlenmemis_250m2_ustu_kume": 100,
+      "ana_cift_kor_piksel": 50779,
+      "ana_cift_kor_yuzde": 1.1161,
+      "zaman_serisiyle_geri_kazanilan_piksel": 44252,
+      "zaman_serisiyle_geri_kazanilan_yuzde": 0.9726,
+      "kalan_kor_piksel": 6527,
+      "kalan_kor_yuzde": 0.1435,
+      "kalan_250m2_ustu_kume": 434,
+      "en_buyuk_kalan_kor_alan_m2": 27600,
+      "coklu_yedek_toplam_geri_kazanilan_piksel": 44540,
+      "coklu_yedek_ek_geri_kazanilan_piksel": 288,
+      "coklu_yedek_ek_geri_kazanilan_yuzde": 0.0063,
+      "coklu_yedek_sonrasi_kalan_kor_piksel": 6239,
+      "coklu_yedek_sonrasi_kalan_kor_yuzde": 0.1371,
+      "coklu_yedek_sonrasi_250m2_ustu_kume": 427,
+      "coklu_yedek_sonrasi_en_buyuk_kor_alan_m2": 23200,
       "ornekler": [
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.416568,
-          "boylam": 26.600921,
-          "alan_m2": 21200,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.186377,
-          "boylam": 26.533387,
-          "alan_m2": 14400,
+          "enlem": 38.186196,
+          "boylam": 26.5327,
+          "alan_m2": 27600,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.401283,
-          "boylam": 26.621524,
-          "alan_m2": 13200,
+          "enlem": 38.201029,
+          "boylam": 26.451774,
+          "alan_m2": 22800,
           "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.416659,
+          "boylam": 26.601035,
+          "alan_m2": 22400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.194607,
+          "boylam": 26.463335,
+          "alan_m2": 20800,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.188005,
+          "boylam": 26.537279,
+          "alan_m2": 18800,
+          "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.188819,
+          "boylam": 26.540026,
+          "alan_m2": 15200,
+          "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
           "enlem": 38.206366,
           "boylam": 26.451431,
-          "alan_m2": 12800,
+          "alan_m2": 13600,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.41883,
-          "boylam": 26.612253,
-          "alan_m2": 12600,
+          "enlem": 38.41892,
+          "boylam": 26.612138,
+          "alan_m2": 13000,
           "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.201301,
-          "boylam": 26.451202,
-          "alan_m2": 12000,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.188276,
-          "boylam": 26.537622,
-          "alan_m2": 12000,
-          "neden": "BULUT_GOLGE_KALICI"
-        },
-        {
-          "mahalle_yaklasik": "Gülbahçe",
-          "enlem": 38.321236,
-          "boylam": 26.66628,
-          "alan_m2": 11600,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.194698,
-          "boylam": 26.464594,
-          "alan_m2": 11600,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.189,
-          "boylam": 26.540255,
-          "alan_m2": 11600,
-          "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Ildır",
           "enlem": 38.401192,
           "boylam": 26.490692,
-          "alan_m2": 11200,
+          "alan_m2": 11600,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.200125,
-          "boylam": 26.45269,
+          "enlem": 38.401283,
+          "boylam": 26.621524,
+          "alan_m2": 10400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.425975,
+          "boylam": 26.459443,
           "alan_m2": 10000,
           "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.203471,
+          "boylam": 26.52732,
+          "alan_m2": 9600,
+          "neden": "BULUT_GOLGE_KALICI"
         }
       ],
       "kor_alan_devriye_ornekleri": [
@@ -743,23 +743,9 @@
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Gülbahçe",
-          "enlem": 38.358139,
-          "boylam": 26.644761,
-          "alan_m2": 400,
-          "neden": "BULUT_GOLGE_KALICI"
-        },
-        {
           "mahalle_yaklasik": "Ildır",
           "enlem": 38.373605,
           "boylam": 26.476384,
-          "alan_m2": 400,
-          "neden": "BULUT_GOLGE_KALICI"
-        },
-        {
-          "mahalle_yaklasik": "Ildır",
-          "enlem": 38.399654,
-          "boylam": 26.475354,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
@@ -786,8 +772,8 @@
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.185472,
-          "boylam": 26.532128,
+          "enlem": 38.18312,
+          "boylam": 26.487601,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
@@ -801,21 +787,14 @@
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
           "enlem": 38.189723,
-          "boylam": 26.62576,
+          "boylam": 26.623012,
           "alan_m2": 400,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Gülbahçe",
-          "enlem": 38.333175,
-          "boylam": 26.65346,
-          "alan_m2": 800,
-          "neden": "BULUT_GOLGE_KALICI"
-        },
-        {
-          "mahalle_yaklasik": "Gülbahçe",
-          "enlem": 38.343667,
-          "boylam": 26.642929,
+          "mahalle_yaklasik": "Ildır",
+          "enlem": 38.399383,
+          "boylam": 26.462648,
           "alan_m2": 800,
           "neden": "BULUT_GOLGE_KALICI"
         },
@@ -823,6 +802,27 @@
           "mahalle_yaklasik": "Germiyan",
           "enlem": 38.348732,
           "boylam": 26.491493,
+          "alan_m2": 400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Gülbahçe",
+          "enlem": 38.319969,
+          "boylam": 26.66628,
+          "alan_m2": 400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Gülbahçe",
+          "enlem": 38.331366,
+          "boylam": 26.653574,
+          "alan_m2": 400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Gülbahçe",
+          "enlem": 38.338692,
+          "boylam": 26.648996,
           "alan_m2": 400,
           "neden": "KARISIK_GECERSIZLIK"
         },
@@ -835,96 +835,96 @@
         },
         {
           "mahalle_yaklasik": "Şifne",
-          "enlem": 38.348641,
+          "enlem": 38.348732,
           "boylam": 26.45166,
-          "alan_m2": 6400,
+          "alan_m2": 7200,
           "neden": "KARISIK_GECERSIZLIK"
         }
       ],
       "coklu_yedek_sonrasi_ornekler": [
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.416568,
-          "boylam": 26.600921,
-          "alan_m2": 21200,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.186377,
-          "boylam": 26.533387,
-          "alan_m2": 14400,
+          "enlem": 38.186286,
+          "boylam": 26.532357,
+          "alan_m2": 23200,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.401283,
-          "boylam": 26.621524,
-          "alan_m2": 13200,
+          "enlem": 38.201029,
+          "boylam": 26.451774,
+          "alan_m2": 22800,
           "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.416659,
+          "boylam": 26.601035,
+          "alan_m2": 22400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.194607,
+          "boylam": 26.463335,
+          "alan_m2": 20800,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.187914,
+          "boylam": 26.537279,
+          "alan_m2": 17200,
+          "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
           "enlem": 38.206366,
           "boylam": 26.451431,
-          "alan_m2": 12800,
+          "alan_m2": 13600,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.41883,
-          "boylam": 26.612253,
-          "alan_m2": 12600,
+          "enlem": 38.41892,
+          "boylam": 26.612138,
+          "alan_m2": 13000,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.201301,
-          "boylam": 26.451202,
+          "enlem": 38.188819,
+          "boylam": 26.539912,
           "alan_m2": 12000,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.188276,
-          "boylam": 26.537622,
-          "alan_m2": 12000,
-          "neden": "BULUT_GOLGE_KALICI"
-        },
-        {
-          "mahalle_yaklasik": "Gülbahçe",
-          "enlem": 38.321236,
-          "boylam": 26.66628,
-          "alan_m2": 11600,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.194698,
-          "boylam": 26.464594,
-          "alan_m2": 11600,
-          "neden": "KARISIK_GECERSIZLIK"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.189,
-          "boylam": 26.540255,
-          "alan_m2": 11600,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
           "mahalle_yaklasik": "Ildır",
           "enlem": 38.401192,
           "boylam": 26.490692,
-          "alan_m2": 11200,
+          "alan_m2": 11600,
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.200125,
-          "boylam": 26.45269,
+          "enlem": 38.401283,
+          "boylam": 26.621524,
+          "alan_m2": 10400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.425975,
+          "boylam": 26.459443,
           "alan_m2": 10000,
           "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "enlem": 38.203381,
+          "boylam": 26.527206,
+          "alan_m2": 9200,
+          "neden": "BULUT_GOLGE_KALICI"
         }
       ],
       "cozumlenmemis_yuzey_ornekleri": [
@@ -932,7 +932,7 @@
           "mahalle_yaklasik": "Mevki doğrulanmadı",
           "enlem": 38.185472,
           "boylam": 26.531556,
-          "alan_m2": 15200,
+          "alan_m2": 15600,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
@@ -960,7 +960,7 @@
           "mahalle_yaklasik": "Mevki doğrulanmadı",
           "enlem": 38.186829,
           "boylam": 26.533845,
-          "alan_m2": 9200,
+          "alan_m2": 10400,
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
@@ -969,6 +969,13 @@
           "boylam": 26.46448,
           "alan_m2": 6000,
           "neden": "BULUT_GOLGE_KALICI"
+        },
+        {
+          "mahalle_yaklasik": "Gülbahçe",
+          "enlem": 38.32612,
+          "boylam": 26.653231,
+          "alan_m2": 5900,
+          "neden": "KARISIK_GECERSIZLIK"
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
@@ -1000,16 +1007,9 @@
         },
         {
           "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.420639,
-          "boylam": 26.606759,
-          "alan_m2": 4000,
-          "neden": "BULUT_GOLGE_KALICI"
-        },
-        {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
-          "enlem": 38.181854,
-          "boylam": 26.501452,
-          "alan_m2": 4000,
+          "enlem": 38.417654,
+          "boylam": 26.603096,
+          "alan_m2": 4400,
           "neden": "BULUT_GOLGE_KALICI"
         }
       ],
