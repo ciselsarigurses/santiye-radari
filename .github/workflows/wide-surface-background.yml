@@ -9,7 +9,6 @@ on:
   workflow_run:
     workflows:
       - "Günlük Şantiye Taraması"
-      - "Parsel Ön Kontrol Bağlantıları"
     types: [completed]
   workflow_dispatch:
 
