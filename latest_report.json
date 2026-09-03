@@ -3381,5 +3381,23 @@
       "aciklama": "BBox/yeniden-pikselleştirme nedeniyle birkaç metre kayan düşük-kompaktlık geniş kümeler yalnız şekil denetiminin kendi 25 m / 0.60 güven sınırında arka plana ayrılır."
     }
   },
-  "parsel_on_kontrol_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+  "parsel_on_kontrol_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+  "kapasite_santiye_devriyesi": [],
+  "kapasite_santiye_devriyesi_meta": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "olusturma": "2026-09-03 17:30 +0300",
+    "bolgeler": {
+      "cesme": {
+        "durum": "uretim_kotasi_yeterli",
+        "uretim_santiye_olcegi": 8,
+        "tavan_disinda_uygun_havuz": 0
+      },
+      "uzunkuyu": {
+        "durum": "uretim_kotasi_yeterli",
+        "uretim_santiye_olcegi": 8,
+        "tavan_disinda_uygun_havuz": 0
+      }
+    }
+  }
 }
