@@ -33,9 +33,11 @@ CALIBRATION_LIMIT = 2
 CALIBRATION_PER_REGION_LIMIT = 1
 CALIBRATION_MIN_DISTANCE_METERS = 120
 ACTIVE_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT"}
+# satellite.REGIONS["uzunkuyu"]["label"] ile aynı tutulmalıdır. Gülbahçe ayrı bir
+# alarm bölgesi değildir; doğu Sentinel kapsamasının operasyonel parçasıdır.
 SATELLITE_REGION_LABELS = (
     "Çeşme merkez · Alaçatı · Ilıca",
-    "Uzunkuyu · Germiyan · Ildır",
+    "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
 )
 ROUTE_PRIORITY = {
     "TEKRAR": 0,
@@ -495,6 +497,9 @@ def update_daily_shortlist():
 def _self_check():
     west = SATELLITE_REGION_LABELS[0]
     east = SATELLITE_REGION_LABELS[1]
+    assert east == "Uzunkuyu · Germiyan · Ildır · Gülbahçe", (
+        "Gülbahçe doğu Sentinel rota bölgesi etiketinden düştü."
+    )
     sample = [
         {
             "gorev_id": "U1", "saha_durumu": "KONTROLE_GIT", "oncelik": "ERKEN",
