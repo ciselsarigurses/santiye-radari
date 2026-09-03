@@ -131,6 +131,32 @@ jobs:
       - name: Değişen kör alan raporunu kaydet
         run: |
           report_files="coverage_blind_area_audit.json coastal_false_positive_audit.json stale_coastal_task_audit.json latest_report.json SAHA_RAPORU.md"
+
+          refresh_reports() {
+            python coverage_blind_area_runner.py
+            python coastal_false_positive_audit.py
+            python stale_coastal_task_audit.py
+            python coverage_patrol_shortlist.py
+            python temporal_candidate_pool.py --apply
+            python calibration_rotation_guard.py
+            python temporal_calibration_rotation_guard.py --check-only
+            python temporal_calibration_rotation_guard.py
+            python completed_calibration_guard.py --check-only
+            python completed_calibration_guard.py
+            python route_diversity_guard.py
+            python coverage_overlap_rotation_guard.py
+            python final_calibration_diversity_guard.py
+            python overdue_route_rotation_guard.py --check-only
+            python overdue_route_rotation_guard.py
+            python coastal_route_guard.py
+            python calibration_cross_layer_diversity_guard.py --check-only
+            python calibration_cross_layer_diversity_guard.py
+            python calibration_note_guard.py --check-only
+            python calibration_note_guard.py
+            python preseason_route_final_guard.py
+            git checkout -- dry_ground_gap_audit.json
+          }
+
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Kör alan ölçümü, kıyı yanlış pozitif auditleri ve saha devriyesi değişmedi."
             exit 0
@@ -138,12 +164,34 @@ jobs:
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add $report_files
-          git commit -m "Radar: Sentinel kör alan raporunu ve devriyeyi güncelle"
 
-          git fetch origin main
-          if ! git merge-base --is-ancestor origin/main HEAD; then
-            echo "Ana dal değişti; eski ölçümü üzerine yazmadan sonraki çalışmaya bırakılıyor."
-            exit 1
-          fi
-          git push origin HEAD:main
+          # latest_report.json başka koruma workflow'ları tarafından da yazılıyor.
+          # Main ilerlediyse eski raporu zorla birleştirmek yerine en güncel main
+          # üzerinde bütün kör-alan/rota zincirini yeniden üret. Böylece yeni saha
+          # geri bildirimi veya geniş-yüzey/parsel katmanı kaybolmaz.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+              echo "Main ilerledi; kör-alan raporu güncel veri üzerinde yeniden üretiliyor (${attempt}/3)."
+              git reset --hard origin/main
+              refresh_reports
+            fi
+
+            if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+              echo "En güncel main üzerinde ek kör-alan rapor değişikliği gerekmiyor."
+              exit 0
+            fi
+
+            git add $report_files
+            git commit -m "Radar: Sentinel kör alan raporunu ve devriyeyi güncelle"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Main yeniden ilerledi veya geçici push hatası oluştu; güvenli biçimde tekrar deneniyor (${attempt}/3)."
+            git reset --hard HEAD~1
+            sleep $((attempt * 2))
+          done
+
+          echo "Kör alan raporu üç güvenli denemede güncel main üzerine kaydedilemedi."
+          exit 1
