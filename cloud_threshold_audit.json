@@ -1,0 +1,57 @@
+{
+  "amac": "Global Sentinel bulut metadata filtresinin Çeşme, Uzunkuyu ve ayrıca Gülbahçe 2 km operasyonel penceresinde yerel olarak açık daha yeni sahneleri geciktirip geciktirmediğini ölçmek.",
+  "uretim_global_bulut_esigi_yuzde": 25,
+  "yerel_kapali_esik_yuzde": 25.0,
+  "audit_piksel_m": 40,
+  "alarm_uretmez": true,
+  "saha_gorevi_uretmez": true,
+  "dikkat_hedef_aday_sayisi": 0,
+  "uyarilar": [],
+  "hedefler": [
+    {
+      "hedef": "cesme",
+      "etiket": "Çeşme üretim kutusu",
+      "uretim_bolgesi": "cesme",
+      "kapsam": "uretim_bbox",
+      "bbox": [
+        26.22,
+        38.18,
+        26.53,
+        38.43
+      ],
+      "production_item": "S2C_T35SMC_20260903T090747_L2A",
+      "production_date": "03.09.2026 09:09Z",
+      "newer_candidates": []
+    },
+    {
+      "hedef": "uzunkuyu",
+      "etiket": "Uzunkuyu · Germiyan · Ildır · Gülbahçe üretim kutusu",
+      "uretim_bolgesi": "uzunkuyu",
+      "kapsam": "uretim_bbox",
+      "bbox": [
+        26.45,
+        38.18,
+        26.67,
+        38.43
+      ],
+      "production_item": "S2C_T35SMC_20260903T090747_L2A",
+      "production_date": "03.09.2026 09:09Z",
+      "newer_candidates": []
+    },
+    {
+      "hedef": "gulbahce_2km",
+      "etiket": "Gülbahçe 2 km operasyonel kör-alan penceresi",
+      "uretim_bolgesi": "uzunkuyu",
+      "kapsam": "gulbahce_2km_operasyonel",
+      "bbox": [
+        26.622656,
+        38.314692,
+        26.668464,
+        38.350868
+      ],
+      "production_item": "S2C_T35SMC_20260903T090747_L2A",
+      "production_date": "03.09.2026 09:09Z",
+      "newer_candidates": []
+    }
+  ]
+}
