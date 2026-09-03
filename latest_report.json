@@ -2567,7 +2567,10 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ]
+      ],
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2588,7 +2591,10 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ]
+      ],
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2609,7 +2615,10 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ]
+      ],
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2630,7 +2639,10 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ]
+      ],
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2651,7 +2663,10 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ]
+      ],
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2672,7 +2687,10 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ]
+      ],
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2697,7 +2715,10 @@
       "geometri_esleme_mesafe_m": 9.4,
       "geometri_alan_benzerligi": 0.997,
       "geometri_kaynagi_enlem": 38.32015,
-      "geometri_kaynagi_boylam": 26.466883
+      "geometri_kaynagi_boylam": 26.466883,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2722,7 +2743,10 @@
       "geometri_esleme_mesafe_m": 0.3,
       "geometri_alan_benzerligi": 1.0,
       "geometri_kaynagi_enlem": 38.308663,
-      "geometri_kaynagi_boylam": 26.462992
+      "geometri_kaynagi_boylam": 26.462992,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "arka_plan_kurali": {
