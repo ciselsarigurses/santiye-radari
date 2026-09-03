@@ -33,6 +33,19 @@ PRESEASON_STRONG_PRIORITIES = {"ERKEN", "PARSEL"}
 PRESEASON_SMALL_MAX_M2 = 800
 PRESEASON_ALLOWED_SATELLITE_PRIORITIES = {"YÜKSEK", "ORTA"}
 
+# Gülbahçe ana Uzunkuyu Sentinel bölgesine eklendikten sonra yeni raporlar bölge
+# etiketini "... · Gülbahçe" ile yazar. Eski açık görevler ise tarihsel etiketi
+# taşımaya devam edebilir. Son rota katmanında ikisini aynı doğu bölgesi olarak
+# normalize et; aksi halde iki-bölge dengesi yeni Gülbahçe etiketli görevleri
+# tanımayabilir veya geçiş dönemindeki eski doğu görevlerini dışarıda bırakabilir.
+CANONICAL_WEST_REGION = "Çeşme merkez · Alaçatı · Ilıca"
+CANONICAL_EAST_REGION = "Uzunkuyu · Germiyan · Ildır · Gülbahçe"
+LEGACY_EAST_REGION = "Uzunkuyu · Germiyan · Ildır"
+route.SATELLITE_REGION_LABELS = (
+    CANONICAL_WEST_REGION,
+    CANONICAL_EAST_REGION,
+)
+
 NOTE = (
     "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde "
     "tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey "
@@ -92,6 +105,19 @@ def _historical_evidence_rank(item):
     return 0
 
 
+def _normalized_actionable_candidates(candidates):
+    """Eski/yeni doğu bölge etiketini tek Gülbahçe-dahil bölge anahtarında birleştir."""
+    eligible = route._actionable_candidates(candidates)
+    normalized = []
+    for item in eligible:
+        updated = dict(item)
+        label = str(updated.get("bolge") or "").strip()
+        if label == LEGACY_EAST_REGION:
+            updated["bolge"] = CANONICAL_EAST_REGION
+        normalized.append(updated)
+    return normalized
+
+
 def _fresh_preseason_candidate(item):
     """Yasak döneminde ancak yeni ve güçlü kanıtı veya insan talebi olan adayı geçir."""
     if not isinstance(item, dict):
@@ -137,7 +163,7 @@ def select_fresh_shortlist(candidates, limit=route.SHORTLIST_LIMIT, local_day=No
     if cap <= 0:
         return []
 
-    eligible = route._actionable_candidates(candidates)
+    eligible = _normalized_actionable_candidates(candidates)
     if _preseason_mode(local_day):
         eligible = [item for item in eligible if _fresh_preseason_candidate(item)]
 
@@ -243,6 +269,9 @@ def _self_check():
     route._self_check()
     west = route.SATELLITE_REGION_LABELS[0]
     east = route.SATELLITE_REGION_LABELS[1]
+    assert west == CANONICAL_WEST_REGION
+    assert east == CANONICAL_EAST_REGION
+    assert "Gülbahçe" in east
 
     historical_small = {
         "gorev_id": "HIST_SMALL",
@@ -302,6 +331,18 @@ def _self_check():
         "sinyal": "2 gündür saha kontrolü bekliyor · parsel ölçekli yüzey/toprak değişimi adayı",
     }
 
+    legacy_east = dict(current_east)
+    legacy_east["gorev_id"] = "LEGACY_EAST"
+    legacy_east["bolge"] = LEGACY_EAST_REGION
+    normalized_legacy = _normalized_actionable_candidates([legacy_east])
+    assert normalized_legacy[0]["bolge"] == east
+    legacy_chosen = select_fresh_shortlist(
+        [current_small, historical_small, legacy_east],
+        limit=2,
+        local_day=date(2026, 9, 15),
+    )
+    assert {item["bolge"] for item in legacy_chosen} == {west, east}
+
     # 15 Eylül ve sonrasında önceki güncellik sıralaması aynen korunur.
     chosen = select_fresh_shortlist(
         [historical_small, current_small, current_east, current_parcel],
@@ -334,7 +375,7 @@ def _self_check():
         "bolge": east,
         "uydu_onceligi": "YÜKSEK",
         "boyut_sinifi": "KUCUK",
-        "yeni_goruntu": True,
+        "yeni_goruntu": true,
     }
     manual_repeat = {
         "gorev_id": "MANUAL_REPEAT",
@@ -345,7 +386,7 @@ def _self_check():
         "boylam": 26.3745,
         "alan_m2": 500,
         "bolge": west,
-        "yeni_goruntu": False,
+        "yeni_goruntu": false,
     }
     preseason = select_fresh_shortlist(
         [historical_small, current_small, fresh_early, manual_repeat],
