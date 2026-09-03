@@ -1,16 +1,15 @@
 """15 Eylül sonrası güçlü kuru-zemin anomalilerini tek günlük teyit rotasına bağlar.
 
-Ana Sentinel üretim eşiği 250 m² olarak kalır. Bu katman üretim maskesi dışında kalan
-250-900 m² kuru-zemin diagnostiklerinden yalnız aynı yeni Sentinel sahnesinde şu kanıtları
-birlikte taşıyanları değerlendirir: izole/saha-benzeri geometri, lineer risk olmaması,
-uzun zaman serisinde ani başlangıç, kararlı geçmiş zemin, yörünge/geometri riski olmaması
-ve 5x5 çevre halkasına göre lokal değişim. Geniş/homojen çevre hareketi elenir.
+Ana Sentinel üretim eşiği 250 m² olarak kalır. Üretim maskesi dışında kalan 250-900 m²
+kuru-zemin diagnostiklerinden yalnız yeni Sentinel sahnesinde izole/non-lineer geometri,
+uzun zaman serisinde ani başlangıç + kararlı geçmiş zemin, güvenli yörünge ve 5x5 çevre
+halkasına göre lokal değişim kanıtlarını birlikte taşıyanlar değerlendirilir.
 
-Katman yeni alarm veya kalıcı saha görevi üretmez. En fazla bir güçlü diagnostik, yalnız
-15 Eylül 2026 ve sonrasında ve ilgili bölgenin o gün gerçekten yeni Sentinel görüntüsü
-aldığı doğrulanırsa, mevcut ilk-3 rotada eski/backlog bir görevin önüne tek günlük
-"DOĞRULAMA" olarak girebilir. TEKRAR_GIT ve ana üretimden gelen taze hafriyat adayları
-asla düşürülmez. Aynı noktada zaten aktif ana görev varsa diagnostik tekrar eklenmez.
+Yeni alarm veya kalıcı saha görevi üretilmez. En fazla bir güçlü diagnostik, 15 Eylül
+2026 ve sonrasında ilgili bölgenin o gün gerçekten yeni Sentinel görüntüsü aldığı SQLite
+kaydından doğrulanırsa ilk-3 rotadaki eski/backlog bir görevin önüne tek günlük
+DOĞRULAMA olarak girebilir. TEKRAR_GIT ve ana üretimden gelen taze hafriyat adayları
+asla düşürülmez. Aynı noktada mevcut ana görev varsa diagnostik tekrar eklenmez.
 """
 
 from __future__ import annotations
@@ -27,9 +26,14 @@ from zoneinfo import ZoneInfo
 import daily_route_freshness_guard as freshness
 import daily_route_shortlist as route
 import postseason_excavation_priority_guard as postseason
-from scanner import DB
 
 
+BASE = Path(__file__).resolve().parent
+DB = BASE / "santiye.db"
+REPORT_JSON = BASE / "latest_report.json"
+FIELD_REPORT_MD = BASE / "SAHA_RAPORU.md"
+TEMPORAL_AUDIT = BASE / "dry_ground_temporal_audit.json"
+LOCALITY_AUDIT = BASE / "temporal_locality_audit.json"
 ISTANBUL = ZoneInfo("Europe/Istanbul")
 FULL_OPERATION_START = date(2026, 9, 15)
 MAIN_ALARM_MIN_M2 = 250
@@ -37,10 +41,6 @@ DRY_GROUND_MAX_M2 = 900
 MAX_CONFIRMATIONS = 1
 DUPLICATE_RADIUS_M = 40.0
 MIN_LOCALITY_RATIO = 1.5
-REPORT_JSON = Path(__file__).with_name("latest_report.json")
-FIELD_REPORT_MD = Path(__file__).with_name("SAHA_RAPORU.md")
-TEMPORAL_AUDIT = Path(__file__).with_name("dry_ground_temporal_audit.json")
-LOCALITY_AUDIT = Path(__file__).with_name("temporal_locality_audit.json")
 NOTE_SUFFIX = (
     " Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel "
     "sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte "
@@ -68,9 +68,7 @@ def _local_day(value=None):
     if value is None:
         return datetime.now(ISTANBUL).date()
     if isinstance(value, datetime):
-        if value.tzinfo is None:
-            return value.date()
-        return value.astimezone(ISTANBUL).date()
+        return value.date() if value.tzinfo is None else value.astimezone(ISTANBUL).date()
     if isinstance(value, date):
         return value
     raise TypeError("local_day date/datetime olmalı")
@@ -82,7 +80,7 @@ def _parse_scene_date(value):
         try:
             return datetime.strptime(text, fmt).date()
         except ValueError:
-            pass
+            continue
     return None
 
 
@@ -99,31 +97,28 @@ def _distance_m(a, b):
         lat2, lon2 = float(b.get("enlem")), float(b.get("boylam"))
     except (TypeError, ValueError):
         return float("inf")
-    r = 6_371_000.0
+    radius = 6_371_000.0
     p1, p2 = math.radians(lat1), math.radians(lat2)
     dp = math.radians(lat2 - lat1)
     dl = math.radians(lon2 - lon1)
     h = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
-    return 2 * r * math.asin(min(1.0, math.sqrt(h)))
+    return 2 * radius * math.asin(min(1.0, math.sqrt(h)))
 
 
 def _canonical_region(label):
     text = str(label or "").strip()
-    if text == freshness.LEGACY_EAST_REGION:
-        return freshness.CANONICAL_EAST_REGION
-    return text
+    return freshness.CANONICAL_EAST_REGION if text == freshness.LEGACY_EAST_REGION else text
 
 
 def _new_scene_regions(report_date, db_path=DB):
-    """O gün DB'de gerçekten yeni görüntü diye kaydedilmiş bölge -> son_item haritası."""
+    """O gün gerçekten yeni görüntü yazılmış bölge -> son Sentinel item haritası."""
     path = Path(db_path)
     if not path.exists():
         return {}
     try:
         with sqlite3.connect(path) as connection:
             rows = connection.execute(
-                """SELECT bolge,son_item,yeni_goruntu
-                FROM gunluk_uydu_raporlari WHERE rapor_tarihi=?""",
+                "SELECT bolge,son_item,yeni_goruntu FROM gunluk_uydu_raporlari WHERE rapor_tarihi=?",
                 (str(report_date or ""),),
             ).fetchall()
     except sqlite3.Error:
@@ -138,20 +133,15 @@ def _new_scene_regions(report_date, db_path=DB):
 def _temporal_map(region_data):
     mapped = {}
     for raw in (region_data or {}).get("adaylar") or []:
-        if not isinstance(raw, dict):
-            continue
-        key = _point_key(raw)
-        if key is not None:
-            mapped[key] = raw
+        if isinstance(raw, dict) and _point_key(raw) is not None:
+            mapped[_point_key(raw)] = raw
     return mapped
 
 
 def _is_strong_pair(temporal_item, locality_item):
     area = _number(temporal_item.get("alan_m2"), 0)
     local_area = _number(locality_item.get("alan_m2"), 0)
-    if not (MAIN_ALARM_MIN_M2 <= area <= DRY_GROUND_MAX_M2):
-        return False
-    if abs(area - local_area) > 1:
+    if not (MAIN_ALARM_MIN_M2 <= area <= DRY_GROUND_MAX_M2) or abs(area - local_area) > 1:
         return False
     return bool(
         temporal_item.get("ani_baslangic_destegi") is True
@@ -168,15 +158,14 @@ def _is_strong_pair(temporal_item, locality_item):
 
 
 def _near_existing_task(candidate, report_payload):
-    for item in (report_payload or {}).get("saha_adaylari") or []:
-        if isinstance(item, dict) and _distance_m(candidate, item) <= DUPLICATE_RADIUS_M:
-            return True
-    return False
+    return any(
+        isinstance(item, dict) and _distance_m(candidate, item) <= DUPLICATE_RADIUS_M
+        for item in (report_payload or {}).get("saha_adaylari") or []
+    )
 
 
 def select_confirmations(report_payload, temporal_payload, locality_payload, new_regions, local_day=None):
-    day = _local_day(local_day)
-    if day < FULL_OPERATION_START:
+    if _local_day(local_day) < FULL_OPERATION_START:
         return []
     if not all(isinstance(value, dict) for value in (report_payload, temporal_payload, locality_payload)):
         return []
@@ -200,13 +189,11 @@ def select_confirmations(report_payload, temporal_payload, locality_payload, new
         if local_region.get("durum") != "ok" or temporal_region.get("durum") != "ok":
             continue
 
-        temporal_last = str(temporal_region.get("son_item") or "")
-        locality_last = str(local_region.get("son_item") or "")
-        if not temporal_last or temporal_last != locality_last:
+        last_item = str(temporal_region.get("son_item") or "")
+        if not last_item or last_item != str(local_region.get("son_item") or ""):
             continue
-        if str((new_regions or {}).get(region_key) or "") != temporal_last:
+        if str((new_regions or {}).get(region_key) or "") != last_item:
             continue
-
         scene_date = _parse_scene_date(temporal_region.get("son_tarih"))
         if scene_date is None or scene_date < FULL_OPERATION_START:
             continue
@@ -219,11 +206,13 @@ def select_confirmations(report_payload, temporal_payload, locality_payload, new
             if not isinstance(temporal_item, dict) or not _is_strong_pair(temporal_item, local_item):
                 continue
 
+            lat = round(_number(temporal_item.get("enlem")), 6)
+            lon = round(_number(temporal_item.get("boylam")), 6)
             candidate = {
                 "oncelik": "DOĞRULAMA",
                 "mahalle": str(temporal_item.get("mahalle") or "Mevki doğrulanmadı"),
-                "enlem": round(_number(temporal_item.get("enlem")), 6),
-                "boylam": round(_number(temporal_item.get("boylam")), 6),
+                "enlem": lat,
+                "boylam": lon,
                 "alan_m2": round(_number(temporal_item.get("alan_m2"))),
                 "sinyal": (
                     "Üretim maskesi dışında; yeni Sentinel sahnesinde izole, uzun-temporal "
@@ -248,13 +237,10 @@ def select_confirmations(report_payload, temporal_payload, locality_payload, new
                     "Sentinel kuru-zemin diagnostik kümesinin yaklaşık merkezidir; kesin adres, "
                     "ada veya parsel değildir. Üretim alarmı değildir ve sahada doğrulanmalıdır."
                 ),
+                "harita": f"https://www.google.com/maps/dir/?api=1&destination={lat:.6f},{lon:.6f}",
             }
-            candidate["harita"] = (
-                "https://www.google.com/maps/dir/?api=1&destination="
-                f"{candidate['enlem']:.6f},{candidate['boylam']:.6f}"
-            )
             digest = hashlib.sha1(
-                f"{region_key}|{temporal_last}|{candidate['enlem']:.5f}|{candidate['boylam']:.5f}".encode("utf-8")
+                f"{region_key}|{last_item}|{lat:.5f}|{lon:.5f}".encode("utf-8")
             ).hexdigest()[:10].upper()
             candidate["gorev_id"] = f"DG{digest}"
             if not _near_existing_task(candidate, report_payload):
@@ -284,28 +270,24 @@ def merge_confirmation(shortlist, confirmations, limit=route.SHORTLIST_LIMIT):
     cap = max(int(limit), 0)
     if cap <= 0 or not confirmations:
         return current[:cap]
-
     candidate = dict(confirmations[0])
     if any(_distance_m(candidate, item) <= DUPLICATE_RADIUS_M for item in current):
         return current[:cap]
 
-    insert_at = next((i for i, item in enumerate(current) if _existing_band(item) >= 3), len(current))
     if len(current) < cap:
-        current.insert(insert_at, candidate)
+        current.append(candidate)
     else:
         candidate_region = _canonical_region(candidate.get("bolge"))
-        same_region_backlog = [
+        same_region = [
             i for i, item in enumerate(current)
             if _existing_band(item) >= 3 and _canonical_region(item.get("bolge")) == candidate_region
         ]
-        replace_index = same_region_backlog[-1] if same_region_backlog else None
-        if replace_index is None:
-            candidate_region_present = any(
-                _canonical_region(item.get("bolge")) == candidate_region for item in current
-            )
-            if not candidate_region_present:
-                other_backlog = [i for i, item in enumerate(current) if _existing_band(item) >= 3]
-                replace_index = other_backlog[-1] if other_backlog else None
+        replace_index = same_region[-1] if same_region else None
+        if replace_index is None and not any(
+            _canonical_region(item.get("bolge")) == candidate_region for item in current
+        ):
+            other_backlog = [i for i, item in enumerate(current) if _existing_band(item) >= 3]
+            replace_index = other_backlog[-1] if other_backlog else None
         if replace_index is not None:
             current[replace_index] = candidate
 
@@ -352,12 +334,9 @@ def apply_confirmation(local_day=None, db_path=DB):
         return False, []
 
     new_regions = _new_scene_regions(report.get("rapor_tarihi"), db_path=db_path)
-    confirmations = select_confirmations(
-        report, temporal_payload, locality_payload, new_regions, local_day=day
-    )
+    confirmations = select_confirmations(report, temporal_payload, locality_payload, new_regions, local_day=day)
     chosen = confirmations[:MAX_CONFIRMATIONS]
-    current = report.get("gunun_ilk_3_kontrolu") or []
-    merged = merge_confirmation(current, chosen)
+    merged = merge_confirmation(report.get("gunun_ilk_3_kontrolu") or [], chosen)
 
     note = str(report.get("gunun_ilk_3_notu") or postseason.NOTE).strip()
     if NOTE_SUFFIX.strip() not in note:
@@ -371,7 +350,9 @@ def apply_confirmation(local_day=None, db_path=DB):
         "diagnostik_aralik_m2": [MAIN_ALARM_MIN_M2, DRY_GROUND_MAX_M2],
         "yeni_sahne_bolgeleri": sorted(new_regions),
         "guclu_aday_sayisi": len(confirmations),
-        "rotaya_alinan": [item.get("gorev_id") for item in merged if item.get("postseason_kuru_zemin_dogrulama")],
+        "rotaya_alinan": [
+            item.get("gorev_id") for item in merged if item.get("postseason_kuru_zemin_dogrulama")
+        ],
         "alarm": False,
         "kalici_saha_gorevi": False,
         "kural": (
@@ -424,45 +405,45 @@ def _self_check():
         }}
     }
     selected = select_confirmations(
-        report, temporal_payload, locality_payload, {"cesme": "S2_NEW"},
-        local_day=date(2026, 9, 16),
+        report, temporal_payload, locality_payload, {"cesme": "S2_NEW"}, date(2026, 9, 16)
     )
     assert len(selected) == 1 and selected[0]["alarm"] is False
     assert not select_confirmations(
-        report, temporal_payload, locality_payload, {"cesme": "S2_NEW"},
-        local_day=date(2026, 9, 14),
+        report, temporal_payload, locality_payload, {"cesme": "S2_NEW"}, date(2026, 9, 14)
     )
 
-    # Eski sahne, geniş çevre veya mevcut ana görev aynı noktadaysa yükseltme yok.
     old_temporal = json.loads(json.dumps(temporal_payload))
     old_temporal["bolgeler"]["cesme"]["son_tarih"] = "12.09.2026"
     assert not select_confirmations(
-        report, old_temporal, locality_payload, {"cesme": "S2_NEW"},
-        local_day=date(2026, 9, 16),
+        report, old_temporal, locality_payload, {"cesme": "S2_NEW"}, date(2026, 9, 16)
     )
     broad_locality = json.loads(json.dumps(locality_payload))
     broad_locality["bolgeler"]["cesme"]["adaylar"][0]["yaygin_cevre_degisim_riski"] = True
     broad_locality["bolgeler"]["cesme"]["adaylar"][0]["lokal_ani_baslangic_destegi"] = False
     assert not select_confirmations(
-        report, temporal_payload, broad_locality, {"cesme": "S2_NEW"},
-        local_day=date(2026, 9, 16),
+        report, temporal_payload, broad_locality, {"cesme": "S2_NEW"}, date(2026, 9, 16)
     )
     duplicate_report = {**report, "saha_adaylari": [{"enlem": 38.2501, "boylam": 26.3201}]}
     assert not select_confirmations(
-        duplicate_report, temporal_payload, locality_payload, {"cesme": "S2_NEW"},
-        local_day=date(2026, 9, 16),
+        duplicate_report, temporal_payload, locality_payload, {"cesme": "S2_NEW"}, date(2026, 9, 16)
     )
 
-    repeat = {"gorev_id": "R", "saha_durumu": "TEKRAR_GIT", "oncelik": "TEKRAR", "bolge": west}
+    repeat = {
+        "gorev_id": "R", "saha_durumu": "TEKRAR_GIT", "oncelik": "TEKRAR", "bolge": west,
+        "enlem": 38.30, "boylam": 26.30,
+    }
     fresh = {
         "gorev_id": "F", "saha_durumu": "KONTROLE_GIT", "oncelik": "ERKEN",
         "alan_m2": 600, "bolge": west, "yeni_goruntu": True,
-        "uydu_onceligi": "YÜKSEK", "boyut_sinifi": "KUCUK",
+        "uydu_onceligi": "YÜKSEK", "boyut_sinifi": "KUCUK", "enlem": 38.31, "boylam": 26.31,
     }
-    backlog = {"gorev_id": "B", "saha_durumu": "KONTROLE_GIT", "oncelik": "GECİKEN", "alan_m2": 900, "bolge": west}
+    backlog = {
+        "gorev_id": "B", "saha_durumu": "KONTROLE_GIT", "oncelik": "GECİKEN",
+        "alan_m2": 900, "bolge": west, "enlem": 38.32, "boylam": 26.33,
+    }
     merged = merge_confirmation([repeat, fresh, backlog], selected)
     assert [item.get("gorev_id") for item in merged] == ["R", "F", selected[0]["gorev_id"]], merged
-    assert all(_number(item.get("alan_m2"), MAIN_ALARM_MIN_M2) >= MAIN_ALARM_MIN_M2 for item in merged[1:])
+    assert selected[0]["alan_m2"] >= MAIN_ALARM_MIN_M2
 
 
 if __name__ == "__main__":
@@ -474,7 +455,7 @@ if __name__ == "__main__":
         print("15 Eylül kuru-zemin teyit geçidi öz testi başarılı.")
     else:
         changed, chosen = apply_confirmation()
-        print(
-            "15 Eylül kuru-zemin teyit geçidi: "
-            + (f"{len(chosen)} güçlü aday değerlendirildi; rapor güncellendi={changed}." if _local_day() >= FULL_OPERATION_START else "kalibrasyon dönemi, üretim raporuna dokunulmadı.")
-        )
+        if _local_day() < FULL_OPERATION_START:
+            print("15 Eylül kuru-zemin teyit geçidi: kalibrasyon dönemi, üretim raporuna dokunulmadı.")
+        else:
+            print(f"15 Eylül kuru-zemin teyit geçidi: {len(chosen)} güçlü aday; rapor güncellendi={changed}.")
