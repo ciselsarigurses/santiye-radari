@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-09-03",
-  "olusturma": "2026-09-03 09:07 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 66 · Geciken kontrol: 53 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif) · Arka plan geniş yüzey: 8",
+  "olusturma": "2026-09-03 09:17 +03",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. · Tarama uyarısı: 27 kaynak/arama hatası Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 74 · Geciken kontrol: 59 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)",
   "saha_adaylari": [
     {
       "oncelik": "GECİKEN",
@@ -32,10 +32,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 2.8,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.303146/26.297443",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi."
     },
     {
       "oncelik": "GECİKEN",
@@ -66,10 +63,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 8.9,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.301156/26.304197",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
     },
     {
       "oncelik": "GECİKEN",
@@ -100,10 +94,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 3.1,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313366/26.307173",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
     },
     {
       "oncelik": "GECİKEN",
@@ -134,10 +125,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 3.7,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.263439/26.318163",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi."
     },
     {
       "oncelik": "GECİKEN",
@@ -168,10 +156,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 4.8,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297357/26.355253",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi."
     },
     {
       "oncelik": "GECİKEN",
@@ -202,10 +187,7 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 8.9,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.294734/26.311523",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
     },
     {
       "oncelik": "GECİKEN",
@@ -236,10 +218,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 5.8,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.285689/26.384330",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
     },
     {
       "oncelik": "GECİKEN",
@@ -266,10 +245,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332190/26.652385",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -296,10 +272,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334541/26.651698",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -326,10 +299,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.333275/26.652271",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -360,10 +330,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 7.5,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.346380/26.301220",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
     },
     {
       "oncelik": "GECİKEN",
@@ -390,10 +357,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.287046/26.257491",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -424,10 +388,7 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 2.7,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.355244/26.302251",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
     },
     {
       "oncelik": "GECİKEN",
@@ -458,10 +419,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 24.4,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.290212/26.271915",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
     },
     {
       "oncelik": "GECİKEN",
@@ -488,10 +446,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313469/26.638073",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -518,10 +473,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.333094/26.610019",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -548,10 +500,145 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334813/26.602576",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
+    },
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.253128,
+      "boylam": 26.424511,
+      "alan_m2": 204420,
+      "sinyal": "5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.253128,26.424511",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UEC37CFA14C",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-29",
+      "bekleme_gun": 5,
+      "gecikmis": true,
+      "uydu_kanit_yasi_gun": 5,
+      "uydu_onceligi": "YÜKSEK"
+    },
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.344571,
+      "boylam": 26.475452,
+      "alan_m2": 147614,
+      "sinyal": "5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.344571,26.475452",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U0B5F6411CD",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-29",
+      "bekleme_gun": 5,
+      "gecikmis": true,
+      "uydu_kanit_yasi_gun": 5,
+      "uydu_onceligi": "YÜKSEK"
+    },
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
+      "mahalle": "Germiyan",
+      "enlem": 38.335979,
+      "boylam": 26.483809,
+      "alan_m2": 146314,
+      "sinyal": "5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.335979,26.483809",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UEC36614FA4",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-29",
+      "bekleme_gun": 5,
+      "gecikmis": true,
+      "uydu_kanit_yasi_gun": 5,
+      "uydu_onceligi": "YÜKSEK"
+    },
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
+      "mahalle": "Germiyan",
+      "enlem": 38.329738,
+      "boylam": 26.489876,
+      "alan_m2": 145014,
+      "sinyal": "5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.329738,26.489876",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U7938844405",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-29",
+      "bekleme_gun": 5,
+      "gecikmis": true,
+      "uydu_kanit_yasi_gun": 5,
+      "uydu_onceligi": "YÜKSEK"
+    },
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.24146,
+      "boylam": 26.40608,
+      "alan_m2": 137513,
+      "sinyal": "5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.241460,26.406080",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U03E0421DDD",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-29",
+      "bekleme_gun": 5,
+      "gecikmis": true,
+      "uydu_kanit_yasi_gun": 5,
+      "uydu_onceligi": "YÜKSEK"
+    },
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.2193,
+      "boylam": 26.413864,
+      "alan_m2": 136813,
+      "sinyal": "5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.219300,26.413864",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U07EF15923A",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-08-29",
+      "bekleme_gun": 5,
+      "gecikmis": true,
+      "uydu_kanit_yasi_gun": 5,
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -574,10 +661,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.233229/26.443399",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -600,10 +684,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.240736/26.438133",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -626,10 +707,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.309025/26.462631",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -652,10 +730,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.225450/26.408484",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -678,10 +753,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253218/26.415238",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -704,10 +776,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307849/26.470988",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -730,10 +799,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247520/26.432638",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -756,10 +822,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320241/26.466180",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -782,10 +845,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.254665/26.439850",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -808,10 +868,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344843/26.469042",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -834,10 +891,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.233953/26.406195",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -860,10 +914,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.349546/26.492767",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -886,10 +937,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.330823/26.479828",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -912,10 +960,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.285870/26.484523",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -938,10 +983,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332542/26.487156",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -964,10 +1006,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "YÜKSEK",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334170/26.491279",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "YÜKSEK"
     },
     {
       "oncelik": "GECİKEN",
@@ -990,10 +1029,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "ORTA",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.259188/26.310722",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "ORTA"
     },
     {
       "oncelik": "GECİKEN",
@@ -1016,10 +1052,7 @@
       "bekleme_gun": 5,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "ORTA",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.225541/26.421191",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "ORTA"
     },
     {
       "oncelik": "GECİKEN",
@@ -1050,10 +1083,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.220838/26.435386",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
     },
     {
       "oncelik": "GECİKEN",
@@ -1084,10 +1114,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219843/26.406080",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
     },
     {
       "oncelik": "GECİKEN",
@@ -1118,10 +1145,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.208446/26.480489",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
     },
     {
       "oncelik": "GECİKEN",
@@ -1148,10 +1172,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.262913/26.573034",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -1178,10 +1199,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.249076/26.452004",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -1208,10 +1226,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.232526/26.450286",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -1242,10 +1257,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.201482/26.484496",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
     },
     {
       "oncelik": "GECİKEN",
@@ -1272,10 +1284,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.305420/26.536966",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -1306,10 +1315,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.246435/26.410087",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
     },
     {
       "oncelik": "GECİKEN",
@@ -1340,10 +1346,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319427/26.476025",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
     },
     {
       "oncelik": "GECİKEN",
@@ -1370,10 +1373,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.325859/26.469179",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -1400,10 +1400,7 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344761/26.468950",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
     },
     {
       "oncelik": "GECİKEN",
@@ -1434,10 +1431,7 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.242726/26.400585",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
     },
     {
       "oncelik": "GECİKEN",
@@ -1468,10 +1462,7 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.256836/26.382613",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
     },
     {
       "oncelik": "GECİKEN",
@@ -1502,10 +1493,7 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.342672/26.394633",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
     },
     {
       "oncelik": "GECİKEN",
@@ -1528,10 +1516,7 @@
       "bekleme_gun": 4,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 5,
-      "uydu_onceligi": "ORTA",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338783/26.311638",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_onceligi": "ORTA"
     },
     {
       "oncelik": "GECİKEN",
@@ -1562,10 +1547,7 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.223732/26.393030",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
     },
     {
       "oncelik": "GECİKEN",
@@ -1592,10 +1574,29 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.317087/26.467118",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "proje": null
+    },
+    {
+      "oncelik": "YÜKSEK",
+      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.308663,
+      "boylam": 26.462996,
+      "alan_m2": 120241,
+      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U9D9F899C32",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-09-02",
+      "bekleme_gun": 1,
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1617,10 +1618,7 @@
       "ilk_gorulme": "2026-09-02",
       "bekleme_gun": 1,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.227531/26.428861",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1642,10 +1640,29 @@
       "ilk_gorulme": "2026-09-02",
       "bekleme_gun": 1,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.224908/26.400471",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
+    },
+    {
+      "oncelik": "YÜKSEK",
+      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
+      "mahalle": "Germiyan",
+      "enlem": 38.32015,
+      "boylam": 26.466775,
+      "alan_m2": 125043,
+      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "STANDART",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_tarih": "26.08.2026",
+      "son_tarih": "29.08.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U0F69D72B9B",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-09-03",
+      "bekleme_gun": 0,
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1667,10 +1684,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247610/26.561355",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1692,10 +1706,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.326843/26.494828",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1717,10 +1728,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331275/26.484866",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1742,10 +1750,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.300523/26.516469",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1767,10 +1772,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308935/26.507309",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1792,10 +1794,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.315537/26.486698",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1817,10 +1816,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.217581/26.453034",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1842,10 +1838,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.286684/26.504905",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1867,10 +1860,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338692/26.471927",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1892,10 +1882,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.287317/26.501813",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     },
     {
       "oncelik": "YÜKSEK",
@@ -1917,10 +1904,7 @@
       "ilk_gorulme": "2026-09-03",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.351445/26.467347",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "uydu_kanit_yasi_gun": 5
     }
   ],
   "yeni_internet_bulgulari": [],
@@ -1929,294 +1913,5 @@
   "gunun_ilk_3_kontrolu": [],
   "gunun_ilk_3_notu": "15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya yeni Sentinel görüntüsünde beliren güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.",
   "kuru_zemin_kalibrasyon_kontrolu": [],
-  "kuru_zemin_kalibrasyon_notu": "15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.",
-  "arka_plan_genis_yuzey_hareketleri": [
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.253128,
-      "boylam": 26.424511,
-      "alan_m2": 204420,
-      "genis_kompaktlik": 0.071,
-      "genis_geometri_riski": true,
-      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
-      "kanit_kaynagi": "shape_false_positive_audit",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.253128,26.424511",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511",
-      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
-      "kaynak_bolgeler": [
-        "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.344571,
-      "boylam": 26.475452,
-      "alan_m2": 147614,
-      "genis_kompaktlik": 0.024,
-      "genis_geometri_riski": true,
-      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
-      "kanit_kaynagi": "shape_false_positive_audit",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.344571,26.475452",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452",
-      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
-      "kaynak_bolgeler": [
-        "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.335979,
-      "boylam": 26.483809,
-      "alan_m2": 146314,
-      "genis_kompaktlik": 0.094,
-      "genis_geometri_riski": true,
-      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
-      "kanit_kaynagi": "shape_false_positive_audit",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.335979,26.483809",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809",
-      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
-      "kaynak_bolgeler": [
-        "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.329738,
-      "boylam": 26.489876,
-      "alan_m2": 145014,
-      "genis_kompaktlik": 0.059,
-      "genis_geometri_riski": true,
-      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
-      "kanit_kaynagi": "shape_false_positive_audit",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.329738,26.489876",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876",
-      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
-      "kaynak_bolgeler": [
-        "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.24146,
-      "boylam": 26.40608,
-      "alan_m2": 137513,
-      "genis_kompaktlik": 0.133,
-      "genis_geometri_riski": true,
-      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
-      "kanit_kaynagi": "shape_false_positive_audit",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.241460,26.406080",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080",
-      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
-      "kaynak_bolgeler": [
-        "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.2193,
-      "boylam": 26.413864,
-      "alan_m2": 136813,
-      "genis_kompaktlik": 0.133,
-      "genis_geometri_riski": true,
-      "sinyal": "Şekil denetiminde geniş düşük-kompaktlık yüzey hareketi",
-      "kanit_kaynagi": "shape_false_positive_audit",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.219300,26.413864",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864",
-      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
-      "kaynak_bolgeler": [
-        "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Germiyan",
-      "enlem": 38.32015,
-      "boylam": 26.466775,
-      "alan_m2": 125043,
-      "genis_kompaktlik": 0.033,
-      "genis_geometri_riski": true,
-      "sinyal": "Şekil denetiminde yaklaşık provenansla doğrulanan geniş düşük-kompaktlık yüzey hareketi",
-      "kanit_kaynagi": "shape_false_positive_audit_yaklasik",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775",
-      "neden": "10.000 m² üstünde ve bağımsız şekil denetiminde düşük-kompaktlık riski ölçüldü. Nihai rapor koordinatı aynı geometriye 9.4 m ve alan benzerliği 1.00 ile eşleşiyor; bu, şekil denetiminin kendi yaklaşık-provenans sınırları içindedir. Bu nedenle geniş arazi/tarım/toprak/doğal yüzey hareketi olarak arka planda izlenir; ham radar kaydı silinmez.",
-      "kaynak_bolgeler": [
-        "uzunkuyu"
-      ],
-      "geometri_esleme_mesafe_m": 9.4,
-      "geometri_alan_benzerligi": 0.997,
-      "geometri_kaynagi_enlem": 38.32015,
-      "geometri_kaynagi_boylam": 26.466883,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.308663,
-      "boylam": 26.462996,
-      "alan_m2": 120241,
-      "genis_kompaktlik": 0.059,
-      "genis_geometri_riski": true,
-      "sinyal": "Şekil denetiminde yaklaşık provenansla doğrulanan geniş düşük-kompaktlık yüzey hareketi",
-      "kanit_kaynagi": "shape_false_positive_audit_yaklasik",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996",
-      "neden": "10.000 m² üstünde ve bağımsız şekil denetiminde düşük-kompaktlık riski ölçüldü. Nihai rapor koordinatı aynı geometriye 0.3 m ve alan benzerliği 1.00 ile eşleşiyor; bu, şekil denetiminin kendi yaklaşık-provenans sınırları içindedir. Bu nedenle geniş arazi/tarım/toprak/doğal yüzey hareketi olarak arka planda izlenir; ham radar kaydı silinmez.",
-      "kaynak_bolgeler": [
-        "uzunkuyu"
-      ],
-      "geometri_esleme_mesafe_m": 0.3,
-      "geometri_alan_benzerligi": 1.0,
-      "geometri_kaynagi_enlem": 38.308663,
-      "geometri_kaynagi_boylam": 26.462992,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    }
-  ],
-  "arka_plan_kurali": {
-    "alarm": false,
-    "saha_gorevi": false,
-    "min_alan_m2": 10000,
-    "dusuk_kompaktlik_max": 0.15,
-    "manuel_tekrar_override": true,
-    "kanit": "hareket_json; metadata yoksa aynı tarihli bağımsız şekil denetimi",
-    "aciklama": "Yalnız 10.000 m² üstü + ölçülmüş düşük-kompaktlık riski birlikteyse operasyon listesinden ayrılır. Ham Sentinel/radar kaydı silinmez.",
-    "yaklasik_provenans": {
-      "aktif": true,
-      "maksimum_esleme_m": 25.0,
-      "minimum_alan_benzerligi": 0.6,
-      "kanit": "shape_false_positive_audit üretim seçimi + nihai yaklaşık provenans doğrulaması",
-      "aciklama": "BBox/yeniden-pikselleştirme nedeniyle birkaç metre kayan düşük-kompaktlık geniş kümeler yalnız şekil denetiminin kendi 25 m / 0.60 güven sınırında arka plana ayrılır."
-    }
-  },
-  "parsel_on_kontrol_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-  "kor_alan_saha_devriyesi": [
-    {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.180588,
-      "boylam": 26.501566,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.1468,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180588,26.501566",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.180588/26.501566",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Dalyan",
-      "enlem": 38.346652,
-      "boylam": 26.322856,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.4347,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346652,26.322856",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.346652/26.322856",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    }
-  ],
-  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-03",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
-  "temporal_kalibrasyon_rotasyonu": {
-    "durum": "uygulandi",
-    "slot_sayisi": 2,
-    "kural": "Ani-baslangic destekli alarm-disi kalibrasyonlar ayni Sentinel sahnesinde en guclu dort mahalle-cesitli aday arasinda gunluk doner; 250-900 m2 adayda guvenilir yaygin cevre degisim riski temporal acil havuzundan dusurulur. Ayni boyut sinifinda merkez degisimi cevre halkasina gore belirgin lokal kalan adaylar saha kalibrasyonunda once gelir; normal guvenli rotasyon korunur."
-  },
-  "gecikmis_rota_rotasyonu": {
-    "durum": "uygulandi",
-    "kural": "Yalniz gecikmis kuyrukta, ayni guncel Sentinel kalite bandindaki kucuk-guclu adaylarda en guclu capa korunur; kalan slotlar Cesme yerel takvim gunune gore gunluk doner.",
-    "havuz": 3,
-    "rapor_tarihi": "2026-09-03",
-    "rotasyon_tarihi": "2026-09-03"
-  },
-  "kalibrasyon_katmanlar_arasi_cesitlilik": {
-    "durum": "uygulandi",
-    "engellenen_mahalleler": [
-      "dalyan",
-      "mevki doğrulanmadı",
-      "ovacık"
-    ],
-    "secilen_mahalleler": [
-      "Alaçatı",
-      "Germiyan"
-    ],
-    "kural": "Ana ilk-3 veya kor-alan devriyesi mahallesini, ayni temporal/yerellik kalite sinifinda guvenli alternatif varsa alarm-disi kalibrasyonda tekrar etme."
-  },
-  "preseason_route_final_guard": {
-    "durum": "uygulandi",
-    "tarih": "2026-09-03",
-    "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
-  }
+  "kuru_zemin_kalibrasyon_notu": "15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez."
 }
