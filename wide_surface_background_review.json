@@ -10,11 +10,12 @@
     "rapor_esleme_m": 90,
     "manuel_tekrar_override": true
   },
-  "arka_plan_aday_sayisi": 6,
-  "operasyonel_listeden_ayrilan": 0,
+  "arka_plan_aday_sayisi": 8,
+  "operasyonel_listeden_ayrilan": 4,
   "manuel_tekrar_korunan": 0,
   "kanit_kaynagi_sayilari": {
-    "shape_false_positive_audit": 6
+    "shape_false_positive_audit": 6,
+    "shape_false_positive_audit_yaklasik": 2
   },
   "adaylar": [
     {
@@ -142,6 +143,56 @@
       "kaynak_bolgeler": [
         "cesme"
       ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Germiyan",
+      "enlem": 38.32015,
+      "boylam": 26.466775,
+      "alan_m2": 125043,
+      "genis_kompaktlik": 0.033,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde yaklaşık provenansla doğrulanan geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit_yaklasik",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775",
+      "neden": "10.000 m² üstünde ve bağımsız şekil denetiminde düşük-kompaktlık riski ölçüldü. Nihai rapor koordinatı aynı geometriye 9.4 m ve alan benzerliği 1.00 ile eşleşiyor; bu, şekil denetiminin kendi yaklaşık-provenans sınırları içindedir. Bu nedenle geniş arazi/tarım/toprak/doğal yüzey hareketi olarak arka planda izlenir; ham radar kaydı silinmez.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ],
+      "geometri_esleme_mesafe_m": 9.4,
+      "geometri_alan_benzerligi": 0.997,
+      "geometri_kaynagi_enlem": 38.32015,
+      "geometri_kaynagi_boylam": 26.466883
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.308663,
+      "boylam": 26.462996,
+      "alan_m2": 120241,
+      "genis_kompaktlik": 0.059,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde yaklaşık provenansla doğrulanan geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit_yaklasik",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996",
+      "neden": "10.000 m² üstünde ve bağımsız şekil denetiminde düşük-kompaktlık riski ölçüldü. Nihai rapor koordinatı aynı geometriye 0.3 m ve alan benzerliği 1.00 ile eşleşiyor; bu, şekil denetiminin kendi yaklaşık-provenans sınırları içindedir. Bu nedenle geniş arazi/tarım/toprak/doğal yüzey hareketi olarak arka planda izlenir; ham radar kaydı silinmez.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ],
+      "geometri_esleme_mesafe_m": 0.3,
+      "geometri_alan_benzerligi": 1.0,
+      "geometri_kaynagi_enlem": 38.308663,
+      "geometri_kaynagi_boylam": 26.462992
     }
   ]
 }

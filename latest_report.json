@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-09-03",
   "olusturma": "2026-09-03 02:14 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. · Tarama uyarısı: 27 kaynak/arama hatası Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 87 · Geciken kontrol: 63 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif) · Arka plan geniş yüzey: 6",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. · Tarama uyarısı: 27 kaynak/arama hatası Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 83 · Geciken kontrol: 62 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif) · Arka plan geniş yüzey: 8",
   "saha_adaylari": [
     {
       "oncelik": "GECİKEN",
@@ -1903,40 +1903,6 @@
     },
     {
       "oncelik": "GECİKEN",
-      "mahalle": "Germiyan",
-      "enlem": 38.32015,
-      "boylam": 26.466775,
-      "alan_m2": 125043,
-      "sinyal": "5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
-      "bolge": "Uzunkuyu · Germiyan · Ildır",
-      "onceki_tarih": "26.08.2026",
-      "son_tarih": "29.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775",
-      "konum_notu": "Koordinat açık saha görevinin yaklaşık merkezidir. Alan ve sinyal son eşleşen uydu adayından en fazla 25 m tarihsel eşleşmeyle taşınmıştır; son yeniden analizde küme tekrar görünmediği için saha teyidi beklenmektedir.",
-      "gorev_id": "U3C8C0DE627",
-      "saha_durumu": "KONTROLE_GIT",
-      "takip_gorevi": false,
-      "gecikmis": true,
-      "ilk_gorulme": "2026-08-29",
-      "bekleme_gun": 5,
-      "kontrol_sayisi": 0,
-      "son_islem": "2026-08-29",
-      "adres": null,
-      "ada": null,
-      "parsel": null,
-      "firma": null,
-      "proje": null,
-      "boyut_sinifi": "STANDART",
-      "tarihsel_esleme_mesafe_m": 0.0,
-      "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "oncelik": "GECİKEN",
       "oncelik_nedeni": "Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
       "mahalle": "Dalyan",
       "enlem": 38.338783,
@@ -2076,56 +2042,6 @@
       "gecikmis": false,
       "uydu_kanit_yasi_gun": 5,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.224908/26.400471",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "oncelik": "YÜKSEK",
-      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
-      "mahalle": "Germiyan",
-      "enlem": 38.32015,
-      "boylam": 26.466775,
-      "alan_m2": 125043,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "STANDART",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "onceki_tarih": "26.08.2026",
-      "son_tarih": "29.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "U0F69D72B9B",
-      "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-09-03",
-      "bekleme_gun": 0,
-      "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "oncelik": "YÜKSEK",
-      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.308663,
-      "boylam": 26.462996,
-      "alan_m2": 120241,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "STANDART",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "onceki_tarih": "26.08.2026",
-      "son_tarih": "29.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "UDE2AEF5400",
-      "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-09-03",
-      "bekleme_gun": 0,
-      "gecikmis": false,
-      "uydu_kanit_yasi_gun": 5,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
@@ -2621,40 +2537,6 @@
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.217581/26.453034",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
-      "oncelik": "BEKLEYEN",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.308663,
-      "boylam": 26.462996,
-      "alan_m2": 120241,
-      "sinyal": "Son yeniden analizde tekrar görünmedi · Bitişik yüzey/toprak değişimi adayı",
-      "bolge": "Uzunkuyu · Germiyan · Ildır",
-      "onceki_tarih": "26.08.2026",
-      "son_tarih": "29.08.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996",
-      "konum_notu": "Koordinat açık saha görevinin yaklaşık merkezidir. Alan ve sinyal son eşleşen uydu adayından en fazla 25 m tarihsel eşleşmeyle taşınmıştır; son yeniden analizde küme tekrar görünmediği için saha teyidi beklenmektedir.",
-      "gorev_id": "U9D9F899C32",
-      "saha_durumu": "KONTROLE_GIT",
-      "takip_gorevi": false,
-      "gecikmis": false,
-      "ilk_gorulme": "2026-09-02",
-      "bekleme_gun": 1,
-      "kontrol_sayisi": 0,
-      "son_islem": "2026-09-02",
-      "adres": null,
-      "ada": null,
-      "parsel": null,
-      "firma": null,
-      "proje": null,
-      "boyut_sinifi": "STANDART",
-      "tarihsel_esleme_mesafe_m": 0.0,
-      "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "yeni_internet_bulgulari": [],
@@ -2685,10 +2567,7 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      ]
     },
     {
       "alarm": false,
@@ -2709,10 +2588,7 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      ]
     },
     {
       "alarm": false,
@@ -2733,10 +2609,7 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      ]
     },
     {
       "alarm": false,
@@ -2757,10 +2630,7 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      ]
     },
     {
       "alarm": false,
@@ -2781,10 +2651,7 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
-      ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      ]
     },
     {
       "alarm": false,
@@ -2805,10 +2672,57 @@
       "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
       "kaynak_bolgeler": [
         "cesme"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Germiyan",
+      "enlem": 38.32015,
+      "boylam": 26.466775,
+      "alan_m2": 125043,
+      "genis_kompaktlik": 0.033,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde yaklaşık provenansla doğrulanan geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit_yaklasik",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775",
+      "neden": "10.000 m² üstünde ve bağımsız şekil denetiminde düşük-kompaktlık riski ölçüldü. Nihai rapor koordinatı aynı geometriye 9.4 m ve alan benzerliği 1.00 ile eşleşiyor; bu, şekil denetiminin kendi yaklaşık-provenans sınırları içindedir. Bu nedenle geniş arazi/tarım/toprak/doğal yüzey hareketi olarak arka planda izlenir; ham radar kaydı silinmez.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
       ],
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "geometri_esleme_mesafe_m": 9.4,
+      "geometri_alan_benzerligi": 0.997,
+      "geometri_kaynagi_enlem": 38.32015,
+      "geometri_kaynagi_boylam": 26.466883
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.308663,
+      "boylam": 26.462996,
+      "alan_m2": 120241,
+      "genis_kompaktlik": 0.059,
+      "genis_geometri_riski": true,
+      "sinyal": "Şekil denetiminde yaklaşık provenansla doğrulanan geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit_yaklasik",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996",
+      "neden": "10.000 m² üstünde ve bağımsız şekil denetiminde düşük-kompaktlık riski ölçüldü. Nihai rapor koordinatı aynı geometriye 0.3 m ve alan benzerliği 1.00 ile eşleşiyor; bu, şekil denetiminin kendi yaklaşık-provenans sınırları içindedir. Bu nedenle geniş arazi/tarım/toprak/doğal yüzey hareketi olarak arka planda izlenir; ham radar kaydı silinmez.",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ],
+      "geometri_esleme_mesafe_m": 0.3,
+      "geometri_alan_benzerligi": 1.0,
+      "geometri_kaynagi_enlem": 38.308663,
+      "geometri_kaynagi_boylam": 26.462992
     }
   ],
   "arka_plan_kurali": {
@@ -2818,7 +2732,14 @@
     "dusuk_kompaktlik_max": 0.15,
     "manuel_tekrar_override": true,
     "kanit": "hareket_json; metadata yoksa aynı tarihli bağımsız şekil denetimi",
-    "aciklama": "Yalnız 10.000 m² üstü + ölçülmüş düşük-kompaktlık riski birlikteyse operasyon listesinden ayrılır. Ham Sentinel/radar kaydı silinmez."
+    "aciklama": "Yalnız 10.000 m² üstü + ölçülmüş düşük-kompaktlık riski birlikteyse operasyon listesinden ayrılır. Ham Sentinel/radar kaydı silinmez.",
+    "yaklasik_provenans": {
+      "aktif": true,
+      "maksimum_esleme_m": 25.0,
+      "minimum_alan_benzerligi": 0.6,
+      "kanit": "shape_false_positive_audit üretim seçimi + nihai yaklaşık provenans doğrulaması",
+      "aciklama": "BBox/yeniden-pikselleştirme nedeniyle birkaç metre kayan düşük-kompaktlık geniş kümeler yalnız şekil denetiminin kendi 25 m / 0.60 güven sınırında arka plana ayrılır."
+    }
   },
   "kapasite_santiye_devriyesi": [
     {
