@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-02 23:05 +0300",
+  "olusturma": "2026-09-03 03:02 +0300",
   "amac": "Sahada doğrulanmış kıyı yanlış pozitif mekanizmasının görüldüğü bölgelerde, güncel 30 m sert kıyı filtresine düşen tarihsel açık görevleri bulmak; bu dosya görev veya rota değiştirmez.",
   "uretim_degistirildi": false,
   "dogrulanmis_kiyi_mekanizmali_bolge": [
@@ -19,7 +19,7 @@
           "boylam": 26.302251,
           "alan_m2": 600,
           "oncelik": "GECİKEN",
-          "bekleme_gun": 5,
+          "bekleme_gun": 6,
           "tarihsel_esleme_mesafe_m": 2.7
         },
         {
@@ -29,7 +29,7 @@
           "boylam": 26.271915,
           "alan_m2": 1900,
           "oncelik": "GECİKEN",
-          "bekleme_gun": 5,
+          "bekleme_gun": 6,
           "tarihsel_esleme_mesafe_m": 24.4
         },
         {
@@ -39,7 +39,7 @@
           "boylam": 26.400585,
           "alan_m2": 400,
           "oncelik": "GECİKEN",
-          "bekleme_gun": 4,
+          "bekleme_gun": 5,
           "tarihsel_esleme_mesafe_m": 0.0
         },
         {
@@ -49,7 +49,7 @@
           "boylam": 26.382613,
           "alan_m2": 500,
           "oncelik": "GECİKEN",
-          "bekleme_gun": 4,
+          "bekleme_gun": 5,
           "tarihsel_esleme_mesafe_m": 0.0
         },
         {
@@ -59,7 +59,7 @@
           "boylam": 26.394633,
           "alan_m2": 600,
           "oncelik": "GECİKEN",
-          "bekleme_gun": 4,
+          "bekleme_gun": 5,
           "tarihsel_esleme_mesafe_m": 0.0
         }
       ]
