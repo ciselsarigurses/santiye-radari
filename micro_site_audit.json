@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-03 19:37 +0300",
+  "olusturma": "2026-09-04 02:08 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -13,7 +13,14 @@
     "sinir_adres_degil": true,
     "uzunkuyu_uretim_kapsaminda": true
   },
-  "not": "Bu katman alarm/görev üretmez. 150-249 m² aday ancak ayrıca temporal devam/ani başlangıç veya güvenilir açık-web/yapılaşma doğrulaması alırsa 09:30 saha değerlendirmesine yükseltilmelidir.",
+  "gulbahce_operasyon_referans": {
+    "enlem": 38.33278,
+    "boylam": 26.64556,
+    "yaricap_m": 2000,
+    "sinir_adres_degil": true,
+    "uzunkuyu_uretim_kapsaminda": true
+  },
+  "not": "Bu katman alarm/görev üretmez. 150-249 m² aday ancak ayrıca temporal devam/ani başlangıç veya güvenilir açık-web/yapılaşma doğrulaması alırsa 09:30 saha değerlendirmesine yükseltilmelidir. Gülbahçe'de aday yokluğu yerel Sentinel kalite körlüğünden ayrıca ayrıştırılır.",
   "bolgeler": {
     "cesme": {
       "durum": "ok",
@@ -875,7 +882,54 @@
           "harita": "https://www.google.com/maps/dir/?api=1&destination=38.215592,26.452118",
           "neden": "150-249 m² bandında, en az iki bitişik yaklaşık 10 m pikselde ana küçük-saha yolu kadar güçlü çoklu-spektral değişim ve kompakt geometri görüldü. Tek başına saha ziyareti nedeni değildir."
         }
-      ]
+      ],
+      "gulbahce_gozlenebilirlik": {
+        "alarm": false,
+        "saha_gorevi": false,
+        "referans": {
+          "enlem": 38.33278,
+          "boylam": 26.64556,
+          "operasyon_yaricapi_m": 2000,
+          "sinir_adres_degil": true
+        },
+        "kara_benzeri_piksel": 86653,
+        "kalite_gecerli_kara_piksel": 86623,
+        "kalite_gecerli_kara_yuzde": 99.965,
+        "kalite_kor_kara_piksel": 30,
+        "kalite_kor_kara_yuzde": 0.035,
+        "su_piksel": 39073,
+        "santiye_maskesine_gecerli_piksel": 84697,
+        "mikro_kor_kume_150_249": 0,
+        "ana_kor_kume_250plus": 4,
+        "mikro_ham_aday_2km": 0,
+        "kor_kume_ornekleri": [
+          {
+            "enlem": 38.341406,
+            "boylam": 26.643273,
+            "alan_m2": 1200,
+            "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL"
+          },
+          {
+            "enlem": 38.325487,
+            "boylam": 26.659527,
+            "alan_m2": 800,
+            "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL"
+          },
+          {
+            "enlem": 38.346923,
+            "boylam": 26.641212,
+            "alan_m2": 600,
+            "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL"
+          },
+          {
+            "enlem": 38.34231,
+            "boylam": 26.642586,
+            "alan_m2": 400,
+            "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL"
+          }
+        ],
+        "yorum": "Gülbahçe 2 km penceresinde mikro aday sayısı ile Sentinel kalite körlüğü ayrı ölçülür. Kör kümeler alarm/görev değildir ve silinmez; sonraki açık sahnelerde tekrar izlenir. Su/kıyı pikselleri kalite körlüğü sayılmaz."
+      }
     }
   }
 }
