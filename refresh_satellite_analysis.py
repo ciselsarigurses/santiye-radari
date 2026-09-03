@@ -20,6 +20,9 @@ ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-same
 
 LEGACY_UZUNKUYU_LABEL = "Uzunkuyu · Germiyan · Ildır"
 CURRENT_UZUNKUYU_LABEL = "Uzunkuyu · Germiyan · Ildır · Gülbahçe"
+ARCHIVED_LABEL_TRANSITION_SOURCE = (
+    "Uzunkuyu · Germiyan · Ildır · Gülbahçe · ETIKET_GECIS_KOPYASI"
+)
 INTERNAL_SUPERSEDED_STATUS = "ALGORITMA_ELENDI"
 
 
@@ -41,7 +44,10 @@ def _normalize_legacy_satellite_source_labels(connection):
 
     Eski etiketi güncel etikete taşır. Etiket geçişi sırasında oluşmuş, koordinatı
     altı ondalıkta birebir aynı ve hiç saha işlemi görmemiş açık görevler varsa en
-    eski görev korunur; yalnız daha yeni otomasyon kopyaları ALGORITMA_ELENDI yapılır.
+    eski görev korunur; yalnız daha yeni otomasyon kopyaları ALGORITMA_ELENDI yapılır
+    ve aktif Sentinel kaynak kimliğinin dışına arşivlenir. Bu son adım önemlidir:
+    güncel-hotspot geri-açma katmanı aynı kopyayı tekrar seçip açamaz.
+
     TEKRAR_GIT, KONTROL_EDILDI veya kullanıcı işlemi görmüş kayıtlar değiştirilmez.
     """
     table_exists = connection.execute(
@@ -98,12 +104,14 @@ def _normalize_legacy_satellite_source_labels(connection):
             if not task_id or task_id == keep_id or control_count:
                 continue
             cursor = connection.execute(
-                """UPDATE saha_durumlari SET durum=?,son_islem=?
+                """UPDATE saha_durumlari
+                SET durum=?,son_islem=?,kaynak_kimlik=?
                 WHERE gorev_id=? AND durum='KONTROLE_GIT'
                 AND COALESCE(kontrol_sayisi,0)=0""",
                 (
                     INTERNAL_SUPERSEDED_STATUS,
                     datetime.now(ISTANBUL).isoformat(),
+                    ARCHIVED_LABEL_TRANSITION_SOURCE,
                     task_id,
                 ),
             )
@@ -149,14 +157,14 @@ def _source_label_compatibility_self_check():
             (LEGACY_UZUNKUYU_LABEL,),
         ).fetchone()[0] == 0
         assert connection.execute(
-            "SELECT durum FROM saha_durumlari WHERE gorev_id='UOLD'"
-        ).fetchone()[0] == "KONTROLE_GIT"
+            "SELECT durum,kaynak_kimlik FROM saha_durumlari WHERE gorev_id='UOLD'"
+        ).fetchone() == ("KONTROLE_GIT", CURRENT_UZUNKUYU_LABEL)
         assert connection.execute(
-            "SELECT durum FROM saha_durumlari WHERE gorev_id='UNEW'"
-        ).fetchone()[0] == INTERNAL_SUPERSEDED_STATUS
+            "SELECT durum,kaynak_kimlik FROM saha_durumlari WHERE gorev_id='UNEW'"
+        ).fetchone() == (INTERNAL_SUPERSEDED_STATUS, ARCHIVED_LABEL_TRANSITION_SOURCE)
         assert connection.execute(
-            "SELECT durum FROM saha_durumlari WHERE gorev_id='UREPEAT'"
-        ).fetchone()[0] == "TEKRAR_GIT"
+            "SELECT durum,kaynak_kimlik FROM saha_durumlari WHERE gorev_id='UREPEAT'"
+        ).fetchone() == ("TEKRAR_GIT", CURRENT_UZUNKUYU_LABEL)
     finally:
         connection.close()
 
