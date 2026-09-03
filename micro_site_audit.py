@@ -6,8 +6,10 @@ zemin değişimlerini ölçer. Sonuçlar saha görevi/alarm üretmez; 09:30 rapo
 ayrı temporal veya açık-web doğrulamasıyla güçlenirse değerlendirilebilecek bir
 kalibrasyon havuzudur.
 
-Gülbahçe ayrıca açık bir referans merkezle kapsama regresyonuna alınır. Referans
-merkez mahalle sınırı değildir ve adres/parsel doğrulaması olarak kullanılmaz.
+Gülbahçe ayrıca açık referans merkezlerle kapsama regresyonuna alınır. Referanslar
+mahalle sınırı değildir ve adres/parsel doğrulaması olarak kullanılmaz. Gülbahçe'nin
+2 km operasyonel penceresinde mikro aday olmaması, bulut/gölge/geçersiz SCL nedeniyle
+gözlenemeyen zeminle karıştırılmasın diye yerel görünürlük ayrıca raporlanır.
 """
 
 from __future__ import annotations
@@ -29,10 +31,14 @@ MICRO_MAX_AREA_M2 = 250  # üst sınır hariç; 250+ ana üretim yoludur
 MICRO_MIN_PIXELS = 2
 MICRO_MAX_BBOX_PIXELS = 4
 MICRO_MIN_FILL_RATIO = 0.50
-# Kamuya açık harita kaynaklarında Gülbahçe merkezini temsil eden yaklaşık nokta.
+# Mikro adayların yaklaşık Gülbahçe etiketi için kullanılan eski operasyonel referans.
 # Sınır/adres değildir; yalnız kapsama regresyonu ve yaklaşık izleme etiketi.
 GULBAHCE_REFERENCE_POINT = (38.319473, 26.646463)
 GULBAHCE_LABEL_RADIUS_M = 5_000
+# Ana Gülbahçe kapsama korumasındaki 2 km operasyonel pencereyle aynı referans.
+# Bu da idari/kadastral sınır veya adres değildir.
+GULBAHCE_OPERATION_POINT = (38.33278, 26.64556)
+GULBAHCE_OPERATION_RADIUS_M = 2_000
 REPORT_REGIONS = ("cesme", "uzunkuyu")
 
 
@@ -85,6 +91,115 @@ def _compactness(component):
     return bbox_pixels, float(fill_ratio)
 
 
+def _circle_mask(bbox, shape, center, radius_m):
+    """Yaklaşık metre hesabıyla bir operasyonel daire maskesi üretir."""
+    height, width = shape
+    west, south, east, north = map(float, bbox)
+    center_latitude, center_longitude = center
+    latitudes = north - (np.arange(height, dtype="float32") + 0.5) / height * (north - south)
+    longitudes = west + (np.arange(width, dtype="float32") + 0.5) / width * (east - west)
+    north_m = (latitudes[:, None] - center_latitude) * 110570
+    east_m = (
+        (longitudes[None, :] - center_longitude)
+        * 111320
+        * np.cos(np.radians(center_latitude))
+    )
+    return north_m * north_m + east_m * east_m <= float(radius_m) ** 2
+
+
+def _blind_component_summary(mask, bbox, pixel_area):
+    """Kalite nedeniyle gözlenemeyen kara kümelerini yalnız diagnostik olarak özetler."""
+    rows = []
+    for component in satellite._connected_components(mask):
+        area_m2 = len(component) * pixel_area
+        if area_m2 < MICRO_MIN_AREA_M2:
+            continue
+        latitude, longitude = _representative_point(component, bbox, mask.shape)
+        rows.append(
+            {
+                "enlem": latitude,
+                "boylam": longitude,
+                "alan_m2": round(area_m2),
+                "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
+            }
+        )
+    rows.sort(key=lambda item: (-float(item["alan_m2"]), item["enlem"], item["boylam"]))
+    return rows
+
+
+def _gulbahce_observability(
+    bbox,
+    quality_valid,
+    water,
+    final_valid,
+    pixel_area,
+    candidates,
+):
+    """Gülbahçe 2 km penceresinde 'aday yok' ile 'görüntü yok'u ayırır."""
+    operation = _circle_mask(
+        bbox,
+        quality_valid.shape,
+        GULBAHCE_OPERATION_POINT,
+        GULBAHCE_OPERATION_RADIUS_M,
+    )
+    land_like = operation & ~water
+    quality_blind = land_like & ~quality_valid
+    blind_rows = _blind_component_summary(quality_blind, bbox, pixel_area)
+    micro_blind = [
+        item for item in blind_rows
+        if MICRO_MIN_AREA_M2 <= float(item["alan_m2"]) < MICRO_MAX_AREA_M2
+    ]
+    main_blind = [
+        item for item in blind_rows
+        if float(item["alan_m2"]) >= satellite.MIN_HOTSPOT_AREA_M2
+    ]
+    window_candidates = [
+        item for item in candidates
+        if _distance_m(
+            float(item["enlem"]),
+            float(item["boylam"]),
+            GULBAHCE_OPERATION_POINT,
+        ) <= GULBAHCE_OPERATION_RADIUS_M
+    ]
+
+    land_pixels = int(np.count_nonzero(land_like))
+    quality_valid_pixels = int(np.count_nonzero(land_like & quality_valid))
+    final_valid_pixels = int(np.count_nonzero(operation & final_valid))
+    quality_blind_pixels = int(np.count_nonzero(quality_blind))
+    water_pixels = int(np.count_nonzero(operation & water))
+
+    return {
+        "alarm": False,
+        "saha_gorevi": False,
+        "referans": {
+            "enlem": GULBAHCE_OPERATION_POINT[0],
+            "boylam": GULBAHCE_OPERATION_POINT[1],
+            "operasyon_yaricapi_m": GULBAHCE_OPERATION_RADIUS_M,
+            "sinir_adres_degil": True,
+        },
+        "kara_benzeri_piksel": land_pixels,
+        "kalite_gecerli_kara_piksel": quality_valid_pixels,
+        "kalite_gecerli_kara_yuzde": round(
+            100 * quality_valid_pixels / max(land_pixels, 1), 3
+        ),
+        "kalite_kor_kara_piksel": quality_blind_pixels,
+        "kalite_kor_kara_yuzde": round(
+            100 * quality_blind_pixels / max(land_pixels, 1), 3
+        ),
+        "su_piksel": water_pixels,
+        "santiye_maskesine_gecerli_piksel": final_valid_pixels,
+        "mikro_kor_kume_150_249": len(micro_blind),
+        "ana_kor_kume_250plus": len(main_blind),
+        "mikro_ham_aday_2km": len(window_candidates),
+        "kor_kume_ornekleri": blind_rows[:8],
+        "yorum": (
+            "Gülbahçe 2 km penceresinde mikro aday sayısı ile Sentinel kalite körlüğü "
+            "ayrı ölçülür. Kör kümeler alarm/görev değildir ve silinmez; sonraki açık "
+            "sahnelerde tekrar izlenir. Su/kıyı pikselleri kalite körlüğü sayılmaz."
+        ),
+    }
+
+
 def _strict_micro_mask(older, latest, bbox, height, width):
     older_visual = satellite._read_asset(
         older, "visual", bbox, height, width, "bilinear"
@@ -111,10 +226,11 @@ def _strict_micro_mask(older, latest, bbox, height, width):
         latest, "scl", bbox, height, width, "nearest"
     )[0]
 
-    valid = ~np.isin(older_scl, satellite.EXCLUDED_SCL_CLASSES)
-    valid &= ~np.isin(latest_scl, satellite.EXCLUDED_SCL_CLASSES)
+    quality_valid = ~np.isin(older_scl, satellite.EXCLUDED_SCL_CLASSES)
+    quality_valid &= ~np.isin(latest_scl, satellite.EXCLUDED_SCL_CLASSES)
     water = (older_scl == 6) | (latest_scl == 6)
-    valid &= ~satellite._dilate_mask(water, satellite.COASTAL_WATER_BUFFER_PIXELS)
+    coastal_buffer = satellite._dilate_mask(water, satellite.COASTAL_WATER_BUFFER_PIXELS)
+    valid = quality_valid & ~coastal_buffer
 
     old_rgb = np.moveaxis(older_visual, 0, 2).astype("float32") / 255
     new_rgb = np.moveaxis(latest_visual, 0, 2).astype("float32") / 255
@@ -132,16 +248,30 @@ def _strict_micro_mask(older, latest, bbox, height, width):
         & (brightness_gain > 0.055)
         & (rgb_difference > 0.14)
     )
-    return strict, rgb_difference, vegetation_loss, brightness_gain
+    return (
+        strict,
+        rgb_difference,
+        vegetation_loss,
+        brightness_gain,
+        quality_valid,
+        water,
+        valid,
+    )
 
 
 def _micro_candidates(region_key, pair=None):
     bbox = satellite.REGIONS[region_key]["bbox"]
     older, latest = pair or satellite.sentinel_pair(region_key)
     height, width = satellite._output_shape(bbox)
-    strict, rgb_difference, vegetation_loss, brightness_gain = _strict_micro_mask(
-        older, latest, bbox, height, width
-    )
+    (
+        strict,
+        rgb_difference,
+        vegetation_loss,
+        brightness_gain,
+        quality_valid,
+        water,
+        final_valid,
+    ) = _strict_micro_mask(older, latest, bbox, height, width)
     pixel_area = _pixel_area_m2(bbox, height, width)
 
     rows = []
@@ -206,7 +336,7 @@ def _micro_candidates(region_key, pair=None):
             float(item["alan_m2"]),
         )
     )
-    return {
+    result = {
         "durum": "ok",
         "bolge": region_key,
         "bolge_adi": satellite.REGIONS[region_key]["label"],
@@ -218,6 +348,16 @@ def _micro_candidates(region_key, pair=None):
         "aday_sayisi": len(rows),
         "adaylar": rows,
     }
+    if region_key == "uzunkuyu":
+        result["gulbahce_gozlenebilirlik"] = _gulbahce_observability(
+            bbox,
+            quality_valid,
+            water,
+            final_valid,
+            pixel_area,
+            rows,
+        )
+    return result
 
 
 def _self_check():
@@ -229,7 +369,10 @@ def _self_check():
     assert MICRO_MIN_PIXELS == 2
     assert _contains(
         satellite.REGIONS["uzunkuyu"]["bbox"], *GULBAHCE_REFERENCE_POINT
-    ), "Gülbahçe referans merkezi günlük Uzunkuyu Sentinel kutusunun dışında kalıyor."
+    ), "Gülbahçe mikro referans merkezi günlük Uzunkuyu Sentinel kutusunun dışında kalıyor."
+    assert _contains(
+        satellite.REGIONS["uzunkuyu"]["bbox"], *GULBAHCE_OPERATION_POINT
+    ), "Gülbahçe 2 km operasyon referansı günlük Uzunkuyu Sentinel kutusunun dışında kalıyor."
 
     horizontal = [(3, 3), (3, 4)]
     diagonal = [(3, 3), (4, 4)]
@@ -238,6 +381,16 @@ def _self_check():
     assert _compactness(diagonal) == (4, 0.5)
     stretched_bbox, _ = _compactness(stretched)
     assert stretched_bbox > MICRO_MAX_BBOX_PIXELS
+
+    synthetic_bbox = (26.62, 38.31, 26.67, 38.35)
+    synthetic = _circle_mask(
+        synthetic_bbox,
+        (40, 50),
+        GULBAHCE_OPERATION_POINT,
+        500,
+    )
+    assert synthetic.shape == (40, 50)
+    assert np.count_nonzero(synthetic) > 0
 
 
 def run_audit():
@@ -256,10 +409,20 @@ def run_audit():
                 satellite.REGIONS["uzunkuyu"]["bbox"], *GULBAHCE_REFERENCE_POINT
             ),
         },
+        "gulbahce_operasyon_referans": {
+            "enlem": GULBAHCE_OPERATION_POINT[0],
+            "boylam": GULBAHCE_OPERATION_POINT[1],
+            "yaricap_m": GULBAHCE_OPERATION_RADIUS_M,
+            "sinir_adres_degil": True,
+            "uzunkuyu_uretim_kapsaminda": _contains(
+                satellite.REGIONS["uzunkuyu"]["bbox"], *GULBAHCE_OPERATION_POINT
+            ),
+        },
         "not": (
             "Bu katman alarm/görev üretmez. 150-249 m² aday ancak ayrıca temporal "
             "devam/ani başlangıç veya güvenilir açık-web/yapılaşma doğrulaması alırsa "
-            "09:30 saha değerlendirmesine yükseltilmelidir."
+            "09:30 saha değerlendirmesine yükseltilmelidir. Gülbahçe'de aday yokluğu "
+            "yerel Sentinel kalite körlüğünden ayrıca ayrıştırılır."
         ),
         "bolgeler": {},
     }
@@ -286,10 +449,17 @@ def main():
     summary = []
     for key, data in payload["bolgeler"].items():
         summary.append(f"{key}={data.get('aday_sayisi', 0)}")
+    gulbahce = (payload["bolgeler"].get("uzunkuyu") or {}).get(
+        "gulbahce_gozlenebilirlik"
+    ) or {}
     print(
         "Mikro şantiye diagnostik taraması tamamlandı: "
         + ", ".join(summary)
-        + ". Ana 250 m² alarm eşiği değişmedi; görev üretilmedi."
+        + ". Gülbahçe 2 km: "
+        + f"mikro={gulbahce.get('mikro_ham_aday_2km', 0)}, "
+        + f"kalite-kör-mikro={gulbahce.get('mikro_kor_kume_150_249', 0)}, "
+        + f"kalite-kör-250+={gulbahce.get('ana_kor_kume_250plus', 0)}. "
+        + "Ana 250 m² alarm eşiği değişmedi; görev üretilmedi."
     )
 
 
