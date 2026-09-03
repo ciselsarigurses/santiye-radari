@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 import pandas as pd
 import streamlit as st
 
+from coordinate_navigation import load_audit, signal_core_target
 from field_outcome import OUTCOME_LABELS, outcome_map
 from field_state import ensure_state_schema, satellite_task_id, site_task_id
 from scanner import connect
@@ -16,6 +17,7 @@ st.set_page_config(page_title="Saha Kontrol", page_icon="✅", layout="wide")
 
 REPORT_FILE = Path(__file__).resolve().parents[1] / "latest_report.json"
 ISSUE_URL = "https://github.com/ciselsarigurses/santiye-radari/issues/new"
+COORDINATE_AUDIT = load_audit()
 STATUS_LABELS = {
     "KONTROLE_GIT": "📍 Kontrole git",
     "TEKRAR_GIT": "🔁 Bir daha git bak",
@@ -99,7 +101,7 @@ def task_card(item, task_id, status, source_label):
     except (TypeError, ValueError):
         waiting_days = 0
     overdue = bool(item.get("gecikmis"))
-    satellite_source = source_label == "Sentinel-2"
+    satellite_source = source_label in {"Sentinel-2", "Uydu"}
     location_title = (
         f"Yaklaşık mevki: {neighborhood}" if satellite_source else neighborhood
     )
@@ -147,6 +149,21 @@ def task_card(item, task_id, status, source_label):
             )
         if route:
             st.link_button("🗺️ Yol tarifi", route, width="stretch")
+
+        signal_target = (
+            signal_core_target(item, COORDINATE_AUDIT) if satellite_source else None
+        )
+        if signal_target:
+            st.caption(
+                "🎯 Sinyal çekirdeği, aynı Sentinel bağlı bileşeninde değişimin daha "
+                f"güçlü olduğu pikseldir (yaklaşık {signal_target['kayma_m']:.0f} m fark). "
+                "Ana görev koordinatı değiştirilmedi; bu nokta kesin adres/parsel değildir."
+            )
+            st.link_button(
+                "🎯 Sinyal çekirdeğine git",
+                signal_target["harita"],
+                width="stretch",
+            )
 
         st.caption(
             "Düğme GitHub'da hazır bir talep açar. Açılan sayfada yalnızca yeşil "
