@@ -1,0 +1,101 @@
+name: Sentinel Bulut Körlük Raporu
+
+on:
+  # Ana tarama tamamlandıktan sonra yalnız tanısal bulut-körlük sonucunu kalıcılaştır.
+  # Böylece ana alarm eşiğini veya saha görevlerini değiştirmeden sonraki çalışmalarda
+  # Gülbahçe dahil önceki ölçümü karşılaştırabiliyoruz.
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - "cloud_threshold_audit.py"
+      - ".github/workflows/cloud-threshold-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-db-write
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Çeşme Uzunkuyu ve Gülbahçe yerel bulut körlüğünü ölç
+        run: python cloud_threshold_audit.py
+
+      - name: Tanısal sonucu kaydet
+        run: |
+          file="cloud_threshold_audit.json"
+          if [[ ! -f "$file" ]]; then
+            echo "Bulut körlük raporu oluşmadı."
+            exit 1
+          fi
+          if [[ -z "$(git status --porcelain -- "$file")" ]]; then
+            echo "Bulut körlük ölçümü değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add "$file"
+          git commit -m "Radar: Sentinel bulut körlük auditini güncelle"
+
+          # Başka bir veri workflow'u main'i ilerlettiyse eski tabanla zorla yazma.
+          # Güncel main üzerinde aynı küçük audit bir kez daha üretilecek.
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Main değişti; güncel dal üzerinde bulut auditi yeniden üretiliyor."
+            git reset --hard origin/main
+            python cloud_threshold_audit.py
+            if [[ -z "$(git status --porcelain -- "$file")" ]]; then
+              echo "Yeniden üretim sonrası ölçüm zaten güncel."
+              exit 0
+            fi
+            git add "$file"
+            git commit -m "Radar: Sentinel bulut körlük auditini güncelle"
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Main yeniden değişti; veri kaybı riskine girmeden sonraki çalışmaya bırakıldı."
+              exit 1
+            fi
+          fi
+
+          push_ok=0
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Push öncesi main değişti; güvenli biçimde durduruldu."
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              push_ok=1
+              break
+            fi
+            echo "Push denemesi ${attempt}/3 başarısız; yeniden deneniyor."
+            sleep $((attempt * 2))
+          done
+
+          if [[ "$push_ok" -ne 1 ]]; then
+            echo "Üç güvenli push denemesi başarısız."
+            exit 1
+          fi
