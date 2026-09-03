@@ -7,6 +7,7 @@ on:
       - "wide_surface_background_guard.py"
       - "wide_surface_provenance_gap_guard.py"
       - "historical_wide_backlog_guard.py"
+      - "wide_surface_retention_guard.py"
       - "operational_report_numbering_guard.py"
       - ".github/workflows/wide-surface-background.yml"
   workflow_run:
@@ -50,13 +51,18 @@ jobs:
       - name: Tarihsel geniş backlog öz testi
         run: python historical_wide_backlog_guard.py --check-only
 
+      - name: Tekrar çalıştırma koruması öz testi
+        run: python wide_surface_retention_guard.py --check-only
+
       - name: Saha raporu sıra öz testi
         run: python operational_report_numbering_guard.py --check-only
 
       - name: Operasyon ve arka-plan katmanlarını ayır
         run: |
+          python wide_surface_retention_guard.py snapshot
           python wide_surface_provenance_gap_guard.py
           python historical_wide_backlog_guard.py
+          python wide_surface_retention_guard.py restore
           python operational_report_numbering_guard.py
 
       - name: Yalnız değişiklik varsa güvenli biçimde kaydet
@@ -71,18 +77,22 @@ jobs:
           git config user.email "santiye-radari-bot@users.noreply.github.com"
 
           # Başka bir rapor workflow'u aynı anda main'i ilerletirse en güncel
-          # rapor üzerinde üç geniş-yüzey katmanını ve sıra korumasını tekrar üret.
-          # SQLite veya algılama kodunu bu workflow değiştirmez; yalnız rapor sunumunu
-          # ve diagnostik review'u yazar.
+          # rapor üzerinde geniş-yüzey katmanlarını yeniden üret. Önce aynı rapordaki
+          # mevcut arka-plan kayıtlarını geçici olarak yakala; böylece tarihsel-backlog
+          # kaydı ikinci çalıştırmada sessizce kaybolmaz. SQLite veya algılama kodunu
+          # bu workflow değiştirmez; yalnız rapor sunumunu ve diagnostik review'u yazar.
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
             python wide_surface_background_guard.py --check-only
             python wide_surface_provenance_gap_guard.py --check-only
             python historical_wide_backlog_guard.py --check-only
+            python wide_surface_retention_guard.py --check-only
             python operational_report_numbering_guard.py --check-only
+            python wide_surface_retention_guard.py snapshot
             python wide_surface_provenance_gap_guard.py
             python historical_wide_backlog_guard.py
+            python wide_surface_retention_guard.py restore
             python operational_report_numbering_guard.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
