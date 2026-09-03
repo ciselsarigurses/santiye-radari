@@ -3028,7 +3028,10 @@
       "geometri_kaynagi_enlem": 38.253128,
       "geometri_kaynagi_boylam": 26.424511,
       "tarihsel_gorev_id": "UEC37CFA14C",
-      "tarihsel_bekleme_gun": 5
+      "tarihsel_bekleme_gun": 5,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -3055,7 +3058,10 @@
       "geometri_kaynagi_enlem": 38.344571,
       "geometri_kaynagi_boylam": 26.475452,
       "tarihsel_gorev_id": "U0B5F6411CD",
-      "tarihsel_bekleme_gun": 5
+      "tarihsel_bekleme_gun": 5,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -3082,7 +3088,10 @@
       "geometri_kaynagi_enlem": 38.335979,
       "geometri_kaynagi_boylam": 26.483809,
       "tarihsel_gorev_id": "UEC36614FA4",
-      "tarihsel_bekleme_gun": 5
+      "tarihsel_bekleme_gun": 5,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -3109,7 +3118,10 @@
       "geometri_kaynagi_enlem": 38.329738,
       "geometri_kaynagi_boylam": 26.489762,
       "tarihsel_gorev_id": "U7938844405",
-      "tarihsel_bekleme_gun": 5
+      "tarihsel_bekleme_gun": 5,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -3136,7 +3148,10 @@
       "geometri_kaynagi_enlem": 38.24146,
       "geometri_kaynagi_boylam": 26.40608,
       "tarihsel_gorev_id": "U03E0421DDD",
-      "tarihsel_bekleme_gun": 5
+      "tarihsel_bekleme_gun": 5,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -3163,7 +3178,10 @@
       "geometri_kaynagi_enlem": 38.2193,
       "geometri_kaynagi_boylam": 26.413864,
       "tarihsel_gorev_id": "U07EF15923A",
-      "tarihsel_bekleme_gun": 5
+      "tarihsel_bekleme_gun": 5,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "arka_plan_kurali": {
@@ -3286,7 +3304,10 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.338692,26.648996",
       "saha_gorevi": false,
       "gulbahce_operasyonel_kapsama": true,
-      "gulbahce_referans_mesafesi_m": 719
+      "gulbahce_referans_mesafesi_m": 719,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338692/26.648996",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-03",
@@ -3337,7 +3358,10 @@
       "boylam": 26.648996,
       "alan_m2": 400,
       "neden": "KARISIK_GECERSIZLIK",
-      "referans_mesafesi_m": 719
+      "referans_mesafesi_m": 719,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338692/26.648996",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   }
 }
