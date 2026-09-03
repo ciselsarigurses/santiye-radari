@@ -11,7 +11,7 @@
     "manuel_tekrar_override": true
   },
   "arka_plan_aday_sayisi": 8,
-  "operasyonel_listeden_ayrilan": 4,
+  "operasyonel_listeden_ayrilan": 2,
   "manuel_tekrar_korunan": 0,
   "kanit_kaynagi_sayilari": {
     "shape_false_positive_audit": 6,
