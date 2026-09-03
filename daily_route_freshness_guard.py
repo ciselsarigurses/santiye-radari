@@ -375,7 +375,7 @@ def _self_check():
         "bolge": east,
         "uydu_onceligi": "YÜKSEK",
         "boyut_sinifi": "KUCUK",
-        "yeni_goruntu": true,
+        "yeni_goruntu": True,
     }
     manual_repeat = {
         "gorev_id": "MANUAL_REPEAT",
@@ -386,7 +386,7 @@ def _self_check():
         "boylam": 26.3745,
         "alan_m2": 500,
         "bolge": west,
-        "yeni_goruntu": false,
+        "yeni_goruntu": False,
     }
     preseason = select_fresh_shortlist(
         [historical_small, current_small, fresh_early, manual_repeat],
