@@ -6,6 +6,7 @@ on:
     paths:
       - "postseason_excavation_priority_guard.py"
       - "postseason_dry_ground_confirmation_guard.py"
+      - "postseason_capacity_preview.py"
       - ".github/workflows/postseason-excavation-priority.yml"
   workflow_run:
     workflows:
@@ -46,16 +47,20 @@ jobs:
       - name: 15 Eylül kuru zemin teyit geçidi öz testi
         run: python postseason_dry_ground_confirmation_guard.py --self-check
 
+      - name: 15 Eylül şantiye kapasite önizleme öz testi
+        run: python postseason_capacity_preview.py --check-only
+
       - name: Sezon durumuna göre operasyon önceliğini uygula
         run: |
           python postseason_excavation_priority_guard.py
           python postseason_dry_ground_confirmation_guard.py
+          python postseason_capacity_preview.py
 
       - name: Yalnız değişiklik varsa güvenli biçimde kaydet
         run: |
-          report_files="latest_report.json SAHA_RAPORU.md"
+          report_files="latest_report.json SAHA_RAPORU.md postseason_capacity_preview.json"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "15 Eylül taze kazı/kuru zemin teyit katmanı için rapor değişikliği gerekmiyor."
+            echo "15 Eylül taze kazı/kuru zemin/kapasite katmanı için rapor değişikliği gerekmiyor."
             exit 0
           fi
 
@@ -64,14 +69,17 @@ jobs:
 
           # Başka bir rapor workflow'u aynı anda main'i ilerletirse en güncel rapor
           # üzerinde yeniden üret. Algılama koduna, SQLite'a ve Sentinel eşiklerine
-          # dokunma; yalnız operasyon sırasını ve görünür rapor notunu güncelle.
+          # dokunma; yalnız operasyon sırasını, görünür rapor notunu ve diagnostik
+          # kapasite önizlemesini güncelle.
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
             python postseason_excavation_priority_guard.py --self-check
             python postseason_dry_ground_confirmation_guard.py --self-check
+            python postseason_capacity_preview.py --check-only
             python postseason_excavation_priority_guard.py
             python postseason_dry_ground_confirmation_guard.py
+            python postseason_capacity_preview.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
               echo "En güncel main üzerinde ek değişiklik gerekmiyor."
@@ -79,7 +87,7 @@ jobs:
             fi
 
             git add $report_files
-            git commit -m "Radar: 15 Eylül sonrası taze kazı ve kuru zemin teyidini öne al"
+            git commit -m "Radar: 15 Eylül sonrası taze kazı ve kapasite hazırlığını güncelle"
             if git push origin HEAD:main; then
               exit 0
             fi
@@ -88,5 +96,5 @@ jobs:
             sleep $((attempt * 2))
           done
 
-          echo "15 Eylül taze kazı/kuru zemin teyit katmanı üç güvenli denemede kaydedilemedi."
+          echo "15 Eylül taze kazı/kuru zemin/kapasite katmanı üç güvenli denemede kaydedilemedi."
           exit 1
