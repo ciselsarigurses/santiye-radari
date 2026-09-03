@@ -50,6 +50,29 @@ def _load_json(path):
     return value if isinstance(value, dict) else {}
 
 
+def _semantic_payload(payload):
+    """Yalnız üretim kararını etkileyen alanları karşılaştır; üretim saatini yok say."""
+    if not isinstance(payload, dict):
+        return {}
+    normalized = dict(payload)
+    normalized.pop("olusturma", None)
+    return normalized
+
+
+def _write_preview_if_meaningful(payload):
+    """Semantik durum değişmediyse salt zaman damgası için dosyayı yeniden yazma."""
+    previous = _load_json(OUTPUT_FILE)
+    if previous and _semantic_payload(previous) == _semantic_payload(payload):
+        payload["olusturma"] = previous.get("olusturma") or payload.get("olusturma")
+        return False
+
+    OUTPUT_FILE.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return True
+
+
 def _field_counts(report):
     """Günlük özetten saha kontrol ve doğrulanmış şantiye/kazı sayılarını güvenli oku."""
     summary = str(report.get("ozet") or "")
@@ -172,10 +195,7 @@ def build_preview(now=None):
         "onerilen_eylem": recommendation,
         "neden": reason,
     }
-    OUTPUT_FILE.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    _write_preview_if_meaningful(payload)
     return payload
 
 
@@ -209,6 +229,12 @@ def _self_check():
     blocked_preview = _region_preview(blocked)
     assert blocked_preview["teorik_son_800_10000"] == 8
     assert blocked_preview["senaryo_kapasite_acisindan_mumkun"] is False
+
+    unchanged_first = {"olusturma": "2026-09-03 22:00 +0300", "karar": "URETIME_DOKUNMA"}
+    unchanged_second = {"olusturma": "2026-09-03 23:00 +0300", "karar": "URETIME_DOKUNMA"}
+    meaningfully_changed = {"olusturma": "2026-09-03 23:00 +0300", "karar": "MEVCUT_KOTAYI_KORU"}
+    assert _semantic_payload(unchanged_first) == _semantic_payload(unchanged_second)
+    assert _semantic_payload(unchanged_first) != _semantic_payload(meaningfully_changed)
 
     assert MAIN_ALARM_MIN_M2 == 250
     assert (MICRO_MIN_M2, MICRO_MAX_M2) == (150, 249)
