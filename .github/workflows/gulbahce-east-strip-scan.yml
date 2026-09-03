@@ -9,8 +9,8 @@ on:
       - "gulbahce_east_strip_scan.py"
       - ".github/workflows/gulbahce-east-strip-scan.yml"
   schedule:
-    # Ana Sentinel kontrollerinden 20 dakika sonra; aynı ücretsiz kaynakları
-    # gereksiz eşzamanlı yüklemeden Gülbahçe doğu kör şeridini yeniden kontrol eder.
+    # Ana Sentinel kontrollerinden 20 dakika sonra; artık görüntüyü yeniden
+    # indirmeden Gülbahçe doğu kapsamasının ana üretim bbox'unda kaldığını denetler.
     - cron: "20 8,12,16 * * *"
   workflow_dispatch:
 
@@ -41,27 +41,41 @@ jobs:
       - name: Bağımlılıkları kur
         run: pip install -r requirements.txt
 
-      - name: Gülbahçe şerit öz testi
+      - name: Gülbahçe kapsama regresyonu öz testi
         run: python gulbahce_east_strip_scan.py --self-check
 
-      - name: Gülbahçe doğu kör şeridini tara
+      - name: Gülbahçe doğu kapsama regresyonunu denetle
         run: python gulbahce_east_strip_scan.py
 
       - name: Yalnız sonuç değiştiyse kaydet
         run: |
           if [[ -z "$(git status --porcelain -- gulbahce_east_strip_scan.json)" ]]; then
-            echo "Gülbahçe doğu şerit sonucu değişmedi."
+            echo "Gülbahçe doğu kapsama sonucu değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
           git add gulbahce_east_strip_scan.json
-          git commit -m "Radar: Gülbahçe doğu şerit Sentinel sonucunu güncelle"
+          git commit -m "Radar: Gülbahçe doğu kapsama regresyon sonucunu güncelle"
 
-          git fetch origin main
-          if ! git merge-base --is-ancestor origin/main HEAD; then
-            echo "Ana dal değişti; eski sonucu üzerine yazmadan sonraki çalışmaya bırakılıyor."
-            exit 1
-          fi
-          git push origin HEAD:main
+          # Veri commit'ini yalnız main hâlâ atamızsa gönder. GitHub taraflı geçici
+          # push/commit_refs hatalarında aynı güvenli commit'i birkaç kez dene;
+          # main ilerlediyse kesinlikle zorla yazma.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Ana dal değişti; eski sonucu üzerine yazmadan sonraki çalışmaya bırakılıyor."
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push denemesi ${attempt}/3 başarısız; geçici GitHub hatası olabilir."
+            if [[ "$attempt" -lt 3 ]]; then
+              sleep 5
+            fi
+          done
+
+          echo "Gülbahçe regresyon sonucu 3 güvenli push denemesinden sonra da gönderilemedi."
+          exit 1
