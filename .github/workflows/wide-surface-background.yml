@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "wide_surface_background_guard.py"
+      - "wide_surface_provenance_gap_guard.py"
       - ".github/workflows/wide-surface-background.yml"
   workflow_run:
     workflows:
@@ -41,8 +42,11 @@ jobs:
       - name: Geniş yüzey arka-plan öz testi
         run: python wide_surface_background_guard.py --check-only
 
+      - name: Yaklaşık provenans öz testi
+        run: python wide_surface_provenance_gap_guard.py --check-only
+
       - name: Operasyon ve arka-plan katmanlarını ayır
-        run: python wide_surface_background_guard.py
+        run: python wide_surface_provenance_gap_guard.py
 
       - name: Yalnız değişiklik varsa güvenli biçimde kaydet
         run: |
@@ -56,13 +60,14 @@ jobs:
           git config user.email "santiye-radari-bot@users.noreply.github.com"
 
           # Başka bir rapor workflow'u aynı anda main'i ilerletirse en güncel
-          # rapor üzerinde katmanı tekrar üret. SQLite veya algılama kodunu bu
+          # rapor üzerinde iki katmanı da tekrar üret. SQLite veya algılama kodunu bu
           # workflow değiştirmez; yalnız rapor sunumunu ve diagnostik review'u yazar.
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
             python wide_surface_background_guard.py --check-only
-            python wide_surface_background_guard.py
+            python wide_surface_provenance_gap_guard.py --check-only
+            python wide_surface_provenance_gap_guard.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
               echo "En güncel main üzerinde ek değişiklik gerekmiyor."
