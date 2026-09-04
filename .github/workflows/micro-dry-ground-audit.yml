@@ -46,6 +46,31 @@ jobs:
 
       - name: Sonucu kaydet
         run: |
+          # Aynı Sentinel sahnesinde yalnız oluşturma saati değiştiyse büyük JSON'u
+          # tekrar commit etme. Gerçek aday/sınıf/ölçüm değişikliği aynen korunur.
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          path = Path("micro_dry_ground_audit.json")
+          try:
+              old_text = subprocess.check_output(
+                  ["git", "show", "HEAD:micro_dry_ground_audit.json"],
+                  text=True,
+              )
+          except subprocess.CalledProcessError:
+              raise SystemExit(0)
+
+          old = json.loads(old_text)
+          new = json.loads(path.read_text(encoding="utf-8"))
+          old.pop("olusturma", None)
+          new.pop("olusturma", None)
+          if old == new:
+              path.write_text(old_text, encoding="utf-8")
+              print("Aynı Sentinel/ölçüm sonucu; yalnız saat değişti, veri commit'i yapılmayacak.")
+          PY
+
           if [[ -z "$(git status --porcelain -- micro_dry_ground_audit.json)" ]]; then
             echo "Mikro kuru-zemin diagnostik sonucu değişmedi."
             exit 0
