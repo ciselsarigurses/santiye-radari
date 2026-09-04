@@ -3191,5 +3191,68 @@
         "tavan_disinda_uygun_havuz": 151
       }
     }
+  },
+  "kor_alan_saha_devriyesi": [
+    {
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.338692,
+      "boylam": 26.648996,
+      "alan_m2": 400,
+      "neden": "KARISIK_GECERSIZLIK",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.1435,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.338692,26.648996"
+    },
+    {
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Ildır",
+      "enlem": 38.407071,
+      "boylam": 26.472247,
+      "alan_m2": 400,
+      "neden": "BULUT_GOLGE_KALICI",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.4182,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.407071,26.472247"
+    }
+  ],
+  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-04",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
+  "temporal_kalibrasyon_rotasyonu": {
+    "durum": "uygulandi",
+    "slot_sayisi": 2,
+    "kural": "Ani-baslangic destekli alarm-disi kalibrasyonlar ayni Sentinel sahnesinde en guclu dort mahalle-cesitli aday arasinda gunluk doner; 250-900 m2 adayda guvenilir yaygin cevre degisim riski temporal acil havuzundan dusurulur. Ayni boyut sinifinda merkez degisimi cevre halkasina gore belirgin lokal kalan adaylar saha kalibrasyonunda once gelir; normal guvenli rotasyon korunur."
+  },
+  "gecikmis_rota_rotasyonu": {
+    "durum": "gerekmedi",
+    "kural": "Yalniz gecikmis kuyrukta, ayni guncel Sentinel kalite bandindaki kucuk-guclu adaylarda en guclu capa korunur; kalan slotlar Cesme yerel takvim gunune gore gunluk doner.",
+    "havuz": 0,
+    "rapor_tarihi": "2026-09-04",
+    "rotasyon_tarihi": "2026-09-04"
+  },
+  "kalibrasyon_katmanlar_arasi_cesitlilik": {
+    "durum": "uygulandi",
+    "engellenen_mahalleler": [
+      "gülbahçe",
+      "ildır"
+    ],
+    "secilen_mahalleler": [
+      "Ilıca",
+      "Germiyan"
+    ],
+    "kural": "Ana ilk-3 veya kor-alan devriyesi mahallesini, ayni temporal/yerellik kalite sinifinda guvenli alternatif varsa alarm-disi kalibrasyonda tekrar etme."
+  },
+  "preseason_route_final_guard": {
+    "durum": "uygulandi",
+    "tarih": "2026-09-04",
+    "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
   }
 }
