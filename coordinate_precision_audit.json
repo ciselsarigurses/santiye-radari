@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-03",
-  "olusturma": "2026-09-03 19:25 +0300",
+  "rapor_tarihi": "2026-09-04",
+  "olusturma": "2026-09-04 07:27 +0300",
   "amac": "Mevcut Sentinel aday koordinatının geometrik temsil pikseli ile aynı bağlı bileşendeki BSI×RGB değişim gücüne göre sinyal-ağırlıklı temsil pikseli arasındaki farkı ölçmek; koordinatı otomatik değiştirmeden 10 m sınıfı hassasiyet iyileştirmesini doğrulamak.",
   "uyari": "Bu çıktı alarm/görev/eşik değiştirmez. Sinyal-ağırlıklı koordinat yalnız diagnostiktir; saha doğrulaması olmadan kesin adres veya parsel değildir.",
   "bolgeler": {
