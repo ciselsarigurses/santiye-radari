@@ -1,9 +1,10 @@
 {
-  "olusturma": "2026-09-04 04:01 +0300",
+  "olusturma": "2026-09-04 19:03 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
   "yakın_cift_ust_sinir_m": 60,
+  "diagnostik_kanit_koruma_gun": 2,
   "amac": "Aynı Sentinel çiftindeki yakın 250-800 m² güçlü küçük adayların tek bölünmüş hafriyat mı, yoksa yan yana ayrı şantiyeler mi olduğunu saha kalibrasyonuyla ayırmak.",
   "otomatik_birlestirme": false,
   "cift_sayisi": 1,
