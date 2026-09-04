@@ -1,0 +1,80 @@
+name: Ön Sezon Kuru Zemin Gölge Kalibrasyonu
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "preseason_dry_ground_shadow.py"
+      - ".github/workflows/preseason-dry-ground-shadow.yml"
+  workflow_run:
+    workflows:
+      - "Kuru Zemin Zaman Serisi Denetimi"
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-preseason-dry-ground-shadow
+  cancel-in-progress: false
+
+jobs:
+  shadow:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Gölge kalibrasyon öz testi
+        run: python preseason_dry_ground_shadow.py --check-only
+
+      - name: Mevcut Sentinel sahnesinde gölge filtresini ölç
+        run: python preseason_dry_ground_shadow.py
+
+      - name: Yalnız semantik sonuç değiştiyse kaydet
+        run: |
+          report_file="preseason_dry_ground_shadow.json"
+          if [[ -z "$(git status --porcelain -- $report_file)" ]]; then
+            echo "Gölge kalibrasyon sonucu değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python preseason_dry_ground_shadow.py --check-only
+            python preseason_dry_ground_shadow.py
+
+            if [[ -z "$(git status --porcelain -- $report_file)" ]]; then
+              echo "En güncel main üzerinde ek değişiklik gerekmiyor."
+              exit 0
+            fi
+
+            git add "$report_file"
+            git commit -m "Radar: ön sezon kuru zemin gölge kalibrasyonunu güncelle"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Main değişti veya geçici push hatası oluştu; yeniden deneniyor (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Gölge kalibrasyon sonucu üç güvenli denemede kaydedilemedi."
+          exit 1
