@@ -1,0 +1,68 @@
+{
+  "olusturma": "2026-09-04 03:08 +0300",
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "esleme_mesafesi_m": 45,
+  "amac": "Güçlü lokal/kompakt + temporal mikro diagnostik adayları Sentinel sahneleri arasında hafızada tutmak; bir sonraki değişim çiftinde görünmese bile silmeyip arka planda izlemek.",
+  "uyari": "Bu izleme listesi alarm veya saha görevi üretmez. İki farklı Sentinel sahnesinde tekrar güçlü görünme yalnız ek diagnostik kanıttır; 250 m² ana üretim eşiğini düşürmez.",
+  "guncel_guclu": 2,
+  "arka_plan_takip": 0,
+  "tekrar_dogrulanan": 0,
+  "adaylar": [
+    {
+      "mikro_iz_id": "M064C4375BD",
+      "alarm": false,
+      "saha_gorevi": false,
+      "durum": "GUCLU_GUNCEL",
+      "guncel_guclu": true,
+      "tekrar_dogrulandi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_gecmisi": [
+        "S2C_T35SMC_20260903T090747_L2A"
+      ],
+      "ilk_gorulme_tarihi": "03.09.2026",
+      "son_guclu_gorulme_tarihi": "03.09.2026",
+      "son_guclu_sentinel_item": "S2C_T35SMC_20260903T090747_L2A",
+      "bolge": "cesme",
+      "yaklasik_mevki": "Ovacık",
+      "enlem": 38.253942,
+      "boylam": 26.311981,
+      "alan_m2": 200,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.253942,26.311981",
+      "karar_nedeni": "Adayın kendi bağlı bileşeninde temporal hareket + bağımsız lokal/kompakt karakter birlikte güçlü. Alarm/görev değildir; 15 Eylül sonrası yeni Sentinel sahnesinde öncelikli tekrar doğrulama adayıdır.",
+      "bilesen_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
+      "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
+      "yerel_kontrast_orani": 10.75
+    },
+    {
+      "mikro_iz_id": "MC7D2CCED03",
+      "alarm": false,
+      "saha_gorevi": false,
+      "durum": "GUCLU_GUNCEL",
+      "guncel_guclu": true,
+      "tekrar_dogrulandi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_gecmisi": [
+        "S2C_T35SMC_20260903T090747_L2A"
+      ],
+      "ilk_gorulme_tarihi": "03.09.2026",
+      "son_guclu_gorulme_tarihi": "03.09.2026",
+      "son_guclu_sentinel_item": "S2C_T35SMC_20260903T090747_L2A",
+      "bolge": "cesme",
+      "yaklasik_mevki": "Ilıca",
+      "enlem": 38.317979,
+      "boylam": 26.345866,
+      "alan_m2": 200,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.317979,26.345866",
+      "karar_nedeni": "Adayın kendi bağlı bileşeninde temporal hareket + bağımsız lokal/kompakt karakter birlikte güçlü. Alarm/görev değildir; 15 Eylül sonrası yeni Sentinel sahnesinde öncelikli tekrar doğrulama adayıdır.",
+      "bilesen_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
+      "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
+      "yerel_kontrast_orani": 7.67
+    }
+  ]
+}
