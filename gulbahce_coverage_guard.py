@@ -2,10 +2,12 @@
 
 Bu katman alarm veya saha görevi üretmez. Gülbahçe merkezinin ve çevresindeki
 2 km operasyonel diagnostik çemberinin mevcut ``uzunkuyu`` üretim kutusunda ne
-kadar kaldığını ölçer. Ayrıca ``all`` birleşik zarfının gerçekten Çeşme ve
-Uzunkuyu üretim kutularının tamamını içerip içermediğini ayrı bir bütünlük
-kontrolü olarak raporlar. 2 km çember idari/kadastral mahalle sınırı değildir;
-yalnız kör-alan erken uyarısı için sabit bir operasyon tamponudur.
+kadar kaldığını ölçer. Ayrıca lokal/kuru-zemin diagnostiklerinin aday çevresini
+sağlıklı değerlendirebilmesi için operasyon çemberinin dışında ek analiz bağlam
+halosu bırakılıp bırakılmadığını denetler. ``all`` birleşik zarfının gerçekten
+Çeşme ve Uzunkuyu üretim kutularının tamamını içerip içermediği de ayrı bir
+bütünlük kontrolüdür. 2 km çember ve bağlam halosunun hiçbiri idari/kadastral
+mahalle sınırı değildir; yalnız kör-alan erken uyarısı için operasyonel referanstır.
 
 Referans merkez: Gülbahçe, Urla için 38.33278 N / 26.64556 E. Koordinat yalnız
 kapsama denetimi içindir; ada/parsel veya hukuki sınır olarak kullanılmaz.
@@ -29,6 +31,11 @@ ALL_REGION_KEY = "all"
 GULBAHCE_LAT = 38.33278
 GULBAHCE_LON = 26.64556
 MONITOR_RADIUS_M = 2_000
+# Kuru-zemin komşuluk diagnostikleri 120 m çevrede başka değişim kümeleri arıyor;
+# 9x9 lokal pencereler de yaklaşık 40 m bağlam kullanıyor. Operasyon çemberinin
+# tam kenarındaki bir adayın doğu/batı komşulukları bbox dışında kalıp sahte
+# "izole" görünmesin diye en az 150 m ek analiz bağlamı zorunlu tutulur.
+ANALYSIS_CONTEXT_HALO_M = 150
 COVERAGE_OK_PERCENT = 99.5
 INTEGRATION_SLICES = 2_000
 
@@ -134,19 +141,35 @@ def _core_payload():
         MONITOR_RADIUS_M,
     )
     coverage_percent = coverage_fraction * 100.0
+    context_radius_m = MONITOR_RADIUS_M + ANALYSIS_CONTEXT_HALO_M
+    context_coverage_percent = _circle_coverage_fraction(
+        bbox,
+        GULBAHCE_LAT,
+        GULBAHCE_LON,
+        context_radius_m,
+    ) * 100.0
     all_coverage_percent = _circle_coverage_fraction(
         all_bbox,
         GULBAHCE_LAT,
         GULBAHCE_LON,
         MONITOR_RADIUS_M,
     ) * 100.0
+    all_context_coverage_percent = _circle_coverage_fraction(
+        all_bbox,
+        GULBAHCE_LAT,
+        GULBAHCE_LON,
+        context_radius_m,
+    ) * 100.0
     center_inside = (
         bbox[0] <= GULBAHCE_LON <= bbox[2]
         and bbox[1] <= GULBAHCE_LAT <= bbox[3]
     )
-    full_radius_inside = min(
+    nearest_edge_m = min(
         local["east"], -local["west"], local["north"], -local["south"]
-    ) >= MONITOR_RADIUS_M
+    )
+    full_radius_inside = nearest_edge_m >= MONITOR_RADIUS_M
+    full_context_inside = nearest_edge_m >= context_radius_m
+    context_margin_m = nearest_edge_m - context_radius_m
     current_label = _nearest_place(GULBAHCE_LAT, GULBAHCE_LON)
     label_explicit = current_label == "Gülbahçe"
     pixel = _pixel_metrics(bbox)
@@ -156,6 +179,8 @@ def _core_payload():
         production_issues.append("GULBAHCE_MERKEZI_URETIM_KUTUSU_DISINDA")
     if coverage_percent < COVERAGE_OK_PERCENT:
         production_issues.append("GULBAHCE_2KM_TAMPONU_TAM_KAPSANMIYOR")
+    if not full_context_inside:
+        production_issues.append("GULBAHCE_2KM_ARTI_ANALIZ_HALOSU_TAM_KAPSANMIYOR")
     if not label_explicit:
         production_issues.append("GULBAHCE_MAHALLE_ETIKETI_ACIK_DEGIL")
     if pixel["pixel_edge_max_m"] > 10.5:
@@ -163,18 +188,26 @@ def _core_payload():
 
     union_issues = []
     all_contains_union = _bbox_contains(all_bbox, expected_union_bbox)
+    all_local = _local_bbox_meters(all_bbox, GULBAHCE_LAT, GULBAHCE_LON)
+    all_nearest_edge_m = min(
+        all_local["east"], -all_local["west"], all_local["north"], -all_local["south"]
+    )
+    all_full_context_inside = all_nearest_edge_m >= context_radius_m
     if not all_contains_union:
         union_issues.append("BIRLESIK_ALL_ZARFI_URETIM_BOLGELERINI_TAM_KAPSAMIYOR")
     if all_coverage_percent < COVERAGE_OK_PERCENT:
         union_issues.append("BIRLESIK_ALL_ZARFI_GULBAHCE_2KM_TAMPONUNU_TAM_KAPSAMIYOR")
+    if not all_full_context_inside:
+        union_issues.append("BIRLESIK_ALL_ZARFI_GULBAHCE_ANALIZ_HALOSUNU_TAM_KAPSAMIYOR")
 
     issues = production_issues + union_issues
     return {
         "amac": (
-            "Gülbahçe merkezli 2 km operasyonel diagnostik tamponun mevcut Sentinel "
-            "üretim kutusundaki geometrik kapsamasını ve mahalle etiketleme görünürlüğünü "
-            "ölçmek; ayrıca birleşik all zarfının iki üretim bölgesini eksiksiz içerdiğini "
-            "doğrulamak. Alarm veya saha görevi üretmez."
+            "Gülbahçe merkezli 2 km operasyonel diagnostik tamponun ve çevresindeki "
+            "analiz bağlam halosunun mevcut Sentinel üretim kutusundaki geometrik "
+            "kapsamasını ölçmek; mahalle etiketleme görünürlüğünü ve birleşik all "
+            "zarfının iki üretim bölgesini eksiksiz içermesini doğrulamak. Alarm "
+            "veya saha görevi üretmez."
         ),
         "referans": {
             "ad": "Gülbahçe, Urla",
@@ -183,6 +216,8 @@ def _core_payload():
             "not": "Operasyonel referans noktasıdır; idari/kadastral sınır veya ada-parsel değildir.",
         },
         "operasyon_tampon_m": MONITOR_RADIUS_M,
+        "analiz_baglam_halo_m": ANALYSIS_CONTEXT_HALO_M,
+        "baglam_gereken_yaricap_m": context_radius_m,
         "uretim_bolgesi": REGION_KEY,
         "uretim_bolge_etiketi": region["label"],
         "uretim_bbox": bbox,
@@ -190,6 +225,9 @@ def _core_payload():
         "tampon_tamamen_bbox_icinde": full_radius_inside,
         "tampon_kapsama_yuzde": round(coverage_percent, 2),
         "tampon_disinda_yuzde": round(max(0.0, 100.0 - coverage_percent), 2),
+        "baglam_tamamen_bbox_icinde": full_context_inside,
+        "baglam_kapsama_yuzde": round(context_coverage_percent, 2),
+        "baglam_kenar_marji_m": round(context_margin_m),
         "kenar_mesafeleri_m": {
             "bati": round(-local["west"]),
             "dogu": round(local["east"]),
@@ -206,12 +244,15 @@ def _core_payload():
             "beklenen_uretim_birlesimi_bbox": expected_union_bbox,
             "uretim_birlesimini_tam_kapsiyor": all_contains_union,
             "gulbahce_2km_tampon_kapsama_yuzde": round(all_coverage_percent, 2),
+            "gulbahce_baglam_kapsama_yuzde": round(all_context_coverage_percent, 2),
+            "gulbahce_baglam_tamamen_icinde": all_full_context_inside,
             "durum": "ok" if not union_issues else "dikkat_gerekiyor",
             "sorunlar": union_issues,
             "not": (
                 "all zarfı doğrudan saha alarmı değildir; ancak birleşik/diagnostik taramalar "
                 "gelecekte bu anahtarı kullandığında Gülbahçe doğu kenarında sessiz körlük "
-                "oluşmaması için üretim kutularının birleşimini eksiksiz içermelidir."
+                "oluşmaması için üretim kutularının birleşimini ve analiz bağlam halosunu "
+                "eksiksiz içermelidir."
             ),
         },
         "durum": "ok" if not issues else "dikkat_gerekiyor",
@@ -259,6 +300,7 @@ def _self_check():
     assert _bbox_contains([-1.0, -2.0, 3.0, 2.0], union)
     assert not _bbox_contains([0.0, -1.0, 1.9, 1.0], union)
 
+    assert ANALYSIS_CONTEXT_HALO_M >= 120
     region_bbox = REGIONS[REGION_KEY]["bbox"]
     assert region_bbox[0] <= GULBAHCE_LON <= region_bbox[2]
     assert region_bbox[1] <= GULBAHCE_LAT <= region_bbox[3]
@@ -282,7 +324,8 @@ def main():
     print(
         "Gülbahçe kapsama: "
         f"üretim 2 km tampon %{core['tampon_kapsama_yuzde']:.2f} içeride; "
-        f"doğu kenar mesafesi {core['kenar_mesafeleri_m']['dogu']} m; "
+        f"2 km + {core['analiz_baglam_halo_m']} m bağlam %{core['baglam_kapsama_yuzde']:.2f}; "
+        f"bağlam kenar marjı {core['baglam_kenar_marji_m']} m; "
         f"all tampon %{union['gulbahce_2km_tampon_kapsama_yuzde']:.2f}; "
         f"etiket={core['mevcut_mahalle_etiketi']}; durum={core['durum']}"
     )
