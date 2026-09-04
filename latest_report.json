@@ -3150,7 +3150,10 @@
       "alarm": false,
       "saha_gorevi": false,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.263620,26.446948",
-      "neden": "Aynı 250 m²+ / yaklaşık 10 m Sentinel değişim maskesini geçti; ana 24-aday tavanının dışında kaldığı için üretim alarmı değildir. Mevcut saha görevlerinden uzakta, şantiye ölçeği kapasite kalibrasyonu için seçildi."
+      "neden": "Aynı 250 m²+ / yaklaşık 10 m Sentinel değişim maskesini geçti; ana 24-aday tavanının dışında kaldığı için üretim alarmı değildir. Mevcut saha görevlerinden uzakta, şantiye ölçeği kapasite kalibrasyonu için seçildi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.263620/26.446948",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "KAPASITE_DIAGNOSTIK",
@@ -3166,7 +3169,10 @@
       "alarm": false,
       "saha_gorevi": false,
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.220385,26.491264",
-      "neden": "Aynı 250 m²+ / yaklaşık 10 m Sentinel değişim maskesini geçti; ana 24-aday tavanının dışında kaldığı için üretim alarmı değildir. Mevcut saha görevlerinden uzakta, şantiye ölçeği kapasite kalibrasyonu için seçildi."
+      "neden": "Aynı 250 m²+ / yaklaşık 10 m Sentinel değişim maskesini geçti; ana 24-aday tavanının dışında kaldığı için üretim alarmı değildir. Mevcut saha görevlerinden uzakta, şantiye ölçeği kapasite kalibrasyonu için seçildi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.220385/26.491264",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kapasite_santiye_devriyesi_meta": {

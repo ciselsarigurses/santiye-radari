@@ -26,9 +26,9 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
 > **Alarm veya saha görevi değildir.** Aynı 250 m²+ / yaklaşık 10 m Sentinel üretim maskesini geçmiş, fakat ana 24-aday kapasitesinin dışında kalmış 800–10.000 m² adaylardan seçilir. Mevcut görevlerden uzakta en fazla iki nokta gösterilir. Amaç mevcut sahnedeki ölçülmüş kapasite körlüğünü sahada kalibre etmektir; üretim eşikleri ve alarm sayısı değişmez.
 
-1. **KAPASİTE — Mevki doğrulanmadı** · yaklaşık 1,200 m² · 29.08.2026 → 03.09.2026 · güçlü-piksel oranı 0.58 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.263620,26.446948)
+1. **KAPASİTE — Mevki doğrulanmadı** · yaklaşık 1,200 m² · 29.08.2026 → 03.09.2026 · güçlü-piksel oranı 0.58 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.263620,26.446948) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.263620/26.446948)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka neden ise onu yaz.
-2. **KAPASİTE — Mevki doğrulanmadı** · yaklaşık 2,000 m² · 29.08.2026 → 03.09.2026 · güçlü-piksel oranı 0.15 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.220385,26.491264)
+2. **KAPASİTE — Mevki doğrulanmadı** · yaklaşık 2,000 m² · 29.08.2026 → 03.09.2026 · güçlü-piksel oranı 0.15 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.220385,26.491264) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.220385/26.491264)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka neden ise onu yaz.
 
 _Kapasite özeti: cesme: üretimde 6, tavan dışında uygun havuz 261 · uzunkuyu: üretimde 5, tavan dışında uygun havuz 151_
