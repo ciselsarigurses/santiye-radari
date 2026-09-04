@@ -1,0 +1,113 @@
+{
+  "rapor_tarihi": "2026-09-04",
+  "olusturma": "2026-09-04 17:12 +0300",
+  "amac": "901-2.000 m² güçlü kuru-zemin temporal adayında 3x3 merkez değişimini 7x7 pencerenin merkez 5x5 dışındaki halkasına karşı ölçmek.",
+  "ana_uretim_esigi_m2": 250,
+  "mikro_santiye_bandi_m2": [
+    150,
+    249
+  ],
+  "izlenen_ust_bant_m2": [
+    901,
+    2000
+  ],
+  "alarm": false,
+  "saha_gorevi": false,
+  "operasyonel": false,
+  "gulbahce_operasyon_penceresi": {
+    "merkez": [
+      38.33278,
+      26.64556
+    ],
+    "yaricap_m": 2000,
+    "not": "Yalnız kör-alan diagnostik referansıdır; idari/kadastral sınır değildir."
+  },
+  "esikler": {
+    "ic_yama": "3x3",
+    "cevre_penceresi": "7x7_merkez_5x5_haric_halka",
+    "minimum_halka_gecerli_oran": 0.6666666666666666,
+    "lokal_kontrast_min": 1.5,
+    "minimum_ic_bsi_degisim": 0.1,
+    "yaygin_halka_mutlak_bsi_min": 0.1,
+    "yaygin_halka_goreli_min": 0.8
+  },
+  "uyari": "Diagnostiktir; lokal destek tek başına şantiye değildir. 250 m² ana eşik ve 150-249 m² MİKRO ŞANTİYE alarm/görev politikası değiştirilmez.",
+  "bolgeler": {
+    "cesme": {
+      "durum": "ok",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "degisim_oncesi_item": "S2A_T35SMC_20260826T090624_L2A",
+      "onceki_item": "S2B_T35SMC_20260829T090620_L2A",
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "aday": 1,
+      "lokal_destek": 0,
+      "yaygin_cevre_riski": 1,
+      "gulbahce_2km_aday": 0,
+      "adaylar": [
+        {
+          "mahalle": "Ilıca",
+          "enlem": 38.307759,
+          "boylam": 26.355596,
+          "alan_m2": 1000,
+          "son_item": "S2C_T35SMC_20260903T090747_L2A",
+          "son_tarih": "03.09.2026",
+          "ic_3x3_son_bsi_degisim": 0.1213,
+          "ic_3x3_gecerli_oran": 1.0,
+          "cevre_7x7_dis_halka_onceki_bsi_degisim": 0.0089,
+          "cevre_7x7_dis_halka_son_bsi_degisim": 0.1076,
+          "cevre_7x7_dis_halka_gecerli_oran": 1.0,
+          "cevre_7x7_dis_halka_geometri_orani": 1.0,
+          "yerellik_orani": 1.13,
+          "ust_bant_lokal_destek": false,
+          "yaygin_cevre_degisim_riski": true,
+          "yerellik_durumu": "YAYGIN_CEVRE_RISKI",
+          "ana_goreve_40m_yakin": false,
+          "gulbahce_merkeze_mesafe_m": 25475.2,
+          "gulbahce_2km_operasyon_penceresinde": false,
+          "alarm": false,
+          "saha_gorevi": false,
+          "harita": "https://www.google.com/maps/dir/?api=1&destination=38.307759,26.355596"
+        }
+      ]
+    },
+    "uzunkuyu": {
+      "durum": "ok",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "aday": 0,
+      "lokal_destek": 0,
+      "yaygin_cevre_riski": 0,
+      "gulbahce_2km_aday": 0,
+      "adaylar": []
+    }
+  },
+  "ust_bant_aday_toplam": 1,
+  "ust_bant_lokal_destek_toplam": 0,
+  "yaygin_cevre_riski_toplam": 1,
+  "gulbahce_2km_ust_bant_aday": 0,
+  "adaylar": [
+    {
+      "mahalle": "Ilıca",
+      "enlem": 38.307759,
+      "boylam": 26.355596,
+      "alan_m2": 1000,
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "son_tarih": "03.09.2026",
+      "ic_3x3_son_bsi_degisim": 0.1213,
+      "ic_3x3_gecerli_oran": 1.0,
+      "cevre_7x7_dis_halka_onceki_bsi_degisim": 0.0089,
+      "cevre_7x7_dis_halka_son_bsi_degisim": 0.1076,
+      "cevre_7x7_dis_halka_gecerli_oran": 1.0,
+      "cevre_7x7_dis_halka_geometri_orani": 1.0,
+      "yerellik_orani": 1.13,
+      "ust_bant_lokal_destek": false,
+      "yaygin_cevre_degisim_riski": true,
+      "yerellik_durumu": "YAYGIN_CEVRE_RISKI",
+      "ana_goreve_40m_yakin": false,
+      "gulbahce_merkeze_mesafe_m": 25475.2,
+      "gulbahce_2km_operasyon_penceresinde": false,
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.307759,26.355596"
+    }
+  ]
+}
