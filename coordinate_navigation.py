@@ -5,7 +5,8 @@ değiştirmez. ``coordinate_precision_audit.json`` içindeki aynı bağlı bile�
 seçilmiş BSI×RGB sinyal-ağırlıklı piksel yalnızca şu koşullarda ikinci bir
 "sinyal çekirdeği" hedefi olarak gösterilebilir:
 
-* görev yeni Sentinel görüntüsünden geliyorsa,
+* görev yeni Sentinel görüntüsünden geliyorsa veya aynı sahnede ilk kez görülmüş
+  kanıtı en fazla iki günlükse,
 * görev 250 m²+ ana üretim yolundaysa,
 * audit aynı Sentinel son sahnesine aitse,
 * audit adayı mevcut görev koordinatına yakın ve alanı aynıysa,
@@ -13,6 +14,10 @@ seçilmiş BSI×RGB sinyal-ağırlıklı piksel yalnızca şu koşullarda ikinci
 
 Amaç saha ekibine 10 m sınıfı Sentinel çözünürlüğünde daha odaklı bir kontrol
 noktası vermek; özgün koordinatı kesin adres/parsel gibi değiştirmek değildir.
+Saatlik rapor yenilemesinde ``yeni_goruntu`` biti söndüğünde gerçekten taze bir
+adayın ikinci navigasyon hedefinin birkaç saat içinde kaybolmaması için, aynı
+sahnede ilk kez görülmüş güncel kanıt iki gün boyunca korunabilir. Bu retention
+alarm/öncelik üretmez ve 150–249 m² MİKRO ŞANTİYE katmanını kapsamaz.
 """
 
 from __future__ import annotations
@@ -29,6 +34,7 @@ AUDIT_FILE = Path(__file__).with_name("coordinate_precision_audit.json")
 MAIN_MIN_AREA_M2 = 250
 MATCH_RADIUS_M = 20.0
 MAX_SIGNAL_SHIFT_M = 20.0
+RECENT_EVIDENCE_RETENTION_DAYS = 2
 
 
 def _number(value, default=None):
@@ -67,6 +73,45 @@ def _item_date(item_id):
         return None
 
 
+def _nonnegative_int(value):
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    if number < 0:
+        return None
+    return int(number)
+
+
+def _has_recent_same_scene_evidence(item):
+    """Yeni-görüntü biti söndüğünde yalnız gerçekten taze aynı-sahne kanıtını koru."""
+    if not isinstance(item, dict):
+        return False
+    if item.get("yeni_goruntu") is True:
+        return True
+
+    evidence_age = _nonnegative_int(item.get("uydu_kanit_yasi_gun"))
+    if evidence_age is None or evidence_age > RECENT_EVIDENCE_RETENTION_DAYS:
+        return False
+
+    first_seen = _normalize_date(item.get("ilk_gorulme"))
+    scene_date = _normalize_date(item.get("son_tarih"))
+    if first_seen is None or scene_date is None or first_seen != scene_date:
+        return False
+
+    # Tarihsel taşınmış, geniş yüzey veya açıkça görev dışı kayıtlar taze navigasyon
+    # hedefi kazanamaz. Alan alt eşiği signal_core_target içinde ayrıca korunur.
+    if _number(item.get("tarihsel_esleme_mesafe_m")) is not None:
+        return False
+    if item.get("genis_geometri_riski") is True:
+        return False
+    if str(item.get("izleme") or "").strip().upper() == "ARKA_PLAN_GENIS_YUZEY":
+        return False
+    if item.get("alarm") is False or item.get("saha_gorevi") is False:
+        return False
+    return True
+
+
 def load_audit(path=AUDIT_FILE):
     try:
         data = json.loads(Path(path).read_text(encoding="utf-8"))
@@ -79,7 +124,7 @@ def signal_core_target(item, audit_payload):
     """Güvenli ise ikinci navigasyon hedefini döndür; aksi halde ``None``."""
     if not isinstance(item, dict) or not isinstance(audit_payload, dict):
         return None
-    if item.get("yeni_goruntu") is not True:
+    if not _has_recent_same_scene_evidence(item):
         return None
 
     area = _number(item.get("alan_m2"))
@@ -175,8 +220,26 @@ def _self_check():
     assert result and result["kayma_m"] == 10.0
     assert result["enlem"] == 38.30009
 
-    stale = dict(fresh, yeni_goruntu=False)
+    retained = dict(
+        fresh,
+        yeni_goruntu=False,
+        ilk_gorulme="2026-09-15",
+        uydu_kanit_yasi_gun=1,
+    )
+    retained_result = signal_core_target(retained, audit)
+    assert retained_result and retained_result["kayma_m"] == 10.0
+
+    stale = dict(retained, uydu_kanit_yasi_gun=RECENT_EVIDENCE_RETENTION_DAYS + 1)
     assert signal_core_target(stale, audit) is None
+
+    preexisting = dict(retained, ilk_gorulme="2026-09-14")
+    assert signal_core_target(preexisting, audit) is None
+
+    historical = dict(retained, tarihsel_esleme_mesafe_m=8.0)
+    assert signal_core_target(historical, audit) is None
+
+    background = dict(retained, izleme="ARKA_PLAN_GENIS_YUZEY")
+    assert signal_core_target(background, audit) is None
 
     micro = dict(fresh, alan_m2=200)
     assert signal_core_target(micro, audit) is None
@@ -199,8 +262,8 @@ def main():
     _self_check()
     if args.check_only:
         print(
-            "Sinyal çekirdeği navigasyon öz testi başarılı: yalnız taze 250 m²+ "
-            "aynı-sahne/eş-bileşen adayına ikinci hedef veriliyor."
+            "Sinyal çekirdeği navigasyon öz testi başarılı: yeni veya en fazla 2 günlük "
+            "aynı-sahne ilk-görülme kanıtlı 250 m²+ adayına ikinci hedef veriliyor."
         )
         return
     print("coordinate_navigation yalnız uygulama yardımcı modülüdür; üretim verisini değiştirmez.")
