@@ -1,0 +1,52 @@
+{
+  "rapor_tarihi": "2026-09-04",
+  "olusturma": "2026-09-04 16:05 +0300",
+  "amac": "Mevcut 250-900 m² kuru-zemin teyit geçidinin üstünde kalan 901-2.000 m² güçlü temporal/izole adayları yalnız kalibrasyon için görünür kılmak.",
+  "ana_uretim_esigi_m2": 250,
+  "mevcut_kuru_zemin_dogrulama_ust_siniri_m2": 900,
+  "izlenen_ust_bant_m2": [
+    901,
+    2000
+  ],
+  "alarm": false,
+  "saha_gorevi": false,
+  "operasyonel": false,
+  "yerellik_5x5_olculmeden_15eylul_rotasina_giremez": true,
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "guclu_temporal_ust_bant": 1,
+      "ana_gorevle_zaten_kapsanan": 0,
+      "yerellik_testi_gereken": 1
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "guclu_temporal_ust_bant": 0,
+      "ana_gorevle_zaten_kapsanan": 0,
+      "yerellik_testi_gereken": 0
+    }
+  },
+  "guclu_temporal_ust_bant_toplam": 1,
+  "ana_gorev_disinda_yerellik_testi_gereken": 1,
+  "adaylar": [
+    {
+      "mahalle": "Ilıca",
+      "enlem": 38.307759,
+      "boylam": 26.355596,
+      "alan_m2": 1000,
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "son_tarih": "03.09.2026",
+      "son_cift_bsi_degisim": 0.1213,
+      "uzun_temporal_ani_baslangic_orani": 12.13,
+      "ana_goreve_40m_yakin": false,
+      "en_yakin_ana_gorev_m": 1150.5,
+      "yerellik_5x5_durumu": "UST_BANT_ICIN_HENUZ_OLCULMEDI",
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.307759,26.355596",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca"
+    }
+  ]
+}
