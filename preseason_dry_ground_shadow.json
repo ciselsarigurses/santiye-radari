@@ -1,0 +1,47 @@
+{
+  "rapor_tarihi": "2026-09-04",
+  "amac": "15 Eylül sonrası kuru-zemin teyit filtresini yasak döneminde gölge modunda ölçmek; operasyonel alarm/görev üretmeden güçlü aday hacmini kalibre etmek.",
+  "ana_alarm_alt_esigi_m2": 250,
+  "diagnostik_aralik_m2": [
+    250,
+    900
+  ],
+  "operasyonel": false,
+  "alarm": false,
+  "kalici_saha_gorevi": false,
+  "kurallar": "uzun-temporal ani başlangıç + kararlı geçmiş zemin + yörünge güveni + izole/non-lineer geometri + lokal 5x5 çevre kontrastı; ana görev 40 m içindeyse atla",
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "son_tarih": "03.09.2026",
+      "guclu_golge_aday": 1,
+      "ana_goreve_yakin_oldugu_icin_atlanan": 0
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "son_tarih": "03.09.2026",
+      "guclu_golge_aday": 0,
+      "ana_goreve_yakin_oldugu_icin_atlanan": 0
+    }
+  },
+  "guclu_golge_aday_sayisi": 1,
+  "adaylar": [
+    {
+      "mahalle": "Çiftlikköy",
+      "enlem": 38.288041,
+      "boylam": 26.285881,
+      "alan_m2": 700,
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "son_item": "S2C_T35SMC_20260903T090747_L2A",
+      "yerellik_orani": 2.2,
+      "uzun_temporal_ani_baslangic_orani": 3.73,
+      "son_cift_bsi_degisim": 0.1144,
+      "alarm": false,
+      "saha_gorevi": false,
+      "gölge_kalibrasyon": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.288041,26.285881"
+    }
+  ]
+}
