@@ -10,6 +10,7 @@ on:
       - "temporal_candidate_pool.py"
       - "temporal_locality_audit.py"
       - "coordinate_precision_audit.py"
+      - "calibration_rotation_guard.py"
       - ".github/workflows/dry-ground-temporal-audit.yml"
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
@@ -82,12 +83,15 @@ jobs:
       - name: Geometrik merkez ile sinyal-ağırlıklı Sentinel koordinatını karşılaştır
         run: python coordinate_precision_audit.py
 
+      - name: Ön sezon kalibrasyon rotasyonunu güvenli uygula
+        run: python calibration_rotation_guard.py
+
       - name: Kanonik kuru zemin raporunu geri yükle
         run: git checkout -- dry_ground_gap_audit.json
 
       - name: Diagnostik raporu kaydet
         run: |
-          report_files="dry_ground_temporal_pool.json dry_ground_temporal_audit.json temporal_locality_audit.json coordinate_precision_audit.json"
+          report_files="dry_ground_temporal_pool.json dry_ground_temporal_audit.json temporal_locality_audit.json coordinate_precision_audit.json latest_report.json SAHA_RAPORU.md"
 
           regenerate_reports() {
             echo "Güncel main üzerinde temporal diagnostikler yeniden üretiliyor."
@@ -98,6 +102,7 @@ jobs:
             python temporal_orbit_guard.py
             python temporal_locality_audit.py
             python coordinate_precision_audit.py
+            python calibration_rotation_guard.py
             git checkout -- dry_ground_gap_audit.json
           }
 
@@ -106,12 +111,12 @@ jobs:
 
           for attempt in 1 2 3; do
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-              echo "Kuru zemin zaman serisi, yerellik ve koordinat hassasiyet raporu değişmedi."
+              echo "Kuru zemin zaman serisi, yerellik, koordinat ve kalibrasyon raporu değişmedi."
               exit 0
             fi
 
             git add $report_files
-            git commit -m "Radar: kuru zemin temporal yerellik ve koordinat raporunu güncelle"
+            git commit -m "Radar: kuru zemin temporal kalibrasyon raporunu güncelle"
 
             git fetch origin main
             if ! git merge-base --is-ancestor origin/main HEAD; then
