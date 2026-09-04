@@ -1,4 +1,4 @@
-"""Sahada yanlış pozitif denmiş noktadaki yeni küçük-hafriyat sinyalini kaçırma.
+"""Sahada yanlış pozitif denmiş noktadaki yeni erken-hafriyat sinyalini kaçırma.
 
 Bir Sentinel görevi ``YANLIS_POZITIF`` olarak kapatıldığında mevcut görev eşleştirme
 mantığı aynı konumdaki sonraki hotspot'u 25 m içinde aynı ``KONTROL_EDILDI`` göreve
@@ -8,13 +8,17 @@ aynı parselde gerçekten hafriyat başlarsa yeni sinyal sessizce kapalı kalmam
 Bu koruma yalnız şu dar durumda görevi yeniden açar:
 - sonuç ``YANLIS_POZITIF`` ve görev hâlâ ``KONTROL_EDILDI``;
 - gerçekten daha yeni bir Sentinel sahnesi gelmiş ve ``yeni_goruntu`` true;
-- yeniden-beliren sinyal 250-800 m² ana alarm bandında;
-- uydu motorunun güçlü küçük-saha sınıfından geçmiş;
+- yeniden-beliren sinyal 250-2.000 m² erken/parsel ana alarm bandında;
+- 250-800 m² ise uydu motorunun güçlü küçük-saha sınıfından geçmiş;
+- 800-2.000 m² ise zaten ana üretim seçimine girmiş parsel-ölçekli hotspot;
 - yeni hotspot, eski saha sonucunun koordinatına en fazla 25 m uzakta.
 
-150-249 m² MİKRO ŞANTİYE bu koruma ile üretim görevine yükseltilmez. Geniş yüzey
-hareketleri de otomatik yeniden açılmaz. ``TARLA_BITKI`` için mevcut ayrı takip
-mekanizmasına dokunulmaz.
+Bu üst sınır ``field_state.EARLY_SITE_MATCH_MAX_M2`` ile aynıdır. Böylece görev
+eşleştirmesinin erken/parsel kabul ettiği 800-2.000 m² yeni saha kanıtı, eski bir
+yanlış-pozitif kararının içinde kapalı kalamaz. 150-249 m² MİKRO ŞANTİYE bu koruma
+ile üretim görevine yükseltilmez; 2.000 m² üzerindeki geniş yüzey hareketleri de
+otomatik yeniden açılmaz. ``TARLA_BITKI`` için mevcut ayrı takip mekanizmasına
+dokunulmaz.
 """
 
 from __future__ import annotations
@@ -25,12 +29,13 @@ from datetime import datetime, timezone
 
 from daily_report import ISTANBUL, _report_hotspots, ensure_daily_schema
 from field_outcome import ensure_outcome_schema
-from field_state import ensure_state_schema
+from field_state import EARLY_SITE_MATCH_MAX_M2, ensure_state_schema
 from scanner import connect
 
 
 MIN_AREA_M2 = 250
-MAX_AREA_M2 = 800
+STRONG_SMALL_MAX_M2 = 800
+EARLY_SITE_MAX_M2 = EARLY_SITE_MATCH_MAX_M2
 MAX_MATCH_METERS = 25
 
 
@@ -57,20 +62,37 @@ def _distance_m(lat1, lon1, lat2, lon2):
     return math.hypot(north, east)
 
 
-def _strong_small_site(item):
+def _area_m2(item):
     try:
-        area_m2 = float(item.get("alan_m2") or 0)
+        return float(item.get("alan_m2") or 0)
     except (TypeError, ValueError, AttributeError):
-        return False
-    if not (MIN_AREA_M2 <= area_m2 <= MAX_AREA_M2):
+        return 0.0
+
+
+def _strong_small_site(item):
+    area_m2 = _area_m2(item)
+    if not (MIN_AREA_M2 <= area_m2 <= STRONG_SMALL_MAX_M2):
         return False
     size_class = str(item.get("boyut_sinifi") or "").strip().upper()
     signal = str(item.get("sinyal") or "").casefold()
     return size_class == "KUCUK" or "küçük, güçlü" in signal
 
 
+def _eligible_early_site(item):
+    """Üretimde zaten seçilmiş erken/parsel adayı güvenli yeniden-açma sınıfına al."""
+    area_m2 = _area_m2(item)
+    if not (MIN_AREA_M2 <= area_m2 <= EARLY_SITE_MAX_M2):
+        return False
+    if area_m2 <= STRONG_SMALL_MAX_M2:
+        return _strong_small_site(item)
+    # 800-2.000 m² için ek alarm üretmiyoruz: _report_hotspots yalnız ana üretim
+    # hareket_json listesine seçilmiş hotspot'ları döndürür. Bu sınıf field_state
+    # tarafından da 25 m erken/parsel eşleşme korumasıyla ele alınır.
+    return True
+
+
 def _safe_new_reappearance(saved_scene, item):
-    if not bool(item.get("yeni_goruntu")) or not _strong_small_site(item):
+    if not bool(item.get("yeni_goruntu")) or not _eligible_early_site(item):
         return False
     saved = _scene_date(saved_scene)
     current = _scene_date(item.get("son_tarih"))
@@ -86,7 +108,7 @@ def _report_date(connection):
 
 
 def reopen_false_positive_reappearances():
-    """Yeni güçlü küçük-saha kanıtıyla dönen tamamlanmış yanlış pozitifleri aç."""
+    """Yeni erken/parsel kanıtıyla dönen tamamlanmış yanlış pozitifleri aç."""
     ensure_daily_schema()
     reopened = []
     with connect() as connection:
@@ -154,15 +176,24 @@ def _self_check():
         "son_tarih": "03.09.2026",
         "yeni_goruntu": True,
     }
+    assert EARLY_SITE_MAX_M2 == 2_000
     assert _safe_new_reappearance("29.08.2026", base)
     assert not _safe_new_reappearance("03.09.2026", base)
     assert not _safe_new_reappearance("29.08.2026", dict(base, yeni_goruntu=False))
     assert not _safe_new_reappearance("29.08.2026", dict(base, alan_m2=200))
-    assert not _safe_new_reappearance("29.08.2026", dict(base, alan_m2=900))
     assert not _safe_new_reappearance(
         "29.08.2026",
-        dict(base, boyut_sinifi="STANDART", sinyal="Yüzey değişimi adayı"),
+        dict(base, alan_m2=700, boyut_sinifi="STANDART", sinyal="Yüzey değişimi adayı"),
     )
+    parsel = dict(
+        base,
+        alan_m2=1_100,
+        boyut_sinifi="STANDART",
+        sinyal="Yüzey değişimi adayı",
+    )
+    assert _safe_new_reappearance("29.08.2026", parsel)
+    assert _safe_new_reappearance("29.08.2026", dict(parsel, alan_m2=2_000))
+    assert not _safe_new_reappearance("29.08.2026", dict(parsel, alan_m2=2_001))
     assert _distance_m(38.30, 26.30, 38.30, 26.30) == 0
 
 
@@ -174,7 +205,8 @@ def main(argv=None):
     if args.check_only:
         print(
             "Yanlış pozitif yeniden-belirme koruması öz testi başarılı: "
-            "yalnız daha yeni 250-800 m² güçlü küçük-saha kanıtı kabul ediliyor."
+            "yalnız daha yeni 250-2.000 m² erken/parsel ana-üretim kanıtı kabul ediliyor; "
+            "250-800 m² sınıfında güçlü küçük-saha filtresi zorunlu."
         )
         return
 
@@ -187,7 +219,7 @@ def main(argv=None):
                 )
             )
     else:
-        print("Daha yeni güçlü küçük-saha kanıtıyla dönen kapalı yanlış pozitif yok.")
+        print("Daha yeni erken/parsel kanıtıyla dönen kapalı yanlış pozitif yok.")
 
 
 if __name__ == "__main__":
