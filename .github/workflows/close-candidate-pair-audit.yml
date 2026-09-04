@@ -1,0 +1,51 @@
+name: Yakın Aday Geometri Denetimi
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "latest_report.json"
+      - "close_candidate_pair_audit.py"
+      - ".github/workflows/close-candidate-pair-audit.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: close-candidate-pair-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Yakın aday diagnostigini çalıştır
+        run: python close_candidate_pair_audit.py
+
+      - name: Sonucu yalnız anlamlı değişiklikte kaydet
+        shell: bash
+        run: |
+          if [[ ! -f close_candidate_pair_audit.json ]]; then
+            echo "Diagnostik çıktı oluşmadı."
+            exit 1
+          fi
+          git add close_candidate_pair_audit.json
+          if git diff --cached --quiet; then
+            echo "Semantik sonuç değişmedi; commit yok."
+            exit 0
+          fi
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git commit -m "Radar: yakın aday geometri sonucunu güncelle"
+          git push
