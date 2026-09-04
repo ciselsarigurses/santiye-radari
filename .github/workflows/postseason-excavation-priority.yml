@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "postseason_excavation_priority_guard.py"
+      - "postseason_fresh_evidence_guard.py"
       - "postseason_dry_ground_confirmation_guard.py"
       - "postseason_capacity_preview.py"
       - ".github/workflows/postseason-excavation-priority.yml"
@@ -44,6 +45,9 @@ jobs:
       - name: 15 Eylül taze kazı önceliği öz testi
         run: python postseason_excavation_priority_guard.py --self-check
 
+      - name: 15 Eylül taze Sentinel kanıt retention öz testi
+        run: python postseason_fresh_evidence_guard.py --self-check
+
       - name: 15 Eylül kuru zemin teyit geçidi öz testi
         run: python postseason_dry_ground_confirmation_guard.py --self-check
 
@@ -53,6 +57,7 @@ jobs:
       - name: Sezon durumuna göre operasyon önceliğini uygula
         run: |
           python postseason_excavation_priority_guard.py
+          python postseason_fresh_evidence_guard.py
           python postseason_dry_ground_confirmation_guard.py
           python postseason_capacity_preview.py
 
@@ -75,9 +80,11 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python postseason_excavation_priority_guard.py --self-check
+            python postseason_fresh_evidence_guard.py --self-check
             python postseason_dry_ground_confirmation_guard.py --self-check
             python postseason_capacity_preview.py --check-only
             python postseason_excavation_priority_guard.py
+            python postseason_fresh_evidence_guard.py
             python postseason_dry_ground_confirmation_guard.py
             python postseason_capacity_preview.py
 
