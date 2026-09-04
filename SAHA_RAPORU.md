@@ -3,7 +3,7 @@
 **Rapor tarihi:** 2026-09-04
 **Hazırlanma:** 2026-09-04 15:18 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 105 · Geciken kontrol: 64 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)
+**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 99 · Geciken kontrol: 58 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif) · Arka plan geniş yüzey: 6
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
@@ -592,66 +592,6 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 58. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.2193, 26.413864`
-- **Değişim alanı:** yaklaşık 136.813 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.219300,26.413864)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 59. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.24146, 26.40608`
-- **Değişim alanı:** yaklaşık 137.513 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.241460,26.406080)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 60. GECİKEN — Germiyan
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Germiyan
-- **Koordinat:** `38.329738, 26.489876`
-- **Değişim alanı:** yaklaşık 145.014 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.329738,26.489876)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 61. GECİKEN — Germiyan
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Germiyan
-- **Koordinat:** `38.335979, 26.483809`
-- **Değişim alanı:** yaklaşık 146.314 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.335979,26.483809)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 62. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.344571, 26.475452`
-- **Değişim alanı:** yaklaşık 147.614 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.344571,26.475452)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 63. GECİKEN — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.253128, 26.424511`
-- **Değişim alanı:** yaklaşık 204.420 m²
-- **Görüntü aralığı:** 26.08.2026 → 29.08.2026
-- **Sinyal:** 6 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.253128,26.424511)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 64. GECİKEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.318432, 26.613512`
 - **Değişim alanı:** yaklaşık 9.200 m²
@@ -661,7 +601,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318432,26.613512)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 65. GECİKEN — Dalyan
+### 59. GECİKEN — Dalyan
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Dalyan
 - **Koordinat:** `38.338783, 26.311638`
 - **Değişim alanı:** yaklaşık 400 m²
@@ -671,7 +611,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.338783,26.311638)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 66. GECİKEN — Ovacık
+### 60. GECİKEN — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.223732, 26.39303`
 - **Değişim alanı:** yaklaşık 800 m²
@@ -681,7 +621,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.223732,26.393030)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 67. GECİKEN — Germiyan
+### 61. GECİKEN — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.317087, 26.467118`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -691,7 +631,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.317087,26.467118)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 68. GECİKEN — Mevki doğrulanmadı
+### 62. GECİKEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.227531, 26.428861`
 - **Değişim alanı:** yaklaşık 58.006 m²
@@ -701,7 +641,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.227531,26.428861)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 69. GECİKEN — Mevki doğrulanmadı
+### 63. GECİKEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.224908, 26.400471`
 - **Değişim alanı:** yaklaşık 50.505 m²
@@ -711,7 +651,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.224908,26.400471)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 70. GECİKEN — Mevki doğrulanmadı
+### 64. GECİKEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.308663, 26.462996`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -721,7 +661,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 71. PARSEL — Mevki doğrulanmadı
+### 65. PARSEL — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.271579, 26.305456`
 - **Değişim alanı:** yaklaşık 1.100 m²
@@ -731,7 +671,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.271579,26.305456)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 72. PARSEL — Germiyan
+### 66. PARSEL — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.325125, 26.475239`
 - **Değişim alanı:** yaklaşık 1.300 m²
@@ -741,7 +681,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.325125,26.475239)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 73. PARSEL — Mevki doğrulanmadı
+### 67. PARSEL — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.318793, 26.615801`
 - **Değişim alanı:** yaklaşık 1.400 m²
@@ -751,7 +691,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318793,26.615801)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 74. PARSEL — Musalla
+### 68. PARSEL — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.298442, 26.305571`
 - **Değişim alanı:** yaklaşık 1.500 m²
@@ -761,7 +701,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.298442,26.305571)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 75. PARSEL — Ovacık
+### 69. PARSEL — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.26977, 26.311523`
 - **Değişim alanı:** yaklaşık 1.800 m²
@@ -771,7 +711,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.269770,26.311523)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 76. PARSEL — Mevki doğrulanmadı
+### 70. PARSEL — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.318703, 26.610765`
 - **Değişim alanı:** yaklaşık 1.800 m²
@@ -781,7 +721,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318703,26.610765)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 77. YÜKSEK — Germiyan
+### 71. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.326843, 26.494813`
 - **Değişim alanı:** yaklaşık 55.900 m²
@@ -791,7 +731,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.326843,26.494813)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 78. YÜKSEK — Mevki doğrulanmadı
+### 72. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.237932, 26.44878`
 - **Değişim alanı:** yaklaşık 34.903 m²
@@ -801,7 +741,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.237932,26.448780)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 79. YÜKSEK — Germiyan
+### 73. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Germiyan
 - **Koordinat:** `38.315537, 26.486671`
 - **Değişim alanı:** yaklaşık 32.803 m²
@@ -811,7 +751,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315537,26.486671)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 80. YÜKSEK — Germiyan
+### 74. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.300432, 26.516561`
 - **Değişim alanı:** yaklaşık 32.400 m²
@@ -821,7 +761,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.300432,26.516561)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 81. YÜKSEK — Mevki doğrulanmadı
+### 75. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.218576, 26.40837`
 - **Değişim alanı:** yaklaşık 30.803 m²
@@ -831,7 +771,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.218576,26.408370)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 82. YÜKSEK — Germiyan
+### 76. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.308935, 26.507404`
 - **Değişim alanı:** yaklaşık 29.900 m²
@@ -841,7 +781,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.308935,26.507404)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 83. YÜKSEK — Germiyan
+### 77. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.338692, 26.47192`
 - **Değişim alanı:** yaklaşık 27.000 m²
@@ -851,7 +791,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.338692,26.471920)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 84. YÜKSEK — Mevki doğrulanmadı
+### 78. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.257741, 26.451316`
 - **Değişim alanı:** yaklaşık 20.200 m²
@@ -861,7 +801,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.257741,26.451316)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 85. YÜKSEK — Germiyan
+### 79. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.322954, 26.474209`
 - **Değişim alanı:** yaklaşık 19.400 m²
@@ -871,7 +811,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.322954,26.474209)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 86. YÜKSEK — Germiyan
+### 80. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.30595, 26.51244`
 - **Değişim alanı:** yaklaşık 19.300 m²
@@ -881,7 +821,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.305950,26.512440)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 87. YÜKSEK — Mevki doğrulanmadı
+### 81. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.288764, 26.48268`
 - **Değişim alanı:** yaklaşık 18.000 m²
@@ -891,7 +831,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.288764,26.482680)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 88. YÜKSEK — Mevki doğrulanmadı
+### 82. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.286775, 26.505343`
 - **Değişim alanı:** yaklaşık 16.300 m²
@@ -901,7 +841,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.286775,26.505343)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 89. YÜKSEK — Germiyan
+### 83. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.315447, 26.50294`
 - **Değişim alanı:** yaklaşık 15.100 m²
@@ -911,7 +851,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315447,26.502940)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 90. YÜKSEK — Germiyan
+### 84. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.314271, 26.488059`
 - **Değişim alanı:** yaklaşık 14.500 m²
@@ -921,7 +861,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.314271,26.488059)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 91. YÜKSEK — Germiyan
+### 85. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.31599, 26.4686`
 - **Değişim alanı:** yaklaşık 14.300 m²
@@ -931,7 +871,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315990,26.468600)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 92. YÜKSEK — Şifne
+### 86. YÜKSEK — Şifne
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Şifne
 - **Koordinat:** `38.326029, 26.46013`
 - **Değişim alanı:** yaklaşık 12.800 m²
@@ -941,7 +881,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.326029,26.460130)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 93. YÜKSEK — Germiyan
+### 87. YÜKSEK — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.327386, 26.485083`
 - **Değişim alanı:** yaklaşık 12.100 m²
@@ -951,7 +891,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.327386,26.485083)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 94. YÜKSEK — Mevki doğrulanmadı
+### 88. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.242183, 26.456238`
 - **Değişim alanı:** yaklaşık 12.000 m²
@@ -961,7 +901,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.242183,26.456238)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 95. YÜKSEK — Mevki doğrulanmadı
+### 89. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.265248, 26.428975`
 - **Değişim alanı:** yaklaşık 5.000 m²
@@ -971,7 +911,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.265248,26.428975)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 96. ORTA — Çiftlikköy
+### 90. ORTA — Çiftlikköy
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Çiftlikköy
 - **Koordinat:** `38.272755, 26.279585`
 - **Değişim alanı:** yaklaşık 3.400 m²
@@ -981,7 +921,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.272755,26.279585)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 97. ORTA — Gülbahçe
+### 91. ORTA — Gülbahçe
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Gülbahçe
 - **Koordinat:** `38.319607, 26.617404`
 - **Değişim alanı:** yaklaşık 3.400 m²
@@ -991,7 +931,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.319607,26.617404)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 98. ORTA — Mevki doğrulanmadı
+### 92. ORTA — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.215772, 26.452672`
 - **Değişim alanı:** yaklaşık 3.100 m²
@@ -1001,7 +941,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.215772,26.452672)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 99. BEKLEYEN — Mevki doğrulanmadı
+### 93. BEKLEYEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.351445, 26.467347`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -1011,7 +951,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.351445,26.467347)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 100. BEKLEYEN — Mevki doğrulanmadı
+### 94. BEKLEYEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.287317, 26.501813`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -1021,7 +961,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.287317,26.501813)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 101. BEKLEYEN — Mevki doğrulanmadı
+### 95. BEKLEYEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.217581, 26.453034`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -1031,7 +971,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.217581,26.453034)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 102. BEKLEYEN — Germiyan
+### 96. BEKLEYEN — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.315537, 26.486698`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -1041,7 +981,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315537,26.486698)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 103. BEKLEYEN — Germiyan
+### 97. BEKLEYEN — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.331275, 26.484866`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -1051,7 +991,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.331275,26.484866)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 104. BEKLEYEN — Mevki doğrulanmadı
+### 98. BEKLEYEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.24761, 26.561355`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -1061,7 +1001,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.247610,26.561355)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 105. BEKLEYEN — Germiyan
+### 99. BEKLEYEN — Germiyan
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
 - **Koordinat:** `38.32015, 26.466775`
 - **Değişim alanı:** yaklaşık 0 m²
@@ -1081,3 +1021,14 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması değildir; yanlış pozitifler saha kontrolüyle elenir.
+
+## Arka planda izlenen geniş yüzey hareketleri
+
+> Bu bölüm **şantiye alarmı veya saha görevi değildir**. 10.000 m² üstü ve ölçülen düşük-kompaktlık riski taşıyan geniş değişimler; tarım, toprak temizliği, doğal/kırsal yüzey hareketi veya başka geniş arazi müdahalesi olasılığı nedeniyle operasyon listesinden ayrılır. Ham radar kaydı silinmez; yeni görüntüde kompakt/parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa yeniden değerlendirilir.
+
+- **Mevki doğrulanmadı · yaklaşık 204.420 m²** — kompaktlık 0.072; koordinat `38.253128, 26.424511` · kanıt `shape_false_positive_audit_tarihsel_tasima` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.253128,26.424511) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511)
+- **Mevki doğrulanmadı · yaklaşık 147.614 m²** — kompaktlık 0.025; koordinat `38.344571, 26.475452` · kanıt `shape_false_positive_audit_tarihsel_tasima` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.344571,26.475452) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452)
+- **Germiyan · yaklaşık 146.314 m²** — kompaktlık 0.097; koordinat `38.335979, 26.483809` · kanıt `shape_false_positive_audit_tarihsel_tasima` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.335979,26.483809) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809)
+- **Germiyan · yaklaşık 145.014 m²** — kompaktlık 0.051; koordinat `38.329738, 26.489876` · kanıt `shape_false_positive_audit_tarihsel_tasima` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.329738,26.489876) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876)
+- **Mevki doğrulanmadı · yaklaşık 137.513 m²** — kompaktlık 0.131; koordinat `38.24146, 26.40608` · kanıt `shape_false_positive_audit_tarihsel_tasima` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.241460,26.406080) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080)
+- **Mevki doğrulanmadı · yaklaşık 136.813 m²** — kompaktlık 0.122; koordinat `38.2193, 26.413864` · kanıt `shape_false_positive_audit_tarihsel_tasima` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.219300,26.413864) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864)
