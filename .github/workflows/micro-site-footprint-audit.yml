@@ -7,6 +7,7 @@ on:
       - "micro_site_temporal_footprint_audit.py"
       - "micro_site_footprint_priority_review.py"
       - "micro_site_watchlist.py"
+      - "micro_site_identity_guard.py"
       - "micro_site_audit.py"
       - "micro_site_shortlist.json"
       - "micro_site_temporal_review.json"
@@ -64,6 +65,12 @@ jobs:
 
       - name: Güçlü mikro adayları Sentinel sahneleri arasında koru
         run: python micro_site_watchlist.py
+
+      - name: Mikro mekansal kimlik koruması öz testini çalıştır
+        run: python micro_site_identity_guard.py --check-only
+
+      - name: Farklı sahnedeki mikro tekrarın aynı küçük alanla uyumunu işaretle
+        run: python micro_site_identity_guard.py
 
       - name: Sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
