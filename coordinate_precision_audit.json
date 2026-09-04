@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-04",
-  "olusturma": "2026-09-04 11:26 +0300",
+  "olusturma": "2026-09-04 13:16 +0300",
   "amac": "Mevcut Sentinel aday koordinatının geometrik temsil pikseli ile aynı bağlı bileşendeki BSI×RGB değişim gücüne göre sinyal-ağırlıklı temsil pikseli arasındaki farkı ölçmek; koordinatı otomatik değiştirmeden 10 m sınıfı hassasiyet iyileştirmesini doğrulamak.",
   "uyari": "Bu çıktı alarm/görev/eşik değiştirmez. Sinyal-ağırlıklı koordinat yalnız diagnostiktir; saha doğrulaması olmadan kesin adres veya parsel değildir.",
   "bolgeler": {
@@ -77,18 +77,6 @@
         },
         {
           "mahalle": "Mevki doğrulanmadı",
-          "alan_m2": 600,
-          "mevcut_enlem": 38.275469,
-          "mevcut_boylam": 26.231963,
-          "geometrik_enlem": 38.275469,
-          "geometrik_boylam": 26.231963,
-          "sinyal_agirlikli_enlem": 38.275559,
-          "sinyal_agirlikli_boylam": 26.231963,
-          "geometrik_sinyal_kaymasi_m": 10.0,
-          "bilesen_piksel": 6
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 400,
           "mevcut_enlem": 38.241098,
           "mevcut_boylam": 26.437904,
@@ -96,18 +84,6 @@
           "geometrik_boylam": 26.437904,
           "sinyal_agirlikli_enlem": 38.241188,
           "sinyal_agirlikli_boylam": 26.437904,
-          "geometrik_sinyal_kaymasi_m": 10.0,
-          "bilesen_piksel": 4
-        },
-        {
-          "mahalle": "Şifne",
-          "alan_m2": 400,
-          "mevcut_enlem": 38.331637,
-          "mevcut_boylam": 26.411689,
-          "geometrik_enlem": 38.331637,
-          "geometrik_boylam": 26.411689,
-          "sinyal_agirlikli_enlem": 38.331637,
-          "sinyal_agirlikli_boylam": 26.411575,
           "geometrik_sinyal_kaymasi_m": 10.0,
           "bilesen_piksel": 4
         },
@@ -136,16 +112,16 @@
           "bilesen_piksel": 7
         },
         {
-          "mahalle": "Dalyan",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.352983,
-          "mevcut_boylam": 26.31324,
-          "geometrik_enlem": 38.352983,
-          "geometrik_boylam": 26.31324,
-          "sinyal_agirlikli_enlem": 38.352983,
-          "sinyal_agirlikli_boylam": 26.31324,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 600,
+          "mevcut_enlem": 38.242183,
+          "mevcut_boylam": 26.437561,
+          "geometrik_enlem": 38.242183,
+          "geometrik_boylam": 26.437561,
+          "sinyal_agirlikli_enlem": 38.242183,
+          "sinyal_agirlikli_boylam": 26.437675,
+          "geometrik_sinyal_kaymasi_m": 10.0,
+          "bilesen_piksel": 6
         },
         {
           "mahalle": "Mevki doğrulanmadı",
@@ -156,18 +132,6 @@
           "geometrik_boylam": 26.406424,
           "sinyal_agirlikli_enlem": 38.240013,
           "sinyal_agirlikli_boylam": 26.406424,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.229792,
-          "mevcut_boylam": 26.392114,
-          "geometrik_enlem": 38.229792,
-          "geometrik_boylam": 26.392114,
-          "sinyal_agirlikli_enlem": 38.229792,
-          "sinyal_agirlikli_boylam": 26.392114,
           "geometrik_sinyal_kaymasi_m": 0.0,
           "bilesen_piksel": 3
         },
@@ -234,18 +198,6 @@
         {
           "mahalle": "Mevki doğrulanmadı",
           "alan_m2": 500,
-          "mevcut_enlem": 38.206185,
-          "mevcut_boylam": 26.418672,
-          "geometrik_enlem": 38.206185,
-          "geometrik_boylam": 26.418672,
-          "sinyal_agirlikli_enlem": 38.206185,
-          "sinyal_agirlikli_boylam": 26.418672,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 5
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "alan_m2": 500,
           "mevcut_enlem": 38.255208,
           "mevcut_boylam": 26.415811,
           "geometrik_enlem": 38.255208,
@@ -266,6 +218,30 @@
           "sinyal_agirlikli_boylam": 26.427373,
           "geometrik_sinyal_kaymasi_m": 0.0,
           "bilesen_piksel": 12
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 800,
+          "mevcut_enlem": 38.253128,
+          "mevcut_boylam": 26.422336,
+          "geometrik_enlem": 38.253128,
+          "geometrik_boylam": 26.422336,
+          "sinyal_agirlikli_enlem": 38.253128,
+          "sinyal_agirlikli_boylam": 26.422336,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 8
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.26163,
+          "mevcut_boylam": 26.430349,
+          "geometrik_enlem": 38.26163,
+          "geometrik_boylam": 26.430349,
+          "sinyal_agirlikli_enlem": 38.26163,
+          "sinyal_agirlikli_boylam": 26.430349,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
         },
         {
           "mahalle": "Germiyan",
@@ -328,18 +304,6 @@
           "bilesen_piksel": 7
         },
         {
-          "mahalle": "Musalla",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.317256,
-          "mevcut_boylam": 26.287369,
-          "geometrik_enlem": 38.317256,
-          "geometrik_boylam": 26.287369,
-          "sinyal_agirlikli_enlem": 38.317256,
-          "sinyal_agirlikli_boylam": 26.287369,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
-        },
-        {
           "mahalle": "Ildır",
           "alan_m2": 400,
           "mevcut_enlem": 38.358953,
@@ -360,30 +324,6 @@
           "geometrik_boylam": 26.311294,
           "sinyal_agirlikli_enlem": 38.261178,
           "sinyal_agirlikli_boylam": 26.311294,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "alan_m2": 800,
-          "mevcut_enlem": 38.253128,
-          "mevcut_boylam": 26.422336,
-          "geometrik_enlem": 38.253128,
-          "geometrik_boylam": 26.422336,
-          "sinyal_agirlikli_enlem": 38.253128,
-          "sinyal_agirlikli_boylam": 26.422336,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 8
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.26163,
-          "mevcut_boylam": 26.430349,
-          "geometrik_enlem": 38.26163,
-          "geometrik_boylam": 26.430349,
-          "sinyal_agirlikli_enlem": 38.26163,
-          "sinyal_agirlikli_boylam": 26.430349,
           "geometrik_sinyal_kaymasi_m": 0.0,
           "bilesen_piksel": 3
         },
@@ -458,18 +398,6 @@
           "sinyal_agirlikli_boylam": 26.465264,
           "geometrik_sinyal_kaymasi_m": 0.0,
           "bilesen_piksel": 12
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.222375,
-          "mevcut_boylam": 26.424053,
-          "geometrik_enlem": 38.222375,
-          "geometrik_boylam": 26.424053,
-          "sinyal_agirlikli_enlem": 38.222375,
-          "sinyal_agirlikli_boylam": 26.424053,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
         },
         {
           "mahalle": "Mevki doğrulanmadı",
@@ -590,6 +518,78 @@
           "sinyal_agirlikli_boylam": 26.49125,
           "geometrik_sinyal_kaymasi_m": 0.0,
           "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.291297,
+          "mevcut_boylam": 26.483008,
+          "geometrik_enlem": 38.291297,
+          "geometrik_boylam": 26.483008,
+          "sinyal_agirlikli_enlem": 38.291297,
+          "sinyal_agirlikli_boylam": 26.483008,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.312462,
+          "mevcut_boylam": 26.460685,
+          "geometrik_enlem": 38.312462,
+          "geometrik_boylam": 26.460685,
+          "sinyal_agirlikli_enlem": 38.312462,
+          "sinyal_agirlikli_boylam": 26.460685,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 600,
+          "mevcut_enlem": 38.215682,
+          "mevcut_boylam": 26.45084,
+          "geometrik_enlem": 38.215682,
+          "geometrik_boylam": 26.45084,
+          "sinyal_agirlikli_enlem": 38.215682,
+          "sinyal_agirlikli_boylam": 26.45084,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 6
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.216858,
+          "mevcut_boylam": 26.414437,
+          "geometrik_enlem": 38.216858,
+          "geometrik_boylam": 26.414437,
+          "sinyal_agirlikli_enlem": 38.216858,
+          "sinyal_agirlikli_boylam": 26.414437,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Germiyan",
+          "alan_m2": 400,
+          "mevcut_enlem": 38.340501,
+          "mevcut_boylam": 26.483695,
+          "geometrik_enlem": 38.340501,
+          "geometrik_boylam": 26.483695,
+          "sinyal_agirlikli_enlem": 38.340501,
+          "sinyal_agirlikli_boylam": 26.483695,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 4
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 600,
+          "mevcut_enlem": 38.343305,
+          "mevcut_boylam": 26.464463,
+          "geometrik_enlem": 38.343305,
+          "geometrik_boylam": 26.464463,
+          "sinyal_agirlikli_enlem": 38.343305,
+          "sinyal_agirlikli_boylam": 26.464463,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 6
         }
       ]
     },
@@ -1037,18 +1037,6 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Mevki doğrulanmadı",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.383916,
-          "mevcut_boylam": 26.629194,
-          "geometrik_enlem": 38.383916,
-          "geometrik_boylam": 26.629194,
-          "sinyal_agirlikli_enlem": 38.383916,
-          "sinyal_agirlikli_boylam": 26.629194,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
-        },
-        {
           "mahalle": "Germiyan",
           "alan_m2": 300,
           "mevcut_enlem": 38.315809,
@@ -1179,6 +1167,18 @@
           "sinyal_agirlikli_boylam": 26.46654,
           "geometrik_sinyal_kaymasi_m": 0.0,
           "bilesen_piksel": 4
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.340139,
+          "mevcut_boylam": 26.464136,
+          "geometrik_enlem": 38.340139,
+          "geometrik_boylam": 26.464136,
+          "sinyal_agirlikli_enlem": 38.340139,
+          "sinyal_agirlikli_boylam": 26.464136,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
         }
       ]
     }

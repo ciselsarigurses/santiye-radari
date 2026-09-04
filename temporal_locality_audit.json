@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-04",
-  "olusturma": "2026-09-04 11:25 +0300",
+  "olusturma": "2026-09-04 13:16 +0300",
   "amac": "250-900 m² temporal kuru-zemin adayında 3x3 değişimin hemen dışındaki 5x5 halkaya göre yerel mi yaygın mı olduğunu ölçmek.",
   "esikler": {
     "kucuk_orta_maks_alan_m2": 900,
@@ -123,22 +123,6 @@
           "kayitli_3x3_farki": 1.1e-05
         },
         {
-          "mahalle": "Musalla",
-          "enlem": 38.317256,
-          "boylam": 26.287369,
-          "alan_m2": 300,
-          "ani_baslangic_destegi": false,
-          "ic_3x3_son_bsi_degisim": 0.0823,
-          "ic_3x3_gecerli_oran": 0.667,
-          "cevre_halka_onceki_bsi_degisim": 0.067,
-          "cevre_halka_son_bsi_degisim": 0.0355,
-          "cevre_halka_gecerli_oran": 0.688,
-          "yerellik_orani": 2.32,
-          "lokal_ani_baslangic_destegi": false,
-          "yaygin_cevre_degisim_riski": false,
-          "kayitli_3x3_farki": 7e-06
-        },
-        {
           "mahalle": "Germiyan",
           "enlem": 38.333898,
           "boylam": 26.492738,
@@ -185,22 +169,6 @@
           "lokal_ani_baslangic_destegi": false,
           "yaygin_cevre_degisim_riski": false,
           "kayitli_3x3_farki": 2.7e-05
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.222375,
-          "boylam": 26.424053,
-          "alan_m2": 300,
-          "ani_baslangic_destegi": false,
-          "ic_3x3_son_bsi_degisim": 0.0905,
-          "ic_3x3_gecerli_oran": 0.667,
-          "cevre_halka_onceki_bsi_degisim": 0.0412,
-          "cevre_halka_son_bsi_degisim": 0.0441,
-          "cevre_halka_gecerli_oran": 0.438,
-          "yerellik_orani": 2.05,
-          "lokal_ani_baslangic_destegi": false,
-          "yaygin_cevre_degisim_riski": false,
-          "kayitli_3x3_farki": 9e-06
         },
         {
           "mahalle": "Mevki doğrulanmadı",
@@ -267,38 +235,6 @@
           "kayitli_3x3_farki": 3.4e-05
         },
         {
-          "mahalle": "Dalyan",
-          "enlem": 38.352983,
-          "boylam": 26.31324,
-          "alan_m2": 300,
-          "ani_baslangic_destegi": false,
-          "ic_3x3_son_bsi_degisim": 0.4851,
-          "ic_3x3_gecerli_oran": 1.0,
-          "cevre_halka_onceki_bsi_degisim": 0.2947,
-          "cevre_halka_son_bsi_degisim": 0.267,
-          "cevre_halka_gecerli_oran": 0.688,
-          "yerellik_orani": 1.82,
-          "lokal_ani_baslangic_destegi": false,
-          "yaygin_cevre_degisim_riski": false,
-          "kayitli_3x3_farki": 4.9e-05
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.206185,
-          "boylam": 26.418672,
-          "alan_m2": 500,
-          "ani_baslangic_destegi": false,
-          "ic_3x3_son_bsi_degisim": 0.2803,
-          "ic_3x3_gecerli_oran": 0.778,
-          "cevre_halka_onceki_bsi_degisim": 0.1746,
-          "cevre_halka_son_bsi_degisim": 0.1544,
-          "cevre_halka_gecerli_oran": 0.688,
-          "yerellik_orani": 1.81,
-          "lokal_ani_baslangic_destegi": false,
-          "yaygin_cevre_degisim_riski": false,
-          "kayitli_3x3_farki": 4.3e-05
-        },
-        {
           "mahalle": "Germiyan",
           "enlem": 38.31816,
           "boylam": 26.46389,
@@ -347,6 +283,22 @@
           "kayitli_3x3_farki": 3.2e-05
         },
         {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.216858,
+          "boylam": 26.414437,
+          "alan_m2": 300,
+          "ani_baslangic_destegi": false,
+          "ic_3x3_son_bsi_degisim": 0.0878,
+          "ic_3x3_gecerli_oran": 1.0,
+          "cevre_halka_onceki_bsi_degisim": 0.0533,
+          "cevre_halka_son_bsi_degisim": 0.0527,
+          "cevre_halka_gecerli_oran": 0.562,
+          "yerellik_orani": 1.67,
+          "lokal_ani_baslangic_destegi": false,
+          "yaygin_cevre_degisim_riski": false,
+          "kayitli_3x3_farki": 3.9e-05
+        },
+        {
           "mahalle": "Şifne",
           "enlem": 38.327476,
           "boylam": 26.461372,
@@ -380,6 +332,22 @@
         },
         {
           "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.242183,
+          "boylam": 26.437561,
+          "alan_m2": 600,
+          "ani_baslangic_destegi": false,
+          "ic_3x3_son_bsi_degisim": 0.1235,
+          "ic_3x3_gecerli_oran": 1.0,
+          "cevre_halka_onceki_bsi_degisim": 0.093,
+          "cevre_halka_son_bsi_degisim": 0.0762,
+          "cevre_halka_gecerli_oran": 1.0,
+          "yerellik_orani": 1.62,
+          "lokal_ani_baslangic_destegi": false,
+          "yaygin_cevre_degisim_riski": false,
+          "kayitli_3x3_farki": 2.6e-05
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.223189,
           "boylam": 26.408026,
           "alan_m2": 400,
@@ -393,22 +361,6 @@
           "lokal_ani_baslangic_destegi": false,
           "yaygin_cevre_degisim_riski": false,
           "kayitli_3x3_farki": 1.2e-05
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.275469,
-          "boylam": 26.231963,
-          "alan_m2": 600,
-          "ani_baslangic_destegi": false,
-          "ic_3x3_son_bsi_degisim": 0.1186,
-          "ic_3x3_gecerli_oran": 0.889,
-          "cevre_halka_onceki_bsi_degisim": 0.0492,
-          "cevre_halka_son_bsi_degisim": 0.0744,
-          "cevre_halka_gecerli_oran": 0.812,
-          "yerellik_orani": 1.59,
-          "lokal_ani_baslangic_destegi": false,
-          "yaygin_cevre_degisim_riski": false,
-          "kayitli_3x3_farki": 1.6e-05
         },
         {
           "mahalle": "Germiyan",
@@ -441,6 +393,22 @@
           "lokal_ani_baslangic_destegi": false,
           "yaygin_cevre_degisim_riski": false,
           "kayitli_3x3_farki": 3.5e-05
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.343305,
+          "boylam": 26.464463,
+          "alan_m2": 600,
+          "ani_baslangic_destegi": false,
+          "ic_3x3_son_bsi_degisim": 0.0984,
+          "ic_3x3_gecerli_oran": 1.0,
+          "cevre_halka_onceki_bsi_degisim": 0.0487,
+          "cevre_halka_son_bsi_degisim": 0.0635,
+          "cevre_halka_gecerli_oran": 1.0,
+          "yerellik_orani": 1.55,
+          "lokal_ani_baslangic_destegi": false,
+          "yaygin_cevre_degisim_riski": false,
+          "kayitli_3x3_farki": 2.4e-05
         },
         {
           "mahalle": "Mevki doğrulanmadı",
@@ -508,6 +476,22 @@
         },
         {
           "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.215682,
+          "boylam": 26.45084,
+          "alan_m2": 600,
+          "ani_baslangic_destegi": false,
+          "ic_3x3_son_bsi_degisim": 0.1144,
+          "ic_3x3_gecerli_oran": 1.0,
+          "cevre_halka_onceki_bsi_degisim": 0.0945,
+          "cevre_halka_son_bsi_degisim": 0.079,
+          "cevre_halka_gecerli_oran": 0.75,
+          "yerellik_orani": 1.45,
+          "lokal_ani_baslangic_destegi": false,
+          "yaygin_cevre_degisim_riski": false,
+          "kayitli_3x3_farki": 8e-06
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.241098,
           "boylam": 26.437904,
           "alan_m2": 400,
@@ -521,38 +505,6 @@
           "lokal_ani_baslangic_destegi": false,
           "yaygin_cevre_degisim_riski": false,
           "kayitli_3x3_farki": 2.2e-05
-        },
-        {
-          "mahalle": "Şifne",
-          "enlem": 38.331637,
-          "boylam": 26.411689,
-          "alan_m2": 400,
-          "ani_baslangic_destegi": false,
-          "ic_3x3_son_bsi_degisim": 0.0872,
-          "ic_3x3_gecerli_oran": 0.889,
-          "cevre_halka_onceki_bsi_degisim": 0.1287,
-          "cevre_halka_son_bsi_degisim": 0.0607,
-          "cevre_halka_gecerli_oran": 0.812,
-          "yerellik_orani": 1.44,
-          "lokal_ani_baslangic_destegi": false,
-          "yaygin_cevre_degisim_riski": false,
-          "kayitli_3x3_farki": 2.1e-05
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.229792,
-          "boylam": 26.392114,
-          "alan_m2": 300,
-          "ani_baslangic_destegi": false,
-          "ic_3x3_son_bsi_degisim": 0.2308,
-          "ic_3x3_gecerli_oran": 1.0,
-          "cevre_halka_onceki_bsi_degisim": 0.2157,
-          "cevre_halka_son_bsi_degisim": 0.1626,
-          "cevre_halka_gecerli_oran": 0.562,
-          "yerellik_orani": 1.42,
-          "lokal_ani_baslangic_destegi": false,
-          "yaygin_cevre_degisim_riski": false,
-          "kayitli_3x3_farki": 3e-05
         },
         {
           "mahalle": "Germiyan",
@@ -569,6 +521,38 @@
           "lokal_ani_baslangic_destegi": false,
           "yaygin_cevre_degisim_riski": false,
           "kayitli_3x3_farki": 3.3e-05
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.312462,
+          "boylam": 26.460685,
+          "alan_m2": 300,
+          "ani_baslangic_destegi": false,
+          "ic_3x3_son_bsi_degisim": 0.1,
+          "ic_3x3_gecerli_oran": 1.0,
+          "cevre_halka_onceki_bsi_degisim": 0.0777,
+          "cevre_halka_son_bsi_degisim": 0.0756,
+          "cevre_halka_gecerli_oran": 1.0,
+          "yerellik_orani": 1.32,
+          "lokal_ani_baslangic_destegi": false,
+          "yaygin_cevre_degisim_riski": false,
+          "kayitli_3x3_farki": 3.6e-05
+        },
+        {
+          "mahalle": "Germiyan",
+          "enlem": 38.340501,
+          "boylam": 26.483695,
+          "alan_m2": 400,
+          "ani_baslangic_destegi": false,
+          "ic_3x3_son_bsi_degisim": 0.1174,
+          "ic_3x3_gecerli_oran": 0.778,
+          "cevre_halka_onceki_bsi_degisim": 0.0771,
+          "cevre_halka_son_bsi_degisim": 0.0933,
+          "cevre_halka_gecerli_oran": 0.75,
+          "yerellik_orani": 1.26,
+          "lokal_ani_baslangic_destegi": false,
+          "yaygin_cevre_degisim_riski": false,
+          "kayitli_3x3_farki": 2.7e-05
         },
         {
           "mahalle": "Alaçatı",
@@ -601,6 +585,22 @@
           "lokal_ani_baslangic_destegi": false,
           "yaygin_cevre_degisim_riski": false,
           "kayitli_3x3_farki": 4.7e-05
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.291297,
+          "boylam": 26.483008,
+          "alan_m2": 300,
+          "ani_baslangic_destegi": false,
+          "ic_3x3_son_bsi_degisim": 0.0884,
+          "ic_3x3_gecerli_oran": 1.0,
+          "cevre_halka_onceki_bsi_degisim": 0.0633,
+          "cevre_halka_son_bsi_degisim": 0.0759,
+          "cevre_halka_gecerli_oran": 1.0,
+          "yerellik_orani": 1.16,
+          "lokal_ani_baslangic_destegi": false,
+          "yaygin_cevre_degisim_riski": false,
+          "kayitli_3x3_farki": 3.3e-05
         },
         {
           "mahalle": "Mevki doğrulanmadı",
@@ -683,22 +683,6 @@
       "adaylar": [
         {
           "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.383916,
-          "boylam": 26.629194,
-          "alan_m2": 300,
-          "ani_baslangic_destegi": false,
-          "ic_3x3_son_bsi_degisim": 0.0866,
-          "ic_3x3_gecerli_oran": 0.667,
-          "cevre_halka_onceki_bsi_degisim": 0.1144,
-          "cevre_halka_son_bsi_degisim": 0.0127,
-          "cevre_halka_gecerli_oran": 0.562,
-          "yerellik_orani": 6.81,
-          "lokal_ani_baslangic_destegi": false,
-          "yaygin_cevre_degisim_riski": false,
-          "kayitli_3x3_farki": 4e-05
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.370711,
           "boylam": 26.559027,
           "alan_m2": 300,
@@ -776,6 +760,22 @@
           "lokal_ani_baslangic_destegi": false,
           "yaygin_cevre_degisim_riski": false,
           "kayitli_3x3_farki": 1.7e-05
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.340139,
+          "boylam": 26.464136,
+          "alan_m2": 300,
+          "ani_baslangic_destegi": false,
+          "ic_3x3_son_bsi_degisim": 0.1013,
+          "ic_3x3_gecerli_oran": 1.0,
+          "cevre_halka_onceki_bsi_degisim": 0.0405,
+          "cevre_halka_son_bsi_degisim": 0.0543,
+          "cevre_halka_gecerli_oran": 1.0,
+          "yerellik_orani": 1.87,
+          "lokal_ani_baslangic_destegi": false,
+          "yaygin_cevre_degisim_riski": false,
+          "kayitli_3x3_farki": 1e-06
         },
         {
           "mahalle": "Mevki doğrulanmadı",
