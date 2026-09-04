@@ -1,0 +1,78 @@
+name: Yanlış Pozitif Yeniden-Belirme Koruması
+
+on:
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - "false_positive_reappearance_guard.py"
+      - ".github/workflows/false-positive-reappearance-guard.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-db-write
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Yeniden-belirme kuralı öz testi
+        run: python false_positive_reappearance_guard.py --check-only
+
+      - name: Yeni güçlü küçük-saha kanıtını kontrol et
+        run: python false_positive_reappearance_guard.py
+
+      - name: Güvenli durum değişikliğini kaydet
+        run: |
+          if [[ -z "$(git status --porcelain -- santiye.db)" ]]; then
+            echo "Yeniden açılan görev yok; veritabanı değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add santiye.db
+          git commit -m "Radar: yeni güçlü kanıtla yanlış pozitifi yeniden aç"
+
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Main değişti; en güncel veritabanında kural bir kez yeniden uygulanıyor."
+            git reset --hard origin/main
+            python false_positive_reappearance_guard.py --check-only
+            python false_positive_reappearance_guard.py
+            if [[ -z "$(git status --porcelain -- santiye.db)" ]]; then
+              echo "Güncel main üzerinde yeniden açılacak görev kalmadı."
+              exit 0
+            fi
+            git add santiye.db
+            git commit -m "Radar: yeni güçlü kanıtla yanlış pozitifi yeniden aç"
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Main yeniden değişti; ikili DB çakışması riski almadan sonraki çalışmaya bırakıldı."
+              exit 0
+            fi
+          fi
+
+          git push origin HEAD:main
