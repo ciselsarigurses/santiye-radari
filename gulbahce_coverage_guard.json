@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-04 23:09 +0300",
+  "olusturma": "2026-09-05 01:01 +0300",
   "amac": "Gülbahçe merkezli 2 km operasyonel diagnostik tamponun ve çevresindeki analiz bağlam halosunun mevcut Sentinel üretim kutusundaki geometrik kapsamasını ölçmek; mahalle etiketleme görünürlüğünü ve birleşik all zarfının iki üretim bölgesini eksiksiz içermesini doğrulamak. Alarm veya saha görevi üretmez.",
   "referans": {
     "ad": "Gülbahçe, Urla",
@@ -15,19 +15,19 @@
   "uretim_bbox": [
     26.45,
     38.18,
-    26.67,
+    26.672,
     38.43
   ],
   "merkez_bbox_icinde": true,
   "tampon_tamamen_bbox_icinde": true,
   "tampon_kapsama_yuzde": 100.0,
   "tampon_disinda_yuzde": 0.0,
-  "baglam_tamamen_bbox_icinde": false,
-  "baglam_kapsama_yuzde": 99.96,
-  "baglam_kenar_marji_m": -16,
+  "baglam_tamamen_bbox_icinde": true,
+  "baglam_kapsama_yuzde": 100.0,
+  "baglam_kenar_marji_m": 159,
   "kenar_mesafeleri_m": {
     "bati": 17077,
-    "dogu": 2134,
+    "dogu": 2309,
     "guney": 16893,
     "kuzey": 10750
   },
@@ -35,41 +35,34 @@
   "gulbahce_etiketi_acik": true,
   "analiz_grid": {
     "height": 2764,
-    "width": 1922,
+    "width": 1939,
     "pixel_width_m": 10.0,
     "pixel_height_m": 10.0,
     "pixel_edge_max_m": 10.0
   },
-  "uretim_durumu": "dikkat_gerekiyor",
-  "uretim_sorunlari": [
-    "GULBAHCE_2KM_ARTI_ANALIZ_HALOSU_TAM_KAPSANMIYOR"
-  ],
+  "uretim_durumu": "ok",
+  "uretim_sorunlari": [],
   "birlesik_all_denetime": {
     "mevcut_bbox": [
       26.22,
       38.18,
-      26.67,
+      26.672,
       38.43
     ],
     "beklenen_uretim_birlesimi_bbox": [
       26.22,
       38.18,
-      26.67,
+      26.672,
       38.43
     ],
     "uretim_birlesimini_tam_kapsiyor": true,
     "gulbahce_2km_tampon_kapsama_yuzde": 100.0,
-    "gulbahce_baglam_kapsama_yuzde": 99.96,
-    "gulbahce_baglam_tamamen_icinde": false,
-    "durum": "dikkat_gerekiyor",
-    "sorunlar": [
-      "BIRLESIK_ALL_ZARFI_GULBAHCE_ANALIZ_HALOSUNU_TAM_KAPSAMIYOR"
-    ],
+    "gulbahce_baglam_kapsama_yuzde": 100.0,
+    "gulbahce_baglam_tamamen_icinde": true,
+    "durum": "ok",
+    "sorunlar": [],
     "not": "all zarfı doğrudan saha alarmı değildir; ancak birleşik/diagnostik taramalar gelecekte bu anahtarı kullandığında Gülbahçe doğu kenarında sessiz körlük oluşmaması için üretim kutularının birleşimini ve analiz bağlam halosunu eksiksiz içermelidir."
   },
-  "durum": "dikkat_gerekiyor",
-  "sorunlar": [
-    "GULBAHCE_2KM_ARTI_ANALIZ_HALOSU_TAM_KAPSANMIYOR",
-    "BIRLESIK_ALL_ZARFI_GULBAHCE_ANALIZ_HALOSUNU_TAM_KAPSAMIYOR"
-  ]
+  "durum": "ok",
+  "sorunlar": []
 }
