@@ -6,7 +6,7 @@
     150,
     249
   ],
-  "kaynak_temporal_olusturma": "2026-09-03 19:50 +0300",
+  "kaynak_temporal_olusturma": "2026-09-04 11:50 +0300",
   "amac": "Mikro temporal sinyalin yalnız aday çevresinde mi yoğunlaştığını, yoksa aynı Sentinel geçişinde çevrede de yaygın olup tarla/toprak temizliği gibi geniş-yüzey hareketi riski taşıyıp taşımadığını diagnostik olarak ölçmek.",
   "esikler": {
     "merkez_yaricap_piksel": 1,
@@ -165,7 +165,7 @@
           "ortusme_tekrari": false,
           "250m_mikro_komsu": 0,
           "genis_hareket_kumesi_riski": false,
-          "en_yakin_250plus_m": 222,
+          "en_yakin_250plus_m": 431,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": true,
           "uc_sahne_gecerli_oran": 0.444,
