@@ -190,7 +190,7 @@ def _self_check():
         """INSERT INTO saha_durumlari
         (gorev_id,kaynak,kaynak_kimlik,enlem,boylam,durum,kontrol_sayisi,
         ilk_gorulme,son_gorulme,son_islem)
-        VALUES(?,'uydu',?,?,?,?,?,?,?,?,?)""",
+        VALUES(?,'uydu',?,?,?,?,?,?,?,?)""",
         rows,
     )
     ids = _same_day_superseded_ids(
