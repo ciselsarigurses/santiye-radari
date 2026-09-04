@@ -46,21 +46,40 @@ jobs:
       - name: Gülbahçe operasyon tamponunu ölç
         run: python gulbahce_coverage_guard.py
 
-      - name: Yalnız değişiklik varsa denetim sonucunu kaydet
+      - name: Son ana dal üzerinde sonucu güvenli biçimde kaydet
         run: |
-          if [[ -z "$(git status --porcelain -- gulbahce_coverage_guard.json)" ]]; then
-            echo "Gülbahçe kapsama sonucu değişmedi."
-            exit 0
-          fi
-
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add gulbahce_coverage_guard.json
-          git commit -m "Radar: Gülbahçe kapsama denetimini güncelle"
 
-          git fetch origin main
-          if ! git merge-base --is-ancestor origin/main HEAD; then
-            echo "Ana dal değişti; eski kapsama sonucunu üzerine yazmadan sonraki çalışmaya bırakılıyor."
-            exit 1
-          fi
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            echo "Kapsama sonucu kaydetme denemesi: ${attempt}/3"
+
+            # Başka bir workflow bu sırada main'e sonuç yazdıysa eski checkout'tan
+            # üretilmiş JSON'u taşımak yerine her seferinde en güncel ana dalda
+            # yeniden hesapla. Böylece yeni satellite.py sınırları kaybolmaz.
+            git fetch origin main
+            git reset --hard origin/main
+            python gulbahce_coverage_guard.py
+
+            if [[ -z "$(git status --porcelain -- gulbahce_coverage_guard.json)" ]]; then
+              echo "Gülbahçe kapsama sonucu güncel; commit gerekmiyor."
+              exit 0
+            fi
+
+            git add gulbahce_coverage_guard.json
+            git commit -m "Radar: Gülbahçe kapsama denetimini güncelle"
+
+            # Commit ile push arasında main tekrar ilerlediyse non-fast-forward
+            # zorlamak yerine bir sonraki turda yeni HEAD üzerinde yeniden hesapla.
+            git fetch origin main
+            if git merge-base --is-ancestor origin/main HEAD; then
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+            fi
+
+            echo "Ana dal kaydetme sırasında değişti; güncel HEAD üzerinde tekrar hesaplanacak."
+          done
+
+          echo "Gülbahçe kapsama sonucu 3 güvenli denemede kaydedilemedi."
+          exit 1
