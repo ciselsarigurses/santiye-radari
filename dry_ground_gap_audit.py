@@ -9,9 +9,11 @@ farkında eşzamanlı spektral değişim gösteren 250-2.000 m² kümeleri sayı
 Ham kuru-zemin sinyali yaz sonunda çok sayıda tarla/toprak değişimi üretebildiği için
 bu diagnostik katman ayrıca küme geometrisini ölçer. Kompakt/dolgun ve aşırı lineer
 olmayan bileşenler "saha benzeri geometri" olarak işaretlenir; yakın çevredeki diğer
-kuru-zemin bileşenlerinin sayısı da kaydedilir. Bu etiketler yalnız kalibrasyon ve
-saha geri bildirimi içindir; hiçbir kayıt bu nedenle alarma/göreve dönüştürülmez,
-elenmez veya ana radar önceliği değiştirilmez.
+kuru-zemin bileşenlerinin sayısı da kaydedilir. Ana Sentinel motorunun su/kıyı tamponuna
+düşen değişimler silinmez: arka planda ölçülür, ancak kıyı-karışık piksel riski nedeniyle
+"izole saha benzeri" kanıtına yükseltilmez. Bu etiketler yalnız kalibrasyon ve saha geri
+bildirimi içindir; hiçbir kayıt bu nedenle alarma/göreve dönüştürülmez veya ana radar
+önceliği değiştirilmez.
 """
 
 from __future__ import annotations
@@ -123,7 +125,22 @@ def _distance_m(first, second):
     return math.hypot(north, east)
 
 
-def _records(mask, bbox, pixel_area_m2, bsi_delta, rgb_difference):
+def _component_overlap_fraction(component, mask):
+    """Bileşenin verilen risk maskesiyle kesişen piksel oranını döndürür."""
+    if mask is None or not component:
+        return 0.0
+    pixels = np.asarray(component, dtype="int32")
+    return float(np.mean(mask[pixels[:, 0], pixels[:, 1]]))
+
+
+def _records(
+    mask,
+    bbox,
+    pixel_area_m2,
+    bsi_delta,
+    rgb_difference,
+    coastal_buffer=None,
+):
     records = []
     for component in satellite._connected_components(mask):
         area_m2 = len(component) * pixel_area_m2
@@ -131,6 +148,7 @@ def _records(mask, bbox, pixel_area_m2, bsi_delta, rgb_difference):
             continue
         pixels = np.asarray(component, dtype="int32")
         latitude, longitude = _component_location(component, bbox, mask.shape)
+        coastal_fraction = _component_overlap_fraction(component, coastal_buffer)
         record = {
             "mahalle": satellite._nearest_place(latitude, longitude),
             "enlem": latitude,
@@ -142,6 +160,8 @@ def _records(mask, bbox, pixel_area_m2, bsi_delta, rgb_difference):
             "ortalama_rgb_farki": round(
                 float(np.mean(rgb_difference[pixels[:, 0], pixels[:, 1]])), 4
             ),
+            "kiyi_su_tamponu_riski": bool(coastal_fraction > 0),
+            "kiyi_su_tamponu_orani": round(coastal_fraction, 3),
         }
         record.update(_shape_metrics(component))
         record["yakindaki_kuru_degisim_120m"] = 0
@@ -160,8 +180,13 @@ def _records(mask, bbox, pixel_area_m2, bsi_delta, rgb_difference):
             if _distance_m(first_point, second_point) <= LOCAL_CLUSTER_RADIUS_M:
                 neighbors += 1
         first["yakindaki_kuru_degisim_120m"] = neighbors
+        # Kıyı/su tamponuna değen kayıt diagnostik havuzda kalır; ancak ana üretim
+        # motorunun bilinçli olarak dışladığı karma kıyı pikseli, 15 Eylül sonrası
+        # kuru-zemin teyit yolunda "izole saha" kanıtına dönüşemez.
         first["izole_saha_benzeri"] = bool(
-            first.get("saha_benzeri_geometri") and neighbors == 0
+            first.get("saha_benzeri_geometri")
+            and neighbors == 0
+            and not first.get("kiyi_su_tamponu_riski")
         )
 
     return sorted(
@@ -219,6 +244,14 @@ def _analyze_region(region_key, pair):
 
     valid = ~np.isin(older_scl, satellite.EXCLUDED_SCL_CLASSES)
     valid &= ~np.isin(latest_scl, satellite.EXCLUDED_SCL_CLASSES)
+    water = (older_scl == 6) | (latest_scl == 6)
+    coastal_buffer = satellite._dilate_mask(
+        water,
+        satellite.COASTAL_WATER_BUFFER_PIXELS,
+    )
+    # Gerçek üretim maskesi kıyı tamponunu dışlar. Diagnostik havuz ise tamponu
+    # tamamen silmez; aşağıda risk etiketiyle arka planda tutar.
+    production_valid = valid & ~coastal_buffer
 
     old_rgb = np.moveaxis(older_visual, 0, 2).astype("float32") / 255
     new_rgb = np.moveaxis(latest_visual, 0, 2).astype("float32") / 255
@@ -228,14 +261,14 @@ def _analyze_region(region_key, pair):
     latest_ndvi = satellite._ndvi(latest_red, latest_nir)
 
     soil_signal = (
-        valid
+        production_valid
         & (older_ndvi - latest_ndvi > 0.14)
         & (brightness_gain > 0.035)
         & (rgb_difference > 0.10)
     )
-    strong_visual_change = valid & (rgb_difference > 0.24)
+    strong_visual_change = production_valid & (rgb_difference > 0.24)
     small_site_signal = (
-        valid
+        production_valid
         & (older_ndvi - latest_ndvi > 0.20)
         & (latest_ndvi < 0.30)
         & (brightness_gain > 0.055)
@@ -282,13 +315,16 @@ def _analyze_region(region_key, pair):
         pixel_area_m2,
         bsi_delta,
         rgb_difference,
+        coastal_buffer=coastal_buffer,
     )
     site_like = [item for item in records if item.get("saha_benzeri_geometri")]
     isolated_site_like = [item for item in site_like if item.get("izole_saha_benzeri")]
     linear_risk = [item for item in records if item.get("lineer_geometri_riski")]
+    coastal_risk = [item for item in records if item.get("kiyi_su_tamponu_riski")]
     site_like_examples = sorted(
         site_like,
         key=lambda item: (
+            bool(item.get("kiyi_su_tamponu_riski")),
             int(item.get("yakindaki_kuru_degisim_120m") or 0),
             -float(item.get("ortalama_bsi_degisim") or 0),
             -float(item.get("ortalama_rgb_farki") or 0),
@@ -306,6 +342,7 @@ def _analyze_region(region_key, pair):
         "saha_benzeri_geometri": len(site_like),
         "izole_saha_benzeri_geometri": len(isolated_site_like),
         "lineer_geometri_riski": len(linear_risk),
+        "kiyi_su_tamponu_riski": len(coastal_risk),
         "ornekler": records[:EXAMPLE_LIMIT],
         "saha_benzeri_ornekler": site_like_examples,
     }
@@ -351,6 +388,11 @@ def _self_check():
     assert not strip_shape["saha_benzeri_geometri"], strip_shape
     assert _distance_m((38.30, 26.30), (38.30, 26.30)) == 0
 
+    coastal = np.zeros((3, 3), dtype=bool)
+    coastal[1, 1] = True
+    assert _component_overlap_fraction([(1, 1), (1, 2)], coastal) == 0.5
+    assert _component_overlap_fraction([(0, 0)], coastal) == 0.0
+
 
 def run_audit():
     _self_check()
@@ -361,8 +403,8 @@ def run_audit():
         "amac": (
             "Mevcut alarm üretim maskesinin dışında kalan düşük-NDVI 250-2.000 m² "
             "kuru zemin spektral değişimlerini BSI ile ölçmek; ayrıca kompaktlık, "
-            "uzun/kısa oranı ve 120 m yerel kümelenmeyi saha kalibrasyonu için kaydetmek; "
-            "alarm/görev üretmez."
+            "uzun/kısa oranı, 120 m yerel kümelenme ve ana Sentinel kıyı tamponu "
+            "riskini saha kalibrasyonu için kaydetmek; alarm/görev üretmez."
         ),
         "esikler": {
             "alan_m2": [satellite.MIN_HOTSPOT_AREA_M2, MAX_AUDIT_AREA_M2],
@@ -377,10 +419,16 @@ def run_audit():
             "lineer_risk_min_uzun_kisa": LINEAR_RISK_MIN_ASPECT,
             "lineer_risk_max_kompaktlik": LINEAR_RISK_MAX_COMPACTNESS,
             "yerel_kume_yaricapi_m": LOCAL_CLUSTER_RADIUS_M,
+            "kiyi_su_tamponu_piksel": satellite.COASTAL_WATER_BUFFER_PIXELS,
+            "kiyi_su_tamponu_m_yaklasik": (
+                satellite.COASTAL_WATER_BUFFER_PIXELS * satellite.TARGET_PIXEL_SIZE_M
+            ),
         },
         "uyari": (
-            "Geometri ve yakınlık etiketleri yalnız diagnostiktir; saha doğrulaması olmadan "
-            "hiçbir kuru-zemin kaydı alarm/görev değildir ve üretim radarı etkilenmez."
+            "Geometri, yakınlık ve kıyı etiketleri yalnız diagnostiktir. Kıyı/su tamponuna "
+            "değen kayıt silinmez ve arka planda izlenir; fakat izole-saha kanıtına "
+            "yükseltilmez. Saha doğrulaması olmadan hiçbir kuru-zemin kaydı alarm/görev "
+            "değildir ve ana üretim radarı etkilenmez."
         ),
         "bolgeler": {},
     }
@@ -432,7 +480,8 @@ def main():
     if args.check_only:
         print(
             "Kuru zemin körlük denetimi öz testi başarılı; üretim alarmı değişmedi, "
-            "saha-benzeri geometri ve yerel kümelenme diagnostik olarak ölçülüyor."
+            "saha-benzeri geometri, yerel kümelenme ve kıyı tamponu riski diagnostik "
+            "olarak ölçülüyor."
         )
         return
 
@@ -444,7 +493,8 @@ def main():
                 f"{region_key}={int(data.get('potansiyel_kuru_zemin_korlugu') or 0)} "
                 f"(saha-benzeri={int(data.get('saha_benzeri_geometri') or 0)}, "
                 f"izole={int(data.get('izole_saha_benzeri_geometri') or 0)}, "
-                f"lineer-risk={int(data.get('lineer_geometri_riski') or 0)})"
+                f"lineer-risk={int(data.get('lineer_geometri_riski') or 0)}, "
+                f"kıyı-risk={int(data.get('kiyi_su_tamponu_riski') or 0)})"
             )
         else:
             counts.append(f"{region_key}={data.get('durum')}")
