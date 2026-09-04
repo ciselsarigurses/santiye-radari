@@ -1,0 +1,72 @@
+name: Kuru Zemin Üst Bant Körlük İzleme
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dry_ground_upper_band_watch.py"
+      - "dry_ground_temporal_audit.json"
+      - "latest_report.json"
+      - ".github/workflows/dry-ground-upper-band-watch.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-dry-ground-upper-band-watch
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Üst bant öz testini çalıştır
+        run: python dry_ground_upper_band_watch.py --check-only
+
+      - name: 901-2000 m² güçlü temporal körlük adaylarını ölç
+        run: python dry_ground_upper_band_watch.py
+
+      - name: Diagnostik sonucu güvenli kaydet
+        run: |
+          if [[ -z "$(git status --porcelain -- dry_ground_upper_band_watch.json)" ]]; then
+            echo "Üst bant diagnostik sonucu değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add dry_ground_upper_band_watch.json
+          git commit -m "Radar: kuru zemin üst bant diagnostik raporunu güncelle"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Main ilerledi; güncel veride üst bant raporu yeniden hesaplanıyor (${attempt}/3)."
+              git reset --hard origin/main
+              python dry_ground_upper_band_watch.py
+              if [[ -z "$(git status --porcelain -- dry_ground_upper_band_watch.json)" ]]; then
+                exit 0
+              fi
+              git add dry_ground_upper_band_watch.json
+              git commit -m "Radar: kuru zemin üst bant diagnostik raporunu güncelle"
+            fi
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+          done
+
+          echo "Üst bant diagnostik rapor güvenli biçimde kaydedilemedi."
+          exit 1
