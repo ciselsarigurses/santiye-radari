@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-03 05:01 +0300",
+  "olusturma": "2026-09-05 00:10 +0300",
   "amac": "Gülbahçe'nin daha önce 26.66 E doğusunda kalan kör şeridinin ana Uzunkuyu Sentinel üretim kutusuna entegre kalmasını ölçmek. Aynı görüntüleri ikinci kez analiz etmez; alarm veya saha görevi üretmez.",
   "durum": "ok",
   "sorunlar": [],
@@ -17,7 +17,7 @@
   "ana_uretim_bbox": [
     26.45,
     38.18,
-    26.67,
+    26.672,
     38.43
   ],
   "eski_uzunkuyu_dogu_siniri": 26.66,
@@ -25,7 +25,7 @@
   "dogu_kapsama_entegre": true,
   "analiz_grid": {
     "height": 2764,
-    "width": 1922,
+    "width": 1939,
     "pixel_width_m": 10.0,
     "pixel_height_m": 10.0,
     "pixel_edge_max_m": 10.0
@@ -36,11 +36,11 @@
       "boylam": 26.64556,
       "kenar_mesafeleri_m": {
         "bati": 17077,
-        "dogu": 2134,
+        "dogu": 2309,
         "guney": 16893,
         "kuzey": 10750
       },
-      "en_yakin_kenar_m": 2134,
+      "en_yakin_kenar_m": 2309,
       "2km_operasyon_tamponu_kapsaniyor": true,
       "not": "Operasyonel referanstır; idari/kadastral sınır veya ada-parsel değildir."
     },
@@ -49,11 +49,11 @@
       "boylam": 26.646463,
       "kenar_mesafeleri_m": {
         "bati": 17159,
-        "dogu": 2056,
+        "dogu": 2230,
         "guney": 15422,
         "kuzey": 12221
       },
-      "en_yakin_kenar_m": 2056,
+      "en_yakin_kenar_m": 2230,
       "2km_operasyon_tamponu_kapsaniyor": true,
       "not": "Operasyonel referanstır; idari/kadastral sınır veya ada-parsel değildir."
     }
