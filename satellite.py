@@ -57,7 +57,9 @@ REGIONS = {
     },
     "all": {
         "label": "Tüm Çeşme + Uzunkuyu",
-        "bbox": [26.22, 38.18, 26.66, 38.43],
+        # Birleşik zarf, üretim kutularının gerçek birleşimini eksiksiz içermelidir.
+        # Gülbahçe doğu kenarını sessizce kaybetmemek için Uzunkuyu ile 26.67 E'de eşitlenir.
+        "bbox": [26.22, 38.18, 26.67, 38.43],
     },
 }
 
