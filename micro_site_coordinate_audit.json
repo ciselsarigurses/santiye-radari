@@ -1,0 +1,60 @@
+{
+  "olusturma": "2026-09-04 21:10 +0300",
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "amac": "Güçlü mikro diagnostik adayın bağlı bileşen temsilcisi ile aynı bileşendeki en güçlü çoklu-spektral piksel merkezini karşılaştırmak.",
+  "uyari": "Sinyal çekirdeği ikinci diagnostik koordinattır; alarm/görev üretmez, adres veya parsel değildir ve mevcut temsilci koordinatını otomatik değiştirmez.",
+  "guclu_aday": 2,
+  "eslesen": 2,
+  "eslesmeyen": 0,
+  "koordinat_incele": 0,
+  "maksimum_sapma_m": 0.0,
+  "adaylar": [
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "bolge": "cesme",
+      "yaklasik_mevki": "Ilıca",
+      "alan_m2": 200,
+      "enlem": 38.317979,
+      "boylam": 26.345866,
+      "sinyal_cekirdegi_enlem": 38.317979,
+      "sinyal_cekirdegi_boylam": 26.345866,
+      "sinyal_cekirdegi_sapma_m": 0.0,
+      "koordinat_kalitesi": "AYNI_PIKSEL",
+      "cekirdek_skor": 10.3394,
+      "cekirdek_rgb_degisim": 0.366,
+      "cekirdek_ndvi_kaybi": 0.2141,
+      "cekirdek_parlaklik_artisi": 0.366,
+      "temsilci_harita": "https://www.google.com/maps/search/?api=1&query=38.317979,26.345866",
+      "cekirdek_harita": "https://www.google.com/maps/search/?api=1&query=38.317979,26.345866",
+      "latest_item": "S2C_T35SMC_20260903T090747_L2A"
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "bolge": "cesme",
+      "yaklasik_mevki": "Ovacık",
+      "alan_m2": 200,
+      "enlem": 38.253942,
+      "boylam": 26.311981,
+      "sinyal_cekirdegi_enlem": 38.253942,
+      "sinyal_cekirdegi_boylam": 26.311981,
+      "sinyal_cekirdegi_sapma_m": 0.0,
+      "koordinat_kalitesi": "AYNI_PIKSEL",
+      "cekirdek_skor": 8.9961,
+      "cekirdek_rgb_degisim": 0.3046,
+      "cekirdek_ndvi_kaybi": 0.2566,
+      "cekirdek_parlaklik_artisi": 0.3046,
+      "temsilci_harita": "https://www.google.com/maps/search/?api=1&query=38.253942,26.311981",
+      "cekirdek_harita": "https://www.google.com/maps/search/?api=1&query=38.253942,26.311981",
+      "latest_item": "S2C_T35SMC_20260903T090747_L2A"
+    }
+  ],
+  "eslesmeyen_adaylar": []
+}
