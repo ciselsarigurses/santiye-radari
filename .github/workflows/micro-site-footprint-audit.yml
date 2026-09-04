@@ -6,6 +6,7 @@ on:
     paths:
       - "micro_site_temporal_footprint_audit.py"
       - "micro_site_footprint_priority_review.py"
+      - "micro_site_watchlist.py"
       - "micro_site_audit.py"
       - "micro_site_shortlist.json"
       - "micro_site_temporal_review.json"
@@ -58,6 +59,12 @@ jobs:
       - name: Bileşen temporal ve lokal kanıtını güvenli diagnostik öncelikte birleştir
         run: python micro_site_footprint_priority_review.py
 
+      - name: Güçlü mikro aday izleme öz testini çalıştır
+        run: python micro_site_watchlist.py --check-only
+
+      - name: Güçlü mikro adayları Sentinel sahneleri arasında koru
+        run: python micro_site_watchlist.py
+
       - name: Sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
@@ -71,15 +78,15 @@ jobs:
             fi
           fi
 
-          if [[ -z "$(git status --porcelain -- micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json)" ]]; then
-            echo "Footprint mikro diagnostik sonuçları değişmedi."
+          if [[ -z "$(git status --porcelain -- micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json micro_site_watchlist.json)" ]]; then
+            echo "Footprint mikro diagnostik ve izleme sonuçları değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json
-          git commit -m "Radar: footprint mikro diagnostik önceliğini güncelle"
+          git add micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json micro_site_watchlist.json
+          git commit -m "Radar: footprint mikro diagnostik ve izleme sonucunu güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
             echo "Ana dal değişti; eski diagnostik sonuç üzerine yazılmayacak."
