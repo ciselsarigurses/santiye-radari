@@ -26,6 +26,8 @@ import satellite
 
 REPORT_PATH = Path(__file__).with_name("latest_report.json")
 OUTPUT_PATH = Path(__file__).with_name("hotspot_coordinate_audit.json")
+AREA_SIMILARITY_MIN = 0.80
+MAX_CURRENT_GEOMETRIC_M = 5.0
 
 
 def _distance_m(first, second):
@@ -35,6 +37,15 @@ def _distance_m(first, second):
     north = (lat1 - lat2) * 110570
     east = (lon1 - lon2) * 111320 * math.cos(mean_lat)
     return math.hypot(north, east)
+
+
+def _area_similarity(first, second):
+    first = max(float(first), 0.0)
+    second = max(float(second), 0.0)
+    maximum = max(first, second)
+    if maximum <= 0:
+        return 1.0
+    return min(first, second) / maximum
 
 
 def _pixel_location(row, column, bbox, shape):
@@ -216,12 +227,37 @@ def _analyze_region(region_key, report):
             continue
 
         component = components[component_id]
-        geometric_pixel = _representative_pixel(component)
-        weighted_pixel = _weighted_representative_pixel(component, score)
-        geometric_point = _pixel_location(*geometric_pixel, bbox, shape)
-        weighted_point = _pixel_location(*weighted_pixel, bbox, shape)
-        current_point = (round(latitude, 6), round(longitude, 6))
         component_area = len(component) * pixel_area_m2
+        geometric_pixel = _representative_pixel(component)
+        geometric_point = _pixel_location(*geometric_pixel, bbox, shape)
+        current_point = (round(latitude, 6), round(longitude, 6))
+        area_similarity = _area_similarity(area, component_area)
+        current_geometric_m = _distance_m(current_point, geometric_point)
+
+        # Yan-küme, dedupe veya başka bir post-process adayı daha büyük ham üretim
+        # bileşeninin içine taşıyabilir. Böyle bir kaydı ham bileşenin merkezine göre
+        # ölçmek sahte 100+ m "koordinat hatası" üretir. Yalnız alanı ve mevcut
+        # geometrik temsil noktası ham üretim bileşeniyle gerçekten uyuşan adaylar
+        # koordinat hassasiyet istatistiğine girsin; diğerleri ayrı diagnostik olarak
+        # görünür kalsın.
+        if area_similarity < AREA_SIMILARITY_MIN or current_geometric_m > MAX_CURRENT_GEOMETRIC_M:
+            unmatched.append(
+                {
+                    "gorev_id": raw.get("gorev_id"),
+                    "mahalle": raw.get("mahalle"),
+                    "enlem": current_point[0],
+                    "boylam": current_point[1],
+                    "rapor_alan_m2": round(area),
+                    "bilesen_alan_m2": round(component_area),
+                    "alan_benzerligi": round(area_similarity, 3),
+                    "mevcut_geometrik_fark_m": round(current_geometric_m, 1),
+                    "neden": "aday_ham_uretim_bileseniyle_birebir_eslesmiyor_postprocess_veya_yan_kume_olabilir",
+                }
+            )
+            continue
+
+        weighted_pixel = _weighted_representative_pixel(component, score)
+        weighted_point = _pixel_location(*weighted_pixel, bbox, shape)
         rows.append(
             {
                 "gorev_id": raw.get("gorev_id"),
@@ -229,6 +265,7 @@ def _analyze_region(region_key, report):
                 "mahalle": raw.get("mahalle"),
                 "rapor_alan_m2": round(area),
                 "bilesen_alan_m2": round(component_area),
+                "alan_benzerligi": round(area_similarity, 3),
                 "bilesen_piksel": len(component),
                 "mevcut_enlem": current_point[0],
                 "mevcut_boylam": current_point[1],
@@ -236,9 +273,7 @@ def _analyze_region(region_key, report):
                 "geometrik_boylam": geometric_point[1],
                 "sinyal_agirlikli_enlem": weighted_point[0],
                 "sinyal_agirlikli_boylam": weighted_point[1],
-                "mevcut_geometrik_fark_m": round(
-                    _distance_m(current_point, geometric_point), 1
-                ),
+                "mevcut_geometrik_fark_m": round(current_geometric_m, 1),
                 "geometrik_sinyal_kaymasi_m": round(
                     _distance_m(geometric_point, weighted_point), 1
                 ),
@@ -285,11 +320,13 @@ def build_audit():
     measured = sum(int(item.get("olculen_aday") or 0) for item in regions.values())
     over_10 = sum(int(item.get("10m_ustu_kayma") or 0) for item in regions.values())
     over_20 = sum(int(item.get("20m_ustu_kayma") or 0) for item in regions.values())
+    unmatched = sum(int(item.get("eslesmeyen_aday") or 0) for item in regions.values())
     return {
         "rapor_tarihi": report.get("rapor_tarihi"),
         "amac": "Ana 250 m²+ Sentinel saha adaylarında mevcut geometrik koordinat ile aynı üretim bileşenindeki sinyal-ağırlıklı gerçek piksel koordinatı arasındaki farkı ölçmek.",
         "politika": "DIAGNOSTIK_ONLY: alarm, görev, sıralama ve 250 m² ana eşik değişmez; saha kanıtı olmadan koordinat otomatik taşınmaz.",
-        "olculen_aday": measured,
+        "ham_bilesenle_birebir_olculen_aday": measured,
+        "postprocess_veya_eslesmeyen_aday": unmatched,
         "10m_ustu_kayma": over_10,
         "20m_ustu_kayma": over_20,
         "bolgeler": regions,
@@ -305,6 +342,8 @@ def _self_test():
     assert _weighted_representative_pixel(component, score) == (1, 3)
     fallback = np.zeros((4, 5), dtype="float32")
     assert _weighted_representative_pixel(component, fallback) == (1, 2)
+    assert _area_similarity(400, 400) == 1.0
+    assert _area_similarity(3100, 38500) < AREA_SIMILARITY_MIN
     print("Ana aday koordinat hassasiyet öz testi başarılı.")
 
 
@@ -323,7 +362,8 @@ def main():
     )
     print(
         "Ana aday koordinat denetimi: "
-        f"{audit['olculen_aday']} aday, "
+        f"{audit['ham_bilesenle_birebir_olculen_aday']} birebir aday, "
+        f"post-process/eşleşmeyen {audit['postprocess_veya_eslesmeyen_aday']}, "
         f">10 m {audit['10m_ustu_kayma']}, >20 m {audit['20m_ustu_kayma']}."
     )
     if audit.get("hatalar"):
