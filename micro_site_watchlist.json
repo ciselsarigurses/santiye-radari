@@ -37,7 +37,13 @@
       "karar_nedeni": "Adayın kendi bağlı bileşeninde temporal hareket + bağımsız lokal/kompakt karakter birlikte güçlü. Alarm/görev değildir; 15 Eylül sonrası yeni Sentinel sahnesinde öncelikli tekrar doğrulama adayıdır.",
       "bilesen_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
       "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
-      "yerel_kontrast_orani": 10.75
+      "yerel_kontrast_orani": 10.75,
+      "ilk_enlem": 38.253942,
+      "ilk_boylam": 26.311981,
+      "ilk_konumdan_sapma_m": 0.0,
+      "tekrar_dogrulama_mekansal_guvenli": null,
+      "tekrar_dogrulama_mekansal_esik_m": 25.0,
+      "tekrar_dogrulama_mekansal_not": "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok."
     },
     {
       "mikro_iz_id": "MC7D2CCED03",
@@ -62,7 +68,13 @@
       "karar_nedeni": "Adayın kendi bağlı bileşeninde temporal hareket + bağımsız lokal/kompakt karakter birlikte güçlü. Alarm/görev değildir; 15 Eylül sonrası yeni Sentinel sahnesinde öncelikli tekrar doğrulama adayıdır.",
       "bilesen_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
       "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
-      "yerel_kontrast_orani": 7.67
+      "yerel_kontrast_orani": 7.67,
+      "ilk_enlem": 38.317979,
+      "ilk_boylam": 26.345866,
+      "ilk_konumdan_sapma_m": 0.0,
+      "tekrar_dogrulama_mekansal_guvenli": null,
+      "tekrar_dogrulama_mekansal_esik_m": 25.0,
+      "tekrar_dogrulama_mekansal_not": "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok."
     }
   ]
 }
