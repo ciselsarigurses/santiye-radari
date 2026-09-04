@@ -1,0 +1,85 @@
+name: Ana Aday Koordinat Hassasiyet Denetimi
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "latest_report.json"
+      - "satellite.py"
+      - "hotspot_coordinate_audit.py"
+      - ".github/workflows/hotspot-coordinate-audit.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-db-write
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Koordinat denetimi öz testi
+        run: python hotspot_coordinate_audit.py --self-test
+
+      - name: Güncel ana Sentinel adaylarının koordinatını ölç
+        run: python hotspot_coordinate_audit.py
+
+      - name: Sonucu yalnız anlamlı değişiklikte güvenli kaydet
+        shell: bash
+        run: |
+          if [[ ! -f hotspot_coordinate_audit.json ]]; then
+            echo "Diagnostik çıktı oluşmadı."
+            exit 1
+          fi
+
+          git add hotspot_coordinate_audit.json
+          if git diff --cached --quiet; then
+            echo "Koordinat diagnostik sonucu değişmedi; commit yok."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git commit -m "Radar: ana aday koordinat hassasiyet sonucunu güncelle"
+
+          # Uzun Sentinel okuması sırasında main ilerlediyse eski rapora ait
+          # koordinat sonucunu push etme; en güncel main üzerinde bir kez yeniden üret.
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal denetim sırasında değişti; en güncel raporda yeniden ölçülüyor."
+            git reset --hard origin/main
+            python hotspot_coordinate_audit.py --self-test
+            python hotspot_coordinate_audit.py
+            git add hotspot_coordinate_audit.json
+            if git diff --cached --quiet; then
+              echo "Yeniden ölçüm sonrası semantik değişiklik yok."
+              exit 0
+            fi
+            git commit -m "Radar: ana aday koordinat hassasiyet sonucunu güncelle"
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Ana dal yeniden değişti; eski diagnostik sonucu zorlamadan sonraki çalışmaya bırakılıyor."
+              exit 1
+            fi
+          fi
+
+          git push origin HEAD:main
