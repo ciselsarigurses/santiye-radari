@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-04 09:08 +0300",
+  "olusturma": "2026-09-04 10:06 +0300",
   "amac": "Gülbahçe merkezli 2 km operasyonel diagnostik tamponun mevcut Sentinel üretim kutusundaki geometrik kapsamasını ve mahalle etiketleme görünürlüğünü ölçmek; ayrıca birleşik all zarfının iki üretim bölgesini eksiksiz içerdiğini doğrulamak. Alarm veya saha görevi üretmez.",
   "referans": {
     "ad": "Gülbahçe, Urla",
@@ -41,7 +41,7 @@
     "mevcut_bbox": [
       26.22,
       38.18,
-      26.66,
+      26.67,
       38.43
     ],
     "beklenen_uretim_birlesimi_bbox": [
@@ -50,18 +50,12 @@
       26.67,
       38.43
     ],
-    "uretim_birlesimini_tam_kapsiyor": false,
-    "gulbahce_2km_tampon_kapsama_yuzde": 87.29,
-    "durum": "dikkat_gerekiyor",
-    "sorunlar": [
-      "BIRLESIK_ALL_ZARFI_URETIM_BOLGELERINI_TAM_KAPSAMIYOR",
-      "BIRLESIK_ALL_ZARFI_GULBAHCE_2KM_TAMPONUNU_TAM_KAPSAMIYOR"
-    ],
+    "uretim_birlesimini_tam_kapsiyor": true,
+    "gulbahce_2km_tampon_kapsama_yuzde": 100.0,
+    "durum": "ok",
+    "sorunlar": [],
     "not": "all zarfı doğrudan saha alarmı değildir; ancak birleşik/diagnostik taramalar gelecekte bu anahtarı kullandığında Gülbahçe doğu kenarında sessiz körlük oluşmaması için üretim kutularının birleşimini eksiksiz içermelidir."
   },
-  "durum": "dikkat_gerekiyor",
-  "sorunlar": [
-    "BIRLESIK_ALL_ZARFI_URETIM_BOLGELERINI_TAM_KAPSAMIYOR",
-    "BIRLESIK_ALL_ZARFI_GULBAHCE_2KM_TAMPONUNU_TAM_KAPSAMIYOR"
-  ]
+  "durum": "ok",
+  "sorunlar": []
 }
