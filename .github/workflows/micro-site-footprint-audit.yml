@@ -8,6 +8,7 @@ on:
       - "micro_site_footprint_priority_review.py"
       - "micro_site_watchlist.py"
       - "micro_site_identity_guard.py"
+      - "micro_site_coordinate_audit.py"
       - "micro_site_audit.py"
       - "micro_site_shortlist.json"
       - "micro_site_temporal_review.json"
@@ -72,6 +73,12 @@ jobs:
       - name: Farklı sahnedeki mikro tekrarın aynı küçük alanla uyumunu işaretle
         run: python micro_site_identity_guard.py
 
+      - name: Mikro sinyal çekirdeği koordinat öz testini çalıştır
+        run: python micro_site_coordinate_audit.py --check-only
+
+      - name: Güçlü mikro adayın temsilci ve sinyal çekirdeği koordinatını karşılaştır
+        run: python micro_site_coordinate_audit.py
+
       - name: Sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
@@ -85,15 +92,15 @@ jobs:
             fi
           fi
 
-          if [[ -z "$(git status --porcelain -- micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json micro_site_watchlist.json)" ]]; then
-            echo "Footprint mikro diagnostik ve izleme sonuçları değişmedi."
+          if [[ -z "$(git status --porcelain -- micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json micro_site_watchlist.json micro_site_coordinate_audit.json)" ]]; then
+            echo "Footprint mikro diagnostik, izleme ve koordinat sonuçları değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json micro_site_watchlist.json
-          git commit -m "Radar: footprint mikro diagnostik ve izleme sonucunu güncelle"
+          git add micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json micro_site_watchlist.json micro_site_coordinate_audit.json
+          git commit -m "Radar: footprint mikro diagnostik, izleme ve koordinat sonucunu güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
             echo "Ana dal değişti; eski diagnostik sonuç üzerine yazılmayacak."
