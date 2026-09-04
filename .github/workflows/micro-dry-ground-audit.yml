@@ -1,0 +1,58 @@
+name: Mikro Kuru-Zemin Diagnostik
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "micro_dry_ground_audit.py"
+      - ".github/workflows/micro-dry-ground-audit.yml"
+  schedule:
+    # Ana Sentinel kontrollerinden kısa süre sonra yalnız bu alarm-dışı diagnostik
+    # katmanı yenile (Türkiye 11:20, 15:20, 19:20).
+    - cron: "20 8,12,16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-micro-dry-ground
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Ana eşik ve diagnostik öz test
+        run: python micro_dry_ground_audit.py --check-only
+
+      - name: Mikro kuru-zemin körlüğünü ölç
+        run: python micro_dry_ground_audit.py
+
+      - name: Sonucu kaydet
+        run: |
+          if [[ -z "$(git status --porcelain -- micro_dry_ground_audit.json)" ]]; then
+            echo "Mikro kuru-zemin diagnostik sonucu değişmedi."
+            exit 0
+          fi
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add micro_dry_ground_audit.json
+          git commit -m "Radar: mikro kuru-zemin diagnostik sonucunu güncelle"
+          git pull --rebase origin main
+          git push origin HEAD:main
