@@ -3209,7 +3209,8 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.338692,26.648996",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338692/26.648996",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "saha_gorevi": false
     },
     {
       "bolge_anahtari": "cesme",
@@ -3227,7 +3228,8 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.407071,26.472247",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.407071/26.472247",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "saha_gorevi": false
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-04",
@@ -3260,5 +3262,16 @@
     "durum": "uygulandi",
     "tarih": "2026-09-04",
     "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
+  },
+  "gulbahce_kor_alan_devriye_korumasi": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "aktif_gun": false,
+    "rotasyon_tarihi": "2026-09-04",
+    "operasyonel_yaricap_m": 3000,
+    "idari_kadastral_sinir_degildir": true,
+    "uygulandi": false,
+    "uygun_aday_sayisi": 0,
+    "neden": "GENEL_DOGU_ROTASYONU"
   }
 }
