@@ -1,6 +1,9 @@
 name: Mikro Temporal Bileşen İzi Denetimi
 
 on:
+  workflow_run:
+    workflows: ["Mikro Şantiye Zaman Serisi Denetimi"]
+    types: [completed]
   push:
     branches: [main]
     paths:
@@ -16,7 +19,7 @@ on:
       - "micro_site_field_review.json"
       - ".github/workflows/micro-site-footprint-audit.yml"
   schedule:
-    # Mikro zaman-serisi sentezinden sonra yalnız diagnostik karşılaştırma.
+    # workflow_run ana yol; takvim olası zincir kesintisine karşı emniyet ağıdır.
     - cron: "55 8,12,16 * * *"
   workflow_dispatch:
 
@@ -29,6 +32,7 @@ concurrency:
 
 jobs:
   footprint-audit:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
