@@ -43,7 +43,8 @@
       "ilk_konumdan_sapma_m": 0.0,
       "tekrar_dogrulama_mekansal_guvenli": null,
       "tekrar_dogrulama_mekansal_esik_m": 25.0,
-      "tekrar_dogrulama_mekansal_not": "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok."
+      "tekrar_dogrulama_mekansal_not": "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok.",
+      "tekrar_dogrulandi_ham": false
     },
     {
       "mikro_iz_id": "MC7D2CCED03",
@@ -74,7 +75,11 @@
       "ilk_konumdan_sapma_m": 0.0,
       "tekrar_dogrulama_mekansal_guvenli": null,
       "tekrar_dogrulama_mekansal_esik_m": 25.0,
-      "tekrar_dogrulama_mekansal_not": "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok."
+      "tekrar_dogrulama_mekansal_not": "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok.",
+      "tekrar_dogrulandi_ham": false
     }
-  ]
+  ],
+  "tekrar_dogrulanan_ham": 0,
+  "mekansal_belirsiz_tekrar": 0,
+  "tekrar_kimlik_kurali": "45 m eşleştirme toleransı iz sürekliliği içindir; iki-sahne tekrar kanıtı yalnız ilk güçlü konuma göre <=25 m sapmada geçerlidir. >25 m ham tekrar arka planda saklanır fakat devam eden aynı mikro şantiye sayılmaz."
 }
