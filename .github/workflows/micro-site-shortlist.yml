@@ -1,6 +1,9 @@
 name: Mikro Şantiye Kısa Liste Filtresi
 
 on:
+  workflow_run:
+    workflows: ["Mikro Şantiye Diagnostik Taraması"]
+    types: [completed]
   push:
     branches: [main]
     paths:
@@ -8,6 +11,7 @@ on:
       - "micro_site_shortlist.py"
       - ".github/workflows/micro-site-shortlist.yml"
   schedule:
+    # workflow_run ana yol; bu takvim olası zincir kesintisine karşı emniyet ağıdır.
     - cron: "35 8,12,16 * * *"
   workflow_dispatch:
 
@@ -20,6 +24,7 @@ concurrency:
 
 jobs:
   shortlist:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
