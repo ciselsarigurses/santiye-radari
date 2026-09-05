@@ -89,4 +89,8 @@ jobs:
           micro_page = AppTest.from_file("pages/3_Mikro_Santiye.py")
           micro_page.run(timeout=45)
           assert not micro_page.exception, micro_page.exception
+
+          early_ground_page = AppTest.from_file("pages/4_Erken_Zemin_Sinyalleri.py")
+          early_ground_page.run(timeout=45)
+          assert not early_ground_page.exception, early_ground_page.exception
           PY
