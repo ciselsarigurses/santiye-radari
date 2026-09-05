@@ -2,6 +2,11 @@ name: Yakın Aday Geometri Denetimi
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "Günlük Şantiye Taraması"
+      - "Saha Durumunu İşle"
+    types: [completed]
   push:
     branches: [main]
     paths:
@@ -18,11 +23,13 @@ concurrency:
 
 jobs:
   audit:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Depoyu al
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Python kur
