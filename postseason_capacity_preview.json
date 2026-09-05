@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-04",
-  "olusturma": "2026-09-04 07:20 +0300",
+  "rapor_tarihi": "2026-09-05",
+  "olusturma": "2026-09-05 06:17 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -22,8 +22,8 @@
     "asgari_dogrulanmis_santiye_kazi": 3
   },
   "veri_tazeligi": {
-    "gunluk_rapor_tarihi": "2026-09-04",
-    "kapasite_denetim_tarihi": "2026-09-04",
+    "gunluk_rapor_tarihi": "2026-09-05",
+    "kapasite_denetim_tarihi": "2026-09-05",
     "ayni_gun": true
   },
   "bolgeler": {
@@ -43,7 +43,7 @@
     "uzunkuyu": {
       "durum": "ok",
       "latest_item": "S2C_T35SMC_20260903T090747_L2A",
-      "ham_800_10000": 183,
+      "ham_800_10000": 196,
       "raporda_800_10000": 5,
       "raporda_10000_ustu": 17,
       "mevcut_post_dedupe_hedefi": 8,
