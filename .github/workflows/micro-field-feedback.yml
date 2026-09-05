@@ -6,6 +6,7 @@ on:
     paths:
       - "micro_site_shortlist.json"
       - "micro_site_audit.json"
+      - "micro_spectral_borderline_review.json"
       - "santiye.db"
       - "micro_site_field_guard.py"
       - ".github/workflows/micro-field-feedback.yml"
