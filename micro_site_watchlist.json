@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-05 17:08 +0300",
+  "olusturma": "2026-09-05 18:10 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -10,7 +10,7 @@
   "esleme_mesafesi_m": 45,
   "amac": "Güçlü lokal/kompakt + temporal mikro diagnostik adayları Sentinel sahneleri arasında hafızada tutmak; bir sonraki değişim çiftinde görünmese bile silmeyip arka planda izlemek.",
   "uyari": "Bu izleme listesi alarm veya saha görevi üretmez. İki farklı Sentinel sahnesinde tekrar güçlü görünme yalnız ek diagnostik kanıttır; 250 m² ana üretim eşiğini düşürmez.",
-  "guncel_guclu": 2,
+  "guncel_guclu": 3,
   "arka_plan_takip": 0,
   "tekrar_dogrulanan": 0,
   "adaylar": [
@@ -47,6 +47,41 @@
       "tekrar_dogrulandi_ham": false
     },
     {
+      "mikro_iz_id": "MBC99188115",
+      "alarm": false,
+      "saha_gorevi": false,
+      "durum": "GUCLU_GUNCEL",
+      "guncel_guclu": true,
+      "tekrar_dogrulandi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_gecmisi": [
+        "S2C_T35SMC_20260903T090747_L2A"
+      ],
+      "ilk_gorulme_tarihi": "03.09.2026",
+      "son_guclu_gorulme_tarihi": "03.09.2026",
+      "son_guclu_sentinel_item": "S2C_T35SMC_20260903T090747_L2A",
+      "bolge": "cesme",
+      "yaklasik_mevki": "Ovacık",
+      "enlem": 38.250866,
+      "boylam": 26.321368,
+      "alan_m2": 200,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.250866,26.321368",
+      "karar_nedeni": "Tek spektral eşiği dar marjla kaçırmasına rağmen temporal hareket ve lokal/kompakt karakter birlikte güçlü. Yalnız diagnostik takip; otomatik alarm/görev değildir.",
+      "bilesen_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
+      "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
+      "yerel_kontrast_orani": 4.22,
+      "mikro_kaynak": "SPEKTRAL_SINIR_TEMPORAL_LOKAL",
+      "sinir_temporal_lokal_ek_kanit": true,
+      "sinir_ek_kanit_esleme_mesafe_m": 0.0,
+      "ilk_enlem": 38.250866,
+      "ilk_boylam": 26.321368,
+      "ilk_konumdan_sapma_m": 0.0,
+      "tekrar_dogrulandi_ham": false,
+      "tekrar_dogrulama_mekansal_esik_m": 25.0,
+      "tekrar_dogrulama_mekansal_guvenli": null,
+      "tekrar_dogrulama_mekansal_not": "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok."
+    },
+    {
       "mikro_iz_id": "MC7D2CCED03",
       "alarm": false,
       "saha_gorevi": false,
@@ -79,6 +114,10 @@
       "tekrar_dogrulandi_ham": false
     }
   ],
+  "sinir_temporal_lokal_guclu_girdi": 1,
+  "sinir_watchlist_yeni": 1,
+  "sinir_watchlist_eslesen": 0,
+  "sinir_watchlist_kurali": "Normal spektral eşiği değiştirmeden yalnız SINIR_TEMPORAL_LOKAL_GUCLU 150-249 m² adaylar kalıcı mikro hafızaya eklenir; alarm/görev/15 Eylül otomatik terfisi yoktur. Aynı bölgede 45 m içindeki mevcut iz yinelenmez.",
   "tekrar_dogrulanan_ham": 0,
   "mekansal_belirsiz_tekrar": 0,
   "tekrar_kimlik_kurali": "45 m eşleştirme toleransı iz sürekliliği içindir; iki-sahne tekrar kanıtı yalnız ilk güçlü konuma göre <=25 m sapmada geçerlidir. >25 m ham tekrar arka planda saklanır fakat devam eden aynı mikro şantiye sayılmaz."
