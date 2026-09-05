@@ -7,7 +7,9 @@ watchlist içinde tutar.
 
 Bu katman alarm veya saha görevi üretmez, 15 Eylül otomatik terfisi yapmaz ve 250 m²
 ana üretim eşiğini değiştirmez. Aynı bölgede mevcut bir mikro izle 45 m içinde eşleşen
-sınır adayı yeni kayıt açmaz; yalnız ek diagnostik kanıt olarak işaretlenir.
+sınır adayı yeni kayıt açmaz; yalnız ek diagnostik kanıt olarak işaretlenir. Aynı
+turda tek bir iz en fazla bir güçlü adayla eşleşir; yakın iki ayrı mikro değişim tek
+iz üstüne yazılarak koordinat kimliğini kaybetmez.
 """
 
 from __future__ import annotations
@@ -93,6 +95,7 @@ def _strong_borderline_candidates(payload: dict) -> list[dict]:
         raise AssertionError("Spektral sınır katmanında mikro bant 150-249 m² değil.")
 
     selected = []
+    seen = set()
     regions = payload.get("bolgeler") or {}
     if not isinstance(regions, dict):
         return selected
@@ -126,6 +129,14 @@ def _strong_borderline_candidates(payload: dict) -> list[dict]:
             item["boylam"] = round(longitude, 6)
             item["alan_m2"] = int(round(area))
             item["mikro_kaynak"] = SOURCE
+            identity = (
+                item["bolge"],
+                round(item["enlem"], 5),
+                round(item["boylam"], 5),
+            )
+            if identity in seen:
+                continue
+            seen.add(identity)
             selected.append(item)
 
     return selected
@@ -143,13 +154,19 @@ def _history(entry: dict) -> list[str]:
     return cleaned[-MAX_SCENE_HISTORY:]
 
 
-def _match_index(entries: list[dict], candidate: dict) -> tuple[int | None, float | None]:
+def _match_index(
+    entries: list[dict],
+    candidate: dict,
+    used: set[int],
+) -> tuple[int | None, float | None]:
     region = str(candidate.get("bolge") or "")
     point = (float(candidate["enlem"]), float(candidate["boylam"]))
     best_index = None
     best_distance = None
 
     for index, entry in enumerate(entries):
+        if index in used:
+            continue
         if str(entry.get("bolge") or "") != region:
             continue
         latitude = _number(entry.get("enlem"))
@@ -200,6 +217,7 @@ def apply_borderline_guard(
     scene_by_region = _scene_lookup(temporal, audit)
     added = 0
     matched = 0
+    used = set()
 
     for candidate in candidates:
         region = str(candidate.get("bolge") or "")
@@ -207,8 +225,9 @@ def apply_borderline_guard(
         scene_item = str(scene.get("son_item") or "").strip() or None
         scene_date = str(scene.get("son_tarih") or "").strip() or None
 
-        match, distance = _match_index(entries, candidate)
+        match, distance = _match_index(entries, candidate, used)
         if match is not None:
+            used.add(match)
             matched += 1
             entry = entries[match]
             history = _history(entry)
@@ -301,6 +320,7 @@ def apply_borderline_guard(
                 "sinir_ek_kanit_esleme_mesafe_m": 0.0,
             }
         )
+        used.add(len(entries) - 1)
         added += 1
 
     entries.sort(
@@ -324,7 +344,8 @@ def apply_borderline_guard(
     updated["sinir_watchlist_kurali"] = (
         "Normal spektral eşiği değiştirmeden yalnız SINIR_TEMPORAL_LOKAL_GUCLU "
         "150-249 m² adaylar kalıcı mikro hafızaya eklenir; alarm/görev/15 Eylül "
-        "otomatik terfisi yoktur. Aynı bölgede 45 m içindeki mevcut iz yinelenmez."
+        "otomatik terfisi yoktur. Aynı bölgede 45 m içindeki mevcut iz yinelenmez; "
+        "aynı turda tek iz en fazla bir güçlü adayla eşleşir."
     )
     if added or matched or updated.get("olusturma"):
         updated["olusturma"] = datetime.now(ISTANBUL).strftime("%Y-%m-%d %H:%M %z")
@@ -451,6 +472,25 @@ def _self_check():
     assert added == 0 and matched == 1
     assert len(near_payload["adaylar"]) == 1
     assert near_payload["adaylar"][0]["sinir_temporal_lokal_ek_kanit"] is True
+
+    # Aynı sahnede birbirine yakın iki ayrı güçlü sınır aday tek mevcut izi paylaşmamalı.
+    close_pair = json.loads(json.dumps(border))
+    first = close_pair["bolgeler"]["uzunkuyu"]["adaylar"][0]
+    first["bolge"] = "cesme"
+    first["enlem"] = 38.30005
+    first["boylam"] = 26.35000
+    second = dict(first)
+    second["enlem"] = 38.30030
+    second["boylam"] = 26.35000
+    close_pair["bolgeler"]["uzunkuyu"]["adaylar"] = [first, second]
+    pair_payload, added, matched = apply_borderline_guard(base, close_pair, temporal, {})
+    assert added == 1 and matched == 1
+    assert len(pair_payload["adaylar"]) == 2
+    pair_points = {
+        (round(float(item["enlem"]), 5), round(float(item["boylam"]), 5))
+        for item in pair_payload["adaylar"]
+    }
+    assert len(pair_points) == 2
 
     weak = json.loads(json.dumps(border))
     weak["bolgeler"]["uzunkuyu"]["adaylar"][0]["sinir_temporal_lokal_guclu"] = False
