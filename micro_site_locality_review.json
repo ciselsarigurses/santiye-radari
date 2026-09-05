@@ -6,7 +6,7 @@
     150,
     249
   ],
-  "kaynak_temporal_olusturma": "2026-09-05 11:37 +0300",
+  "kaynak_temporal_olusturma": "2026-09-05 12:01 +0300",
   "amac": "Mikro temporal sinyalin yalnız aday çevresinde mi yoğunlaştığını, yoksa aynı Sentinel geçişinde çevrede de yaygın olup tarla/toprak temizliği gibi geniş-yüzey hareketi riski taşıyıp taşımadığını diagnostik olarak ölçmek.",
   "esikler": {
     "merkez_yaricap_piksel": 1,
@@ -19,7 +19,7 @@
     "lokal_kompakt_kontrast_min": 2.5,
     "lokal_kompakt_hedef_skor_min": 0.45
   },
-  "uyari": "Bu çıktı alarm veya saha görevi üretmez. Geniş-yüzey riski tarla/sit/tarım statüsü anlamına gelmez ve adayı kalıcı olarak silmez; yalnız saha önceliklendirmesinde ek negatif kanıttır. Yeni Sentinel sahnesinde lokal hareket güçlenirse aday tekrar öne çıkabilir.",
+  "uyari": "Bu çıktı alarm veya saha görevi üretmez. Geniş-yüzey riski tarla/sit/tarım statüsü anlamına gelmez ve adayı kalıcı olarak silmez. Çevre bağlamının %55'ten azı geçerliyse aday negatif sayılmaz; YETERSIZ_BAGLAM_VERISI olarak arka planda tutulur ve sonraki açık Sentinel sahnesinde yeniden ölçülür.",
   "bolgeler": {
     "cesme": {
       "durum": "ok",
@@ -33,6 +33,7 @@
       "temporal_destekli_aday": 7,
       "genis_yuzey_kontekst_riski": 5,
       "lokal_kompakt_destek": 2,
+      "yetersiz_baglam_verisi": 1,
       "gulbahce_olculen": 0,
       "adaylar": [
         {
@@ -86,7 +87,8 @@
           "yerel_kontrast_orani": 10.75,
           "genis_yuzey_kontekst_riski": false,
           "lokal_kompakt_destek": true,
-          "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK"
+          "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
+          "baglam_yeniden_goruntule": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -139,7 +141,8 @@
           "yerel_kontrast_orani": 7.67,
           "genis_yuzey_kontekst_riski": false,
           "lokal_kompakt_destek": true,
-          "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK"
+          "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
+          "baglam_yeniden_goruntule": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -192,7 +195,8 @@
           "yerel_kontrast_orani": 1.01,
           "genis_yuzey_kontekst_riski": false,
           "lokal_kompakt_destek": false,
-          "lokalite_sinifi": "NÖTR_BAGLAM"
+          "lokalite_sinifi": "YETERSIZ_BAGLAM_VERISI",
+          "baglam_yeniden_goruntule": true
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -245,7 +249,8 @@
           "yerel_kontrast_orani": 1.54,
           "genis_yuzey_kontekst_riski": true,
           "lokal_kompakt_destek": false,
-          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI"
+          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI",
+          "baglam_yeniden_goruntule": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -298,7 +303,8 @@
           "yerel_kontrast_orani": 1.51,
           "genis_yuzey_kontekst_riski": true,
           "lokal_kompakt_destek": false,
-          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI"
+          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI",
+          "baglam_yeniden_goruntule": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -351,7 +357,8 @@
           "yerel_kontrast_orani": 1.49,
           "genis_yuzey_kontekst_riski": true,
           "lokal_kompakt_destek": false,
-          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI"
+          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI",
+          "baglam_yeniden_goruntule": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -404,7 +411,8 @@
           "yerel_kontrast_orani": 1.45,
           "genis_yuzey_kontekst_riski": true,
           "lokal_kompakt_destek": false,
-          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI"
+          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI",
+          "baglam_yeniden_goruntule": false
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -457,7 +465,8 @@
           "yerel_kontrast_orani": 1.34,
           "genis_yuzey_kontekst_riski": true,
           "lokal_kompakt_destek": false,
-          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI"
+          "lokalite_sinifi": "GENIS_YUZEY_KONTEKST_RISKI",
+          "baglam_yeniden_goruntule": false
         }
       ]
     },
@@ -473,6 +482,7 @@
       "temporal_destekli_aday": 1,
       "genis_yuzey_kontekst_riski": 0,
       "lokal_kompakt_destek": 0,
+      "yetersiz_baglam_verisi": 2,
       "gulbahce_olculen": 0,
       "adaylar": [
         {
@@ -527,7 +537,8 @@
           "yerel_kontrast_orani": 0.97,
           "genis_yuzey_kontekst_riski": false,
           "lokal_kompakt_destek": false,
-          "lokalite_sinifi": "NÖTR_BAGLAM"
+          "lokalite_sinifi": "YETERSIZ_BAGLAM_VERISI",
+          "baglam_yeniden_goruntule": true
         },
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -580,7 +591,8 @@
           "yerel_kontrast_orani": 1.29,
           "genis_yuzey_kontekst_riski": false,
           "lokal_kompakt_destek": false,
-          "lokalite_sinifi": "NÖTR_BAGLAM"
+          "lokalite_sinifi": "YETERSIZ_BAGLAM_VERISI",
+          "baglam_yeniden_goruntule": true
         }
       ]
     }
@@ -590,6 +602,7 @@
     "temporal_destekli_aday": 8,
     "genis_yuzey_kontekst_riski": 5,
     "lokal_kompakt_destek": 2,
+    "yetersiz_baglam_verisi": 3,
     "gulbahce_olculen": 0
   }
 }
