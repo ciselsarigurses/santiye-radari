@@ -1,0 +1,110 @@
+name: Temporal Lokal Erken Sinyal İzleme
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "temporal_local_watch_guard.py"
+      - ".github/workflows/temporal-local-watch.yml"
+  workflow_run:
+    workflows:
+      - "Kuru Zemin Zaman Serisi Denetimi"
+      - "Saha Durumunu İşle"
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-temporal-local-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Temporal-lokal izleme öz testini çalıştır
+        run: python temporal_local_watch_guard.py --check-only
+
+      - name: Güçlü temporal-lokal erken sinyali görünür izle
+        run: python temporal_local_watch_guard.py
+
+      - name: Diagnostik sözleşmesini doğrula
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path("temporal_local_watch.json").read_text(encoding="utf-8"))
+          assert payload.get("ana_uretim_esigi_m2") == 250
+          assert payload.get("diagnostik_bant_m2") == [250, 900]
+          assert payload.get("alarm") is False
+          assert payload.get("saha_gorevi") is False
+          for row in payload.get("adaylar") or []:
+              assert 250 <= float(row.get("alan_m2") or 0) <= 900
+              assert row.get("ani_baslangic_destegi") is True
+              assert row.get("lokal_ani_baslangic_destegi") is True
+              assert row.get("yaygin_cevre_degisim_riski") is False
+              assert float(row.get("yerellik_orani") or 0) >= 1.5
+              assert float(row.get("ic_3x3_gecerli_oran") or 0) >= 2/3
+              assert float(row.get("cevre_halka_gecerli_oran") or 0) >= 2/3
+              assert abs(float(row.get("ic_3x3_son_bsi_degisim") or 0)) >= 0.10
+              assert row.get("alarm") is False and row.get("saha_gorevi") is False
+          print(f"Temporal-lokal sözleşme OK: aday={payload.get('aday_sayisi', 0)}")
+          PY
+
+      - name: Diagnostik sonucu güvenli kaydet
+        run: |
+          report_files="temporal_local_watch.json latest_report.json SAHA_RAPORU.md"
+
+          regenerate() {
+            echo "Güncel main üzerinde temporal-lokal izleme yeniden hesaplanıyor."
+            python temporal_local_watch_guard.py
+          }
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+              echo "Temporal-lokal izleme sonucu değişmedi."
+              exit 0
+            fi
+
+            git add $report_files
+            git commit -m "Radar: temporal-lokal erken sinyal izleme sonucunu güncelle"
+
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Main ilerledi; izleme güncel veride yeniden hesaplanıyor (${attempt}/3)."
+              git reset --hard origin/main
+              regenerate
+              continue
+            fi
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            git fetch origin main
+            git reset --hard origin/main
+            regenerate
+          done
+
+          echo "Temporal-lokal izleme sonucu güvenli biçimde kaydedilemedi."
+          exit 1
