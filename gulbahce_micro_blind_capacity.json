@@ -1,0 +1,21 @@
+{
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "amac": "Gülbahçe'de Sentinel kalite körlüğünün 150-249 m² bir mikro şantiye izini gizleme kapasitesini, kör kümenin toplam boyutundan bağımsız olarak görünür kılmak.",
+  "durum": "ok",
+  "kaynak_son_tarih": "03.09.2026",
+  "kaynak_son_item": "S2C_T35SMC_20260903T090747_L2A",
+  "gulbahce_operasyon_yaricapi_m": 2000,
+  "kalite_kor_kara_yuzde": 0.035,
+  "mikro_ham_aday_2km": 1,
+  "mikro_kor_kume_tam_150_249": 0,
+  "ana_kor_kume_250plus": 4,
+  "mikro_gizleyebilen_kor_kume": 4,
+  "mikro_korluk_kapasitesi_var": true,
+  "yorum": "'mikro_kor_kume_tam_150_249' yalnız toplam alanı 150-249 m² olan kör kümeleri sayar. 250 m²+ bir kör küme de içinde 150-249 m² yeni kazı/temel izini gizleyebilir; bu nedenle 'mikro_gizleyebilen_kor_kume' iki boyut sınıfını birlikte sayar. Bu yalnız kalite/kapsama diagnostiğidir; alarm veya saha görevi değildir."
+}
