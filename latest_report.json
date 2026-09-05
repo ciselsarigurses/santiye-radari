@@ -25,7 +25,10 @@
       "gecikmis": false,
       "uydu_kanit_yasi_gun": 2,
       "uydu_onceligi": "ORTA",
-      "erken_hafriyat": true
+      "erken_hafriyat": true,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.306402/26.309806",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -56,7 +59,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 2.8,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.303146/26.297443",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -87,7 +93,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 8.9,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.301156/26.304197",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -118,7 +127,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 3.1,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313366/26.307173",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -149,7 +161,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 3.7,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.263439/26.318163",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -180,7 +195,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 4.8,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297357/26.355253",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -211,7 +229,10 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 8.9,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.294734/26.311523",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -242,7 +263,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 5.8,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.285689/26.384330",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -269,7 +293,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332190/26.652385",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -296,7 +323,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334541/26.651698",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -323,7 +353,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.333275/26.652271",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -354,7 +387,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 7.5,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.346380/26.301220",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -381,7 +417,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.287046/26.257491",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -412,7 +451,10 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 2.7,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.355244/26.302251",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -443,7 +485,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 24.4,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.290212/26.271915",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -470,7 +515,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313469/26.638073",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -497,7 +545,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.333094/26.610019",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -524,7 +575,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334813/26.602576",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -547,7 +601,10 @@
       "bekleme_gun": 7,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.233229/26.443399",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -570,7 +627,10 @@
       "bekleme_gun": 7,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.240736/26.438133",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -593,7 +653,10 @@
       "bekleme_gun": 7,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.254665/26.439850",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -616,7 +679,10 @@
       "bekleme_gun": 7,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.233862/26.405966",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -639,7 +705,10 @@
       "bekleme_gun": 7,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334079/26.491274",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -662,7 +731,10 @@
       "bekleme_gun": 7,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338330/26.486237",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -693,7 +765,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344843/26.469042",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -724,7 +799,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320241/26.466180",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -755,7 +833,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247520/26.432638",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -786,7 +867,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.220838/26.435386",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -817,7 +901,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219843/26.406080",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -848,7 +935,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.208446/26.480489",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -875,7 +965,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.262913/26.573034",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -902,7 +995,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.249076/26.452004",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -929,7 +1025,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.232526/26.450286",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -960,7 +1059,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.201482/26.484496",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -987,7 +1089,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.305420/26.536966",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1018,7 +1123,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.246435/26.410087",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1049,7 +1157,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319427/26.476025",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1076,7 +1187,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.325859/26.469179",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1103,7 +1217,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344761/26.468950",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1134,7 +1251,10 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.242726/26.400585",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1165,7 +1285,10 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.256836/26.382613",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1196,7 +1319,10 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.225541/26.421191",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1227,7 +1353,10 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.259188/26.310722",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1258,7 +1387,10 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.342672/26.394633",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1285,7 +1417,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332542/26.487156",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1312,7 +1447,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.330823/26.479828",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1339,7 +1477,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.285870/26.484523",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1366,7 +1507,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.349546/26.492767",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1397,7 +1541,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307849/26.470988",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1428,7 +1575,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253218/26.415238",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1459,7 +1609,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.225450/26.408484",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1490,7 +1643,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.309025/26.462631",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1513,7 +1669,10 @@
       "bekleme_gun": 6,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.318432/26.613552",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1544,7 +1703,10 @@
       "boyut_sinifi": "KUCUK",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338783/26.311638",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1575,7 +1737,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.223732/26.393030",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1602,7 +1767,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.317087/26.467118",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1625,7 +1793,10 @@
       "bekleme_gun": 3,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.227531/26.428861",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1648,7 +1819,10 @@
       "bekleme_gun": 3,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.224908/26.400471",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1675,7 +1849,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1698,7 +1875,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.237932/26.448780",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1721,7 +1901,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.315537/26.486671",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1744,7 +1927,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.218576/26.408370",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1767,7 +1953,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308935/26.507418",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1790,7 +1979,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.257741/26.451317",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1813,7 +2005,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.322954/26.474215",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1836,7 +2031,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.305950/26.512455",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1859,7 +2057,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.288764/26.482687",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1882,7 +2083,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.286775/26.505357",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1905,7 +2109,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.315447/26.502953",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1928,7 +2135,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.314271/26.488069",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1951,7 +2161,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.315990/26.468605",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1974,7 +2187,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.326029/26.460133",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -1997,7 +2213,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.242183/26.456240",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2020,7 +2239,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
+      "uydu_onceligi": "YÜKSEK",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265248/26.428975",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2043,7 +2265,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "ORTA"
+      "uydu_onceligi": "ORTA",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319607/26.617445",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2066,7 +2291,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "ORTA"
+      "uydu_onceligi": "ORTA",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.272755/26.279585",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2089,7 +2317,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "ORTA"
+      "uydu_onceligi": "ORTA",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.215772/26.452672",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2112,7 +2343,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "NORMAL"
+      "uydu_onceligi": "NORMAL",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.269770/26.311523",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2135,7 +2369,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "NORMAL"
+      "uydu_onceligi": "NORMAL",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.325125/26.475131",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2158,7 +2395,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "NORMAL"
+      "uydu_onceligi": "NORMAL",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.298442/26.305571",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2181,7 +2421,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "NORMAL"
+      "uydu_onceligi": "NORMAL",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.318703/26.610804",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2204,7 +2447,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "NORMAL"
+      "uydu_onceligi": "NORMAL",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.318793/26.615842",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2227,7 +2473,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "NORMAL"
+      "uydu_onceligi": "NORMAL",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.271579/26.305456",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2250,7 +2499,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "ORTA"
+      "uydu_onceligi": "ORTA",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297809/26.307975",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2273,7 +2525,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "ORTA"
+      "uydu_onceligi": "ORTA",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.243088/26.419016",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2296,7 +2551,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "ORTA"
+      "uydu_onceligi": "ORTA",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.257288/26.329839",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2319,7 +2577,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "ORTA"
+      "uydu_onceligi": "ORTA",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.268414/26.364297",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2342,7 +2603,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "ORTA"
+      "uydu_onceligi": "ORTA",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.278453/26.309577",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2365,7 +2629,10 @@
       "bekleme_gun": 2,
       "gecikmis": true,
       "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "ORTA"
+      "uydu_onceligi": "ORTA",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.278544/26.309921",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2392,7 +2659,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.351445/26.467347",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2419,7 +2689,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.287317/26.501813",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2450,7 +2723,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.4,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338692/26.471920",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2477,7 +2753,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.217581/26.453034",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2504,7 +2783,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.315537/26.486698",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2535,7 +2817,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 13.2,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.300432/26.516561",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2562,7 +2847,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331275/26.484866",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2593,7 +2881,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 1.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.326843/26.494813",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2620,7 +2911,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247610/26.561355",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2647,7 +2941,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "GECİKEN",
@@ -2678,7 +2975,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.327386/26.485083",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "oncelik": "YÜKSEK",
@@ -2700,7 +3000,10 @@
       "ilk_gorulme": "2026-09-05",
       "bekleme_gun": 0,
       "gecikmis": false,
-      "uydu_kanit_yasi_gun": 2
+      "uydu_kanit_yasi_gun": 2,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.306221/26.464483",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "yeni_internet_bulgulari": [],
@@ -2739,7 +3042,10 @@
       "geometri_kaynagi_enlem": 38.253128,
       "geometri_kaynagi_boylam": 26.424511,
       "tarihsel_gorev_id": "UEC37CFA14C",
-      "tarihsel_bekleme_gun": 7
+      "tarihsel_bekleme_gun": 7,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2766,7 +3072,10 @@
       "geometri_kaynagi_enlem": 38.344571,
       "geometri_kaynagi_boylam": 26.475452,
       "tarihsel_gorev_id": "U0B5F6411CD",
-      "tarihsel_bekleme_gun": 7
+      "tarihsel_bekleme_gun": 7,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2793,7 +3102,10 @@
       "geometri_kaynagi_enlem": 38.335979,
       "geometri_kaynagi_boylam": 26.483809,
       "tarihsel_gorev_id": "UEC36614FA4",
-      "tarihsel_bekleme_gun": 7
+      "tarihsel_bekleme_gun": 7,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2820,7 +3132,10 @@
       "geometri_kaynagi_enlem": 38.329738,
       "geometri_kaynagi_boylam": 26.489762,
       "tarihsel_gorev_id": "U7938844405",
-      "tarihsel_bekleme_gun": 7
+      "tarihsel_bekleme_gun": 7,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2847,7 +3162,10 @@
       "geometri_kaynagi_enlem": 38.24146,
       "geometri_kaynagi_boylam": 26.40608,
       "tarihsel_gorev_id": "U03E0421DDD",
-      "tarihsel_bekleme_gun": 7
+      "tarihsel_bekleme_gun": 7,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "alarm": false,
@@ -2874,7 +3192,10 @@
       "geometri_kaynagi_enlem": 38.2193,
       "geometri_kaynagi_boylam": 26.413864,
       "tarihsel_gorev_id": "U07EF15923A",
-      "tarihsel_bekleme_gun": 7
+      "tarihsel_bekleme_gun": 7,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "arka_plan_kurali": {
@@ -2909,5 +3230,6 @@
       "saha_gorevi": false,
       "aciklama": "Aynı günlük rapor yeniden işlendiğinde daha önce arka plana ayrılmış geniş-yüzey diagnostik kayıtları sessizce düşürülmez."
     }
-  }
+  },
+  "parsel_on_kontrol_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
 }
