@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "micro_site_audit.py"
+      - "gulbahce_micro_blind_capacity_guard.py"
       - "satellite.py"
       - ".github/workflows/micro-site-audit.yml"
   schedule:
@@ -45,6 +46,9 @@ jobs:
       - name: 150-249 m² mikro diagnostik taramayı çalıştır
         run: python micro_site_audit.py
 
+      - name: Gülbahçe mikro körlük kapasitesini ayır
+        run: python gulbahce_micro_blind_capacity_guard.py
+
       - name: Sonucu yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
@@ -53,21 +57,20 @@ jobs:
               | grep -E '^[+-]' \
               | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
             if [[ -z "$meaningful" ]]; then
-              echo "Yalnız çalışma zamanı değişti; gereksiz veri commit'i yapılmıyor."
+              echo "Mikro auditte yalnız çalışma zamanı değişti; bu dosya geri alınıyor."
               git checkout -- micro_site_audit.json
-              exit 0
             fi
           fi
 
-          if [[ -z "$(git status --porcelain -- micro_site_audit.json)" ]]; then
-            echo "Mikro diagnostik sonucu değişmedi."
+          if [[ -z "$(git status --porcelain -- micro_site_audit.json gulbahce_micro_blind_capacity.json)" ]]; then
+            echo "Mikro diagnostik ve Gülbahçe körlük kapasitesi değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_audit.json
-          git commit -m "Radar: mikro şantiye diagnostik sonucunu güncelle"
+          git add micro_site_audit.json gulbahce_micro_blind_capacity.json
+          git commit -m "Radar: mikro diagnostik ve Gülbahçe körlük kapasitesini güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
             git rebase origin/main
