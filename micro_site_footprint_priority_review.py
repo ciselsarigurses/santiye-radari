@@ -7,8 +7,10 @@ bileşeninde güçlü temporal destek VE bağımsız lokal/kompakt bağlam birli
 "footprint güçlü diagnostik" etiketi üretir.
 
 Geniş-yüzey riski, önceki zeminin zaten hareketli olması, ana 250 m²+ adaya yakınlık
-ve güncel saha eşleşmesi yükseltmeyi engeller. Böylece eşiği düşürmek yerine ölçülen
-lokal + temporal kanıt birlikte aranır.
+ve güncel saha eşleşmesi yükseltmeyi engeller. Yetersiz geçerli 9x9 çevre bağlamı ise
+"lokal değil" diye yorumlanmaz; güçlü temporal sinyal arka planda sonraki açık Sentinel
+sahnesinde yeniden bağlam ölçümü bekler. Böylece eşiği düşürmek yerine ölçülen lokal +
+temporal kanıt birlikte aranır.
 """
 
 from __future__ import annotations
@@ -18,6 +20,7 @@ import json
 from pathlib import Path
 
 import satellite
+import micro_site_locality_guard as locality_guard
 
 
 FOOTPRINT_FILE = Path(__file__).with_name("micro_site_temporal_footprint_audit.json")
@@ -59,6 +62,17 @@ def _field_index(payload):
     return index
 
 
+def _context_fraction(locality):
+    raw = locality.get("baglam_gecerli_oran")
+    if raw is None:
+        # Eski/eksik diagnostik çıktıda yeni bir negatif kanıt uydurma.
+        return 1.0
+    try:
+        return float(raw)
+    except (TypeError, ValueError):
+        return 1.0
+
+
 def _classify(footprint, locality, field):
     component_temporal = bool(
         footprint.get("bilesen_ani_baslangic")
@@ -71,6 +85,8 @@ def _classify(footprint, locality, field):
     component_valid = float(footprint.get("bilesen_gecerli_oran") or 0.0) >= (2 / 3)
     spectral_gate = bool(footprint.get("spektral_kisa_liste_kapisi", True))
     local_compact = bool(locality.get("lokal_kompakt_destek"))
+    context_fraction = _context_fraction(locality)
+    context_sufficient = context_fraction >= locality_guard.MIN_CONTEXT_VALID_FRACTION
     broad_risk = bool(
         locality.get("genis_yuzey_kontekst_riski")
         or footprint.get("genis_hareket_kumesi_riski")
@@ -85,6 +101,7 @@ def _classify(footprint, locality, field):
         and spectral_gate
         and component_temporal
         and local_compact
+        and context_sufficient
         and not broad_risk
         and not prior_unstable
         and not near_main
@@ -101,9 +118,16 @@ def _classify(footprint, locality, field):
     elif broad_risk:
         label = "GENIS_HAREKET_ARKA_PLAN"
         reason = "Çevresel yaygın hareket riski var; mikro bileşen temporal sinyal verse de yükseltilmedi."
+    elif component_temporal and not context_sufficient:
+        label = "FOOTPRINT_TEMPORAL_VAR_BAGLAM_YETERSIZ"
+        reason = (
+            "Bileşenin temporal desteği var fakat 9x9 çevre bağlamının geçerli Sentinel "
+            "oranı lokal/kompakt yorumu için yetersiz. Aday silinmez veya 'lokal değil' "
+            "sayılmaz; sonraki açık sahnede çevre bağlamı yeniden ölçülür."
+        )
     elif component_temporal and not local_compact:
         label = "FOOTPRINT_TEMPORAL_VAR_LOKAL_DEGIL"
-        reason = "Bileşenin temporal desteği var fakat bağımsız lokal/kompakt karakter yok."
+        reason = "Bileşenin temporal desteği var fakat yeterli geçerli çevre bağlamında bağımsız lokal/kompakt karakter yok."
     elif local_compact and not component_temporal:
         label = "LOKAL_KOMPAKT_VAR_TEMPORAL_YETERSIZ"
         reason = "Lokal/kompakt karakter var fakat aday bileşeninde temporal destek yeterli değil."
@@ -117,6 +141,11 @@ def _classify(footprint, locality, field):
         "footprint_temporal_destek": component_temporal,
         "footprint_tam_esleme": exact_component,
         "footprint_gecerli": component_valid,
+        "baglam_gecerli": context_sufficient,
+        "baglam_gecerli_oran": round(context_fraction, 3),
+        "baglam_yeniden_goruntuleme_onceligi": bool(
+            component_temporal and not context_sufficient
+        ),
         "lokal_kompakt_destek": local_compact,
         "genis_yuzey_riski": broad_risk,
         "onceki_zemin_hareketli_riski": prior_unstable,
@@ -143,18 +172,23 @@ def build_review(footprint_payload, locality_payload, field_payload):
         locality = locality_index.get(key) or {}
         field = field_index.get(key) or {}
         item = dict(raw)
-        item.update(_classify(item, locality, field))
+        classification = _classify(item, locality, field)
+        item.update(classification)
         if locality:
             item["yerel_kontrast_orani"] = locality.get("yerel_kontrast_orani")
-            item["lokalite_sinifi"] = locality.get("lokalite_sinifi")
+            if classification.get("baglam_gecerli") is False:
+                item["lokalite_sinifi"] = "YETERSIZ_BAGLAM_VERISI"
+            else:
+                item["lokalite_sinifi"] = locality.get("lokalite_sinifi")
         rows.append(item)
 
     priority = {
         "MIKRO_FOOTPRINT_GUCLU_DIAGNOSTIK": 0,
         "LOKAL_KOMPAKT_VAR_TEMPORAL_YETERSIZ": 1,
-        "FOOTPRINT_TEMPORAL_VAR_LOKAL_DEGIL": 2,
-        "BEKLE": 3,
-        "GENIS_HAREKET_ARKA_PLAN": 4,
+        "FOOTPRINT_TEMPORAL_VAR_BAGLAM_YETERSIZ": 2,
+        "FOOTPRINT_TEMPORAL_VAR_LOKAL_DEGIL": 3,
+        "BEKLE": 4,
+        "GENIS_HAREKET_ARKA_PLAN": 5,
     }
     rows.sort(
         key=lambda item: (
@@ -169,6 +203,9 @@ def build_review(footprint_payload, locality_payload, field_payload):
         counts[label] = counts.get(label, 0) + 1
 
     strong = [row for row in rows if row.get("mikro_footprint_guclu_diagnostik")]
+    context_wait = [
+        row for row in rows if row.get("baglam_yeniden_goruntuleme_onceligi")
+    ]
     gulbahce = [
         row for row in rows
         if str(row.get("yaklasik_mevki") or "").startswith("Gülbahçe")
@@ -181,13 +218,15 @@ def build_review(footprint_payload, locality_payload, field_payload):
         "ana_uretim_esigi_m2": footprint_payload.get("ana_uretim_esigi_m2", 250),
         "mikro_aralik_m2": footprint_payload.get("mikro_aralik_m2", [150, 249]),
         "amac": "Sabit 3x3 pencerenin seyreltme riskine karşı gerçek mikro bileşen temporal kanıtını lokal/kompakt bağlamla birlikte değerlendirmek.",
-        "uyari": "Güçlü footprint diagnostik etiketi alarm veya saha görevi değildir; yeni Sentinel sahnesinde tekrar doğrulama ve saha kalibrasyonu beklenir.",
+        "uyari": "Güçlü footprint diagnostik etiketi alarm veya saha görevi değildir; yeni Sentinel sahnesinde tekrar doğrulama ve saha kalibrasyonu beklenir. Geçerli çevre bağlamı yetersiz temporal adaylar negatif kabul edilmez, ayrı yeniden-görüntüleme bekleme sınıfında korunur.",
         "toplam_aday": len(rows),
         "guclu_footprint_diagnostik": len(strong),
+        "baglam_yeniden_goruntuleme": len(context_wait),
         "gulbahce_toplam": len(gulbahce),
         "gulbahce_guclu": sum(bool(row.get("mikro_footprint_guclu_diagnostik")) for row in gulbahce),
         "karar_sayilari": counts,
         "guclu_adaylar": strong,
+        "baglam_bekleyen_adaylar": context_wait,
         "adaylar": rows,
     }
 
@@ -205,7 +244,11 @@ def _self_check():
         "genis_hareket_kumesi_riski": False,
         "ana_adaya_yakin": False,
     }
-    locality = {"lokal_kompakt_destek": True, "genis_yuzey_kontekst_riski": False}
+    locality = {
+        "lokal_kompakt_destek": True,
+        "genis_yuzey_kontekst_riski": False,
+        "baglam_gecerli_oran": 1.0,
+    }
     result = _classify(footprint, locality, {})
     assert result["mikro_footprint_guclu_diagnostik"]
     assert result["karar_sinifi"] == "MIKRO_FOOTPRINT_GUCLU_DIAGNOSTIK"
@@ -215,6 +258,16 @@ def _self_check():
     result = _classify(footprint, broad, {})
     assert not result["mikro_footprint_guclu_diagnostik"]
     assert result["karar_sinifi"] == "GENIS_HAREKET_ARKA_PLAN"
+
+    blind_context = {
+        "lokal_kompakt_destek": False,
+        "genis_yuzey_kontekst_riski": False,
+        "baglam_gecerli_oran": 0.389,
+    }
+    result = _classify(footprint, blind_context, {})
+    assert not result["mikro_footprint_guclu_diagnostik"]
+    assert result["karar_sinifi"] == "FOOTPRINT_TEMPORAL_VAR_BAGLAM_YETERSIZ"
+    assert result["baglam_yeniden_goruntuleme_onceligi"]
 
 
 def main():
@@ -237,6 +290,7 @@ def main():
     print(
         "Footprint mikro öncelik incelemesi: "
         f"toplam={result['toplam_aday']}, güçlü={result['guclu_footprint_diagnostik']}, "
+        f"bağlam-bekleyen={result['baglam_yeniden_goruntuleme']}, "
         f"Gülbahçe={result['gulbahce_toplam']}, Gülbahçe-güçlü={result['gulbahce_guclu']}. "
         "Alarm/görev üretilmedi."
     )
