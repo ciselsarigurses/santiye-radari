@@ -44,6 +44,29 @@ jobs:
       - name: Güçlü temporal-lokal erken sinyali görünür izle
         run: python temporal_local_watch_guard.py
 
+      - name: Rota bağlantısı biçimini koru
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path("temporal_local_watch.json").read_text(encoding="utf-8"))
+          report_path = Path("SAHA_RAPORU.md")
+          text = report_path.read_text(encoding="utf-8")
+
+          for row in payload.get("adaylar") or []:
+              lat = float(row["enlem"])
+              lon = float(row["boylam"])
+              correct = f"destination={lat:.6f},{lon:.6f}"
+              malformed = f"destination={lat:.6f}.{lon:.6f}"
+              text = text.replace(malformed, correct)
+              assert correct in text, f"Temporal-lokal rota bağlantısı eksik: {correct}"
+              assert malformed not in text, f"Bozuk rota bağlantısı kaldı: {malformed}"
+
+          report_path.write_text(text, encoding="utf-8")
+          print(f"Temporal-lokal rota bağlantıları OK: aday={payload.get('aday_sayisi', 0)}")
+          PY
+
       - name: Diagnostik sözleşmesini doğrula
         run: |
           python - <<'PY'
@@ -75,6 +98,22 @@ jobs:
           regenerate() {
             echo "Güncel main üzerinde temporal-lokal izleme yeniden hesaplanıyor."
             python temporal_local_watch_guard.py
+            python - <<'PY'
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path("temporal_local_watch.json").read_text(encoding="utf-8"))
+          report_path = Path("SAHA_RAPORU.md")
+          text = report_path.read_text(encoding="utf-8")
+          for row in payload.get("adaylar") or []:
+              lat = float(row["enlem"])
+              lon = float(row["boylam"])
+              text = text.replace(
+                  f"destination={lat:.6f}.{lon:.6f}",
+                  f"destination={lat:.6f},{lon:.6f}",
+              )
+          report_path.write_text(text, encoding="utf-8")
+          PY
           }
 
           git config user.name "santiye-radari-bot"
