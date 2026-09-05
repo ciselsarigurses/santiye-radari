@@ -6,52 +6,10 @@
     150,
     249
   ],
-  "kaynak_olusturma": "2026-09-05 11:03 +0300",
-  "gulbahce_ham_tekil_aday": 1,
+  "kaynak_olusturma": "2026-09-05 19:35 +0300",
+  "gulbahce_ham_tekil_aday": 0,
   "gulbahce_kisa_listeye_giren": 0,
-  "yalniz_sinirda_spektral_nedenle_elenen": 1,
-  "adaylar": [
-    {
-      "oncelik": "MIKRO_DIAGNOSTIK",
-      "alarm": false,
-      "saha_gorevi": false,
-      "bolge": "uzunkuyu",
-      "yaklasik_mevki": "Gülbahçe çevresi",
-      "enlem": 38.327205,
-      "boylam": 26.64664,
-      "alan_m2": 200,
-      "piksel": 2,
-      "bbox_piksel": 2,
-      "doluluk_orani": 1.0,
-      "ortalama_rgb_degisim": 0.3098,
-      "ortalama_ndvi_kaybi": 0.2081,
-      "ortalama_parlaklik_artisi": 0.3098,
-      "gulbahce_merkeze_mesafe_m": 855,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.327205,26.646640",
-      "neden": "150-249 m² bandında, en az iki bitişik yaklaşık 10 m pikselde ana küçük-saha yolu kadar güçlü çoklu-spektral değişim ve kompakt geometri görüldü. Tek başına saha ziyareti nedeni değildir.",
-      "kaynak_bolgeler": [
-        "uzunkuyu"
-      ],
-      "ortusme_tekrari": false,
-      "250m_mikro_komsu": 0,
-      "genis_hareket_kumesi_riski": false,
-      "en_yakin_250plus_m": 745,
-      "ana_adaya_yakin": false,
-      "spektral_kisa_liste_kapisi": false,
-      "kisa_listeye_girer": false,
-      "elenme_nedenleri": [
-        "SPEKTRAL_KISA_LISTE_KAPISI"
-      ],
-      "spektral_esikler": {
-        "rgb_min": 0.24,
-        "ndvi_kaybi_min": 0.22,
-        "rgb_gecer": true,
-        "ndvi_gecer": false,
-        "rgb_marj": 0.0698,
-        "ndvi_marj": -0.0119
-      },
-      "yalniz_sinirda_spektral_nedenle_elendi": true
-    }
-  ],
+  "yalniz_sinirda_spektral_nedenle_elenen": 0,
+  "adaylar": [],
   "yorum": "Bu çıktı yalnız kalibrasyon açıklamasıdır. Ham mikro adayın neden kısa-listede olmadığını görünür kılar; hiçbir eşiği düşürmez, alarm veya saha görevi üretmez."
 }
