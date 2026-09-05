@@ -252,7 +252,11 @@ show_background = st.checkbox(
     "Arka plan ve bekleyen mikro değişimleri de göster",
     value=False,
 )
-map_rows = frame.copy() if show_background else frame[frame["strong"]].copy()
+map_rows = (
+    frame.copy()
+    if show_background or frame.empty
+    else frame[frame["strong"]].copy()
+)
 
 if map_rows.empty:
     st.info("Seçili katmanda gösterilecek aday yok.")
