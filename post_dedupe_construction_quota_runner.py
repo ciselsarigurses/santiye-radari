@@ -412,9 +412,10 @@ def _fixed_self_check():
         quota._is_early_construction(candidate) for candidate in weak_early_updated
     ) == 2
 
+    small_quota = max(int(quota.satellite.SMALL_HOTSPOT_QUOTA), 1)
     crowded_small = [
-        item(100 + i, 300 + i * 70, 0.50 + i * 0.03)
-        for i in range(6)
+        item(100 + i, 300 + i * 40, 0.50 + i * 0.03)
+        for i in range(small_quota)
     ]
     crowded_small.extend(item(120 + i, 1000 + i * 400, 0.7) for i in range(8))
     crowded_small.extend(item(140 + i, 20000 + i * 1000, 0.1) for i in range(10))
@@ -425,7 +426,7 @@ def _fixed_self_check():
     )
     assert len(small_updated) == len(crowded_small)
     assert len(small_swaps) == 1, small_swaps
-    assert sum(_is_small(candidate) for candidate in small_updated) == 6
+    assert sum(_is_small(candidate) for candidate in small_updated) == small_quota
     assert quota.rebalance._candidate_key(strong_small) in {
         quota.rebalance._candidate_key(candidate) for candidate in small_updated
     }, "Güçlü 250-800 m² küçük-saha adayı dolu kotada korunmadı."
