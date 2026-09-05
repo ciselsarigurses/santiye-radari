@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-05 11:09 +0300",
+  "olusturma": "2026-09-05 11:38 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -15,7 +15,7 @@
       "olculen": 8,
       "sinif_farki": 4,
       "ani_destek_farki": 3,
-      "devam_destek_farki": 2,
+      "devam_destek_farki": 1,
       "adaylar": [
         {
           "oncelik": "MIKRO_DIAGNOSTIK",
@@ -366,9 +366,9 @@
           "en_yakin_250plus_m": 2436,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": true,
-          "3x3_temporal_sinif": null,
+          "3x3_temporal_sinif": "DEVAM_EDEN_HAREKET",
           "3x3_ani_baslangic": false,
-          "3x3_devam_eden": false,
+          "3x3_devam_eden": true,
           "bilesen_eslesti": true,
           "bilesen_esleme_piksel_mesafesi": 0.0,
           "bilesen_piksel": 2,
@@ -382,7 +382,7 @@
           "bilesen_onceki_zemin_hareketli_riski": false,
           "sinif_farki": true,
           "ani_destek_farki": true,
-          "devam_destek_farki": true,
+          "devam_destek_farki": false,
           "ornekleme_riski": "3x3_lokal_sinyali_seyreltmis_olabilir"
         }
       ]
@@ -495,7 +495,7 @@
     "bilesen_eslesmeyen": 0,
     "sinif_farki": 5,
     "ani_destek_farki": 3,
-    "devam_destek_farki": 3,
+    "devam_destek_farki": 2,
     "3x3_cevre_sinyali_olasi": 0,
     "3x3_lokal_sinyali_seyreltmis_olabilir": 3
   }
