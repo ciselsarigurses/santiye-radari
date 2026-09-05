@@ -11,7 +11,13 @@
   "tekil_aday": 39,
   "ortusme_tekrari_elendi": 7,
   "genis_hareket_kumesi_arka_plana_alindi": 9,
-  "ana_250plus_adaya_yakin_arka_plana_alindi": 17,
+  "ana_250plus_adaya_yakin_arka_plana_alindi": 8,
+  "250plus_yakinlik_referans_toplam_saha_adayi": 101,
+  "250plus_yakinlik_referans_guncel_sentinel": 45,
+  "250plus_yakinlik_referans_dislanan_eski_veya_250alti": 56,
+  "yakinlik_referans_sentinel_tarihleri": [
+    "03.09.2026"
+  ],
   "gulbahce_ham_tekil_aday": 1,
   "gulbahce_kisa_liste_aday": 0,
   "kisa_liste": [
@@ -39,7 +45,7 @@
       "ortusme_tekrari": false,
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
-      "en_yakin_250plus_m": 431,
+      "en_yakin_250plus_m": 1001,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -95,7 +101,7 @@
       "ortusme_tekrari": false,
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
-      "en_yakin_250plus_m": 832,
+      "en_yakin_250plus_m": 1485,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -123,7 +129,7 @@
       "ortusme_tekrari": false,
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
-      "en_yakin_250plus_m": 1190,
+      "en_yakin_250plus_m": 2536,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -151,7 +157,7 @@
       "ortusme_tekrari": false,
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
-      "en_yakin_250plus_m": 2423,
+      "en_yakin_250plus_m": 3400,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -207,7 +213,7 @@
       "ortusme_tekrari": false,
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
-      "en_yakin_250plus_m": 590,
+      "en_yakin_250plus_m": 1604,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -263,7 +269,7 @@
       "ortusme_tekrari": false,
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
-      "en_yakin_250plus_m": 2436,
+      "en_yakin_250plus_m": 3610,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -298,5 +304,5 @@
     }
   ],
   "arka_plan_aday_sayisi": 29,
-  "not": "Kısa liste de alarm/görev değildir. Yalnız 150-249 m² ham mikro havuzdaki örtüşme tekrarları, geniş yüzey kümeleri ve mevcut 250+ aday parçaları ayıklanmıştır. Saha rotasına geçmek için ayrıca temporal devam/ani başlangıç veya güvenilir açık-web/yapılaşma doğrulaması gerekir."
+  "not": "Kısa liste de alarm/görev değildir. Yalnız 150-249 m² ham mikro havuzdaki örtüşme tekrarları, geniş yüzey kümeleri ve aynı güncel Sentinel karşılaştırmasındaki 250+ aday parçaları ayıklanmıştır. Eski saha backlog'u mikro sinyali bastırmaz. Saha rotasına geçmek için ayrıca temporal devam/ani başlangıç veya güvenilir açık-web/yapılaşma doğrulaması gerekir."
 }
