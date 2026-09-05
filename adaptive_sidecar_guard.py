@@ -1,10 +1,12 @@
-"""İkinci diyagonal parsel yan-kümesini yalnız ölçülebilir biçimde daha iyi ise terfi ettir.
+"""Diyagonal parsel yan-kümelerini yalnız ölçülebilir biçimde daha iyi ise terfi ettir.
 
 Bu katman ana Sentinel eşiklerini, 250 m² alt sınırını, 24 aday tavanını veya
 6 şantiye-ölçeği kotasını değiştirmez. ``rebalance_satellite_candidates`` tarafından
-üretilen 1 yan-kümeli güvenli seçim ile 2 yan-kümeli karşı-olgusal seçimi aynı sahnede
-karşılaştırır. İkinci ``DIYAGONAL_YAN_KUME`` yalnız bire bir yer değiştirdiği normal
-şantiye-ölçeği adayından daha yüksek ``guclu_sinyal_orani`` taşıyorsa seçilir.
+üretilen 0, 1 ve 2 ``DIYAGONAL_YAN_KUME`` içeren karşı-olgusal seçimleri aynı sahnede
+karşılaştırır. İlk yan-küme de ikinci yan-küme de yalnız bire bir yer değiştirdiği
+normal şantiye-ölçeği adayından daha yüksek ``guclu_sinyal_orani`` taşıyorsa seçilir.
+Böylece yalnız geometri kurtarma kotası var diye 0 güçlü-sinyalli bir yan-küme daha
+güçlü normal hafriyat adayını saha listesinden çıkaramaz.
 
 Yeni politika mevcut Sentinel sahnesine geriye dönük uygulanmaz. İlk çalışmada sahne
 zaten eskiyse o sahne ``grandfathered`` olarak kaydedilir; ilk sonraki Sentinel ürününde
@@ -13,7 +15,7 @@ yeniden üretilebilir. Böylece kod değişikliği tek başına saha kuyruğunu 
 
 Normal çalışmada mevcut ``diagonal_sidecar_audit.json`` dosyasını da üretir; bu nedenle
 aynı ham Sentinel analizi yalnız bir kez yapılır. ``--check-only`` ağ veya veritabanı
-kullanmadan terfi/ret regresyonlarını sınar.
+kullanmadan ilk ve ikinci yan-küme terfi/ret regresyonlarını sınar.
 """
 
 from __future__ import annotations
@@ -29,7 +31,8 @@ from daily_report import ISTANBUL, REPORT_REGIONS, build_daily_report, ensure_da
 from scanner import connect
 
 
-POLICY_VERSION = "adaptive-diagonal-sidecar-v1-next-scene"
+POLICY_VERSION = "adaptive-diagonal-sidecar-v2-guard-first-next-scene"
+NO_SIDECAR_QUOTA = 0
 BASELINE_SIDECAR_QUOTA = 1
 CANDIDATE_SIDECAR_QUOTA = 2
 AUDIT_FILE = Path("diagonal_sidecar_audit.json")
@@ -71,32 +74,33 @@ def _selected_difference(before, after):
     return added, removed
 
 
-def _adaptive_choice(baseline, expanded):
-    """Sadece aynı bütçede daha güçlü ikinci yan-küme varsa expanded seçimini kabul et."""
+def _adaptive_choice(baseline, expanded, ordinal):
+    """Aynı bütçede yalnız daha güçlü tek bir yan-küme takasını kabul et."""
+    prefix = str(ordinal)
     if len(baseline) != len(expanded):
-        return baseline, "butce_farki", [], []
+        return baseline, f"{prefix}_butce_farki", [], []
     if rebalance._bucket_counts(baseline) != rebalance._bucket_counts(expanded):
-        return baseline, "olcek_dagilimi_farki", [], []
+        return baseline, f"{prefix}_olcek_dagilimi_farki", [], []
 
     added, removed = _selected_difference(baseline, expanded)
     if not added and not removed:
-        return baseline, "ikinci_yan_kume_yok", added, removed
+        return baseline, f"{prefix}_yan_kume_yok", added, removed
     if len(added) != 1 or len(removed) != 1:
-        return baseline, "bire_bir_takas_degil", added, removed
+        return baseline, f"{prefix}_bire_bir_takas_degil", added, removed
 
     challenger = added[0]
     displaced = removed[0]
     if challenger.get("geometri_kaynagi") != rebalance.DIAGONAL_SIDECAR_TAG:
-        return baseline, "eklenen_yan_kume_degil", added, removed
+        return baseline, f"{prefix}_eklenen_yan_kume_degil", added, removed
     if displaced.get("geometri_kaynagi") == rebalance.DIAGONAL_SIDECAR_TAG:
-        return baseline, "yan_kume_yan_kumeyi_degistiriyor", added, removed
+        return baseline, f"{prefix}_yan_kume_yan_kumeyi_degistiriyor", added, removed
 
     challenger_strength = rebalance._signal_strength(challenger)
     displaced_strength = rebalance._signal_strength(displaced)
     if challenger_strength <= displaced_strength:
-        return baseline, "ikinci_yan_kume_daha_guclu_degil", added, removed
+        return baseline, f"{prefix}_yan_kume_daha_guclu_degil", added, removed
 
-    return expanded, "ikinci_yan_kume_terfi", added, removed
+    return expanded, f"{prefix}_yan_kume_terfi", added, removed
 
 
 def _ensure_state_table(connection):
@@ -182,41 +186,93 @@ def _self_check():
         item(90, 3500, 0.90, sidecar=True),
         item(91, 5400, 0.35, sidecar=True),
     ]
-    baseline = rebalance._balanced_select(
+    no_sidecar = rebalance._balanced_select(
+        promote_pool, diagonal_sidecar_quota=NO_SIDECAR_QUOTA
+    )
+    baseline_raw = rebalance._balanced_select(
         promote_pool, diagonal_sidecar_quota=BASELINE_SIDECAR_QUOTA
     )
+    baseline, first_reason, first_added, first_removed = _adaptive_choice(
+        no_sidecar, baseline_raw, "ilk"
+    )
+    assert first_reason == "ilk_yan_kume_terfi", (
+        first_reason,
+        first_added,
+        first_removed,
+    )
+    assert len(_sidecars(no_sidecar)) == 0
+    assert len(_sidecars(baseline)) == 1
+    assert len(first_added) == len(first_removed) == 1
+    assert rebalance._signal_strength(first_added[0]) > rebalance._signal_strength(
+        first_removed[0]
+    )
+
     expanded = rebalance._balanced_select(
         promote_pool, diagonal_sidecar_quota=CANDIDATE_SIDECAR_QUOTA
     )
-    chosen, reason, added, removed = _adaptive_choice(baseline, expanded)
-    assert reason == "ikinci_yan_kume_terfi", (reason, added, removed)
-    assert len(_sidecars(baseline)) == 1
+    chosen, second_reason, added, removed = _adaptive_choice(
+        baseline, expanded, "ikinci"
+    )
+    assert second_reason == "ikinci_yan_kume_terfi", (
+        second_reason,
+        added,
+        removed,
+    )
     assert len(_sidecars(chosen)) == 2
     assert len(added) == len(removed) == 1
     assert rebalance._signal_strength(added[0]) > rebalance._signal_strength(removed[0])
     assert len(chosen) == satellite.HOTSPOT_LIMIT
-    assert rebalance._bucket_counts(chosen) == rebalance._bucket_counts(baseline)
+    assert rebalance._bucket_counts(chosen) == rebalance._bucket_counts(no_sidecar)
 
-    reject_pool = list(base) + [
-        item(92, 3500, 0.90, sidecar=True),
-        item(93, 5400, 0.25, sidecar=True),
+    first_reject_pool = list(base) + [item(92, 3500, 0.0, sidecar=True)]
+    first_reject_no = rebalance._balanced_select(
+        first_reject_pool, diagonal_sidecar_quota=NO_SIDECAR_QUOTA
+    )
+    first_reject_raw = rebalance._balanced_select(
+        first_reject_pool, diagonal_sidecar_quota=BASELINE_SIDECAR_QUOTA
+    )
+    first_reject, first_reject_reason, first_reject_added, first_reject_removed = (
+        _adaptive_choice(first_reject_no, first_reject_raw, "ilk")
+    )
+    assert first_reject_reason == "ilk_yan_kume_daha_guclu_degil", (
+        first_reject_reason,
+        first_reject_added,
+        first_reject_removed,
+    )
+    assert {_key(item) for item in first_reject} == {
+        _key(item) for item in first_reject_no
+    }
+    assert len(_sidecars(first_reject)) == 0
+
+    second_reject_pool = list(base) + [
+        item(93, 3500, 0.90, sidecar=True),
+        item(94, 5400, 0.25, sidecar=True),
     ]
-    baseline_reject = rebalance._balanced_select(
-        reject_pool, diagonal_sidecar_quota=BASELINE_SIDECAR_QUOTA
+    second_no = rebalance._balanced_select(
+        second_reject_pool, diagonal_sidecar_quota=NO_SIDECAR_QUOTA
     )
-    expanded_reject = rebalance._balanced_select(
-        reject_pool, diagonal_sidecar_quota=CANDIDATE_SIDECAR_QUOTA
+    second_one_raw = rebalance._balanced_select(
+        second_reject_pool, diagonal_sidecar_quota=BASELINE_SIDECAR_QUOTA
     )
-    chosen_reject, reason_reject, added_reject, removed_reject = _adaptive_choice(
-        baseline_reject, expanded_reject
+    second_one, second_first_reason, _, _ = _adaptive_choice(
+        second_no, second_one_raw, "ilk"
     )
-    assert reason_reject == "ikinci_yan_kume_daha_guclu_degil", (
-        reason_reject,
-        added_reject,
-        removed_reject,
+    assert second_first_reason == "ilk_yan_kume_terfi"
+    second_two = rebalance._balanced_select(
+        second_reject_pool, diagonal_sidecar_quota=CANDIDATE_SIDECAR_QUOTA
     )
-    assert {_key(item) for item in chosen_reject} == {_key(item) for item in baseline_reject}
-    assert len(_sidecars(chosen_reject)) == 1
+    second_reject, second_reject_reason, second_reject_added, second_reject_removed = (
+        _adaptive_choice(second_one, second_two, "ikinci")
+    )
+    assert second_reject_reason == "ikinci_yan_kume_daha_guclu_degil", (
+        second_reject_reason,
+        second_reject_added,
+        second_reject_removed,
+    )
+    assert {_key(item) for item in second_reject} == {
+        _key(item) for item in second_one
+    }
+    assert len(_sidecars(second_reject)) == 1
 
 
 def run_guard():
@@ -259,18 +315,38 @@ def run_guard():
 
                 raw_result = rebalance._uncapped_analysis(region_key, pair)
                 candidates = [
-                    item for item in raw_result.get("hotspots", [])
+                    item
+                    for item in raw_result.get("hotspots", [])
                     if isinstance(item, dict)
                 ]
-                baseline = rebalance._balanced_select(
+                no_sidecar = rebalance._balanced_select(
+                    candidates,
+                    diagonal_sidecar_quota=NO_SIDECAR_QUOTA,
+                )
+                baseline_raw = rebalance._balanced_select(
                     candidates,
                     diagonal_sidecar_quota=BASELINE_SIDECAR_QUOTA,
+                )
+                baseline, first_reason, first_added, first_removed = _adaptive_choice(
+                    no_sidecar, baseline_raw, "ilk"
                 )
                 expanded = rebalance._balanced_select(
                     candidates,
                     diagonal_sidecar_quota=CANDIDATE_SIDECAR_QUOTA,
                 )
-                chosen, adaptive_reason, added, removed = _adaptive_choice(baseline, expanded)
+
+                if first_reason == "ilk_yan_kume_terfi":
+                    chosen, second_reason, second_added, second_removed = _adaptive_choice(
+                        baseline, expanded, "ikinci"
+                    )
+                    adaptive_reason = second_reason
+                else:
+                    chosen = baseline
+                    second_reason = "ilk_yan_kume_gecmedi"
+                    second_added, second_removed = [], []
+                    adaptive_reason = first_reason
+
+                final_added, final_removed = _selected_difference(no_sidecar, chosen)
                 allow_apply, scene_reason = _state_decision(
                     connection, region_key, latest_item, bool(row[3])
                 )
@@ -314,18 +390,28 @@ def run_guard():
                             for item in sidecar_pool
                         ),
                         "mevcut_kota": BASELINE_SIDECAR_QUOTA,
+                        "ham_mevcut_secili_yan_kume": len(_sidecars(baseline_raw)),
                         "mevcut_secili_yan_kume": len(_sidecars(baseline)),
                         "simulasyon_kota": CANDIDATE_SIDECAR_QUOTA,
                         "simulasyon_secili_yan_kume": len(_sidecars(expanded)),
+                        "son_secili_yan_kume": len(_sidecars(chosen)),
                         "toplam_aday_mevcut": len(baseline),
                         "toplam_aday_simulasyon": len(expanded),
+                        "toplam_aday_son": len(chosen),
                         "olcek_dagilimi_mevcut": rebalance._bucket_counts(baseline),
                         "olcek_dagilimi_simulasyon": rebalance._bucket_counts(expanded),
+                        "olcek_dagilimi_son": rebalance._bucket_counts(chosen),
+                        "ilk_yan_kume_karari": first_reason,
+                        "ikinci_yan_kume_karari": second_reason,
                         "uyarlamali_karar": adaptive_reason,
                         "sahne_politikasi": scene_reason,
                         "uygulanan_karar": applied_decision,
-                        "eklenen": [_detail(item) for item in added],
-                        "cikarilan": [_detail(item) for item in removed],
+                        "ilk_takas_eklenen": [_detail(item) for item in first_added],
+                        "ilk_takas_cikarilan": [_detail(item) for item in first_removed],
+                        "ikinci_takas_eklenen": [_detail(item) for item in second_added],
+                        "ikinci_takas_cikarilan": [_detail(item) for item in second_removed],
+                        "eklenen": [_detail(item) for item in final_added],
+                        "cikarilan": [_detail(item) for item in final_removed],
                         "en_guclu_yan_kumeler": [
                             _detail(item) for item in ranked_sidecars[:5]
                         ],
@@ -341,10 +427,11 @@ def run_guard():
         "rapor_tarihi": report_date,
         "olusturma": now.strftime("%Y-%m-%d %H:%M %Z"),
         "amac": (
-            "İkinci diyagonal 800-10.000 m² yan-kümeyi yalnız yerini aldığı normal "
+            "Diyagonal 800-10.000 m² yan-kümeleri yalnız yerini aldıkları normal "
             "şantiye-ölçeği adayından daha güçlü Sentinel kanıtı taşıyorsa, toplam "
-            "24 aday ve ölçek dağılımını değiştirmeden terfi ettirmek; mevcut sahneyi "
-            "geriye dönük değiştirmemek."
+            "24 aday ve ölçek dağılımını değiştirmeden terfi ettirmek; ilk yan-küme "
+            "için de güvenli karşılaştırma uygulamak ve mevcut sahneyi geriye dönük "
+            "değiştirmemek."
         ),
         "bolgeler": records,
     }
@@ -364,9 +451,9 @@ def main():
     _self_check()
     if args.check_only:
         print(
-            "Uyarlamalı diyagonal yan-küme öz testi başarılı: daha güçlü ikinci "
-            "yan-küme bire bir terfi ediyor, daha zayıf olan reddediliyor; 24 aday "
-            "ve ölçek dağılımı sabit kalıyor."
+            "Uyarlamalı diyagonal yan-küme öz testi başarılı: ilk ve ikinci yan-küme "
+            "yalnız yerini aldığı normal adaydan daha güçlü ise bire bir terfi ediyor; "
+            "zayıf yan-küme reddediliyor, 24 aday ve ölçek dağılımı sabit kalıyor."
         )
         return
 
@@ -374,7 +461,8 @@ def main():
     summaries = []
     for key, item in payload["bolgeler"].items():
         summaries.append(
-            f"{key}: {item.get('uyarlamali_karar', item.get('durum'))}; "
+            f"{key}: ilk={item.get('ilk_yan_kume_karari', item.get('durum'))}; "
+            f"ikinci={item.get('ikinci_yan_kume_karari', 'yok')}; "
             f"uygulama={item.get('uygulanan_karar', 'yok')}"
         )
     print("Uyarlamalı diyagonal yan-küme koruması: " + " | ".join(summaries))
