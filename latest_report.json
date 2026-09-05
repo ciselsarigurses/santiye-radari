@@ -3325,7 +3325,10 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319969,26.666218",
       "saha_gorevi": false,
       "gulbahce_operasyonel_kapsama": true,
-      "gulbahce_referans_mesafesi_m": 2294
+      "gulbahce_referans_mesafesi_m": 2294,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319969/26.666218",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-05",
@@ -3374,7 +3377,10 @@
       "boylam": 26.666218,
       "alan_m2": 400,
       "neden": "KARISIK_GECERSIZLIK",
-      "referans_mesafesi_m": 2294
+      "referans_mesafesi_m": 2294,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319969/26.666218",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   }
 }
