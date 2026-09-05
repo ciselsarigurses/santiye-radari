@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-05",
-  "olusturma": "2026-09-05 06:17 +0300",
+  "olusturma": "2026-09-05 19:18 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -29,32 +29,32 @@
   "bolgeler": {
     "cesme": {
       "durum": "ok",
-      "latest_item": "S2C_T35SMC_20260903T090747_L2A",
-      "ham_800_10000": 298,
-      "raporda_800_10000": 6,
-      "raporda_10000_ustu": 9,
+      "latest_item": "S2A_T35SMC_20260905T090529_L2A",
+      "ham_800_10000": 13,
+      "raporda_800_10000": 13,
+      "raporda_10000_ustu": 0,
       "mevcut_post_dedupe_hedefi": 8,
       "diagnostik_15eylul_senaryosu": 10,
-      "senaryoya_eksik": 4,
-      "bire_bir_takasla_teorik_ek_kapasite": 4,
-      "teorik_son_800_10000": 10,
+      "senaryoya_eksik": 0,
+      "bire_bir_takasla_teorik_ek_kapasite": 0,
+      "teorik_son_800_10000": 13,
       "senaryo_kapasite_acisindan_mumkun": true
     },
     "uzunkuyu": {
       "durum": "ok",
-      "latest_item": "S2C_T35SMC_20260903T090747_L2A",
-      "ham_800_10000": 196,
-      "raporda_800_10000": 5,
-      "raporda_10000_ustu": 17,
+      "latest_item": "S2A_T35SMC_20260905T090529_L2A",
+      "ham_800_10000": 3,
+      "raporda_800_10000": 3,
+      "raporda_10000_ustu": 0,
       "mevcut_post_dedupe_hedefi": 8,
       "diagnostik_15eylul_senaryosu": 10,
-      "senaryoya_eksik": 5,
-      "bire_bir_takasla_teorik_ek_kapasite": 5,
-      "teorik_son_800_10000": 10,
-      "senaryo_kapasite_acisindan_mumkun": true
+      "senaryoya_eksik": 7,
+      "bire_bir_takasla_teorik_ek_kapasite": 0,
+      "teorik_son_800_10000": 3,
+      "senaryo_kapasite_acisindan_mumkun": false
     }
   },
-  "kapasite_senaryosu_iki_bolgede_mumkun": true,
+  "kapasite_senaryosu_iki_bolgede_mumkun": false,
   "onerilen_eylem": "URETIME_DOKUNMA",
   "neden": "Saha doğrulama örneklemi politika değişikliği için yetersiz. 15 Eylül senaryosu yalnız kapasite diagnostikidir; eşik/kota/alarm değiştirilmez."
 }
