@@ -1,6 +1,9 @@
 name: Mikro Şantiye Zaman Serisi Denetimi
 
 on:
+  workflow_run:
+    workflows: ["Mikro Şantiye Kısa Liste Filtresi"]
+    types: [completed]
   push:
     branches: [main]
     paths:
@@ -13,7 +16,7 @@ on:
       - "micro_site_audit.json"
       - ".github/workflows/micro-site-temporal.yml"
   schedule:
-    # Ana Sentinel + mikro tarama + kısa liste tamamlandıktan sonra çalışır.
+    # workflow_run ana yol; takvim olası zincir kesintisine karşı emniyet ağıdır.
     - cron: "45 8,12,16 * * *"
   workflow_dispatch:
 
@@ -26,6 +29,7 @@ concurrency:
 
 jobs:
   temporal-review:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
