@@ -66,6 +66,13 @@ PRESEASON_CALIBRATION_NOTE = (
     "sırf veri toplamak için ekip rotasına eklenmez."
 )
 
+PRESEASON_BACKLOG_NOTE = (
+    "15 Eylül öncesi bu tam liste bugünün saha rotası değildir; açık görev hafızasıdır. "
+    "Operasyon için yalnız 'Günün ilk 3 kontrolü' bölümü kullanılır. Eski/gecikmiş "
+    "kayıtlar silinmez; yeni Sentinel kanıtıyla yeniden güçlenirse veya insan TEKRAR_GIT "
+    "verirse tekrar rota havuzuna girebilir."
+)
+
 
 def _number(value, default=0.0):
     try:
@@ -217,6 +224,19 @@ def _preseason_calibration_markdown():
     )
 
 
+def _annotate_preseason_full_list(text):
+    """Tam görev listesini silmeden, ön sezonda bugünün rotası olmadığını görünür kıl."""
+    source = str(text or "")
+    marker = route.NEXT_SECTION
+    if marker not in source:
+        return source
+    note = f"> **Arka plan görev hafızası:** {PRESEASON_BACKLOG_NOTE}"
+    decorated = marker + "\n\n" + note
+    if decorated in source:
+        return source
+    return source.replace(marker, decorated, 1)
+
+
 def update_fresh_shortlist(local_day=None):
     day = _local_day(local_day)
     preseason = _preseason_mode(day)
@@ -229,6 +249,13 @@ def update_fresh_shortlist(local_day=None):
     if preseason:
         payload["kuru_zemin_kalibrasyon_kontrolu"] = []
         payload["kuru_zemin_kalibrasyon_notu"] = PRESEASON_CALIBRATION_NOTE
+        payload["saha_adaylari_operasyonel_rol"] = "ARKA_PLAN_GOREV_HAFIZASI"
+        payload["saha_adaylari_bugunun_rotasi"] = False
+        payload["saha_adaylari_operasyon_notu"] = PRESEASON_BACKLOG_NOTE
+    else:
+        payload.pop("saha_adaylari_operasyonel_rol", None)
+        payload.pop("saha_adaylari_bugunun_rotasi", None)
+        payload.pop("saha_adaylari_operasyon_notu", None)
 
     route.REPORT_JSON.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
@@ -255,6 +282,7 @@ def update_fresh_shortlist(local_day=None):
                 updated,
                 _preseason_calibration_markdown(),
             )
+            updated = _annotate_preseason_full_list(updated)
         else:
             calibration = payload.get("kuru_zemin_kalibrasyon_kontrolu") or []
             updated = route._inject_calibration_markdown(
@@ -399,6 +427,23 @@ def _self_check():
     assert "CURRENT_SMALL" not in preseason_ids
     assert _preseason_mode(date(2026, 9, 14)) is True
     assert _preseason_mode(date(2026, 9, 15)) is False
+
+    sample_md = "\n".join(
+        [
+            "# Rapor",
+            "",
+            route.NEXT_SECTION,
+            "",
+            "### 1. GECİKEN — Test",
+            "- **Koordinat:** `38.3, 26.4`",
+            "",
+        ]
+    )
+    annotated = _annotate_preseason_full_list(sample_md)
+    assert PRESEASON_BACKLOG_NOTE in annotated
+    assert annotated.count("**Arka plan görev hafızası:**") == 1
+    assert annotated.count(route.NEXT_SECTION) == 1
+    assert _annotate_preseason_full_list(annotated) == annotated
 
 
 if __name__ == "__main__":
