@@ -13,9 +13,9 @@
 
 > 15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya yeni Sentinel görüntüsünde beliren güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.
 
-1. **ERKEN — Alaçatı** · yaklaşık 700 m² · Görev `U6571135BD1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.267780,26.366014)
-2. **ERKEN — Ovacık** · yaklaşık 500 m² · Görev `U522B8FA096` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.264524,26.319537)
-3. **ERKEN — Çiftlikköy** · yaklaşık 400 m² · Görev `U00238DB218` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.285780,26.239060)
+1. **ERKEN — Alaçatı** · yaklaşık 700 m² · Görev `U6571135BD1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.267780,26.366014) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.267780/26.366014)
+2. **ERKEN — Ovacık** · yaklaşık 500 m² · Görev `U522B8FA096` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.264524,26.319537) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.264524/26.319537)
+3. **ERKEN — Çiftlikköy** · yaklaşık 400 m² · Görev `U00238DB218` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.285780,26.239060) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.285780/26.239060)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
@@ -27,9 +27,9 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
 > **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
 
-1. **KÖR ALAN — Reisdere** · yaklaşık 800 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.296181,26.409629)
+1. **KÖR ALAN — Reisdere** · yaklaşık 800 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.296181,26.409629) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.296181/26.409629)
    - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
-2. **KÖR ALAN — Gülbahçe** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.352169,26.642976)
+2. **KÖR ALAN — Gülbahçe** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.352169,26.642976) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.352169/26.642976)
    - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
 
 ## Bugün sahada kontrol edilecek uydu adayları
