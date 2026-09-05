@@ -119,14 +119,15 @@ def watchlist_frame(payload: dict) -> pd.DataFrame:
             continue
 
         repeated = bool(raw.get("tekrar_dogrulandi"))
+        raw_repeated = bool(raw.get("tekrar_dogrulandi_ham", repeated))
         safe = raw.get("tekrar_dogrulama_mekansal_guvenli")
         current = bool(raw.get("guncel_guclu"))
         if repeated and safe is True:
             status_label = "TEKRAR · MEKÂNSAL GÜVENLİ"
             color = [31, 138, 112, 210]
             radius = 125
-        elif repeated and safe is False:
-            status_label = "TEKRAR · MEKÂNSAL BELİRSİZ"
+        elif raw_repeated and safe is False:
+            status_label = "HAM TEKRAR · MEKÂNSAL BELİRSİZ"
             color = [217, 133, 35, 210]
             radius = 125
         elif current:
@@ -149,6 +150,7 @@ def watchlist_frame(payload: dict) -> pd.DataFrame:
                 "status_label": status_label,
                 "current": current,
                 "repeated": repeated,
+                "raw_repeated": raw_repeated,
                 "identity_safe": safe,
                 "scene_count": int(raw.get("farkli_sentinel_sahnesi_gorulme_sayisi") or 0),
                 "first_date": str(raw.get("ilk_gorulme_tarihi") or "-"),
@@ -356,18 +358,17 @@ st.divider()
 st.subheader("Temporal izleme hafızası")
 st.caption(
     "Güçlü mikro aday ilk sahneden sonra ana değişim maskesinden düşse bile burada "
-    "arka planda korunur. Tekrar etiketi yalnız farklı Sentinel sahnesini ifade eder; "
-    "25 m ilk-konum kontrolü ayrı mekânsal güvenlik kanıtıdır."
+    "arka planda korunur. Ham tekrar iki farklı Sentinel sahnesinde güçlü görünümü "
+    "ifade eder; geçerli tekrar için ayrıca ilk güçlü konuma göre en fazla 25 m "
+    "mekânsal kimlik şartı aranır."
 )
 
 if watch_frame.empty:
     st.info("Temporal izleme hafızasında kayıt yok.")
 else:
-    safe_repeat_count = int(
-        (watch_frame["repeated"] & (watch_frame["identity_safe"] == True)).sum()
-    )
+    safe_repeat_count = int(watch_frame["repeated"].sum())
     ambiguous_repeat_count = int(
-        (watch_frame["repeated"] & (watch_frame["identity_safe"] == False)).sum()
+        (watch_frame["raw_repeated"] & (watch_frame["identity_safe"] == False)).sum()
     )
     current_trace_count = int(watch_frame["current"].sum())
     background_trace_count = len(watch_frame) - current_trace_count
@@ -376,7 +377,7 @@ else:
     w1, w2, w3, w4, w5 = st.columns(5)
     w1.metric("Güncel güçlü iz", current_trace_count)
     w2.metric("Güvenli tekrar", safe_repeat_count)
-    w3.metric("Belirsiz tekrar", ambiguous_repeat_count)
+    w3.metric("Belirsiz ham tekrar", ambiguous_repeat_count)
     w4.metric("Arka plan iz", background_trace_count)
     w5.metric("Gülbahçe iz", gulbahce_trace_count)
 
@@ -387,7 +388,9 @@ else:
     temporal_rows = (
         watch_frame.copy()
         if show_temporal_background
-        else watch_frame[watch_frame["current"] | watch_frame["repeated"]].copy()
+        else watch_frame[
+            watch_frame["current"] | watch_frame["repeated"] | watch_frame["raw_repeated"]
+        ].copy()
     )
 
     if not temporal_rows.empty:
