@@ -6,7 +6,8 @@ parçacıklar olarak çok sayıda mikro aday üretebilir. Bu koruma:
 
 1) yaklaşık 30 m içinde bölge-örtüşmesi tekrarlarını tekilleştirir,
 2) 250 m çevresinde yoğun mikro kümelerini geniş-yüzey riski sayar,
-3) mevcut 250 m²+ üretim adayına 150 m'den yakın mikro parçayı ayrı fırsat saymaz,
+3) yalnız aynı güncel Sentinel karşılaştırmasının 250 m²+ üretim adayına 150 m'den
+   yakın mikro parçayı ayrı fırsat saymaz; eski saha backlog'u mikro sinyali bastıramaz,
 4) yalnız daha izole ve spektral olarak güçlü adayları alarm-dışı kısa listeye alır.
 
 Alarm, saha görevi ve ana 250 m² üretim eşiği değişmez.
@@ -109,6 +110,37 @@ def _production_candidates():
     return [row for row in rows if isinstance(row, dict)]
 
 
+def _current_source_dates(raw_payload):
+    """Mikro analizinin gerçekten kullandığı son Sentinel tarihlerini döndür."""
+    dates = set()
+    for region in (raw_payload.get("bolgeler") or {}).values():
+        if not isinstance(region, dict) or region.get("durum") != "ok":
+            continue
+        value = str(region.get("son_tarih") or "").strip()
+        if value:
+            dates.add(value)
+    return dates
+
+
+def _filter_current_production(rows, current_dates):
+    """Yalnız aynı güncel Sentinel kanıtındaki gerçek 250+ adayları yakınlık referansı yap.
+
+    latest_report.json saha backlog'unu da taşır. Güncel mikro sinyali, günler önceki
+    açık bir saha görevinin 150 m yakınına düştü diye arka plana atmak yanlış-negatif
+    üretebilir. Bu yakınlık filtresi yalnız mikro analizinin son Sentinel tarihleriyle
+    eşleşen ve alanı gerçekten 250 m²+ olan uydu adaylarını kullanır.
+    """
+    dates = {str(value).strip() for value in current_dates if str(value).strip()}
+    if not dates:
+        return []
+    return [
+        row for row in rows
+        if isinstance(row, dict)
+        and _number(row.get("alan_m2"), 0.0) >= 250
+        and str(row.get("son_tarih") or "").strip() in dates
+    ]
+
+
 def _nearest_distance(row, others):
     distances = [_distance_m(row, other) for other in others]
     finite = [distance for distance in distances if np.isfinite(distance)]
@@ -146,7 +178,9 @@ def _annotate(rows, production):
 def build_shortlist(raw_payload, latest_report_exists=True):
     raw_rows = _raw_candidates(raw_payload)
     deduped, duplicate_count = _dedupe(raw_rows)
-    production = _production_candidates() if latest_report_exists else []
+    source_dates = _current_source_dates(raw_payload)
+    production_all = _production_candidates() if latest_report_exists else []
+    production = _filter_current_production(production_all, source_dates)
     annotated = _annotate(deduped, production)
 
     shortlist = [
@@ -192,15 +226,22 @@ def build_shortlist(raw_payload, latest_report_exists=True):
         "ana_250plus_adaya_yakin_arka_plana_alindi": sum(
             row["ana_adaya_yakin"] for row in annotated
         ),
+        "250plus_yakinlik_referans_toplam_saha_adayi": len(production_all),
+        "250plus_yakinlik_referans_guncel_sentinel": len(production),
+        "250plus_yakinlik_referans_dislanan_eski_veya_250alti": (
+            len(production_all) - len(production)
+        ),
+        "yakinlik_referans_sentinel_tarihleri": sorted(source_dates),
         "gulbahce_ham_tekil_aday": gulbahce_raw,
         "gulbahce_kisa_liste_aday": gulbahce_shortlist,
         "kisa_liste": shortlist,
         "arka_plan_aday_sayisi": len(background),
         "not": (
             "Kısa liste de alarm/görev değildir. Yalnız 150-249 m² ham mikro havuzdaki "
-            "örtüşme tekrarları, geniş yüzey kümeleri ve mevcut 250+ aday parçaları "
-            "ayıklanmıştır. Saha rotasına geçmek için ayrıca temporal devam/ani başlangıç "
-            "veya güvenilir açık-web/yapılaşma doğrulaması gerekir."
+            "örtüşme tekrarları, geniş yüzey kümeleri ve aynı güncel Sentinel "
+            "karşılaştırmasındaki 250+ aday parçaları ayıklanmıştır. Eski saha backlog'u "
+            "mikro sinyali bastırmaz. Saha rotasına geçmek için ayrıca temporal devam/ani "
+            "başlangıç veya güvenilir açık-web/yapılaşma doğrulaması gerekir."
         ),
     }
 
@@ -211,6 +252,8 @@ def _self_check():
         "mikro_aralik_m2": [150, 249],
         "bolgeler": {
             "cesme": {
+                "durum": "ok",
+                "son_tarih": "03.09.2026",
                 "adaylar": [
                     {
                         "bolge": "cesme", "enlem": 38.3, "boylam": 26.4,
@@ -221,6 +264,8 @@ def _self_check():
                 ]
             },
             "uzunkuyu": {
+                "durum": "ok",
+                "son_tarih": "03.09.2026",
                 "adaylar": [
                     {
                         "bolge": "uzunkuyu", "enlem": 38.30005, "boylam": 26.40005,
@@ -238,6 +283,19 @@ def _self_check():
     assert len(deduped) == 1
     assert duplicates == 1
     assert deduped[0]["ortusme_tekrari"] is True
+    assert _current_source_dates(synthetic) == {"03.09.2026"}
+
+    references = [
+        {"alan_m2": 400, "son_tarih": "03.09.2026"},
+        {"alan_m2": 500, "son_tarih": "26.08.2026"},
+        {"alan_m2": 200, "son_tarih": "03.09.2026"},
+        {"alan_m2": 800, "son_tarih": None},
+    ]
+    filtered = _filter_current_production(references, {"03.09.2026"})
+    assert filtered == [references[0]], (
+        "Mikro yakınlık filtresi yalnız aynı güncel Sentinel tarihindeki 250+ adayı "
+        "referans almalıdır."
+    )
 
 
 def main():
@@ -254,7 +312,9 @@ def main():
         "Mikro kısa liste hazır: "
         f"ham={result['ham_aday']}, tekil={result['tekil_aday']}, "
         f"kısa_liste={len(result['kisa_liste'])}, "
-        f"Gülbahçe={result['gulbahce_kisa_liste_aday']}. Alarm/görev üretilmedi."
+        f"Gülbahçe={result['gulbahce_kisa_liste_aday']}, "
+        f"güncel-250+={result['250plus_yakinlik_referans_guncel_sentinel']}. "
+        "Alarm/görev üretilmedi."
     )
 
 
