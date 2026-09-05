@@ -4,11 +4,12 @@ Mikro izleme listesi farklı Sentinel sahneleri arasında yaklaşık koordinat e
 kullanır. Bu katman mevcut 45 m izleme toleransını veya 250 m² ana alarm eşiğini
 değiştirmez; yalnız ilk güçlü konumu saklar ve sonraki güçlü görünümün ilk konumdan
 ne kadar saptığını ölçer. 25 m üzerindeki sapma, iki yakın fakat ayrı parselin tek iz
-gibi yorumlanma riskidir ve diagnostik olarak işaretlenir.
+gibi yorumlanma riskidir.
 
-Bu dosya alarm üretmez, saha görevi açmaz ve ``tekrar_dogrulandi`` kararını değiştirmez.
-Ama gelecekte tekrar kanıtı operasyonel önceliklendirmede kullanılacaksa
-``tekrar_dogrulama_mekansal_guvenli`` alanı ayrıca aranmalıdır.
+Ham iki-sahne görünümü korunur; ancak ``tekrar_dogrulandi`` yalnız mekânsal kimlik de
+güvenliyse True kalır. Böylece >25 m kaymış yakın bir değişim, sırf 45 m izleme
+toleransına girdiği için "devam eden aynı mikro şantiye" kanıtı sayılmaz. Alarm veya
+saha görevi üretilmez ve ana 250 m² üretim eşiği değiştirilmez.
 """
 
 from __future__ import annotations
@@ -51,6 +52,18 @@ def _distance_m(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return math.hypot(north, east)
 
 
+def _raw_repeat(entry: dict) -> bool:
+    """İki farklı Sentinel sahnesinde güçlü görünümün ham kanıtını koru."""
+    if entry.get("tekrar_dogrulandi_ham") is True:
+        return True
+    if entry.get("tekrar_dogrulandi") is True:
+        return True
+    try:
+        return int(entry.get("farkli_sentinel_sahnesi_gorulme_sayisi") or 0) >= 2
+    except (TypeError, ValueError):
+        return False
+
+
 def apply_identity_guard(payload: dict) -> tuple[dict, int, int]:
     if int(payload.get("ana_uretim_esigi_m2") or MAIN_THRESHOLD_M2) != MAIN_THRESHOLD_M2:
         raise AssertionError("Ana üretim eşiği 250 m² değil.")
@@ -65,8 +78,9 @@ def apply_identity_guard(payload: dict) -> tuple[dict, int, int]:
     if not isinstance(entries, list):
         raise AssertionError("Mikro aday listesi geçersiz.")
 
-    repeated = 0
+    safe_repeated = 0
     ambiguous = 0
+    raw_repeated = 0
     for entry in entries:
         if not isinstance(entry, dict):
             continue
@@ -88,12 +102,18 @@ def apply_identity_guard(payload: dict) -> tuple[dict, int, int]:
         drift = _distance_m(first_lat, first_lon, latitude, longitude)
         entry["ilk_konumdan_sapma_m"] = round(drift, 1)
 
-        if bool(entry.get("tekrar_dogrulandi")):
-            repeated += 1
+        raw_repeat = _raw_repeat(entry)
+        entry["tekrar_dogrulandi_ham"] = raw_repeat
+        entry["tekrar_dogrulama_mekansal_esik_m"] = REPEAT_IDENTITY_MAX_DRIFT_M
+
+        if raw_repeat:
+            raw_repeated += 1
             safe = drift <= REPEAT_IDENTITY_MAX_DRIFT_M
             entry["tekrar_dogrulama_mekansal_guvenli"] = safe
-            entry["tekrar_dogrulama_mekansal_esik_m"] = REPEAT_IDENTITY_MAX_DRIFT_M
+            # Canonical tekrar kanıtı artık yalnız aynı küçük alan kimliği korunuyorsa geçerli.
+            entry["tekrar_dogrulandi"] = safe
             if safe:
+                safe_repeated += 1
                 entry["tekrar_dogrulama_mekansal_not"] = (
                     "Farklı Sentinel sahnelerindeki güçlü görünüm ilk mikro konumdan "
                     "25 m içinde; aynı küçük alan iziyle uyumlu."
@@ -101,18 +121,29 @@ def apply_identity_guard(payload: dict) -> tuple[dict, int, int]:
             else:
                 ambiguous += 1
                 entry["tekrar_dogrulama_mekansal_not"] = (
-                    "Tekrar güçlü görünüm ilk mikro konumdan 25 m'den fazla kaymış. "
-                    "Yakın ama ayrı parsel olasılığı nedeniyle tekrar kanıtı mekânsal "
-                    "olarak belirsiz tutulmalı."
+                    "İki farklı Sentinel sahnesinde güçlü görünüm var; ancak son güçlü "
+                    "konum ilk mikro izden 25 m'den fazla kaymış. Ham tekrar saklandı, "
+                    "yakın ama ayrı parsel olasılığı nedeniyle geçerli devam eden-hareket "
+                    "kanıtı sayılmadı."
                 )
         else:
+            entry["tekrar_dogrulandi"] = False
             entry["tekrar_dogrulama_mekansal_guvenli"] = None
-            entry["tekrar_dogrulama_mekansal_esik_m"] = REPEAT_IDENTITY_MAX_DRIFT_M
             entry["tekrar_dogrulama_mekansal_not"] = (
                 "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok."
             )
 
-    return updated, repeated, ambiguous
+    # Üst seviye sayaç da artık geçerli/safe tekrar sayısını ifade eder.
+    updated["tekrar_dogrulanan"] = safe_repeated
+    updated["tekrar_dogrulanan_ham"] = raw_repeated
+    updated["mekansal_belirsiz_tekrar"] = ambiguous
+    updated["tekrar_kimlik_kurali"] = (
+        "45 m eşleştirme toleransı iz sürekliliği içindir; iki-sahne tekrar kanıtı "
+        "yalnız ilk güçlü konuma göre <=25 m sapmada geçerlidir. >25 m ham tekrar "
+        "arka planda saklanır fakat devam eden aynı mikro şantiye sayılmaz."
+    )
+
+    return updated, safe_repeated, ambiguous
 
 
 def _semantic(payload: dict) -> dict:
@@ -129,7 +160,7 @@ def update_watchlist() -> tuple[dict, bool, int, int]:
     if _semantic(updated) == _semantic(payload):
         print(
             "Mikro mekânsal kimlik korumasında anlamlı değişiklik yok: "
-            f"{repeated} tekrar, {ambiguous} belirsiz."
+            f"{repeated} güvenli tekrar, {ambiguous} belirsiz."
         )
         return payload, False, repeated, ambiguous
 
@@ -139,7 +170,7 @@ def update_watchlist() -> tuple[dict, bool, int, int]:
     )
     print(
         "Mikro mekânsal kimlik alanları güncellendi: "
-        f"{repeated} tekrar, {ambiguous} >25 m belirsiz tekrar."
+        f"{repeated} güvenli tekrar, {ambiguous} >25 m belirsiz ham tekrar."
     )
     return updated, True, repeated, ambiguous
 
@@ -159,6 +190,7 @@ def _self_check():
                 "enlem": 38.300000,
                 "boylam": 26.350000,
                 "alan_m2": 200,
+                "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
                 "tekrar_dogrulandi": False,
             }
         ],
@@ -166,28 +198,48 @@ def _self_check():
     initialized, repeated, ambiguous = apply_identity_guard(base)
     entry = initialized["adaylar"][0]
     assert repeated == 0 and ambiguous == 0
+    assert initialized["tekrar_dogrulanan"] == 0
+    assert initialized["tekrar_dogrulanan_ham"] == 0
     assert entry["ilk_enlem"] == 38.3 and entry["ilk_boylam"] == 26.35
+    assert entry["tekrar_dogrulandi"] is False
+    assert entry["tekrar_dogrulandi_ham"] is False
     assert entry["tekrar_dogrulama_mekansal_guvenli"] is None
 
     safe = json.loads(json.dumps(initialized))
     safe_entry = safe["adaylar"][0]
     safe_entry["tekrar_dogrulandi"] = True
+    safe_entry["farkli_sentinel_sahnesi_gorulme_sayisi"] = 2
     safe_entry["enlem"] = 38.300150  # yaklaşık 16.6 m kuzey
     safe_checked, repeated, ambiguous = apply_identity_guard(safe)
     safe_entry = safe_checked["adaylar"][0]
     assert repeated == 1 and ambiguous == 0
+    assert safe_checked["tekrar_dogrulanan_ham"] == 1
+    assert safe_entry["tekrar_dogrulandi"] is True
+    assert safe_entry["tekrar_dogrulandi_ham"] is True
     assert safe_entry["tekrar_dogrulama_mekansal_guvenli"] is True
     assert 15 <= safe_entry["ilk_konumdan_sapma_m"] <= 18
 
     shifted = json.loads(json.dumps(initialized))
     shifted_entry = shifted["adaylar"][0]
     shifted_entry["tekrar_dogrulandi"] = True
+    shifted_entry["farkli_sentinel_sahnesi_gorulme_sayisi"] = 2
     shifted_entry["enlem"] = 38.300300  # yaklaşık 33.2 m kuzey
     shifted_checked, repeated, ambiguous = apply_identity_guard(shifted)
     shifted_entry = shifted_checked["adaylar"][0]
-    assert repeated == 1 and ambiguous == 1
+    assert repeated == 0 and ambiguous == 1
+    assert shifted_checked["tekrar_dogrulanan"] == 0
+    assert shifted_checked["tekrar_dogrulanan_ham"] == 1
+    assert shifted_entry["tekrar_dogrulandi"] is False
+    assert shifted_entry["tekrar_dogrulandi_ham"] is True
     assert shifted_entry["tekrar_dogrulama_mekansal_guvenli"] is False
     assert shifted_entry["ilk_konumdan_sapma_m"] > REPEAT_IDENTITY_MAX_DRIFT_M
+
+    # Sonraki turda canonical tekrar false kalsa bile ham geçmiş kaybolmamalı.
+    shifted_again, repeated, ambiguous = apply_identity_guard(shifted_checked)
+    shifted_again_entry = shifted_again["adaylar"][0]
+    assert repeated == 0 and ambiguous == 1
+    assert shifted_again_entry["tekrar_dogrulandi_ham"] is True
+    assert shifted_again_entry["tekrar_dogrulandi"] is False
 
     print("Mikro mekânsal kimlik koruması öz testi başarılı.")
 
