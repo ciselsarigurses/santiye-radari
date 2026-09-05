@@ -3198,26 +3198,22 @@
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "mahalle": "Gülbahçe",
       "enlem": 38.338692,
-      "boylam": 26.648996,
+      "boylam": 26.649044,
       "alan_m2": 400,
       "neden": "KARISIK_GECERSIZLIK",
       "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.1435,
+      "kalan_kor_yuzde": 0.1429,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.338692,26.648996",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338692/26.648996",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-      "saha_gorevi": false
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.338692,26.649044"
     },
     {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Ildır",
-      "enlem": 38.407071,
-      "boylam": 26.472247,
+      "mahalle": "Dalyan",
+      "enlem": 38.355063,
+      "boylam": 26.283591,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -3225,14 +3221,10 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.407071,26.472247",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.407071/26.472247",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-      "saha_gorevi": false
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.355063,26.283591"
     }
   ],
-  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-04",
+  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-05",
   "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
   "temporal_kalibrasyon_rotasyonu": {
     "durum": "uygulandi",
@@ -3244,13 +3236,13 @@
     "kural": "Yalniz gecikmis kuyrukta, ayni guncel Sentinel kalite bandindaki kucuk-guclu adaylarda en guclu capa korunur; kalan slotlar Cesme yerel takvim gunune gore gunluk doner.",
     "havuz": 0,
     "rapor_tarihi": "2026-09-04",
-    "rotasyon_tarihi": "2026-09-04"
+    "rotasyon_tarihi": "2026-09-05"
   },
   "kalibrasyon_katmanlar_arasi_cesitlilik": {
     "durum": "uygulandi",
     "engellenen_mahalleler": [
-      "gülbahçe",
-      "ildır"
+      "dalyan",
+      "gülbahçe"
     ],
     "secilen_mahalleler": [
       "Ilıca",
@@ -3260,7 +3252,7 @@
   },
   "preseason_route_final_guard": {
     "durum": "uygulandi",
-    "tarih": "2026-09-04",
+    "tarih": "2026-09-05",
     "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
   },
   "gulbahce_kor_alan_devriye_korumasi": {
