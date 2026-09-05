@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-05 19:09 +0300",
+  "olusturma": "2026-09-05 19:37 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -9,26 +9,11 @@
   ],
   "amac": "Güçlü mikro diagnostik adayın bağlı bileşen temsilcisi ile aynı bileşendeki en güçlü çoklu-spektral piksel merkezini karşılaştırmak.",
   "uyari": "Sinyal çekirdeği ikinci diagnostik koordinattır; alarm/görev üretmez, adres veya parsel değildir ve mevcut temsilci koordinatını otomatik değiştirmez.",
-  "guclu_aday": 2,
+  "guclu_aday": 0,
   "eslesen": 0,
-  "eslesmeyen": 2,
+  "eslesmeyen": 0,
   "koordinat_incele": 0,
   "maksimum_sapma_m": 0.0,
   "adaylar": [],
-  "eslesmeyen_adaylar": [
-    {
-      "neden": "GUNCEL_BAGLI_BILESEN_ESLESMEDI",
-      "bolge": "cesme",
-      "enlem": 38.317979,
-      "boylam": 26.345866,
-      "alan_m2": 200
-    },
-    {
-      "neden": "GUNCEL_BAGLI_BILESEN_ESLESMEDI",
-      "bolge": "cesme",
-      "enlem": 38.253942,
-      "boylam": 26.311981,
-      "alan_m2": 200
-    }
-  ]
+  "eslesmeyen_adaylar": []
 }

@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-05 19:09 +0300",
+  "olusturma": "2026-09-05 19:37 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -10,16 +10,16 @@
   "esleme_mesafesi_m": 45,
   "amac": "Güçlü lokal/kompakt + temporal mikro diagnostik adayları Sentinel sahneleri arasında hafızada tutmak; bir sonraki değişim çiftinde görünmese bile silmeyip arka planda izlemek.",
   "uyari": "Bu izleme listesi alarm veya saha görevi üretmez. İki farklı Sentinel sahnesinde tekrar güçlü görünme yalnız ek diagnostik kanıttır; 250 m² ana üretim eşiğini düşürmez.",
-  "guncel_guclu": 3,
-  "arka_plan_takip": 0,
+  "guncel_guclu": 0,
+  "arka_plan_takip": 3,
   "tekrar_dogrulanan": 0,
   "adaylar": [
     {
       "mikro_iz_id": "M064C4375BD",
       "alarm": false,
       "saha_gorevi": false,
-      "durum": "GUCLU_GUNCEL",
-      "guncel_guclu": true,
+      "durum": "ARKA_PLAN_TAKIP",
+      "guncel_guclu": false,
       "tekrar_dogrulandi": false,
       "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
       "sentinel_sahne_gecmisi": [
@@ -50,8 +50,8 @@
       "mikro_iz_id": "MBC99188115",
       "alarm": false,
       "saha_gorevi": false,
-      "durum": "GUCLU_GUNCEL",
-      "guncel_guclu": true,
+      "durum": "ARKA_PLAN_TAKIP",
+      "guncel_guclu": false,
       "tekrar_dogrulandi": false,
       "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
       "sentinel_sahne_gecmisi": [
@@ -85,8 +85,8 @@
       "mikro_iz_id": "MC7D2CCED03",
       "alarm": false,
       "saha_gorevi": false,
-      "durum": "GUCLU_GUNCEL",
-      "guncel_guclu": true,
+      "durum": "ARKA_PLAN_TAKIP",
+      "guncel_guclu": false,
       "tekrar_dogrulandi": false,
       "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
       "sentinel_sahne_gecmisi": [
@@ -114,9 +114,9 @@
       "tekrar_dogrulandi_ham": false
     }
   ],
-  "sinir_temporal_lokal_guclu_girdi": 1,
+  "sinir_temporal_lokal_guclu_girdi": 0,
   "sinir_watchlist_yeni": 0,
-  "sinir_watchlist_eslesen": 1,
+  "sinir_watchlist_eslesen": 0,
   "sinir_watchlist_kurali": "Normal spektral eşiği değiştirmeden yalnız SINIR_TEMPORAL_LOKAL_GUCLU 150-249 m² adaylar kalıcı mikro hafızaya eklenir; alarm/görev/15 Eylül otomatik terfisi yoktur. Aynı bölgede 45 m içindeki mevcut iz yinelenmez; aynı turda tek iz en fazla bir güçlü adayla eşleşir.",
   "tekrar_dogrulanan_ham": 0,
   "mekansal_belirsiz_tekrar": 0,
