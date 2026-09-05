@@ -5,6 +5,11 @@ ilişkili ve yaklaşık aynı noktada daha önce saha sonucu bulunan mikro adayl
 "yeni fırsat" gibi tekrar öne çıkmasını engeller. Eski saha sonucu yeni Sentinel
 sahnesini kalıcı olarak bastırmaz; böylece bugün tarla olan yerde sonraki görüntüde
 hafriyat başlarsa aday yeniden değerlendirilebilir.
+
+Normal mikro kısa listeye ek olarak, spektral eşiği yalnız dar marjla kaçırıp
+ayrı temporal + lokal analizde güçlü bulunan en fazla birkaç aday da yalnız
+kalibrasyon incelemesine alınabilir. Bu ek yol alarm, saha görevi veya otomatik
+15 Eylül terfisi üretmez.
 """
 
 from __future__ import annotations
@@ -18,9 +23,12 @@ from pathlib import Path
 
 SHORTLIST_FILE = Path(__file__).with_name("micro_site_shortlist.json")
 AUDIT_FILE = Path(__file__).with_name("micro_site_audit.json")
+BORDERLINE_FILE = Path(__file__).with_name("micro_spectral_borderline_review.json")
 DB_FILE = Path(__file__).with_name("santiye.db")
 OUTPUT_FILE = Path(__file__).with_name("micro_site_field_review.json")
 FIELD_MATCH_RADIUS_M = 35
+BORDERLINE_DEDUPE_RADIUS_M = 35
+MAX_BORDERLINE_FIELD_REVIEW = 2
 KNOWN_OUTCOMES = {
     "SANTIYE_KAZI",
     "YOL_ALTYAPI",
@@ -162,12 +170,55 @@ def _applicable_feedback(candidate, scene_date, field_rows):
     return matches
 
 
-def build_review(shortlist_payload, audit_payload, field_rows):
+def _borderline_calibration_rows(borderline_payload, normal_rows):
+    """Yalnız temporal + lokal güçlü sınır adaylarını kalibrasyona ekler."""
+    if not isinstance(borderline_payload, dict):
+        return []
+
+    candidates = []
+    for region in (borderline_payload.get("bolgeler") or {}).values():
+        if not isinstance(region, dict):
+            continue
+        for row in region.get("adaylar") or []:
+            if not isinstance(row, dict):
+                continue
+            if not bool(row.get("sinir_temporal_lokal_guclu")):
+                continue
+            if bool(row.get("alarm")) or bool(row.get("saha_gorevi")):
+                continue
+            if any(
+                _distance_m(row, normal) <= BORDERLINE_DEDUPE_RADIUS_M
+                for normal in normal_rows
+            ):
+                continue
+            item = dict(row)
+            item["mikro_kaynak"] = "SPEKTRAL_SINIR_TEMPORAL_LOKAL_GUCLU"
+            item["kalibrasyon_firsati"] = True
+            item["alarm"] = False
+            item["saha_gorevi"] = False
+            candidates.append(item)
+
+    candidates.sort(
+        key=lambda item: (
+            0 if item.get("gulbahce_cevre") else 1,
+            _number(item.get("spektral_sinir_eksik_marj"), 999.0),
+            -_number(item.get("yerel_kontrast_orani"), 0.0),
+        )
+    )
+    return candidates[:MAX_BORDERLINE_FIELD_REVIEW]
+
+
+def build_review(shortlist_payload, audit_payload, field_rows, borderline_payload=None):
     scene_dates = _scene_dates(audit_payload)
-    input_rows = [
-        row for row in (shortlist_payload.get("kisa_liste") or [])
+    normal_rows = [
+        dict(row) for row in (shortlist_payload.get("kisa_liste") or [])
         if isinstance(row, dict)
     ]
+    for row in normal_rows:
+        row["mikro_kaynak"] = "NORMAL_KISA_LISTE"
+        row["kalibrasyon_firsati"] = False
+    borderline_rows = _borderline_calibration_rows(borderline_payload, normal_rows)
+    input_rows = normal_rows + borderline_rows
     review = []
     background = []
     outcome_counts = {key: 0 for key in sorted(KNOWN_OUTCOMES)}
@@ -203,16 +254,20 @@ def build_review(shortlist_payload, audit_payload, field_rows):
         "ana_uretim_esigi_m2": shortlist_payload.get("ana_uretim_esigi_m2", 250),
         "mikro_aralik_m2": shortlist_payload.get("mikro_aralik_m2", [150, 249]),
         "saha_esleme_yaricapi_m": FIELD_MATCH_RADIUS_M,
-        "kisa_liste_girdi": len(input_rows),
+        "kisa_liste_girdi": len(normal_rows),
+        "sinir_temporal_lokal_guclu_girdi": len(borderline_rows),
+        "toplam_kalibrasyon_girdi": len(input_rows),
         "yeni_mikro_inceleme_adayi": len(review),
         "guncel_saha_eslesmesi_arka_plan": len(background),
         "guncel_saha_eslesmesi_sonuclari": outcome_counts,
         "inceleme_adaylari": review,
         "arka_plan_saha_eslesmeleri": background,
         "not": (
-            "Bu katman alarm/görev üretmez. Yalnız aynı veya daha güncel saha geri bildirimi "
-            "olan 150-249 m² adayların tekrar yeni fırsat gibi görünmesini engeller. Daha yeni "
-            "Sentinel sahnesi geldiğinde eski saha sonucu otomatik kalıcı veto değildir."
+            "Bu katman alarm/görev üretmez. Normal 150-249 m² kısa listeye ek olarak yalnız "
+            "spektral sınır analizinde temporal + lokal birlikte güçlü bulunan en fazla iki aday "
+            "kalibrasyon fırsatı olarak görülebilir. Aynı veya daha güncel saha geri bildirimi "
+            "olan aday yeni fırsat gibi gösterilmez; daha yeni Sentinel sahnesi eski saha sonucunu "
+            "kalıcı veto olarak kullanmaz."
         ),
     }
 
@@ -238,15 +293,50 @@ def _self_check():
             "kayit_zamani": "2026-09-02 08:00 UTC",
         }
     ]
-    old_result = build_review(shortlist, audit_old, feedback)
+    borderline = {
+        "bolgeler": {
+            "cesme": {
+                "adaylar": [
+                    {
+                        "bolge": "cesme",
+                        "enlem": 38.305000,
+                        "boylam": 26.405000,
+                        "alan_m2": 200,
+                        "sinir_temporal_lokal_guclu": True,
+                        "spektral_sinir_eksik_marj": 0.01,
+                        "yerel_kontrast_orani": 4.0,
+                        "alarm": False,
+                        "saha_gorevi": False,
+                    },
+                    {
+                        "bolge": "cesme",
+                        "enlem": 38.306000,
+                        "boylam": 26.406000,
+                        "alan_m2": 200,
+                        "sinir_temporal_lokal_guclu": False,
+                        "alarm": False,
+                        "saha_gorevi": False,
+                    },
+                ]
+            }
+        }
+    }
+    old_result = build_review(shortlist, audit_old, feedback, borderline)
     assert old_result["kisa_liste_girdi"] == 2
+    assert old_result["sinir_temporal_lokal_guclu_girdi"] == 1
+    assert old_result["toplam_kalibrasyon_girdi"] == 3
     assert old_result["guncel_saha_eslesmesi_arka_plan"] == 1
-    assert old_result["yeni_mikro_inceleme_adayi"] == 1
+    assert old_result["yeni_mikro_inceleme_adayi"] == 2
     assert old_result["arka_plan_saha_eslesmeleri"][0]["saha_eslesme_sonucu"] == "TARLA_BITKI"
+    assert any(
+        row.get("mikro_kaynak") == "SPEKTRAL_SINIR_TEMPORAL_LOKAL_GUCLU"
+        for row in old_result["inceleme_adaylari"]
+    )
+    assert all(not row.get("alarm") and not row.get("saha_gorevi") for row in old_result["inceleme_adaylari"])
 
-    new_result = build_review(shortlist, audit_new, feedback)
+    new_result = build_review(shortlist, audit_new, feedback, borderline)
     assert new_result["guncel_saha_eslesmesi_arka_plan"] == 0
-    assert new_result["yeni_mikro_inceleme_adayi"] == 2
+    assert new_result["yeni_mikro_inceleme_adayi"] == 3
 
 
 def main():
@@ -255,15 +345,19 @@ def main():
         raise RuntimeError("Mikro kısa liste veya mikro audit verisi bulunamadı.")
     shortlist_payload = json.loads(SHORTLIST_FILE.read_text(encoding="utf-8"))
     audit_payload = json.loads(AUDIT_FILE.read_text(encoding="utf-8"))
+    borderline_payload = None
+    if BORDERLINE_FILE.exists():
+        borderline_payload = json.loads(BORDERLINE_FILE.read_text(encoding="utf-8"))
     field_rows = _read_field_rows()
-    result = build_review(shortlist_payload, audit_payload, field_rows)
+    result = build_review(shortlist_payload, audit_payload, field_rows, borderline_payload)
     OUTPUT_FILE.write_text(
         json.dumps(result, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     print(
         "Mikro saha geri bildirim koruması tamamlandı: "
-        f"girdi={result['kisa_liste_girdi']}, "
+        f"normal={result['kisa_liste_girdi']}, "
+        f"sinir_guclu={result['sinir_temporal_lokal_guclu_girdi']}, "
         f"inceleme={result['yeni_mikro_inceleme_adayi']}, "
         f"saha_arka_plan={result['guncel_saha_eslesmesi_arka_plan']}. "
         "Alarm/görev üretilmedi."
