@@ -34,6 +34,7 @@ BROAD_CONTEXT_ACTIVE_FRACTION_MIN = 0.25
 BROAD_LOCAL_CONTRAST_MAX = 2.0
 LOCAL_COMPACT_CONTRAST_MIN = 2.5
 LOCAL_COMPACT_TARGET_SCORE_MIN = 0.45
+INSUFFICIENT_CONTEXT_LABEL = "YETERSIZ_BAGLAM_VERISI"
 
 
 def _number(value, default=0.0):
@@ -124,6 +125,29 @@ def _locality_metrics(score, valid, row, column, pixel_count):
     }
 
 
+def _locality_label(metrics, temporal_support):
+    if metrics is None:
+        return INSUFFICIENT_CONTEXT_LABEL, False, False, True
+
+    context_valid_fraction = _number(metrics.get("context_valid_fraction"), 0.0)
+    if context_valid_fraction < MIN_CONTEXT_VALID_FRACTION:
+        # Çevrenin çoğunu göremiyorsak "lokal değil" veya "geniş hareket" diyemeyiz.
+        # Adayı negatif sınıfa itmek yerine sonraki açık Sentinel sahnesine bırak.
+        return INSUFFICIENT_CONTEXT_LABEL, False, False, True
+
+    broad_risk = bool(metrics.get("broad_risk"))
+    compact_support = bool(metrics.get("compact_support"))
+    if broad_risk:
+        label = "GENIS_YUZEY_KONTEKST_RISKI"
+    elif compact_support and temporal_support:
+        label = "LOKAL_KOMPAKT_TEMPORAL_DESTEK"
+    elif compact_support:
+        label = "LOKAL_KOMPAKT_DESTEK"
+    else:
+        label = "NÖTR_BAGLAM"
+    return label, broad_risk, compact_support, False
+
+
 def _analyze_region(region_key, region_payload):
     rows = [
         dict(item) for item in (region_payload.get("adaylar") or [])
@@ -136,6 +160,7 @@ def _analyze_region(region_key, region_payload):
             "temporal_destekli_aday": 0,
             "genis_yuzey_kontekst_riski": 0,
             "lokal_kompakt_destek": 0,
+            "yetersiz_baglam_verisi": 0,
             "gulbahce_olculen": 0,
             "adaylar": [],
         }
@@ -174,6 +199,7 @@ def _analyze_region(region_key, region_payload):
             longitude = float(raw["boylam"])
         except (KeyError, TypeError, ValueError):
             continue
+
         row, column = temporal._pixel_for_point(
             latitude, longitude, bbox, valid.shape
         )
@@ -181,34 +207,30 @@ def _analyze_region(region_key, region_payload):
             score, valid, row, column, int(_number(raw.get("piksel"), 2))
         )
         item = dict(raw)
+        temporal_support = bool(
+            item.get("ani_baslangic_destegi")
+            or item.get("devam_eden_hareket_destegi")
+        )
+        label, broad_risk, compact_support, reimage = _locality_label(
+            metrics, temporal_support
+        )
+
         if metrics is None:
             item.update(
                 {
                     "baglam_gecerli_oran": 0.0,
                     "hedef_degisim_skoru": None,
                     "cevre_q75_degisim_skoru": None,
+                    "cevre_ortalama_degisim_skoru": None,
                     "cevre_aktif_piksel_orani": None,
                     "yerel_kontrast_orani": None,
                     "genis_yuzey_kontekst_riski": False,
                     "lokal_kompakt_destek": False,
-                    "lokalite_sinifi": "YETERSIZ_BAGLAM_VERISI",
+                    "lokalite_sinifi": label,
+                    "baglam_yeniden_goruntule": reimage,
                 }
             )
         else:
-            broad_risk = bool(metrics["broad_risk"])
-            compact_support = bool(metrics["compact_support"])
-            temporal_support = bool(
-                item.get("ani_baslangic_destegi")
-                or item.get("devam_eden_hareket_destegi")
-            )
-            if broad_risk:
-                label = "GENIS_YUZEY_KONTEKST_RISKI"
-            elif compact_support and temporal_support:
-                label = "LOKAL_KOMPAKT_TEMPORAL_DESTEK"
-            elif compact_support:
-                label = "LOKAL_KOMPAKT_DESTEK"
-            else:
-                label = "NÖTR_BAGLAM"
             item.update(
                 {
                     "baglam_gecerli_oran": round(metrics["context_valid_fraction"], 3),
@@ -220,6 +242,7 @@ def _analyze_region(region_key, region_payload):
                     "genis_yuzey_kontekst_riski": broad_risk,
                     "lokal_kompakt_destek": compact_support,
                     "lokalite_sinifi": label,
+                    "baglam_yeniden_goruntule": reimage,
                 }
             )
         analyzed.append(item)
@@ -228,6 +251,7 @@ def _analyze_region(region_key, region_payload):
         key=lambda item: (
             bool(item.get("genis_yuzey_kontekst_riski")),
             not bool(item.get("lokal_kompakt_destek")),
+            not bool(item.get("baglam_yeniden_goruntule")),
             not bool(item.get("ani_baslangic_destegi")),
             -_number(item.get("yerel_kontrast_orani"), 0.0),
             -_number(item.get("hedef_degisim_skoru"), 0.0),
@@ -252,6 +276,10 @@ def _analyze_region(region_key, region_payload):
         "lokal_kompakt_destek": sum(
             bool(item.get("lokal_kompakt_destek")) for item in analyzed
         ),
+        "yetersiz_baglam_verisi": sum(
+            str(item.get("lokalite_sinifi") or "") == INSUFFICIENT_CONTEXT_LABEL
+            for item in analyzed
+        ),
         "gulbahce_olculen": sum(bool(item.get("gulbahce_cevre")) for item in analyzed),
         "adaylar": analyzed,
     }
@@ -260,6 +288,7 @@ def _analyze_region(region_key, region_payload):
 def _self_check():
     assert satellite.MIN_HOTSPOT_AREA_M2 == 250
     assert CENTER_RADIUS_PIXELS < CONTEXT_RADIUS_PIXELS
+
     score = np.zeros((9, 9), dtype="float32")
     valid = np.ones((9, 9), dtype=bool)
     score[4, 4] = 0.9
@@ -268,6 +297,9 @@ def _self_check():
     assert compact is not None
     assert compact["compact_support"]
     assert not compact["broad_risk"]
+    label, broad_risk, compact_support, reimage = _locality_label(compact, True)
+    assert label == "LOKAL_KOMPAKT_TEMPORAL_DESTEK"
+    assert compact_support and not broad_risk and not reimage
 
     broad = np.full((9, 9), 0.4, dtype="float32")
     broad[4, 4] = 0.65
@@ -276,6 +308,17 @@ def _self_check():
     assert broad_metrics is not None
     assert broad_metrics["broad_risk"]
     assert not broad_metrics["compact_support"]
+
+    # Geçerli çevre %55'in altındaysa ölçülen q75/kontrast negatif kanıt olamaz.
+    partial_valid = np.zeros((9, 9), dtype=bool)
+    partial_valid[3:6, 3:6] = True
+    partial_valid[0:2, 0:6] = True
+    partial = _locality_metrics(score, partial_valid, 4, 4, 2)
+    assert partial is not None
+    assert partial["context_valid_fraction"] < MIN_CONTEXT_VALID_FRACTION
+    label, broad_risk, compact_support, reimage = _locality_label(partial, True)
+    assert label == INSUFFICIENT_CONTEXT_LABEL
+    assert not broad_risk and not compact_support and reimage
 
 
 def run_review():
@@ -307,9 +350,9 @@ def run_review():
         },
         "uyari": (
             "Bu çıktı alarm veya saha görevi üretmez. Geniş-yüzey riski tarla/sit/tarım "
-            "statüsü anlamına gelmez ve adayı kalıcı olarak silmez; yalnız saha "
-            "önceliklendirmesinde ek negatif kanıttır. Yeni Sentinel sahnesinde lokal "
-            "hareket güçlenirse aday tekrar öne çıkabilir."
+            "statüsü anlamına gelmez ve adayı kalıcı olarak silmez. Çevre bağlamının "
+            "%55'ten azı geçerliyse aday negatif sayılmaz; YETERSIZ_BAGLAM_VERISI olarak "
+            "arka planda tutulur ve sonraki açık Sentinel sahnesinde yeniden ölçülür."
         ),
         "bolgeler": {},
     }
@@ -345,6 +388,7 @@ def run_review():
             "temporal_destekli_aday",
             "genis_yuzey_kontekst_riski",
             "lokal_kompakt_destek",
+            "yetersiz_baglam_verisi",
             "gulbahce_olculen",
         )
     }
@@ -372,6 +416,7 @@ def main():
         f"temporal={int(total.get('temporal_destekli_aday') or 0)}, "
         f"geniş-yüzey-risk={int(total.get('genis_yuzey_kontekst_riski') or 0)}, "
         f"lokal-kompakt={int(total.get('lokal_kompakt_destek') or 0)}, "
+        f"yetersiz-bağlam={int(total.get('yetersiz_baglam_verisi') or 0)}, "
         f"Gülbahçe={int(total.get('gulbahce_olculen') or 0)}. "
         "Alarm/görev üretilmedi."
     )
