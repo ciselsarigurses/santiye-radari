@@ -14,6 +14,7 @@ from report_quality import normalize_daily_report
 
 
 REPORT_FILE = Path(__file__).with_name("latest_report.json")
+SHADOW_FILE = Path(__file__).with_name("preseason_dry_ground_shadow.json")
 TITLE_PATTERN = re.compile(
     r"^\[SAHA\]\s+([SU][A-Z0-9]+)\s+"
     r"(KONTROLE_GIT|TEKRAR_GIT|KONTROL_EDILDI)"
@@ -33,11 +34,71 @@ def _report_payload():
     return payload if isinstance(payload, dict) else {}
 
 
+def _shadow_calibration_items(report_date):
+    """Yalnız güvenli, alarm-dışı 250-900 m² ön-sezon gölge adaylarını döndür."""
+    try:
+        payload = json.loads(SHADOW_FILE.read_text(encoding="utf-8"))
+    except (OSError, TypeError, ValueError, json.JSONDecodeError):
+        return []
+    if not isinstance(payload, dict):
+        return []
+    if str(payload.get("rapor_tarihi") or "") != str(report_date or ""):
+        return []
+    if not (
+        payload.get("operasyonel") is False
+        and payload.get("alarm") is False
+        and payload.get("kalici_saha_gorevi") is False
+        and payload.get("ana_alarm_alt_esigi_m2") == 250
+        and payload.get("diagnostik_aralik_m2") == [250, 900]
+    ):
+        return []
+
+    selected = []
+    for raw in payload.get("adaylar") or []:
+        if not isinstance(raw, dict):
+            continue
+        try:
+            area = float(raw.get("alan_m2") or 0)
+        except (TypeError, ValueError):
+            continue
+        if not (
+            250 <= area <= 900
+            and raw.get("gölge_kalibrasyon") is True
+            and raw.get("alarm") is False
+            and raw.get("saha_gorevi") is False
+        ):
+            continue
+
+        # Gölge dosyası güçlü-pair geçidinden çıktığı için bu kanıtlar çıkarımsal değil,
+        # guard'ın zorunlu koşullarıdır. Geri bildirim snapshot'ına mevcut ölçüleri taşı.
+        item = dict(raw)
+        item["kalibrasyon_kaynagi"] = "ON_SEZON_KURU_ZEMIN_GOLGE"
+        item["ortalama_bsi_degisim"] = raw.get("son_cift_bsi_degisim")
+        item["izole_saha_benzeri"] = True
+        item["lineer_geometri_riski"] = False
+        item["zaman_serisi_ani_baslangic_destegi"] = True
+        item["zaman_serisi_ani_baslangic_orani"] = raw.get(
+            "uzun_temporal_ani_baslangic_orani"
+        )
+        item["zaman_serisi_istikrarsiz_zemin_riski"] = False
+        item["yerellik_lokal_ani_baslangic_destegi"] = True
+        item["yerellik_yaygin_cevre_degisim_riski"] = False
+        selected.append(item)
+    return selected
+
+
 def _calibration_item(calibration_key):
     payload = _report_payload()
     for item in payload.get("kuru_zemin_kalibrasyon_kontrolu", []) or []:
         if not isinstance(item, dict):
             continue
+        if calibration_key in calibration_id_aliases(item):
+            return item
+
+    # Yasak dönemindeki çok güçlü kuru-zemin gölge adayları normal saha görevine
+    # dönüşmez; fakat kullanıcı zaten yakınındaysa verdiği etiket ayrı kalibrasyon
+    # tablosuna kaydedilebilsin. Kimlik yine dosyadaki ham aday üzerinden doğrulanır.
+    for item in _shadow_calibration_items(payload.get("rapor_tarihi")):
         if calibration_key in calibration_id_aliases(item):
             return item
     return None
@@ -67,7 +128,8 @@ def apply_issue_title(title):
         item = _calibration_item(calibration_key)
         if item is None:
             raise ValueError(
-                "Kalibrasyon noktası güncel raporda bulunamadı; eski veya doğrulanmamış kimlik kaydedilmedi."
+                "Kalibrasyon noktası güncel raporda veya aynı-gün güçlü gölge havuzunda bulunamadı; "
+                "eski ya da doğrulanmamış kimlik kaydedilmedi."
             )
         save_calibration_outcome(calibration_key, outcome, item)
         return {
