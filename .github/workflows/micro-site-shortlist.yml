@@ -9,6 +9,7 @@ on:
     paths:
       - "micro_site_audit.json"
       - "micro_site_shortlist.py"
+      - "gulbahce_micro_candidate_review.py"
       - ".github/workflows/micro-site-shortlist.yml"
   schedule:
     # workflow_run ana yol; bu takvim olası zincir kesintisine karşı emniyet ağıdır.
@@ -45,18 +46,21 @@ jobs:
       - name: Mikro kısa liste öz testini ve filtreyi çalıştır
         run: python micro_site_shortlist.py
 
+      - name: Gülbahçe ham mikro adaylarının eleme nedenini açıkla
+        run: python gulbahce_micro_candidate_review.py
+
       - name: Sonucu yalnız değişiklikte kaydet
         shell: bash
         run: |
-          if [[ -z "$(git status --porcelain -- micro_site_shortlist.json)" ]]; then
-            echo "Mikro kısa liste değişmedi."
+          if [[ -z "$(git status --porcelain -- micro_site_shortlist.json gulbahce_micro_candidate_review.json)" ]]; then
+            echo "Mikro kısa liste ve Gülbahçe açıklaması değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_shortlist.json
-          git commit -m "Radar: mikro şantiye kısa listesini güncelle"
+          git add micro_site_shortlist.json gulbahce_micro_candidate_review.json
+          git commit -m "Radar: mikro kısa liste ve Gülbahçe eleme açıklamasını güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
             git rebase origin/main
