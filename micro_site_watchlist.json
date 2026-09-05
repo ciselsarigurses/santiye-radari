@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-05 18:10 +0300",
+  "olusturma": "2026-09-05 19:09 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -115,9 +115,9 @@
     }
   ],
   "sinir_temporal_lokal_guclu_girdi": 1,
-  "sinir_watchlist_yeni": 1,
-  "sinir_watchlist_eslesen": 0,
-  "sinir_watchlist_kurali": "Normal spektral eşiği değiştirmeden yalnız SINIR_TEMPORAL_LOKAL_GUCLU 150-249 m² adaylar kalıcı mikro hafızaya eklenir; alarm/görev/15 Eylül otomatik terfisi yoktur. Aynı bölgede 45 m içindeki mevcut iz yinelenmez.",
+  "sinir_watchlist_yeni": 0,
+  "sinir_watchlist_eslesen": 1,
+  "sinir_watchlist_kurali": "Normal spektral eşiği değiştirmeden yalnız SINIR_TEMPORAL_LOKAL_GUCLU 150-249 m² adaylar kalıcı mikro hafızaya eklenir; alarm/görev/15 Eylül otomatik terfisi yoktur. Aynı bölgede 45 m içindeki mevcut iz yinelenmez; aynı turda tek iz en fazla bir güçlü adayla eşleşir.",
   "tekrar_dogrulanan_ham": 0,
   "mekansal_belirsiz_tekrar": 0,
   "tekrar_kimlik_kurali": "45 m eşleştirme toleransı iz sürekliliği içindir; iki-sahne tekrar kanıtı yalnız ilk güçlü konuma göre <=25 m sapmada geçerlidir. >25 m ham tekrar arka planda saklanır fakat devam eden aynı mikro şantiye sayılmaz."
