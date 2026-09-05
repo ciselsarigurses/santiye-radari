@@ -4228,5 +4228,58 @@
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
-  }
+  },
+  "temporal_lokal_erken_izleme": [
+    {
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.398298,
+      "boylam": 26.624314,
+      "alan_m2": 300,
+      "ani_baslangic_destegi": true,
+      "ic_3x3_son_bsi_degisim": 0.1153,
+      "ic_3x3_gecerli_oran": 0.778,
+      "cevre_halka_onceki_bsi_degisim": 0.0314,
+      "cevre_halka_son_bsi_degisim": 0.0347,
+      "cevre_halka_gecerli_oran": 0.875,
+      "yerellik_orani": 3.33,
+      "lokal_ani_baslangic_destegi": true,
+      "yaygin_cevre_degisim_riski": false,
+      "kayitli_3x3_farki": 2.9e-05,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_sentinel_item": "S2C_T35SMC_20260903T090747_L2A",
+      "son_sentinel_item": "S2A_T35SMC_20260905T090529_L2A",
+      "alarm": false,
+      "saha_gorevi": false,
+      "operasyonel_agirlik": "KALIBRASYON_DIAGNOSTIK",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.398298,26.624314",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.398298/26.624314"
+    },
+    {
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.425342,
+      "boylam": 26.577372,
+      "alan_m2": 500,
+      "ani_baslangic_destegi": true,
+      "ic_3x3_son_bsi_degisim": 0.1068,
+      "ic_3x3_gecerli_oran": 1.0,
+      "cevre_halka_onceki_bsi_degisim": 0.0071,
+      "cevre_halka_son_bsi_degisim": 0.0651,
+      "cevre_halka_gecerli_oran": 1.0,
+      "yerellik_orani": 1.64,
+      "lokal_ani_baslangic_destegi": true,
+      "yaygin_cevre_degisim_riski": false,
+      "kayitli_3x3_farki": 1.6e-05,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_sentinel_item": "S2C_T35SMC_20260903T090747_L2A",
+      "son_sentinel_item": "S2A_T35SMC_20260905T090529_L2A",
+      "alarm": false,
+      "saha_gorevi": false,
+      "operasyonel_agirlik": "KALIBRASYON_DIAGNOSTIK",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.425342,26.577372",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.425342/26.577372"
+    }
+  ],
+  "temporal_lokal_erken_izleme_notu": "15 Eylül öncesinde yalnız kalibrasyon/izleme; alarm veya saha görevi yok."
 }
