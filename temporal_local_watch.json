@@ -18,6 +18,7 @@
     "minimum_ic_ve_cevre_gecerli_oran": 0.6667,
     "minimum_ic_bsi_degisim": 0.1,
     "aktif_gorev_min_mesafe_m": 120,
+    "aktif_yakinlik_referansi": "TEKRAR_GIT veya aynı güncel Sentinel tarihindeki 250 m²+ KONTROLE_GIT; eski KONTROLE_GIT backlog yakınlık veto nedeni değildir.",
     "adaylar_arasi_min_mesafe_m": 45
   },
   "aday_sayisi": 2,
