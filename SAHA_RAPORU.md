@@ -23,6 +23,15 @@
 
 Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
+## Kör alan saha devriyesi
+
+> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
+
+1. **KÖR ALAN — Reisdere** · yaklaşık 800 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.296181,26.409629)
+   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+2. **KÖR ALAN — Gülbahçe** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.352169,26.642976)
+   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 > **Arka plan görev hafızası:** 15 Eylül öncesi bu tam liste bugünün saha rotası değildir; açık görev hafızasıdır. Operasyon için yalnız 'Günün ilk 3 kontrolü' bölümü kullanılır. Eski/gecikmiş kayıtlar silinmez; yeni Sentinel kanıtıyla yeniden güçlenirse veya insan TEKRAR_GIT verirse tekrar rota havuzuna girebilir.
