@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-04",
+  "rapor_tarihi": "2026-09-05",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -42,7 +42,7 @@
       "geometri_kaynagi_enlem": 38.253128,
       "geometri_kaynagi_boylam": 26.424511,
       "tarihsel_gorev_id": "UEC37CFA14C",
-      "tarihsel_bekleme_gun": 6
+      "tarihsel_bekleme_gun": 7
     },
     {
       "alarm": false,
@@ -69,7 +69,7 @@
       "geometri_kaynagi_enlem": 38.344571,
       "geometri_kaynagi_boylam": 26.475452,
       "tarihsel_gorev_id": "U0B5F6411CD",
-      "tarihsel_bekleme_gun": 6
+      "tarihsel_bekleme_gun": 7
     },
     {
       "alarm": false,
@@ -96,7 +96,7 @@
       "geometri_kaynagi_enlem": 38.335979,
       "geometri_kaynagi_boylam": 26.483809,
       "tarihsel_gorev_id": "UEC36614FA4",
-      "tarihsel_bekleme_gun": 6
+      "tarihsel_bekleme_gun": 7
     },
     {
       "alarm": false,
@@ -123,7 +123,7 @@
       "geometri_kaynagi_enlem": 38.329738,
       "geometri_kaynagi_boylam": 26.489762,
       "tarihsel_gorev_id": "U7938844405",
-      "tarihsel_bekleme_gun": 6
+      "tarihsel_bekleme_gun": 7
     },
     {
       "alarm": false,
@@ -150,7 +150,7 @@
       "geometri_kaynagi_enlem": 38.24146,
       "geometri_kaynagi_boylam": 26.40608,
       "tarihsel_gorev_id": "U03E0421DDD",
-      "tarihsel_bekleme_gun": 6
+      "tarihsel_bekleme_gun": 7
     },
     {
       "alarm": false,
@@ -177,7 +177,7 @@
       "geometri_kaynagi_enlem": 38.2193,
       "geometri_kaynagi_boylam": 26.413864,
       "tarihsel_gorev_id": "U07EF15923A",
-      "tarihsel_bekleme_gun": 6
+      "tarihsel_bekleme_gun": 7
     }
   ]
 }
