@@ -17,12 +17,9 @@ Bugün ekip göndermeyi gerektiren güçlü yeni aday yok.
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli bir örnek bulursa o örnek saha teyidi için rotasyonun önüne alınır; bu yine alarm değildir. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
+> 15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.
 
-1. **KALİBRASYON — Ilıca** · yaklaşık 1.000 m² · 29.08.2026 → 03.09.2026 · BSI Δ 0.130 · RGB Δ 0.196 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307759,26.355596)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Germiyan** · yaklaşık 300 m² · 29.08.2026 → 03.09.2026 · BSI Δ 0.161 · RGB Δ 0.187 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.348099,26.492648)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
