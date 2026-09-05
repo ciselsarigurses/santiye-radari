@@ -6,6 +6,11 @@ temporal_locality_audit.json içinde hem ani başlangıç hem lokal/kompakt kara
 koyar. Amaç, özellikle ana çoklu-spektral üretim maskesine girmemiş olabilecek erken hafriyat
 sinyallerinin diagnostik dosyalarda saklı kalmamasıdır.
 
+Yakınlık filtresi eski KONTROLE_GIT backlog'unu yeni bir sinyale kalıcı veto olarak kullanmaz:
+yalnız aynı güncel Sentinel tarihindeki 250 m²+ KONTROLE_GIT görevleri ile bilinçli TEKRAR_GIT
+görevleri yakınlık referansıdır. Böylece gecikmiş eski saha işi yeni temporal-lokal müdahaleyi
+sessizce bastıramaz.
+
 15 Eylül 2026 öncesinde kayıtlar yalnız kalibrasyon/izleme statüsündedir. 15 Eylül ve
 sonrasında aynı kanıt "yüksek diagnostik" operasyonel ağırlık etiketi alır; yine de bu script
 alarm üretmez veya görev açmaz. Kesin adres, ada/parsel veya hukuki statü türetmez.
@@ -75,16 +80,42 @@ def _report_day(report_payload):
         return None
 
 
-def _active_candidates(report_payload):
+def _current_source_dates(audit_payload):
+    """Güncel temporal analiz gününü raporun kullandığı tarih biçimleriyle döndür."""
+    raw = str((audit_payload or {}).get("rapor_tarihi") or "").strip()
+    if not raw:
+        return set()
+    values = {raw}
+    try:
+        values.add(date.fromisoformat(raw).strftime("%d.%m.%Y"))
+    except ValueError:
+        pass
+    return values
+
+
+def _active_candidates(report_payload, source_dates=None):
+    """Yeni sinyali gerçekten temsil edebilecek yakın görevleri döndür.
+
+    TEKRAR_GIT bilinçli bir saha takip kararı olduğu için tarihinden bağımsız korunur.
+    KONTROLE_GIT ise yalnız güncel temporal Sentinel tarihiyle eşleşen 250 m²+ uydu
+    adayıysa yakınlık referansıdır. Eski açık backlog yeni sinyali bastıramaz.
+    """
+    dates = {str(value).strip() for value in (source_dates or set()) if str(value).strip()}
     rows = []
     for raw in (report_payload.get("saha_adaylari") or []):
         if not isinstance(raw, dict):
             continue
         status = str(raw.get("saha_durumu") or "KONTROLE_GIT").strip().upper()
-        if status not in ACTIVE_STATUSES:
+        if status not in ACTIVE_STATUSES or _point(raw) is None:
             continue
-        if _point(raw) is not None:
+        if status == "TEKRAR_GIT":
             rows.append(raw)
+            continue
+        if _number(raw.get("alan_m2"), 0) < MAIN_THRESHOLD_M2:
+            continue
+        if dates and str(raw.get("son_tarih") or "").strip() not in dates:
+            continue
+        rows.append(raw)
     return rows
 
 
@@ -136,7 +167,7 @@ def select_watch(audit_payload, report_payload, limit=WATCH_LIMIT, local_day=Non
     if not _same_report_day(audit_payload, report_payload):
         return []
 
-    active = _active_candidates(report_payload)
+    active = _active_candidates(report_payload, _current_source_dates(audit_payload))
     day = local_day or _report_day(report_payload) or date.today()
     season_open = day >= SEASON_START
 
@@ -222,6 +253,10 @@ def _payload(audit_payload, report_payload, selected):
             "minimum_ic_ve_cevre_gecerli_oran": round(MIN_VALID_RATIO, 4),
             "minimum_ic_bsi_degisim": MIN_INNER_BSI_CHANGE,
             "aktif_gorev_min_mesafe_m": MIN_ACTIVE_DISTANCE_M,
+            "aktif_yakinlik_referansi": (
+                "TEKRAR_GIT veya aynı güncel Sentinel tarihindeki 250 m²+ KONTROLE_GIT; "
+                "eski KONTROLE_GIT backlog yakınlık veto nedeni değildir."
+            ),
             "adaylar_arasi_min_mesafe_m": MIN_SELECTED_DISTANCE_M,
         },
         "aday_sayisi": len(selected),
@@ -369,10 +404,53 @@ def _self_check():
                 "saha_durumu": "KONTROLE_GIT",
                 "enlem": 38.4003,
                 "boylam": 26.6203,
+                "alan_m2": 500,
+                "son_tarih": "05.09.2026",
             }
         ],
     }
     assert not select_watch(audit, blocked_report, local_day=date(2026, 9, 5))
+
+    stale_backlog_report = {
+        "rapor_tarihi": "2026-09-05",
+        "saha_adaylari": [
+            {
+                "saha_durumu": "KONTROLE_GIT",
+                "enlem": 38.4003,
+                "boylam": 26.6203,
+                "alan_m2": 500,
+                "son_tarih": "26.08.2026",
+            }
+        ],
+    }
+    stale_choice = select_watch(audit, stale_backlog_report, local_day=date(2026, 9, 5))
+    assert len(stale_choice) == 1, stale_choice
+
+    micro_task_report = {
+        "rapor_tarihi": "2026-09-05",
+        "saha_adaylari": [
+            {
+                "saha_durumu": "KONTROLE_GIT",
+                "enlem": 38.4003,
+                "boylam": 26.6203,
+                "alan_m2": 200,
+                "son_tarih": "05.09.2026",
+            }
+        ],
+    }
+    assert select_watch(audit, micro_task_report, local_day=date(2026, 9, 5))
+
+    repeat_report = {
+        "rapor_tarihi": "2026-09-05",
+        "saha_adaylari": [
+            {
+                "saha_durumu": "TEKRAR_GIT",
+                "enlem": 38.4003,
+                "boylam": 26.6203,
+            }
+        ],
+    }
+    assert not select_watch(audit, repeat_report, local_day=date(2026, 9, 5))
 
     stale = dict(audit, rapor_tarihi="2026-09-04")
     assert not select_watch(stale, report, local_day=date(2026, 9, 5))
