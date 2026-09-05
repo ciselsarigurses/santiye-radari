@@ -3194,6 +3194,21 @@
   },
   "kor_alan_saha_devriyesi": [
     {
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.338692,
+      "boylam": 26.649044,
+      "alan_m2": 400,
+      "neden": "KARISIK_GECERSIZLIK",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.1429,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.338692,26.649044"
+    },
+    {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "mahalle": "Dalyan",
@@ -3206,33 +3221,11 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.355063,26.283591",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.355063/26.283591",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-      "saha_gorevi": false
-    },
-    {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Gülbahçe",
-      "enlem": 38.319969,
-      "boylam": 26.666218,
-      "alan_m2": 400,
-      "neden": "KARISIK_GECERSIZLIK",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.1429,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319969,26.666218",
-      "saha_gorevi": false,
-      "gulbahce_operasyonel_kapsama": true,
-      "gulbahce_referans_mesafesi_m": 2294
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.355063,26.283591"
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-05",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Mevcut bölgesel kör-alan rotasyonu korunur; iki günde bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu Gülbahçe operasyonel referansının 3 km çevresine ayrılır. Aktif radar görevlerinden >=150 m ve diğer kör-alan devriyesinden >=250 m uzakta tutulur. Operasyonel referans idari/kadastral sınır değildir.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
   "temporal_kalibrasyon_rotasyonu": {
     "durum": "uygulandi",
     "slot_sayisi": 2,
