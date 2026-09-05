@@ -3712,5 +3712,39 @@
   "kuru_zemin_kalibrasyon_notu": "15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.",
   "saha_adaylari_operasyonel_rol": "ARKA_PLAN_GOREV_HAFIZASI",
   "saha_adaylari_bugunun_rotasi": false,
-  "saha_adaylari_operasyon_notu": "15 Eylül öncesi bu tam liste bugünün saha rotası değildir; açık görev hafızasıdır. Operasyon için yalnız 'Günün ilk 3 kontrolü' bölümü kullanılır. Eski/gecikmiş kayıtlar silinmez; yeni Sentinel kanıtıyla yeniden güçlenirse veya insan TEKRAR_GIT verirse tekrar rota havuzuna girebilir."
+  "saha_adaylari_operasyon_notu": "15 Eylül öncesi bu tam liste bugünün saha rotası değildir; açık görev hafızasıdır. Operasyon için yalnız 'Günün ilk 3 kontrolü' bölümü kullanılır. Eski/gecikmiş kayıtlar silinmez; yeni Sentinel kanıtıyla yeniden güçlenirse veya insan TEKRAR_GIT verirse tekrar rota havuzuna girebilir.",
+  "arka_plan_genis_yuzey_hareketleri": [],
+  "arka_plan_kurali": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "min_alan_m2": 10000,
+    "dusuk_kompaktlik_max": 0.15,
+    "manuel_tekrar_override": true,
+    "kanit": "hareket_json; metadata yoksa aynı tarihli bağımsız şekil denetimi",
+    "aciklama": "Yalnız 10.000 m² üstü + ölçülmüş düşük-kompaktlık riski birlikteyse operasyon listesinden ayrılır. Ham Sentinel/radar kaydı silinmez.",
+    "yaklasik_provenans": {
+      "aktif": true,
+      "maksimum_esleme_m": 25.0,
+      "minimum_alan_benzerligi": 0.6,
+      "kanit": "shape_false_positive_audit üretim seçimi + nihai yaklaşık provenans doğrulaması",
+      "aciklama": "BBox/yeniden-pikselleştirme nedeniyle birkaç metre kayan düşük-kompaktlık geniş kümeler yalnız şekil denetiminin kendi 25 m / 0.60 güven sınırında arka plana ayrılır."
+    },
+    "tarihsel_tasima": {
+      "aktif": true,
+      "yalniz_yeni_goruntu_false": true,
+      "minimum_bekleme_gun": 1,
+      "minimum_alan_m2": 10000,
+      "maksimum_esleme_m": 25.0,
+      "minimum_alan_benzerligi": 0.6,
+      "kanit": "aynı-gün shape_false_positive_audit üretim seçimi",
+      "aciklama": "Yalnız tarihsel/gecikmiş geniş görev, güncel düşük-kompaktlık geometriyle güvenli provenans sınırında yeniden eşleşirse arka plana ayrılır. Taze görev ve insanın TEKRAR_GIT kararı korunur."
+    },
+    "tekrar_calistirma_koruması": {
+      "aktif": true,
+      "yalniz_ayni_rapor_tarihi": true,
+      "alarm": false,
+      "saha_gorevi": false,
+      "aciklama": "Aynı günlük rapor yeniden işlendiğinde daha önce arka plana ayrılmış geniş-yüzey diagnostik kayıtları sessizce düşürülmez."
+    }
+  }
 }
