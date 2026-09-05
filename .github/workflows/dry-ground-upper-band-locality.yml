@@ -8,6 +8,10 @@ on:
       - "dry_ground_upper_band_watch.json"
       - "dry_ground_temporal_audit.json"
       - ".github/workflows/dry-ground-upper-band-locality.yml"
+  workflow_run:
+    workflows:
+      - "Kuru Zemin Üst Bant Körlük İzleme"
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -19,6 +23,9 @@ concurrency:
 
 jobs:
   audit:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
