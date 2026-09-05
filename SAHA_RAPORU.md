@@ -27,9 +27,9 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
 > **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül öncesinde yalnız kalibrasyon/izleme amaçlıdır; ekip rotasına otomatik eklenmez.
 
-1. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 300 m² · yerellik 3.33 · iç BSI Δ 0.115 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.398298.26.624314) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.398298/26.624314)
+1. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 300 m² · yerellik 3.33 · iç BSI Δ 0.115 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.398298,26.624314) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.398298/26.624314)
    - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
-2. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 500 m² · yerellik 1.64 · iç BSI Δ 0.107 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.425342.26.577372) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.425342/26.577372)
+2. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 500 m² · yerellik 1.64 · iç BSI Δ 0.107 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.425342,26.577372) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.425342/26.577372)
    - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
 
 ## Kör alan saha devriyesi
