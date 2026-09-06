@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-06",
-  "kaynak_olusturma": "2026-09-06 22:12 +0300",
+  "kaynak_olusturma": "2026-09-07 01:07 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -21,33 +21,7 @@
     "aktif_yakinlik_referansi": "TEKRAR_GIT veya aynı güncel Sentinel tarihindeki 250 m²+ KONTROLE_GIT; eski KONTROLE_GIT backlog yakınlık veto nedeni değildir.",
     "adaylar_arasi_min_mesafe_m": 45
   },
-  "aday_sayisi": 1,
-  "adaylar": [
-    {
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.398298,
-      "boylam": 26.624303,
-      "alan_m2": 300,
-      "ani_baslangic_destegi": true,
-      "ic_3x3_son_bsi_degisim": 0.107,
-      "ic_3x3_gecerli_oran": 0.778,
-      "cevre_halka_onceki_bsi_degisim": 0.0288,
-      "cevre_halka_son_bsi_degisim": 0.0332,
-      "cevre_halka_gecerli_oran": 0.875,
-      "yerellik_orani": 3.22,
-      "lokal_ani_baslangic_destegi": true,
-      "yaygin_cevre_degisim_riski": false,
-      "kayitli_3x3_farki": 4e-05,
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "onceki_sentinel_item": "S2C_T35SMC_20260903T090747_L2A",
-      "son_sentinel_item": "S2A_T35SMC_20260905T090529_L2A",
-      "alarm": false,
-      "saha_gorevi": false,
-      "operasyonel_agirlik": "KALIBRASYON_DIAGNOSTIK",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.398298,26.624303",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.398298/26.624303"
-    }
-  ],
+  "aday_sayisi": 0,
+  "adaylar": [],
   "not": "Kesin adres/ada/parsel/hukuki statü türetilmez. 'Mevki doğrulanmadı' etiketi olduğu gibi korunur. Bu dosya ana 250 m² üretim eşiğini değiştirmez."
 }
