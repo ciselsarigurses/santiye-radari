@@ -9,12 +9,18 @@ Saatlik metadata yoklamasında tek bir geçici ağ/5xx/429 hatası özellikle Uz
 Gülbahçe tarafındaki yeni sahneyi bir sonraki saate erteleyebilir. Bu nedenle yalnız
 geçici HTTP/ağ hataları bölge başına sınırlı sayıda yeniden denenir; kalıcı veri/
 geometri hataları gereksiz STAC sorgusu üretmemek için tekrar edilmez.
+
+Gülbahçe ayrı bir üretim Sentinel kutusu değildir; Uzunkuyu doğu kutusunun içindedir.
+Yine de saatlik yoklamada sessiz kapsama regresyonu yaşanmaması için Gülbahçe'nin
+2 km operasyon alanı + 150 m analiz bağlamı ayrıca doğrulanır ve çıktı içinde açıkça
+gösterilir. Bu kontrol üçüncü bir STAC sorgusu yapmaz ve alarm/görev üretmez.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
 import sqlite3
 import time
 from datetime import datetime
@@ -28,7 +34,11 @@ import satellite
 
 DB_PATH = Path(__file__).with_name("santiye.db")
 ISTANBUL = ZoneInfo("Europe/Istanbul")
-REGIONS = ("cesme", "uzunkuyu")
+STAC_REGIONS = ("cesme", "uzunkuyu")
+GULBAHCE_PROBE_KEY = "gulbahce"
+GULBAHCE_SOURCE_REGION = "uzunkuyu"
+GULBAHCE_CENTER = (38.33278, 26.64556)
+GULBAHCE_OPERATION_CONTEXT_RADIUS_M = 2_150
 PROBE_ATTEMPTS = 3
 PROBE_RETRY_SECONDS = 1.0
 
@@ -84,9 +94,83 @@ def _probe_pair(
     raise last_error
 
 
+def _bbox_covers_radius(bbox, center, radius_m):
+    """WGS84 kutusunun merkez çevresindeki yaklaşık metre tamponunu içerdiğini doğrula."""
+    try:
+        west, south, east, north = map(float, bbox)
+        latitude, longitude = map(float, center)
+        radius_m = max(float(radius_m), 0.0)
+    except (TypeError, ValueError):
+        return False
+
+    latitude_margin = radius_m / 110_570
+    longitude_scale = 111_320 * math.cos(math.radians(latitude))
+    if longitude_scale <= 0:
+        return False
+    longitude_margin = radius_m / longitude_scale
+    return (
+        west <= longitude - longitude_margin
+        and south <= latitude - latitude_margin
+        and east >= longitude + longitude_margin
+        and north >= latitude + latitude_margin
+    )
+
+
+def _gulbahce_coverage_row(rows):
+    """Uzunkuyu yoklamasından Gülbahçe için açık ve test edilebilir kapsama kaydı üret."""
+    source = next(
+        (row for row in rows if row.get("bolge") == GULBAHCE_SOURCE_REGION),
+        None,
+    )
+    region = satellite.REGIONS.get(GULBAHCE_SOURCE_REGION, {})
+    bbox = region.get("bbox") if isinstance(region, dict) else None
+    covered = _bbox_covers_radius(
+        bbox,
+        GULBAHCE_CENTER,
+        GULBAHCE_OPERATION_CONTEXT_RADIUS_M,
+    )
+
+    row = {
+        "bolge": GULBAHCE_PROBE_KEY,
+        "kaynak_bolge": GULBAHCE_SOURCE_REGION,
+        "metadata_sorgusu": False,
+        "operasyon_merkezi": {
+            "enlem": GULBAHCE_CENTER[0],
+            "boylam": GULBAHCE_CENTER[1],
+        },
+        "operasyon_ve_analiz_yaricapi_m": GULBAHCE_OPERATION_CONTEXT_RADIUS_M,
+        "kaynak_bbox": bbox,
+        "kapsama_tam": covered,
+        "deneme_sayisi": 0,
+        "kayitli_item": source.get("kayitli_item") if source else None,
+        "kayitli_rapor_tarihi": source.get("kayitli_rapor_tarihi") if source else None,
+        "canli_item": source.get("canli_item") if source else None,
+        "canli_datetime": source.get("canli_datetime") if source else None,
+        "yeni_sahne": False,
+    }
+
+    if source is None or source.get("durum") != "ok":
+        row["durum"] = "kaynak_hatasi"
+        row["hata"] = (
+            "Gülbahçe açık kapsama kontrolü için Uzunkuyu metadata yoklaması tamamlanamadı."
+        )
+        return row
+    if not covered:
+        row["durum"] = "kapsama_hatasi"
+        row["hata"] = (
+            "Uzunkuyu Sentinel kutusu Gülbahçe 2 km operasyon alanı + 150 m analiz "
+            "bağlamını artık bütünüyle kapsamıyor."
+        )
+        return row
+
+    row["durum"] = "ok"
+    row["yeni_sahne"] = bool(source.get("yeni_sahne"))
+    return row
+
+
 def probe(connection, pair_provider=satellite.sentinel_pair):
     rows = []
-    for region_key in REGIONS:
+    for region_key in STAC_REGIONS:
         stored_item, stored_date = _stored_latest_item(connection, region_key)
         attempts_used = 0
         try:
@@ -100,6 +184,7 @@ def probe(connection, pair_provider=satellite.sentinel_pair):
                 {
                     "bolge": region_key,
                     "durum": "ok",
+                    "metadata_sorgusu": True,
                     "deneme_sayisi": attempts_used,
                     "kayitli_item": stored_item,
                     "kayitli_rapor_tarihi": stored_date,
@@ -113,6 +198,7 @@ def probe(connection, pair_provider=satellite.sentinel_pair):
                 {
                     "bolge": region_key,
                     "durum": "hata",
+                    "metadata_sorgusu": True,
                     "deneme_sayisi": attempts_used or 1,
                     "kayitli_item": stored_item,
                     "kayitli_rapor_tarihi": stored_date,
@@ -123,17 +209,29 @@ def probe(connection, pair_provider=satellite.sentinel_pair):
                 }
             )
 
-    successful = [row for row in rows if row["durum"] == "ok"]
+    gulbahce_row = _gulbahce_coverage_row(rows)
+    rows.append(gulbahce_row)
+    successful_stac = [
+        row
+        for row in rows
+        if row.get("metadata_sorgusu") is True and row.get("durum") == "ok"
+    ]
+    stac_complete = len(successful_stac) == len(STAC_REGIONS)
+    probe_complete = stac_complete and gulbahce_row.get("durum") == "ok"
     return {
         "kontrol_zamani": datetime.now(ISTANBUL).isoformat(timespec="seconds"),
-        "yeni_sahne": any(row["yeni_sahne"] for row in successful),
-        "probe_ok": bool(successful),
-        "probe_complete": len(successful) == len(REGIONS),
+        "yeni_sahne": any(
+            row.get("durum") == "ok" and row.get("yeni_sahne") for row in rows
+        ),
+        "probe_ok": bool(successful_stac),
+        "probe_complete": probe_complete,
         "bolgeler": rows,
         "not": (
             "Bu yalnız metadata yoklamasıdır; alarm/görev üretmez. Yeni sahne saptanırsa "
             "mevcut tam tarama workflow'u çalıştırılmalıdır. Geçici STAC/ağ hataları "
-            "bölge başına en fazla üç denemeyle sınırlandırılır."
+            "bölge başına en fazla üç denemeyle sınırlandırılır. Gülbahçe, Uzunkuyu "
+            "kutusunun 2 km operasyon alanı + 150 m analiz bağlamını kapsadığı ayrıca "
+            "doğrulanan açık diagnostik kayıttır; ek STAC sorgusu yapılmaz."
         ),
     }
 
@@ -179,6 +277,15 @@ def _self_check():
         assert stable["probe_ok"] is True
         assert stable["probe_complete"] is True
         assert stable["yeni_sahne"] is False
+        assert [row["bolge"] for row in stable["bolgeler"]] == [
+            "cesme",
+            "uzunkuyu",
+            "gulbahce",
+        ]
+        gulbahce = stable["bolgeler"][-1]
+        assert gulbahce["durum"] == "ok", gulbahce
+        assert gulbahce["kapsama_tam"] is True, gulbahce
+        assert gulbahce["metadata_sorgusu"] is False, gulbahce
 
         def one_changed(region_key):
             item_id = "CESME_NEW" if region_key == "cesme" else "UZUN_OLD"
@@ -191,7 +298,8 @@ def _self_check():
         assert [row["bolge"] for row in changed_rows] == ["cesme"]
 
         # Geçici Timeout ilk denemede doğu bölgesini kör bırakmamalı; ikinci
-        # denemede iyileşince aynı saat içinde yeni sahne görülebilmeli.
+        # denemede iyileşince aynı saat içinde yeni sahne görülebilmeli. Gülbahçe
+        # aynı kaynak sorgudan açık kapsama kaydı olarak yeni sahneyi devralmalı.
         calls = {"cesme": 0, "uzunkuyu": 0}
 
         def transient_then_ok(region_key):
@@ -211,7 +319,10 @@ def _self_check():
         assert recovered["probe_complete"] is True
         assert recovered["yeni_sahne"] is True
         uzunkuyu = next(row for row in recovered["bolgeler"] if row["bolge"] == "uzunkuyu")
+        gulbahce = next(row for row in recovered["bolgeler"] if row["bolge"] == "gulbahce")
         assert uzunkuyu["deneme_sayisi"] == 2, recovered
+        assert gulbahce["yeni_sahne"] is True, recovered
+        assert calls == {"cesme": 1, "uzunkuyu": 2}, calls
 
         def one_error(region_key):
             if region_key == "cesme":
@@ -225,6 +336,19 @@ def _self_check():
         assert partial["yeni_sahne"] is False
         assert partial["bolgeler"][0]["durum"] == "hata"
         assert partial["bolgeler"][0]["deneme_sayisi"] == 1
+
+        # Gülbahçe doğu kenarı gelecekte daraltılırsa ana iki sorgu başarılı olsa
+        # bile yoklama tamamlandı sayılmamalı; sessiz kapsama regresyonu görünür olmalı.
+        original_bbox = list(satellite.REGIONS[GULBAHCE_SOURCE_REGION]["bbox"])
+        try:
+            satellite.REGIONS[GULBAHCE_SOURCE_REGION]["bbox"] = [26.45, 38.18, 26.65, 38.43]
+            uncovered = probe(connection, unchanged)
+        finally:
+            satellite.REGIONS[GULBAHCE_SOURCE_REGION]["bbox"] = original_bbox
+        gulbahce = next(row for row in uncovered["bolgeler"] if row["bolge"] == "gulbahce")
+        assert gulbahce["durum"] == "kapsama_hatasi", uncovered
+        assert gulbahce["kapsama_tam"] is False, uncovered
+        assert uncovered["probe_complete"] is False, uncovered
     finally:
         connection.close()
 
@@ -247,7 +371,7 @@ def main():
     if not payload["probe_ok"]:
         print("Hiçbir üretim bölgesinde Sentinel metadata yoklaması tamamlanamadı.")
     elif not payload["probe_complete"]:
-        print("UYARI: Sentinel metadata yoklaması üretim bölgelerinin yalnız bir bölümünde tamamlandı.")
+        print("UYARI: Sentinel metadata yoklaması üretim bölgeleri veya Gülbahçe açık kapsama korumasında eksik tamamlandı.")
     return 0
 
 
