@@ -4120,11 +4120,27 @@
   "temporal_lokal_erken_izleme_notu": "15 Eylül öncesinde yalnız kalibrasyon/izleme; alarm veya saha görevi yok.",
   "kor_alan_saha_devriyesi": [
     {
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Çiftlikköy",
+      "enlem": 38.265881,
+      "boylam": 26.282904,
+      "alan_m2": 400,
+      "neden": "BULUT_GOLGE_KALICI",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.4419,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.265881,26.282904",
+      "saha_gorevi": false
+    },
+    {
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Ildır",
-      "enlem": 38.373605,
-      "boylam": 26.47639,
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.180588,
+      "boylam": 26.501579,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -4132,26 +4148,12 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.373605,26.476390"
-    },
-    {
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Musalla",
-      "enlem": 38.298714,
-      "boylam": 26.281187,
-      "alan_m2": 1600,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.4419,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.298714,26.281187"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180588,26.501579",
+      "saha_gorevi": false
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-06",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından Çeşme yerel takvim gününe göre günlük rotasyonla en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur ve güvenli alternatif varsa farklı mahallelerden seçilir.",
   "temporal_kalibrasyon_rotasyonu": {
     "durum": "uygulandi",
     "slot_sayisi": 2,
@@ -4180,5 +4182,16 @@
     "durum": "uygulandi",
     "tarih": "2026-09-06",
     "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
+  },
+  "gulbahce_kor_alan_devriye_korumasi": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "aktif_gun": false,
+    "rotasyon_tarihi": "2026-09-06",
+    "operasyonel_yaricap_m": 3000,
+    "idari_kadastral_sinir_degildir": true,
+    "uygulandi": false,
+    "uygun_aday_sayisi": 4,
+    "neden": "GENEL_DOGU_ROTASYONU"
   }
 }
