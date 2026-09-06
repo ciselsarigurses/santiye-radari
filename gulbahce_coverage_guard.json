@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-05 01:01 +0300",
+  "olusturma": "2026-09-06 15:27 +0300",
   "amac": "Gülbahçe merkezli 2 km operasyonel diagnostik tamponun ve çevresindeki analiz bağlam halosunun mevcut Sentinel üretim kutusundaki geometrik kapsamasını ölçmek; mahalle etiketleme görünürlüğünü ve birleşik all zarfının iki üretim bölgesini eksiksiz içermesini doğrulamak. Alarm veya saha görevi üretmez.",
   "referans": {
     "ad": "Gülbahçe, Urla",
@@ -15,7 +15,7 @@
   "uretim_bbox": [
     26.45,
     38.18,
-    26.672,
+    26.68,
     38.43
   ],
   "merkez_bbox_icinde": true,
@@ -24,10 +24,10 @@
   "tampon_disinda_yuzde": 0.0,
   "baglam_tamamen_bbox_icinde": true,
   "baglam_kapsama_yuzde": 100.0,
-  "baglam_kenar_marji_m": 159,
+  "baglam_kenar_marji_m": 857,
   "kenar_mesafeleri_m": {
     "bati": 17077,
-    "dogu": 2309,
+    "dogu": 3007,
     "guney": 16893,
     "kuzey": 10750
   },
@@ -35,7 +35,7 @@
   "gulbahce_etiketi_acik": true,
   "analiz_grid": {
     "height": 2764,
-    "width": 1939,
+    "width": 2009,
     "pixel_width_m": 10.0,
     "pixel_height_m": 10.0,
     "pixel_edge_max_m": 10.0
@@ -46,13 +46,13 @@
     "mevcut_bbox": [
       26.22,
       38.18,
-      26.672,
+      26.68,
       38.43
     ],
     "beklenen_uretim_birlesimi_bbox": [
       26.22,
       38.18,
-      26.672,
+      26.68,
       38.43
     ],
     "uretim_birlesimini_tam_kapsiyor": true,
