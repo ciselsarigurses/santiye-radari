@@ -148,6 +148,18 @@ def apply_gulbahce_guard(
             existing.append(clean)
     existing = existing[:TOTAL_LIMIT]
 
+    # Gülbahçe körlük durumu devriye gününe bağlı bir bilgi değildir. Uygun kör
+    # hücreleri her gün ölç; yalnız seçip doğu slotuna yazmayı iki günlük rotasyona
+    # bırak. Böylece aktif olmayan günde ``uygun_aday_sayisi=0`` görülüp gerçek
+    # körlük kapasitesi yokmuş gibi yorumlanmaz.
+    other = _current_non_east_patrol(report, east_key)
+    east_key, eligible = _eligible_gulbahce_candidates(
+        audit_payload,
+        report,
+        scan_payload,
+        other,
+    )
+
     metadata = {
         "alarm": False,
         "saha_gorevi": False,
@@ -156,7 +168,7 @@ def apply_gulbahce_guard(
         "operasyonel_yaricap_m": GULBAHCE_OPERATION_RADIUS_M,
         "idari_kadastral_sinir_degildir": True,
         "uygulandi": False,
-        "uygun_aday_sayisi": 0,
+        "uygun_aday_sayisi": len(eligible),
         "neden": "GENEL_DOGU_ROTASYONU",
     }
 
@@ -164,15 +176,6 @@ def apply_gulbahce_guard(
         report["kor_alan_saha_devriyesi"] = existing
         report["gulbahce_kor_alan_devriye_korumasi"] = metadata
         return report
-
-    other = _current_non_east_patrol(report, east_key)
-    east_key, eligible = _eligible_gulbahce_candidates(
-        audit_payload,
-        report,
-        scan_payload,
-        other,
-    )
-    metadata["uygun_aday_sayisi"] = len(eligible)
 
     if east_key is None:
         metadata["neden"] = "DOGU_BOLGESI_BULUNAMADI"
@@ -311,6 +314,7 @@ def _self_check():
     meta = guarded["gulbahce_kor_alan_devriye_korumasi"]
     assert meta["aktif_gun"] is True
     assert meta["uygulandi"] is True
+    assert meta["uygun_aday_sayisi"] == 2
     assert len(guarded["kor_alan_saha_devriyesi"]) <= TOTAL_LIMIT
     east = [
         item for item in guarded["kor_alan_saha_devriyesi"]
@@ -326,7 +330,9 @@ def _self_check():
         scan,
         rotation_day=date(2026, 9, 4),
     )
-    assert alternate["gulbahce_kor_alan_devriye_korumasi"]["aktif_gun"] is False
+    alternate_meta = alternate["gulbahce_kor_alan_devriye_korumasi"]
+    assert alternate_meta["aktif_gun"] is False
+    assert alternate_meta["uygun_aday_sayisi"] == 2
     assert alternate["kor_alan_saha_devriyesi"][1]["mahalle"] == "Ildır"
 
     blocked_report = dict(report)
@@ -349,6 +355,7 @@ def _self_check():
         rotation_day=duty_day,
     )
     assert blocked["gulbahce_kor_alan_devriye_korumasi"]["uygulandi"] is False
+    assert blocked["gulbahce_kor_alan_devriye_korumasi"]["uygun_aday_sayisi"] == 0
 
     print("Gülbahçe kör-alan devriye koruması öz testi başarılı.")
 
