@@ -72,28 +72,36 @@ def current_main_early_candidates(report):
 st.set_page_config(page_title="Erken Zemin Sinyalleri", page_icon="🧭", layout="wide")
 st.title("🧭 Erken Zemin Sinyalleri")
 st.caption(
-    "Ana 250–800 m² taze Sentinel ERKEN adaylarını, güçlü temporal/lokal kanıtı ve "
-    "150–249 m² MİKRO ŞANTİYE izleriyle tek zemin haritasında birlikte gösterir."
+    "Ana 250–800 m² taze Sentinel ERKEN adaylarını, güçlü temporal/lokal kanıtı, "
+    "150–249 m² MİKRO ŞANTİYE izlerini ve Gülbahçe kalite-kör ceplerini tek zemin "
+    "haritasında birlikte gösterir."
 )
 st.info(
     "Bu sayfa yeni alarm veya saha görevi üretmez. Kırmızı ana ERKEN noktalar, "
     "günlük raporda zaten 250 m² ana üretim eşiğiyle seçilmiş mevcut görevlerdir. "
     "MİKRO ŞANTİYE katmanı 150–249 m² aralığında yalnız güçlü lokal/kompakt + "
-    "temporal kanıtı olan izleri arka planda tutar."
+    "temporal kanıtı olan izleri arka planda tutar. Turuncu Gülbahçe noktaları ise "
+    "şantiye sinyali değil, görüntü kalitesi nedeniyle gözlenemeyen zemin cepleridir."
 )
 
 latest = load_json("latest_report.json")
 temporal = load_json("temporal_local_watch.json")
 micro = load_json("micro_site_watchlist.json")
 gulbahce = load_json("gulbahce_coverage_guard.json")
+gulbahce_blind = load_json("gulbahce_micro_blind_capacity.json")
 main_early = current_main_early_candidates(latest)
+blind_examples = [
+    item
+    for item in (gulbahce_blind.get("kor_kume_ornekleri") or [])
+    if isinstance(item, dict)
+]
 
 coverage_status = gulbahce.get("durum", "veri_yok")
 coverage_pct = as_float(gulbahce.get("tampon_kapsama_yuzde"))
 context_pct = as_float(gulbahce.get("baglam_kapsama_yuzde"))
 edge_margin = as_float(gulbahce.get("baglam_kenar_marji_m"))
 
-m1, m2, m3, m4, m5 = st.columns(5)
+m1, m2, m3, m4, m5, m6 = st.columns(6)
 m1.metric("Ana ERKEN 250–800", len(main_early))
 m2.metric("250–900 m² temporal-lokal", int(temporal.get("aday_sayisi", 0) or 0))
 m3.metric("MİKRO güçlü güncel", int(micro.get("guncel_guclu", 0) or 0))
@@ -102,6 +110,7 @@ m5.metric(
     "Gülbahçe kapsama",
     f"%{coverage_pct:.1f}" if coverage_pct is not None else "Veri yok",
 )
+m6.metric("Gülbahçe kör cep", len(blind_examples))
 
 if coverage_status == "ok":
     st.success(
@@ -120,6 +129,13 @@ elif gulbahce:
     )
 else:
     st.warning("Gülbahçe kapsama denetim dosyası okunamadı.")
+
+if gulbahce_blind.get("mikro_korluk_kapasitesi_var"):
+    st.warning(
+        "Gülbahçe 2 km içinde görüntü kalitesi nedeniyle gözlenemeyen ve 150–249 m² "
+        "bir müdahaleyi kendi içinde gizleyebilecek kör cepler var. Bunlar alarm değildir; "
+        "turuncu temsil noktaları yalnız körlüğün konumunu görünür tutar."
+    )
 
 rows = []
 for candidate in main_early:
@@ -212,6 +228,30 @@ for candidate in micro.get("adaylar", []):
         }
     )
 
+for blind in blind_examples:
+    lat = as_float(blind.get("enlem"))
+    lon = as_float(blind.get("boylam"))
+    area = as_float(blind.get("alan_m2"))
+    if lat is None or lon is None or area is None:
+        continue
+    rows.append(
+        {
+            "katman": "GÜLBAHÇE KÖR CEP",
+            "durum": "ALARM DEĞİL · MİKRO İZ GİZLEYEBİLİR",
+            "bolge": "Gülbahçe 2 km kalite-körlük diagnostik alanı",
+            "mevki": "Gülbahçe kör cep merkezi",
+            "alan_m2": int(round(area)),
+            "enlem": lat,
+            "boylam": lon,
+            "kanıt": str(blind.get("neden") or "Sentinel kalite körlüğü"),
+            "son_sahne": gulbahce_blind.get("kaynak_son_tarih", "-"),
+            "renk": [235, 145, 40, 175],
+            "yaricap": 145,
+            "harita": map_link(lat, lon),
+            "parsel_sorgu": parcel_link(lat, lon),
+        }
+    )
+
 signals = pd.DataFrame(rows)
 show_background_micro = st.toggle(
     "Arka plandaki eski MİKRO izleri de göster",
@@ -219,6 +259,14 @@ show_background_micro = st.toggle(
     help=(
         "Kapalı olduğunda yalnız güncel güçlü veya farklı Sentinel sahnesinde tekrar "
         "doğrulanmış MİKRO izleri gösterilir."
+    ),
+)
+show_blind = st.toggle(
+    "Gülbahçe kalite-kör ceplerini göster",
+    value=True,
+    help=(
+        "Turuncu noktalar şantiye sinyali değildir. Sentinel bulut/gölge/geçersiz SCL "
+        "nedeniyle gözlenemeyen ve küçük bir müdahaleyi gizleyebilecek kör küme merkezleridir."
     ),
 )
 
@@ -229,6 +277,8 @@ if not signals.empty and not show_background_micro:
             & (signals["durum"] == "ARKA_PLAN_TAKIP")
         )
     ].copy()
+if not signals.empty and not show_blind:
+    signals = signals[signals["katman"] != "GÜLBAHÇE KÖR CEP"].copy()
 
 if signals.empty:
     st.info("Seçili katmanlarda haritada gösterilecek güçlü erken zemin sinyali yok.")
@@ -260,7 +310,7 @@ else:
                 "html": (
                     "<b>{katman}</b><br>{mevki} · yaklaşık {alan_m2} m²"
                     "<br>{durum}<br>{kanıt}"
-                    "<br><small>Koordinat değişim merkezidir; kesin parsel değildir.</small>"
+                    "<br><small>Koordinat sinyal veya kör-küme temsil merkezidir; kesin parsel değildir.</small>"
                 )
             },
         ),
@@ -269,8 +319,9 @@ else:
     st.caption(
         "Kırmızı = ana üretimde zaten ERKEN seçilmiş taze 250–800 m² Sentinel adayı · "
         "Mor = 250–900 m² güçlü temporal-lokal diagnostik sinyal · Mavi/yeşil = "
-        "güncel/tekrar doğrulanan MİKRO iz · Gri = eski MİKRO arka plan izi. "
-        "Harita mevcut kararları birleştirir; kendi başına yeni alarm/görev üretmez."
+        "güncel/tekrar doğrulanan MİKRO iz · Gri = eski MİKRO arka plan izi · "
+        "Turuncu = Gülbahçe kalite-kör cebi, alarm değildir. Harita mevcut kararları "
+        "ve gözlemsizlik riskini birleştirir; kendi başına yeni alarm/görev üretmez."
     )
     st.dataframe(
         signals[
@@ -319,7 +370,12 @@ with st.expander("Kaynak ve güvenlik notları"):
     )
     st.write("MİKRO iz kaynak zamanı:", micro.get("olusturma", "Veri yok"))
     st.write("Gülbahçe kapsama denetimi:", gulbahce.get("olusturma", "Veri yok"))
+    st.write(
+        "Gülbahçe körlük kaynağı:",
+        gulbahce_blind.get("kaynak_son_tarih", "Veri yok"),
+    )
     st.caption(
         "Ada/parsel ve hukuki statü otomatik türetilmez. TKGM bağlantısı yalnız verilen "
-        "koordinatı manuel Parsel Sorgu ekranında açmak içindir."
+        "koordinatı manuel Parsel Sorgu ekranında açmak içindir. Kör cep noktaları gerçek "
+        "şantiye koordinatı değil, gözlenemeyen kümenin yaklaşık merkezidir."
     )
