@@ -44,7 +44,7 @@ jobs:
         id: probe
         run: python sentinel_scene_probe.py --github-output "$GITHUB_OUTPUT"
 
-      - name: Yeni sahne varsa mevcut tam radar taramasını başlat
+      - name: Yeni sahne varsa ana radar ve MİKRO zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -52,7 +52,8 @@ jobs:
         shell: bash
         run: |
           echo "Yeni Sentinel sahnesi: ${{ steps.probe.outputs.changed_regions }}"
-          response_code="$(curl -sS -o /tmp/dispatch-response.txt -w '%{http_code}' \
+
+          response_code="$(curl -sS -o /tmp/daily-dispatch-response.txt -w '%{http_code}' \
             -L -X POST \
             -H 'Accept: application/vnd.github+json' \
             -H "Authorization: Bearer ${GH_TOKEN}" \
@@ -60,8 +61,26 @@ jobs:
             "https://api.github.com/repos/${REPOSITORY}/actions/workflows/daily-scan.yml/dispatches" \
             -d '{"ref":"main"}')"
           if [[ "$response_code" != "204" ]]; then
-            cat /tmp/dispatch-response.txt
+            cat /tmp/daily-dispatch-response.txt
             echo "Tam radar taraması başlatılamadı; HTTP ${response_code}."
             exit 1
           fi
           echo "Tam radar taraması workflow_dispatch ile başlatıldı."
+
+          # Ana 250 m² taramasını beklemeden aynı yeni Sentinel sahnesini 150–249 m²
+          # diagnostik zincire de ver. Mikro audit aynı DB-write concurrency grubunda
+          # seri çalışır; ardından shortlist -> temporal -> footprint workflow_run
+          # zinciri mevcut güvenlik kilitleriyle otomatik devam eder.
+          micro_response_code="$(curl -sS -o /tmp/micro-dispatch-response.txt -w '%{http_code}' \
+            -L -X POST \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "https://api.github.com/repos/${REPOSITORY}/actions/workflows/micro-site-audit.yml/dispatches" \
+            -d '{"ref":"main"}')"
+          if [[ "$micro_response_code" != "204" ]]; then
+            cat /tmp/micro-dispatch-response.txt
+            echo "MİKRO diagnostik taraması başlatılamadı; HTTP ${micro_response_code}."
+            exit 1
+          fi
+          echo "MİKRO diagnostik zinciri workflow_dispatch ile başlatıldı."
