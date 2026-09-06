@@ -50,15 +50,16 @@ REGIONS = {
         # iki günlük tarama kutusunun da dışında bırakıyordu. Güney sınırını
         # 38.18 N'ye indirerek bu iç kapsama boşluğu kapatıldı. Gülbahçe'nin
         # 2 km operasyon tamponu ile lokal/kuru-zemin diagnostiklerinin 150 m
-        # ek komşuluk bağlamı doğu kenarında eksiksiz kalsın diye sınır 26.672 E'ye
-        # genişletildi. 2800 piksel tavanında yaklaşık 10 m analiz ölçeği korunur.
-        "bbox": [26.45, 38.18, 26.672, 38.43],
+        # ek komşuluk bağlamı yalnız sınırda kalmasın diye doğu sınırı 26.680 E'ye
+        # genişletildi. Böylece bağlamın dışında ek operasyonel rezerv bırakılır;
+        # 2800 piksel tavanında yaklaşık 10 m analiz ölçeği korunur.
+        "bbox": [26.45, 38.18, 26.68, 38.43],
     },
     "all": {
         "label": "Tüm Çeşme + Uzunkuyu",
         # Birleşik zarf, üretim kutularının gerçek birleşimini eksiksiz içermelidir.
-        # Gülbahçe analiz bağlamını sessizce kaybetmemek için Uzunkuyu ile 26.672 E'de eşitlenir.
-        "bbox": [26.22, 38.18, 26.672, 38.43],
+        # Gülbahçe analiz bağlamı ve doğu rezervi kaybolmasın diye Uzunkuyu ile 26.680 E'de eşitlenir.
+        "bbox": [26.22, 38.18, 26.68, 38.43],
     },
 }
 
