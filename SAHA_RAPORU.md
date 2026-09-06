@@ -17,19 +17,9 @@ Bugün ekip göndermeyi gerektiren güçlü yeni aday yok.
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli bir örnek bulursa o örnek saha teyidi için rotasyonun önüne alınır; bu yine alarm değildir. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
+> 15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.
 
-1. **KALİBRASYON — Çeşme** · yaklaşık 300 m² · 03.09.2026 → 05.09.2026 · BSI Δ 0.108 · RGB Δ 0.143 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.329105,26.306715)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Gülbahçe** · yaklaşık 400 m² · 03.09.2026 → 05.09.2026 · BSI Δ 0.110 · RGB Δ 0.219 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.324853,26.648345)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-
-## Temporal-lokal erken sinyal izleme
-
-> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül öncesinde yalnız kalibrasyon/izleme amaçlıdır; ekip rotasına otomatik eklenmez.
-
-1. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 300 m² · yerellik 3.22 · iç BSI Δ 0.107 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.398298,26.624303) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.398298/26.624303)
-   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
