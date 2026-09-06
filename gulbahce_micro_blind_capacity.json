@@ -17,5 +17,29 @@
   "ana_kor_kume_250plus": 2,
   "mikro_gizleyebilen_kor_kume": 2,
   "mikro_korluk_kapasitesi_var": true,
-  "yorum": "'mikro_kor_kume_tam_150_249' yalnız toplam alanı 150-249 m² olan kör kümeleri sayar. 250 m²+ bir kör küme de içinde 150-249 m² yeni kazı/temel izini gizleyebilir; bu nedenle 'mikro_gizleyebilen_kor_kume' iki boyut sınıfını birlikte sayar. Bu yalnız kalite/kapsama diagnostiğidir; alarm veya saha görevi değildir."
+  "kor_kume_ornekleri": [
+    {
+      "enlem": 38.34231,
+      "boylam": 26.642518,
+      "alan_m2": 400,
+      "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
+      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
+      "mikro_gizleyebilir": true,
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.342310,26.642518"
+    },
+    {
+      "enlem": 38.341406,
+      "boylam": 26.643205,
+      "alan_m2": 1100,
+      "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
+      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
+      "mikro_gizleyebilir": true,
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.341406,26.643205"
+    }
+  ],
+  "yorum": "'mikro_kor_kume_tam_150_249' yalnız toplam alanı 150-249 m² olan kör kümeleri sayar. 250 m²+ bir kör küme de içinde 150-249 m² yeni kazı/temel izini gizleyebilir; bu nedenle 'mikro_gizleyebilen_kor_kume' iki boyut sınıfını birlikte sayar. 'kor_kume_ornekleri' yaklaşık kör küme merkezlerini yalnız diagnostik inceleme için taşır; adres/parsel değildir. Bu katman alarm veya saha görevi üretmez."
 }
