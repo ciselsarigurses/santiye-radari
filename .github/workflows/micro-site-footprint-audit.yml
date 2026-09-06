@@ -94,24 +94,36 @@ jobs:
       - name: Sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
-          if git ls-files --error-unmatch micro_site_temporal_footprint_audit.json >/dev/null 2>&1; then
-            meaningful="$(git diff -- micro_site_temporal_footprint_audit.json \
-              | grep -E '^[+-]' \
-              | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
-            if [[ -z "$meaningful" ]]; then
-              echo "Bileşen-izi audit çıktısında yalnız çalışma zamanı değişti."
-              git checkout -- micro_site_temporal_footprint_audit.json
-            fi
-          fi
+          outputs=(
+            micro_site_temporal_footprint_audit.json
+            micro_site_footprint_priority_review.json
+            micro_site_watchlist.json
+            micro_site_coordinate_audit.json
+          )
 
-          if [[ -z "$(git status --porcelain -- micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json micro_site_watchlist.json micro_site_coordinate_audit.json)" ]]; then
+          for file in "${outputs[@]}"; do
+            if ! git ls-files --error-unmatch "$file" >/dev/null 2>&1; then
+              continue
+            fi
+
+            meaningful="$(git diff -- "$file" \
+              | grep -E '^[+-]' \
+              | grep -vE '^(---|\+\+\+|[-+][[:space:]]*"olusturma":)' || true)"
+
+            if [[ -z "$meaningful" && -n "$(git status --porcelain -- "$file")" ]]; then
+              echo "$file çıktısında yalnız çalışma zamanı değişti; commit edilmeyecek."
+              git checkout -- "$file"
+            fi
+          done
+
+          if [[ -z "$(git status --porcelain -- "${outputs[@]}")" ]]; then
             echo "Footprint mikro diagnostik, izleme ve koordinat sonuçları değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_temporal_footprint_audit.json micro_site_footprint_priority_review.json micro_site_watchlist.json micro_site_coordinate_audit.json
+          git add "${outputs[@]}"
           git commit -m "Radar: footprint mikro diagnostik, izleme ve koordinat sonucunu güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
