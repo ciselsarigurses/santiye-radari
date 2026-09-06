@@ -4046,5 +4046,23 @@
       "aciklama": "Aynı günlük rapor yeniden işlendiğinde daha önce arka plana ayrılmış geniş-yüzey diagnostik kayıtları sessizce düşürülmez."
     }
   },
-  "parsel_on_kontrol_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+  "parsel_on_kontrol_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+  "kapasite_santiye_devriyesi": [],
+  "kapasite_santiye_devriyesi_meta": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "olusturma": "2026-09-06 11:20 +0300",
+    "bolgeler": {
+      "cesme": {
+        "durum": "uretim_kotasi_yeterli",
+        "uretim_santiye_olcegi": 13,
+        "tavan_disinda_uygun_havuz": 0
+      },
+      "uzunkuyu": {
+        "durum": "ok",
+        "uretim_santiye_olcegi": 3,
+        "tavan_disinda_uygun_havuz": 0
+      }
+    }
+  }
 }
