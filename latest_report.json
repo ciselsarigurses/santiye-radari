@@ -4124,29 +4124,11 @@
   "temporal_lokal_erken_izleme_notu": "15 Eylül öncesinde yalnız kalibrasyon/izleme; alarm veya saha görevi yok.",
   "kor_alan_saha_devriyesi": [
     {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.189452,
-      "boylam": 26.538668,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.1732,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.189452,26.538668",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.189452/26.538668",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Ildır",
-      "enlem": 38.373605,
-      "boylam": 26.476368,
+      "mahalle": "Şifne",
+      "enlem": 38.335979,
+      "boylam": 26.420161,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -4154,14 +4136,30 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.373605,26.476368",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.373605/26.476368",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.335979,26.420161",
+      "saha_gorevi": false
+    },
+    {
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.329557,
+      "boylam": 26.674905,
+      "alan_m2": 400,
+      "neden": "BULUT_GOLGE_KALICI",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.1732,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.329557,26.674905",
+      "saha_gorevi": false,
+      "gulbahce_operasyonel_kapsama": true,
+      "gulbahce_referans_mesafesi_m": 2587
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-07",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Mevcut bölgesel kör-alan rotasyonu korunur; iki günde bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu Gülbahçe operasyonel referansının 3 km çevresine ayrılır. Aktif radar görevlerinden >=150 m ve diğer kör-alan devriyesinden >=250 m uzakta tutulur. Operasyonel referans idari/kadastral sınır değildir.",
   "temporal_kalibrasyon_rotasyonu": {
     "durum": "uygulandi",
     "slot_sayisi": 2,
@@ -4206,10 +4204,7 @@
       "boylam": 26.674905,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
-      "referans_mesafesi_m": 2587,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329557/26.674905",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "referans_mesafesi_m": 2587
     }
   }
 }
