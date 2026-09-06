@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-06",
-  "olusturma": "2026-09-06 22:13 +0300",
+  "olusturma": "2026-09-07 01:07 +0300",
   "amac": "Mevcut Sentinel aday koordinatının geometrik temsil pikseli ile aynı bağlı bileşendeki BSI×RGB değişim gücüne göre sinyal-ağırlıklı temsil pikseli arasındaki farkı ölçmek; koordinatı otomatik değiştirmeden 10 m sınıfı hassasiyet iyileştirmesini doğrulamak.",
   "uyari": "Bu çıktı alarm/görev/eşik değiştirmez. Sinyal-ağırlıklı koordinat yalnız diagnostiktir; saha doğrulaması olmadan kesin adres veya parsel değildir.",
   "bolgeler": {
@@ -9,7 +9,7 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_item": "S2C_T35SMC_20260903T090747_L2A",
       "son_item": "S2A_T35SMC_20260905T090529_L2A",
-      "olculen_aday": 11,
+      "olculen_aday": 8,
       "eslesmeyen_aday": 0,
       "10m_ustu_kayma": 0,
       "20m_ustu_kayma": 0,
@@ -110,42 +110,6 @@
           "sinyal_agirlikli_boylam": 26.298244,
           "geometrik_sinyal_kaymasi_m": 0.0,
           "bilesen_piksel": 4
-        },
-        {
-          "mahalle": "Dalyan",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.345385,
-          "mevcut_boylam": 26.28485,
-          "geometrik_enlem": 38.345385,
-          "geometrik_boylam": 26.28485,
-          "sinyal_agirlikli_enlem": 38.345385,
-          "sinyal_agirlikli_boylam": 26.28485,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
-        },
-        {
-          "mahalle": "Musalla",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.296272,
-          "mevcut_boylam": 26.280386,
-          "geometrik_enlem": 38.296272,
-          "geometrik_boylam": 26.280386,
-          "sinyal_agirlikli_enlem": 38.296272,
-          "sinyal_agirlikli_boylam": 26.280386,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
-        },
-        {
-          "mahalle": "Musalla",
-          "alan_m2": 300,
-          "mevcut_enlem": 38.320874,
-          "mevcut_boylam": 26.300534,
-          "geometrik_enlem": 38.320874,
-          "geometrik_boylam": 26.300534,
-          "sinyal_agirlikli_enlem": 38.320874,
-          "sinyal_agirlikli_boylam": 26.300534,
-          "geometrik_sinyal_kaymasi_m": 0.0,
-          "bilesen_piksel": 3
         }
       ]
     },

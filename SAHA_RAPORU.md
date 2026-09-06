@@ -17,18 +17,12 @@ Bugün ekip göndermeyi gerektiren güçlü yeni aday yok.
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> 15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli bir örnek bulursa o örnek saha teyidi için rotasyonun önüne alınır; bu yine alarm değildir. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
 
-Bugün ekip gönderilecek ek kalibrasyon noktası yok.
-
-## Kör alan saha devriyesi
-
-> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
-
-1. **KÖR ALAN — Çiftlikköy** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265881,26.282904) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265881/26.282904)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
-2. **KÖR ALAN — Mevki doğrulanmadı** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.180588,26.501575) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.180588/26.501575)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+1. **KALİBRASYON — Çeşme** · yaklaşık 300 m² · 03.09.2026 → 05.09.2026 · BSI Δ 0.108 · RGB Δ 0.143 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.329105,26.306715)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+2. **KALİBRASYON — Gülbahçe** · yaklaşık 400 m² · 03.09.2026 → 05.09.2026 · BSI Δ 0.110 · RGB Δ 0.219 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.324853,26.648345)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
