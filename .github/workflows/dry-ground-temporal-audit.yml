@@ -11,6 +11,7 @@ on:
       - "temporal_locality_audit.py"
       - "coordinate_precision_audit.py"
       - "calibration_rotation_guard.py"
+      - "postseason_dry_ground_confirmation_guard.py"
       - ".github/workflows/dry-ground-temporal-audit.yml"
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
@@ -77,6 +78,9 @@ jobs:
       - name: 250-900 m² adayın çevre halkasını ölç
         run: python temporal_locality_audit.py
 
+      - name: 15 Eylül kuru-zemin teyit geçidi öz testi
+        run: python postseason_dry_ground_confirmation_guard.py --self-check
+
       - name: Koordinat hassasiyetini öz test et
         run: python coordinate_precision_audit.py --check-only
 
@@ -85,6 +89,9 @@ jobs:
 
       - name: Ön sezon kalibrasyon rotasyonunu güvenli uygula
         run: python calibration_rotation_guard.py
+
+      - name: 15 Eylül sonrası güçlü kuru-zemin teyidini günlük rotaya bağla
+        run: python postseason_dry_ground_confirmation_guard.py
 
       - name: Kanonik kuru zemin raporunu geri yükle
         run: git checkout -- dry_ground_gap_audit.json
@@ -103,6 +110,7 @@ jobs:
             python temporal_locality_audit.py
             python coordinate_precision_audit.py
             python calibration_rotation_guard.py
+            python postseason_dry_ground_confirmation_guard.py
             git checkout -- dry_ground_gap_audit.json
           }
 
