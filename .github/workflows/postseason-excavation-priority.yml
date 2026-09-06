@@ -15,6 +15,10 @@ on:
       - "Kuru Zemin Zaman Serisi Denetimi"
       - "Saha Durumunu İşle"
     types: [completed]
+  schedule:
+    # 15 Eylül 05:30 TSİ: sezon sınırını 11:00 ana taramadan önce uygula.
+    # Guard tarih-duyarlıdır; eşik, alarm veya yeni görev üretme politikasını değiştirmez.
+    - cron: "30 2 15 9 *"
   workflow_dispatch:
 
 permissions:
