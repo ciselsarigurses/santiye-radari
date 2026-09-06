@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-05 19:35 +0300",
+  "olusturma": "2026-09-06 15:39 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -110,16 +110,16 @@
           "bolge": "uzunkuyu",
           "yaklasik_mevki": "Mevki doğrulanmadı",
           "enlem": 38.423895,
-          "boylam": 26.570732,
+          "boylam": 26.570724,
           "alan_m2": 200,
           "piksel": 2,
           "bbox_piksel": 4,
           "doluluk_orani": 0.5,
-          "ortalama_rgb_degisim": 0.3131,
-          "ortalama_ndvi_kaybi": 0.2059,
-          "ortalama_parlaklik_artisi": 0.3131,
+          "ortalama_rgb_degisim": 0.3242,
+          "ortalama_ndvi_kaybi": 0.2122,
+          "ortalama_parlaklik_artisi": 0.3242,
           "gulbahce_merkeze_mesafe_m": 13302,
-          "harita": "https://www.google.com/maps/dir/?api=1&destination=38.423895,26.570732",
+          "harita": "https://www.google.com/maps/dir/?api=1&destination=38.423895,26.570724",
           "neden": "150-249 m² bandında, en az iki bitişik yaklaşık 10 m pikselde ana küçük-saha yolu kadar güçlü çoklu-spektral değişim ve kompakt geometri görüldü. Tek başına saha ziyareti nedeni değildir."
         }
       ],
@@ -132,26 +132,26 @@
           "operasyon_yaricapi_m": 2000,
           "sinir_adres_degil": true
         },
-        "kara_benzeri_piksel": 86444,
-        "kalite_gecerli_kara_piksel": 86429,
-        "kalite_gecerli_kara_yuzde": 99.983,
-        "kalite_kor_kara_piksel": 15,
-        "kalite_kor_kara_yuzde": 0.017,
-        "su_piksel": 39236,
-        "santiye_maskesine_gecerli_piksel": 84461,
+        "kara_benzeri_piksel": 86446,
+        "kalite_gecerli_kara_piksel": 86430,
+        "kalite_gecerli_kara_yuzde": 99.981,
+        "kalite_kor_kara_piksel": 16,
+        "kalite_kor_kara_yuzde": 0.019,
+        "su_piksel": 39248,
+        "santiye_maskesine_gecerli_piksel": 84460,
         "mikro_kor_kume_150_249": 0,
         "ana_kor_kume_250plus": 2,
         "mikro_ham_aday_2km": 0,
         "kor_kume_ornekleri": [
           {
             "enlem": 38.341406,
-            "boylam": 26.643205,
-            "alan_m2": 1100,
+            "boylam": 26.643308,
+            "alan_m2": 1200,
             "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL"
           },
           {
             "enlem": 38.34231,
-            "boylam": 26.642518,
+            "boylam": 26.642621,
             "alan_m2": 400,
             "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL"
           }

@@ -11,7 +11,7 @@
   "kaynak_son_tarih": "05.09.2026",
   "kaynak_son_item": "S2A_T35SMC_20260905T090529_L2A",
   "gulbahce_operasyon_yaricapi_m": 2000,
-  "kalite_kor_kara_yuzde": 0.017,
+  "kalite_kor_kara_yuzde": 0.019,
   "mikro_ham_aday_2km": 0,
   "mikro_kor_kume_tam_150_249": 0,
   "ana_kor_kume_250plus": 2,
@@ -20,25 +20,25 @@
   "kor_kume_ornekleri": [
     {
       "enlem": 38.34231,
-      "boylam": 26.642518,
+      "boylam": 26.642621,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
       "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
       "mikro_gizleyebilir": true,
       "alarm": false,
       "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.342310,26.642518"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.342310,26.642621"
     },
     {
       "enlem": 38.341406,
-      "boylam": 26.643205,
-      "alan_m2": 1100,
+      "boylam": 26.643308,
+      "alan_m2": 1200,
       "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
       "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
       "mikro_gizleyebilir": true,
       "alarm": false,
       "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.341406,26.643205"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.341406,26.643308"
     }
   ],
   "yorum": "'mikro_kor_kume_tam_150_249' yalnız toplam alanı 150-249 m² olan kör kümeleri sayar. 250 m²+ bir kör küme de içinde 150-249 m² yeni kazı/temel izini gizleyebilir; bu nedenle 'mikro_gizleyebilen_kor_kume' iki boyut sınıfını birlikte sayar. 'kor_kume_ornekleri' yaklaşık kör küme merkezlerini yalnız diagnostik inceleme için taşır; adres/parsel değildir. Bu katman alarm veya saha görevi üretmez."
