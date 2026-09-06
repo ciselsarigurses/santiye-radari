@@ -1,0 +1,90 @@
+name: Aktif Aday Analiz Kenarı Koruması
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - "active_edge_candidate_guard.py"
+      - "satellite.py"
+      - "hotspot_coordinate_audit.py"
+      - ".github/workflows/active-edge-candidate-guard.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-active-edge-candidate
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    # Başarısız günlük taramanın çıktısını yeni/sağlıklı veri gibi ölçme.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Analiz kenarı koruması öz testi
+        run: python active_edge_candidate_guard.py --self-test
+
+      - name: Güncel ana Sentinel adaylarında kenar kırpma riskini ölç
+        run: python active_edge_candidate_guard.py
+
+      - name: Sonucu yalnız anlamlı değişiklikte güvenli kaydet
+        shell: bash
+        run: |
+          if [[ ! -f active_edge_candidate_review.json ]]; then
+            echo "Diagnostik çıktı oluşmadı."
+            exit 1
+          fi
+
+          git add active_edge_candidate_review.json
+          if git diff --cached --quiet; then
+            echo "Analiz-kenarı sonucu değişmedi; commit yok."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git commit -m "Radar: aktif aday analiz kenarı sonucunu güncelle"
+
+          # Sentinel okuması sırasında main ilerlediyse eski rapora ait sonucu zorlama;
+          # en güncel main üzerinde bir kez yeniden hesapla.
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal denetim sırasında değişti; güncel raporda yeniden ölçülüyor."
+            git reset --hard origin/main
+            python active_edge_candidate_guard.py --self-test
+            python active_edge_candidate_guard.py
+            git add active_edge_candidate_review.json
+            if git diff --cached --quiet; then
+              echo "Yeniden ölçüm sonrası semantik değişiklik yok."
+              exit 0
+            fi
+            git commit -m "Radar: aktif aday analiz kenarı sonucunu güncelle"
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Ana dal yeniden değişti; eski diagnostik sonucu zorlamadan sonraki çalışmaya bırakılıyor."
+              exit 1
+            fi
+          fi
+
+          git push origin HEAD:main
