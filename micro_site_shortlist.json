@@ -6,14 +6,14 @@
     150,
     249
   ],
-  "kaynak_olusturma": "2026-09-05 19:35 +0300",
+  "kaynak_olusturma": "2026-09-06 15:39 +0300",
   "ham_aday": 4,
   "tekil_aday": 4,
   "ortusme_tekrari_elendi": 0,
   "genis_hareket_kumesi_arka_plana_alindi": 0,
   "ana_250plus_adaya_yakin_arka_plana_alindi": 3,
-  "250plus_yakinlik_referans_toplam_saha_adayi": 125,
-  "250plus_yakinlik_referans_guncel_sentinel": 20,
+  "250plus_yakinlik_referans_toplam_saha_adayi": 126,
+  "250plus_yakinlik_referans_guncel_sentinel": 21,
   "250plus_yakinlik_referans_dislanan_eski_veya_250alti": 105,
   "yakinlik_referans_sentinel_tarihleri": [
     "05.09.2026"
