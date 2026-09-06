@@ -93,4 +93,8 @@ jobs:
           early_ground_page = AppTest.from_file("pages/4_Erken_Zemin_Sinyalleri.py")
           early_ground_page.run(timeout=45)
           assert not early_ground_page.exception, early_ground_page.exception
+
+          geometry_page = AppTest.from_file("pages/5_Geometri_Ayrisma.py")
+          geometry_page.run(timeout=45)
+          assert not geometry_page.exception, geometry_page.exception
           PY
