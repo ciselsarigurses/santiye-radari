@@ -69,19 +69,54 @@ def current_main_early_candidates(report):
     return selected
 
 
+def current_edge_risk_candidates(review):
+    """Ana Sentinel bileşeni analiz kutusu kenarına temas eden/yaklaşan adayları döndür.
+
+    Kaynak dosya diagnostiktir; bu yardımcı işlev de alarm, görev veya koordinat
+    değiştirmez. Yalnız alan/merkez koordinatının bbox kırpmasından etkilenme riskini
+    ana zemin haritasında görünür kılar.
+    """
+    selected = []
+    regions = review.get("bolgeler") or {}
+    if not isinstance(regions, dict):
+        return selected
+    for region_key, region in regions.items():
+        if not isinstance(region, dict):
+            continue
+        for candidate in region.get("adaylar") or []:
+            if not isinstance(candidate, dict):
+                continue
+            if candidate.get("kenara_temas") is not True and candidate.get("kenara_yakin") is not True:
+                continue
+            lat = as_float(candidate.get("enlem"))
+            lon = as_float(candidate.get("boylam"))
+            area = as_float(candidate.get("alan_m2"))
+            if lat is None or lon is None or area is None:
+                continue
+            item = dict(candidate)
+            item["region_key"] = region_key
+            item["bolge"] = region.get("bolge", region_key)
+            item["enlem"] = lat
+            item["boylam"] = lon
+            item["alan_m2"] = area
+            selected.append(item)
+    return selected
+
+
 st.set_page_config(page_title="Erken Zemin Sinyalleri", page_icon="🧭", layout="wide")
 st.title("🧭 Erken Zemin Sinyalleri")
 st.caption(
     "Ana 250–800 m² taze Sentinel ERKEN adaylarını, güçlü temporal/lokal kanıtı, "
-    "150–249 m² MİKRO ŞANTİYE izlerini ve Gülbahçe kalite-kör ceplerini tek zemin "
-    "haritasında birlikte gösterir."
+    "150–249 m² MİKRO ŞANTİYE izlerini, Gülbahçe kalite-kör ceplerini ve analiz "
+    "kenarına yaklaşan ana adayları tek zemin haritasında birlikte gösterir."
 )
 st.info(
     "Bu sayfa yeni alarm veya saha görevi üretmez. Kırmızı ana ERKEN noktalar, "
     "günlük raporda zaten 250 m² ana üretim eşiğiyle seçilmiş mevcut görevlerdir. "
     "MİKRO ŞANTİYE katmanı 150–249 m² aralığında yalnız güçlü lokal/kompakt + "
-    "temporal kanıtı olan izleri arka planda tutar. Turuncu Gülbahçe noktaları ise "
-    "şantiye sinyali değil, görüntü kalitesi nedeniyle gözlenemeyen zemin cepleridir."
+    "temporal kanıtı olan izleri arka planda tutar. Turuncu Gülbahçe noktaları görüntü "
+    "kalitesi körlüğünü; sarı noktalar ise mevcut ana adayın analiz bbox kenarına çok "
+    "yakın olduğunu gösterir. Bu iki diagnostik katman da kendi başına şantiye alarmı değildir."
 )
 
 latest = load_json("latest_report.json")
@@ -89,7 +124,9 @@ temporal = load_json("temporal_local_watch.json")
 micro = load_json("micro_site_watchlist.json")
 gulbahce = load_json("gulbahce_coverage_guard.json")
 gulbahce_blind = load_json("gulbahce_micro_blind_capacity.json")
+edge_review = load_json("active_edge_candidate_review.json")
 main_early = current_main_early_candidates(latest)
+edge_risks = current_edge_risk_candidates(edge_review)
 blind_examples = [
     item
     for item in (gulbahce_blind.get("kor_kume_ornekleri") or [])
@@ -110,7 +147,7 @@ m5.metric(
     "Gülbahçe kapsama",
     f"%{coverage_pct:.1f}" if coverage_pct is not None else "Veri yok",
 )
-m6.metric("Gülbahçe kör cep", len(blind_examples))
+m6.metric("Kenar-yakın ana aday", len(edge_risks))
 
 if coverage_status == "ok":
     st.success(
@@ -135,6 +172,26 @@ if gulbahce_blind.get("mikro_korluk_kapasitesi_var"):
         "Gülbahçe 2 km içinde görüntü kalitesi nedeniyle gözlenemeyen ve 150–249 m² "
         "bir müdahaleyi kendi içinde gizleyebilecek kör cepler var. Bunlar alarm değildir; "
         "turuncu temsil noktaları yalnız körlüğün konumunu görünür tutar."
+    )
+
+if edge_risks:
+    closest = min(
+        edge_risks,
+        key=lambda item: as_float(item.get("en_yakin_kenar_m"))
+        if as_float(item.get("en_yakin_kenar_m")) is not None
+        else float("inf"),
+    )
+    closest_m = as_float(closest.get("en_yakin_kenar_m"))
+    st.warning(
+        f"{len(edge_risks)} ana Sentinel adayı analiz kutusunun kenarına çok yakın. "
+        + (
+            f"En yakın kayıt yaklaşık {closest_m:.0f} m ile "
+            f"{str(closest.get('en_yakin_kenar') or 'bir')} kenarında. "
+            if closest_m is not None
+            else ""
+        )
+        + "Bu, adayın şantiye olasılığını yükseltmez; yalnız ölçülen alan veya temsil "
+        "koordinatının sınır kırpmasından etkilenme riskini gösterir."
     )
 
 rows = []
@@ -252,6 +309,36 @@ for blind in blind_examples:
         }
     )
 
+for candidate in edge_risks:
+    lat = candidate["enlem"]
+    lon = candidate["boylam"]
+    area = candidate["alan_m2"]
+    touches = candidate.get("kenara_temas") is True
+    nearest_pixels = candidate.get("en_yakin_kenar_piksel", "-")
+    nearest_m = as_float(candidate.get("en_yakin_kenar_m"))
+    edge_name = str(candidate.get("en_yakin_kenar") or "kenar")
+    rows.append(
+        {
+            "katman": "ANALİZ KENARI RİSKİ",
+            "durum": "SINIRA TEMAS · YENİDEN ÖLÇ" if touches else "SINIRA YAKIN · ALARM DEĞİL",
+            "bolge": candidate.get("bolge", "-"),
+            "mevki": candidate.get("mahalle", "Mevki doğrulanmadı"),
+            "alan_m2": int(round(area)),
+            "enlem": lat,
+            "boylam": lon,
+            "kanıt": (
+                f"En yakın {edge_name} kenarı: {nearest_pixels} piksel"
+                + (f" · yaklaşık {nearest_m:.0f} m" if nearest_m is not None else "")
+                + " · alan/merkez kırpma riski diagnostik"
+            ),
+            "son_sahne": edge_review.get("rapor_tarihi", "-"),
+            "renk": [250, 205, 45, 245],
+            "yaricap": 215,
+            "harita": map_link(lat, lon),
+            "parsel_sorgu": parcel_link(lat, lon),
+        }
+    )
+
 signals = pd.DataFrame(rows)
 show_background_micro = st.toggle(
     "Arka plandaki eski MİKRO izleri de göster",
@@ -269,6 +356,14 @@ show_blind = st.toggle(
         "nedeniyle gözlenemeyen ve küçük bir müdahaleyi gizleyebilecek kör küme merkezleridir."
     ),
 )
+show_edge_risk = st.toggle(
+    "Analiz kenarına yaklaşan ana adayları göster",
+    value=True,
+    help=(
+        "Sarı noktalar yeni alarm değildir. Mevcut 250 m²+ aday bileşeninin analiz "
+        "kutusu kenarına temas/yakınlık nedeniyle alan veya temsil koordinatı kırpılabilir."
+    ),
+)
 
 if not signals.empty and not show_background_micro:
     signals = signals[
@@ -279,6 +374,8 @@ if not signals.empty and not show_background_micro:
     ].copy()
 if not signals.empty and not show_blind:
     signals = signals[signals["katman"] != "GÜLBAHÇE KÖR CEP"].copy()
+if not signals.empty and not show_edge_risk:
+    signals = signals[signals["katman"] != "ANALİZ KENARI RİSKİ"].copy()
 
 if signals.empty:
     st.info("Seçili katmanlarda haritada gösterilecek güçlü erken zemin sinyali yok.")
@@ -310,7 +407,7 @@ else:
                 "html": (
                     "<b>{katman}</b><br>{mevki} · yaklaşık {alan_m2} m²"
                     "<br>{durum}<br>{kanıt}"
-                    "<br><small>Koordinat sinyal veya kör-küme temsil merkezidir; kesin parsel değildir.</small>"
+                    "<br><small>Koordinat sinyal/kör-küme/kenar-risk temsil noktasıdır; kesin parsel değildir.</small>"
                 )
             },
         ),
@@ -320,8 +417,9 @@ else:
         "Kırmızı = ana üretimde zaten ERKEN seçilmiş taze 250–800 m² Sentinel adayı · "
         "Mor = 250–900 m² güçlü temporal-lokal diagnostik sinyal · Mavi/yeşil = "
         "güncel/tekrar doğrulanan MİKRO iz · Gri = eski MİKRO arka plan izi · "
-        "Turuncu = Gülbahçe kalite-kör cebi, alarm değildir. Harita mevcut kararları "
-        "ve gözlemsizlik riskini birleştirir; kendi başına yeni alarm/görev üretmez."
+        "Turuncu = Gülbahçe kalite-kör cebi · Sarı = mevcut ana adayın analiz kutusu "
+        "kenarına temas/yakınlık riski. Turuncu ve sarı katmanlar alarm değildir. Harita "
+        "mevcut kararları ve gözlem/ölçüm risklerini birleştirir; kendi başına yeni alarm/görev üretmez."
     )
     st.dataframe(
         signals[
@@ -374,8 +472,14 @@ with st.expander("Kaynak ve güvenlik notları"):
         "Gülbahçe körlük kaynağı:",
         gulbahce_blind.get("kaynak_son_tarih", "Veri yok"),
     )
+    st.write(
+        "Analiz kenarı denetimi:",
+        edge_review.get("rapor_tarihi", "Veri yok"),
+    )
     st.caption(
         "Ada/parsel ve hukuki statü otomatik türetilmez. TKGM bağlantısı yalnız verilen "
         "koordinatı manuel Parsel Sorgu ekranında açmak içindir. Kör cep noktaları gerçek "
-        "şantiye koordinatı değil, gözlenemeyen kümenin yaklaşık merkezidir."
+        "şantiye koordinatı değil, gözlenemeyen kümenin yaklaşık merkezidir. Sarı analiz "
+        "kenarı kaydı da mevcut adayın şantiye olasılığını artırmaz; yalnız bbox kırpma "
+        "riskini ve gerektiğinde yeniden ölçüm ihtiyacını görünür tutar."
     )
