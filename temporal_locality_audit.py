@@ -256,7 +256,11 @@ def run_audit():
         raise RuntimeError("dry_ground_temporal_audit.json bulunamadı.")
     source = json.loads(SOURCE_AUDIT.read_text(encoding="utf-8"))
     payload = {
-        "rapor_tarihi": datetime.now(ISTANBUL).strftime("%Y-%m-%d"),
+        # Bu diagnostik, çalıştırıldığı takvim gününe değil kaynak temporal verinin
+        # gününe aittir. Gece yarısını geçen zincirde bugünün tarihini yazmak,
+        # aynı Sentinel verisini farklı veri günü gibi gösterip aşağı akış kalibrasyonunu
+        # yanlış biçimde başarısız kılıyordu.
+        "rapor_tarihi": source.get("rapor_tarihi"),
         "olusturma": datetime.now(ISTANBUL).strftime("%Y-%m-%d %H:%M %z"),
         "amac": (
             "250-900 m² temporal kuru-zemin adayında 3x3 değişimin hemen dışındaki "
