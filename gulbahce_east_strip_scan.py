@@ -1,15 +1,15 @@
 """Gülbahçe doğu kapsaması için alarm-dışı regresyon koruması.
 
 Gülbahçe'nin eski 26.66 E doğu kör şeridi artık ``uzunkuyu`` ana Sentinel
-üretim kutusuna 26.67 E'ye kadar entegredir. Bu yardımcı katman bu nedenle aynı
+üretim kutusuna 26.68 E'ye kadar entegredir. Bu yardımcı katman bu nedenle aynı
 Sentinel görüntülerini ikinci kez indirip analiz etmez. Bunun yerine ana üretim
-bbox'unun Gülbahçe referanslarının 2 km operasyon tamponunu kapsadığını ve 10 m
-sınıfı analiz ölçeğinin korunduğunu ölçer.
+bbox'unun Gülbahçe referanslarının 2 km operasyon tamponunu, dışındaki 150 m
+analiz bağlamını ve 10 m sınıfı analiz ölçeğini koruduğunu ölçer.
 
 Katman alarm veya saha görevi üretmez; ana 250 m² eşiğini ve 150-249 m² MİKRO
-ŞANTİYE karar zincirini değiştirmez. Amaç, eski kör alanın ileride yanlışlıkla
-geri gelmesini görünür bir kalite hatasına dönüştürmek ve gereksiz mükerrer
-Sentinel taramasını ortadan kaldırmaktır.
+ŞANTİYE karar zincirini değiştirmez. Amaç, eski kör alanın veya analiz bağlamı
+rezervinin ileride yanlışlıkla geri gelmesini görünür bir kalite hatasına
+dönüştürmek ve gereksiz mükerrer Sentinel taramasını ortadan kaldırmaktır.
 """
 
 from __future__ import annotations
@@ -29,8 +29,10 @@ REGION_KEY = "uzunkuyu"
 REGION_LABEL = "Gülbahçe doğu kapsama regresyon koruması"
 
 OLD_UZUNKUYU_EAST = 26.6600
-REQUIRED_UZUNKUYU_EAST = 26.6700
-TARGET_RADIUS_M = 2_000
+REQUIRED_UZUNKUYU_EAST = 26.6800
+MONITOR_RADIUS_M = 2_000
+ANALYSIS_CONTEXT_HALO_M = 150
+REQUIRED_CONTEXT_RADIUS_M = MONITOR_RADIUS_M + ANALYSIS_CONTEXT_HALO_M
 
 # Repoda farklı diagnostik amaçlarla kullanılan iki operasyon referansı korunur.
 # Bunlar idari/kadastral mahalle merkezi veya ada/parsel değildir.
@@ -85,20 +87,25 @@ def _build_core():
     for name, (latitude, longitude) in REFERENCE_POINTS.items():
         margins = _edge_margins_m(bbox, latitude, longitude)
         min_margin = min(margins.values())
-        fully_covered = min_margin >= TARGET_RADIUS_M
+        operation_covered = min_margin >= MONITOR_RADIUS_M
+        context_covered = min_margin >= REQUIRED_CONTEXT_RADIUS_M
         refs[name] = {
             "enlem": latitude,
             "boylam": longitude,
             "kenar_mesafeleri_m": margins,
             "en_yakin_kenar_m": min_margin,
-            "2km_operasyon_tamponu_kapsaniyor": fully_covered,
+            "2km_operasyon_tamponu_kapsaniyor": operation_covered,
+            "analiz_baglami_dahil_tam_kapsaniyor": context_covered,
+            "gereken_baglam_yaricapi_m": REQUIRED_CONTEXT_RADIUS_M,
             "not": "Operasyonel referanstır; idari/kadastral sınır veya ada-parsel değildir.",
         }
-        if not fully_covered:
+        if not operation_covered:
             issues.append(f"{name.upper()}_2KM_TAMPONU_TAM_KAPSANMIYOR")
+        if not context_covered:
+            issues.append(f"{name.upper()}_2KM_ARTI_ANALIZ_BAGLAMI_TAM_KAPSANMIYOR")
 
     if bbox[2] < REQUIRED_UZUNKUYU_EAST:
-        issues.append("UZUNKUYU_DOGU_SINIRI_GULBAHCE_ICIN_GERI_CEKILMIS")
+        issues.append("UZUNKUYU_DOGU_ANALIZ_REZERVI_GERI_CEKILMIS")
     if pixel["pixel_edge_max_m"] > 10.5:
         issues.append("ANALIZ_COZUNURLUGU_10M_SINIFINDAN_UZAKLASIYOR")
     if satellite.MIN_HOTSPOT_AREA_M2 != 250:
@@ -108,8 +115,9 @@ def _build_core():
     return {
         "amac": (
             "Gülbahçe'nin daha önce 26.66 E doğusunda kalan kör şeridinin ana "
-            "Uzunkuyu Sentinel üretim kutusuna entegre kalmasını ölçmek. Aynı "
-            "görüntüleri ikinci kez analiz etmez; alarm veya saha görevi üretmez."
+            "Uzunkuyu Sentinel üretim kutusuna entegre kalmasını ve 2 km operasyon "
+            "tamponu dışında 150 m analiz bağlamı korunmasını ölçmek. Aynı görüntüleri "
+            "ikinci kez analiz etmez; alarm veya saha görevi üretmez."
         ),
         "durum": "ok" if integrated else "dikkat_gerekiyor",
         "sorunlar": issues,
@@ -124,6 +132,9 @@ def _build_core():
         "ana_uretim_bbox": bbox,
         "eski_uzunkuyu_dogu_siniri": OLD_UZUNKUYU_EAST,
         "gereken_dogu_sinir": REQUIRED_UZUNKUYU_EAST,
+        "operasyon_tampon_m": MONITOR_RADIUS_M,
+        "analiz_baglam_halo_m": ANALYSIS_CONTEXT_HALO_M,
+        "gereken_baglam_yaricap_m": REQUIRED_CONTEXT_RADIUS_M,
         "dogu_kapsama_entegre": bbox[2] >= REQUIRED_UZUNKUYU_EAST,
         "analiz_grid": pixel,
         "referanslar": refs,
@@ -180,7 +191,19 @@ def _self_check():
 
     for latitude, longitude in REFERENCE_POINTS.values():
         margins = _edge_margins_m(bbox, latitude, longitude)
-        assert min(margins.values()) >= TARGET_RADIUS_M, margins
+        assert min(margins.values()) >= MONITOR_RADIUS_M, margins
+        assert min(margins.values()) >= REQUIRED_CONTEXT_RADIUS_M, margins
+
+    # 26.67 E eski gevşek sınır 2 km operasyon tamponunu neredeyse karşılasa bile
+    # 150 m analiz bağlamını karşılamaz; bu regresyonun yeniden sessizce geçmesine izin verme.
+    narrowed_bbox = list(map(float, bbox))
+    narrowed_bbox[2] = 26.6700
+    assert narrowed_bbox[2] < REQUIRED_UZUNKUYU_EAST
+    assert any(
+        min(_edge_margins_m(narrowed_bbox, latitude, longitude).values())
+        < REQUIRED_CONTEXT_RADIUS_M
+        for latitude, longitude in REFERENCE_POINTS.values()
+    )
 
     print("gulbahce_east_strip_scan self-check: OK")
 
