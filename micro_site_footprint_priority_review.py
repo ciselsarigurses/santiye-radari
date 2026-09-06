@@ -9,8 +9,9 @@ bileşeninde güçlü temporal destek VE bağımsız lokal/kompakt bağlam birli
 Geniş-yüzey riski, önceki zeminin zaten hareketli olması, ana 250 m²+ adaya yakınlık
 ve güncel saha eşleşmesi yükseltmeyi engeller. Yetersiz geçerli 9x9 çevre bağlamı ise
 "lokal değil" diye yorumlanmaz; güçlü temporal sinyal arka planda sonraki açık Sentinel
-sahnesinde yeniden bağlam ölçümü bekler. Böylece eşiği düşürmek yerine ölçülen lokal +
-temporal kanıt birlikte aranır.
+sahnesinde yeniden bağlam ölçümü bekler. Ham 150-249 m² sinyaller footprint zincirine
+geçemese bile koordinatları silinmez; ayrı arka-plan diagnostik kaydı olarak korunur.
+Böylece eşiği düşürmek yerine ölçülen lokal + temporal kanıt birlikte aranır.
 """
 
 from __future__ import annotations
@@ -21,11 +22,13 @@ from pathlib import Path
 
 import satellite
 import micro_site_locality_guard as locality_guard
+import micro_site_shortlist as shortlist_guard
 
 
 FOOTPRINT_FILE = Path(__file__).with_name("micro_site_temporal_footprint_audit.json")
 LOCALITY_FILE = Path(__file__).with_name("micro_site_locality_review.json")
 FIELD_FILE = Path(__file__).with_name("micro_site_field_review.json")
+RAW_MICRO_FILE = Path(__file__).with_name("micro_site_audit.json")
 OUTPUT_FILE = Path(__file__).with_name("micro_site_footprint_priority_review.json")
 
 
@@ -157,7 +160,58 @@ def _classify(footprint, locality, field):
     }
 
 
-def build_review(footprint_payload, locality_payload, field_payload):
+def _raw_background_rows(raw_payload, footprint_rows):
+    """Footprint zincirine geçmeyen ham mikro koordinatlarını görünür arka planda koru."""
+    if not isinstance(raw_payload, dict):
+        return []
+
+    existing_keys = {
+        key
+        for key in (_candidate_key(item) for item in footprint_rows)
+        if key is not None
+    }
+    raw_rows = shortlist_guard._raw_candidates(raw_payload)
+    deduped, _ = shortlist_guard._dedupe(raw_rows)
+
+    background = []
+    for raw in deduped:
+        key = _candidate_key(raw)
+        if key is None or key in existing_keys:
+            continue
+
+        item = dict(raw)
+        item.update(
+            {
+                "karar_sinifi": "HAM_MIKRO_ARKA_PLAN",
+                "karar_nedeni": (
+                    "Ham 150–249 m² kompakt Sentinel sinyali footprint temporal + lokal "
+                    "kanıt zincirine yükselmedi. Negatif sayılmadı; koordinatı silinmeden "
+                    "arka planda izleniyor ve yeni Sentinel sahnesinde tekrar değerlendirilecek."
+                ),
+                "footprint_temporal_destek": None,
+                "footprint_tam_esleme": None,
+                "footprint_gecerli": None,
+                "baglam_gecerli": None,
+                "baglam_gecerli_oran": None,
+                "baglam_yeniden_goruntuleme_onceligi": False,
+                "lokal_kompakt_destek": None,
+                "lokalite_sinifi": "HAM_MIKRO_ARKA_PLAN",
+                "genis_yuzey_riski": False,
+                "onceki_zemin_hareketli_riski": None,
+                "ana_250m_adaya_yakin": None,
+                "guncel_saha_eslesmesi": False,
+                "mikro_footprint_guclu_diagnostik": False,
+                "ham_mikro_arka_plan": True,
+                "alarm": False,
+                "saha_gorevi": False,
+            }
+        )
+        background.append(item)
+
+    return background
+
+
+def build_review(footprint_payload, locality_payload, field_payload, raw_payload=None):
     footprint_rows = _flatten_regions(footprint_payload)
     locality_index = {
         _candidate_key(item): item
@@ -182,6 +236,9 @@ def build_review(footprint_payload, locality_payload, field_payload):
                 item["lokalite_sinifi"] = locality.get("lokalite_sinifi")
         rows.append(item)
 
+    raw_background = _raw_background_rows(raw_payload, footprint_rows)
+    rows.extend(raw_background)
+
     priority = {
         "MIKRO_FOOTPRINT_GUCLU_DIAGNOSTIK": 0,
         "LOKAL_KOMPAKT_VAR_TEMPORAL_YETERSIZ": 1,
@@ -189,6 +246,7 @@ def build_review(footprint_payload, locality_payload, field_payload):
         "FOOTPRINT_TEMPORAL_VAR_LOKAL_DEGIL": 3,
         "BEKLE": 4,
         "GENIS_HAREKET_ARKA_PLAN": 5,
+        "HAM_MIKRO_ARKA_PLAN": 6,
     }
     rows.sort(
         key=lambda item: (
@@ -218,15 +276,23 @@ def build_review(footprint_payload, locality_payload, field_payload):
         "ana_uretim_esigi_m2": footprint_payload.get("ana_uretim_esigi_m2", 250),
         "mikro_aralik_m2": footprint_payload.get("mikro_aralik_m2", [150, 249]),
         "amac": "Sabit 3x3 pencerenin seyreltme riskine karşı gerçek mikro bileşen temporal kanıtını lokal/kompakt bağlamla birlikte değerlendirmek.",
-        "uyari": "Güçlü footprint diagnostik etiketi alarm veya saha görevi değildir; yeni Sentinel sahnesinde tekrar doğrulama ve saha kalibrasyonu beklenir. Geçerli çevre bağlamı yetersiz temporal adaylar negatif kabul edilmez, ayrı yeniden-görüntüleme bekleme sınıfında korunur.",
+        "uyari": (
+            "Güçlü footprint diagnostik etiketi alarm veya saha görevi değildir; yeni "
+            "Sentinel sahnesinde tekrar doğrulama ve saha kalibrasyonu beklenir. Geçerli "
+            "çevre bağlamı yetersiz temporal adaylar negatif kabul edilmez. Footprint "
+            "zincirine geçmeyen ham 150–249 m² sinyaller de koordinatlarıyla arka planda "
+            "korunur; ana 250 m² eşiğini değiştirmez."
+        ),
         "toplam_aday": len(rows),
         "guclu_footprint_diagnostik": len(strong),
         "baglam_yeniden_goruntuleme": len(context_wait),
+        "ham_arka_plan_aday": len(raw_background),
         "gulbahce_toplam": len(gulbahce),
         "gulbahce_guclu": sum(bool(row.get("mikro_footprint_guclu_diagnostik")) for row in gulbahce),
         "karar_sayilari": counts,
         "guclu_adaylar": strong,
         "baglam_bekleyen_adaylar": context_wait,
+        "ham_arka_plan_adaylar": raw_background,
         "adaylar": rows,
     }
 
@@ -269,6 +335,37 @@ def _self_check():
     assert result["karar_sinifi"] == "FOOTPRINT_TEMPORAL_VAR_BAGLAM_YETERSIZ"
     assert result["baglam_yeniden_goruntuleme_onceligi"]
 
+    raw_payload = {
+        "ana_uretim_esigi_m2": 250,
+        "mikro_aralik_m2": [150, 249],
+        "bolgeler": {
+            "cesme": {
+                "adaylar": [
+                    {
+                        "bolge": "cesme",
+                        "yaklasik_mevki": "Test",
+                        "enlem": 38.2,
+                        "boylam": 26.2,
+                        "alan_m2": 200,
+                        "ortalama_rgb_degisim": 0.35,
+                        "ortalama_ndvi_kaybi": 0.25,
+                    }
+                ]
+            }
+        },
+    }
+    review = build_review(
+        {"ana_uretim_esigi_m2": 250, "mikro_aralik_m2": [150, 249], "bolgeler": {}},
+        {"bolgeler": {}},
+        {"inceleme_adaylari": []},
+        raw_payload,
+    )
+    assert review["ham_arka_plan_aday"] == 1
+    assert review["toplam_aday"] == 1
+    assert review["adaylar"][0]["karar_sinifi"] == "HAM_MIKRO_ARKA_PLAN"
+    assert review["adaylar"][0]["alarm"] is False
+    assert review["adaylar"][0]["saha_gorevi"] is False
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -279,17 +376,19 @@ def main():
         print("Footprint mikro öncelik öz testi başarılı; 250 m² eşik/alarm/görev değişmedi.")
         return
 
-    for path in (FOOTPRINT_FILE, LOCALITY_FILE, FIELD_FILE):
+    for path in (FOOTPRINT_FILE, LOCALITY_FILE, FIELD_FILE, RAW_MICRO_FILE):
         if not path.exists():
             raise RuntimeError(f"{path.name} bulunamadı.")
     footprint_payload = json.loads(FOOTPRINT_FILE.read_text(encoding="utf-8"))
     locality_payload = json.loads(LOCALITY_FILE.read_text(encoding="utf-8"))
     field_payload = json.loads(FIELD_FILE.read_text(encoding="utf-8"))
-    result = build_review(footprint_payload, locality_payload, field_payload)
+    raw_payload = json.loads(RAW_MICRO_FILE.read_text(encoding="utf-8"))
+    result = build_review(footprint_payload, locality_payload, field_payload, raw_payload)
     OUTPUT_FILE.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(
         "Footprint mikro öncelik incelemesi: "
         f"toplam={result['toplam_aday']}, güçlü={result['guclu_footprint_diagnostik']}, "
+        f"ham-arka-plan={result['ham_arka_plan_aday']}, "
         f"bağlam-bekleyen={result['baglam_yeniden_goruntuleme']}, "
         f"Gülbahçe={result['gulbahce_toplam']}, Gülbahçe-güçlü={result['gulbahce_guclu']}. "
         "Alarm/görev üretilmedi."
