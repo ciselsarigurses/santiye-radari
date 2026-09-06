@@ -10,6 +10,8 @@ on:
       - "micro_site_audit.json"
       - "micro_site_shortlist.py"
       - "gulbahce_micro_candidate_review.py"
+      - "micro_spectral_borderline_guard.py"
+      - "micro_spectral_borderline_runner.py"
       - ".github/workflows/micro-site-shortlist.yml"
   schedule:
     # workflow_run ana yol; bu takvim olası zincir kesintisine karşı emniyet ağıdır.
@@ -49,18 +51,35 @@ jobs:
       - name: Gülbahçe ham mikro adaylarının eleme nedenini açıkla
         run: python gulbahce_micro_candidate_review.py
 
-      - name: Sonucu yalnız değişiklikte kaydet
+      - name: Spektral sınır MİKRO diagnostik katmanını güncelle
+        run: python micro_spectral_borderline_runner.py
+
+      - name: Sonucu yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
-          if [[ -z "$(git status --porcelain -- micro_site_shortlist.json gulbahce_micro_candidate_review.json)" ]]; then
-            echo "Mikro kısa liste ve Gülbahçe açıklaması değişmedi."
+          report_files="micro_site_shortlist.json gulbahce_micro_candidate_review.json micro_spectral_borderline_review.json"
+
+          # Spektral sınır katmanı her çalışmada üretim saatini yeniler. Aday/kanıt/
+          # kaynak Sentinel bağlamı aynıysa yalnız timestamp yüzünden bot commit'i atma.
+          if git ls-files --error-unmatch micro_spectral_borderline_review.json >/dev/null 2>&1; then
+            meaningful="$(git diff -- micro_spectral_borderline_review.json \
+              | grep -E '^[+-]' \
+              | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
+            if [[ -z "$meaningful" ]]; then
+              echo "Spektral sınır katmanında yalnız çalışma zamanı değişti; dosya geri alınıyor."
+              git checkout -- micro_spectral_borderline_review.json
+            fi
+          fi
+
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+            echo "Mikro kısa liste, Gülbahçe açıklaması ve spektral sınır katmanı değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_shortlist.json gulbahce_micro_candidate_review.json
-          git commit -m "Radar: mikro kısa liste ve Gülbahçe eleme açıklamasını güncelle"
+          git add $report_files
+          git commit -m "Radar: mikro kısa liste, Gülbahçe ve spektral sınır katmanını güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
             git rebase origin/main
