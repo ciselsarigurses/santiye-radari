@@ -9,6 +9,10 @@ on:
   workflow_run:
     workflows: ["Sentinel Kör Alan Denetimi"]
     types: [completed]
+  # Yeni Sentinel sahnesi gelmese bile insan kör-alan devriyesi günlük dönmeli.
+  # Türkiye UTC+3 olduğundan 00:10 UTC = 03:10 Europe/Istanbul.
+  schedule:
+    - cron: "10 0 * * *"
   workflow_dispatch:
 
 permissions:
@@ -34,6 +38,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Günlük genel kör alan rotasyonunu güncelle
+        run: python coverage_patrol_shortlist.py
+
       - name: Gülbahçe kör alan temsil koruması öz testi
         run: python gulbahce_blind_patrol_guard.py --check-only
 
@@ -45,6 +52,7 @@ jobs:
           report_files="latest_report.json SAHA_RAPORU.md"
 
           refresh_guard() {
+            python coverage_patrol_shortlist.py
             python gulbahce_blind_patrol_guard.py --check-only
             python gulbahce_blind_patrol_guard.py
           }
