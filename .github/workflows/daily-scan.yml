@@ -113,6 +113,9 @@ jobs:
       - name: Saha görev ayrıştırma kalite kontrolü
         run: python field_state_quality.py
 
+      - name: 15 Eylül taze kazı önceliği kalite kontrolü
+        run: python postseason_excavation_priority_guard.py --self-check
+
       - name: Uygulama açılış testi
         if: github.event_name == 'push'
         run: |
@@ -194,6 +197,9 @@ jobs:
       - name: Günün ilk üçünde güncel uydu kanıtını öne al
         run: python daily_route_freshness_guard.py
 
+      - name: 15 Eylül sonrası taze kazıyı ana taramada öne al
+        run: python postseason_excavation_priority_guard.py
+
       - name: Tarama ve rapor sonuçlarını kaydet
         run: |
           report_files="santiye.db SAHA_RAPORU.md latest_report.json candidate_capacity_audit.json diagonal_sidecar_audit.json shape_false_positive_audit.json dry_ground_gap_audit.json reflectance_metadata_audit.json"
@@ -248,6 +254,7 @@ jobs:
             python hydrate_persisted_satellite_metadata.py
             python daily_route_shortlist.py
             python daily_route_freshness_guard.py
+            python postseason_excavation_priority_guard.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
               echo "Yeniden üretim sonrası kaydedilecek veri değişikliği yok."
