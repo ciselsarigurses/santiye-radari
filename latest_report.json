@@ -4136,28 +4136,25 @@
     {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Reisdere",
-      "enlem": 38.296181,
-      "boylam": 26.409629,
-      "alan_m2": 800,
+      "mahalle": "Çiftlikköy",
+      "enlem": 38.265881,
+      "boylam": 26.282904,
+      "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 0.4419,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.296181,26.409629",
-      "saha_gorevi": false,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.296181/26.409629",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.265881,26.282904",
+      "saha_gorevi": false
     },
     {
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Gülbahçe",
-      "enlem": 38.352169,
-      "boylam": 26.642976,
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.180588,
+      "boylam": 26.501579,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -4165,17 +4162,12 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.352169,26.642976",
-      "saha_gorevi": false,
-      "gulbahce_operasyonel_kapsama": true,
-      "gulbahce_referans_mesafesi_m": 2156,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.352169/26.642976",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180588,26.501579",
+      "saha_gorevi": false
     }
   ],
-  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-05",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Mevcut bölgesel kör-alan rotasyonu korunur; iki günde bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu Gülbahçe operasyonel referansının 3 km çevresine ayrılır. Aktif radar görevlerinden >=150 m ve diğer kör-alan devriyesinden >=250 m uzakta tutulur. Operasyonel referans idari/kadastral sınır değildir.",
+  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-06",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından Çeşme yerel takvim gününe göre günlük rotasyonla en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur ve güvenli alternatif varsa farklı mahallelerden seçilir.",
   "temporal_kalibrasyon_rotasyonu": {
     "durum": "uygulandi",
     "slot_sayisi": 2,
@@ -4211,23 +4203,13 @@
   "gulbahce_kor_alan_devriye_korumasi": {
     "alarm": false,
     "saha_gorevi": false,
-    "aktif_gun": true,
-    "rotasyon_tarihi": "2026-09-05",
+    "aktif_gun": false,
+    "rotasyon_tarihi": "2026-09-06",
     "operasyonel_yaricap_m": 3000,
     "idari_kadastral_sinir_degildir": true,
-    "uygulandi": true,
-    "uygun_aday_sayisi": 4,
-    "neden": "GULBAHCE_OPERASYONEL_TEMSIL",
-    "secilen": {
-      "enlem": 38.352169,
-      "boylam": 26.642976,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_mesafesi_m": 2156,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.352169/26.642976",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    }
+    "uygulandi": false,
+    "uygun_aday_sayisi": 0,
+    "neden": "GENEL_DOGU_ROTASYONU"
   },
   "temporal_lokal_erken_izleme": [
     {
