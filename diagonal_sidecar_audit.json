@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-06",
-  "olusturma": "2026-09-06 11:15 +03",
+  "olusturma": "2026-09-06 15:16 +03",
   "amac": "Diyagonal 800-10.000 m² yan-kümeleri yalnız yerini aldıkları normal şantiye-ölçeği adayından daha güçlü Sentinel kanıtı taşıyorsa, toplam 24 aday ve ölçek dağılımını değiştirmeden terfi ettirmek; ilk yan-küme için de güvenli karşılaştırma uygulamak ve mevcut sahneyi geriye dönük değiştirmemek.",
   "bolgeler": {
     "cesme": {
@@ -51,7 +51,7 @@
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "durum": "ok",
       "latest_item": "S2A_T35SMC_20260905T090529_L2A",
-      "ham_aday": 3,
+      "ham_aday": 4,
       "guvenli_diyagonal_yan_kume_havuzu": 0,
       "erken_parsel_yan_kume": 0,
       "mevcut_kota": 1,
@@ -60,22 +60,22 @@
       "simulasyon_kota": 2,
       "simulasyon_secili_yan_kume": 0,
       "son_secili_yan_kume": 0,
-      "toplam_aday_mevcut": 3,
-      "toplam_aday_simulasyon": 3,
-      "toplam_aday_son": 3,
+      "toplam_aday_mevcut": 4,
+      "toplam_aday_simulasyon": 4,
+      "toplam_aday_son": 4,
       "olcek_dagilimi_mevcut": {
         "kucuk": 0,
-        "santiye_olcegi": 3,
+        "santiye_olcegi": 4,
         "genis": 0
       },
       "olcek_dagilimi_simulasyon": {
         "kucuk": 0,
-        "santiye_olcegi": 3,
+        "santiye_olcegi": 4,
         "genis": 0
       },
       "olcek_dagilimi_son": {
         "kucuk": 0,
-        "santiye_olcegi": 3,
+        "santiye_olcegi": 4,
         "genis": 0
       },
       "ilk_yan_kume_karari": "ilk_yan_kume_yok",

@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-06",
-  "olusturma": "2026-09-06 11:17 +03",
+  "olusturma": "2026-09-06 15:19 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -106,9 +106,9 @@
       "son_item": "S2A_T35SMC_20260905T090529_L2A",
       "durum": "ok",
       "latest_item": "S2A_T35SMC_20260905T090529_L2A",
-      "ham_gecerli_aday": 3,
+      "ham_gecerli_aday": 4,
       "diyagonal_yan_kume_geometri": 0,
-      "uretim_secimi": 3,
+      "uretim_secimi": 4,
       "ham_sekil_dagilimi": {
         "kucuk_250_800": {
           "toplam": 0,
@@ -116,7 +116,7 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 3,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -133,7 +133,7 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 3,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -145,11 +145,11 @@
       },
       "secili_genis_sekil_isaretli": 0,
       "secili_genis_sekil_ornekleri": [],
-      "nihai_rapor_secimi": 3,
-      "nihai_rapor_eslesen_geometri": 3,
+      "nihai_rapor_secimi": 4,
+      "nihai_rapor_eslesen_geometri": 4,
       "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 3,
+      "nihai_rapor_cozulen_geometri": 4,
       "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
@@ -160,7 +160,7 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 3,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -177,7 +177,7 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 3,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
