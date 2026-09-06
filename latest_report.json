@@ -4208,7 +4208,7 @@
     "operasyonel_yaricap_m": 3000,
     "idari_kadastral_sinir_degildir": true,
     "uygulandi": false,
-    "uygun_aday_sayisi": 0,
+    "uygun_aday_sayisi": 4,
     "neden": "GENEL_DOGU_ROTASYONU"
   },
   "temporal_lokal_erken_izleme": [
