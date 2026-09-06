@@ -52,27 +52,77 @@ jobs:
       - name: Sonucu yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
-          if git ls-files --error-unmatch micro_site_audit.json >/dev/null 2>&1; then
-            meaningful="$(git diff -- micro_site_audit.json \
-              | grep -E '^[+-]' \
-              | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
-            if [[ -z "$meaningful" ]]; then
-              echo "Mikro auditte yalnız çalışma zamanı değişti; bu dosya geri alınıyor."
-              git checkout -- micro_site_audit.json
-            fi
-          fi
+          report_files="micro_site_audit.json gulbahce_micro_blind_capacity.json"
 
-          if [[ -z "$(git status --porcelain -- micro_site_audit.json gulbahce_micro_blind_capacity.json)" ]]; then
+          normalize_micro_timestamp_only() {
+            if git ls-files --error-unmatch micro_site_audit.json >/dev/null 2>&1; then
+              meaningful="$(git diff -- micro_site_audit.json \
+                | grep -E '^[+-]' \
+                | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
+              if [[ -z "$meaningful" ]]; then
+                echo "Mikro auditte yalnız çalışma zamanı değişti; bu dosya geri alınıyor."
+                git checkout -- micro_site_audit.json
+              fi
+            fi
+          }
+
+          regenerate_reports() {
+            echo "Güncel main üzerinde MİKRO ve Gülbahçe körlük diagnostikleri yeniden üretiliyor."
+            python satellite_quality.py
+            python micro_site_audit.py
+            python gulbahce_micro_blind_capacity_guard.py
+            normalize_micro_timestamp_only
+          }
+
+          normalize_micro_timestamp_only
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Mikro diagnostik ve Gülbahçe körlük kapasitesi değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_audit.json gulbahce_micro_blind_capacity.json
-          git commit -m "Radar: mikro diagnostik ve Gülbahçe körlük kapasitesini güncelle"
-          git fetch origin main
-          if ! git merge-base --is-ancestor origin/main HEAD; then
-            git rebase origin/main
-          fi
-          git push origin HEAD:main
+
+          # MİKRO taraması uzun sürerken başka bir bot main'i ilerletebilir. Eski
+          # diagnostik JSON'u yeni main'in üstüne rebase etmek yerine en güncel kod
+          # ve radar verisi üzerinde yeniden hesapla. Böylece 150-249 m² ve Gülbahçe
+          # körlük çıktısı hiçbir zaman eski Sentinel/config durumuyla yayımlanmaz.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+              echo "Main ilerledi; eski MİKRO sonucu taşınmadan güncel veri üzerinde yeniden hesaplanıyor (${attempt}/3)."
+              git reset --hard origin/main
+              regenerate_reports
+            fi
+
+            if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+              echo "En güncel main üzerinde ek MİKRO diagnostik değişikliği gerekmiyor."
+              exit 0
+            fi
+
+            git add $report_files
+            git commit -m "Radar: mikro diagnostik ve Gülbahçe körlük kapasitesini güncelle"
+
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Main commit sırasında yeniden ilerledi; diagnostik güncel main üzerinde tekrar hesaplanıyor (${attempt}/3)."
+              git reset --hard origin/main
+              regenerate_reports
+              continue
+            fi
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push sırasında main ilerlemiş veya geçici GitHub hatası oluşmuş olabilir; güncel main üzerinde tekrar hesaplanıyor (${attempt}/3)."
+            git fetch origin main
+            git reset --hard origin/main
+            regenerate_reports
+            if [[ "$attempt" -lt 3 ]]; then
+              sleep $((attempt * 2))
+            fi
+          done
+
+          echo "MİKRO diagnostik üç güvenli yeniden hesaplama denemesinde kaydedilemedi."
+          exit 1
