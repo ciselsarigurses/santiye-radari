@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "micro_site_audit.py"
+      - "micro_diagonal_recovery.py"
       - "gulbahce_micro_blind_capacity_guard.py"
       - "satellite.py"
       - ".github/workflows/micro-site-audit.yml"
@@ -46,6 +47,12 @@ jobs:
       - name: 150-249 m² mikro diagnostik taramayı çalıştır
         run: python micro_site_audit.py
 
+      - name: Diyagonal MİKRO kurtarma güvenlik öz testini çalıştır
+        run: python micro_diagonal_recovery.py --check-only
+
+      - name: 8-komşuda yutulan güçlü MİKRO parçaları diagnostik havuza geri ekle
+        run: python micro_diagonal_recovery.py --augment-audit
+
       - name: Gülbahçe mikro körlük kapasitesini ayır
         run: python gulbahce_micro_blind_capacity_guard.py
 
@@ -67,16 +74,18 @@ jobs:
           }
 
           regenerate_reports() {
-            echo "Güncel main üzerinde MİKRO ve Gülbahçe körlük diagnostikleri yeniden üretiliyor."
+            echo "Güncel main üzerinde MİKRO, diyagonal kurtarma ve Gülbahçe körlük diagnostikleri yeniden üretiliyor."
             python satellite_quality.py
             python micro_site_audit.py
+            python micro_diagonal_recovery.py --check-only
+            python micro_diagonal_recovery.py --augment-audit
             python gulbahce_micro_blind_capacity_guard.py
             normalize_micro_timestamp_only
           }
 
           normalize_micro_timestamp_only
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "Mikro diagnostik ve Gülbahçe körlük kapasitesi değişmedi."
+            echo "Mikro diagnostik, diyagonal kurtarma ve Gülbahçe körlük kapasitesi değişmedi."
             exit 0
           fi
 
