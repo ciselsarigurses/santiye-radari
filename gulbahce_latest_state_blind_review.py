@@ -166,8 +166,12 @@ def build_review_from_masks(
     if latest_scl.shape != known_land.shape:
         raise ValueError("SCL ve tarihsel yüzey maskesi boyutları uyuşmuyor.")
 
-    latest_quality_invalid = np.isin(latest_scl, satellite.EXCLUDED_SCL_CLASSES)
     latest_water = latest_scl == WATER_CLASS
+    # SCL=6 su üretim maskesinde doğal olarak geçersizdir; fakat güncel-sahne
+    # "kalite körlüğü" değildir. Su geçişini ayrı kıyı/su arka-planında tut.
+    latest_quality_invalid = (
+        np.isin(latest_scl, satellite.EXCLUDED_SCL_CLASSES) & ~latest_water
+    )
 
     # Gerçek güncel-sahne kalite körlüğü yalnız tarihsel olarak kara olduğu
     # bağımsız sahnelerde kanıtlanmış piksellerde hesaplanır.
@@ -329,6 +333,11 @@ def _self_check():
     unknown[0, 3:5] = True
     latest_scl[0, 3:5] = 10
 
+    # Tarihsel kara olup güncel SCL=su görünen pikseller kalite körlüğüne
+    # karışmamalı; kıyı/su arka-planında ayrı sayılmalı.
+    known_land[5, 3:6] = True
+    latest_scl[5, 3:6] = 6
+
     report = {
         "gulbahce_kor_alan_devriye_korumasi": {
             "secilen": {"enlem": 38.324167, "boylam": 26.6425}
@@ -355,6 +364,7 @@ def _self_check():
     assert result["guncel_sahne_kor_250_6500"] == 1
     assert result["tarihsel_su_kalite_kor_150plus"] == 1
     assert result["cozulmemis_yuzey_kalite_kor_150plus"] == 1
+    assert result["tarihsel_kara_guncel_su_150plus"] == 1
     assert result["ikili_sahne_korlugu_250plus_diagnostik"] == 4
     assert all(
         item["yuzey_kaniti"] == "TARIHSEL_KARA"
