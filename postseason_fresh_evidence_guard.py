@@ -119,13 +119,28 @@ def _fresh_with_retention(item, local_day=None):
     return _ORIGINAL_FRESH_CLASSIFIER(item) or _retained_fresh_candidate(item, local_day)
 
 
-def select_shortlist(candidates, limit=base.route.SHORTLIST_LIMIT, local_day=None):
-    """Ana sıralama/bölge dengelemesini aynı sınıflandırıcıya retention ekleyerek kullan."""
+def select_shortlist(
+    candidates,
+    limit=base.route.SHORTLIST_LIMIT,
+    local_day=None,
+    micro_watchlist=None,
+):
+    """Ana sıralamaya retention eklerken MİKRO→ANA devam kanıtını da koru."""
     day = base._local_day(local_day)
+    watchlist = (
+        micro_watchlist
+        if isinstance(micro_watchlist, dict)
+        else base._load_micro_watchlist()
+    )
     original = base._is_fresh_excavation_candidate
     try:
         base._is_fresh_excavation_candidate = lambda item: _fresh_with_retention(item, day)
-        return base.select_postseason_shortlist(candidates, limit=limit, local_day=day)
+        return base.select_postseason_shortlist(
+            candidates,
+            limit=limit,
+            local_day=day,
+            micro_watchlist=watchlist,
+        )
     finally:
         base._is_fresh_excavation_candidate = original
 
@@ -245,19 +260,55 @@ def _self_check():
         ilk_gorulme="2026-09-10",
         uydu_kanit_yasi_gun=6,
     )
-    live = _candidate("LIVE", yeni_goruntu=True, ilk_gorulme="2026-09-16", uydu_kanit_yasi_gun=0)
+    live = _candidate(
+        "LIVE",
+        yeni_goruntu=True,
+        ilk_gorulme="2026-09-16",
+        son_tarih="16.09.2026",
+        uydu_kanit_yasi_gun=0,
+    )
     backlog = _candidate(
         "BACKLOG",
         ilk_gorulme="2026-09-01",
         uydu_kanit_yasi_gun=15,
         tarihsel_esleme_mesafe_m=4.0,
     )
-    selected = select_shortlist([backlog, retained, live, repeat], limit=3, local_day=day)
+    micro_history = {
+        "alarm": False,
+        "saha_gorevi": False,
+        "ana_uretim_esigi_m2": 250,
+        "mikro_aralik_m2": [150, 249],
+        "adaylar": [
+            {
+                "mikro_iz_id": "MRETENTION_PRECURSOR",
+                "alarm": False,
+                "saha_gorevi": False,
+                "enlem": 38.3329,
+                "boylam": 26.6456,
+                "ilk_enlem": 38.3329,
+                "ilk_boylam": 26.6456,
+                "alan_m2": 200,
+                "son_guclu_gorulme_tarihi": "14.09.2026",
+                "son_guclu_sentinel_item": "SCENE_MICRO_OLD",
+                "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+            }
+        ],
+    }
+    selected = select_shortlist(
+        [backlog, retained, live, repeat],
+        limit=3,
+        local_day=day,
+        micro_watchlist=micro_history,
+    )
     ids = [item["gorev_id"] for item in selected]
     assert ids[0] == "REPEAT", ids
     assert "LIVE" in ids[:3], ids
     assert "RETAINED" in ids[:3], ids
     assert "BACKLOG" not in ids[:3], ids
+    live_row = next(item for item in selected if item["gorev_id"] == "LIVE")
+    retained_row = next(item for item in selected if item["gorev_id"] == "RETAINED")
+    assert live_row.get("mikro_oncul_iz_eslesmesi") is True, live_row
+    assert retained_row.get("mikro_oncul_iz_eslesmesi") is True, retained_row
 
     # Ana eşikler sabit; Mikro doğrudan saha görevine çıkamaz.
     assert base.MAIN_ALARM_MIN_M2 == 250
