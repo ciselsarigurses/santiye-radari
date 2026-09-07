@@ -1,0 +1,42 @@
+{
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_santiye_araligi_m2": [
+    150,
+    249
+  ],
+  "durum": "ok",
+  "amac": "En yeni Sentinel sahnesinde kalite nedeniyle görünmeyen, tarihsel/yedek sahne ile eski yüzeyi bilinse bile yeni hafriyat başlangıcını saklayabilecek Gülbahçe kör ceplerinin mevcut insan kör-alan devriyesiyle örtüşmesini ölçmek.",
+  "kaynak_son_tarih": "05.09.2026",
+  "kaynak_son_item": "S2A_T35SMC_20260905T090529_L2A",
+  "coverage_son_tarih": "05.09.2026",
+  "coverage_son_item": "S2A_T35SMC_20260905T090529_L2A",
+  "ayni_sentinel_sahnesi": true,
+  "guncel_sahne_kor_250_6500": 2,
+  "secilen_devriye_eslesen_kor_kume": 0,
+  "secilen_devriye_guncel_korlugu_kapsiyor": false,
+  "guncel_sahne_kor_kumeleri": [
+    {
+      "enlem": 38.34231,
+      "boylam": 26.642621,
+      "alan_m2": 400,
+      "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": 2559,
+      "secilen_devriye_kapsiyor": false
+    },
+    {
+      "enlem": 38.341406,
+      "boylam": 26.643308,
+      "alan_m2": 1200,
+      "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": 2444,
+      "secilen_devriye_kapsiyor": false
+    }
+  ],
+  "yorum": "Bu sonuç alarm/görev değildir. Yedek sahne eski yüzey bilgisini geri kazansa da en yeni sahne geçersizse yeni kazının mevcut durumu doğrudan görülemez. Veri tarihleri uyuşmuyorsa rota kararı verilmez; yalnız diagnostik bekletilir."
+}
