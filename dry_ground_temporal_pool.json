@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-06",
-  "olusturma": "2026-09-06 22:07 +0300",
+  "rapor_tarihi": "2026-09-07",
+  "olusturma": "2026-09-07 11:24 +0300",
   "amac": "Mevcut alarm üretim maskesinin dışında kalan düşük-NDVI 250-2.000 m² kuru zemin spektral değişimlerini BSI ile ölçmek; ayrıca kompaktlık, uzun/kısa oranı, 120 m yerel kümelenme ve ana Sentinel kıyı tamponu riskini saha kalibrasyonu için kaydetmek; alarm/görev üretmez.",
   "esikler": {
     "alan_m2": [
@@ -174,6 +174,74 @@
           "lineer_geometri_riski": false,
           "yakindaki_kuru_degisim_120m": 1,
           "izole_saha_benzeri": false
+        },
+        {
+          "mahalle": "Alaçatı",
+          "enlem": 38.288855,
+          "boylam": 26.382384,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.1102,
+          "ortalama_rgb_farki": 0.1429,
+          "kiyi_su_tamponu_riski": false,
+          "kiyi_su_tamponu_orani": 0.0,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Çeşme",
+          "enlem": 38.329105,
+          "boylam": 26.306715,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.1084,
+          "ortalama_rgb_farki": 0.1429,
+          "kiyi_su_tamponu_riski": false,
+          "kiyi_su_tamponu_orani": 0.0,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Alaçatı",
+          "enlem": 38.278815,
+          "boylam": 26.401616,
+          "alan_m2": 400,
+          "ortalama_bsi_degisim": 0.1083,
+          "ortalama_rgb_farki": 0.1693,
+          "kiyi_su_tamponu_riski": false,
+          "kiyi_su_tamponu_orani": 0.0,
+          "uzun_kisa_orani": 1.5,
+          "kutu_doluluk_orani": 0.667,
+          "kompaktlik": 0.503,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
+        },
+        {
+          "mahalle": "Musalla",
+          "enlem": 38.29591,
+          "boylam": 26.296985,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.1052,
+          "ortalama_rgb_farki": 0.1582,
+          "kiyi_su_tamponu_riski": false,
+          "kiyi_su_tamponu_orani": 0.0,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": true
         }
       ],
       "saha_benzeri_ornekler": [
@@ -308,6 +376,57 @@
           "uzun_kisa_orani": 1.0,
           "kutu_doluluk_orani": 0.444,
           "kompaktlik": 0.349,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": false
+        },
+        {
+          "mahalle": "Dalyan",
+          "enlem": 38.345385,
+          "boylam": 26.28485,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.1475,
+          "ortalama_rgb_farki": 0.1381,
+          "kiyi_su_tamponu_riski": true,
+          "kiyi_su_tamponu_orani": 1.0,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": false
+        },
+        {
+          "mahalle": "Musalla",
+          "enlem": 38.296272,
+          "boylam": 26.280386,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.1394,
+          "ortalama_rgb_farki": 0.1773,
+          "kiyi_su_tamponu_riski": true,
+          "kiyi_su_tamponu_orani": 1.0,
+          "uzun_kisa_orani": 3.0,
+          "kutu_doluluk_orani": 1.0,
+          "kompaktlik": 0.589,
+          "saha_benzeri_geometri": true,
+          "lineer_geometri_riski": false,
+          "yakindaki_kuru_degisim_120m": 0,
+          "izole_saha_benzeri": false
+        },
+        {
+          "mahalle": "Musalla",
+          "enlem": 38.320874,
+          "boylam": 26.300534,
+          "alan_m2": 300,
+          "ortalama_bsi_degisim": 0.1197,
+          "ortalama_rgb_farki": 0.1495,
+          "kiyi_su_tamponu_riski": true,
+          "kiyi_su_tamponu_orani": 0.667,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "kompaktlik": 0.589,
           "saha_benzeri_geometri": true,
           "lineer_geometri_riski": false,
           "yakindaki_kuru_degisim_120m": 0,
@@ -604,5 +723,24 @@
         }
       ]
     }
+  },
+  "zaman_serisi_aday_havuzu": {
+    "durum": "genisletildi_ve_mahalle_dengeli",
+    "tarama_limiti": 96,
+    "ornek_limiti": 48,
+    "guclu_cekirdek": 12,
+    "kanonik_aday_sayilari": {
+      "cesme": 8,
+      "uzunkuyu": 8
+    },
+    "genis_aday_sayilari": {
+      "cesme": 11,
+      "uzunkuyu": 8
+    },
+    "temsil_edilen_mahalle_sayilari": {
+      "cesme": 5,
+      "uzunkuyu": 2
+    },
+    "not": "Yalnız diagnostik zaman-serisi ve saha kalibrasyonu içindir; alarm/görev/eşik üretmez. En güçlü çekirdek korunur, kalan slotlar mümkün olduğunda farklı mahallelere yayılır."
   }
 }
