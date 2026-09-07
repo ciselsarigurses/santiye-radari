@@ -37,6 +37,10 @@ from coverage_patrol_shortlist import (
 AUDIT_JSON = Path(__file__).with_name("coverage_blind_area_audit.json")
 GULBAHCE_SCAN_JSON = Path(__file__).with_name("gulbahce_east_strip_scan.json")
 
+# Gülbahçe'nin diğer radar diagnostiklerinde kullanılan operasyon çekirdeği 2 km'dir.
+# Kör-alan devriyesi bu çekirdeği öncelemeli; ancak çekirdekte güvenli kör hücre yoksa
+# daha önceki 3 km'lik çevre kapsamasını yedek olarak korur.
+GULBAHCE_CORE_RADIUS_M = 2000
 GULBAHCE_OPERATION_RADIUS_M = 3000
 DUTY_PERIOD_DAYS = 2
 
@@ -114,10 +118,14 @@ def _eligible_gulbahce_candidates(
         candidate["saha_gorevi"] = False
         candidate["gulbahce_operasyonel_kapsama"] = True
         candidate["gulbahce_referans_mesafesi_m"] = int(round(distance_to_ref))
+        candidate["gulbahce_cekirdek_operasyon"] = (
+            distance_to_ref <= GULBAHCE_CORE_RADIUS_M
+        )
         eligible.append(candidate)
 
     eligible.sort(
         key=lambda item: (
+            0 if item.get("gulbahce_cekirdek_operasyon") else 1,
             0 if item.get("neden") == "BULUT_GOLGE_KALICI" else 1,
             int(item.get("alan_m2") or 0),
             int(item.get("gulbahce_referans_mesafesi_m") or 0),
@@ -159,16 +167,25 @@ def apply_gulbahce_guard(
         scan_payload,
         other,
     )
+    core_eligible = [
+        item for item in eligible if item.get("gulbahce_cekirdek_operasyon") is True
+    ]
+    # 2 km çekirdekte güvenli aday varsa duty slotu burada kalır. Çekirdek boşsa,
+    # önceki 3 km kapsama davranışı yedek olarak sürer; böylece kapsama daralmaz.
+    selection_pool = core_eligible or eligible
 
     metadata = {
         "alarm": False,
         "saha_gorevi": False,
         "aktif_gun": duty,
         "rotasyon_tarihi": day.isoformat(),
-        "operasyonel_yaricap_m": GULBAHCE_OPERATION_RADIUS_M,
+        "operasyonel_yaricap_m": GULBAHCE_CORE_RADIUS_M,
+        "yedek_patrol_yaricap_m": GULBAHCE_OPERATION_RADIUS_M,
         "idari_kadastral_sinir_degildir": True,
         "uygulandi": False,
         "uygun_aday_sayisi": len(eligible),
+        "cekirdek_uygun_aday_sayisi": len(core_eligible),
+        "yedek_uygun_aday_sayisi": len(eligible) - len(core_eligible),
         "neden": "GENEL_DOGU_ROTASYONU",
     }
 
@@ -179,23 +196,28 @@ def apply_gulbahce_guard(
 
     if east_key is None:
         metadata["neden"] = "DOGU_BOLGESI_BULUNAMADI"
-    elif not eligible:
+    elif not selection_pool:
         metadata["neden"] = "UYGUN_GULBAHCE_KOR_HUCRESI_YOK"
     else:
         # Duty günleri iki günde bir geldiği için // DUTY_PERIOD_DAYS kullanmak,
         # çift sayıda aday olduğunda listenin yalnız yarısında dönüp durmayı önler.
-        offset = (day.toordinal() // DUTY_PERIOD_DAYS) % len(eligible)
-        chosen = dict(eligible[offset])
+        offset = (day.toordinal() // DUTY_PERIOD_DAYS) % len(selection_pool)
+        chosen = dict(selection_pool[offset])
         selected = other + [chosen]
         report["kor_alan_saha_devriyesi"] = selected[:TOTAL_LIMIT]
         metadata["uygulandi"] = True
-        metadata["neden"] = "GULBAHCE_OPERASYONEL_TEMSIL"
+        metadata["neden"] = (
+            "GULBAHCE_CEKIRDEK_OPERASYONEL_TEMSIL"
+            if chosen.get("gulbahce_cekirdek_operasyon")
+            else "GULBAHCE_YEDEK_OPERASYONEL_TEMSIL"
+        )
         metadata["secilen"] = {
             "enlem": chosen["enlem"],
             "boylam": chosen["boylam"],
             "alan_m2": chosen["alan_m2"],
             "neden": chosen["neden"],
             "referans_mesafesi_m": chosen["gulbahce_referans_mesafesi_m"],
+            "cekirdek_operasyon": bool(chosen.get("gulbahce_cekirdek_operasyon")),
         }
 
     if not metadata["uygulandi"]:
@@ -204,10 +226,11 @@ def apply_gulbahce_guard(
     report["gulbahce_kor_alan_devriye_korumasi"] = metadata
     report["kor_alan_saha_devriyesi_notu"] = (
         "Alarm/görev değildir. Mevcut bölgesel kör-alan rotasyonu korunur; iki günde "
-        "bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu Gülbahçe "
-        "operasyonel referansının 3 km çevresine ayrılır. Aktif radar görevlerinden "
-        ">=150 m ve diğer kör-alan devriyesinden >=250 m uzakta tutulur. Operasyonel "
-        "referans idari/kadastral sınır değildir."
+        "bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu önce "
+        "Gülbahçe operasyonel referansının 2 km çekirdeğine ayrılır. Çekirdekte "
+        "güvenli aday yoksa 3 km çevre yalnız yedek kapsama olarak kullanılabilir. "
+        "Aktif radar görevlerinden >=150 m ve diğer kör-alan devriyesinden >=250 m "
+        "uzakta tutulur. Operasyonel referans idari/kadastral sınır değildir."
     )
     return report
 
@@ -273,6 +296,15 @@ def _self_check():
                         "alan_m2": 500,
                         "neden": "KARISIK_GECERSIZLIK",
                     },
+                    {
+                        # Mevcut gerçek örneğe yakın: 2 km çekirdeğin dışında ama
+                        # 3 km yedek kapsama içinde. Çekirdek varken seçilmemeli.
+                        "mahalle_yaklasik": "Gülbahçe çevresi",
+                        "enlem": 38.329557,
+                        "boylam": 26.674905,
+                        "alan_m2": 400,
+                        "neden": "BULUT_GOLGE_KALICI",
+                    },
                 ],
             },
         }
@@ -314,7 +346,9 @@ def _self_check():
     meta = guarded["gulbahce_kor_alan_devriye_korumasi"]
     assert meta["aktif_gun"] is True
     assert meta["uygulandi"] is True
-    assert meta["uygun_aday_sayisi"] == 2
+    assert meta["uygun_aday_sayisi"] == 3
+    assert meta["cekirdek_uygun_aday_sayisi"] == 2
+    assert meta["yedek_uygun_aday_sayisi"] == 1
     assert len(guarded["kor_alan_saha_devriyesi"]) <= TOTAL_LIMIT
     east = [
         item for item in guarded["kor_alan_saha_devriyesi"]
@@ -322,7 +356,9 @@ def _self_check():
     ]
     assert len(east) == 1
     assert east[0]["gulbahce_operasyonel_kapsama"] is True
+    assert east[0]["gulbahce_cekirdek_operasyon"] is True
     assert east[0]["alarm"] is False and east[0]["saha_gorevi"] is False
+    assert meta["secilen"]["referans_mesafesi_m"] <= GULBAHCE_CORE_RADIUS_M
 
     alternate = apply_gulbahce_guard(
         audit,
@@ -332,8 +368,36 @@ def _self_check():
     )
     alternate_meta = alternate["gulbahce_kor_alan_devriye_korumasi"]
     assert alternate_meta["aktif_gun"] is False
-    assert alternate_meta["uygun_aday_sayisi"] == 2
+    assert alternate_meta["uygun_aday_sayisi"] == 3
+    assert alternate_meta["cekirdek_uygun_aday_sayisi"] == 2
     assert alternate["kor_alan_saha_devriyesi"][1]["mahalle"] == "Ildır"
+
+    # Çekirdekteki iki nokta aktif görevlerle çakışırsa 2-3 km yedek adayın
+    # tamamen kaybolmadığını doğrula.
+    core_blocked_report = dict(report)
+    core_blocked_report["saha_adaylari"] = [
+        {
+            "saha_durumu": "KONTROLE_GIT",
+            "enlem": 38.3330,
+            "boylam": 26.6460,
+        },
+        {
+            "saha_durumu": "KONTROLE_GIT",
+            "enlem": 38.3400,
+            "boylam": 26.6500,
+        },
+    ]
+    fallback = apply_gulbahce_guard(
+        audit,
+        core_blocked_report,
+        scan,
+        rotation_day=duty_day,
+    )
+    fallback_meta = fallback["gulbahce_kor_alan_devriye_korumasi"]
+    assert fallback_meta["uygulandi"] is True
+    assert fallback_meta["cekirdek_uygun_aday_sayisi"] == 0
+    assert fallback_meta["secilen"]["cekirdek_operasyon"] is False
+    assert fallback_meta["secilen"]["referans_mesafesi_m"] > GULBAHCE_CORE_RADIUS_M
 
     blocked_report = dict(report)
     blocked_report["saha_adaylari"] = [
@@ -346,6 +410,11 @@ def _self_check():
             "saha_durumu": "KONTROLE_GIT",
             "enlem": 38.3400,
             "boylam": 26.6500,
+        },
+        {
+            "saha_durumu": "KONTROLE_GIT",
+            "enlem": 38.329557,
+            "boylam": 26.674905,
         },
     ]
     blocked = apply_gulbahce_guard(
