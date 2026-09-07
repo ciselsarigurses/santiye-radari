@@ -4100,26 +4100,11 @@
   "temporal_lokal_erken_izleme_notu": "15 Eylül öncesinde yalnız kalibrasyon/izleme; alarm veya saha görevi yok.",
   "kor_alan_saha_devriyesi": [
     {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Gülbahçe",
-      "enlem": 38.352169,
-      "boylam": 26.642964,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.1732,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.352169,26.642964"
-    },
-    {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Ildır",
-      "enlem": 38.401554,
-      "boylam": 26.495028,
+      "mahalle": "Şifne",
+      "enlem": 38.335979,
+      "boylam": 26.420161,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -4127,11 +4112,31 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.401554,26.495028"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.335979,26.420161",
+      "saha_gorevi": false
+    },
+    {
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.324853,
+      "boylam": 26.661854,
+      "alan_m2": 400,
+      "neden": "KARISIK_GECERSIZLIK",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.1732,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.324853,26.661854",
+      "saha_gorevi": false,
+      "gulbahce_operasyonel_kapsama": true,
+      "gulbahce_referans_mesafesi_m": 1671,
+      "gulbahce_cekirdek_operasyon": true
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-07",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Mevcut bölgesel kör-alan rotasyonu korunur; iki günde bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu önce Gülbahçe operasyonel referansının 2 km çekirdeğine ayrılır. Çekirdekte güvenli aday yoksa 3 km çevre yalnız yedek kapsama olarak kullanılabilir. Aktif radar görevlerinden >=150 m ve diğer kör-alan devriyesinden >=250 m uzakta tutulur. Operasyonel referans idari/kadastral sınır değildir.",
   "temporal_kalibrasyon_rotasyonu": {
     "durum": "uygulandi",
     "slot_sayisi": 2,
@@ -4160,5 +4165,27 @@
     "durum": "uygulandi",
     "tarih": "2026-09-07",
     "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
+  },
+  "gulbahce_kor_alan_devriye_korumasi": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "aktif_gun": true,
+    "rotasyon_tarihi": "2026-09-07",
+    "operasyonel_yaricap_m": 2000,
+    "yedek_patrol_yaricap_m": 3000,
+    "idari_kadastral_sinir_degildir": true,
+    "uygulandi": true,
+    "uygun_aday_sayisi": 4,
+    "cekirdek_uygun_aday_sayisi": 2,
+    "yedek_uygun_aday_sayisi": 2,
+    "neden": "GULBAHCE_CEKIRDEK_OPERASYONEL_TEMSIL",
+    "secilen": {
+      "enlem": 38.324853,
+      "boylam": 26.661854,
+      "alan_m2": 400,
+      "neden": "KARISIK_GECERSIZLIK",
+      "referans_mesafesi_m": 1671,
+      "cekirdek_operasyon": true
+    }
   }
 }
