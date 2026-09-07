@@ -80,13 +80,26 @@ def _raw_candidates(payload):
     return rows
 
 
+def _same_source_day(first, second):
+    """Farklı Sentinel günlerindeki yakın sinyalleri aynı kayıt gibi yutma."""
+    first_date = str(first.get("mikro_kaynak_sentinel_tarihi") or "").strip()
+    second_date = str(second.get("mikro_kaynak_sentinel_tarihi") or "").strip()
+    # Eski/sentetik payload'da tarih yoksa geriye dönük tekilleştirme davranışı korunur.
+    return not first_date or not second_date or first_date == second_date
+
+
 def _dedupe(rows):
     """Örtüşen Sentinel kutularındaki aynı fiziksel mikro sinyali tekilleştir."""
     kept = []
     duplicate_count = 0
     for row in sorted(rows, key=_strength, reverse=True):
         duplicate = next(
-            (existing for existing in kept if _distance_m(row, existing) <= DEDUPE_RADIUS_M),
+            (
+                existing
+                for existing in kept
+                if _distance_m(row, existing) <= DEDUPE_RADIUS_M
+                and _same_source_day(row, existing)
+            ),
             None,
         )
         if duplicate is not None:
@@ -307,6 +320,44 @@ def _self_check():
     assert deduped[0]["ortusme_tekrari"] is True
     assert deduped[0]["mikro_kaynak_sentinel_tarihi"] == "03.09.2026"
     assert _current_source_dates(synthetic) == {"03.09.2026"}
+
+    different_day_overlap = {
+        "bolgeler": {
+            "cesme": {
+                "durum": "ok",
+                "son_tarih": "05.09.2026",
+                "adaylar": [
+                    {
+                        "bolge": "cesme", "enlem": 38.3, "boylam": 26.4,
+                        "alan_m2": 200, "ortalama_rgb_degisim": 0.60,
+                        "ortalama_ndvi_kaybi": 0.40,
+                        "ortalama_parlaklik_artisi": 0.30,
+                    }
+                ],
+            },
+            "uzunkuyu": {
+                "durum": "ok",
+                "son_tarih": "07.09.2026",
+                "adaylar": [
+                    {
+                        "bolge": "uzunkuyu", "enlem": 38.30002, "boylam": 26.40002,
+                        "alan_m2": 200, "ortalama_rgb_degisim": 0.30,
+                        "ortalama_ndvi_kaybi": 0.25,
+                        "ortalama_parlaklik_artisi": 0.20,
+                    }
+                ],
+            },
+        }
+    }
+    different_day_rows = _raw_candidates(different_day_overlap)
+    different_day_deduped, different_day_duplicates = _dedupe(different_day_rows)
+    assert len(different_day_deduped) == 2 and different_day_duplicates == 0, (
+        "Aynı noktadaki farklı Sentinel günleri tekilleştirilmemeli; yeni sahne daha "
+        "güçlü eski spektral iz tarafından yutulmamalıdır."
+    )
+    assert {
+        row.get("mikro_kaynak_sentinel_tarihi") for row in different_day_deduped
+    } == {"05.09.2026", "07.09.2026"}
 
     references = [
         {"alan_m2": 400, "son_tarih": "03.09.2026"},
