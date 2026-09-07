@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-06 15:39 +0300",
+  "olusturma": "2026-09-07 04:05 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -90,7 +90,8 @@
           "harita": "https://www.google.com/maps/dir/?api=1&destination=38.268052,26.315530",
           "neden": "150-249 m² bandında, en az iki bitişik yaklaşık 10 m pikselde ana küçük-saha yolu kadar güçlü çoklu-spektral değişim ve kompakt geometri görüldü. Tek başına saha ziyareti nedeni değildir."
         }
-      ]
+      ],
+      "diyagonal_mikro_kurtarma_sayisi": 0
     },
     "uzunkuyu": {
       "durum": "ok",
@@ -156,8 +157,14 @@
             "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL"
           }
         ],
-        "yorum": "Gülbahçe 2 km penceresinde mikro aday sayısı ile Sentinel kalite körlüğü ayrı ölçülür. Kör kümeler alarm/görev değildir ve silinmez; sonraki açık sahnelerde tekrar izlenir. Su/kıyı pikselleri kalite körlüğü sayılmaz."
-      }
+        "yorum": "Gülbahçe 2 km penceresinde mikro aday sayısı ile Sentinel kalite körlüğü ayrı ölçülür. Kör kümeler alarm/görev değildir ve silinmez; sonraki açık sahnelerde tekrar izlenir. Su/kıyı pikselleri kalite körlüğü sayılmaz.",
+        "diyagonal_mikro_kurtarma_2km": 0
+      },
+      "diyagonal_mikro_kurtarma_sayisi": 0
     }
-  }
+  },
+  "diyagonal_mikro_kurtarma_toplam": 0,
+  "diyagonal_mikro_kurtarma_alarm": false,
+  "diyagonal_mikro_kurtarma_saha_gorevi": false,
+  "diyagonal_mikro_kurtarma_not": "Yalnız güçlü MİKRO maskesinde, köşe teması yüzünden 8-komşu 250+ ebeveyne yutulan kompakt 150-249 m² 4-komşu parçalar diagnostik olarak geri kazanılır. Ana 250 m² üretim alarmı ve 8-komşu üretim geometrisi değişmez."
 }
