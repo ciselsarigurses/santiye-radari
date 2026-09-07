@@ -243,7 +243,7 @@
     },
     {
       "oncelik": "GECİKEN",
-      "mahalle": "Uzunkuyu",
+      "mahalle": "Gülbahçe",
       "enlem": 38.33219,
       "boylam": 26.652385,
       "alan_m2": 0,
@@ -269,11 +269,13 @@
       "proje": null,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332190/26.652385",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "mahalle_kaynagi": "KOORDINAT_YAKIN_MERKEZ",
+      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir."
     },
     {
       "oncelik": "GECİKEN",
-      "mahalle": "Uzunkuyu",
+      "mahalle": "Gülbahçe",
       "enlem": 38.334541,
       "boylam": 26.651698,
       "alan_m2": 0,
@@ -299,11 +301,13 @@
       "proje": null,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334541/26.651698",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "mahalle_kaynagi": "KOORDINAT_YAKIN_MERKEZ",
+      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir."
     },
     {
       "oncelik": "GECİKEN",
-      "mahalle": "Uzunkuyu",
+      "mahalle": "Gülbahçe",
       "enlem": 38.333275,
       "boylam": 26.652271,
       "alan_m2": 0,
@@ -329,7 +333,9 @@
       "proje": null,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.333275/26.652271",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "mahalle_kaynagi": "KOORDINAT_YAKIN_MERKEZ",
+      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir."
     },
     {
       "oncelik": "GECİKEN",
@@ -465,7 +471,7 @@
     },
     {
       "oncelik": "GECİKEN",
-      "mahalle": "Uzunkuyu",
+      "mahalle": "Gülbahçe",
       "enlem": 38.313469,
       "boylam": 26.638073,
       "alan_m2": 0,
@@ -491,7 +497,9 @@
       "proje": null,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313469/26.638073",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "mahalle_kaynagi": "KOORDINAT_YAKIN_MERKEZ",
+      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir."
     },
     {
       "oncelik": "GECİKEN",
