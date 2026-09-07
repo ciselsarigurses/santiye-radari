@@ -6,8 +6,9 @@ parçacıklar olarak çok sayıda mikro aday üretebilir. Bu koruma:
 
 1) yaklaşık 30 m içinde bölge-örtüşmesi tekrarlarını tekilleştirir,
 2) 250 m çevresinde yoğun mikro kümelerini geniş-yüzey riski sayar,
-3) yalnız aynı güncel Sentinel karşılaştırmasının 250 m²+ üretim adayına 150 m'den
-   yakın mikro parçayı ayrı fırsat saymaz; eski saha backlog'u mikro sinyali bastıramaz,
+3) her mikro adayı yalnız kendi bölgesinin aynı Sentinel son-tarihindeki 250 m²+
+   üretim adaylarıyla karşılaştırır; eski veya diğer bölgenin farklı tarihli kanıtı
+   mikro sinyali bastıramaz,
 4) yalnız daha izole ve spektral olarak güçlü adayları alarm-dışı kısa listeye alır.
 
 Alarm, saha görevi ve ana 250 m² üretim eşiği değişmez.
@@ -67,11 +68,14 @@ def _raw_candidates(payload):
     for region_key, region in (payload.get("bolgeler") or {}).items():
         if not isinstance(region, dict):
             continue
+        region_date = str(region.get("son_tarih") or "").strip()
         for item in region.get("adaylar") or []:
             if not isinstance(item, dict):
                 continue
             row = dict(item)
             row.setdefault("bolge", region_key)
+            if region_date:
+                row.setdefault("mikro_kaynak_sentinel_tarihi", region_date)
             rows.append(row)
     return rows
 
@@ -123,12 +127,13 @@ def _current_source_dates(raw_payload):
 
 
 def _filter_current_production(rows, current_dates):
-    """Yalnız aynı güncel Sentinel kanıtındaki gerçek 250+ adayları yakınlık referansı yap.
+    """MİKRO bölgelerinde kullanılan güncel tarihlerdeki gerçek 250+ adayları seç.
 
-    latest_report.json saha backlog'unu da taşır. Güncel mikro sinyali, günler önceki
-    açık bir saha görevinin 150 m yakınına düştü diye arka plana atmak yanlış-negatif
-    üretebilir. Bu yakınlık filtresi yalnız mikro analizinin son Sentinel tarihleriyle
-    eşleşen ve alanı gerçekten 250 m²+ olan uydu adaylarını kullanır.
+    Bu ilk kaba bağlam filtresidir. Aday bazındaki yakınlık hesabı ayrıca her MİKRO
+    kaydını yalnız kendi ``mikro_kaynak_sentinel_tarihi`` ile eşleşen üretim
+    adaylarıyla karşılaştırır. Böylece farklı bölgeler yeni Sentinel sahnesine farklı
+    günlerde geçtiğinde bir bölgenin eski 250+ adayı diğerinin yeni MİKRO sinyalini
+    yanlışlıkla bastıramaz.
     """
     dates = {str(value).strip() for value in current_dates if str(value).strip()}
     if not dates:
@@ -138,6 +143,18 @@ def _filter_current_production(rows, current_dates):
         if isinstance(row, dict)
         and _number(row.get("alan_m2"), 0.0) >= 250
         and str(row.get("son_tarih") or "").strip() in dates
+    ]
+
+
+def _production_for_micro_row(row, production):
+    """Bir MİKRO adayı için yalnız aynı kaynak Sentinel günündeki 250+ adayları döndür."""
+    source_date = str(row.get("mikro_kaynak_sentinel_tarihi") or "").strip()
+    if not source_date:
+        # Eski/sentetik girdilerde tarih yoksa mevcut davranışı koru.
+        return production
+    return [
+        item for item in production
+        if str(item.get("son_tarih") or "").strip() == source_date
     ]
 
 
@@ -154,11 +171,15 @@ def _annotate(rows, production):
         neighbor_count = sum(
             _distance_m(row, other) <= CLUSTER_RADIUS_M for other in others
         )
-        production_distance = _nearest_distance(row, production)
+        row_production = _production_for_micro_row(row, production)
+        production_distance = _nearest_distance(row, row_production)
         updated = dict(row)
         updated["250m_mikro_komsu"] = int(neighbor_count)
         updated["genis_hareket_kumesi_riski"] = bool(
             neighbor_count > MAX_CLUSTER_NEIGHBORS
+        )
+        updated["250plus_yakinlik_kaynak_tarihi"] = (
+            str(updated.get("mikro_kaynak_sentinel_tarihi") or "").strip() or None
         )
         updated["en_yakin_250plus_m"] = (
             round(production_distance) if production_distance is not None else None
@@ -238,10 +259,11 @@ def build_shortlist(raw_payload, latest_report_exists=True):
         "arka_plan_aday_sayisi": len(background),
         "not": (
             "Kısa liste de alarm/görev değildir. Yalnız 150-249 m² ham mikro havuzdaki "
-            "örtüşme tekrarları, geniş yüzey kümeleri ve aynı güncel Sentinel "
-            "karşılaştırmasındaki 250+ aday parçaları ayıklanmıştır. Eski saha backlog'u "
-            "mikro sinyali bastırmaz. Saha rotasına geçmek için ayrıca temporal devam/ani "
-            "başlangıç veya güvenilir açık-web/yapılaşma doğrulaması gerekir."
+            "örtüşme tekrarları, geniş yüzey kümeleri ve her adayın kendi bölgesindeki "
+            "aynı kaynak Sentinel gününe ait 250+ aday parçaları ayıklanmıştır. Farklı "
+            "bölgenin farklı tarihli kanıtı veya eski saha backlog'u mikro sinyali "
+            "bastırmaz. Saha rotasına geçmek için ayrıca temporal devam/ani başlangıç "
+            "veya güvenilir açık-web/yapılaşma doğrulaması gerekir."
         ),
     }
 
@@ -283,6 +305,7 @@ def _self_check():
     assert len(deduped) == 1
     assert duplicates == 1
     assert deduped[0]["ortusme_tekrari"] is True
+    assert deduped[0]["mikro_kaynak_sentinel_tarihi"] == "03.09.2026"
     assert _current_source_dates(synthetic) == {"03.09.2026"}
 
     references = [
@@ -293,8 +316,45 @@ def _self_check():
     ]
     filtered = _filter_current_production(references, {"03.09.2026"})
     assert filtered == [references[0]], (
-        "Mikro yakınlık filtresi yalnız aynı güncel Sentinel tarihindeki 250+ adayı "
-        "referans almalıdır."
+        "Mikro yakınlık filtresi yalnız güncel Sentinel tarihlerindeki 250+ adayları "
+        "ilk bağlama almalıdır."
+    )
+
+    mixed_dates = {
+        "bolgeler": {
+            "cesme": {
+                "durum": "ok",
+                "son_tarih": "05.09.2026",
+                "adaylar": [
+                    {
+                        "bolge": "cesme", "enlem": 38.30, "boylam": 26.40,
+                        "alan_m2": 200, "ortalama_rgb_degisim": 0.4,
+                        "ortalama_ndvi_kaybi": 0.3,
+                        "ortalama_parlaklik_artisi": 0.3,
+                    }
+                ],
+            },
+            "uzunkuyu": {
+                "durum": "ok",
+                "son_tarih": "07.09.2026",
+                "adaylar": [],
+            },
+        }
+    }
+    micro_row = _raw_candidates(mixed_dates)[0]
+    wrong_day_reference = {
+        "enlem": 38.30, "boylam": 26.40,
+        "alan_m2": 400, "son_tarih": "07.09.2026",
+    }
+    same_day_reference = dict(wrong_day_reference, son_tarih="05.09.2026")
+    wrong_day_annotated = _annotate([micro_row], [wrong_day_reference])[0]
+    same_day_annotated = _annotate([micro_row], [same_day_reference])[0]
+    assert wrong_day_annotated["ana_adaya_yakin"] is False, (
+        "Farklı bölgenin farklı Sentinel günündeki 250+ adayı yeni MİKRO sinyali "
+        "bastırmamalıdır."
+    )
+    assert same_day_annotated["ana_adaya_yakin"] is True, (
+        "Aynı kaynak Sentinel günündeki yakın 250+ aday MİKRO parçayı ayıklamalıdır."
     )
 
 
