@@ -9,6 +9,11 @@ on:
       # zincirlerin bitiş sırası ne olursa olsun sezon önceliği en güncel kanıtla yenilensin.
       - "micro_site_watchlist.json"
       - "postseason_fresh_evidence_guard.py"
+      # 250-900 m² güçlü temporal-lokal kalibrasyon izini sahneler arasında sakla;
+      # yalnız sonraki bağımsız taze 250+ ana aday için sıralama kanıtı olarak kullan.
+      - "temporal_local_precursor_guard.py"
+      - "temporal_local_watch.json"
+      - "temporal_local_precursor_watchlist.json"
       - "postseason_dry_ground_confirmation_guard.py"
       - "postseason_capacity_preview.py"
       - ".github/workflows/postseason-excavation-priority.yml"
@@ -56,6 +61,9 @@ jobs:
       - name: 15 Eylül taze Sentinel kanıt retention öz testi
         run: python postseason_fresh_evidence_guard.py --self-check
 
+      - name: Temporal-lokal öncül iz hafızası öz testi
+        run: python temporal_local_precursor_guard.py --self-check
+
       - name: 15 Eylül kuru zemin teyit geçidi öz testi
         run: python postseason_dry_ground_confirmation_guard.py --self-check
 
@@ -66,14 +74,15 @@ jobs:
         run: |
           python postseason_excavation_priority_guard.py
           python postseason_fresh_evidence_guard.py
+          python temporal_local_precursor_guard.py
           python postseason_dry_ground_confirmation_guard.py
           python postseason_capacity_preview.py
 
       - name: Yalnız değişiklik varsa güvenli biçimde kaydet
         run: |
-          report_files="latest_report.json SAHA_RAPORU.md postseason_capacity_preview.json"
+          report_files="latest_report.json SAHA_RAPORU.md postseason_capacity_preview.json temporal_local_precursor_watchlist.json"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "15 Eylül taze kazı/kuru zemin/kapasite katmanı için rapor değişikliği gerekmiyor."
+            echo "15 Eylül taze kazı/öncül hafıza/kuru zemin/kapasite katmanı için rapor değişikliği gerekmiyor."
             exit 0
           fi
 
@@ -82,17 +91,19 @@ jobs:
 
           # Başka bir rapor workflow'u aynı anda main'i ilerletirse en güncel rapor
           # üzerinde yeniden üret. Algılama koduna, SQLite'a ve Sentinel eşiklerine
-          # dokunma; yalnız operasyon sırasını, görünür rapor notunu ve diagnostik
-          # kapasite önizlemesini güncelle.
+          # dokunma; yalnız operasyon sırasını, öncül iz hafızasını, görünür rapor notunu
+          # ve diagnostik kapasite önizlemesini güncelle.
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
             python postseason_excavation_priority_guard.py --self-check
             python postseason_fresh_evidence_guard.py --self-check
+            python temporal_local_precursor_guard.py --self-check
             python postseason_dry_ground_confirmation_guard.py --self-check
             python postseason_capacity_preview.py --check-only
             python postseason_excavation_priority_guard.py
             python postseason_fresh_evidence_guard.py
+            python temporal_local_precursor_guard.py
             python postseason_dry_ground_confirmation_guard.py
             python postseason_capacity_preview.py
 
@@ -102,7 +113,7 @@ jobs:
             fi
 
             git add $report_files
-            git commit -m "Radar: 15 Eylül sonrası taze kazı ve kapasite hazırlığını güncelle"
+            git commit -m "Radar: 15 Eylül sonrası taze kazı öncül hafızasını güncelle"
             if git push origin HEAD:main; then
               exit 0
             fi
@@ -111,5 +122,5 @@ jobs:
             sleep $((attempt * 2))
           done
 
-          echo "15 Eylül taze kazı/kuru zemin/kapasite katmanı üç güvenli denemede kaydedilemedi."
+          echo "15 Eylül taze kazı/öncül hafıza/kuru zemin/kapasite katmanı üç güvenli denemede kaydedilemedi."
           exit 1
