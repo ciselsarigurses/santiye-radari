@@ -1,0 +1,34 @@
+{
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_uretim_esigi_m2": 250,
+  "diagnostik_bant_m2": [
+    250,
+    900
+  ],
+  "esleme_mesafesi_m": 25.0,
+  "amac": "15 Eylül öncesi güçlü 250-900 m² temporal-lokal ani zemin izini saklamak; sonraki bağımsız taze 250 m²+ ana adaya yalnız sıralama kanıtı sağlamak.",
+  "adaylar": [
+    {
+      "temporal_iz_id": "TL-20260905-38.39830-26.62430",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.398298,
+      "boylam": 26.624303,
+      "alan_m2": 300,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Mevki doğrulanmadı",
+      "ilk_guclu_tarih": "05.09.2026",
+      "son_guclu_tarih": "05.09.2026",
+      "son_guclu_sentinel_item": "S2A_T35SMC_20260905T090529_L2A",
+      "sentinel_sahneleri": [
+        "S2A_T35SMC_20260905T090529_L2A"
+      ],
+      "maks_yerellik_orani": 3.22,
+      "maks_ic_bsi_degisim": 0.107
+    }
+  ],
+  "guclu_iz_sayisi": 1,
+  "guncelleme_tarihi": "2026-09-07 15:27 +0300"
+}
