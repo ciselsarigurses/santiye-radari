@@ -6,7 +6,7 @@
     150,
     249
   ],
-  "kaynak_olusturma": "2026-09-06 15:39 +0300",
+  "kaynak_olusturma": "2026-09-07 04:05 +0300",
   "ham_aday": 4,
   "tekil_aday": 4,
   "ortusme_tekrari_elendi": 0,
@@ -22,5 +22,8 @@
   "gulbahce_kisa_liste_aday": 0,
   "kisa_liste": [],
   "arka_plan_aday_sayisi": 4,
-  "not": "Kısa liste de alarm/görev değildir. Yalnız 150-249 m² ham mikro havuzdaki örtüşme tekrarları, geniş yüzey kümeleri ve aynı güncel Sentinel karşılaştırmasındaki 250+ aday parçaları ayıklanmıştır. Eski saha backlog'u mikro sinyali bastırmaz. Saha rotasına geçmek için ayrıca temporal devam/ani başlangıç veya güvenilir açık-web/yapılaşma doğrulaması gerekir."
+  "not": "Kısa liste de alarm/görev değildir. Yalnız 150-249 m² ham mikro havuzdaki örtüşme tekrarları, geniş yüzey kümeleri ve aynı güncel Sentinel karşılaştırmasındaki 250+ aday parçaları ayıklanmıştır. Eski saha backlog'u mikro sinyali bastırmaz. Saha rotasına geçmek için ayrıca temporal devam/ani başlangıç veya güvenilir açık-web/yapılaşma doğrulaması gerekir. Köşe teması nedeniyle 250+ ebeveyne birleşmiş açıkça işaretli 4-komşu MİKRO kurtarmalarda ana-adaya yakınlık tek başına eleme değildir; geniş-yüzey ve güçlü spektral kısa-liste kapıları ile sonraki temporal/lokal doğrulamalar zorunlu kalır.",
+  "diyagonal_mikro_kurtarma_tekil": 0,
+  "diyagonal_mikro_kurtarma_kisa_liste": 0,
+  "diyagonal_mikro_yakinlik_istisnasi": 0
 }
