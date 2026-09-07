@@ -4115,35 +4115,30 @@
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.335979,26.420161",
-      "saha_gorevi": false,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.420161",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "saha_gorevi": false
     },
     {
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "mahalle": "Gülbahçe",
-      "enlem": 38.329557,
-      "boylam": 26.674905,
+      "enlem": 38.324853,
+      "boylam": 26.661854,
       "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
+      "neden": "KARISIK_GECERSIZLIK",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 0.1732,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.329557,26.674905",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.324853,26.661854",
       "saha_gorevi": false,
       "gulbahce_operasyonel_kapsama": true,
-      "gulbahce_referans_mesafesi_m": 2587,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329557/26.674905",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "gulbahce_referans_mesafesi_m": 1671,
+      "gulbahce_cekirdek_operasyon": true
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-07",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Mevcut bölgesel kör-alan rotasyonu korunur; iki günde bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu Gülbahçe operasyonel referansının 3 km çevresine ayrılır. Aktif radar görevlerinden >=150 m ve diğer kör-alan devriyesinden >=250 m uzakta tutulur. Operasyonel referans idari/kadastral sınır değildir.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Mevcut bölgesel kör-alan rotasyonu korunur; iki günde bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu önce Gülbahçe operasyonel referansının 2 km çekirdeğine ayrılır. Çekirdekte güvenli aday yoksa 3 km çevre yalnız yedek kapsama olarak kullanılabilir. Aktif radar görevlerinden >=150 m ve diğer kör-alan devriyesinden >=250 m uzakta tutulur. Operasyonel referans idari/kadastral sınır değildir.",
   "temporal_kalibrasyon_rotasyonu": {
     "durum": "uygulandi",
     "slot_sayisi": 2,
@@ -4178,20 +4173,21 @@
     "saha_gorevi": false,
     "aktif_gun": true,
     "rotasyon_tarihi": "2026-09-07",
-    "operasyonel_yaricap_m": 3000,
+    "operasyonel_yaricap_m": 2000,
+    "yedek_patrol_yaricap_m": 3000,
     "idari_kadastral_sinir_degildir": true,
     "uygulandi": true,
     "uygun_aday_sayisi": 4,
-    "neden": "GULBAHCE_OPERASYONEL_TEMSIL",
+    "cekirdek_uygun_aday_sayisi": 2,
+    "yedek_uygun_aday_sayisi": 2,
+    "neden": "GULBAHCE_CEKIRDEK_OPERASYONEL_TEMSIL",
     "secilen": {
-      "enlem": 38.329557,
-      "boylam": 26.674905,
+      "enlem": 38.324853,
+      "boylam": 26.661854,
       "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_mesafesi_m": 2587,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329557/26.674905",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "neden": "KARISIK_GECERSIZLIK",
+      "referans_mesafesi_m": 1671,
+      "cekirdek_operasyon": true
     }
   }
 }
