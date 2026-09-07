@@ -6,18 +6,28 @@
     150,
     249
   ],
-  "amac": "Gülbahçe'de Sentinel kalite körlüğünün 150-249 m² bir mikro şantiye izini gizleme kapasitesini, kör kümenin toplam boyutundan bağımsız olarak görünür kılmak.",
+  "amac": "Gülbahçe'de iki-sahne temporal kalite körlüğünü en yeni sahnenin gerçek körlüğünden ayırmak; mikro körlük kapasitesini yalnız güncel-sahne kanıtından hesaplamak.",
   "durum": "ok",
   "kaynak_son_tarih": "05.09.2026",
   "kaynak_son_item": "S2A_T35SMC_20260905T090529_L2A",
   "gulbahce_operasyon_yaricapi_m": 2000,
-  "kalite_kor_kara_yuzde": 0.019,
   "mikro_ham_aday_2km": 0,
+  "guncel_sahne_dogrulandi": true,
+  "guncel_sahne_review_tarih": "05.09.2026",
+  "guncel_sahne_review_item": "S2A_T35SMC_20260905T090529_L2A",
+  "guncel_sahne_mikro_kor_150_249": 0,
+  "guncel_sahne_kor_250_6500": 0,
+  "guncel_sahne_buyuk_kor_6500ustu_arka_plan": 0,
   "mikro_kor_kume_tam_150_249": 0,
-  "ana_kor_kume_250plus": 2,
-  "mikro_gizleyebilen_kor_kume": 2,
-  "mikro_korluk_kapasitesi_var": true,
-  "kor_kume_ornekleri": [
+  "ana_kor_kume_250plus": 0,
+  "mikro_gizleyebilen_kor_kume": 0,
+  "mikro_korluk_kapasitesi_var": false,
+  "kor_kume_ornekleri": [],
+  "kalite_kor_kara_yuzde_temporal_cift_sahne": 0.019,
+  "temporal_cift_sahne_kor_kume_150_249": 0,
+  "temporal_cift_sahne_kor_kume_250plus": 2,
+  "temporal_cift_sahne_mikro_gizleyebilen_kor_kume": 2,
+  "temporal_cift_sahne_kor_kume_ornekleri": [
     {
       "enlem": 38.34231,
       "boylam": 26.642621,
@@ -41,5 +51,5 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.341406,26.643308"
     }
   ],
-  "yorum": "'mikro_kor_kume_tam_150_249' yalnız toplam alanı 150-249 m² olan kör kümeleri sayar. 250 m²+ bir kör küme de içinde 150-249 m² yeni kazı/temel izini gizleyebilir; bu nedenle 'mikro_gizleyebilen_kor_kume' iki boyut sınıfını birlikte sayar. 'kor_kume_ornekleri' yaklaşık kör küme merkezlerini yalnız diagnostik inceleme için taşır; adres/parsel değildir. Bu katman alarm veya saha görevi üretmez."
+  "yorum": "İki-sahne temporal kalite körlüğü, en yeni sahnenin körlüğü değildir. Mikro körlük kapasitesi yalnız micro audit ile aynı en yeni Sentinel sahnesine ait güncel-sahne review'ü doğrulanırsa hesaplanır. Temporal çift-sahne cepleri silinmez; arka-plan diagnostik olarak korunur. 6500 m² üstü güncel körlük geniş-yüzey arka planında ayrıca izlenir. Bu katman alarm veya saha görevi üretmez."
 }
