@@ -18,6 +18,7 @@ import re
 from zoneinfo import ZoneInfo
 
 import postseason_excavation_priority_guard as base
+import postseason_fresh_evidence_guard as retention
 
 ROOT = Path(__file__).resolve().parent
 WATCH = ROOT / "temporal_local_watch.json"
@@ -273,32 +274,46 @@ def _annotate(item, history_payload):
     return item
 
 
-def select_shortlist(candidates, history_payload, limit=base.route.SHORTLIST_LIMIT):
+def select_shortlist(candidates, history_payload, limit=base.route.SHORTLIST_LIMIT, local_day=None):
     cap = max(int(limit), 0)
     if cap <= 0:
         return []
+    day = base._local_day(local_day)
     micro = base._load_micro_watchlist()
-    indexed = list(enumerate(base.freshness._normalized_actionable_candidates(candidates)))
+    original = base._is_fresh_excavation_candidate
+    try:
+        # Retention katmanı çalıştıktan sonra bu sıralama eski sınıflandırıcıya dönüp
+        # iki günlük taze kanıtı yanlışlıkla düşürmesin.
+        base._is_fresh_excavation_candidate = lambda item: retention._fresh_with_retention(item, day)
+        indexed = list(enumerate(base.freshness._normalized_actionable_candidates(candidates)))
 
-    def key(pair):
-        idx, item = pair
-        prior = base._sort_key(item, idx, micro)
-        temporal_rank = 0 if prior[0] == 1 and _match(item, history_payload) else 1
-        return (prior[0], prior[1], temporal_rank, *prior[2:])
+        def key(pair):
+            idx, item = pair
+            prior = base._sort_key(item, idx, micro)
+            temporal_rank = 0 if prior[0] == 1 and _match(item, history_payload) else 1
+            return (prior[0], prior[1], temporal_rank, *prior[2:])
 
-    indexed.sort(key=key)
-    ranked = [item for _, item in indexed]
-    selected = [dict(item) for item in ranked[:cap]]
-    selected = base._balance_regions(ranked, selected, cap)
-    for order, item in enumerate(selected, start=1):
-        base._annotate_micro_precursor(item, micro)
-        _annotate(item, history_payload)
-        item["gunluk_sira"] = order
-    return selected
+        indexed.sort(key=key)
+        ranked = [item for _, item in indexed]
+        selected = [dict(item) for item in ranked[:cap]]
+        selected = base._balance_regions(ranked, selected, cap)
+        for order, item in enumerate(selected, start=1):
+            base._annotate_micro_precursor(item, micro)
+            _annotate(item, history_payload)
+            item["gunluk_sira"] = order
+        return selected
+    finally:
+        base._is_fresh_excavation_candidate = original
 
 
-def _markdown(shortlist):
-    text = base._shortlist_markdown(shortlist)
+def _markdown(shortlist, local_day=None):
+    day = base._local_day(local_day)
+    original = base._is_fresh_excavation_candidate
+    try:
+        base._is_fresh_excavation_candidate = lambda item: retention._fresh_with_retention(item, day)
+        text = base._shortlist_markdown(shortlist)
+    finally:
+        base._is_fresh_excavation_candidate = original
     for item in shortlist:
         if item.get("temporal_lokal_oncul_eslesmesi") is not True:
             continue
@@ -317,13 +332,14 @@ def apply(local_day=None):
     if history_changed:
         HISTORY.write_text(new_text, encoding="utf-8")
 
-    if _day(local_day) < SEASON_START:
+    day = _day(local_day)
+    if day < SEASON_START:
         return history_changed, []
 
     report = _load(REPORT)
     if not isinstance(report, dict):
         return history_changed, []
-    shortlist = select_shortlist(report.get("saha_adaylari") or [], after)
+    shortlist = select_shortlist(report.get("saha_adaylari") or [], after, local_day=day)
     report["gunun_ilk_3_kontrolu"] = shortlist
     meta = report.get("postseason_excavation_priority")
     meta = meta if isinstance(meta, dict) else {}
@@ -352,7 +368,7 @@ def apply(local_day=None):
     md_changed = False
     if FIELD_MD.exists():
         current = FIELD_MD.read_text(encoding="utf-8")
-        updated = base.route._inject_markdown(current, _markdown(shortlist))
+        updated = base.route._inject_markdown(current, _markdown(shortlist, day))
         if updated != current:
             FIELD_MD.write_text(updated, encoding="utf-8")
             md_changed = True
@@ -361,6 +377,7 @@ def apply(local_day=None):
 
 def _self_check():
     base._self_check()
+    retention._self_check()
     watch = {
         "alarm": False,
         "saha_gorevi": False,
@@ -418,11 +435,30 @@ def _self_check():
     assert _match(plain, history) is None
     assert _match(same_day, history) is None
     assert _match(micro, history) is None
-    selected = select_shortlist([plain, matched], history, limit=2)
+    selected = select_shortlist([plain, matched], history, limit=2, local_day=date(2026, 9, 15))
     assert selected[0]["gorev_id"] == "TEMP_MATCH", selected
     assert selected[0]["temporal_lokal_oncul_eslesmesi"] is True
+
+    retained = dict(matched)
+    retained.update(
+        {
+            "gorev_id": "RETAINED_TEMP_MATCH",
+            "yeni_goruntu": False,
+            "ilk_gorulme": "2026-09-15",
+            "son_tarih": "15.09.2026",
+            "uydu_kanit_yasi_gun": 1,
+        }
+    )
+    retained_selected = select_shortlist(
+        [plain, retained],
+        history,
+        limit=2,
+        local_day=date(2026, 9, 16),
+    )
+    assert retained_selected[0]["gorev_id"] == "RETAINED_TEMP_MATCH", retained_selected
+    assert retained_selected[0]["temporal_lokal_oncul_eslesmesi"] is True
     assert MAIN_MIN == 250 and base.MICRO_MIN_M2 == 150 and base.MICRO_MAX_M2 == 249
-    print("OK: temporal-lokal öncül hafıza self-check geçti.")
+    print("OK: temporal-lokal öncül hafıza + retention self-check geçti.")
 
 
 def main():
