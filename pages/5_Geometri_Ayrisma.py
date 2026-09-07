@@ -8,15 +8,16 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT_FILE = ROOT / "candidate_capacity_audit.json"
+CHILD_AUDIT_FILE = ROOT / "diagonal_child_coordinate_audit.json"
 SATELLITE_STYLE = (
     "https://raw.githubusercontent.com/ciselsarigurses/santiye-radari/"
     "main/satellite-style.json"
 )
 
 
-def load_audit():
+def load_json(path):
     try:
-        data = json.loads(AUDIT_FILE.read_text(encoding="utf-8"))
+        data = json.loads(path.read_text(encoding="utf-8"))
         return data if isinstance(data, dict) else {}
     except (OSError, ValueError, json.JSONDecodeError):
         return {}
@@ -37,7 +38,7 @@ def parcel_link(lat, lon):
     return f"https://parselsorgu.tkgm.gov.tr/#ara/cografi/{lat:.6f}/{lon:.6f}"
 
 
-def diagnostic_rows(payload):
+def parent_rows(payload):
     rows = []
     for region_key, region in (payload.get("bolgeler") or {}).items():
         if not isinstance(region, dict) or region.get("durum") != "ok":
@@ -63,16 +64,26 @@ def diagnostic_rows(payload):
                     child_areas.append(int(round(float(value))))
                 except (TypeError, ValueError):
                     continue
+            child_text = ", ".join(f"{value} m²" for value in child_areas) or "-"
             rows.append(
                 {
+                    "katman": "8-KOMŞU BİRLEŞMİŞ EBEVEYN",
                     "bolge_anahtari": region_key,
                     "bolge": region.get("bolge", region_key),
                     "enlem": lat,
                     "boylam": lon,
-                    "sekiz_komsu_alan_m2": int(round(area)),
-                    "dort_komsu_alt_aday_sayisi": child_count,
-                    "alt_alanlar": ", ".join(f"{value} m²" for value in child_areas) or "-",
-                    "durum": "DIAGNOSTIK — ALARM DEGIL",
+                    "ebeveyn_alan_m2": int(round(area)),
+                    "alt_kume_alan_m2": None,
+                    "alt_kume_no": "-",
+                    "alt_kume_sayisi": child_count,
+                    "alt_alanlar": child_text,
+                    "durum": "DIAGNOSTIK — ALARM DEĞİL",
+                    "detay": (
+                        f"8-komşu yaklaşık {int(round(area))} m² · "
+                        f"4-komşu alt parçalar: {child_text}"
+                    ),
+                    "renk": [235, 145, 35, 210],
+                    "yaricap": 190,
                     "harita": map_link(lat, lon),
                     "parsel_sorgu": parcel_link(lat, lon),
                 }
@@ -80,37 +91,89 @@ def diagnostic_rows(payload):
     return rows
 
 
+def child_rows(payload):
+    rows = []
+    for region_key, region in (payload.get("bolgeler") or {}).items():
+        if not isinstance(region, dict) or region.get("durum") != "ok":
+            continue
+        for parent in region.get("ebeveynler") or []:
+            if not isinstance(parent, dict):
+                continue
+            parent_area = as_float(parent.get("sekiz_komsu_alan_m2"))
+            children = [
+                item for item in (parent.get("alt_adaylar") or []) if isinstance(item, dict)
+            ]
+            if parent_area is None or len(children) < 2:
+                continue
+            for index, child in enumerate(children, start=1):
+                lat = as_float(child.get("enlem"))
+                lon = as_float(child.get("boylam"))
+                area = as_float(child.get("alan_m2"))
+                if lat is None or lon is None or area is None:
+                    continue
+                rows.append(
+                    {
+                        "katman": "4-KOMŞU ALT-KÜME KOORDİNATI",
+                        "bolge_anahtari": region_key,
+                        "bolge": region.get("bolge", region_key),
+                        "enlem": lat,
+                        "boylam": lon,
+                        "ebeveyn_alan_m2": int(round(parent_area)),
+                        "alt_kume_alan_m2": int(round(area)),
+                        "alt_kume_no": f"{index}/{len(children)}",
+                        "alt_kume_sayisi": len(children),
+                        "alt_alanlar": f"{int(round(area))} m²",
+                        "durum": "KOORDİNAT DIAGNOSTİĞİ — ALARM DEĞİL",
+                        "detay": (
+                            f"4-komşu alt-küme yaklaşık {int(round(area))} m² · "
+                            f"8-komşu ebeveyn yaklaşık {int(round(parent_area))} m² · "
+                            f"parça {index}/{len(children)}"
+                        ),
+                        "renk": [45, 180, 190, 235],
+                        "yaricap": 125,
+                        "harita": map_link(lat, lon),
+                        "parsel_sorgu": parcel_link(lat, lon),
+                    }
+                )
+    return rows
+
+
 st.set_page_config(page_title="Geometri Ayrışma", page_icon="◫", layout="wide")
 st.title("◫ Geometri Ayrışma Diagnostiği")
 st.caption(
     "Sentinel değişim maskesinde yalnız köşeden temas ettiği için 8-komşulukta tek "
-    "küme görünen, fakat 4-komşulukta iki veya daha fazla ayrı şantiye-ölçeği parçaya "
-    "ayrılabilen noktaları haritada görünür tutar."
+    "küme görünen, fakat 4-komşulukta iki veya daha fazla geçerli parçaya ayrılan "
+    "zemin müdahalelerini ve artık her alt parçanın ayrı değişim-pikseli temsil "
+    "koordinatını haritada gösterir."
 )
 st.warning(
     "Bu katman alarm veya saha görevi üretmez ve 250 m² ana eşiği değiştirmez. "
-    "Turuncu nokta, birleşmiş 8-komşu kümenin yaklaşık merkezidir; alt parçaların "
-    "kesin koordinatı veya parseli değildir. Amaç tek bir geniş merkez koordinatının "
-    "yakındaki iki ayrı zemin müdahalesini gizleyebileceği yerleri operatöre göstermektir."
+    "Turuncu nokta üretimde korunan 8-komşu ebeveyn merkezidir. Camgöbeği noktalar "
+    "aynı geçerli Sentinel maskesindeki 4-komşu alt-kümelerin kendi değişmiş pikselleri "
+    "üzerindeki temsil noktalarıdır. Bunlar kesin parsel/adres değildir; yalnız birleşmiş "
+    "ebeveyn merkezine göre saha navigasyonu için daha yerel bir geometrik referanstır."
 )
 
-payload = load_audit()
-rows = diagnostic_rows(payload)
-frame = pd.DataFrame(rows)
+payload = load_json(AUDIT_FILE)
+child_payload = load_json(CHILD_AUDIT_FILE)
+parents = parent_rows(payload)
+children = child_rows(child_payload)
+parent_frame = pd.DataFrame(parents)
+child_frame = pd.DataFrame(children)
+all_frame = pd.DataFrame(parents + children)
 
 split_total = sum(
     int((region.get("baglanti_geometrisi") or {}).get("diyagonal_birlesmis_ebeveyn", 0) or 0)
     for region in (payload.get("bolgeler") or {}).values()
     if isinstance(region, dict) and region.get("durum") == "ok"
 )
-recovered_total = sum(
-    int((region.get("baglanti_geometrisi") or {}).get("ayrisan_kucuk_250_800", 0) or 0)
-    + int((region.get("baglanti_geometrisi") or {}).get("ayrisan_santiye_olcegi_800_10000", 0) or 0)
-    for region in (payload.get("bolgeler") or {}).values()
+child_coordinate_total = sum(
+    int(region.get("alt_kume_koordinat_sayisi", 0) or 0)
+    for region in (child_payload.get("bolgeler") or {}).values()
     if isinstance(region, dict) and region.get("durum") == "ok"
 )
-gulbahce_region_splits = 0
 uzunkuyu = (payload.get("bolgeler") or {}).get("uzunkuyu") or {}
+gulbahce_region_splits = 0
 if isinstance(uzunkuyu, dict):
     gulbahce_region_splits = int(
         (uzunkuyu.get("baglanti_geometrisi") or {}).get("diyagonal_birlesmis_ebeveyn", 0)
@@ -118,63 +181,94 @@ if isinstance(uzunkuyu, dict):
     )
 
 m1, m2, m3 = st.columns(3)
-m1.metric("Diyagonal birleşmiş küme", split_total)
-m2.metric("4-komşuda ayrışan 250–10.000 m² parça", recovered_total)
+m1.metric("Diyagonal birleşmiş ebeveyn", split_total)
+m2.metric("Ayrı alt-küme koordinatı", child_coordinate_total)
 m3.metric("Uzunkuyu · Gülbahçe hattı", gulbahce_region_splits)
 
-if frame.empty:
+if split_total and not child_payload:
+    st.info(
+        "Diyagonal birleşme saptandı; alt-küme koordinat diagnostiği henüz veri üretmedi. "
+        "Üretim ebeveyn koordinatı ve ana alarm mantığı değişmeden korunuyor."
+    )
+elif split_total and child_coordinate_total == 0:
+    st.info(
+        "Diyagonal birleşme var ancak güvenli alt-küme koordinat kaynağı bu sahne için "
+        "ayrı nokta üretmedi. Ebeveyn aday otomatik bölünmedi."
+    )
+
+if all_frame.empty:
     st.success(
         "Güncel Sentinel sahnesinde haritada ayrıca incelenecek diyagonal birleşme "
         "örneği yok. Üretim 8-komşu geometrisi değiştirilmedi."
     )
 else:
+    layers = []
+    if not parent_frame.empty:
+        layers.append(
+            pdk.Layer(
+                "ScatterplotLayer",
+                parent_frame,
+                id="diagonal-connectivity-parent",
+                get_position="[boylam,enlem]",
+                get_fill_color="renk",
+                get_line_color=[255, 255, 255, 255],
+                get_radius="yaricap",
+                radius_min_pixels=11,
+                radius_max_pixels=25,
+                line_width_min_pixels=3,
+                stroked=True,
+                pickable=True,
+            )
+        )
+    if not child_frame.empty:
+        layers.append(
+            pdk.Layer(
+                "ScatterplotLayer",
+                child_frame,
+                id="diagonal-connectivity-children",
+                get_position="[boylam,enlem]",
+                get_fill_color="renk",
+                get_line_color=[255, 255, 255, 255],
+                get_radius="yaricap",
+                radius_min_pixels=9,
+                radius_max_pixels=20,
+                line_width_min_pixels=3,
+                stroked=True,
+                pickable=True,
+            )
+        )
+
     st.pydeck_chart(
         pdk.Deck(
             map_provider="carto",
             map_style=SATELLITE_STYLE,
-            layers=[
-                pdk.Layer(
-                    "ScatterplotLayer",
-                    frame,
-                    id="diagonal-connectivity-diagnostic",
-                    get_position="[boylam,enlem]",
-                    get_fill_color=[235, 145, 35, 210],
-                    get_line_color=[255, 255, 255, 255],
-                    get_radius=190,
-                    radius_min_pixels=11,
-                    radius_max_pixels=25,
-                    line_width_min_pixels=3,
-                    stroked=True,
-                    pickable=True,
-                )
-            ],
+            layers=layers,
             initial_view_state=pdk.ViewState(
                 latitude=38.315, longitude=26.455, zoom=9.9
             ),
             tooltip={
                 "html": (
-                    "<b>Geometri ayrışma diagnostiği</b><br>{bolge}"
-                    "<br>8-komşu: yaklaşık {sekiz_komsu_alan_m2} m²"
-                    "<br>4-komşu alt parça: {dort_komsu_alt_aday_sayisi}"
-                    "<br>Alt alanlar: {alt_alanlar}"
-                    "<br><small>Alarm/görev değildir; merkez yaklaşık noktadır.</small>"
+                    "<b>{katman}</b><br>{bolge}<br>{detay}<br>{durum}"
+                    "<br><small>Koordinat değişim geometrisi temsil noktasıdır; kesin parsel değildir.</small>"
                 )
             },
         ),
         use_container_width=True,
     )
     st.caption(
-        "Turuncu = aynı değişim maskesinde yalnız diyagonal temas nedeniyle birleşmiş "
-        "8-komşu küme. Saha ekibi bu noktayı ancak mevcut rota üzerinde yakınından "
-        "geçiyorsa çevresel gözlem için kullanmalı; otomatik görev açılmaz."
+        "Turuncu = üretimde korunan birleşmiş 8-komşu aday merkezi · Camgöbeği = aynı "
+        "değişim maskesinde yalnız köşe teması ayrıldığında oluşan 4-komşu alt-kümenin "
+        "kendi değişmiş pikseli üzerindeki temsil koordinatı. Camgöbeği noktalar yeni "
+        "alarm/görev değildir; üretim 8-komşuluğunu veya 250 m² eşiğini değiştirmez."
     )
     st.dataframe(
-        frame[
+        all_frame[
             [
+                "katman",
                 "bolge",
-                "sekiz_komsu_alan_m2",
-                "dort_komsu_alt_aday_sayisi",
-                "alt_alanlar",
+                "ebeveyn_alan_m2",
+                "alt_kume_alan_m2",
+                "alt_kume_no",
                 "enlem",
                 "boylam",
                 "durum",
@@ -183,10 +277,11 @@ else:
             ]
         ].rename(
             columns={
+                "katman": "Katman",
                 "bolge": "Bölge",
-                "sekiz_komsu_alan_m2": "8-komşu alan (m²)",
-                "dort_komsu_alt_aday_sayisi": "4-komşu parça",
-                "alt_alanlar": "Alt parça alanları",
+                "ebeveyn_alan_m2": "8-komşu ebeveyn (m²)",
+                "alt_kume_alan_m2": "4-komşu alt-küme (m²)",
+                "alt_kume_no": "Alt-küme",
                 "enlem": "Enlem",
                 "boylam": "Boylam",
                 "durum": "Durum",
@@ -204,10 +299,14 @@ else:
 
 with st.expander("Kaynak ve yorumlama sınırları"):
     st.write("Kapasite/geometri denetimi:", payload.get("olusturma", "Veri yok"))
+    st.write(
+        "Alt-küme koordinat denetimi:", child_payload.get("olusturma", "Veri yok")
+    )
     st.write("Sentinel rapor tarihi:", payload.get("rapor_tarihi", "Veri yok"))
     st.caption(
-        "4-komşu hesap yalnız geometrik bir diagnostiktir. Tarla sürümü, doğal zemin, "
-        "yol/altyapı veya gerçek şantiye ayrımı için ana Sentinel spektral, temporal, "
-        "kıyı ve geniş-yüzey korumaları geçerliliğini korur. Ada/parsel ve hukuki statü "
-        "otomatik türetilmez."
+        "4-komşu hesap yalnız geometrik bir diagnostiktir. Alt-küme temsil noktası "
+        "hesaplanan bileşenin merkezine en yakın gerçek değişim pikselinden seçilir; "
+        "ana 8-komşu adayın yerine geçmez. Tarla sürümü, doğal zemin, yol/altyapı, kıyı "
+        "ve gerçek şantiye ayrımı için ana Sentinel spektral, temporal ve geniş-yüzey "
+        "korumaları geçerliliğini korur. Ada/parsel ve hukuki statü otomatik türetilmez."
     )
