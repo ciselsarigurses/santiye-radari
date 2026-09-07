@@ -56,35 +56,39 @@ jobs:
             exit 1
           fi
 
-          git add active_edge_candidate_review.json
-          if git diff --cached --quiet; then
-            echo "Analiz-kenarı sonucu değişmedi; commit yok."
-            exit 0
-          fi
-
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git commit -m "Radar: aktif aday analiz kenarı sonucunu güncelle"
 
-          # Sentinel okuması sırasında main ilerlediyse eski rapora ait sonucu zorlama;
-          # en güncel main üzerinde bir kez yeniden hesapla.
-          git fetch origin main
-          if ! git merge-base --is-ancestor origin/main HEAD; then
-            echo "Ana dal denetim sırasında değişti; güncel raporda yeniden ölçülüyor."
-            git reset --hard origin/main
-            python active_edge_candidate_guard.py --self-test
-            python active_edge_candidate_guard.py
+          # Birkaç uydu/diagnostik workflow'u aynı dakikada main'e veri yazabilir.
+          # Eski sonucu zorlamak yerine güncel main üzerinde yeniden hesapla ve
+          # push yarışı olursa sınırlı sayıda tekrar dene. Böylece normal bir
+          # eşzamanlı veri commit'i kırmızı workflow üretmez; gerçekten
+          # stabilize olamayan durum ise görünür failure olarak kalır.
+          for attempt in 1 2 3 4; do
+            echo "Analiz-kenarı güvenli kayıt denemesi ${attempt}/4"
+            git fetch origin main
+
+            if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+              echo "Ana dal denetim sırasında değişti; güncel raporda yeniden ölçülüyor."
+              git reset --hard origin/main
+              python active_edge_candidate_guard.py --self-test
+              python active_edge_candidate_guard.py
+            fi
+
             git add active_edge_candidate_review.json
             if git diff --cached --quiet; then
-              echo "Yeniden ölçüm sonrası semantik değişiklik yok."
+              echo "Güncel main üzerinde analiz-kenarı sonucu değişmedi; commit yok."
               exit 0
             fi
-            git commit -m "Radar: aktif aday analiz kenarı sonucunu güncelle"
-            git fetch origin main
-            if ! git merge-base --is-ancestor origin/main HEAD; then
-              echo "Ana dal yeniden değişti; eski diagnostik sonucu zorlamadan sonraki çalışmaya bırakılıyor."
-              exit 1
-            fi
-          fi
 
-          git push origin HEAD:main
+            git commit -m "Radar: aktif aday analiz kenarı sonucunu güncelle"
+            if git push origin HEAD:main; then
+              echo "Analiz-kenarı sonucu güncel main'e güvenle yazıldı."
+              exit 0
+            fi
+
+            echo "Push sırasında main yeniden ilerledi; eski diagnostik zorlanmayacak."
+          done
+
+          echo "Ana dal dört denemede stabilize olmadı; diagnostik sonucu bayat yazmamak için hata ile çıkılıyor."
+          exit 1
