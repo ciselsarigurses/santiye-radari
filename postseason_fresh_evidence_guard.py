@@ -5,12 +5,13 @@ ister. Bu doğru bir ilk-giriş kilididir; ancak aynı Sentinel sahnesi sonraki 
 yenilemelerinde yeni sayılmadığında, gerçekten yeni başlamış bir hafriyatın operasyon
 önceliği birkaç saat içinde kaybolmamalıdır.
 
-Bu katman yeni alarm veya saha görevi üretmez. Yalnız 15 Eylül 2026 ve sonrasında ilk
-kez görülen, halen güncel Sentinel kümesinde bulunan ve uydu kanıt yaşı en fazla iki
+Bu katman yeni alarm veya saha görevi üretmez. Yalnız 15 Eylül 2026 ve sonrasında
+güncel Sentinel kümesinde yeniden/ilk kez kanıtlanan ve uydu kanıt yaşı en fazla iki
 gün olan güçlü 250–5.000 m² ana-alarm adaylarının taze-kazı rota önceliğini kısa süre
-korur. 150–249 m² MİKRO ŞANTİYE diagnostikleri hiçbir koşulda yükseltilmez; tarihsel
-kanıt, geniş-geometri/arka-plan işareti ve açık alarm/görev dışı kayıtlar dışarıda
-kalır.
+korur. Görev kimliği 15 Eylül öncesinden açık olsa bile, yalnız 15 Eylül sonrası güncel
+ve tarihsel-taşınmamış Sentinel kanıtı varsa retention uygulanabilir. 150–249 m² MİKRO
+ŞANTİYE diagnostikleri hiçbir koşulda yükseltilmez; tarihsel kanıt,
+geniş-geometri/arka-plan işareti ve açık alarm/görev dışı kayıtlar dışarıda kalır.
 """
 
 from __future__ import annotations
@@ -25,10 +26,10 @@ import postseason_excavation_priority_guard as base
 RETENTION_DAYS = 2
 RETENTION_NOTE = (
     "15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ "
-    "hafriyat/temel adayları ve ilk görülmesinden sonra en fazla 2 günlük güncel Sentinel "
-    "kanıtı taşıyan aynı adaylar eski backlog'un önünde tutulur. TEKRAR_GIT her zaman "
-    "en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha "
-    "görevine yükseltilmez."
+    "hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası "
+    "güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski "
+    "backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. "
+    "150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez."
 )
 
 _ORIGINAL_FRESH_CLASSIFIER = base._is_fresh_excavation_candidate
@@ -78,8 +79,12 @@ def _retained_fresh_candidate(item, local_day=None):
     if item.get("yeni_goruntu") is True:
         return False
 
+    # Görevin yaşam döngüsü sezon öncesinde başlamış olabilir. Retention açısından
+    # belirleyici olan görev açılış tarihi değil, 15 Eylül ve sonrasına ait halen
+    # güncel/tarihsel-taşınmamış Sentinel kanıtıdır. Geleceğe tarihli görev kaydı ise
+    # veri kalitesi sorunu sayılır ve yükseltilmez.
     first_seen = _day_value(item.get("ilk_gorulme"))
-    if first_seen is None or first_seen < base.FULL_OPERATION_START or first_seen > day:
+    if first_seen is not None and first_seen > day:
         return False
 
     evidence_day = _day_value(item.get("son_tarih"))
@@ -181,9 +186,10 @@ def apply_retention(local_day=None):
         "korunan_gorevler": retained_ids,
         "mikro_santiye": "150-249 m² diagnostik; doğrudan saha görevine yükseltilmez",
         "not": (
-            "Yeni alarm/görev üretmez. Yalnız 15 Eylül ve sonrasında ilk kez görülen, "
-            "tarihsel olmayan, en fazla 2 günlük güncel Sentinel kanıtlı güçlü ana-alarm "
-            "adayının rota önceliğini saatlik rapor yenilemeleri arasında korur."
+            "Yeni alarm/görev üretmez. Görev kimliği sezon öncesinden açık olsa bile "
+            "yalnız 15 Eylül ve sonrasına ait, tarihsel-taşınmamış ve en fazla 2 günlük "
+            "güncel Sentinel kanıtlı güçlü ana-alarm adayının rota önceliğini saatlik "
+            "rapor yenilemeleri arasında korur."
         ),
     }
 
@@ -230,11 +236,25 @@ def _self_check():
     retained = _candidate("RETAINED")
     assert _retained_fresh_candidate(retained, day)
 
+    # Sezon öncesinden açık bir görev, 15 Eylül sonrası yeni/güncel Sentinel kanıtı
+    # almışsa görev kimliği eski diye bir sonraki saat önceliğini kaybetmemeli.
+    preban_reactivated = _candidate(
+        "PREBAN_REACTIVATED",
+        ilk_gorulme="2026-09-01",
+        son_tarih="15.09.2026",
+        uydu_kanit_yasi_gun=1,
+    )
+    assert _retained_fresh_candidate(preban_reactivated, day)
+
+    # Buna karşılık kanıt sahnesi sezon öncesinde kalan kayıt retention alamaz.
     assert not _retained_fresh_candidate(
         _candidate("PREBAN", ilk_gorulme="2026-09-14", son_tarih="14.09.2026"), day
     )
     assert not _retained_fresh_candidate(
         _candidate("PREBAN_SCENE", ilk_gorulme="2026-09-15", son_tarih="14.09.2026"), day
+    )
+    assert not _retained_fresh_candidate(
+        _candidate("FUTURE_TASK", ilk_gorulme="2026-09-17", son_tarih="16.09.2026"), day
     )
     assert not _retained_fresh_candidate(
         _candidate("STALE", uydu_kanit_yasi_gun=RETENTION_DAYS + 1), day
