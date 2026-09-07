@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - "postseason_excavation_priority_guard.py"
+      # Mikro iz hafızası yeni Sentinel sahnesinde anlamlı değişirse, ana ve mikro
+      # zincirlerin bitiş sırası ne olursa olsun sezon önceliği en güncel kanıtla yenilensin.
+      - "micro_site_watchlist.json"
       - "postseason_fresh_evidence_guard.py"
       - "postseason_dry_ground_confirmation_guard.py"
       - "postseason_capacity_preview.py"
