@@ -4105,8 +4105,8 @@
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "mahalle": "Şifne",
-      "enlem": 38.335979,
-      "boylam": 26.420161,
+      "enlem": 38.341315,
+      "boylam": 26.430692,
       "alan_m2": 400,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
@@ -4114,31 +4114,28 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.335979,26.420161",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.341315,26.430692",
       "saha_gorevi": false
     },
     {
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Gülbahçe",
-      "enlem": 38.324853,
-      "boylam": 26.661854,
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.189452,
+      "boylam": 26.538668,
       "alan_m2": 400,
-      "neden": "KARISIK_GECERSIZLIK",
+      "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 0.1732,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.324853,26.661854",
-      "saha_gorevi": false,
-      "gulbahce_operasyonel_kapsama": true,
-      "gulbahce_referans_mesafesi_m": 1671,
-      "gulbahce_cekirdek_operasyon": true
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.189452,26.538668",
+      "saha_gorevi": false
     }
   ],
-  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-07",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Mevcut bölgesel kör-alan rotasyonu korunur; iki günde bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu önce Gülbahçe operasyonel referansının 2 km çekirdeğine ayrılır. Çekirdekte güvenli aday yoksa 3 km çevre yalnız yedek kapsama olarak kullanılabilir. Aktif radar görevlerinden >=150 m ve diğer kör-alan devriyesinden >=250 m uzakta tutulur. Operasyonel referans idari/kadastral sınır değildir.",
+  "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-08",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından Çeşme yerel takvim gününe göre günlük rotasyonla en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur ve güvenli alternatif varsa farklı mahallelerden seçilir.",
   "temporal_kalibrasyon_rotasyonu": {
     "durum": "uygulandi",
     "slot_sayisi": 2,
@@ -4171,23 +4168,15 @@
   "gulbahce_kor_alan_devriye_korumasi": {
     "alarm": false,
     "saha_gorevi": false,
-    "aktif_gun": true,
-    "rotasyon_tarihi": "2026-09-07",
+    "aktif_gun": false,
+    "rotasyon_tarihi": "2026-09-08",
     "operasyonel_yaricap_m": 2000,
     "yedek_patrol_yaricap_m": 3000,
     "idari_kadastral_sinir_degildir": true,
-    "uygulandi": true,
+    "uygulandi": false,
     "uygun_aday_sayisi": 4,
     "cekirdek_uygun_aday_sayisi": 2,
     "yedek_uygun_aday_sayisi": 2,
-    "neden": "GULBAHCE_CEKIRDEK_OPERASYONEL_TEMSIL",
-    "secilen": {
-      "enlem": 38.324853,
-      "boylam": 26.661854,
-      "alan_m2": 400,
-      "neden": "KARISIK_GECERSIZLIK",
-      "referans_mesafesi_m": 1671,
-      "cekirdek_operasyon": true
-    }
+    "neden": "GENEL_DOGU_ROTASYONU"
   }
 }

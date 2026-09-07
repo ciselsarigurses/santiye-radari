@@ -15,14 +15,14 @@
   "ayni_sentinel_sahnesi": true,
   "kara_referans_sahne_sayisi": 8,
   "kara_referans_tarihleri": [
-    "05.09.2026",
     "03.09.2026",
     "29.08.2026",
     "26.08.2026",
     "24.08.2026",
     "19.08.2026",
     "16.08.2026",
-    "14.08.2026"
+    "14.08.2026",
+    "09.08.2026"
   ],
   "ikili_sahne_korlugu_250plus_diagnostik": 2,
   "guncel_sahne_mikro_kor_150_249": 0,
