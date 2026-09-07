@@ -104,8 +104,8 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285689,26.384330) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.285689/26.384330)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 8. GECİKEN — Uzunkuyu
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Uzunkuyu
+### 8. GECİKEN — Gülbahçe
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Gülbahçe
 - **Koordinat:** `38.33219, 26.652385`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
@@ -114,8 +114,8 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.332190,26.652385) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332190/26.652385)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 9. GECİKEN — Uzunkuyu
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Uzunkuyu
+### 9. GECİKEN — Gülbahçe
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Gülbahçe
 - **Koordinat:** `38.334541, 26.651698`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
@@ -124,8 +124,8 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334541,26.651698) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334541/26.651698)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 10. GECİKEN — Uzunkuyu
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Uzunkuyu
+### 10. GECİKEN — Gülbahçe
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Gülbahçe
 - **Koordinat:** `38.333275, 26.652271`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
@@ -174,8 +174,8 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.290212,26.271915) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.290212/26.271915)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 15. GECİKEN — Uzunkuyu
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Uzunkuyu
+### 15. GECİKEN — Gülbahçe
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Gülbahçe
 - **Koordinat:** `38.313469, 26.638073`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
