@@ -12,6 +12,12 @@ on:
   schedule:
     # Ana 11:00 / 15:00 / 19:00 Sentinel taramasından kısa süre sonra çalışır.
     - cron: "25 8,12,16 * * *"
+  workflow_run:
+    # Saatlik probe yeni sahne bulduğunda önce ana 250 m² tarama tamamlanır;
+    # MİKRO ancak o workflow başarıyla bittikten sonra aynı DB-write grubuna girer.
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -24,6 +30,7 @@ concurrency:
 
 jobs:
   micro-audit:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'workflow_dispatch')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
