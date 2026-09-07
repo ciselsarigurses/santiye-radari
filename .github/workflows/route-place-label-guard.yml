@@ -1,0 +1,80 @@
+name: Uydu Mevki Etiketi Koordinat Koruması
+
+on:
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - "route_place_label_guard.py"
+      - ".github/workflows/route-place-label-guard.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-db-write
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Depoyu güncel main üzerinden al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Mevki etiketi korumasını öz testten geçir
+        run: python route_place_label_guard.py --check-only
+
+      - name: Güncel rapordaki güvenli mevki düzeltmelerini uygula
+        run: python route_place_label_guard.py
+
+      - name: Sonucu yalnız rapor dosyaları değiştiyse kaydet
+        run: |
+          report_files="latest_report.json SAHA_RAPORU.md"
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+            echo "Koordinatla çelişen güvenli-düzeltilebilir uydu mevki etiketi yok."
+            exit 0
+          fi
+
+          # Kuyrukta beklerken main ilerlediyse eski raporun üzerine yazma.
+          git fetch origin main
+          if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+            echo "Main ilerledi; en güncel raporda koruma yeniden çalıştırılıyor."
+            git reset --hard origin/main
+            python route_place_label_guard.py --check-only
+            python route_place_label_guard.py
+            if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
+              echo "Güncel main üzerinde düzeltilecek etiket kalmadı."
+              exit 0
+            fi
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add $report_files
+          git commit -m "Radar: uydu mevki etiketini koordinatla düzelt"
+
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Push öncesi main yeniden değişti; eski raporu zorlamadan çıkılıyor."
+            exit 1
+          fi
+          git push origin HEAD:main
