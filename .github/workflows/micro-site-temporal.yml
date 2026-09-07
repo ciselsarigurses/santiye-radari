@@ -12,6 +12,7 @@ on:
       - "micro_site_locality_guard.py"
       - "micro_site_decision_guard.py"
       - "micro_spectral_borderline_guard.py"
+      - "micro_spectral_borderline_runner.py"
       - "micro_site_field_review.json"
       - "micro_site_shortlist.json"
       - "micro_site_audit.json"
@@ -63,8 +64,8 @@ jobs:
       - name: Mikro kanıt birleştirme öz testini çalıştır
         run: python micro_site_decision_guard.py --check-only
 
-      - name: Spektral sınır mikro öz testini çalıştır
-        run: python micro_spectral_borderline_guard.py --check-only
+      - name: Spektral sınır mikro ve güncel-Sentinel bağlam öz testini çalıştır
+        run: python micro_spectral_borderline_runner.py --check-only
 
       - name: Üç Sentinel sahnesinde mikro adayları ölç
         run: python micro_site_temporal_guard.py
@@ -78,8 +79,8 @@ jobs:
       - name: Mikro kanıtları tek diagnostik kararda birleştir
         run: python micro_site_decision_guard.py
 
-      - name: Spektral eşiği dar marjla kaçıran izole mikro adayları temporal ve lokal ölç
-        run: python micro_spectral_borderline_guard.py
+      - name: Spektral eşiği dar marjla kaçıran izole mikro adayları yalnız güncel Sentinel 250+ bağlamıyla ölç
+        run: python micro_spectral_borderline_runner.py
 
       - name: Diagnostik sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
