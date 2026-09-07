@@ -76,6 +76,23 @@ def _coverage_east(payload):
     return {}
 
 
+def _independent_historical_items(items, latest):
+    """En yeni sahneyi kara/su referans havuzundan çıkar.
+
+    Güncel SCL zaten körlük testinin hedefidir; aynı sahneyi tarihsel yüzey
+    referansı olarak da saymak bağımsız referans sayısını bir azaltır. Böylece
+    sekiz referans hedefi gerçekten sekiz daha eski Sentinel sahnesinden oluşur.
+    """
+    latest_id = str((latest or {}).get("id") or "")
+    if not latest_id:
+        return list(items or [])
+    return [
+        item
+        for item in (items or [])
+        if str((item or {}).get("id") or "") != latest_id
+    ]
+
+
 def _component_reason(component, latest_scl):
     pixels = np.asarray(component, dtype="int32")
     values = latest_scl[pixels[:, 0], pixels[:, 1]]
@@ -272,7 +289,7 @@ def analyze_current_scene(micro_payload, coverage_payload, report_payload):
         GULBAHCE_OPERATION_RADIUS_M,
     )
 
-    items = satellite._search_items(bbox)
+    items = _independent_historical_items(satellite._search_items(bbox), latest)
     known_land, known_water, unknown_surface, refs, ref_dates = (
         _historical_surface_mask(items, latest, bbox, height, width)
     )
@@ -309,6 +326,12 @@ def analyze_current_scene(micro_payload, coverage_payload, report_payload):
 
 def _self_check():
     assert satellite.MIN_HOTSPOT_AREA_M2 == MAIN_THRESHOLD_M2
+    reference_items = _independent_historical_items(
+        [{"id": "LATEST"}, {"id": "OLDER_A"}, {"id": "OLDER_B"}],
+        {"id": "LATEST"},
+    )
+    assert [item["id"] for item in reference_items] == ["OLDER_A", "OLDER_B"]
+
     bbox = (26.64, 38.32, 26.65, 38.33)
     shape = (6, 6)
     latest_scl = np.full(shape, 4, dtype="uint8")
@@ -356,7 +379,7 @@ def _self_check():
         source_item="S2_TEST",
         coverage_date="05.09.2026",
         coverage_item="S2_TEST",
-        reference_dates=["05.09.2026", "03.09.2026"],
+        reference_dates=["03.09.2026", "29.08.2026"],
         pair_blind_count=4,
     )
     assert result["durum"] == "ok"
@@ -388,7 +411,7 @@ def _self_check():
         source_item="S2_TEST",
         coverage_date="03.09.2026",
         coverage_item="OLD",
-        reference_dates=["05.09.2026"],
+        reference_dates=["03.09.2026"],
     )
     assert stale["durum"] == "veri_tarihi_uyusmuyor"
 
@@ -402,7 +425,8 @@ def main():
     if args.check_only:
         print(
             "Gülbahçe gerçek güncel-sahne körlük öz testi başarılı; "
-            "tarihsel kara/su ayrımı korundu, 250 m² eşik değişmedi."
+            "tarihsel kara/su ayrımı ve son sahneden bağımsız referans korundu, "
+            "250 m² eşik değişmedi."
         )
         return
 
