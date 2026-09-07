@@ -1,15 +1,17 @@
 """Gülbahçe ham MİKRO ŞANTİYE adaylarının kısa-listeden elenme nedenini açıklar.
 
 Bu dosya seçim eşiklerini değiştirmez. Ham 150-249 m² adayları mevcut kısa-liste
-kurallarıyla aynı biçimde tekilleştirip işaretler; Gülbahçe çevresindeki adayın geniş
-hareket, 250 m²+ ana adaya yakınlık veya spektral kapı nedeniyle elenip elenmediğini
-kalibrasyon için kalıcı bir çıktıda gösterir. Alarm veya saha görevi üretmez.
+kurallarıyla aynı biçimde tekilleştirip işaretler; Gülbahçe'nin açıkça tanımlı 2 km
+operasyon penceresindeki adayın geniş hareket, 250 m²+ ana adaya yakınlık veya
+spektral kapı nedeniyle elenip elenmediğini kalibrasyon için kalıcı bir çıktıda
+gösterir. Alarm veya saha görevi üretmez.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 import micro_site_shortlist as shortlist
@@ -19,7 +21,33 @@ RAW_FILE = Path(__file__).with_name("micro_site_audit.json")
 OUTPUT_FILE = Path(__file__).with_name("gulbahce_micro_candidate_review.json")
 
 
-def _is_gulbahce(item):
+def _distance_m(latitude, longitude, target_latitude, target_longitude):
+    north_m = (target_latitude - latitude) * 110570
+    east_m = (
+        (target_longitude - longitude)
+        * 111320
+        * math.cos(math.radians(latitude))
+    )
+    return math.hypot(north_m, east_m)
+
+
+def _is_gulbahce(item, operation_reference=None):
+    """Varsa gerçek 2 km operasyon penceresini kullan; eski payload'da etikete dön."""
+    if operation_reference:
+        try:
+            latitude = float(item["enlem"])
+            longitude = float(item["boylam"])
+            target_latitude = float(operation_reference["enlem"])
+            target_longitude = float(operation_reference["boylam"])
+            radius_m = float(operation_reference["yaricap_m"])
+            return _distance_m(
+                latitude,
+                longitude,
+                target_latitude,
+                target_longitude,
+            ) <= radius_m
+        except (KeyError, TypeError, ValueError):
+            pass
     return str(item.get("yaklasik_mevki") or "").startswith("Gülbahçe")
 
 
@@ -58,7 +86,12 @@ def build_review(raw_payload):
     deduped, _ = shortlist._dedupe(raw_rows)
     production = shortlist._production_candidates()
     annotated = shortlist._annotate(deduped, production)
-    gulbahce = [_review_item(item) for item in annotated if _is_gulbahce(item)]
+    operation_reference = raw_payload.get("gulbahce_operasyon_referans") or None
+    gulbahce = [
+        _review_item(item)
+        for item in annotated
+        if _is_gulbahce(item, operation_reference)
+    ]
 
     return {
         "alarm": False,
@@ -66,6 +99,7 @@ def build_review(raw_payload):
         "ana_uretim_esigi_m2": raw_payload.get("ana_uretim_esigi_m2", 250),
         "mikro_aralik_m2": raw_payload.get("mikro_aralik_m2", [150, 249]),
         "kaynak_olusturma": raw_payload.get("olusturma"),
+        "gulbahce_operasyon_referans": operation_reference,
         "gulbahce_ham_tekil_aday": len(gulbahce),
         "gulbahce_kisa_listeye_giren": sum(bool(item["kisa_listeye_girer"]) for item in gulbahce),
         "yalniz_sinirda_spektral_nedenle_elenen": sum(
@@ -73,14 +107,24 @@ def build_review(raw_payload):
         ),
         "adaylar": gulbahce,
         "yorum": (
-            "Bu çıktı yalnız kalibrasyon açıklamasıdır. Ham mikro adayın neden kısa-listede "
-            "olmadığını görünür kılar; hiçbir eşiği düşürmez, alarm veya saha görevi üretmez."
+            "Bu çıktı yalnız kalibrasyon açıklamasıdır. Güncel payload'da Gülbahçe "
+            "adayları 2 km operasyon referansına gerçek koordinat mesafesiyle seçilir; "
+            "eski payload'da yaklaşık etiket yalnız geriye uyum için kullanılır. Ham "
+            "mikro adayın neden kısa-listede olmadığını görünür kılar; hiçbir eşiği "
+            "düşürmez, alarm veya saha görevi üretmez."
         ),
     }
 
 
 def _self_check():
+    operation_reference = {
+        "enlem": 38.33278,
+        "boylam": 26.64556,
+        "yaricap_m": 2000,
+        "sinir_adres_degil": True,
+    }
     sample = {
+        "gulbahce_operasyon_referans": operation_reference,
         "bolgeler": {
             "uzunkuyu": {
                 "adaylar": [
@@ -93,10 +137,20 @@ def _self_check():
                         "ortalama_rgb_degisim": 0.31,
                         "ortalama_ndvi_kaybi": 0.208,
                         "ortalama_parlaklik_artisi": 0.31,
-                    }
+                    },
+                    {
+                        "bolge": "uzunkuyu",
+                        "yaklasik_mevki": "Gülbahçe çevresi",
+                        "enlem": 38.36,
+                        "boylam": 26.646,
+                        "alan_m2": 200,
+                        "ortalama_rgb_degisim": 0.31,
+                        "ortalama_ndvi_kaybi": 0.208,
+                        "ortalama_parlaklik_artisi": 0.31,
+                    },
                 ]
             }
-        }
+        },
     }
     original = shortlist._production_candidates
     try:
@@ -104,12 +158,18 @@ def _self_check():
         result = build_review(sample)
     finally:
         shortlist._production_candidates = original
-    assert result["gulbahce_ham_tekil_aday"] == 1
+    assert result["gulbahce_ham_tekil_aday"] == 1, (
+        "2 km dışındaki yalnızca geniş Gülbahçe etiketi taşıyan aday operasyon "
+        "incelemesine girmemeli."
+    )
     item = result["adaylar"][0]
     assert item["spektral_esikler"]["rgb_gecer"] is True
     assert item["spektral_esikler"]["ndvi_gecer"] is False
     assert item["yalniz_sinirda_spektral_nedenle_elendi"] is True
     assert item["alarm"] is False and item["saha_gorevi"] is False
+    assert _is_gulbahce(
+        {"yaklasik_mevki": "Gülbahçe çevresi"}, None
+    ) is True, "Eski payload etiketi için geriye uyum korunmalı."
 
 
 def main():
@@ -118,7 +178,7 @@ def main():
     args = parser.parse_args()
     _self_check()
     if args.check_only:
-        print("Gülbahçe mikro aday açıklama öz testi başarılı; eşikler değişmedi.")
+        print("Gülbahçe mikro aday açıklama öz testi başarılı; 2 km kapsamı doğrulandı, eşikler değişmedi.")
         return
 
     if not RAW_FILE.exists():
@@ -130,7 +190,7 @@ def main():
         encoding="utf-8",
     )
     print(
-        "Gülbahçe mikro aday açıklaması: "
+        "Gülbahçe mikro aday açıklaması (2 km operasyon penceresi): "
         f"ham={result['gulbahce_ham_tekil_aday']}, "
         f"kısa-liste={result['gulbahce_kisa_listeye_giren']}, "
         f"yalnız-spektral={result['yalniz_sinirda_spektral_nedenle_elenen']}. "
