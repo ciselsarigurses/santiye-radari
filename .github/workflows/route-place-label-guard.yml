@@ -9,6 +9,8 @@ on:
     paths:
       - "route_place_label_guard.py"
       - ".github/workflows/route-place-label-guard.yml"
+      - "latest_report.json"
+      - "SAHA_RAPORU.md"
   workflow_dispatch:
 
 permissions:
