@@ -81,11 +81,13 @@ def _item_date(item):
 
 
 def _reference_items(items, latest, bbox, limit=LAND_REFERENCE_SCENES):
+    """Son sahneyi dışarıda bırakıp gerçekten bağımsız geçmiş yüzey referansları seç."""
     refs = []
     seen = set()
+    latest_id = str((latest or {}).get("id") or "")
     for item in items:
         item_id = str(item.get("id") or "")
-        if not item_id or item_id in seen:
+        if not item_id or item_id in seen or item_id == latest_id:
             continue
         if not _same_mgrs_tile(item, latest):
             continue
