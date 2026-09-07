@@ -9,6 +9,7 @@ on:
     paths:
       - "micro_site_audit.json"
       - "micro_site_shortlist.py"
+      - "micro_diagonal_recovery.py"
       - "gulbahce_micro_candidate_review.py"
       - "micro_spectral_borderline_guard.py"
       - "micro_spectral_borderline_runner.py"
@@ -47,6 +48,9 @@ jobs:
 
       - name: Mikro kısa liste öz testini ve filtreyi çalıştır
         run: python micro_site_shortlist.py
+
+      - name: Diyagonal MİKRO kurtarmalarda yakınlığı tek başına eleme nedeni yapma
+        run: python micro_diagonal_recovery.py --augment-shortlist
 
       - name: Gülbahçe ham mikro adaylarının eleme nedenini açıkla
         run: python gulbahce_micro_candidate_review.py
