@@ -7,6 +7,7 @@ on:
       - "gulbahce_blind_patrol_guard.py"
       - "gulbahce_latest_state_blind_review.py"
       - "gulbahce_micro_blind_capacity.json"
+      - "requirements.txt"
       - ".github/workflows/gulbahce-blind-patrol.yml"
   workflow_run:
     workflows: ["Sentinel Kör Alan Denetimi"]
@@ -28,7 +29,7 @@ jobs:
   guard:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
@@ -39,6 +40,10 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
 
       - name: Günlük genel kör alan rotasyonunu güncelle
         run: python coverage_patrol_shortlist.py
@@ -49,10 +54,10 @@ jobs:
       - name: Gülbahçe kör alan temsilini uygula
         run: python gulbahce_blind_patrol_guard.py
 
-      - name: Gülbahçe güncel-sahne körlük diagnostigi öz testi
+      - name: Gülbahçe gerçek güncel-sahne körlük diagnostigi öz testi
         run: python gulbahce_latest_state_blind_review.py --check-only
 
-      - name: Gülbahçe güncel-sahne körlüğünü mevcut devriyeyle karşılaştır
+      - name: En yeni sahne körlüğünü tarihsel kara/su kanıtıyla doğrula
         run: python gulbahce_latest_state_blind_review.py
 
       - name: Güvenli rapor değişikliğini kaydet
@@ -68,7 +73,7 @@ jobs:
           }
 
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "Gülbahçe kör alan temsilinde ve güncel-sahne diagnostiginde değişiklik gerekmiyor."
+            echo "Gülbahçe kör alan temsilinde ve gerçek güncel-sahne diagnostiginde değişiklik gerekmiyor."
             exit 0
           fi
 
