@@ -7,6 +7,8 @@ on:
       - "micro_site_audit.py"
       - "micro_diagonal_recovery.py"
       - "gulbahce_micro_blind_capacity_guard.py"
+      - "gulbahce_latest_state_blind_review.py"
+      - "gulbahce_latest_state_blind_review.json"
       - "satellite.py"
       - ".github/workflows/micro-site-audit.yml"
   schedule:
