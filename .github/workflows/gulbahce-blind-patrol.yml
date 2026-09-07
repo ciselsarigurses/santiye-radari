@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "gulbahce_blind_patrol_guard.py"
+      - "gulbahce_latest_state_blind_review.py"
+      - "gulbahce_micro_blind_capacity.json"
       - ".github/workflows/gulbahce-blind-patrol.yml"
   workflow_run:
     workflows: ["Sentinel Kör Alan Denetimi"]
@@ -47,18 +49,26 @@ jobs:
       - name: Gülbahçe kör alan temsilini uygula
         run: python gulbahce_blind_patrol_guard.py
 
+      - name: Gülbahçe güncel-sahne körlük diagnostigi öz testi
+        run: python gulbahce_latest_state_blind_review.py --check-only
+
+      - name: Gülbahçe güncel-sahne körlüğünü mevcut devriyeyle karşılaştır
+        run: python gulbahce_latest_state_blind_review.py
+
       - name: Güvenli rapor değişikliğini kaydet
         run: |
-          report_files="latest_report.json SAHA_RAPORU.md"
+          report_files="latest_report.json SAHA_RAPORU.md gulbahce_latest_state_blind_review.json"
 
           refresh_guard() {
             python coverage_patrol_shortlist.py
             python gulbahce_blind_patrol_guard.py --check-only
             python gulbahce_blind_patrol_guard.py
+            python gulbahce_latest_state_blind_review.py --check-only
+            python gulbahce_latest_state_blind_review.py
           }
 
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "Gülbahçe kör alan temsilinde değişiklik gerekmiyor."
+            echo "Gülbahçe kör alan temsilinde ve güncel-sahne diagnostiginde değişiklik gerekmiyor."
             exit 0
           fi
 
@@ -79,7 +89,7 @@ jobs:
             fi
 
             git add $report_files
-            git commit -m "Radar: Gülbahçe kör alan devriyesini güncelle"
+            git commit -m "Radar: Gülbahçe kör alan devriyesini ve güncel-sahne diagnostigini güncelle"
             if git push origin HEAD:main; then
               exit 0
             fi
