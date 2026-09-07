@@ -9,6 +9,9 @@ on:
       # zincirlerin bitiş sırası ne olursa olsun sezon önceliği en güncel kanıtla yenilensin.
       - "micro_site_watchlist.json"
       - "postseason_fresh_evidence_guard.py"
+      # Kuru-zemin DOĞRULAMA, iki günlük taze-kanıt retention ile korunan ana adayı
+      # ilk üçten düşürmesin; entegrasyon köprüsü bunu self-check ile kilitler.
+      - "postseason_dry_ground_retention_guard.py"
       # 250-900 m² güçlü temporal-lokal kalibrasyon izini sahneler arasında sakla;
       # yalnız sonraki bağımsız taze 250+ ana aday için sıralama kanıtı olarak kullan.
       - "temporal_local_precursor_guard.py"
@@ -64,8 +67,8 @@ jobs:
       - name: Temporal-lokal öncül iz hafızası öz testi
         run: python temporal_local_precursor_guard.py --self-check
 
-      - name: 15 Eylül kuru zemin teyit geçidi öz testi
-        run: python postseason_dry_ground_confirmation_guard.py --self-check
+      - name: 15 Eylül kuru zemin teyit + retention entegrasyon öz testi
+        run: python postseason_dry_ground_retention_guard.py --self-check
 
       - name: 15 Eylül şantiye kapasite önizleme öz testi
         run: python postseason_capacity_preview.py --check-only
@@ -75,7 +78,7 @@ jobs:
           python postseason_excavation_priority_guard.py
           python postseason_fresh_evidence_guard.py
           python temporal_local_precursor_guard.py
-          python postseason_dry_ground_confirmation_guard.py
+          python postseason_dry_ground_retention_guard.py
           python postseason_capacity_preview.py
 
       - name: Yalnız değişiklik varsa güvenli biçimde kaydet
@@ -99,12 +102,12 @@ jobs:
             python postseason_excavation_priority_guard.py --self-check
             python postseason_fresh_evidence_guard.py --self-check
             python temporal_local_precursor_guard.py --self-check
-            python postseason_dry_ground_confirmation_guard.py --self-check
+            python postseason_dry_ground_retention_guard.py --self-check
             python postseason_capacity_preview.py --check-only
             python postseason_excavation_priority_guard.py
             python postseason_fresh_evidence_guard.py
             python temporal_local_precursor_guard.py
-            python postseason_dry_ground_confirmation_guard.py
+            python postseason_dry_ground_retention_guard.py
             python postseason_capacity_preview.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
