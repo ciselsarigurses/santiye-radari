@@ -95,6 +95,37 @@ jobs:
         run: |
           report_files="temporal_local_watch.json latest_report.json SAHA_RAPORU.md"
 
+          normalize_timestamp_only_watch() {
+            python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          path = Path("temporal_local_watch.json")
+          if not path.exists():
+              raise SystemExit(0)
+
+          try:
+              previous_text = subprocess.check_output(
+                  ["git", "show", "HEAD:temporal_local_watch.json"],
+                  text=True,
+              )
+              previous = json.loads(previous_text)
+              current = json.loads(path.read_text(encoding="utf-8"))
+          except (subprocess.CalledProcessError, json.JSONDecodeError, OSError):
+              raise SystemExit(0)
+
+          def semantic(payload):
+              normalized = dict(payload) if isinstance(payload, dict) else {}
+              normalized.pop("kaynak_olusturma", None)
+              return normalized
+
+          if semantic(previous) == semantic(current):
+              path.write_text(previous_text, encoding="utf-8")
+              print("Temporal-lokal sonuç semantik olarak değişmedi; salt kaynak_olusturma farkı geri alındı.")
+          PY
+          }
+
           regenerate() {
             echo "Güncel main üzerinde temporal-lokal izleme yeniden hesaplanıyor."
             python temporal_local_watch_guard.py
@@ -114,14 +145,16 @@ jobs:
               )
           report_path.write_text(text, encoding="utf-8")
           PY
+            normalize_timestamp_only_watch
           }
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
+          normalize_timestamp_only_watch
 
           for attempt in 1 2 3; do
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-              echo "Temporal-lokal izleme sonucu değişmedi."
+              echo "Temporal-lokal izleme sonucu semantik olarak değişmedi."
               exit 0
             fi
 
