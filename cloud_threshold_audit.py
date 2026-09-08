@@ -30,7 +30,11 @@ import satellite
 
 
 PRODUCTION_MAX_CLOUD = 25
-AUDIT_MAX_CLOUD = 100
+# satellite._search_items Earth Search'a ``eo:cloud_cover < max_cloud`` yollar.
+# Sentinel metadata'sında geçerli üst değer %100 olabildiği için 100 kullanmak tam
+# %100 kayıtları sessizce dışarıda bırakır. 100.01 yalnız strict-lt sınırını kapsar;
+# üretim filtresini değiştirmez ve yerel SCL doğrulanmadan alarm üretmez.
+AUDIT_MAX_CLOUD = 100.01
 LOCAL_BLOCKED_MAX_PERCENT = 25.0
 AUDIT_PIXEL_SIZE_M = 40
 AUDIT_MAX_DIMENSION = 800
@@ -228,6 +232,10 @@ def _write_if_changed(payload):
 
 
 def _self_check():
+    # Earth Search sorgusu strict ``lt`` kullandığı için %100 bulut metadata'sı da
+    # tanısal SCL auditine girebilmelidir.
+    assert AUDIT_MAX_CLOUD > 100
+
     clear = np.full((10, 10), 4, dtype="uint8")
     clear[0, :] = 9
     assert abs(_blocked_percent(clear) - 10.0) < 1e-9
