@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-08 17:09 +0300",
+  "olusturma": "2026-09-08 19:41 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "otomatik_alarm": false,
@@ -14,8 +14,8 @@
   "minimum_uc_sahne_gecerli_oran": 0.75,
   "amac": "250 m²+ ana adaya yakınlık nedeniyle normal MİKRO kısa listeden bastırılan ama güçlü temporal kanıt alan 150-249 m² parçaların Sentinel sahneleri arasında kaybolmasını önlemek.",
   "uyari": "Bu hafıza bağımsız şantiye kanıtı değildir; alarm/görev üretmez ve 15 Eylül'de otomatik terfi yapmaz. Yeni sahnede bağımsız 250 m²+ ana aday oluşursa ancak ayrı bir güvenli öncelik katmanı tarafından kanıt olarak değerlendirilebilir.",
-  "guncel_guclu": 2,
-  "arka_plan_takip": 0,
+  "guncel_guclu": 0,
+  "arka_plan_takip": 2,
   "tekrar_temporal_destek": 0,
   "adaylar": [
     {
@@ -27,8 +27,8 @@
       "otomatik_saha_gorevi": false,
       "15_eylul_otomatik_terfi": false,
       "bagimsiz_santiye_dogrulanmadi": true,
-      "durum": "GUCLU_GUNCEL",
-      "guncel_guclu": true,
+      "durum": "ARKA_PLAN_TAKIP",
+      "guncel_guclu": false,
       "tekrar_temporal_destek": false,
       "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
       "sentinel_sahne_gecmisi": [
@@ -60,8 +60,8 @@
       "otomatik_saha_gorevi": false,
       "15_eylul_otomatik_terfi": false,
       "bagimsiz_santiye_dogrulanmadi": true,
-      "durum": "GUCLU_GUNCEL",
-      "guncel_guclu": true,
+      "durum": "ARKA_PLAN_TAKIP",
+      "guncel_guclu": false,
       "tekrar_temporal_destek": false,
       "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
       "sentinel_sahne_gecmisi": [
