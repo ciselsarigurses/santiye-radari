@@ -85,37 +85,57 @@ jobs:
       - name: Diagnostik sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
-          if git ls-files --error-unmatch micro_site_temporal_review.json >/dev/null 2>&1; then
-            meaningful_temporal="$(git diff -- micro_site_temporal_review.json \
-              | grep -E '^[+-]' \
-              | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
-            if [[ -z "$meaningful_temporal" ]]; then
-              echo "Temporal çıktıda yalnız çalışma zamanı değişti."
-              git checkout -- micro_site_temporal_review.json
-            fi
-          fi
-
-          if git ls-files --error-unmatch micro_site_locality_review.json >/dev/null 2>&1; then
-            meaningful_locality="$(git diff -- micro_site_locality_review.json \
-              | grep -E '^[+-]' \
-              | grep -vE '^(---|\+\+\+|[-+]  "kaynak_temporal_olusturma":)' || true)"
-            if [[ -z "$meaningful_locality" ]]; then
-              echo "Lokalite çıktıda yalnız kaynak çalışma zamanı değişti."
-              git checkout -- micro_site_locality_review.json
-            fi
-          fi
-
-          if git ls-files --error-unmatch micro_spectral_borderline_review.json >/dev/null 2>&1; then
-            meaningful_borderline="$(git diff -- micro_spectral_borderline_review.json \
-              | grep -E '^[+-]' \
-              | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
-            if [[ -z "$meaningful_borderline" ]]; then
-              echo "Spektral sınır çıktıda yalnız çalışma zamanı değişti."
-              git checkout -- micro_spectral_borderline_review.json
-            fi
-          fi
-
           result_files="micro_site_temporal_review.json micro_site_locality_review.json micro_site_decision_review.json micro_spectral_borderline_review.json"
+
+          normalize_timestamp_only() {
+            if git ls-files --error-unmatch micro_site_temporal_review.json >/dev/null 2>&1; then
+              meaningful_temporal="$(git diff -- micro_site_temporal_review.json \
+                | grep -E '^[+-]' \
+                | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
+              if [[ -z "$meaningful_temporal" ]]; then
+                echo "Temporal çıktıda yalnız çalışma zamanı değişti."
+                git checkout -- micro_site_temporal_review.json
+              fi
+            fi
+
+            if git ls-files --error-unmatch micro_site_locality_review.json >/dev/null 2>&1; then
+              meaningful_locality="$(git diff -- micro_site_locality_review.json \
+                | grep -E '^[+-]' \
+                | grep -vE '^(---|\+\+\+|[-+]  "kaynak_temporal_olusturma":)' || true)"
+              if [[ -z "$meaningful_locality" ]]; then
+                echo "Lokalite çıktıda yalnız kaynak çalışma zamanı değişti."
+                git checkout -- micro_site_locality_review.json
+              fi
+            fi
+
+            if git ls-files --error-unmatch micro_spectral_borderline_review.json >/dev/null 2>&1; then
+              meaningful_borderline="$(git diff -- micro_spectral_borderline_review.json \
+                | grep -E '^[+-]' \
+                | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
+              if [[ -z "$meaningful_borderline" ]]; then
+                echo "Spektral sınır çıktıda yalnız çalışma zamanı değişti."
+                git checkout -- micro_spectral_borderline_review.json
+              fi
+            fi
+          }
+
+          regenerate_results() {
+            echo "Main ilerledi; MİKRO temporal/lokal karar kanıtı güncel radar verisi üzerinde yeniden hesaplanıyor."
+            python satellite_quality.py
+            python micro_site_temporal_guard.py --check-only
+            python micro_site_orbit_guard.py --check-only
+            python micro_site_locality_guard.py --check-only
+            python micro_site_decision_guard.py --check-only
+            python micro_spectral_borderline_runner.py --check-only
+            python micro_site_temporal_guard.py
+            python micro_site_orbit_guard.py
+            python micro_site_locality_guard.py
+            python micro_site_decision_guard.py
+            python micro_spectral_borderline_runner.py
+            normalize_timestamp_only
+          }
+
+          normalize_timestamp_only
           if [[ -z "$(git status --porcelain -- $result_files)" ]]; then
             echo "Mikro diagnostik sonuçlar değişmedi."
             exit 0
@@ -123,11 +143,47 @@ jobs:
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add $result_files
-          git commit -m "Radar: mikro kanıt sentezini güncelle"
-          git fetch origin main
-          if ! git merge-base --is-ancestor origin/main HEAD; then
-            echo "Ana dal değişti; eski diagnostik sonucu üzerine yazmadan sonraki çalışmaya bırakılıyor."
-            exit 0
-          fi
-          git push origin HEAD:main
+
+          # Bu workflow uzun Sentinel okumaları yaparken başka radar botları main'i
+          # ilerletebilir. Eski temporal JSON'u yeni main'in üstüne taşımak ya da
+          # saatler sonraki takvime bırakmak yerine en güncel kod/veri üzerinde
+          # yeniden hesapla. Böylece ani başlangıç kanıtı taze Sentinel zincirinde
+          # gecikmeden ve stale shortlist ile karışmadan yayımlanır.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+              git reset --hard origin/main
+              regenerate_results
+            fi
+
+            if [[ -z "$(git status --porcelain -- $result_files)" ]]; then
+              echo "En güncel main üzerinde ek MİKRO temporal değişiklik gerekmiyor."
+              exit 0
+            fi
+
+            git add $result_files
+            git commit -m "Radar: mikro kanıt sentezini güncelle"
+
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Main commit sırasında ilerledi; eski MİKRO temporal sonucu taşınmıyor (${attempt}/3)."
+              git reset --hard origin/main
+              regenerate_results
+              continue
+            fi
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push sırasında main ilerlemiş veya geçici GitHub hatası oluşmuş olabilir; güncel main üzerinde tekrar hesaplanıyor (${attempt}/3)."
+            git fetch origin main
+            git reset --hard origin/main
+            regenerate_results
+            if [[ "$attempt" -lt 3 ]]; then
+              sleep $((attempt * 2))
+            fi
+          done
+
+          echo "MİKRO temporal diagnostik üç güvenli yeniden hesaplama denemesinde kaydedilemedi."
+          exit 1
