@@ -30,7 +30,11 @@ DB_PATH = Path(__file__).with_name("santiye.db")
 ISTANBUL = ZoneInfo("Europe/Istanbul")
 STAC_REGIONS = ("cesme", "uzunkuyu")
 PRODUCTION_MAX_CLOUD = 25.0
-BROAD_MAX_CLOUD = 100
+# satellite._search_items Earth Search'a ``eo:cloud_cover < max_cloud`` yollar.
+# Sentinel metadata'sında geçerli üst değer %100 olabildiği için 100 kullanmak
+# tam %100 kayıtları sessizce dışarıda bırakırdı. 100.01 yalnız bu strict-lt sınırını
+# kapsar; üretim filtresini değiştirmez ve yerel SCL doğrulanmadan alarm üretmez.
+BROAD_MAX_CLOUD = 100.01
 PROBE_ATTEMPTS = 3
 PROBE_RETRY_SECONDS = 1.0
 
@@ -247,14 +251,16 @@ def _self_check():
         uzun_bbox = satellite.REGIONS["uzunkuyu"]["bbox"]
 
         def broad_with_cloudy_new(bbox, max_cloud=100):
-            assert max_cloud == BROAD_MAX_CLOUD
+            # Earth Search sorgusu strict ``lt`` kullandığı için üst sınırın %100
+            # metadata değerini de içerecek kadar yüksek kaldığını doğrula.
+            assert max_cloud == BROAD_MAX_CLOUD and max_cloud > 100
             if list(bbox) == list(cesme_bbox):
                 return [
                     _test_item("CESME_OLD", "2026-09-05T09:00:00Z", 12, bbox),
                     _test_item("CESME_OLDER", "2026-09-03T09:00:00Z", 8, bbox),
                 ]
             return [
-                _test_item("UZUN_CLOUDY_NEW", "2026-09-07T09:00:00Z", 62, bbox),
+                _test_item("UZUN_CLOUDY_NEW", "2026-09-07T09:00:00Z", 100, bbox),
                 _test_item("UZUN_OLD", "2026-09-05T09:00:00Z", 10, bbox),
                 _test_item("UZUN_OLDER", "2026-09-03T09:00:00Z", 9, bbox),
             ]
