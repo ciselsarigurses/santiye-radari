@@ -55,10 +55,19 @@
       "lokalite_sinifi": "HAM_MIKRO_ARKA_PLAN",
       "genis_yuzey_riski": false,
       "onceki_zemin_hareketli_riski": null,
-      "ana_250m_adaya_yakin": null,
+      "ana_250m_adaya_yakin": true,
       "guncel_saha_eslesmesi": false,
       "mikro_footprint_guclu_diagnostik": false,
-      "ham_mikro_arka_plan": true
+      "ham_mikro_arka_plan": true,
+      "yakin_ana_temporal_probe_destegi": true,
+      "yakin_ana_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
+      "yakin_ana_temporal_ani_baslangic": true,
+      "yakin_ana_temporal_devam_eden": false,
+      "yakin_ana_temporal_ani_baslangic_orani": 16.62,
+      "yakin_ana_temporal_gecerli_oran": 1.0,
+      "yakin_ana_250plus_mesafe_m": 10,
+      "yakin_ana_temporal_kaynak_tarihi": "05.09.2026",
+      "yakin_ana_temporal_notu": "Aynı Sentinel kaynak günündeki 250 m²+ ana adaya yakın MİKRO parçada temporal probe kanıtı var. Bu kanıt ayrı bir şantiye olduğunu kanıtlamaz; alarm/görev üretmez ve bağımsız lokal/geometrik ek kanıt bekler."
     },
     {
       "oncelik": "MIKRO_DIAGNOSTIK",
@@ -95,10 +104,19 @@
       "lokalite_sinifi": "HAM_MIKRO_ARKA_PLAN",
       "genis_yuzey_riski": false,
       "onceki_zemin_hareketli_riski": null,
-      "ana_250m_adaya_yakin": null,
+      "ana_250m_adaya_yakin": true,
       "guncel_saha_eslesmesi": false,
       "mikro_footprint_guclu_diagnostik": false,
-      "ham_mikro_arka_plan": true
+      "ham_mikro_arka_plan": true,
+      "yakin_ana_temporal_probe_destegi": true,
+      "yakin_ana_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
+      "yakin_ana_temporal_ani_baslangic": true,
+      "yakin_ana_temporal_devam_eden": false,
+      "yakin_ana_temporal_ani_baslangic_orani": 12.16,
+      "yakin_ana_temporal_gecerli_oran": 1.0,
+      "yakin_ana_250plus_mesafe_m": 22,
+      "yakin_ana_temporal_kaynak_tarihi": "05.09.2026",
+      "yakin_ana_temporal_notu": "Aynı Sentinel kaynak günündeki 250 m²+ ana adaya yakın MİKRO parçada temporal probe kanıtı var. Bu kanıt ayrı bir şantiye olduğunu kanıtlamaz; alarm/görev üretmez ve bağımsız lokal/geometrik ek kanıt bekler."
     },
     {
       "oncelik": "MIKRO_DIAGNOSTIK",
@@ -217,10 +235,19 @@
       "lokalite_sinifi": "HAM_MIKRO_ARKA_PLAN",
       "genis_yuzey_riski": false,
       "onceki_zemin_hareketli_riski": null,
-      "ana_250m_adaya_yakin": null,
+      "ana_250m_adaya_yakin": true,
       "guncel_saha_eslesmesi": false,
       "mikro_footprint_guclu_diagnostik": false,
-      "ham_mikro_arka_plan": true
+      "ham_mikro_arka_plan": true,
+      "yakin_ana_temporal_probe_destegi": true,
+      "yakin_ana_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
+      "yakin_ana_temporal_ani_baslangic": true,
+      "yakin_ana_temporal_devam_eden": false,
+      "yakin_ana_temporal_ani_baslangic_orani": 16.62,
+      "yakin_ana_temporal_gecerli_oran": 1.0,
+      "yakin_ana_250plus_mesafe_m": 10,
+      "yakin_ana_temporal_kaynak_tarihi": "05.09.2026",
+      "yakin_ana_temporal_notu": "Aynı Sentinel kaynak günündeki 250 m²+ ana adaya yakın MİKRO parçada temporal probe kanıtı var. Bu kanıt ayrı bir şantiye olduğunu kanıtlamaz; alarm/görev üretmez ve bağımsız lokal/geometrik ek kanıt bekler."
     },
     {
       "oncelik": "MIKRO_DIAGNOSTIK",
@@ -257,10 +284,19 @@
       "lokalite_sinifi": "HAM_MIKRO_ARKA_PLAN",
       "genis_yuzey_riski": false,
       "onceki_zemin_hareketli_riski": null,
-      "ana_250m_adaya_yakin": null,
+      "ana_250m_adaya_yakin": true,
       "guncel_saha_eslesmesi": false,
       "mikro_footprint_guclu_diagnostik": false,
-      "ham_mikro_arka_plan": true
+      "ham_mikro_arka_plan": true,
+      "yakin_ana_temporal_probe_destegi": true,
+      "yakin_ana_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
+      "yakin_ana_temporal_ani_baslangic": true,
+      "yakin_ana_temporal_devam_eden": false,
+      "yakin_ana_temporal_ani_baslangic_orani": 12.16,
+      "yakin_ana_temporal_gecerli_oran": 1.0,
+      "yakin_ana_250plus_mesafe_m": 22,
+      "yakin_ana_temporal_kaynak_tarihi": "05.09.2026",
+      "yakin_ana_temporal_notu": "Aynı Sentinel kaynak günündeki 250 m²+ ana adaya yakın MİKRO parçada temporal probe kanıtı var. Bu kanıt ayrı bir şantiye olduğunu kanıtlamaz; alarm/görev üretmez ve bağımsız lokal/geometrik ek kanıt bekler."
     },
     {
       "oncelik": "MIKRO_DIAGNOSTIK",
@@ -342,5 +378,9 @@
       "mikro_footprint_guclu_diagnostik": false,
       "ham_mikro_arka_plan": true
     }
-  ]
+  ],
+  "yakin_ana_temporal_destekli_arka_plan": 2,
+  "yakin_ana_temporal_bridge_alarm_etkisi": false,
+  "yakin_ana_temporal_bridge_saha_gorevi_etkisi": false,
+  "yakin_ana_temporal_bridge_uyari": "Yakın-ana temporal probe yalnız aynı koordinat/alan ve aynı Sentinel kaynak günü eşleşirse eklenir. Footprint sınıfını yükseltmez; 250 m² ana eşiği ile 150-249 m² alarm-dışı diagnostik politikası değişmez."
 }
