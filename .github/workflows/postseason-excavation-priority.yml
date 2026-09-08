@@ -84,8 +84,41 @@ jobs:
       - name: Yalnız değişiklik varsa güvenli biçimde kaydet
         run: |
           report_files="latest_report.json SAHA_RAPORU.md postseason_capacity_preview.json temporal_local_precursor_watchlist.json"
+
+          normalize_timestamp_only_precursor() {
+            python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          path = Path("temporal_local_precursor_watchlist.json")
+          if not path.exists():
+              raise SystemExit(0)
+
+          try:
+              previous_text = subprocess.check_output(
+                  ["git", "show", "HEAD:temporal_local_precursor_watchlist.json"],
+                  text=True,
+              )
+              previous = json.loads(previous_text)
+              current = json.loads(path.read_text(encoding="utf-8"))
+          except (subprocess.CalledProcessError, json.JSONDecodeError, OSError):
+              raise SystemExit(0)
+
+          def semantic(payload):
+              normalized = dict(payload) if isinstance(payload, dict) else {}
+              normalized.pop("guncelleme_tarihi", None)
+              return normalized
+
+          if semantic(previous) == semantic(current):
+              path.write_text(previous_text, encoding="utf-8")
+              print("Temporal-lokal öncül hafıza semantik olarak değişmedi; salt guncelleme_tarihi farkı geri alındı.")
+          PY
+          }
+
+          normalize_timestamp_only_precursor
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "15 Eylül taze kazı/öncül hafıza/kuru zemin/kapasite katmanı için rapor değişikliği gerekmiyor."
+            echo "15 Eylül taze kazı/öncül hafıza/kuru zemin/kapasite katmanı için semantik rapor değişikliği gerekmiyor."
             exit 0
           fi
 
@@ -109,9 +142,10 @@ jobs:
             python temporal_local_precursor_guard.py
             python postseason_dry_ground_retention_guard.py
             python postseason_capacity_preview.py
+            normalize_timestamp_only_precursor
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-              echo "En güncel main üzerinde ek değişiklik gerekmiyor."
+              echo "En güncel main üzerinde semantik ek değişiklik gerekmiyor."
               exit 0
             fi
 
