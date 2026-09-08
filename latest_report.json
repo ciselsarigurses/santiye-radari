@@ -4121,17 +4121,20 @@
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "mahalle": "Gülbahçe",
-      "enlem": 38.330461,
-      "boylam": 26.652466,
+      "enlem": 38.329557,
+      "boylam": 26.674905,
       "alan_m2": 400,
-      "neden": "KARISIK_GECERSIZLIK",
+      "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 0.1783,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.330461,26.652466",
-      "saha_gorevi": false
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.329557,26.674905",
+      "saha_gorevi": false,
+      "gulbahce_operasyonel_kapsama": true,
+      "gulbahce_referans_mesafesi_m": 2587,
+      "gulbahce_cekirdek_operasyon": false
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-08",
@@ -4186,8 +4189,14 @@
     "eslesme_yaricapi_m": 25,
     "inceleme_guncel": true,
     "arka_plan_kume_sayisi": 8,
-    "uygulandi": false,
-    "elendi": 0,
-    "neden": "DEGISIKLIK_YOK"
+    "uygulandi": true,
+    "elendi": 1,
+    "neden": "SU_KIYI_YERINE_GUVENLI_KARA_KOR_NOKTASI",
+    "secilen": {
+      "enlem": 38.329557,
+      "boylam": 26.674905,
+      "alan_m2": 400,
+      "cekirdek_operasyon": false
+    }
   }
 }
