@@ -4115,7 +4115,10 @@
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.341315,26.430692",
-      "saha_gorevi": false
+      "saha_gorevi": false,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.341315/26.430692",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "bolge_anahtari": "uzunkuyu",
@@ -4134,7 +4137,10 @@
       "saha_gorevi": false,
       "gulbahce_operasyonel_kapsama": true,
       "gulbahce_referans_mesafesi_m": 2587,
-      "gulbahce_cekirdek_operasyon": false
+      "gulbahce_cekirdek_operasyon": false,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329557/26.674905",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-08",
@@ -4196,7 +4202,10 @@
       "enlem": 38.329557,
       "boylam": 26.674905,
       "alan_m2": 400,
-      "cekirdek_operasyon": false
+      "cekirdek_operasyon": false,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329557/26.674905",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   }
 }
