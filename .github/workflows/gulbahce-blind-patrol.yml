@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "gulbahce_blind_patrol_guard.py"
+      - "gulbahce_patrol_surface_guard.py"
       - "gulbahce_latest_state_blind_review.py"
       - "gulbahce_micro_blind_capacity.json"
       - "requirements.txt"
@@ -60,6 +61,12 @@ jobs:
       - name: En yeni sahne körlüğünü tarihsel kara/su kanıtıyla doğrula
         run: python gulbahce_latest_state_blind_review.py
 
+      - name: Gülbahçe su-kıyı devriye koruması öz testi
+        run: python gulbahce_patrol_surface_guard.py --check-only
+
+      - name: Güncel su-kıyı yüzeyini kör alan devriyesinden ayır
+        run: python gulbahce_patrol_surface_guard.py
+
       - name: Güvenli rapor değişikliğini kaydet
         run: |
           report_files="latest_report.json SAHA_RAPORU.md gulbahce_latest_state_blind_review.json"
@@ -70,6 +77,8 @@ jobs:
             python gulbahce_blind_patrol_guard.py
             python gulbahce_latest_state_blind_review.py --check-only
             python gulbahce_latest_state_blind_review.py
+            python gulbahce_patrol_surface_guard.py --check-only
+            python gulbahce_patrol_surface_guard.py
           }
 
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
