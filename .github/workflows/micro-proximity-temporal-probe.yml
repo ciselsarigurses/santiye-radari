@@ -1,0 +1,82 @@
+name: Mikro Yakın-Ana Temporal Probe
+
+on:
+  workflow_run:
+    workflows: ["Mikro Şantiye Kısa Liste Filtresi"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - "micro_proximity_temporal_probe.py"
+      - "micro_site_shortlist.py"
+      - "micro_site_temporal_guard.py"
+      - "micro_site_audit.json"
+      - "latest_report.json"
+      - ".github/workflows/micro-proximity-temporal-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-micro-proximity-temporal-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Ana uydu kalite korumalarını doğrula
+        run: python satellite_quality.py
+
+      - name: Yakın-ana MİKRO temporal probe öz testini çalıştır
+        run: python micro_proximity_temporal_probe.py --check-only
+
+      - name: Yakınlık nedeniyle bastırılan güçlü MİKRO parçaları temporalde ölç
+        run: python micro_proximity_temporal_probe.py
+
+      - name: Diagnostik sonucu yalnız anlamlı değişiklikte kaydet
+        shell: bash
+        run: |
+          result_file="micro_proximity_temporal_probe.json"
+          if git ls-files --error-unmatch "$result_file" >/dev/null 2>&1; then
+            meaningful="$(git diff -- "$result_file" \
+              | grep -E '^[+-]' \
+              | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
+            if [[ -z "$meaningful" ]]; then
+              echo "Yakın-ana temporal probe çıktısında yalnız çalışma zamanı değişti."
+              git checkout -- "$result_file"
+            fi
+          fi
+
+          if [[ -z "$(git status --porcelain -- "$result_file")" ]]; then
+            echo "Yakın-ana temporal probe sonucu değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add "$result_file"
+          git commit -m "Radar: yakın ana mikro temporal probe güncelle"
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal değişti; eski diagnostik sonucu üzerine yazmadan sonraki çalışmaya bırakılıyor."
+            exit 0
+          fi
+          git push origin HEAD:main
