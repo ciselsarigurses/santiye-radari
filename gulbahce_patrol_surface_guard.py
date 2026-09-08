@@ -30,11 +30,13 @@ from gulbahce_blind_patrol_guard import (
     AUDIT_JSON,
     DUTY_PERIOD_DAYS,
     GULBAHCE_CORE_RADIUS_M,
+    GULBAHCE_OPERATION_RADIUS_M,
     GULBAHCE_SCAN_JSON,
     _current_non_east_patrol,
     _east_region,
     _eligible_gulbahce_candidates,
     _is_duty_day,
+    _reference_point,
 )
 
 LATEST_STATE_JSON = Path(__file__).with_name("gulbahce_latest_state_blind_review.json")
@@ -86,6 +88,17 @@ def _review_matches_audit(review_payload, audit_payload):
     return bool(review_item and audit_item and review_item == audit_item)
 
 
+def _is_gulbahce_patrol_item(item, east_key, scan_payload):
+    """Duty bayrağı olmasa da Gülbahçe operasyon çevresine düşen doğu slotunu tanır."""
+    if east_key is None or str(item.get("bolge_anahtari") or "") != str(east_key):
+        return False
+    point = _point(item)
+    reference = _reference_point(scan_payload)
+    if point is None or reference is None:
+        return item.get("gulbahce_operasyonel_kapsama") is True
+    return _distance_m(point, reference) <= GULBAHCE_OPERATION_RADIUS_M
+
+
 def apply_surface_guard(
     audit_payload,
     report_payload,
@@ -115,10 +128,14 @@ def apply_surface_guard(
         report["gulbahce_devriye_yuzey_korumasi"] = metadata
         return report
 
-    current = [dict(item) for item in report.get("kor_alan_saha_devriyesi") or [] if isinstance(item, dict)]
+    current = [
+        dict(item)
+        for item in report.get("kor_alan_saha_devriyesi") or []
+        if isinstance(item, dict)
+    ]
     bad = [
         item for item in current
-        if item.get("gulbahce_operasyonel_kapsama") is True
+        if _is_gulbahce_patrol_item(item, east_key, scan_payload)
         and _matches_background(item, backgrounds)
     ]
     metadata["elendi"] = len(bad)
@@ -131,7 +148,7 @@ def apply_surface_guard(
     kept = [item for item in current if item not in bad]
     report["kor_alan_saha_devriyesi"] = kept[:TOTAL_LIMIT]
 
-    if not _is_duty_day(day) or east_key is None:
+    if east_key is None:
         metadata["uygulandi"] = True
         metadata["neden"] = "SU_KIYI_NOKTASI_CIKARILDI"
         report["gulbahce_devriye_yuzey_korumasi"] = metadata
@@ -156,7 +173,12 @@ def apply_surface_guard(
         report["gulbahce_devriye_yuzey_korumasi"] = metadata
         return report
 
-    offset = (day.toordinal() // DUTY_PERIOD_DAYS) % len(pool)
+    if _is_duty_day(day):
+        offset = (day.toordinal() // DUTY_PERIOD_DAYS) % len(pool)
+    else:
+        # Genel doğu rotasyonu Gülbahçe'ye doğal olarak düştüyse aynı günlük
+        # çeşitliliği koru; yalnız su/kıyı ile çakışan hücreyi başka kara hücresine değiştir.
+        offset = day.toordinal() % len(pool)
     chosen = dict(pool[offset])
     chosen["alarm"] = False
     chosen["saha_gorevi"] = False
@@ -239,7 +261,7 @@ def _self_check():
         }
     }
     report = {
-        "rapor_tarihi": "2026-09-03",
+        "rapor_tarihi": "2026-09-08",
         "saha_adaylari": [],
         "kor_alan_saha_devriyesi": [
             {
@@ -250,8 +272,6 @@ def _self_check():
                 "boylam": 26.652466,
                 "alan_m2": 400,
                 "neden": "KARISIK_GECERSIZLIK",
-                "gulbahce_operasyonel_kapsama": True,
-                "gulbahce_cekirdek_operasyon": True,
                 "alarm": False,
                 "saha_gorevi": False,
             }
@@ -268,12 +288,14 @@ def _self_check():
         ],
     }
 
+    # 8 Eylül duty günü değildir: genel doğu rotasyonu Gülbahçe'yi seçmiş olsa
+    # bile güncel SCL=su hücresi elenmeli ve güvenli kara alternatifiyle değişmelidir.
     guarded = apply_surface_guard(
         audit,
         report,
         scan,
         review,
-        rotation_day=__import__("datetime").date(2026, 9, 3),
+        rotation_day=__import__("datetime").date(2026, 9, 8),
     )
     meta = guarded["gulbahce_devriye_yuzey_korumasi"]
     assert meta["inceleme_guncel"] is True
@@ -291,7 +313,7 @@ def _self_check():
         report,
         scan,
         stale,
-        rotation_day=__import__("datetime").date(2026, 9, 3),
+        rotation_day=__import__("datetime").date(2026, 9, 8),
     )
     assert untouched["kor_alan_saha_devriyesi"][0]["enlem"] == 38.330461
     assert untouched["gulbahce_devriye_yuzey_korumasi"]["inceleme_guncel"] is False
