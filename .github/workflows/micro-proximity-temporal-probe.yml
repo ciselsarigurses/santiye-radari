@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "micro_proximity_temporal_probe.py"
+      - "micro_proximity_temporal_watchlist.py"
       - "micro_site_shortlist.py"
       - "micro_site_temporal_guard.py"
       - "micro_site_audit.json"
@@ -51,29 +52,43 @@ jobs:
       - name: Yakınlık nedeniyle bastırılan güçlü MİKRO parçaları temporalde ölç
         run: python micro_proximity_temporal_probe.py
 
-      - name: Diagnostik sonucu yalnız anlamlı değişiklikte kaydet
+      - name: Yakın-ana temporal kalıcı hafıza öz testini çalıştır
+        run: python micro_proximity_temporal_watchlist.py --check-only
+
+      - name: Güçlü yakın-ana temporal kanıtı Sentinel sahneleri arasında koru
+        run: python micro_proximity_temporal_watchlist.py
+
+      - name: Diagnostik sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
         run: |
-          result_file="micro_proximity_temporal_probe.json"
-          if git ls-files --error-unmatch "$result_file" >/dev/null 2>&1; then
-            meaningful="$(git diff -- "$result_file" \
-              | grep -E '^[+-]' \
-              | grep -vE '^(---|\+\+\+|[-+]  "olusturma":)' || true)"
-            if [[ -z "$meaningful" ]]; then
-              echo "Yakın-ana temporal probe çıktısında yalnız çalışma zamanı değişti."
-              git checkout -- "$result_file"
-            fi
-          fi
+          outputs=(
+            micro_proximity_temporal_probe.json
+            micro_proximity_temporal_watchlist.json
+          )
 
-          if [[ -z "$(git status --porcelain -- "$result_file")" ]]; then
-            echo "Yakın-ana temporal probe sonucu değişmedi."
+          for file in "${outputs[@]}"; do
+            if ! git ls-files --error-unmatch "$file" >/dev/null 2>&1; then
+              continue
+            fi
+
+            meaningful="$(git diff -- "$file" \
+              | grep -E '^[+-]' \
+              | grep -vE '^(---|\+\+\+|[-+][[:space:]]*"olusturma":)' || true)"
+            if [[ -z "$meaningful" && -n "$(git status --porcelain -- "$file")" ]]; then
+              echo "$file çıktısında yalnız çalışma zamanı değişti; commit edilmeyecek."
+              git checkout -- "$file"
+            fi
+          done
+
+          if [[ -z "$(git status --porcelain -- "${outputs[@]}")" ]]; then
+            echo "Yakın-ana temporal probe ve kalıcı hafıza sonucu değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add "$result_file"
-          git commit -m "Radar: yakın ana mikro temporal probe güncelle"
+          git add "${outputs[@]}"
+          git commit -m "Radar: yakın ana mikro temporal probe ve hafızayı güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
             echo "Ana dal değişti; eski diagnostik sonucu üzerine yazmadan sonraki çalışmaya bırakılıyor."
