@@ -10,6 +10,44 @@
   "amac": "15 Eylül öncesi güçlü 250-900 m² temporal-lokal ani zemin izini saklamak; sonraki bağımsız taze 250 m²+ ana adaya yalnız sıralama kanıtı sağlamak.",
   "adaylar": [
     {
+      "temporal_iz_id": "TL-20260908-38.29401-26.27695",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.29401,
+      "boylam": 26.276952,
+      "alan_m2": 300,
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Çiftlikköy",
+      "ilk_guclu_tarih": "08.09.2026",
+      "son_guclu_tarih": "08.09.2026",
+      "son_guclu_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "sentinel_sahneleri": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "maks_yerellik_orani": 2.32,
+      "maks_ic_bsi_degisim": 0.1189
+    },
+    {
+      "temporal_iz_id": "TL-20260908-38.40327-26.48600",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.403272,
+      "boylam": 26.486005,
+      "alan_m2": 400,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Ildır",
+      "ilk_guclu_tarih": "08.09.2026",
+      "son_guclu_tarih": "08.09.2026",
+      "son_guclu_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "sentinel_sahneleri": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "maks_yerellik_orani": 1.95,
+      "maks_ic_bsi_degisim": 0.1716
+    },
+    {
       "temporal_iz_id": "TL-20260905-38.39830-26.62430",
       "alarm": false,
       "saha_gorevi": false,
@@ -29,6 +67,6 @@
       "maks_ic_bsi_degisim": 0.107
     }
   ],
-  "guclu_iz_sayisi": 1,
-  "guncelleme_tarihi": "2026-09-08 11:27 +0300"
+  "guclu_iz_sayisi": 3,
+  "guncelleme_tarihi": "2026-09-08 18:18 +0300"
 }
