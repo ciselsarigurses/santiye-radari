@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-07",
-  "olusturma": "2026-09-07 19:19 +03",
+  "rapor_tarihi": "2026-09-08",
+  "olusturma": "2026-09-08 19:20 +03",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -9,20 +9,20 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2A_T35SMC_20260905T090529_L2A",
+      "son_item": "S2B_T35SMC_20260908T090037_L2A",
       "durum": "ok",
       "ebeveynler": [
         {
           "ebeveyn_enlem": 38.282162,
           "ebeveyn_boylam": 26.376774,
-          "sekiz_komsu_alan_m2": 2100,
+          "sekiz_komsu_alan_m2": 1900,
           "dort_komsu_alt_aday_sayisi": 2,
           "alt_adaylar": [
             {
               "enlem": 38.282162,
               "boylam": 26.377003,
-              "alan_m2": 1300,
-              "piksel_sayisi": 13,
+              "alan_m2": 1100,
+              "piksel_sayisi": 11,
               "koordinat_tipi": "4-komsu_degisim_pikseli_temsil_noktasi"
             },
             {
@@ -36,16 +36,16 @@
           "geometri_nedeni": "yalniz_kose_temasi_8_komsuda_birlestiriyor"
         }
       ],
-      "latest_item": "S2A_T35SMC_20260905T090529_L2A",
+      "latest_item": "S2B_T35SMC_20260908T090037_L2A",
       "diyagonal_birlesmis_ebeveyn": 1,
       "alt_kume_koordinat_sayisi": 2
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2A_T35SMC_20260905T090529_L2A",
+      "son_item": "S2B_T35SMC_20260908T090037_L2A",
       "durum": "ok",
       "ebeveynler": [],
-      "latest_item": "S2A_T35SMC_20260905T090529_L2A",
+      "latest_item": "S2B_T35SMC_20260908T090037_L2A",
       "diyagonal_birlesmis_ebeveyn": 0,
       "alt_kume_koordinat_sayisi": 0
     }
