@@ -37,8 +37,11 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Bağımlılıkları kur
-        run: pip install -r requirements.txt
+      - name: Hafif metadata bağımlılıklarını kur
+        run: pip install 'requests>=2.31,<3' 'numpy>=1.26,<3' 'Pillow>=10,<12'
+
+      - name: Yoklama mantığı öz testi
+        run: python sentinel_scene_probe.py --self-check-only
 
       - name: Sentinel metadata'sında yeni sahne ara
         id: probe
