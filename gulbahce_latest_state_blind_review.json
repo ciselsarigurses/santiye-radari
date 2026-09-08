@@ -8,34 +8,68 @@
   ],
   "durum": "ok",
   "amac": "Gülbahçe 2 km operasyon alanında yalnız EN YENİ Sentinel SCL sahnesinde kalite nedeniyle görülemeyen pikselleri, son açık tarihlerde SCL=4/5 ile bağımsız olarak kara olduğu kanıtlanmış yüzeylerde ölçmek; iki-sahne temporal körlüğünü güncel-sahne körlüğüyle karıştırmamak.",
-  "kaynak_son_tarih": "05.09.2026",
-  "kaynak_son_item": "S2A_T35SMC_20260905T090529_L2A",
-  "coverage_son_tarih": "05.09.2026",
-  "coverage_son_item": "S2A_T35SMC_20260905T090529_L2A",
+  "kaynak_son_tarih": "08.09.2026",
+  "kaynak_son_item": "S2B_T35SMC_20260908T090037_L2A",
+  "coverage_son_tarih": "08.09.2026",
+  "coverage_son_item": "S2B_T35SMC_20260908T090037_L2A",
   "ayni_sentinel_sahnesi": true,
   "kara_referans_sahne_sayisi": 8,
   "kara_referans_tarihleri": [
+    "05.09.2026",
     "03.09.2026",
     "29.08.2026",
     "26.08.2026",
     "24.08.2026",
     "19.08.2026",
     "16.08.2026",
-    "14.08.2026",
-    "09.08.2026"
+    "14.08.2026"
   ],
   "ikili_sahne_korlugu_250plus_diagnostik": 0,
   "guncel_sahne_mikro_kor_150_249": 0,
-  "guncel_sahne_kor_250_6500": 0,
+  "guncel_sahne_kor_250_6500": 3,
   "guncel_sahne_kor_6500ustu": 0,
   "secilen_devriye_eslesen_kor_kume": 0,
   "secilen_devriye_guncel_korlugu_kapsiyor": false,
   "guncel_sahne_mikro_kor_kumeleri": [],
-  "guncel_sahne_kor_kumeleri": [],
+  "guncel_sahne_kor_kumeleri": [
+    {
+      "enlem": 38.34231,
+      "boylam": 26.642621,
+      "alan_m2": 400,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_KARA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": null,
+      "secilen_devriye_kapsiyor": false
+    },
+    {
+      "enlem": 38.341406,
+      "boylam": 26.643308,
+      "alan_m2": 1200,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_KARA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": null,
+      "secilen_devriye_kapsiyor": false
+    },
+    {
+      "enlem": 38.346923,
+      "boylam": 26.641132,
+      "alan_m2": 1600,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_KARA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": null,
+      "secilen_devriye_kapsiyor": false
+    }
+  ],
   "guncel_sahne_buyuk_kor_kumeleri": [],
   "tarihsel_su_kalite_kor_150plus": 0,
   "cozulmemis_yuzey_kalite_kor_150plus": 0,
-  "tarihsel_kara_guncel_su_150plus": 18,
+  "tarihsel_kara_guncel_su_150plus": 15,
   "tarihsel_su_ornekleri": [],
   "cozulmemis_yuzey_ornekleri": [],
   "tarihsel_kara_guncel_su_ornekleri": [
@@ -49,34 +83,7 @@
       "saha_gorevi": false
     },
     {
-      "enlem": 38.32612,
-      "boylam": 26.659335,
-      "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
-      "alarm": false,
-      "saha_gorevi": false
-    },
-    {
-      "enlem": 38.330461,
-      "boylam": 26.652466,
-      "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
-      "alarm": false,
-      "saha_gorevi": false
-    },
-    {
-      "enlem": 38.333084,
-      "boylam": 26.653611,
-      "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
-      "alarm": false,
-      "saha_gorevi": false
-    },
-    {
-      "enlem": 38.334712,
+      "enlem": 38.331366,
       "boylam": 26.653611,
       "alan_m2": 400,
       "neden": "GUNCEL_SCL_SU",
@@ -106,6 +113,33 @@
       "enlem": 38.337969,
       "boylam": 26.651551,
       "alan_m2": 400,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.339054,
+      "boylam": 26.645597,
+      "alan_m2": 400,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.347466,
+      "boylam": 26.641132,
+      "alan_m2": 400,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.329828,
+      "boylam": 26.652352,
+      "alan_m2": 800,
       "neden": "GUNCEL_SCL_SU",
       "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
       "alarm": false,
