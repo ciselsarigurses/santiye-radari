@@ -235,6 +235,9 @@ jobs:
             python cloud_threshold_audit.py
             python reflectance_metadata_audit.py
             python field_state_quality.py
+            # Reset sonrasında guard kodu main'den değişmiş olabilir; yeni kodu
+            # operasyon sırasına uygulamadan önce self-check'i yeniden çalıştır.
+            python postseason_excavation_priority_guard.py --self-check
             python scanner.py
             python source_label_quality.py
             python retain_recent_candidates.py
