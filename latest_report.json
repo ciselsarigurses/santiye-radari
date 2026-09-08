@@ -4101,24 +4101,6 @@
   "temporal_lokal_erken_izleme_notu": "15 Eylül öncesinde yalnız kalibrasyon/izleme; alarm veya saha görevi yok.",
   "kor_alan_saha_devriyesi": [
     {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Uzunkuyu",
-      "enlem": 38.307397,
-      "boylam": 26.56729,
-      "alan_m2": 6001,
-      "neden": "KARISIK_GECERSIZLIK",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.1783,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.307397,26.567290",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307397/26.567290",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
-    },
-    {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "mahalle": "Şifne",
@@ -4132,13 +4114,36 @@
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.341315,26.430692",
+      "saha_gorevi": false,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.341315/26.430692",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+    },
+    {
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.329557,
+      "boylam": 26.674905,
+      "alan_m2": 400,
+      "neden": "BULUT_GOLGE_KALICI",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.1783,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.329557,26.674905",
+      "saha_gorevi": false,
+      "gulbahce_operasyonel_kapsama": true,
+      "gulbahce_referans_mesafesi_m": 2587,
+      "gulbahce_cekirdek_operasyon": false,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329557/26.674905",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-08",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından Çeşme yerel takvim gününe göre günlük rotasyonla en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur ve güvenli alternatif varsa farklı mahallelerden seçilir.",
   "temporal_kalibrasyon_rotasyonu": {
     "durum": "uygulandi",
     "slot_sayisi": 2,
@@ -4170,5 +4175,39 @@
     "durum": "uygulandi",
     "tarih": "2026-09-08",
     "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
+  },
+  "gulbahce_kor_alan_devriye_korumasi": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "aktif_gun": false,
+    "rotasyon_tarihi": "2026-09-08",
+    "operasyonel_yaricap_m": 2000,
+    "yedek_patrol_yaricap_m": 3000,
+    "idari_kadastral_sinir_degildir": true,
+    "uygulandi": false,
+    "uygun_aday_sayisi": 4,
+    "cekirdek_uygun_aday_sayisi": 2,
+    "yedek_uygun_aday_sayisi": 2,
+    "neden": "GENEL_DOGU_ROTASYONU"
+  },
+  "gulbahce_devriye_yuzey_korumasi": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "rotasyon_tarihi": "2026-09-08",
+    "eslesme_yaricapi_m": 25,
+    "inceleme_guncel": true,
+    "arka_plan_kume_sayisi": 8,
+    "uygulandi": true,
+    "elendi": 1,
+    "neden": "SU_KIYI_YERINE_GUVENLI_KARA_KOR_NOKTASI",
+    "secilen": {
+      "enlem": 38.329557,
+      "boylam": 26.674905,
+      "alan_m2": 400,
+      "cekirdek_operasyon": false,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329557/26.674905",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+    }
   }
 }
