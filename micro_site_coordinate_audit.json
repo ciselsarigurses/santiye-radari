@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-05 19:37 +0300",
+  "olusturma": "2026-09-08 19:52 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -9,11 +9,32 @@
   ],
   "amac": "Güçlü mikro diagnostik adayın bağlı bileşen temsilcisi ile aynı bileşendeki en güçlü çoklu-spektral piksel merkezini karşılaştırmak.",
   "uyari": "Sinyal çekirdeği ikinci diagnostik koordinattır; alarm/görev üretmez, adres veya parsel değildir ve mevcut temsilci koordinatını otomatik değiştirmez.",
-  "guclu_aday": 0,
-  "eslesen": 0,
+  "guclu_aday": 1,
+  "eslesen": 1,
   "eslesmeyen": 0,
   "koordinat_incele": 0,
-  "maksimum_sapma_m": 0.0,
-  "adaylar": [],
+  "maksimum_sapma_m": 10.0,
+  "adaylar": [
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "bolge": "cesme",
+      "yaklasik_mevki": "Çiftlikköy",
+      "alan_m2": 200,
+      "enlem": 38.287679,
+      "boylam": 26.266305,
+      "sinyal_cekirdegi_enlem": 38.287679,
+      "sinyal_cekirdegi_boylam": 26.26642,
+      "sinyal_cekirdegi_sapma_m": 10.0,
+      "koordinat_kalitesi": "KOMSULUK_ICI_10M",
+      "cekirdek_skor": 9.7153,
+      "cekirdek_rgb_degisim": 0.3268,
+      "cekirdek_ndvi_kaybi": 0.2878,
+      "cekirdek_parlaklik_artisi": 0.3268,
+      "temsilci_harita": "https://www.google.com/maps/search/?api=1&query=38.287679,26.266305",
+      "cekirdek_harita": "https://www.google.com/maps/search/?api=1&query=38.287679,26.266420",
+      "latest_item": "S2B_T35SMC_20260908T090037_L2A"
+    }
+  ],
   "eslesmeyen_adaylar": []
 }

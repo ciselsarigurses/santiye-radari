@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-08 19:42 +0300",
+  "olusturma": "2026-09-08 19:52 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -13,8 +13,8 @@
     "cesme": {
       "durum": "ok",
       "olculen": 1,
-      "sinif_farki": 1,
-      "ani_destek_farki": 1,
+      "sinif_farki": 0,
+      "ani_destek_farki": 0,
       "devam_destek_farki": 0,
       "adaylar": [
         {
@@ -46,8 +46,8 @@
           "en_yakin_250plus_m": 969,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": true,
-          "3x3_temporal_sinif": null,
-          "3x3_ani_baslangic": false,
+          "3x3_temporal_sinif": "ANI_BASLANGIC_DESTEGI",
+          "3x3_ani_baslangic": true,
           "3x3_devam_eden": false,
           "bilesen_eslesti": true,
           "bilesen_esleme_piksel_mesafesi": 0.0,
@@ -60,10 +60,10 @@
           "bilesen_ani_baslangic": true,
           "bilesen_devam_eden": false,
           "bilesen_onceki_zemin_hareketli_riski": false,
-          "sinif_farki": true,
-          "ani_destek_farki": true,
+          "sinif_farki": false,
+          "ani_destek_farki": false,
           "devam_destek_farki": false,
-          "ornekleme_riski": "3x3_lokal_sinyali_seyreltmis_olabilir"
+          "ornekleme_riski": "uyumlu"
         }
       ]
     },
@@ -76,10 +76,10 @@
   "toplam": {
     "olculen": 1,
     "bilesen_eslesmeyen": 0,
-    "sinif_farki": 1,
-    "ani_destek_farki": 1,
+    "sinif_farki": 0,
+    "ani_destek_farki": 0,
     "devam_destek_farki": 0,
     "3x3_cevre_sinyali_olasi": 0,
-    "3x3_lokal_sinyali_seyreltmis_olabilir": 1
+    "3x3_lokal_sinyali_seyreltmis_olabilir": 0
   }
 }
