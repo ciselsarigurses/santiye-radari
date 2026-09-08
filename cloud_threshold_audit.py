@@ -7,6 +7,11 @@ Bu denetim eşiği gevşetmeden daha geniş metadata araması yapar ve üretimde
 sahneden daha yeni, tam-kapsam ve karşılaştırılabilir sahneler varsa yalnız SCL
 bandını kaba ölçekte okuyarak AOI içindeki gerçek geçici kapanma oranını ölçer.
 
+Tam üretim kutusunun ortalama kapanma oranı yüksek olduğunda dahi küçük bir hafriyat
+alanı açık kalabilir. Bu yüzden aynı SCL okuması üzerinde, suyu açık arazi saymadan,
+yaklaşık 2 km'lik kara pencereleri de taranır. Böylece sırf geniş kutunun çoğu bulutlu
+diye Çeşme/Uzunkuyu/Gülbahçe içindeki lokal açık bir geçiş sessizce kaçmaz.
+
 Gülbahçe, Uzunkuyu üretim kutusunun içinde olsa da ayrı bir 2 km operasyonel pencere
 olarak ayrıca denetlenir. Böylece Uzunkuyu kutusunun genel bulut oranı Gülbahçe'de
 yerel olarak açık, daha yeni bir sahneyi görünmez kılmaz.
@@ -38,6 +43,12 @@ AUDIT_MAX_CLOUD = 100.01
 LOCAL_BLOCKED_MAX_PERCENT = 25.0
 AUDIT_PIXEL_SIZE_M = 40
 AUDIT_MAX_DIMENSION = 800
+# Global/üretim kutusunun ortalaması bulutlu olsa bile küçük, kullanılabilir kara
+# ceplerini kaçırmamak için aynı SCL rasterında 2 km pencereyi 1 km adımla tara.
+# Deniz/kıyı penceresinin yalancı "açık" sayılmaması için en az %50 kara gerekir.
+LOCAL_LAND_WINDOW_M = 2_000
+LOCAL_LAND_WINDOW_STRIDE_M = 1_000
+LOCAL_LAND_MIN_PERCENT = 50.0
 OUTPUT_FILE = Path(__file__).with_name("cloud_threshold_audit.json")
 
 # Gülbahçe operasyonel referansıdır; idari/kadastral sınır veya ada-parsel değildir.
@@ -71,13 +82,13 @@ def _blocked_percent(scl):
     return float(np.isin(array, LOCAL_BLOCKED_CLASSES).mean() * 100)
 
 
-def _local_blocked_percent(item, bbox):
+def _read_local_scl(item, bbox):
     height, width = satellite._output_shape(
         bbox,
         target_pixel_m=AUDIT_PIXEL_SIZE_M,
         max_dimension=AUDIT_MAX_DIMENSION,
     )
-    scl = satellite._read_asset(
+    return satellite._read_asset(
         item,
         "scl",
         bbox,
@@ -85,7 +96,99 @@ def _local_blocked_percent(item, bbox):
         width,
         "nearest",
     )[0]
-    return _blocked_percent(scl)
+
+
+def _local_blocked_percent(item, bbox):
+    return _blocked_percent(_read_local_scl(item, bbox))
+
+
+def _grid_starts(size, window, stride):
+    """Son kenarı da kapsayacak pencere başlangıçlarını deterministik üretir."""
+    size = max(int(size), 1)
+    window = min(max(int(window), 1), size)
+    stride = max(int(stride), 1)
+    last = size - window
+    starts = list(range(0, last + 1, stride))
+    if not starts or starts[-1] != last:
+        starts.append(last)
+    return starts, window
+
+
+def _best_land_window(
+    scl,
+    bbox,
+    window_m=LOCAL_LAND_WINDOW_M,
+    stride_m=LOCAL_LAND_WINDOW_STRIDE_M,
+    min_land_percent=LOCAL_LAND_MIN_PERCENT,
+):
+    """Aynı SCL görüntüsündeki en açık yeterli-kara lokal pencereyi bulur.
+
+    Su SCL=6, bu denetimde bulut sayılmaz; ancak yalnız denizden oluşan bir pencerenin
+    ``%0 kapalı`` diye erken-sahne kanıtı üretmesini de istemiyoruz. Bu yüzden aday
+    pencerenin en az ``min_land_percent`` oranında su-dışı piksel içermesi gerekir ve
+    kapanma oranı yalnız bu su-dışı pikseller üzerinde hesaplanır.
+    """
+    array = np.asarray(scl, dtype="uint8")
+    if array.ndim != 2 or not array.size:
+        return None
+
+    height, width = array.shape
+    west, south, east, north = map(float, bbox)
+    mean_latitude = (south + north) / 2
+    pixel_width_m = abs(east - west) * 111320 * math.cos(math.radians(mean_latitude)) / width
+    pixel_height_m = abs(north - south) * 110570 / height
+    if pixel_width_m <= 0 or pixel_height_m <= 0:
+        return None
+
+    window_rows = max(1, round(float(window_m) / pixel_height_m))
+    window_cols = max(1, round(float(window_m) / pixel_width_m))
+    stride_rows = max(1, round(float(stride_m) / pixel_height_m))
+    stride_cols = max(1, round(float(stride_m) / pixel_width_m))
+    row_starts, window_rows = _grid_starts(height, window_rows, stride_rows)
+    col_starts, window_cols = _grid_starts(width, window_cols, stride_cols)
+
+    best = None
+    for row_start in row_starts:
+        for col_start in col_starts:
+            window = array[
+                row_start:row_start + window_rows,
+                col_start:col_start + window_cols,
+            ]
+            if not window.size:
+                continue
+            land = window != 6
+            land_count = int(np.count_nonzero(land))
+            land_percent = 100.0 * land_count / window.size
+            if land_count == 0 or land_percent < float(min_land_percent):
+                continue
+
+            blocked = np.isin(window, LOCAL_BLOCKED_CLASSES) & land
+            blocked_percent = 100.0 * int(np.count_nonzero(blocked)) / land_count
+            center_row = row_start + window.shape[0] / 2
+            center_col = col_start + window.shape[1] / 2
+            latitude = north - center_row / height * (north - south)
+            longitude = west + center_col / width * (east - west)
+            candidate = {
+                "kapali_yuzde": round(blocked_percent, 2),
+                "kara_yuzde": round(land_percent, 2),
+                "merkez_enlem": round(latitude, 6),
+                "merkez_boylam": round(longitude, 6),
+                "yaklasik_pencere_m": int(window_m),
+                "adim_m": int(stride_m),
+            }
+            if best is None or (
+                candidate["kapali_yuzde"],
+                -candidate["kara_yuzde"],
+                candidate["merkez_enlem"],
+                candidate["merkez_boylam"],
+            ) < (
+                best["kapali_yuzde"],
+                -best["kara_yuzde"],
+                best["merkez_enlem"],
+                best["merkez_boylam"],
+            ):
+                best = candidate
+    return best
 
 
 def _can_anchor_pair(candidate, broad_items, bbox):
@@ -175,7 +278,13 @@ def audit_target(target):
             continue
         if not _can_anchor_pair(item, broad_items, bbox):
             continue
-        local_blocked = _local_blocked_percent(item, bbox)
+        scl = _read_local_scl(item, bbox)
+        local_blocked = _blocked_percent(scl)
+        best_land_window = _best_land_window(scl, bbox)
+        land_window_open = bool(
+            best_land_window
+            and float(best_land_window["kapali_yuzde"]) <= LOCAL_BLOCKED_MAX_PERCENT
+        )
         newer_timed.append(
             (
                 item_time,
@@ -185,6 +294,8 @@ def audit_target(target):
                     "global_bulut": round(_global_cloud(item), 2),
                     "aoi_kapali": round(local_blocked, 2),
                     "aoi_yeterince_acik": local_blocked <= LOCAL_BLOCKED_MAX_PERCENT,
+                    "lokal_kara_pencere": best_land_window,
+                    "lokal_kara_pencere_yeterince_acik": land_window_open,
                 },
             )
         )
@@ -247,6 +358,25 @@ def _self_check():
     shadow = np.full((10, 10), 2, dtype="uint8")
     assert _blocked_percent(shadow) == 100.0
 
+    # Geniş AOI çoğunlukla kapalıyken 2 km'lik açık kara cebi görünür kalmalıdır.
+    # Sağ yarı deniz olsa bile yalnız su penceresi "açık kara" diye seçilemez.
+    synthetic_bbox = [26.0, 38.0, 26.1, 38.1]
+    synthetic = np.full((100, 100), 9, dtype="uint8")
+    synthetic[:, 70:] = 6
+    synthetic[35:55, 35:55] = 4
+    best = _best_land_window(
+        synthetic,
+        synthetic_bbox,
+        window_m=2_000,
+        stride_m=1_000,
+        min_land_percent=50.0,
+    )
+    assert best is not None, best
+    assert best["kara_yuzde"] >= 50.0, best
+    assert best["kapali_yuzde"] < LOCAL_BLOCKED_MAX_PERCENT, best
+    pure_water = np.full((40, 40), 6, dtype="uint8")
+    assert _best_land_window(pure_water, synthetic_bbox) is None
+
     # İnsan-okur tarih metni DD.MM.YYYY olduğundan ay değişiminde leksikografik
     # sıralama yanlış sonuç verir (31.08, 01.09'un önüne geçer). Gerçek zaman anahtarı
     # Ağustos→Eylül sınırında özellikle korunmalı.
@@ -286,21 +416,36 @@ def main():
 
         results.append(result)
         candidates = result["newer_candidates"]
-        actionable = [row for row in candidates if row["aoi_yeterince_acik"]]
+        actionable = [
+            row for row in candidates
+            if row["aoi_yeterince_acik"]
+            or row.get("lokal_kara_pencere_yeterince_acik")
+        ]
         blind_spots.extend((target["key"], row) for row in actionable)
         if actionable:
-            detail = ", ".join(
-                f"{row['item']} global %{row['global_bulut']:.1f} / "
-                f"AOI kapalı %{row['aoi_kapali']:.1f}"
-                for row in actionable
-            )
+            detail_parts = []
+            for row in actionable:
+                local = row.get("lokal_kara_pencere") or {}
+                if row["aoi_yeterince_acik"]:
+                    detail_parts.append(
+                        f"{row['item']} global %{row['global_bulut']:.1f} / "
+                        f"AOI kapalı %{row['aoi_kapali']:.1f}"
+                    )
+                else:
+                    detail_parts.append(
+                        f"{row['item']} global %{row['global_bulut']:.1f} / "
+                        f"AOI kapalı %{row['aoi_kapali']:.1f} / "
+                        f"lokal kara penceresi kapalı %{float(local.get('kapali_yuzde', 100)):.1f}"
+                    )
             summaries.append(
-                f"{target['key']}: DAHA YENİ AÇIK AOI ADAYI → {detail}"
+                f"{target['key']}: DAHA YENİ AÇIK AOI/LOKAL KARA ADAYI → "
+                + ", ".join(detail_parts)
             )
         elif candidates:
             summaries.append(
                 f"{target['key']}: {len(candidates)} daha yeni global-bulutlu sahne var; "
-                "AOI içi kapanma da yüksek, üretim eşiği şimdilik güvenli"
+                "AOI ve en açık yeterli-kara lokal pencere de fazla kapalı, "
+                "üretim eşiği şimdilik güvenli"
             )
         else:
             summaries.append(
@@ -317,6 +462,9 @@ def main():
         "uretim_global_bulut_esigi_yuzde": PRODUCTION_MAX_CLOUD,
         "yerel_kapali_esik_yuzde": LOCAL_BLOCKED_MAX_PERCENT,
         "audit_piksel_m": AUDIT_PIXEL_SIZE_M,
+        "lokal_kara_pencere_m": LOCAL_LAND_WINDOW_M,
+        "lokal_kara_pencere_adim_m": LOCAL_LAND_WINDOW_STRIDE_M,
+        "lokal_kara_min_yuzde": LOCAL_LAND_MIN_PERCENT,
         "alarm_uretmez": True,
         "saha_gorevi_uretmez": True,
         "dikkat_hedef_aday_sayisi": len(blind_spots),
@@ -328,9 +476,9 @@ def main():
     print("Sentinel global-bulut körlük denetimi: " + " | ".join(summaries))
     if blind_spots:
         print(
-            "DİKKAT: global eo:cloud_cover filtresi AOI içinde kullanılabilir daha yeni "
-            "Sentinel sahnesini geciktiriyor olabilir; üretim seçimi değiştirilmeden "
-            "önce bu sahne ayrıca doğrulanmalı."
+            "DİKKAT: global eo:cloud_cover filtresi AOI veya yeterli-kara lokal pencerede "
+            "kullanılabilir daha yeni Sentinel sahnesini geciktiriyor olabilir; üretim "
+            "seçimi değiştirilmeden önce bu sahne ayrıca doğrulanmalı."
         )
     if warnings:
         # Bu katman üretim alarmı üretmeyen tanısal bir denetimdir. Geçici STAC/COG
