@@ -1,0 +1,145 @@
+name: MİKRO Sentinel Tazelik Köprüsü
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "candidate_capacity_audit.json"
+      - ".github/workflows/micro-freshness-bridge.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: mikro-sentinel-tazelik-koprusu
+  cancel-in-progress: false
+
+jobs:
+  freshness-bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Depoyu güncel main'den al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Tazelik karşılaştırma öz testini çalıştır
+        shell: bash
+        run: |
+          python - <<'PY'
+          from datetime import date, datetime
+
+          def scene_date(item):
+              if not item:
+                  return None
+              parts = str(item).split("_")
+              for part in parts:
+                  if len(part) >= 8 and part[:8].isdigit():
+                      try:
+                          return datetime.strptime(part[:8], "%Y%m%d").date()
+                      except ValueError:
+                          pass
+              return None
+
+          def micro_date(value):
+              try:
+                  return date.fromisoformat(str(value))
+              except (TypeError, ValueError):
+                  return None
+
+          assert scene_date("S2B_T35SMC_20260908T090037_L2A") == date(2026, 9, 8)
+          assert micro_date("2026-09-05") == date(2026, 9, 5)
+          assert date(2026, 9, 8) > date(2026, 9, 5)
+          assert not (date(2026, 9, 8) > date(2026, 9, 8))
+          PY
+
+      - name: Ana 250 m² Sentinel sahnesi MİKRO'dan daha yeni mi kontrol et
+        id: freshness
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from datetime import date, datetime
+          from pathlib import Path
+
+          MAIN = Path("candidate_capacity_audit.json")
+          MICRO = Path("micro_site_shortlist.json")
+
+          def parse_scene_date(item):
+              if not item:
+                  return None
+              for part in str(item).split("_"):
+                  if len(part) >= 8 and part[:8].isdigit():
+                      try:
+                          return datetime.strptime(part[:8], "%Y%m%d").date()
+                      except ValueError:
+                          continue
+              return None
+
+          def parse_iso_date(value):
+              try:
+                  return date.fromisoformat(str(value))
+              except (TypeError, ValueError):
+                  return None
+
+          if not MAIN.exists() or not MICRO.exists():
+              raise SystemExit("Tazelik karşılaştırması için ana veya MİKRO diagnostik dosyası eksik.")
+
+          main = json.loads(MAIN.read_text(encoding="utf-8"))
+          micro = json.loads(MICRO.read_text(encoding="utf-8"))
+
+          main_dates = []
+          for region in (main.get("bolgeler") or {}).values():
+              d = parse_scene_date(region.get("latest_item") or region.get("son_item"))
+              if d:
+                  main_dates.append(d)
+
+          micro_dates = [
+              d for d in (parse_iso_date(v) for v in (micro.get("sentinel_tarihleri") or [])) if d
+          ]
+
+          if not main_dates:
+              raise SystemExit("Ana 250 m² diagnostikte geçerli Sentinel sahne tarihi bulunamadı.")
+
+          main_latest = max(main_dates)
+          micro_latest = max(micro_dates) if micro_dates else None
+          needs_micro = micro_latest is None or main_latest > micro_latest
+
+          print(f"Ana Sentinel: {main_latest.isoformat()}")
+          print(f"MİKRO Sentinel: {micro_latest.isoformat() if micro_latest else 'yok'}")
+          print(f"MİKRO yenileme gerekli: {needs_micro}")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+              fh.write(f"needs_micro={'true' if needs_micro else 'false'}\n")
+              fh.write(f"main_latest={main_latest.isoformat()}\n")
+              fh.write(f"micro_latest={micro_latest.isoformat() if micro_latest else 'none'}\n")
+          PY
+
+      - name: Yalnız MİKRO Sentinel katmanı gerçekten gerideyse taramayı başlat
+        if: steps.freshness.outputs.needs_micro == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          response_code="$(curl -sS -o /tmp/micro-dispatch-response.txt -w '%{http_code}' \
+            -L -X POST \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "https://api.github.com/repos/${REPOSITORY}/actions/workflows/micro-site-audit.yml/dispatches" \
+            -d '{"ref":"main"}')"
+          if [[ "$response_code" != "204" ]]; then
+            cat /tmp/micro-dispatch-response.txt
+            echo "MİKRO diagnostik workflow'u başlatılamadı; HTTP ${response_code}."
+            exit 1
+          fi
+          echo "Ana Sentinel sahnesi MİKRO katmandan daha yeni olduğu için diagnostik tarama tetiklendi."
+
+      - name: MİKRO zaten güncelse tekrar tarama üretme
+        if: steps.freshness.outputs.needs_micro != 'true'
+        run: echo "MİKRO Sentinel diagnostigi ana 250 m² sahneyle aynı güncel seviyede; tekrar tarama yok."
