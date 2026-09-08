@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-08",
-  "olusturma": "2026-09-08 06:13 +0300",
+  "olusturma": "2026-09-08 18:19 +0300",
   "amac": "Mevcut 250-900 m² kuru-zemin teyit geçidinin üstünde kalan 901-2.000 m² güçlü temporal/izole adayları yalnız kalibrasyon için görünür kılmak.",
   "ana_uretim_esigi_m2": 250,
   "mevcut_kuru_zemin_dogrulama_ust_siniri_m2": 900,
@@ -15,14 +15,14 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2A_T35SMC_20260905T090529_L2A",
+      "son_item": "S2B_T35SMC_20260908T090037_L2A",
       "guclu_temporal_ust_bant": 0,
       "ana_gorevle_zaten_kapsanan": 0,
       "yerellik_testi_gereken": 0
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2A_T35SMC_20260905T090529_L2A",
+      "son_item": "S2B_T35SMC_20260908T090037_L2A",
       "guclu_temporal_ust_bant": 0,
       "ana_gorevle_zaten_kapsanan": 0,
       "yerellik_testi_gereken": 0
