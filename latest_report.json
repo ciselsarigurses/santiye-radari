@@ -4742,7 +4742,10 @@
     "uygun_aday_sayisi": 4,
     "cekirdek_uygun_aday_sayisi": 1,
     "yedek_uygun_aday_sayisi": 3,
-    "neden": "GENEL_DOGU_ROTASYONU"
+    "neden": "GENEL_DOGU_ROTASYONU",
+    "guncel_sahne_kor_kaynak_tarihi": "08.09.2026",
+    "guncel_sahne_kor_uygun_aday_sayisi": 3,
+    "guncel_sahne_korlugu_kullanildi": false
   },
   "gulbahce_devriye_yuzey_korumasi": {
     "alarm": false,
