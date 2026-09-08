@@ -1,9 +1,9 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-09-08
-**Hazırlanma:** 2026-09-08 17:49 +03
+**Hazırlanma:** 2026-09-08 18:10 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 14 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır · Gülbahçe: 4 hareket bölgesi adayı · Aktif saha görevi: 139 · Geciken kontrol: 126 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)
+**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 13 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır · Gülbahçe: 4 hareket bölgesi adayı · Aktif saha görevi: 138 · Geciken kontrol: 126 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
@@ -1403,16 +1403,6 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Sinyal:** Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Geniş bitişik zemin/yüzey değişimi.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.362661,26.309348)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 139. NORMAL — Mevki doğrulanmadı
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
-- **Koordinat:** `38.222918, 26.391885`
-- **Değişim alanı:** yaklaşık 1.600 m²
-- **Görüntü aralığı:** 05.09.2026 → 08.09.2026
-- **Sinyal:** Zaman serisi 29.08.2026→05.09.2026; en yeni 08.09.2026 görüntüsünde bulut/gölge, son açık kanıt · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.222918,26.391885)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ## Bugünün yeni internet / sosyal medya bulguları
