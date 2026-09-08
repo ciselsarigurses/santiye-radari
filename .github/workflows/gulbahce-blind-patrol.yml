@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "gulbahce_blind_patrol_guard.py"
+      - "gulbahce_current_blind_patrol_bridge.py"
       - "gulbahce_patrol_surface_guard.py"
       - "gulbahce_latest_state_blind_review.py"
       - "gulbahce_micro_blind_capacity.json"
@@ -53,13 +54,22 @@ jobs:
       - name: Gülbahçe kör alan temsil koruması öz testi
         run: python gulbahce_blind_patrol_guard.py --check-only
 
-      - name: Gülbahçe kör alan temsilini uygula
+      - name: Gülbahçe tarihsel kör alan temsilini uygula
         run: python gulbahce_blind_patrol_guard.py
 
       - name: Gülbahçe gerçek güncel-sahne körlük diagnostigi öz testi
         run: python gulbahce_latest_state_blind_review.py --check-only
 
       - name: En yeni sahne körlüğünü tarihsel kara/su kanıtıyla doğrula
+        run: python gulbahce_latest_state_blind_review.py
+
+      - name: Gülbahçe güncel-sahne körlük devriye köprüsü öz testi
+        run: python gulbahce_current_blind_patrol_bridge.py --check-only
+
+      - name: Güncel-sahne körlüğünü Gülbahçe duty devriyesinde öncele
+        run: python gulbahce_current_blind_patrol_bridge.py
+
+      - name: Seçilen devriyenin güncel körlüğü kapsamasını yeniden ölç
         run: python gulbahce_latest_state_blind_review.py
 
       - name: Gülbahçe su-kıyı devriye koruması öz testi
@@ -83,6 +93,9 @@ jobs:
             python gulbahce_blind_patrol_guard.py --check-only
             python gulbahce_blind_patrol_guard.py
             python gulbahce_latest_state_blind_review.py --check-only
+            python gulbahce_latest_state_blind_review.py
+            python gulbahce_current_blind_patrol_bridge.py --check-only
+            python gulbahce_current_blind_patrol_bridge.py
             python gulbahce_latest_state_blind_review.py
             python gulbahce_patrol_surface_guard.py --check-only
             python gulbahce_patrol_surface_guard.py
