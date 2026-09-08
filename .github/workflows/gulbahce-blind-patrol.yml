@@ -8,6 +8,7 @@ on:
       - "gulbahce_patrol_surface_guard.py"
       - "gulbahce_latest_state_blind_review.py"
       - "gulbahce_micro_blind_capacity.json"
+      - "parcel_precheck_links.py"
       - "requirements.txt"
       - ".github/workflows/gulbahce-blind-patrol.yml"
   workflow_run:
@@ -67,6 +68,12 @@ jobs:
       - name: Güncel su-kıyı yüzeyini kör alan devriyesinden ayır
         run: python gulbahce_patrol_surface_guard.py
 
+      - name: Manuel parsel ön-kontrol katmanı öz testi
+        run: python parcel_precheck_links.py --self-check
+
+      - name: Gülbahçe raporunda parsel ön-kontrol bilgisini koru
+        run: python parcel_precheck_links.py
+
       - name: Güvenli rapor değişikliğini kaydet
         run: |
           report_files="latest_report.json SAHA_RAPORU.md gulbahce_latest_state_blind_review.json"
@@ -79,6 +86,8 @@ jobs:
             python gulbahce_latest_state_blind_review.py
             python gulbahce_patrol_surface_guard.py --check-only
             python gulbahce_patrol_surface_guard.py
+            python parcel_precheck_links.py --self-check
+            python parcel_precheck_links.py
           }
 
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
