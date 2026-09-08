@@ -9,6 +9,8 @@ on:
     paths:
       - "micro_site_temporal_footprint_audit.py"
       - "micro_site_footprint_priority_review.py"
+      - "micro_proximity_priority_bridge.py"
+      - "micro_proximity_temporal_probe.json"
       - "micro_site_watchlist.py"
       - "micro_borderline_watchlist_guard.py"
       - "micro_site_identity_guard.py"
@@ -66,6 +68,12 @@ jobs:
 
       - name: Bileşen temporal ve lokal kanıtını güvenli diagnostik öncelikte birleştir
         run: python micro_site_footprint_priority_review.py
+
+      - name: Yakın-ana temporal bridge öz testini çalıştır
+        run: python micro_proximity_priority_bridge.py --check-only
+
+      - name: Yakın-ana temporal kanıtı arka-plan footprint diagnostikte koru
+        run: python micro_proximity_priority_bridge.py
 
       - name: Güçlü mikro aday izleme öz testini çalıştır
         run: python micro_site_watchlist.py --check-only
