@@ -1,12 +1,12 @@
 {
   "rapor_tarihi": "2026-09-09",
-  "olusturma": "2026-09-09 19:22 +03",
+  "olusturma": "2026-09-09 20:08 +03",
   "amac": "24 aday tavanının ve 8-komşu piksel geometrisinin 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
   "diagnostik_santiye_olcegi_m2": [
     800,
     10000
   ],
-  "sinir_notu": "800 m² ana Sentinel motorunda küçük-saha bandına dahildir; şantiye-ölçeği diagnostik sınıfı 800 m² üstünde başlar.",
+  "sinir_notu": "800 m² ana Sentinel motorunda küçük-saha bandına dahildir; fakat alan ekranda tam sayıya yuvarlandığı için 800 görünen STANDART bir aday gerçek alanda 800 m²'nin az üstünde olabilir. Diagnostik varsa üretimin boyut_sinifi etiketini esas alır; şantiye-ölçeği sınıfı gerçek alanda 800 m² üstünde başlar.",
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
@@ -21,18 +21,18 @@
       "ham_secimden_farkli": 0,
       "tavana_ulasti": false,
       "ham_olcek_dagilimi": {
-        "kucuk_250_800": 1,
-        "santiye_olcegi_800_10000": 12,
+        "kucuk_250_800": 0,
+        "santiye_olcegi_800_10000": 13,
         "genis_10000_ustu": 0
       },
       "tavan_sonrasi_olcek_dagilimi": {
-        "kucuk_250_800": 1,
-        "santiye_olcegi_800_10000": 12,
+        "kucuk_250_800": 0,
+        "santiye_olcegi_800_10000": 13,
         "genis_10000_ustu": 0
       },
       "raporda_olcek_dagilimi": {
-        "kucuk_250_800": 1,
-        "santiye_olcegi_800_10000": 12,
+        "kucuk_250_800": 0,
+        "santiye_olcegi_800_10000": 13,
         "genis_10000_ustu": 0
       },
       "tavan_disinda_olcek_dagilimi": {
@@ -49,8 +49,8 @@
         "sekiz_komsu_gecerli_aday": 13,
         "dort_komsu_gecerli_aday": 14,
         "diyagonal_birlesmis_ebeveyn": 1,
-        "ayrisan_kucuk_250_800": 1,
-        "ayrisan_santiye_olcegi_800_10000": 1,
+        "ayrisan_kucuk_250_800": 0,
+        "ayrisan_santiye_olcegi_800_10000": 2,
         "genis_ebeveynden_ayrisan_250_10000": 0,
         "ornekler": [
           {
@@ -80,18 +80,18 @@
       "ham_secimden_farkli": 0,
       "tavana_ulasti": false,
       "ham_olcek_dagilimi": {
-        "kucuk_250_800": 2,
-        "santiye_olcegi_800_10000": 2,
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 3,
         "genis_10000_ustu": 0
       },
       "tavan_sonrasi_olcek_dagilimi": {
-        "kucuk_250_800": 2,
-        "santiye_olcegi_800_10000": 2,
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 3,
         "genis_10000_ustu": 0
       },
       "raporda_olcek_dagilimi": {
-        "kucuk_250_800": 2,
-        "santiye_olcegi_800_10000": 2,
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 3,
         "genis_10000_ustu": 0
       },
       "tavan_disinda_olcek_dagilimi": {
