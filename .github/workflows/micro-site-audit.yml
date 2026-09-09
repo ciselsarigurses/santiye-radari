@@ -16,7 +16,7 @@ on:
     - cron: "25 8,12,16 * * *"
   workflow_run:
     # Saatlik probe yeni sahne bulduğunda önce ana 250 m² tarama tamamlanır;
-    # MİKRO ancak o workflow başarıyla bittikten sonra aynı DB-write grubuna girer.
+    # MİKRO yalnız başarılı workflow_dispatch zincirinde çalıştırılır.
     workflows: ["Günlük Şantiye Taraması"]
     types: [completed]
     branches: [main]
@@ -26,8 +26,10 @@ permissions:
   contents: write
 
 concurrency:
-  # Radarın diğer bot commit'leriyle SQLite/rapor yazma yarışına girme.
-  group: santiye-radari-db-write
+  # Bu katman santiye.db yazmaz; yalnız MİKRO/Gülbahçe diagnostik JSON'larını
+  # güvenli yeniden-hesaplama ile günceller. Ana DB kuyruğunu paylaşması aynı
+  # satellite.py push'ında günlük taramayı başlamadan iptal edebiliyordu.
+  group: santiye-radari-micro-diagnostic
   cancel-in-progress: false
 
 jobs:
