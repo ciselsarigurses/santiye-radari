@@ -1,7 +1,7 @@
 """250 m²+ Sentinel adaylarında şantiye-ölçeği şekil riskini görünür kılar.
 
 Mevcut ``shape_false_positive_audit.py`` uzun-ince/düşük-kompaktlık metriklerini
-800-10.000 m² bandı için sayıyor fakat örnek koordinatları yalnız 10.000 m² üstü
+800 m² üstü-10.000 m² bandı için sayıyor fakat örnek koordinatları yalnız 10.000 m² üstü
 geniş-yüzey sınıfında yayımlıyor. Bu diagnostik katman o boşluğu kapatır.
 
 Hiçbir adayı silmez, alarm/rota/saha görevi üretmez ve 250 m² ana üretim eşiğine
@@ -25,7 +25,10 @@ from scanner import connect
 
 
 OUTPUT_FILE = Path(__file__).with_name("site_scale_shape_risk_review.json")
-SITE_SCALE_MIN_M2 = 800
+# Ana motor 250-800 m² bandını üst sınır DAHİL küçük-saha olarak işler. Diagnostik
+# de aynı sınıf sözleşmesini izlemeli; tam 800 m² zayıf bir küme standart şekil
+# bandına sızmamalıdır.
+SITE_SCALE_MIN_M2 = satellite.SMALL_HOTSPOT_MAX_M2
 SITE_SCALE_MAX_M2 = 10_000
 EXAMPLE_LIMIT = 8
 
@@ -39,7 +42,7 @@ def _site_scale_risks(records):
             area = float(raw.get("alan_m2") or 0)
         except (TypeError, ValueError):
             continue
-        if not (SITE_SCALE_MIN_M2 <= area <= SITE_SCALE_MAX_M2):
+        if not (SITE_SCALE_MIN_M2 < area <= SITE_SCALE_MAX_M2):
             continue
         long_thin = bool(raw.get("uzun_ince"))
         low_compactness = bool(raw.get("dusuk_kompaktlik"))
@@ -126,7 +129,12 @@ def _self_check():
     assert risks[0]["sekil_riski"] == "DUSUK_KOMPAKTLIK", risks
     assert all(item["alarm"] is False for item in risks), risks
     assert all(item["saha_gorevi"] is False for item in risks), risks
-    assert _site_scale_risks([{**records[0], "alan_m2": 800}]), "800 m² dahil olmalı"
+    assert not _site_scale_risks(
+        [{**records[0], "alan_m2": satellite.SMALL_HOTSPOT_MAX_M2}]
+    ), "Tam 800 m² ana motor gibi küçük-saha bandında kalmalı"
+    assert _site_scale_risks(
+        [{**records[0], "alan_m2": satellite.SMALL_HOTSPOT_MAX_M2 + 0.01}]
+    ), "800 m² üstü şantiye-ölçeği diagnostik banda girmeli"
     assert _site_scale_risks([{**records[0], "alan_m2": 10000}]), "10.000 m² dahil olmalı"
 
 
@@ -233,6 +241,7 @@ def build_review():
         "ana_sentinel_esigi_m2": satellite.MIN_HOTSPOT_AREA_M2,
         "mikro_aralik_m2": [150, 249],
         "diagnostik_sekil_risk_bandi_m2": [SITE_SCALE_MIN_M2, SITE_SCALE_MAX_M2],
+        "diagnostik_alt_sinir_dahil": False,
         "esikler": {
             "uzun_ince_min_uzun_kisa_orani": shape_audit.LONG_THIN_ASPECT_MIN,
             "dusuk_kompaktlik_max": shape_audit.LOW_COMPACTNESS_MAX,
@@ -241,7 +250,7 @@ def build_review():
         "bolgeler": regions,
         "yorum": (
             "Şekil riski tek başına yol, tarla veya yanlış pozitif kararı değildir. "
-            "800-10.000 m² bandındaki uzun-ince/düşük-kompakt kümeler silinmez; "
+            "800 m² üstü-10.000 m² bandındaki uzun-ince/düşük-kompakt kümeler silinmez; "
             "temporal/lokal değişim, saha geri bildirimi ve güvenilir ek kanıtla "
             "kalibre edilmek üzere koordinatlı arka-plan diagnostik olarak tutulur. "
             "250 m² ana eşik ve 150-249 m² MİKRO politikası değişmez."
