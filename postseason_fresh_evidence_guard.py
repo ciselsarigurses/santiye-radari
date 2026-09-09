@@ -91,6 +91,15 @@ def _retained_fresh_candidate(item, local_day=None):
     if evidence_day is None or evidence_day < base.FULL_OPERATION_START or evidence_day > day:
         return False
 
+    # ``uydu_kanit_yasi_gun`` rapor metadata'sı carry-forward/hydration sırasında
+    # yanlışlıkla genç kalırsa eski bir Sentinel sahnesi taze-kazı bandında tutulmamalı.
+    # Sahne tarihinden yaşı bağımsız hesapla; iki kaynak da retention penceresini
+    # sağlamalıdır. Böylece bir metadata sapması eski backlog'u 15 Eylül sonrası
+    # operasyon rotasında yapay olarak öne çıkaramaz.
+    scene_age_days = (day - evidence_day).days
+    if scene_age_days < 0 or scene_age_days > RETENTION_DAYS:
+        return False
+
     evidence_age = _int_value(item.get("uydu_kanit_yasi_gun"))
     if evidence_age is None or evidence_age > RETENTION_DAYS:
         return False
@@ -258,6 +267,16 @@ def _self_check():
     )
     assert not _retained_fresh_candidate(
         _candidate("STALE", uydu_kanit_yasi_gun=RETENTION_DAYS + 1), day
+    )
+    # Metadata yanlışlıkla genç kalsa bile sahne tarihinin gerçek yaşı retention'ı
+    # aşmışsa aday eski backlog'un önünde tutulmamalı.
+    assert not _retained_fresh_candidate(
+        _candidate(
+            "STALE_SCENE_METADATA_MISMATCH",
+            son_tarih="15.09.2026",
+            uydu_kanit_yasi_gun=1,
+        ),
+        date(2026, 9, 18),
     )
     assert not _retained_fresh_candidate(
         _candidate("HISTORICAL", tarihsel_esleme_mesafe_m=8.0), day
