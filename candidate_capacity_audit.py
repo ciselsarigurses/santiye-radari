@@ -55,15 +55,27 @@ def _uncapped_hotspots(
 
 
 def _scale_bucket(item):
+    """Üretim sınıfını yuvarlanmış gösterim alanından önce kullan."""
     try:
         area = float(item.get("alan_m2") or 0)
     except (TypeError, ValueError):
         area = 0.0
+
+    # ``satellite._hotspots`` küçük/standart kararını yuvarlanmamış gerçek piksel
+    # alanıyla verir, ``alan_m2`` ise ekrana yazılırken tam sayıya yuvarlanır.
+    # Örneğin gerçek alanı 800 m²'nin az üstünde olan bir küme ekranda 800 görünüp
+    # üretimde STANDART kalabilir. Diagnostik bunu yeniden 800 m² küçük-saha diye
+    # sınıflandırmamalı; varsa üretimin açık ``boyut_sinifi`` kanıtını esas al.
+    if area > CONSTRUCTION_SCALE_MAX_M2:
+        return "genis_10000_ustu"
+    size_class = str(item.get("boyut_sinifi") or "").strip().upper()
+    if size_class == "KUCUK":
+        return "kucuk_250_800"
+    if size_class == "STANDART":
+        return "santiye_olcegi_800_10000"
     if area <= CONSTRUCTION_SCALE_MIN_M2:
         return "kucuk_250_800"
-    if area <= CONSTRUCTION_SCALE_MAX_M2:
-        return "santiye_olcegi_800_10000"
-    return "genis_10000_ustu"
+    return "santiye_olcegi_800_10000"
 
 
 def _bucket_counts(items):
@@ -198,10 +210,11 @@ def _connectivity_metrics(change_mask, bbox, pixel_area_m2, small_site_mask=None
         if parent_index not in eligible_eight or len(children) < 2:
             continue
         split_parents.append(parent_index)
-        child_areas = sorted(
-            (round(len(component) * pixel_area_m2) for component in children),
+        child_raw_areas = sorted(
+            (len(component) * pixel_area_m2 for component in children),
         )
-        for child_area in child_areas:
+        child_areas = [round(area) for area in child_raw_areas]
+        for child_area in child_raw_areas:
             if child_area <= satellite.SMALL_HOTSPOT_MAX_M2:
                 recovered_small += 1
             elif child_area <= CONSTRUCTION_SCALE_MAX_M2:
@@ -276,6 +289,14 @@ def _self_check():
     assert _scale_bucket({"alan_m2": 801}) == "santiye_olcegi_800_10000"
     assert _scale_bucket({"alan_m2": 5000}) == "santiye_olcegi_800_10000"
     assert _scale_bucket({"alan_m2": 20000}) == "genis_10000_ustu"
+    # Yuvarlama sınırı regresyonu: üretim gerçek alanla STANDART dediğinde,
+    # ekranda 800 m² görünmesi diagnostikte yeniden KUCUK sayılmamalıdır.
+    assert _scale_bucket(
+        {"alan_m2": 800, "boyut_sinifi": "STANDART"}
+    ) == "santiye_olcegi_800_10000"
+    assert _scale_bucket(
+        {"alan_m2": 800, "boyut_sinifi": "KUCUK"}
+    ) == "kucuk_250_800"
 
     # Tam 800 m², ana motorla aynı küçük-saha spektral kapısından geçmelidir.
     boundary_component = [(1, column) for column in range(8)]
@@ -308,6 +329,22 @@ def _self_check():
     assert geometry["dort_komsu_gecerli_aday"] == 2, geometry
     assert geometry["diyagonal_birlesmis_ebeveyn"] == 1, geometry
     assert geometry["ayrisan_kucuk_250_800"] == 2, geometry
+
+    # 800 m²'nin çok az üstündeki gerçek alan, raporda 800'e yuvarlansa bile
+    # geometrik alt-küme sayımında STANDART kalmalıdır.
+    near_boundary = np.zeros((7, 7), dtype=bool)
+    near_boundary[1:3, 1:3] = True
+    near_boundary[3:5, 3:5] = True
+    near_geometry = _connectivity_metrics(
+        near_boundary,
+        [26.30, 38.20, 26.31, 38.21],
+        100.06,
+        small_site_mask=near_boundary,
+    )
+    assert near_geometry["ayrisan_kucuk_250_800"] == 2, near_geometry
+    # Her 4-komşu alt blok 4 pikseldir (~400 m²); ebeveynin 800'e yuvarlanması
+    # çocuk sınıflarını değiştirmemelidir. Üst sınıra yakın tek parça regresyonu
+    # yukarıdaki üretim etiketi testiyle ayrıca korunur.
 
 
 def _stored_snapshot(report_date):
@@ -466,8 +503,11 @@ def audit_capacity():
             CONSTRUCTION_SCALE_MAX_M2,
         ],
         "sinir_notu": (
-            "800 m² ana Sentinel motorunda küçük-saha bandına dahildir; "
-            "şantiye-ölçeği diagnostik sınıfı 800 m² üstünde başlar."
+            "800 m² ana Sentinel motorunda küçük-saha bandına dahildir; fakat alan "
+            "ekranda tam sayıya yuvarlandığı için 800 görünen STANDART bir aday gerçek "
+            "alanda 800 m²'nin az üstünde olabilir. Diagnostik varsa üretimin "
+            "boyut_sinifi etiketini esas alır; şantiye-ölçeği sınıfı gerçek alanda "
+            "800 m² üstünde başlar."
         ),
         "bolgeler": regions,
     }
