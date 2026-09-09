@@ -298,6 +298,29 @@ def _self_check():
         {"alan_m2": 800, "boyut_sinifi": "KUCUK"}
     ) == "kucuk_250_800"
 
+    # Aday sayısı 24 tavanını geçtiğinde kota da gerçek alanla üretilmiş
+    # ``boyut_sinifi`` etiketini kullanmalı. 800.48 m² gerçek alana sahip STANDART
+    # aday ekranda 800 m² görünse bile sekiz küçük-saha slotundan birini tüketmemeli.
+    quota_signal = np.zeros((80, 12), dtype=bool)
+    for index in range(17):
+        quota_signal[1 + index * 3, 1:10] = True  # ~900.54 m² STANDART
+    quota_signal[52, 1:9] = True  # ~800.48 m² STANDART, ekranda 800
+    for index in range(8):
+        quota_signal[55 + index * 3, 1:4] = True  # ~300.18 m² gerçek KUCUK
+    quota_capped = _ORIGINAL_HOTSPOTS(
+        quota_signal,
+        [26.30, 38.20, 26.31, 38.28],
+        100.06,
+        small_site_mask=quota_signal,
+    )
+    assert len(quota_capped) == satellite.HOTSPOT_LIMIT, quota_capped
+    assert sum(
+        str(item.get("boyut_sinifi") or "").upper() == "KUCUK"
+        for item in quota_capped
+    ) == satellite.SMALL_HOTSPOT_QUOTA, (
+        "Yuvarlanmış 800 m² STANDART aday küçük-saha kotasından slot çaldı."
+    )
+
     # Tam 800 m², ana motorla aynı küçük-saha spektral kapısından geçmelidir.
     boundary_component = [(1, column) for column in range(8)]
     weak_boundary_mask = np.zeros((3, 10), dtype=bool)

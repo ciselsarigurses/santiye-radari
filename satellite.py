@@ -470,13 +470,18 @@ def _hotspots(
     if len(ranked) <= limit:
         return ranked
 
+    # Küçük-saha kotasını ekrana yuvarlanmış ``alan_m2`` ile yeniden sınıflandırma.
+    # Gerçek alanı 800 m²'nin az üstünde olan bir STANDART küme ekranda 800 m²
+    # görünebilir; böyle bir adayın 8 küçük-saha slotundan birini tüketmesi gerçek
+    # 250–800 m² erken-hafriyat adayını tavan dışında bırakır. Boyut sınıfı yukarıda
+    # yuvarlanmamış gerçek piksel alanıyla verildiği için kota da aynı kanıtı kullanır.
     small = [
         item for item in ranked
-        if item["alan_m2"] <= SMALL_HOTSPOT_MAX_M2
+        if str(item.get("boyut_sinifi") or "").strip().upper() == "KUCUK"
     ]
     standard = [
         item for item in ranked
-        if item["alan_m2"] > SMALL_HOTSPOT_MAX_M2
+        if str(item.get("boyut_sinifi") or "").strip().upper() != "KUCUK"
     ]
     reserved_small = min(max(int(small_quota), 0), int(limit))
     selected = standard[: max(int(limit) - reserved_small, 0)]
