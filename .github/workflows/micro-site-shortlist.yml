@@ -12,6 +12,7 @@ on:
       - "micro_site_cross_day_cluster_guard.py"
       - "micro_diagonal_recovery.py"
       - "gulbahce_micro_candidate_review.py"
+      - "gulbahce_micro_cross_day_review_guard.py"
       - "micro_spectral_borderline_guard.py"
       - "micro_spectral_borderline_runner.py"
       - ".github/workflows/micro-site-shortlist.yml"
@@ -53,8 +54,8 @@ jobs:
       - name: Diyagonal MİKRO kurtarmalarda yakınlığı tek başına eleme nedeni yapma
         run: python micro_diagonal_recovery.py --augment-shortlist
 
-      - name: Gülbahçe ham mikro adaylarının eleme nedenini açıkla
-        run: python gulbahce_micro_candidate_review.py
+      - name: Gülbahçe ham mikro adaylarının kaynak-gün uyumlu eleme nedenini açıkla
+        run: python gulbahce_micro_cross_day_review_guard.py
 
       - name: Spektral sınır MİKRO diagnostik katmanını güncelle
         run: python micro_spectral_borderline_runner.py
