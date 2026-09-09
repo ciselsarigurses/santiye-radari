@@ -45,15 +45,41 @@ jobs:
               return None
 
           def micro_date(value):
-              try:
-                  return date.fromisoformat(str(value))
-              except (TypeError, ValueError):
+              text = str(value or "").strip()
+              if not text:
                   return None
+              for fmt in ("%Y-%m-%d", "%d.%m.%Y"):
+                  try:
+                      return datetime.strptime(text, fmt).date()
+                  except ValueError:
+                      continue
+              return None
+
+          def collect_micro_dates(payload):
+              values = []
+              for key in ("sentinel_tarihleri", "yakinlik_referans_sentinel_tarihleri"):
+                  values.extend(payload.get(key) or [])
+              for item in payload.get("kisa_liste") or []:
+                  if isinstance(item, dict):
+                      values.append(item.get("mikro_kaynak_sentinel_tarihi"))
+              return [d for d in (micro_date(value) for value in values) if d]
+
+          sample_current = {
+              "yakinlik_referans_sentinel_tarihleri": ["08.09.2026"],
+              "kisa_liste": [{"mikro_kaynak_sentinel_tarihi": "08.09.2026"}],
+          }
+          sample_old = {
+              "sentinel_tarihleri": ["2026-09-05"],
+              "kisa_liste": [],
+          }
 
           assert scene_date("S2B_T35SMC_20260908T090037_L2A") == date(2026, 9, 8)
           assert micro_date("2026-09-05") == date(2026, 9, 5)
-          assert date(2026, 9, 8) > date(2026, 9, 5)
-          assert not (date(2026, 9, 8) > date(2026, 9, 8))
+          assert micro_date("08.09.2026") == date(2026, 9, 8)
+          assert max(collect_micro_dates(sample_current)) == date(2026, 9, 8)
+          assert max(collect_micro_dates(sample_old)) == date(2026, 9, 5)
+          assert date(2026, 9, 8) > max(collect_micro_dates(sample_old))
+          assert not (date(2026, 9, 8) > max(collect_micro_dates(sample_current)))
           PY
 
       - name: Ana 250 m² Sentinel sahnesi MİKRO'dan daha yeni mi kontrol et
@@ -63,7 +89,7 @@ jobs:
           python - <<'PY'
           import json
           import os
-          from datetime import date, datetime
+          from datetime import datetime
           from pathlib import Path
 
           MAIN = Path("candidate_capacity_audit.json")
@@ -80,11 +106,27 @@ jobs:
                           continue
               return None
 
-          def parse_iso_date(value):
-              try:
-                  return date.fromisoformat(str(value))
-              except (TypeError, ValueError):
+          def parse_micro_date(value):
+              text = str(value or "").strip()
+              if not text:
                   return None
+              for fmt in ("%Y-%m-%d", "%d.%m.%Y"):
+                  try:
+                      return datetime.strptime(text, fmt).date()
+                  except ValueError:
+                      continue
+              return None
+
+          def collect_micro_dates(payload):
+              values = []
+              # Legacy alanı desteklemeye devam et; güncel kısa liste ise
+              # yakınlık referans tarihlerini ve adayın gerçek Sentinel tarihini kullanır.
+              for key in ("sentinel_tarihleri", "yakinlik_referans_sentinel_tarihleri"):
+                  values.extend(payload.get(key) or [])
+              for item in payload.get("kisa_liste") or []:
+                  if isinstance(item, dict):
+                      values.append(item.get("mikro_kaynak_sentinel_tarihi"))
+              return [d for d in (parse_micro_date(value) for value in values) if d]
 
           if not MAIN.exists() or not MICRO.exists():
               raise SystemExit("Tazelik karşılaştırması için ana veya MİKRO diagnostik dosyası eksik.")
@@ -98,9 +140,7 @@ jobs:
               if d:
                   main_dates.append(d)
 
-          micro_dates = [
-              d for d in (parse_iso_date(v) for v in (micro.get("sentinel_tarihleri") or [])) if d
-          ]
+          micro_dates = collect_micro_dates(micro)
 
           if not main_dates:
               raise SystemExit("Ana 250 m² diagnostikte geçerli Sentinel sahne tarihi bulunamadı.")
