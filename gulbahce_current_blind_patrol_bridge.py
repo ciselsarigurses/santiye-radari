@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 from coverage_patrol_shortlist import (
@@ -45,6 +45,29 @@ from gulbahce_blind_patrol_guard import (
 )
 
 CURRENT_BLIND_JSON = Path(__file__).with_name("gulbahce_latest_state_blind_review.json")
+
+
+def _parse_source_date(value):
+    text = str(value or "").strip()
+    for fmt in ("%d.%m.%Y", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(text, fmt).date()
+        except ValueError:
+            continue
+    return None
+
+
+def _scene_rotation_offset(day, source_date, candidate_count):
+    """Yeni sahnenin ilk duty gününde en küçük güvenli körlüğü öne al."""
+    if candidate_count <= 1:
+        return 0
+    source_day = _parse_source_date(source_date)
+    if source_day is None or source_day > day:
+        # Tarih metadatası bozuksa mutlak takvim ofsetiyle rastgele büyük kümeye
+        # sıçramak yerine sıralamanın ilk (küçük/kompakt) adayında güvenle kal.
+        return 0
+    elapsed_days = max((day - source_day).days, 0)
+    return (elapsed_days // DUTY_PERIOD_DAYS) % candidate_count
 
 
 def _eligible_current_blind(
@@ -120,8 +143,9 @@ def _eligible_current_blind(
         )
         eligible.append(candidate)
 
-    # Küçük/kompakt kör alanlar erken hafriyat açısından önce gelir. Aynı körlük
-    # birden fazla duty gününde sürerse offset tüm güvenli adaylar arasında döner.
+    # Küçük/kompakt kör alanlar erken hafriyat açısından önce gelir. Yeni bir
+    # Sentinel sahnesinin ilk duty gününde bu sıralamanın ilk adayı kullanılır;
+    # aynı sahne sürerse iki günlük duty döngüsünde kalan güvenli adaylara geçilir.
     eligible.sort(
         key=lambda item: (
             int(item.get("alan_m2") or 0),
@@ -165,6 +189,7 @@ def apply_current_blind_bridge(
         other,
     )
 
+    source_date = str((current_payload or {}).get("kaynak_son_tarih") or "")
     guard = dict(report.get("gulbahce_kor_alan_devriye_korumasi") or {})
     guard.update(
         {
@@ -172,11 +197,11 @@ def apply_current_blind_bridge(
             "saha_gorevi": False,
             "aktif_gun": duty,
             "rotasyon_tarihi": day.isoformat(),
-            "guncel_sahne_kor_kaynak_tarihi": str(
-                (current_payload or {}).get("kaynak_son_tarih") or ""
-            ) or None,
+            "guncel_sahne_kor_kaynak_tarihi": source_date or None,
             "guncel_sahne_kor_uygun_aday_sayisi": len(eligible),
             "guncel_sahne_korlugu_kullanildi": False,
+            "guncel_sahne_rotasyon_kurali": "SAHNE_TARIHINDEN_ITIBAREN_KUCUKTEN_BUYUGE_2_GUNLUK",
+            "guncel_sahne_rotasyon_offset": None,
         }
     )
 
@@ -185,13 +210,14 @@ def apply_current_blind_bridge(
         report["gulbahce_kor_alan_devriye_korumasi"] = guard
         return report
 
-    offset = (day.toordinal() // DUTY_PERIOD_DAYS) % len(eligible)
+    offset = _scene_rotation_offset(day, source_date, len(eligible))
     chosen = dict(eligible[offset])
     report["kor_alan_saha_devriyesi"] = (other + [chosen])[:TOTAL_LIMIT]
 
     guard["uygulandi"] = True
     guard["neden"] = "GULBAHCE_GUNCEL_SAHNE_KOR_TEMSIL"
     guard["guncel_sahne_korlugu_kullanildi"] = True
+    guard["guncel_sahne_rotasyon_offset"] = offset
     guard["secilen"] = {
         "enlem": chosen["enlem"],
         "boylam": chosen["boylam"],
@@ -206,7 +232,9 @@ def apply_current_blind_bridge(
     report["kor_alan_saha_devriyesi_notu"] = (
         "Alarm/görev değildir. Gülbahçe duty gününde en yeni Sentinel sahnesinde "
         "tarihsel kara kanıtlı gerçek 250-6500 m² kalite körlüğü varsa doğu devriye "
-        "slotu önce bu güncel körlüğe ayrılır; uygun güncel körlük yoksa mevcut tarihsel "
+        "slotu önce bu güncel körlüğe ayrılır. Yeni sahnenin ilk duty gününde küçük/kompakt "
+        "güvenli körlük öne alınır; aynı sahne sürerse kalan güvenli kümeler iki günlük "
+        "duty döngüsünde sırayla izlenir. Uygun güncel körlük yoksa mevcut tarihsel "
         "kör-alan rotasyonu korunur. Aktif radar görevlerinden >=150 m ve diğer bölge "
         "devriyesinden >=250 m ayrım korunur."
     )
@@ -246,6 +274,10 @@ def update_current_blind_bridge():
 def _self_check():
     assert MIN_AREA_M2 == 250
     assert TARGET_MAX_AREA_M2 == 6500
+    assert _scene_rotation_offset(date(2026, 9, 9), "08.09.2026", 3) == 0
+    assert _scene_rotation_offset(date(2026, 9, 11), "08.09.2026", 3) == 1
+    assert _scene_rotation_offset(date(2026, 9, 13), "08.09.2026", 3) == 2
+    assert _scene_rotation_offset(date(2026, 9, 15), "14.09.2026", 3) == 0
 
     audit = {
         "bolgeler": {
@@ -321,7 +353,9 @@ def _self_check():
     meta = bridged["gulbahce_kor_alan_devriye_korumasi"]
     assert meta["guncel_sahne_kor_uygun_aday_sayisi"] == 2
     assert meta["guncel_sahne_korlugu_kullanildi"] is True
+    assert meta["guncel_sahne_rotasyon_offset"] == 0
     assert meta["secilen"]["guncel_sahne_korlugu"] is True
+    assert meta["secilen"]["alan_m2"] == 400
     east = [
         item
         for item in bridged["kor_alan_saha_devriyesi"]
@@ -330,6 +364,13 @@ def _self_check():
     assert len(east) == 1
     assert east[0]["kaynak_tipi"] == "GULBAHCE_GUNCEL_SAHNE_BILINEN_KARA_KORLUGU"
     assert east[0]["alarm"] is False and east[0]["saha_gorevi"] is False
+
+    next_duty = apply_current_blind_bridge(
+        current, audit, report, scan, rotation_day=date(2026, 9, 11)
+    )
+    next_meta = next_duty["gulbahce_kor_alan_devriye_korumasi"]
+    assert next_meta["guncel_sahne_rotasyon_offset"] == 1
+    assert next_meta["secilen"]["alan_m2"] == 1600
 
     non_duty = apply_current_blind_bridge(
         current, audit, report, scan, rotation_day=date(2026, 9, 8)
