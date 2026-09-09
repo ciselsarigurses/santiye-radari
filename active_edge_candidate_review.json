@@ -318,7 +318,15 @@
           "kenara_yakin": false
         }
       ],
-      "eslesmeyenler": []
+      "eslesmeyenler": [
+        {
+          "gorev_id": "U45744F8AE6",
+          "enlem": 38.222918,
+          "boylam": 26.391885,
+          "alan_m2": 1600,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        }
+      ]
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
