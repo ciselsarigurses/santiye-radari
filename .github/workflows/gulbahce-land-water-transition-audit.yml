@@ -1,0 +1,90 @@
+name: Gülbahçe Kara-Su Geçiş Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "gulbahce_land_water_transition_audit.py"
+      - ".github/workflows/gulbahce-land-water-transition-audit.yml"
+      - "requirements.txt"
+  workflow_run:
+    workflows: ["Gülbahçe Kör Alan Devriye Koruması"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-gulbahce-land-water-transition
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Kara-su geçiş diagnostik öz testi
+        run: python gulbahce_land_water_transition_audit.py --check-only
+
+      - name: Gülbahçe tarihsel kara güncel SCL-su geçişlerini ayır
+        run: python gulbahce_land_water_transition_audit.py
+
+      - name: Diagnostik sonucu güvenli kaydet
+        run: |
+          output="gulbahce_land_water_transition_audit.json"
+
+          refresh_audit() {
+            python gulbahce_land_water_transition_audit.py --check-only
+            python gulbahce_land_water_transition_audit.py
+          }
+
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Kara-su geçiş diagnostiginde değişiklik yok."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+              echo "Main ilerledi; kara-su diagnostigi güncel veri üzerinde yeniden hesaplanıyor (${attempt}/3)."
+              git reset --hard origin/main
+              refresh_audit
+            fi
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "En güncel main üzerinde ek diagnostik değişiklik yok."
+              exit 0
+            fi
+
+            git add $output
+            git commit -m "Radar: Gülbahçe kara-su geçiş diagnostigini güncelle"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Main yeniden ilerledi veya geçici push hatası oluştu; tekrar deneniyor (${attempt}/3)."
+            git reset --hard HEAD~1
+            sleep $((attempt * 2))
+          done
+
+          echo "Kara-su geçiş diagnostigi üç güvenli denemede kaydedilemedi."
+          exit 1
