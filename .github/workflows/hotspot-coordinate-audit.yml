@@ -17,7 +17,10 @@ permissions:
   contents: write
 
 concurrency:
-  group: santiye-radari-db-write
+  # Bu workflow yalnız diagnostik JSON yazar. Ana günlük taramayla aynı global
+  # DB kuyruğuna girmesi, satellite.py değişikliklerinde ana taramanın daha job
+  # başlamadan iptal olmasına yol açabiliyor. Kendi tekrarlarını burada sırala.
+  group: santiye-radari-hotspot-coordinate
   cancel-in-progress: false
 
 jobs:
