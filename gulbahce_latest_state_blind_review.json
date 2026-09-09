@@ -28,8 +28,8 @@
   "guncel_sahne_mikro_kor_150_249": 0,
   "guncel_sahne_kor_250_6500": 3,
   "guncel_sahne_kor_6500ustu": 0,
-  "secilen_devriye_eslesen_kor_kume": 1,
-  "secilen_devriye_guncel_korlugu_kapsiyor": true,
+  "secilen_devriye_eslesen_kor_kume": 0,
+  "secilen_devriye_guncel_korlugu_kapsiyor": false,
   "guncel_sahne_mikro_kor_kumeleri": [],
   "guncel_sahne_kor_kumeleri": [
     {
@@ -40,8 +40,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 0,
-      "secilen_devriye_kapsiyor": true
+      "secilen_devriyeye_mesafe_m": null,
+      "secilen_devriye_kapsiyor": false
     },
     {
       "enlem": 38.341406,
@@ -51,7 +51,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 117,
+      "secilen_devriyeye_mesafe_m": null,
       "secilen_devriye_kapsiyor": false
     },
     {
@@ -62,7 +62,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 526,
+      "secilen_devriyeye_mesafe_m": null,
       "secilen_devriye_kapsiyor": false
     }
   ],
