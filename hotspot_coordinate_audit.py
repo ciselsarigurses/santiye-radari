@@ -1,10 +1,10 @@
 """Ana Sentinel saha adaylarında koordinat temsil hassasiyetini ölçer.
 
 Üretim alarmını, 250 m² eşiğini, aday sıralamasını veya saha görevlerini değiştirmez.
-Güncel ``latest_report.json`` içindeki yeni Sentinel adaylarını, üretimde kullanılan
-aynı değişim maskesinde tekrar bulur. Mevcut geometrik temsil pikseli ile aynı bağlı
-bileşendeki üretim-sinyali marjlarına göre hesaplanan ağırlıklı temsil pikseli arasındaki
-mesafeyi raporlar.
+Güncel ``latest_report.json`` içindeki son Sentinel sahnesine dayanan adayları, üretimde
+kullanılan aynı değişim maskesinde tekrar bulur. Mevcut geometrik temsil pikseli ile
+aynı bağlı bileşendeki üretim-sinyali marjlarına göre hesaplanan ağırlıklı temsil pikseli
+arasındaki mesafeyi raporlar.
 
 Amaç, doğru koordinat hedefini körlemesine değiştirerek değil; önce hangi gerçek saha
 adaylarında 10 m Sentinel piksel ölçeğinde anlamlı bir koordinat iyileştirme payı olduğunu
@@ -28,6 +28,24 @@ REPORT_PATH = Path(__file__).with_name("latest_report.json")
 OUTPUT_PATH = Path(__file__).with_name("hotspot_coordinate_audit.json")
 AREA_SIMILARITY_MIN = 0.80
 MAX_CURRENT_GEOMETRIC_M = 5.0
+
+
+def _is_current_scene_candidate(raw, label, latest_date):
+    """Son canlı Sentinel sahnesine dayanan rapor adayını seç.
+
+    ``yeni_goruntu`` bir sahne-kimliği değil, rapor üretim anına ait olay bitidir ve
+    aynı Sentinel sahnesi ertesi gün hâlâ güncel kanıtken ``False`` olur. Koordinat
+    denetimi bu yüzden bu bite bağlanmaz; bölge + ``son_tarih`` canlı sahneyle
+    eşleşiyorsa adayı ölçmeye devam eder. Eski/backlog kayıtlar tarih eşleşmesinden
+    geçemez.
+    """
+    if not isinstance(raw, dict):
+        return False
+    return (
+        raw.get("bolge") == label
+        and str(raw.get("son_tarih") or "") == str(latest_date or "")
+        and bool(str(latest_date or "").strip())
+    )
 
 
 def _distance_m(first, second):
@@ -192,11 +210,7 @@ def _analyze_region(region_key, report):
     unmatched = []
     seen = set()
     for raw in report.get("saha_adaylari") or []:
-        if not isinstance(raw, dict):
-            continue
-        if raw.get("bolge") != label or not raw.get("yeni_goruntu"):
-            continue
-        if str(raw.get("son_tarih") or "") != latest_date:
+        if not _is_current_scene_candidate(raw, label, latest_date):
             continue
         try:
             area = float(raw.get("alan_m2") or 0)
@@ -344,6 +358,21 @@ def _self_test():
     assert _weighted_representative_pixel(component, fallback) == (1, 2)
     assert _area_similarity(400, 400) == 1.0
     assert _area_similarity(3100, 38500) < AREA_SIMILARITY_MIN
+
+    label = "Uzunkuyu · Germiyan · Ildır · Gülbahçe"
+    current_carried = {
+        "bolge": label,
+        "son_tarih": "08.09.2026",
+        "yeni_goruntu": False,
+    }
+    current_new = dict(current_carried, yeni_goruntu=True)
+    old_backlog = dict(current_carried, son_tarih="05.09.2026")
+    other_region = dict(current_carried, bolge="Çeşme merkez · Alaçatı · Ilıca")
+    assert _is_current_scene_candidate(current_carried, label, "08.09.2026")
+    assert _is_current_scene_candidate(current_new, label, "08.09.2026")
+    assert not _is_current_scene_candidate(old_backlog, label, "08.09.2026")
+    assert not _is_current_scene_candidate(other_region, label, "08.09.2026")
+    assert not _is_current_scene_candidate(current_carried, label, "")
     print("Ana aday koordinat hassasiyet öz testi başarılı.")
 
 
