@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-08",
-  "olusturma": "2026-09-08 18:14 +0300",
+  "rapor_tarihi": "2026-09-09",
+  "olusturma": "2026-09-09 03:08 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -22,8 +22,8 @@
     "asgari_dogrulanmis_santiye_kazi": 3
   },
   "veri_tazeligi": {
-    "gunluk_rapor_tarihi": "2026-09-08",
-    "kapasite_denetim_tarihi": "2026-09-08",
+    "gunluk_rapor_tarihi": "2026-09-09",
+    "kapasite_denetim_tarihi": "2026-09-09",
     "ayni_gun": true
   },
   "bolgeler": {
