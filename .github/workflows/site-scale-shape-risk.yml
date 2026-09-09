@@ -1,0 +1,74 @@
+name: Şantiye Ölçeği Şekil Risk Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site_scale_shape_risk_guard.py"
+      - ".github/workflows/site-scale-shape-risk.yml"
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-db-write
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Şekil risk katmanı self-check
+        run: python site_scale_shape_risk_guard.py --check-only
+
+      - name: Şantiye ölçeği şekil riskini ölç
+        run: python site_scale_shape_risk_guard.py
+
+      - name: Diagnostik sonucu güvenli kaydet
+        run: |
+          output="site_scale_shape_risk_review.json"
+          if [[ -z "$(git status --porcelain -- "$output")" ]]; then
+            echo "Şantiye ölçeği şekil risk sonucu değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add "$output"
+          git commit -m "Radar: şantiye ölçeği şekil risk diagnostigini güncelle"
+
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Ana dal ilerledi; en güncel main üzerinde diagnostik bir kez yeniden üretiliyor."
+            git reset --hard origin/main
+            python site_scale_shape_risk_guard.py --check-only
+            python site_scale_shape_risk_guard.py
+            if [[ -z "$(git status --porcelain -- "$output")" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+            git add "$output"
+            git commit -m "Radar: şantiye ölçeği şekil risk diagnostigini güncelle"
+          fi
+
+          git push origin HEAD:main
