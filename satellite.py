@@ -432,7 +432,10 @@ def _hotspots(
             continue
 
         pixels = np.asarray(component, dtype="int32")
-        is_small = area_m2 < SMALL_HOTSPOT_MAX_M2
+        # 250–800 m² bandı küçük-saha yoludur; üst sınır dahil olmalı.
+        # Aksi halde tam 800 m² küme daha gevşek standart yola düşer ve küçük-saha
+        # kotası/önceliği ile güçlü-spektral doğrulamasını tutarsız biçimde kaybeder.
+        is_small = area_m2 <= SMALL_HOTSPOT_MAX_M2
         strong_fraction = 0.0
         if small_site_mask is not None:
             strong_fraction = float(
@@ -469,11 +472,11 @@ def _hotspots(
 
     small = [
         item for item in ranked
-        if item["alan_m2"] < SMALL_HOTSPOT_MAX_M2
+        if item["alan_m2"] <= SMALL_HOTSPOT_MAX_M2
     ]
     standard = [
         item for item in ranked
-        if item["alan_m2"] >= SMALL_HOTSPOT_MAX_M2
+        if item["alan_m2"] > SMALL_HOTSPOT_MAX_M2
     ]
     reserved_small = min(max(int(small_quota), 0), int(limit))
     selected = standard[: max(int(limit) - reserved_small, 0)]
