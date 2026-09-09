@@ -9,6 +9,7 @@ on:
     paths:
       - "micro_site_audit.json"
       - "micro_site_shortlist.py"
+      - "micro_site_cross_day_cluster_guard.py"
       - "micro_diagonal_recovery.py"
       - "gulbahce_micro_candidate_review.py"
       - "micro_spectral_borderline_guard.py"
@@ -46,8 +47,8 @@ jobs:
       - name: Bağımlılıkları kur
         run: pip install -r requirements.txt
 
-      - name: Mikro kısa liste öz testini ve filtreyi çalıştır
-        run: python micro_site_shortlist.py
+      - name: Mikro kısa liste öz testini ve kaynak-gün filtrelemesini çalıştır
+        run: python micro_site_cross_day_cluster_guard.py
 
       - name: Diyagonal MİKRO kurtarmalarda yakınlığı tek başına eleme nedeni yapma
         run: python micro_diagonal_recovery.py --augment-shortlist
