@@ -2,10 +2,11 @@ name: Uygulama Veri Sonrası Açılış Testi
 
 on:
   # Günlük tarama kendi GITHUB_TOKEN'i ile rapor/veri commit'i attığında GitHub
-  # güvenlik gereği yeni bir push workflow'u zincirlemez. Bu yüzden asıl veri-sonrası
-  # doğrulama, Günlük Şantiye Taraması tamamlandığında workflow_run ile tetiklenir.
+  # güvenlik gereği yeni bir push workflow'u zincirlemez. MİKRO footprint zinciri de
+  # koordinat/izleme JSON'larını kendi token'iyle yazar. Bu yüzden veri-sonrası
+  # doğrulama iki üretim workflow'u tamamlandığında workflow_run ile tetiklenir.
   workflow_run:
-    workflows: ["Günlük Şantiye Taraması"]
+    workflows: ["Günlük Şantiye Taraması", "Mikro Temporal Bileşen İzi Denetimi"]
     types: [completed]
   # Uygulama kodu veya bu kontrolün kendisi elle değiştiğinde de hemen test et.
   push:
@@ -31,7 +32,7 @@ concurrency:
 
 jobs:
   smoke:
-    # Başarısız bir günlük taramanın çıktısını 'sağlıklı' diye onaylamayalım.
+    # Başarısız bir veri üretim koşusunun çıktısını 'sağlıklı' diye onaylamayalım.
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -40,7 +41,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           # workflow_run olayı tamamlanan koşunun eski head SHA'sına işaret eder;
-          # tarama sonunda botun yazdığı güncel veri commit'ini test etmek için main'i al.
+          # üretim sonunda botun yazdığı güncel veri commit'ini test etmek için main'i al.
           ref: main
 
       - name: Python kur
@@ -73,6 +74,12 @@ jobs:
           assert micro.get("ana_uretim_esigi_m2") == 250, "Mikro katman ana 250 m² eşiğini değiştiremez"
           assert micro.get("mikro_aralik_m2") == [150, 249], "Mikro diagnostik bandı 150-249 m² olmalı"
           assert micro.get("alarm") is False and micro.get("saha_gorevi") is False, "Mikro katman alarm/görev üretmemeli"
+
+          micro_coord = json.loads(Path("micro_site_coordinate_audit.json").read_text(encoding="utf-8"))
+          assert micro_coord.get("ana_uretim_esigi_m2") == 250, "Mikro koordinat katmanı 250 m² ana eşiği korumalı"
+          assert micro_coord.get("mikro_aralik_m2") == [150, 249], "Mikro koordinat diagnostik bandı 150-249 m² olmalı"
+          assert micro_coord.get("alarm") is False and micro_coord.get("saha_gorevi") is False, "Mikro koordinat katmanı alarm/görev üretmemeli"
+          assert isinstance(micro_coord.get("adaylar"), list), "Mikro koordinat aday listesi eksik"
 
           app = AppTest.from_file("app.py")
           app.run(timeout=45)
