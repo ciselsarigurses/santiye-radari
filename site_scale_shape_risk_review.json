@@ -1,0 +1,83 @@
+{
+  "rapor_tarihi": "2026-09-09",
+  "olusturma": "2026-09-09 10:03 +0300",
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_sentinel_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "diagnostik_sekil_risk_bandi_m2": [
+    800,
+    10000
+  ],
+  "esikler": {
+    "uzun_ince_min_uzun_kisa_orani": 5.0,
+    "dusuk_kompaktlik_max": 0.15
+  },
+  "nihai_sekil_riski_toplam": 1,
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "son_item": "S2B_T35SMC_20260908T090037_L2A",
+      "durum": "ok",
+      "latest_item": "S2B_T35SMC_20260908T090037_L2A",
+      "ham_sekil_riski": 0,
+      "nihai_sekil_riski": 0,
+      "nihai_cozulen_sekil_riski": 0,
+      "nihai_ornekler": [],
+      "nihai_cozulen_ornekler": []
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "son_item": "S2B_T35SMC_20260908T090037_L2A",
+      "durum": "ok",
+      "latest_item": "S2B_T35SMC_20260908T090037_L2A",
+      "ham_sekil_riski": 1,
+      "nihai_sekil_riski": 1,
+      "nihai_cozulen_sekil_riski": 1,
+      "nihai_ornekler": [
+        {
+          "enlem": 38.263077,
+          "boylam": 26.677997,
+          "alan_m2": 6901,
+          "olcek": "santiye_olcegi_800_10000",
+          "piksel": 69,
+          "satir_span": 29,
+          "sutun_span": 13,
+          "uzun_kisa_orani": 2.23,
+          "kutu_doluluk_orani": 0.183,
+          "kompaktlik": 0.123,
+          "uzun_ince": false,
+          "dusuk_kompaktlik": true,
+          "sekil_riski": "DUSUK_KOMPAKTLIK",
+          "alarm": false,
+          "saha_gorevi": false,
+          "harita": "https://www.google.com/maps/dir/?api=1&destination=38.263077,26.677997"
+        }
+      ],
+      "nihai_cozulen_ornekler": [
+        {
+          "enlem": 38.263077,
+          "boylam": 26.677997,
+          "alan_m2": 6901,
+          "olcek": "santiye_olcegi_800_10000",
+          "piksel": 69,
+          "satir_span": 29,
+          "sutun_span": 13,
+          "uzun_kisa_orani": 2.23,
+          "kutu_doluluk_orani": 0.183,
+          "kompaktlik": 0.123,
+          "uzun_ince": false,
+          "dusuk_kompaktlik": true,
+          "sekil_riski": "DUSUK_KOMPAKTLIK",
+          "alarm": false,
+          "saha_gorevi": false,
+          "harita": "https://www.google.com/maps/dir/?api=1&destination=38.263077,26.677997"
+        }
+      ]
+    }
+  },
+  "yorum": "Şekil riski tek başına yol, tarla veya yanlış pozitif kararı değildir. 800-10.000 m² bandındaki uzun-ince/düşük-kompakt kümeler silinmez; temporal/lokal değişim, saha geri bildirimi ve güvenilir ek kanıtla kalibre edilmek üzere koordinatlı arka-plan diagnostik olarak tutulur. 250 m² ana eşik ve 150-249 m² MİKRO politikası değişmez."
+}
