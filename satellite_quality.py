@@ -18,6 +18,7 @@ from satellite import (
     MIN_HOTSPOT_AREA_M2,
     PLACE_CENTERS,
     REGIONS,
+    SMALL_HOTSPOT_MAX_M2,
     SMALL_HOTSPOT_MIN_PIXELS,
     SMALL_HOTSPOT_QUOTA,
     TARGET_PIXEL_SIZE_M,
@@ -118,6 +119,9 @@ def check_configuration():
     assert MIN_HOTSPOT_AREA_M2 == 250, (
         "Minimum uydu hareket eşiği 250 m² olmalı; "
         f"mevcut değer {MIN_HOTSPOT_AREA_M2}."
+    )
+    assert SMALL_HOTSPOT_MAX_M2 == 800, (
+        "Güçlü küçük-saha üst sınırı 800 m² olarak korunmalı."
     )
     assert TARGET_PIXEL_SIZE_M == 10, (
         "Küçük şantiye tespiti için hedef piksel ölçeği 10 m olarak korunmalı."
@@ -359,6 +363,39 @@ def check_small_site_path():
         small_quota=3,
     ), "Yaklaşık 200 m² eşik-altı sinyal yanlış saha görevi üretiyor."
 
+    # Küçük-saha tanımının tam üst sınırı da aynı sert spektral kapıdan geçmeli.
+    # Eski `< 800` sınırı 800 m² kümeyi standart yola atıyor, küçük-saha kotasını
+    # ve 50% güçlü-piksel şartını tam sınırda devre dışı bırakıyordu.
+    boundary = np.zeros((12, 12), dtype=bool)
+    boundary[6, 2:10] = True
+    boundary_hotspots = _hotspots(
+        boundary,
+        [26.30, 38.28, 26.312, 38.292],
+        100.0,
+        small_site_mask=boundary,
+        limit=12,
+        small_quota=3,
+    )
+    assert len(boundary_hotspots) == 1
+    assert boundary_hotspots[0]["alan_m2"] == 800
+    assert boundary_hotspots[0]["boyut_sinifi"] == "KUCUK", (
+        "Tam 800 m² güçlü aday küçük-saha sınıfından düşüyor."
+    )
+
+    weak_boundary = np.zeros_like(boundary)
+    weak_boundary[6, 2:5] = True
+    assert not _hotspots(
+        boundary,
+        [26.30, 38.28, 26.312, 38.292],
+        100.0,
+        small_site_mask=weak_boundary,
+        limit=12,
+        small_quota=3,
+    ), (
+        "Tam 800 m² zayıf spektral küme küçük-saha sert filtresini atlayıp "
+        "standart aday olarak sızıyor."
+    )
+
 
 def check_coastal_false_positive_guard():
     water = np.zeros((15, 15), dtype=bool)
@@ -405,7 +442,8 @@ def main():
     print(
         "Uydu kalite kontrolü başarılı: Çeşme idari zarfı, Çeşme+Uzunkuyu birleşik "
         "kapsama zarfı, tam-karo kapsamı, aynı göreli yörünge tercihi, yaklaşık "
-        "10 m ölçek, 250 m² küçük saha yolu ve yoğun-dönem aday kapasitesi korunuyor."
+        "10 m ölçek, 250 m² küçük saha yolu, 800 m² üst-sınır filtresi ve yoğun-dönem "
+        "aday kapasitesi korunuyor."
     )
 
 
