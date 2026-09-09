@@ -117,6 +117,9 @@ jobs:
       - name: 15 Eylül taze kazı önceliği kalite kontrolü
         run: python postseason_excavation_priority_guard.py --self-check
 
+      - name: 15 Eylül sahne tazelik koruması kalite kontrolü
+        run: python postseason_scene_freshness_guard.py --self-check
+
       - name: Uygulama açılış testi
         if: github.event_name == 'push'
         run: |
@@ -201,6 +204,9 @@ jobs:
       - name: 15 Eylül sonrası taze kazıyı ana taramada öne al
         run: python postseason_excavation_priority_guard.py
 
+      - name: 15 Eylül sahne-tarihi kilidini ana taramada uygula
+        run: python postseason_scene_freshness_guard.py
+
       - name: Uydu mevki etiketini son rapor koordinatıyla doğrula
         run: python route_place_label_guard.py
 
@@ -237,8 +243,9 @@ jobs:
             python reflectance_metadata_audit.py
             python field_state_quality.py
             # Reset sonrasında guard kodu main'den değişmiş olabilir; yeni kodu
-            # operasyon sırasına uygulamadan önce self-check'i yeniden çalıştır.
+            # operasyon sırasına uygulamadan önce self-check'leri yeniden çalıştır.
             python postseason_excavation_priority_guard.py --self-check
+            python postseason_scene_freshness_guard.py --self-check
             python scanner.py
             python source_label_quality.py
             python retain_recent_candidates.py
@@ -262,6 +269,7 @@ jobs:
             python daily_route_shortlist.py
             python daily_route_freshness_guard.py
             python postseason_excavation_priority_guard.py
+            python postseason_scene_freshness_guard.py
             python route_place_label_guard.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
