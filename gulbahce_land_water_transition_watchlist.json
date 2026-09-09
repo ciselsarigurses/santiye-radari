@@ -1,0 +1,149 @@
+{
+  "alarm": false,
+  "saha_gorevi": false,
+  "15_eylul_otomatik_terfi": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "esleme_mesafesi_m": 75.0,
+  "kalite_kor_esleme_mesafesi_m": 125.0,
+  "son_degerlendirilen_sentinel_tarihi": "08.09.2026",
+  "son_degerlendirilen_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+  "ayni_sahne_idempotent": false,
+  "guncel_belirsiz_iz": 4,
+  "guncel_mikro_150_249": 0,
+  "guncel_ana_250plus": 4,
+  "farkli_sahnede_tekrarli_iz": 0,
+  "kalite_kor_takip": 0,
+  "arka_plan_cozuldu": 0,
+  "toplam_hafiza_izi": 4,
+  "izler": [
+    {
+      "iz_id": "GWS333658057",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "GUNCEL_SCL_SU_BELIRSIZLIGI",
+      "guncel_scl_su_belirsizligi": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.329105,
+      "boylam": 26.652123,
+      "ilk_enlem": 38.329105,
+      "ilk_boylam": 26.652123,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 1600,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 0.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWS3B496F57F",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "GUNCEL_SCL_SU_BELIRSIZLIGI",
+      "guncel_scl_su_belirsizligi": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.329828,
+      "boylam": 26.652352,
+      "ilk_enlem": 38.329828,
+      "ilk_boylam": 26.652352,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 800,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 0.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWS57F62ABBF",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "GUNCEL_SCL_SU_BELIRSIZLIGI",
+      "guncel_scl_su_belirsizligi": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.347466,
+      "boylam": 26.641132,
+      "ilk_enlem": 38.347466,
+      "ilk_boylam": 26.641132,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 400,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 0.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWSFB66AAFED",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "GUNCEL_SCL_SU_BELIRSIZLIGI",
+      "guncel_scl_su_belirsizligi": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.348099,
+      "boylam": 26.641018,
+      "ilk_enlem": 38.348099,
+      "ilk_boylam": 26.641018,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 800,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 0.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    }
+  ],
+  "yorum": "Bu hafıza katmanı tarihsel kara -> güncel SCL=su çelişkisini sahneler arasında kaybetmez. Tekrar, kalite-kör takip veya çözülme yalnız diagnostik durumdur; hiçbiri inşaat/kazı kabulü, alarm, saha görevi veya 15 Eylül otomatik terfisi değildir."
+}
