@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-09",
-  "olusturma": "2026-09-09 10:03 +0300",
+  "olusturma": "2026-09-09 11:02 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -12,6 +12,7 @@
     800,
     10000
   ],
+  "diagnostik_alt_sinir_dahil": false,
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
     "dusuk_kompaktlik_max": 0.15
@@ -79,5 +80,5 @@
       ]
     }
   },
-  "yorum": "Şekil riski tek başına yol, tarla veya yanlış pozitif kararı değildir. 800-10.000 m² bandındaki uzun-ince/düşük-kompakt kümeler silinmez; temporal/lokal değişim, saha geri bildirimi ve güvenilir ek kanıtla kalibre edilmek üzere koordinatlı arka-plan diagnostik olarak tutulur. 250 m² ana eşik ve 150-249 m² MİKRO politikası değişmez."
+  "yorum": "Şekil riski tek başına yol, tarla veya yanlış pozitif kararı değildir. 800 m² üstü-10.000 m² bandındaki uzun-ince/düşük-kompakt kümeler silinmez; temporal/lokal değişim, saha geri bildirimi ve güvenilir ek kanıtla kalibre edilmek üzere koordinatlı arka-plan diagnostik olarak tutulur. 250 m² ana eşik ve 150-249 m² MİKRO politikası değişmez."
 }
