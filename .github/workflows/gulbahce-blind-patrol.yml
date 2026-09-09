@@ -130,8 +130,10 @@ jobs:
               exit 0
             fi
 
-            echo "Main yeniden ilerledi veya geçici push hatası oluştu; tekrar deneniyor (${attempt}/3)."
-            git reset --hard HEAD~1
+            echo "Main yeniden ilerledi veya geçici push hatası oluştu; güncel main üzerinde yeniden hesaplanıyor (${attempt}/3)."
+            git fetch origin main
+            git reset --hard origin/main
+            refresh_guard
             sleep $((attempt * 2))
           done
 
