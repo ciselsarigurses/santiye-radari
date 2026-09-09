@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "gulbahce_land_water_transition_audit.py"
+      - "gulbahce_land_water_transition_watchlist.py"
       - ".github/workflows/gulbahce-land-water-transition-audit.yml"
       - "requirements.txt"
   workflow_run:
@@ -45,17 +46,28 @@ jobs:
       - name: Gülbahçe tarihsel kara güncel SCL-su geçişlerini ayır
         run: python gulbahce_land_water_transition_audit.py
 
-      - name: Diagnostik sonucu güvenli kaydet
+      - name: Kara-su geçiş hafızası öz testi
+        run: python gulbahce_land_water_transition_watchlist.py --check-only
+
+      - name: Gülbahçe kara-su geçiş hafızasını güncelle
+        run: python gulbahce_land_water_transition_watchlist.py
+
+      - name: Diagnostik sonucu ve hafızayı güvenli kaydet
         run: |
-          output="gulbahce_land_water_transition_audit.json"
+          outputs=(
+            "gulbahce_land_water_transition_audit.json"
+            "gulbahce_land_water_transition_watchlist.json"
+          )
 
           refresh_audit() {
             python gulbahce_land_water_transition_audit.py --check-only
             python gulbahce_land_water_transition_audit.py
+            python gulbahce_land_water_transition_watchlist.py --check-only
+            python gulbahce_land_water_transition_watchlist.py
           }
 
-          if [[ -z "$(git status --porcelain -- $output)" ]]; then
-            echo "Kara-su geçiş diagnostiginde değişiklik yok."
+          if [[ -z "$(git status --porcelain -- "${outputs[@]}")" ]]; then
+            echo "Kara-su geçiş diagnostiği ve hafızasında değişiklik yok."
             exit 0
           fi
 
@@ -65,18 +77,18 @@ jobs:
           for attempt in 1 2 3; do
             git fetch origin main
             if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
-              echo "Main ilerledi; kara-su diagnostigi güncel veri üzerinde yeniden hesaplanıyor (${attempt}/3)."
+              echo "Main ilerledi; kara-su diagnostiği ve hafızası güncel veri üzerinde yeniden hesaplanıyor (${attempt}/3)."
               git reset --hard origin/main
               refresh_audit
             fi
 
-            if [[ -z "$(git status --porcelain -- $output)" ]]; then
-              echo "En güncel main üzerinde ek diagnostik değişiklik yok."
+            if [[ -z "$(git status --porcelain -- "${outputs[@]}")" ]]; then
+              echo "En güncel main üzerinde ek diagnostik/hafıza değişikliği yok."
               exit 0
             fi
 
-            git add $output
-            git commit -m "Radar: Gülbahçe kara-su geçiş diagnostigini güncelle"
+            git add "${outputs[@]}"
+            git commit -m "Radar: Gülbahçe kara-su geçiş diagnostiğini ve hafızasını güncelle"
             if git push origin HEAD:main; then
               exit 0
             fi
@@ -86,5 +98,5 @@ jobs:
             sleep $((attempt * 2))
           done
 
-          echo "Kara-su geçiş diagnostigi üç güvenli denemede kaydedilemedi."
+          echo "Kara-su geçiş diagnostiği ve hafızası üç güvenli denemede kaydedilemedi."
           exit 1
