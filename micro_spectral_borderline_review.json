@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-08 19:40 +0300",
+  "olusturma": "2026-09-09 19:41 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -46,8 +46,8 @@
   "yakinlik_referans_sentinel_tarihleri": [
     "08.09.2026"
   ],
-  "250plus_yakinlik_referans_toplam_saha_adayi": 138,
+  "250plus_yakinlik_referans_toplam_saha_adayi": 139,
   "250plus_yakinlik_referans_guncel_sentinel": 17,
-  "250plus_yakinlik_referans_dislanan_eski_veya_250alti": 121,
+  "250plus_yakinlik_referans_dislanan_eski_veya_250alti": 122,
   "baglam_notu": "Spektral sınır yakınlık filtresi yalnız MİKRO taramasının güncel Sentinel tarihindeki 250+ adayları kullanır; eski açık saha backlog'u near-miss MİKRO sinyalini bastırmaz. Alarm/görev/250 m² eşiği değişmez."
 }
