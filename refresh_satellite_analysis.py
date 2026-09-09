@@ -12,11 +12,12 @@ from scanner import connect
 
 
 # Bu değer yalnızca uydu değişim mantığı anlamlı biçimde değiştiğinde artırılır.
-# v15: SCL su sınıfının çevresine yaklaşık 30 m kıyı tamponu eklenir. Böylece
-# dalga, ıslak kaya, kıyı platformu ve kara/deniz karma pikselleri toprak hareketi
-# olarak saha görevi üretmez. Mahalle merkezinden 3 km uzaktaki yaklaşık etiketler
-# de kesin mahalle adı yerine doğrulanmamış mevki olarak işaretlenir.
-ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-same-orbit-uri-scl2-shadow-coast30-place3km-v15"
+# v16: 250–800 m² küçük-saha üst sınırı artık 800 m² dahil olacak şekilde ana
+# Sentinel motorunda uygulanıyor. Mevcut sahnenin eski v15 hareket_json önbelleğinde
+# tam 800 m² adaylar STANDART kalabildiği için güncel sahne bir kez yeniden işlenir;
+# böylece 800 m² aday ya güçlü küçük-saha kapısından KUCUK olarak geçer ya da daha
+# sert spektral kapıyı geçemiyorsa elenir. Ana 250 m² alarm eşiği değişmez.
+ANALYSIS_VERSION = "native-10m-full-envelope-wgs84-cesme-admin-buffer-cap24-same-orbit-uri-scl2-shadow-coast30-place3km-small800inclusive-v16"
 
 LEGACY_UZUNKUYU_LABEL = "Uzunkuyu · Germiyan · Ildır"
 CURRENT_UZUNKUYU_LABEL = "Uzunkuyu · Germiyan · Ildır · Gülbahçe"
