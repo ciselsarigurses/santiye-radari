@@ -59,7 +59,7 @@ def _scale_bucket(item):
         area = float(item.get("alan_m2") or 0)
     except (TypeError, ValueError):
         area = 0.0
-    if area < CONSTRUCTION_SCALE_MIN_M2:
+    if area <= CONSTRUCTION_SCALE_MIN_M2:
         return "kucuk_250_800"
     if area <= CONSTRUCTION_SCALE_MAX_M2:
         return "santiye_olcegi_800_10000"
@@ -136,7 +136,10 @@ def _eligible_component(component, pixel_area_m2, small_site_mask=None):
     area_m2 = len(component) * pixel_area_m2
     if area_m2 < satellite.MIN_HOTSPOT_AREA_M2:
         return False
-    if area_m2 >= satellite.SMALL_HOTSPOT_MAX_M2:
+    # Ana Sentinel motorunda 250–800 m² küçük-saha bandı üst sınır dahil.
+    # Diagnostik geometri de tam 800 m² kümeyi daha gevşek standart banda
+    # kaçırmamalı; güçlü-spektral küçük-saha kapısı aynen uygulanır.
+    if area_m2 > satellite.SMALL_HOTSPOT_MAX_M2:
         return True
     if small_site_mask is None:
         return False
@@ -199,7 +202,7 @@ def _connectivity_metrics(change_mask, bbox, pixel_area_m2, small_site_mask=None
             (round(len(component) * pixel_area_m2) for component in children),
         )
         for child_area in child_areas:
-            if child_area < satellite.SMALL_HOTSPOT_MAX_M2:
+            if child_area <= satellite.SMALL_HOTSPOT_MAX_M2:
                 recovered_small += 1
             elif child_area <= CONSTRUCTION_SCALE_MAX_M2:
                 recovered_construction += 1
@@ -269,8 +272,26 @@ def _self_check():
         "Kapasite kaybı ile çıktı sonrası eleme ayrımı bozuldu."
     )
     assert _scale_bucket({"alan_m2": 500}) == "kucuk_250_800"
+    assert _scale_bucket({"alan_m2": 800}) == "kucuk_250_800"
+    assert _scale_bucket({"alan_m2": 801}) == "santiye_olcegi_800_10000"
     assert _scale_bucket({"alan_m2": 5000}) == "santiye_olcegi_800_10000"
     assert _scale_bucket({"alan_m2": 20000}) == "genis_10000_ustu"
+
+    # Tam 800 m², ana motorla aynı küçük-saha spektral kapısından geçmelidir.
+    boundary_component = [(1, column) for column in range(8)]
+    weak_boundary_mask = np.zeros((3, 10), dtype=bool)
+    strong_boundary_mask = np.zeros((3, 10), dtype=bool)
+    strong_boundary_mask[1, :8] = True
+    assert not _eligible_component(
+        boundary_component,
+        100.0,
+        small_site_mask=weak_boundary_mask,
+    ), "Zayıf 800 m² küme küçük-saha kapısını atladı."
+    assert _eligible_component(
+        boundary_component,
+        100.0,
+        small_site_mask=strong_boundary_mask,
+    ), "Güçlü 800 m² küme küçük-saha kapısında yanlış elendi."
 
     # İki 2x2 blok yalnız köşeden temas ediyor. 8-komşuluk bunu tek 800 m² aday
     # yaparken 4-komşuluk iki ayrı 400 m² güçlü küçük-saha adayı olarak ayırmalı.
@@ -444,6 +465,10 @@ def audit_capacity():
             CONSTRUCTION_SCALE_MIN_M2,
             CONSTRUCTION_SCALE_MAX_M2,
         ],
+        "sinir_notu": (
+            "800 m² ana Sentinel motorunda küçük-saha bandına dahildir; "
+            "şantiye-ölçeği diagnostik sınıfı 800 m² üstünde başlar."
+        ),
         "bolgeler": regions,
     }
     AUDIT_FILE.write_text(
@@ -479,7 +504,7 @@ def main():
             f"{item.get('tavan_sonrasi_aday', 0)} → rapor {item.get('raporda_kalan_aday', 0)}; "
             f"tavan dışı {item.get('tavan_disinda_kalan', 0)} "
             f"(250-800={dropped_scale.get('kucuk_250_800', 0)}, "
-            f"800-10000={dropped_scale.get('santiye_olcegi_800_10000', 0)}, "
+            f">800-10000={dropped_scale.get('santiye_olcegi_800_10000', 0)}, "
             f">10000={dropped_scale.get('genis_10000_ustu', 0)}); "
             f"diyagonal birleşmiş ebeveyn={geometry.get('diyagonal_birlesmis_ebeveyn', 0)}, "
             f"genişten ayrışabilecek 250-10000={geometry.get('genis_ebeveynden_ayrisan_250_10000', 0)}"
