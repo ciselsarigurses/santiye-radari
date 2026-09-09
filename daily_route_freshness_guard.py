@@ -9,8 +9,8 @@ güncel ama daha geniş bir parsel adayının sırf eski olduğu için arkasına
 
 15 Eylül 2026 öncesindeki kalibrasyon döneminde saha rotası ayrıca sıkılaştırılır:
 eski/gecikmiş taşınmış adaylar yalnız backlog'da kalır; ilk üçe ancak insanın açıkça
-TEKRAR_GIT dediği kayıt veya yeni Sentinel görüntüsünde ortaya çıkan güçlü kompakt
-erken/parsel sinyali girebilir. Kuru-zemin diagnostik kalibrasyon noktaları bu dönemde
+TEKRAR_GIT dediği kayıt veya en fazla iki günlük güncel Sentinel kanıtı taşıyan güçlü
+kompakt erken/parsel sinyali girebilir. Kuru-zemin diagnostik kalibrasyon noktaları bu dönemde
 saha ziyareti olarak önerilmez. 15 Eylül ve sonrasında normal taze-kazı rotası otomatik
 olarak geri açılır.
 
@@ -31,6 +31,7 @@ ISTANBUL = ZoneInfo("Europe/Istanbul")
 FULL_OPERATION_START = date(2026, 9, 15)
 PRESEASON_STRONG_PRIORITIES = {"ERKEN", "PARSEL"}
 PRESEASON_SMALL_MAX_M2 = 800
+PRESEASON_MAX_EVIDENCE_AGE_DAYS = 2
 PRESEASON_ALLOWED_SATELLITE_PRIORITIES = {"YÜKSEK", "ORTA"}
 
 # Gülbahçe ana Uzunkuyu Sentinel bölgesine eklendikten sonra yeni raporlar bölge
@@ -56,8 +57,8 @@ NOTE = (
 
 PRESEASON_NOTE = (
     "15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına "
-    "çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya yeni Sentinel görüntüsünde "
-    "beliren güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar "
+    "çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya en fazla 2 günlük güncel "
+    "Sentinel kanıtı taşıyan güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar "
     "arka planda izlenmeye devam eder."
 )
 
@@ -125,8 +126,22 @@ def _normalized_actionable_candidates(candidates):
     return normalized
 
 
+def _fresh_preseason_evidence(item):
+    """Yeni sahne veya açıkça ölçülmüş en fazla iki günlük güncel Sentinel kanıtı."""
+    if not isinstance(item, dict):
+        return False
+    if item.get("yeni_goruntu") is True:
+        return True
+    raw_age = item.get("uydu_kanit_yasi_gun")
+    try:
+        age_days = float(raw_age)
+    except (TypeError, ValueError):
+        return False
+    return 0 <= age_days <= PRESEASON_MAX_EVIDENCE_AGE_DAYS
+
+
 def _fresh_preseason_candidate(item):
-    """Yasak döneminde ancak yeni ve güçlü kanıtı veya insan talebi olan adayı geçir."""
+    """Yasak döneminde ancak güncel-güçlü kanıtı veya insan talebi olan adayı geçir."""
     if not isinstance(item, dict):
         return False
 
@@ -136,9 +151,11 @@ def _fresh_preseason_candidate(item):
         return True
 
     # Aynı eski Sentinel ölçüsünün günlerce taşınması saha rotası nedeni değildir.
-    if item.get("yeni_goruntu") is not True:
-        return False
+    # Fakat ilk görüntü gününden sonra raporun `yeni_goruntu` bayrağı kapanınca, henüz
+    # doğrulanmamış 1-2 günlük güçlü ERKEN sinyal de rotadan düşmemelidir.
     if _historical_evidence_rank(item) != 0:
+        return False
+    if not _fresh_preseason_evidence(item):
         return False
 
     if priority in PRESEASON_STRONG_PRIORITIES:
@@ -425,6 +442,40 @@ def _self_check():
     assert preseason_ids == ["MANUAL_REPEAT", "FRESH_EARLY"], preseason_ids
     assert "HIST_SMALL" not in preseason_ids
     assert "CURRENT_SMALL" not in preseason_ids
+
+    # Yeni görüntü bayrağı ertesi gün kapanır; açık ve doğrulanmamış güçlü kanıt
+    # en fazla iki günlük pencere boyunca ilk saha rotasında kalmalıdır.
+    carryover_early = dict(fresh_early)
+    carryover_early.update(
+        {
+            "gorev_id": "CARRYOVER_EARLY",
+            "yeni_goruntu": False,
+            "uydu_kanit_yasi_gun": 1,
+        }
+    )
+    stale_early = dict(carryover_early)
+    stale_early.update(
+        {
+            "gorev_id": "STALE_EARLY",
+            "uydu_kanit_yasi_gun": PRESEASON_MAX_EVIDENCE_AGE_DAYS + 1,
+        }
+    )
+    historical_carryover = dict(carryover_early)
+    historical_carryover.update(
+        {
+            "gorev_id": "HIST_CARRYOVER",
+            "tarihsel_esleme_mesafe_m": 4.0,
+        }
+    )
+    retained = select_fresh_shortlist(
+        [carryover_early, stale_early, historical_carryover],
+        limit=3,
+        local_day=date(2026, 9, 9),
+    )
+    retained_ids = [item["gorev_id"] for item in retained]
+    assert retained_ids == ["CARRYOVER_EARLY"], retained_ids
+    assert _fresh_preseason_evidence(carryover_early) is True
+    assert _fresh_preseason_evidence(stale_early) is False
     assert _preseason_mode(date(2026, 9, 14)) is True
     assert _preseason_mode(date(2026, 9, 15)) is False
 
