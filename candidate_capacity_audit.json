@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-09",
-  "olusturma": "2026-09-09 15:20 +03",
+  "olusturma": "2026-09-09 19:09 +03",
   "amac": "24 aday tavanının ve 8-komşu piksel geometrisinin 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
   "diagnostik_santiye_olcegi_m2": [
     800,
@@ -16,7 +16,7 @@
       "aday_tavani": 24,
       "ham_uygun_aday": 13,
       "tavan_sonrasi_aday": 13,
-      "raporda_kalan_aday": 13,
+      "raporda_kalan_aday": 14,
       "tavan_disinda_kalan": 0,
       "ham_secimden_farkli": 0,
       "tavana_ulasti": false,
@@ -32,7 +32,7 @@
       },
       "raporda_olcek_dagilimi": {
         "kucuk_250_800": 1,
-        "santiye_olcegi_800_10000": 12,
+        "santiye_olcegi_800_10000": 13,
         "genis_10000_ustu": 0
       },
       "tavan_disinda_olcek_dagilimi": {

@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-09",
-  "olusturma": "2026-09-09 15:22 +03",
+  "olusturma": "2026-09-09 19:12 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -54,12 +54,12 @@
       },
       "secili_genis_sekil_isaretli": 0,
       "secili_genis_sekil_ornekleri": [],
-      "nihai_rapor_secimi": 13,
+      "nihai_rapor_secimi": 14,
       "nihai_rapor_eslesen_geometri": 13,
       "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
       "nihai_rapor_cozulen_geometri": 13,
-      "nihai_rapor_cozulemeyen_geometri": 0,
+      "nihai_rapor_cozulemeyen_geometri": 1,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
@@ -99,7 +99,17 @@
       "nihai_secili_genis_sekil_isaretli": 0,
       "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 0,
       "nihai_secili_genis_sekil_ornekleri": [],
-      "nihai_cozulemeyen_geometri_ornekleri": []
+      "nihai_cozulemeyen_geometri_ornekleri": [
+        {
+          "enlem": 38.222918,
+          "boylam": 26.391885,
+          "alan_m2": 1600,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 6292.3,
+          "en_yakin_alan_benzerligi": 0.562
+        }
+      ]
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
