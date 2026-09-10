@@ -1,11 +1,18 @@
 from __future__ import annotations
 
+import re
 from datetime import date, datetime
 
 MAIN_SITE_MIN_M2 = 250
 DRY_GROUND_CONFIRMATION_MAX_M2 = 900
 FULL_OPERATION_START = date(2026, 9, 15)
 ACTIVE_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT"}
+PORTAL_ACTIONS = {
+    "DOGRU_ADRES_TAKIP",
+    "COP_ADRES_KALDIR",
+    "POTANSIYEL_MUSTERI",
+}
+TASK_ID_PATTERN = re.compile(r"^[SU][A-Z0-9]+$")
 
 
 def parse_date(value):
@@ -18,6 +25,30 @@ def parse_date(value):
         except ValueError:
             pass
     return None
+
+
+def portal_issue_title(task_id: str, action: str) -> str:
+    """Portal kararını mevcut saha işleyicisinin anlayacağı güvenli başlığa çevir.
+
+    Ana portal yalnız üç kullanıcı kararını gösterir. ``Doğru adres - takip et``
+    yeni bir saha sınıfı uydurmaz; görevi kalıcı ``TEKRAR_GIT`` durumuna geçirir.
+    Ayrıntılı saha/kalibrasyon ekranı daha sonra yıkım, kazı vb. fiziksel sonucu
+    ayrıca etiketleyebilir. ``Çöp adres`` ise doğrudan doğrulanmış negatif saha
+    geri bildirimi olarak kaydedilir. Potansiyel müşteri kaydı saha kalibrasyonunu
+    değiştirmeyen ayrı bir GitHub talebi olarak kalır.
+    """
+    task = str(task_id or "").strip().upper()
+    normalized_action = str(action or "").strip().upper()
+    if not TASK_ID_PATTERN.fullmatch(task):
+        raise ValueError("Geçersiz saha görev kimliği.")
+    if normalized_action not in PORTAL_ACTIONS:
+        raise ValueError("Bilinmeyen portal saha işlemi.")
+
+    if normalized_action == "DOGRU_ADRES_TAKIP":
+        return f"[SAHA] {task} TEKRAR_GIT"
+    if normalized_action == "COP_ADRES_KALDIR":
+        return f"[SAHA] {task} KONTROL_EDILDI YANLIS_POZITIF"
+    return f"[SAHA-PORTAL] {task} POTANSIYEL_MUSTERI"
 
 
 def _verified_followup_waiting(item: dict) -> bool:
@@ -82,6 +113,22 @@ def is_curated_portal_actionable(item: dict) -> bool:
 
 
 def _self_check() -> None:
+    assert portal_issue_title("UABC123", "DOGRU_ADRES_TAKIP") == (
+        "[SAHA] UABC123 TEKRAR_GIT"
+    )
+    assert portal_issue_title("UABC123", "COP_ADRES_KALDIR") == (
+        "[SAHA] UABC123 KONTROL_EDILDI YANLIS_POZITIF"
+    )
+    assert portal_issue_title("UABC123", "POTANSIYEL_MUSTERI") == (
+        "[SAHA-PORTAL] UABC123 POTANSIYEL_MUSTERI"
+    )
+    try:
+        portal_issue_title("RADAR-1", "DOGRU_ADRES_TAKIP")
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("Uydurma fallback görev kimliği saha durumuna yazılmamalı")
+
     assert is_curated_portal_actionable({"saha_durumu": "KONTROLE_GIT"})
     assert is_curated_portal_actionable({"saha_durumu": "TEKRAR_GIT"})
 
