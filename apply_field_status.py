@@ -18,7 +18,7 @@ SHADOW_FILE = Path(__file__).with_name("preseason_dry_ground_shadow.json")
 TITLE_PATTERN = re.compile(
     r"^\[SAHA\]\s+([SU][A-Z0-9]+)\s+"
     r"(KONTROLE_GIT|TEKRAR_GIT|KONTROL_EDILDI)"
-    r"(?:\s+(SANTIYE_KAZI|YOL_ALTYAPI|TARLA_BITKI|YANLIS_POZITIF))?$"
+    r"(?:\s+(SANTIYE_KAZI|YIKIM_TEMIZLIK|YOL_ALTYAPI|TARLA_BITKI|YANLIS_POZITIF))?$"
 )
 CALIBRATION_TITLE_PATTERN = re.compile(
     r"^\[KALIBRASYON\]\s+(K[A-F0-9]{10})\s+"
@@ -147,11 +147,17 @@ def apply_issue_title(title):
             "[KALIBRASYON] <kimlik> <sonuç>"
         )
     task_id, status, outcome = match.groups()
-    if outcome and status != "KONTROL_EDILDI":
-        raise ValueError("Saha sonucu yalnızca KONTROL_EDILDI durumuyla kaydedilebilir.")
+    precursor_repeat = outcome == "YIKIM_TEMIZLIK" and status == "TEKRAR_GIT"
+    if outcome and status != "KONTROL_EDILDI" and not precursor_repeat:
+        raise ValueError(
+            "Saha sonucu yalnızca KONTROL_EDILDI ile kaydedilir; yıkım/parsel "
+            "temizliği öncülü ise TEKRAR_GIT olarak yakın takipte tutulabilir."
+        )
 
     # KONTROL_EDILDI işlemi günlük raporu yeniden normalize edip görevi listeden
     # çıkarabilir. Bu nedenle Sentinel özellik snapshot'ını durum değişmeden önce al.
+    # YIKIM_TEMIZLIK ise aynı snapshot TEKRAR_GIT statüsünde tutulur; böylece gerçek
+    # fiziksel müdahale yanlış pozitif sayılmadan sonraki kazı/temel sinyali izlenebilir.
     field_item = _field_item(task_id) if outcome else None
     result = apply_status(task_id, status)
     if outcome:
