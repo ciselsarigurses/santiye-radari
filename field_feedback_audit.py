@@ -7,9 +7,10 @@ filtreleri bozmayı engellemektir.
 
 Yalnız ``saha_durumlari.kaynak='uydu'`` olan normal görevler Sentinel üretim
 kalibrasyonuna girer. İnternet/belediye gibi başka kaynakların saha sonuçları ayrı
-sayılır ve uydu doğruluk oranını kirletmez. Otomatik eşik değişikliği her durumda
-kapalıdır; yeterli örnek yalnız manuel algoritma incelemesinin anlamlı olduğunu
-belirtir.
+sayılır ve uydu doğruluk oranını kirletmez. Yıkım/parsel temizliği gibi doğrulanmış
+fiziksel öncüller ne aktif şantiye pozitifine ne de şantiye-dışı negatife yazılır;
+ayrı tutulur ki erken müdahale sinyalleri yanlış pozitif filtresini gereksiz yere
+sertleştirmesin. Otomatik eşik değişikliği her durumda kapalıdır.
 """
 
 from __future__ import annotations
@@ -20,7 +21,7 @@ import sqlite3
 from collections import Counter, defaultdict
 
 from calibration_outcome import ensure_calibration_schema
-from field_outcome import ALLOWED_OUTCOMES, ensure_outcome_schema
+from field_outcome import ALLOWED_OUTCOMES, PRECURSOR_OUTCOMES, ensure_outcome_schema
 from scanner import connect
 
 
@@ -51,20 +52,33 @@ def _rate(positive, total):
     return round(positive / total, 4)
 
 
+def _is_precursor(outcome):
+    return str(outcome or "") in PRECURSOR_OUTCOMES
+
+
 def _group_summary(rows, key_index, outcome_index=0):
-    grouped = defaultdict(lambda: {"toplam": 0, "gercek_santiye": 0})
+    grouped = defaultdict(
+        lambda: {"toplam": 0, "gercek_santiye": 0, "on_mudahale": 0, "santiye_disi": 0}
+    )
     for row in rows:
+        outcome = str(row[outcome_index] or "")
         key = str(row[key_index] or "bilinmiyor")
         grouped[key]["toplam"] += 1
-        if str(row[outcome_index] or "") == POSITIVE_OUTCOME:
+        if outcome == POSITIVE_OUTCOME:
             grouped[key]["gercek_santiye"] += 1
-    return {
-        key: {
+        elif _is_precursor(outcome):
+            grouped[key]["on_mudahale"] += 1
+        else:
+            grouped[key]["santiye_disi"] += 1
+    result = {}
+    for key, value in sorted(grouped.items()):
+        decisive = value["gercek_santiye"] + value["santiye_disi"]
+        result[key] = {
             **value,
-            "gercek_santiye_orani": _rate(value["gercek_santiye"], value["toplam"]),
+            "kararli_ornek": decisive,
+            "gercek_santiye_orani": _rate(value["gercek_santiye"], decisive),
         }
-        for key, value in sorted(grouped.items())
-    }
+    return result
 
 
 def _ensure_field_state_stub(connection):
@@ -121,34 +135,46 @@ def feedback_audit_summary(connection=None):
         calibration_counts = Counter(str(row[0] or "") for row in calibration_rows)
         production_total = len(satellite_rows)
         production_positive = production_counts.get(POSITIVE_OUTCOME, 0)
-        production_negative = production_total - production_positive
+        production_precursor = sum(
+            production_counts.get(outcome, 0) for outcome in PRECURSOR_OUTCOMES
+        )
+        production_negative = production_total - production_positive - production_precursor
+        production_decisive = production_positive + production_negative
+
         calibration_total = len(calibration_rows)
         calibration_positive = calibration_counts.get(POSITIVE_OUTCOME, 0)
-        calibration_negative = calibration_total - calibration_positive
+        calibration_precursor = sum(
+            calibration_counts.get(outcome, 0) for outcome in PRECURSOR_OUTCOMES
+        )
+        calibration_negative = calibration_total - calibration_positive - calibration_precursor
+        calibration_decisive = calibration_positive + calibration_negative
 
         size_rows = [(row[0], _size_bucket(row[1])) for row in satellite_rows]
         calibration_size_rows = [(row[0], _size_bucket(row[1])) for row in calibration_rows]
 
         # Bu sınır bir istatistiksel güven aralığı iddiası değildir. Yalnızca birkaç
         # etikete aşırı uyum sağlayıp üretim filtresini bozmayı engelleyen muhafazakâr
-        # operasyonel bir kilittir.
+        # operasyonel bir kilittir. Yıkım/temizlik gibi öncüller ikili pozitif-negatif
+        # karar setine alınmaz; ayrı ölçülür.
         review_ready = (
-            production_total >= MIN_TOTAL_FOR_REVIEW
+            production_decisive >= MIN_TOTAL_FOR_REVIEW
             and production_positive >= MIN_CLASS_FOR_REVIEW
             and production_negative >= MIN_CLASS_FOR_REVIEW
         )
         if review_ready:
             status = "manuel_inceleme_icin_yeterli"
             reason = (
-                "Sentinel üretim etiketlerinde iki sınıf da asgari örnek sayısına ulaştı; "
-                "eşikler yine otomatik değiştirilmez, yalnız manuel karşılaştırma yapılabilir."
+                "Sentinel üretim etiketlerinde aktif şantiye ve şantiye-dışı iki karar "
+                "sınıfı da asgari örnek sayısına ulaştı; yıkım/temizlik öncülleri ayrı "
+                "tutulur. Eşikler yine otomatik değiştirilmez."
             )
         else:
             status = "etiket_yetersiz"
             reason = (
-                f"Sentinel üretim kalibrasyonu için en az {MIN_TOTAL_FOR_REVIEW} toplam, "
-                f"en az {MIN_CLASS_FOR_REVIEW} gerçek şantiye ve {MIN_CLASS_FOR_REVIEW} "
-                "şantiye-dışı etiket beklenir; mevcut örnekle eşik oynamak aşırı uyum riski taşır."
+                f"Sentinel üretim kalibrasyonu için öncül sınıflar hariç en az "
+                f"{MIN_TOTAL_FOR_REVIEW} kararlı örnek, en az {MIN_CLASS_FOR_REVIEW} gerçek "
+                f"şantiye ve {MIN_CLASS_FOR_REVIEW} şantiye-dışı etiket beklenir; mevcut "
+                "örnekle eşik oynamak aşırı uyum riski taşır."
             )
 
         return {
@@ -158,9 +184,11 @@ def feedback_audit_summary(connection=None):
             "neden": reason,
             "sentinel_uretim": {
                 "toplam": production_total,
+                "kararli_ornek": production_decisive,
                 "gercek_santiye": production_positive,
+                "on_mudahale": production_precursor,
                 "santiye_disi": production_negative,
-                "gercek_santiye_orani": _rate(production_positive, production_total),
+                "gercek_santiye_orani": _rate(production_positive, production_decisive),
                 "sonuclar": {key: production_counts.get(key, 0) for key in sorted(ALLOWED_OUTCOMES)},
                 "boyut_bandi": _group_summary(size_rows, 1),
                 "uydu_onceligi": _group_summary(satellite_rows, 3),
@@ -168,9 +196,11 @@ def feedback_audit_summary(connection=None):
             },
             "alarm_disi_kalibrasyon": {
                 "toplam": calibration_total,
+                "kararli_ornek": calibration_decisive,
                 "gercek_santiye": calibration_positive,
+                "on_mudahale": calibration_precursor,
                 "santiye_disi": calibration_negative,
-                "gercek_santiye_orani": _rate(calibration_positive, calibration_total),
+                "gercek_santiye_orani": _rate(calibration_positive, calibration_decisive),
                 "sonuclar": {key: calibration_counts.get(key, 0) for key in sorted(ALLOWED_OUTCOMES)},
                 "boyut_bandi": _group_summary(calibration_size_rows, 1),
                 "temporal_ozellikli": sum(row[2] is not None for row in calibration_rows),
@@ -211,6 +241,7 @@ def _self_check():
 
         # Önce yetersiz örnek: uydu dışı sonuç uydu doğruluk paydasına girmemeli.
         _insert_field(connection, "U1", "SANTIYE_KAZI", 300, "KUCUK", "YUKSEK")
+        _insert_field(connection, "U2", "YIKIM_TEMIZLIK", 400, "KUCUK", "ORTA")
         _insert_field(
             connection,
             "S1",
@@ -221,15 +252,18 @@ def _self_check():
             source="internet",
         )
         summary = feedback_audit_summary(connection)
-        assert summary["sentinel_uretim"]["toplam"] == 1, summary
+        assert summary["sentinel_uretim"]["toplam"] == 2, summary
+        assert summary["sentinel_uretim"]["kararli_ornek"] == 1, summary
+        assert summary["sentinel_uretim"]["on_mudahale"] == 1, summary
+        assert summary["sentinel_uretim"]["santiye_disi"] == 0, summary
         assert summary["uydu_disi_saha_sonucu"] == 1, summary
         assert not summary["manuel_inceleme_hazir"], summary
         assert not summary["otomatik_esik_degistirme"], summary
 
-        # 12 uydu etiketi, iki sınıfta da en az dört örnek: yalnız manuel inceleme
-        # kilidi açılır, otomatik eşik değişikliği yine kapalı kalır.
-        for index in range(2, 13):
-            positive = index <= 6
+        # 12 kararlı uydu etiketi, iki sınıfta da en az dört örnek: yalnız manuel
+        # inceleme kilidi açılır. Aradaki yıkım/temizlik öncülü karar paydasına girmez.
+        for index in range(3, 14):
+            positive = index <= 7
             _insert_field(
                 connection,
                 f"U{index}",
@@ -239,8 +273,10 @@ def _self_check():
                 "YUKSEK" if positive else "NORMAL",
             )
         summary = feedback_audit_summary(connection)
-        assert summary["sentinel_uretim"]["toplam"] == 12, summary
+        assert summary["sentinel_uretim"]["toplam"] == 13, summary
+        assert summary["sentinel_uretim"]["kararli_ornek"] == 12, summary
         assert summary["sentinel_uretim"]["gercek_santiye"] == 6, summary
+        assert summary["sentinel_uretim"]["on_mudahale"] == 1, summary
         assert summary["sentinel_uretim"]["santiye_disi"] == 6, summary
         assert summary["manuel_inceleme_hazir"], summary
         assert not summary["otomatik_esik_degistirme"], summary
