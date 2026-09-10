@@ -288,6 +288,23 @@
           "geometrik_sinyal_kaymasi_m": 10.0
         },
         {
+          "gorev_id": "UEC44340AEC",
+          "oncelik": "TEKRAR",
+          "mahalle": "Gülbahçe",
+          "rapor_alan_m2": 400,
+          "bilesen_alan_m2": 400,
+          "alan_benzerligi": 1.0,
+          "bilesen_piksel": 4,
+          "mevcut_enlem": 38.331547,
+          "mevcut_boylam": 26.644338,
+          "geometrik_enlem": 38.331547,
+          "geometrik_boylam": 26.644338,
+          "sinyal_agirlikli_enlem": 38.331547,
+          "sinyal_agirlikli_boylam": 26.644338,
+          "mevcut_geometrik_fark_m": 0.0,
+          "geometrik_sinyal_kaymasi_m": 0.0
+        },
+        {
           "gorev_id": "U4F642FC4B3",
           "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
@@ -301,23 +318,6 @@
           "geometrik_boylam": 26.66609,
           "sinyal_agirlikli_enlem": 38.297086,
           "sinyal_agirlikli_boylam": 26.66609,
-          "mevcut_geometrik_fark_m": 0.0,
-          "geometrik_sinyal_kaymasi_m": 0.0
-        },
-        {
-          "gorev_id": "UEC44340AEC",
-          "oncelik": "GECİKEN",
-          "mahalle": "Gülbahçe",
-          "rapor_alan_m2": 400,
-          "bilesen_alan_m2": 400,
-          "alan_benzerligi": 1.0,
-          "bilesen_piksel": 4,
-          "mevcut_enlem": 38.331547,
-          "mevcut_boylam": 26.644338,
-          "geometrik_enlem": 38.331547,
-          "geometrik_boylam": 26.644338,
-          "sinyal_agirlikli_enlem": 38.331547,
-          "sinyal_agirlikli_boylam": 26.644338,
           "mevcut_geometrik_fark_m": 0.0,
           "geometrik_sinyal_kaymasi_m": 0.0
         }
