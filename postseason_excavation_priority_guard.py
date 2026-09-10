@@ -127,6 +127,14 @@ def _is_fresh_excavation_candidate(item):
 
     if item.get("yeni_goruntu") is not True:
         return False
+
+    # Sezon açılışından önceki Sentinel sahnesi, workflow 15 Eylül sabahı
+    # çalıştığında yeni_goruntu biti hâlâ açık olsa bile TAZE KAZI sayılamaz.
+    # Operasyonel ağırlık yalnız 15 Eylül ve sonrasına ait gerçek sahne kanıtıyla başlar.
+    evidence_day = _parse_scene_date(item.get("son_tarih"))
+    if evidence_day is None or evidence_day < FULL_OPERATION_START:
+        return False
+
     if freshness._historical_evidence_rank(item) != 0:
         return False
 
@@ -450,8 +458,8 @@ def _self_check():
         "boylam": 26.650,
         "alan_m2": 600,
         "bolge": east,
-        "onceki_tarih": "03.09.2026",
-        "son_tarih": "05.09.2026",
+        "onceki_tarih": "13.09.2026",
+        "son_tarih": "15.09.2026",
         "yeni_goruntu": True,
         "uydu_onceligi": "YÜKSEK",
         "boyut_sinifi": "KUCUK",
@@ -466,8 +474,8 @@ def _self_check():
         "boylam": 26.640,
         "alan_m2": 600,
         "bolge": east,
-        "onceki_tarih": "03.09.2026",
-        "son_tarih": "05.09.2026",
+        "onceki_tarih": "13.09.2026",
+        "son_tarih": "15.09.2026",
         "yeni_goruntu": True,
         "uydu_onceligi": "YÜKSEK",
         "boyut_sinifi": "KUCUK",
@@ -494,6 +502,7 @@ def _self_check():
         "boylam": 26.580,
         "alan_m2": 12_000,
         "bolge": east,
+        "son_tarih": "15.09.2026",
         "yeni_goruntu": True,
         "uydu_onceligi": "YÜKSEK",
     }
@@ -506,7 +515,7 @@ def _self_check():
         "boylam": 26.520,
         "alan_m2": 200,
         "bolge": east,
-        "son_tarih": "05.09.2026",
+        "son_tarih": "15.09.2026",
         "yeni_goruntu": True,
         "uydu_onceligi": "YÜKSEK",
         "boyut_sinifi": "KUCUK",
@@ -535,6 +544,10 @@ def _self_check():
     }
 
     assert _is_fresh_excavation_candidate(fresh_excavation)
+    preseason_scene = dict(fresh_excavation)
+    preseason_scene["gorev_id"] = "PRESEASON_SCENE"
+    preseason_scene["son_tarih"] = "14.09.2026"
+    assert not _is_fresh_excavation_candidate(preseason_scene)
     assert not _is_fresh_excavation_candidate(old_early)
     assert not _is_fresh_excavation_candidate(broad)
     assert not _is_fresh_excavation_candidate(micro)
@@ -545,7 +558,7 @@ def _self_check():
     assert _micro_precursor_match(micro, micro_history) is None
 
     same_day_history = json.loads(json.dumps(micro_history))
-    same_day_history["adaylar"][0]["son_guclu_gorulme_tarihi"] = "05.09.2026"
+    same_day_history["adaylar"][0]["son_guclu_gorulme_tarihi"] = "15.09.2026"
     assert _micro_precursor_match(fresh_excavation, same_day_history) is None
 
     ranked_fresh = select_postseason_shortlist(
