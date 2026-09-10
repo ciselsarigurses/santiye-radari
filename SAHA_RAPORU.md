@@ -1,7 +1,7 @@
 # Şantiye Radarı — Günlük Saha Raporu
 
 **Rapor tarihi:** 2026-09-10
-**Hazırlanma:** 2026-09-10 19:15 +03
+**Hazırlanma:** 2026-09-10 20:25 +03
 
 **Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 139 · Geciken kontrol: 138 · Tekrar gidilecek: 1 · Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)
 
@@ -18,15 +18,6 @@
 > 15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.
 
 Bugün ekip gönderilecek ek kalibrasyon noktası yok.
-
-## Temporal-lokal erken sinyal izleme
-
-> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül öncesinde yalnız kalibrasyon/izleme amaçlıdır; ekip rotasına otomatik eklenmez.
-
-1. **TEMPORAL-LOKAL — Çiftlikköy** · yaklaşık 300 m² · yerellik 2.32 · iç BSI Δ 0.119 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.294010,26.276952) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.294010/26.276952)
-   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
-2. **TEMPORAL-LOKAL — Ildır** · yaklaşık 400 m² · yerellik 1.95 · iç BSI Δ 0.172 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.403272,26.486005) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.403272/26.486005)
-   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
@@ -122,8 +113,8 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285689,26.384330)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 10. GECİKEN — Uzunkuyu
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Uzunkuyu
+### 10. GECİKEN — Gülbahçe
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Gülbahçe
 - **Koordinat:** `38.33219, 26.652385`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
@@ -132,8 +123,8 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.332190,26.652385)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 11. GECİKEN — Uzunkuyu
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Uzunkuyu
+### 11. GECİKEN — Gülbahçe
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Gülbahçe
 - **Koordinat:** `38.334541, 26.651698`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
@@ -182,8 +173,8 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.290212,26.271915)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 16. GECİKEN — Uzunkuyu
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Uzunkuyu
+### 16. GECİKEN — Gülbahçe
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Gülbahçe
 - **Koordinat:** `38.313469, 26.638073`
 - **Değişim alanı:** yaklaşık 0 m²
 - **Görüntü aralığı:** - → -
