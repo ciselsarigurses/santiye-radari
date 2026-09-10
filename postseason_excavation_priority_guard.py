@@ -13,9 +13,10 @@ Geniş-yüzey arka-plan katmanı tarafından operasyon listesinden ayrılan kay�
 buraya gelmez; bu guard da 10.000 m² ve üstünü hiçbir koşulda yükseltmez.
 
 Ayrıca daha eski bir Sentinel sahnesinde güçlü temporal + lokal/kompakt MİKRO izi
-olan aynı küçük alan, sonraki yeni sahnede bağımsız olarak 250 m²+ ana adaya dönüşürse
-bu geçmiş yalnız taze-kazı bandı içinde sıralama kanıtı olarak kullanılır. MİKRO iz
-tek başına alarm veya saha görevi üretmez.
+veya sahada doğrulanmış yıkım/parsel temizliği olan aynı küçük alan, sonraki yeni
+sahnede bağımsız olarak 250 m²+ ana adaya dönüşürse bu geçmiş yalnız taze-kazı bandı
+içinde sıralama kanıtı olarak kullanılır. MİKRO iz veya saha öncülü tek başına alarm
+veya saha görevi üretmez.
 
 15 Eylül öncesinde üretim raporuna dokunmaz; yalnız --self-check ile sezon açılışı
 davranışı bugünden doğrulanabilir.
@@ -28,6 +29,7 @@ from datetime import date, datetime
 import json
 import math
 from pathlib import Path
+import sqlite3
 from zoneinfo import ZoneInfo
 
 import daily_route_shortlist as route
@@ -37,11 +39,17 @@ import daily_route_freshness_guard as freshness
 ISTANBUL = ZoneInfo("Europe/Istanbul")
 BASE = Path(__file__).resolve().parent
 MICRO_WATCHLIST_FILE = BASE / "micro_site_watchlist.json"
+FIELD_DB_FILE = BASE / "santiye.db"
 FULL_OPERATION_START = date(2026, 9, 15)
 MAIN_ALARM_MIN_M2 = 250
 MICRO_MIN_M2 = 150
 MICRO_MAX_M2 = 249
 MICRO_PRECURSOR_MAX_DISTANCE_M = 25.0
+FIELD_PRECURSOR_OUTCOMES = {"YIKIM_TEMIZLIK"}
+FIELD_PRECURSOR_MIN_M2 = 150
+FIELD_PRECURSOR_MAX_M2 = 5_000
+FIELD_PRECURSOR_MAX_DISTANCE_M = 25.0
+FIELD_PRECURSOR_MAX_AGE_DAYS = 60
 FRESH_EXCAVATION_MAX_M2 = 5_000
 STRONG_SMALL_MAX_M2 = 800
 ALLOWED_SATELLITE_PRIORITIES = {"YÜKSEK", "ORTA"}
@@ -49,9 +57,10 @@ FRESH_ROUTE_PRIORITIES = {"ERKEN", "PARSEL"}
 NOTE = (
     "15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ "
     "kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un "
-    "önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi varsa, "
-    "bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT "
-    "her zaman en yüksek önceliktedir; MİKRO iz tek başına saha görevine yükseltilmez."
+    "önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya "
+    "sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday "
+    "kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek "
+    "önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez."
 )
 
 
@@ -109,6 +118,71 @@ def _load_micro_watchlist():
     return payload
 
 
+def _field_precursors_from_connection(connection):
+    """Sahada doğrulanmış fiziksel öncülleri salt-okunur sıralama kanıtına dönüştür."""
+    try:
+        columns = {
+            str(row[1]) for row in connection.execute("PRAGMA table_info(saha_sonuclari)")
+        }
+    except sqlite3.Error:
+        return []
+    required = {"gorev_id", "sonuc", "enlem", "boylam", "alan_m2", "son_tarih"}
+    if not required.issubset(columns):
+        return []
+
+    placeholders = ",".join("?" for _ in FIELD_PRECURSOR_OUTCOMES)
+    try:
+        rows = connection.execute(
+            f"""SELECT gorev_id,sonuc,enlem,boylam,alan_m2,son_tarih
+            FROM saha_sonuclari
+            WHERE sonuc IN ({placeholders})
+              AND enlem IS NOT NULL AND boylam IS NOT NULL
+              AND alan_m2 IS NOT NULL AND son_tarih IS NOT NULL""",
+            tuple(sorted(FIELD_PRECURSOR_OUTCOMES)),
+        ).fetchall()
+    except sqlite3.Error:
+        return []
+
+    precursors = []
+    for task_id, outcome, latitude, longitude, area, last_date in rows:
+        area_value = _number(area, None)
+        scene_day = _parse_scene_date(last_date)
+        if area_value is None or not (
+            FIELD_PRECURSOR_MIN_M2 <= area_value <= FIELD_PRECURSOR_MAX_M2
+        ):
+            continue
+        if scene_day is None:
+            continue
+        precursors.append(
+            {
+                "gorev_id": str(task_id or "").strip(),
+                "sonuc": str(outcome or "").strip().upper(),
+                "enlem": _number(latitude, None),
+                "boylam": _number(longitude, None),
+                "alan_m2": area_value,
+                "son_tarih": scene_day.strftime("%d.%m.%Y"),
+            }
+        )
+    return precursors
+
+
+def _load_field_precursors():
+    """DB okunamazsa ana rota saha-öncül bonusu olmadan güvenle devam etsin."""
+    if not FIELD_DB_FILE.exists():
+        return []
+    connection = None
+    try:
+        connection = sqlite3.connect(
+            f"file:{FIELD_DB_FILE}?mode=ro", uri=True, timeout=5
+        )
+        return _field_precursors_from_connection(connection)
+    except sqlite3.Error:
+        return []
+    finally:
+        if connection is not None:
+            connection.close()
+
+
 def _is_manual_repeat(item):
     status = str(item.get("saha_durumu") or "").strip().upper()
     priority = str(item.get("oncelik") or "").strip().upper()
@@ -159,6 +233,63 @@ def _is_fresh_excavation_candidate(item):
         and satellite_priority in ALLOWED_SATELLITE_PRIORITIES
     )
     return strong_small
+
+
+def _field_precursor_match(item, field_precursors):
+    """Daha eski saha-teyitli yıkım/temizliğin taze 250+ adayla çakışmasını ölç."""
+    if not _is_fresh_excavation_candidate(item):
+        return None
+    if not isinstance(field_precursors, (list, tuple)):
+        return None
+
+    current_date = _parse_scene_date(item.get("son_tarih"))
+    latitude = _number(item.get("enlem"), None)
+    longitude = _number(item.get("boylam"), None)
+    if current_date is None or latitude is None or longitude is None:
+        return None
+
+    best = None
+    best_distance = None
+    for entry in field_precursors:
+        if not isinstance(entry, dict):
+            continue
+        outcome = str(entry.get("sonuc") or "").strip().upper()
+        if outcome not in FIELD_PRECURSOR_OUTCOMES:
+            continue
+        area = _number(entry.get("alan_m2"), None)
+        if area is None or not (
+            FIELD_PRECURSOR_MIN_M2 <= area <= FIELD_PRECURSOR_MAX_M2
+        ):
+            continue
+        previous_date = _parse_scene_date(entry.get("son_tarih"))
+        if previous_date is None or previous_date >= current_date:
+            continue
+        age_days = (current_date - previous_date).days
+        if age_days > FIELD_PRECURSOR_MAX_AGE_DAYS:
+            continue
+        previous_lat = _number(entry.get("enlem"), None)
+        previous_lon = _number(entry.get("boylam"), None)
+        if previous_lat is None or previous_lon is None:
+            continue
+        distance = _distance_m(latitude, longitude, previous_lat, previous_lon)
+        if distance > FIELD_PRECURSOR_MAX_DISTANCE_M:
+            continue
+        if best_distance is None or distance < best_distance:
+            best_distance = distance
+            best = {
+                "saha_oncul_eslesmesi": True,
+                "saha_oncul_sonuc": outcome,
+                "saha_oncul_gorev_id": str(entry.get("gorev_id") or ""),
+                "saha_oncul_mesafe_m": round(distance, 1),
+                "saha_oncul_son_tarih": previous_date.strftime("%d.%m.%Y"),
+                "saha_oncul_kanit_notu": (
+                    "Aynı küçük alanda daha eski sahada doğrulanmış yıkım/parsel "
+                    "temizliği ile güncel bağımsız 250 m²+ taze Sentinel adayı 25 m "
+                    "içinde örtüşüyor. Bu yalnız taze ana aday için sıralama kanıtıdır; "
+                    "saha öncülü tek başına alarm veya yeni görev üretmez."
+                ),
+            }
+    return best
 
 
 def _micro_precursor_match(item, micro_watchlist):
@@ -231,11 +362,14 @@ def _priority_band(item):
     return 2
 
 
-def _sort_key(item, original_index, micro_watchlist=None):
+def _sort_key(item, original_index, micro_watchlist=None, field_precursors=None):
     base = route._route_sort_key(item, original_index)
     band = _priority_band(item)
+    field_rank = (
+        0 if band == 1 and _field_precursor_match(item, field_precursors or []) else 1
+    )
     micro_rank = 0 if band == 1 and _micro_precursor_match(item, micro_watchlist or {}) else 1
-    return (band, micro_rank, *base)
+    return (band, field_rank, micro_rank, *base)
 
 
 def _balance_regions(ranked, selected, limit):
@@ -303,6 +437,23 @@ def _balance_regions(ranked, selected, limit):
     return selected
 
 
+def _annotate_field_precursor(item, field_precursors):
+    keys = (
+        "saha_oncul_eslesmesi",
+        "saha_oncul_sonuc",
+        "saha_oncul_gorev_id",
+        "saha_oncul_mesafe_m",
+        "saha_oncul_son_tarih",
+        "saha_oncul_kanit_notu",
+    )
+    for key in keys:
+        item.pop(key, None)
+    match = _field_precursor_match(item, field_precursors)
+    if match:
+        item.update(match)
+    return item
+
+
 def _annotate_micro_precursor(item, micro_watchlist):
     keys = (
         "mikro_oncul_iz_eslesmesi",
@@ -325,21 +476,28 @@ def select_postseason_shortlist(
     limit=route.SHORTLIST_LIMIT,
     local_day=None,
     micro_watchlist=None,
+    field_precursors=None,
 ):
     cap = max(int(limit), 0)
     if cap <= 0:
         return []
 
     micro_watchlist = micro_watchlist if isinstance(micro_watchlist, dict) else {}
+    field_precursors = field_precursors if isinstance(field_precursors, (list, tuple)) else []
     # Legacy Uzunkuyu etiketi ile Gülbahçe-dahil yeni etiketi aynı doğu bölgesi kabul et.
     eligible = freshness._normalized_actionable_candidates(candidates)
     indexed = list(enumerate(eligible))
-    indexed.sort(key=lambda pair: _sort_key(pair[1], pair[0], micro_watchlist))
+    indexed.sort(
+        key=lambda pair: _sort_key(
+            pair[1], pair[0], micro_watchlist, field_precursors
+        )
+    )
     ranked = [item for _, item in indexed]
 
     selected = [dict(item) for item in ranked[:cap]]
     selected = _balance_regions(ranked, selected, cap)
     for index, item in enumerate(selected, start=1):
+        _annotate_field_precursor(item, field_precursors)
         _annotate_micro_precursor(item, micro_watchlist)
         item["gunluk_sira"] = index
     return selected
@@ -365,9 +523,10 @@ def _shortlist_markdown(shortlist):
             else ""
         )
         fresh_tag = " · **TAZE KAZI ÖNCELİĞİ**" if _is_fresh_excavation_candidate(item) else ""
+        field_tag = " · **SAHA ÖNCÜLÜ→TAZE KAZI**" if item.get("saha_oncul_eslesmesi") else ""
         micro_tag = " · **MİKRO→ANA DEVAM KANITI**" if item.get("mikro_oncul_iz_eslesmesi") else ""
         lines.append(
-            f"{order}. **{priority} — {neighborhood}**{area_text}{fresh_tag}{micro_tag} · "
+            f"{order}. **{priority} — {neighborhood}**{area_text}{fresh_tag}{field_tag}{micro_tag} · "
             f"Görev `{task_id}`{route_text}"
         )
     lines.append("")
@@ -382,15 +541,22 @@ def apply_postseason_priority(local_day=None):
     payload = json.loads(route.REPORT_JSON.read_text(encoding="utf-8"))
     candidates = payload.get("saha_adaylari") or []
     micro_watchlist = _load_micro_watchlist()
+    field_precursors = _load_field_precursors()
     shortlist = select_postseason_shortlist(
         candidates,
         local_day=day,
         micro_watchlist=micro_watchlist,
+        field_precursors=field_precursors,
     )
     promoted = [
         str(item.get("gorev_id") or "")
         for item in shortlist
         if _is_fresh_excavation_candidate(item)
+    ]
+    field_precursor_promoted = [
+        str(item.get("gorev_id") or "")
+        for item in shortlist
+        if item.get("saha_oncul_eslesmesi") is True
     ]
     micro_precursor_promoted = [
         str(item.get("gorev_id") or "")
@@ -408,11 +574,16 @@ def apply_postseason_priority(local_day=None):
         "mikro_santiye": "150-249 m² diagnostik; doğrudan saha görevine yükseltilmez",
         "mikro_oncul_esleme_mesafesi_m": MICRO_PRECURSOR_MAX_DISTANCE_M,
         "mikro_oncul_iz_eslesen_gorevler": micro_precursor_promoted,
+        "saha_oncul_sonuclari": sorted(FIELD_PRECURSOR_OUTCOMES),
+        "saha_oncul_esleme_mesafesi_m": FIELD_PRECURSOR_MAX_DISTANCE_M,
+        "saha_oncul_azami_yas_gun": FIELD_PRECURSOR_MAX_AGE_DAYS,
+        "saha_oncul_eslesen_gorevler": field_precursor_promoted,
         "one_alinan_gorevler": promoted,
         "not": (
             "Yalnız mevcut aktif görevlerin sırasını değiştirir; alarm/görev üretmez. "
-            "Daha eski güçlü MİKRO izi yalnız zaten bağımsız 250 m²+ taze ana adayda "
-            "sıralama kanıtıdır. TEKRAR_GIT en yüksek öncelikte kalır."
+            "Daha eski güçlü MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği "
+            "yalnız zaten bağımsız 250 m²+ taze ana adayda sıralama kanıtıdır. "
+            "TEKRAR_GIT en yüksek öncelikte kalır."
         ),
     }
 
@@ -542,6 +713,16 @@ def _self_check():
             }
         ],
     }
+    field_history = [
+        {
+            "gorev_id": "FIELD_PRECURSOR",
+            "sonuc": "YIKIM_TEMIZLIK",
+            "enlem": 38.4101,
+            "boylam": 26.6500,
+            "alan_m2": 400,
+            "son_tarih": "08.09.2026",
+        }
+    ]
 
     assert _is_fresh_excavation_candidate(fresh_excavation)
     broad_geometry = dict(fresh_excavation)
@@ -556,6 +737,37 @@ def _self_check():
     assert not _is_fresh_excavation_candidate(broad)
     assert not _is_fresh_excavation_candidate(micro)
 
+    field_match = _field_precursor_match(fresh_excavation, field_history)
+    assert field_match and field_match["saha_oncul_mesafe_m"] <= FIELD_PRECURSOR_MAX_DISTANCE_M
+    assert _field_precursor_match(fresh_plain, field_history) is None
+    assert _field_precursor_match(micro, field_history) is None
+
+    wrong_outcome = json.loads(json.dumps(field_history))
+    wrong_outcome[0]["sonuc"] = "TARLA_BITKI"
+    assert _field_precursor_match(fresh_excavation, wrong_outcome) is None
+    same_day_field = json.loads(json.dumps(field_history))
+    same_day_field[0]["son_tarih"] = "15.09.2026"
+    assert _field_precursor_match(fresh_excavation, same_day_field) is None
+    stale_field = json.loads(json.dumps(field_history))
+    stale_field[0]["son_tarih"] = "01.07.2026"
+    assert _field_precursor_match(fresh_excavation, stale_field) is None
+
+    memory_db = sqlite3.connect(":memory:")
+    try:
+        memory_db.execute(
+            """CREATE TABLE saha_sonuclari (
+            gorev_id TEXT, sonuc TEXT, enlem REAL, boylam REAL,
+            alan_m2 REAL, son_tarih TEXT)"""
+        )
+        memory_db.execute(
+            "INSERT INTO saha_sonuclari VALUES (?,?,?,?,?,?)",
+            ("FIELD_DB_TEST", "YIKIM_TEMIZLIK", 38.4101, 26.6500, 400, "08.09.2026"),
+        )
+        loaded_field = _field_precursors_from_connection(memory_db)
+        assert len(loaded_field) == 1 and loaded_field[0]["gorev_id"] == "FIELD_DB_TEST"
+    finally:
+        memory_db.close()
+
     match = _micro_precursor_match(fresh_excavation, micro_history)
     assert match and match["mikro_oncul_mesafe_m"] <= MICRO_PRECURSOR_MAX_DISTANCE_M
     assert _micro_precursor_match(fresh_plain, micro_history) is None
@@ -565,13 +777,26 @@ def _self_check():
     same_day_history["adaylar"][0]["son_guclu_gorulme_tarihi"] = "15.09.2026"
     assert _micro_precursor_match(fresh_excavation, same_day_history) is None
 
+    ranked_field = select_postseason_shortlist(
+        [fresh_plain, fresh_excavation],
+        limit=2,
+        local_day=date(2026, 9, 15),
+        micro_watchlist={},
+        field_precursors=field_history,
+    )
+    assert ranked_field[0]["gorev_id"] == "FRESH_EXC", ranked_field
+    assert ranked_field[0]["saha_oncul_eslesmesi"] is True
+    assert "saha_oncul_eslesmesi" not in ranked_field[1]
+
     ranked_fresh = select_postseason_shortlist(
         [fresh_plain, fresh_excavation],
         limit=2,
         local_day=date(2026, 9, 15),
         micro_watchlist=micro_history,
+        field_precursors=field_history,
     )
     assert ranked_fresh[0]["gorev_id"] == "FRESH_EXC", ranked_fresh
+    assert ranked_fresh[0]["saha_oncul_eslesmesi"] is True
     assert ranked_fresh[0]["mikro_oncul_iz_eslesmesi"] is True
     assert "mikro_oncul_iz_eslesmesi" not in ranked_fresh[1]
 
@@ -580,10 +805,12 @@ def _self_check():
         limit=3,
         local_day=date(2026, 9, 15),
         micro_watchlist=micro_history,
+        field_precursors=field_history,
     )
     ids = [item["gorev_id"] for item in selected]
     assert ids[0] == "REPEAT", ids
     assert ids[1] == "FRESH_EXC", ids
+    assert selected[1]["saha_oncul_eslesmesi"] is True
     assert selected[1]["mikro_oncul_iz_eslesmesi"] is True
     assert "MICRO_SHOULD_NOT_PROMOTE" not in ids[:2], ids
 
@@ -591,7 +818,7 @@ def _self_check():
     assert date(2026, 9, 14) < FULL_OPERATION_START
     assert MAIN_ALARM_MIN_M2 == 250
     assert MICRO_MIN_M2 == 150 and MICRO_MAX_M2 == 249
-    print("OK: 15 Eylül sonrası taze hafriyat + MİKRO öncül iz self-check geçti.")
+    print("OK: 15 Eylül sonrası taze hafriyat + saha/MİKRO öncül iz self-check geçti.")
 
 
 def main():
@@ -608,10 +835,12 @@ def main():
         print("Kalibrasyon modu: 15 Eylül öncesi rapora dokunulmadı.")
         return
     promoted = sum(_is_fresh_excavation_candidate(item) for item in shortlist)
-    precursor = sum(bool(item.get("mikro_oncul_iz_eslesmesi")) for item in shortlist)
+    field_precursor = sum(bool(item.get("saha_oncul_eslesmesi")) for item in shortlist)
+    micro_precursor = sum(bool(item.get("mikro_oncul_iz_eslesmesi")) for item in shortlist)
     print(
         f"15 Eylül sonrası taze hafriyat önceliği uygulandı: "
-        f"{promoted} taze ana-alarm adayı ilk üçte, {precursor} MİKRO öncül iz eşleşmesi."
+        f"{promoted} taze ana-alarm adayı ilk üçte, {field_precursor} saha öncülü ve "
+        f"{micro_precursor} MİKRO öncül iz eşleşmesi."
     )
     if not changed:
         print("Rapor zaten güncel.")
