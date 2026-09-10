@@ -88,6 +88,9 @@ jobs:
       - name: Güncel su-kıyı yüzeyini kör alan devriyesinden ayır
         run: python gulbahce_patrol_surface_guard.py
 
+      - name: Su-kıyı koruması sonrası güncel körlük kapsamasını yeniden ölç
+        run: python gulbahce_latest_state_blind_review.py
+
       - name: Manuel parsel ön-kontrol katmanı öz testi
         run: python parcel_precheck_links.py --self-check
 
@@ -112,6 +115,7 @@ jobs:
             python gulbahce_latest_state_blind_review.py
             python gulbahce_patrol_surface_guard.py --check-only
             python gulbahce_patrol_surface_guard.py
+            python gulbahce_latest_state_blind_review.py
             python parcel_precheck_links.py --self-check
             python parcel_precheck_links.py
           }
