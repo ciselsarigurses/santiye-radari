@@ -13,6 +13,12 @@ daha yeni bir zemin hareketinin önüne geçebiliyordu. Bu guard, gecikmiş gör
 Geometri guard'ı önce uygulanır; düşük-kompakt/uzun-ince risk nedeniyle BEKLEYEN'e
 alınan kayıtlar bu katmanda tekrar yükseltilmez. Gülbahçe, doğu Sentinel bölgesinin
 mevcut kapsama dengesi içinde aynen korunur.
+
+Yeni günlük raporlarda ``gunun_ilk_3_kontrolu`` merkezi karar motorunun nihai saha
+kapısıdır. Bu alan varsa operasyonel rota yalnız bu havuz içinde şekil/tazelik
+kontrolü yapar; tüm ``saha_adaylari`` backlog'unu tekrar açmaz. Böylece 15 Eylül
+öncesi kalibrasyon filtresinden geçmiş eski kayıtlar ikinci bir rota motoruyla geri
+giremez. Eski raporlarda alan yoksa önceki davranış güvenli fallback olarak sürer.
 """
 
 from __future__ import annotations
@@ -122,25 +128,52 @@ def select_fresh_shortlist(candidates, report_day, limit=FINAL_LIMIT):
     return selected
 
 
+def _route_source(report):
+    """Yeni raporda merkezi günlük rotayı, eski raporda backlog'u kaynak yap."""
+    if "gunun_ilk_3_kontrolu" in report and isinstance(
+        report.get("gunun_ilk_3_kontrolu"), list
+    ):
+        return (
+            [
+                dict(item)
+                for item in report.get("gunun_ilk_3_kontrolu") or []
+                if isinstance(item, dict)
+            ],
+            "MERKEZI_GUNUN_ILK_3",
+        )
+    candidates = report.get("saha_adaylari") or []
+    if not isinstance(candidates, list):
+        candidates = []
+    return [dict(item) for item in candidates if isinstance(item, dict)], "LEGACY_SAHA_ADAYLARI"
+
+
 def build_fresh_operational_route(report, shape_review, limit=FINAL_LIMIT):
     report_day = _parse_date(report.get("rapor_tarihi"))
-    candidates = report.get("saha_adaylari") or []
-    candidate_count = len(candidates) if isinstance(candidates, list) else 0
+    route_candidates, route_source = _route_source(report)
 
-    # Önce mevcut geometri korumasının gerçek nihai 3'lüsünü üret.
-    base = build_operational_route(report, shape_review, limit=limit)
+    # Merkezi rota varsa geometri ve tazelik korumaları yalnız o nihai havuzda
+    # çalışır. Böylece 15 Eylül öncesi kalibrasyon filtresinin dışarıda bıraktığı
+    # eski backlog ikinci bir rota motoruyla yeniden açılamaz.
+    route_report = dict(report)
+    route_report["saha_adaylari"] = route_candidates
+    candidate_count = len(route_candidates)
+
+    # Önce mevcut geometri korumasının gerçek nihai listesini üret.
+    base = build_operational_route(route_report, shape_review, limit=limit)
     shape_ids = [str(item.get("gorev_id") or "") for item in base.get("operasyonel_rota", [])]
 
-    # Sonra geometri guard uygulanmış tüm aktif aday havuzunu al. Bu çağrı alarm
-    # veya görev üretmez; yalnız route seçim havuzunu genişletir.
+    # Ardından aynı yetkili havuz içinde gerçek uydu kanıt yaşını kullan. Legacy
+    # raporlarda bu havuz tüm aktif saha_adaylari olduğundan önceki davranış sürer.
     expanded_limit = max(candidate_count, limit, 1)
-    expanded = build_operational_route(report, shape_review, limit=expanded_limit)
+    expanded = build_operational_route(route_report, shape_review, limit=expanded_limit)
     expanded_candidates = expanded.get("operasyonel_rota") or []
     selected = select_fresh_shortlist(expanded_candidates, report_day, limit=limit)
     fresh_ids = [str(item.get("gorev_id") or "") for item in selected]
 
     result = dict(base)
     result["operasyonel_rota"] = selected
+    result["rota_kaynagi"] = route_source
+    result["merkezi_rota_kilidi"] = route_source == "MERKEZI_GUNUN_ILK_3"
     result["tazelik_korumasi"] = True
     result["tazelik_sirasi_degisti"] = shape_ids != fresh_ids
     result["geometri_sonrasi_rota_gorevleri"] = shape_ids
@@ -149,10 +182,10 @@ def build_fresh_operational_route(report, shape_review, limit=FINAL_LIMIT):
     result["mikro_aralik_m2"] = MICRO_RANGE_M2
     result["rota_degisti"] = bool(base.get("rota_degisti")) or shape_ids != fresh_ids
     result["tazelik_notu"] = (
-        "Yeni alarm/görev üretmez. GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, "
-        "sonra gerçek Sentinel kanıt yaşı kullanılır; daha eski backlog aynı sınıftaki "
-        "daha yeni zemin hareketinin önüne geçemez. TEKRAR_GIT ve geometri arka-plan "
-        "koruması aynen korunur."
+        "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' "
+        "nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz "
+        "içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel "
+        "kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur."
     )
     return result
 
@@ -222,8 +255,26 @@ def _self_check():
     ids = [item["gorev_id"] for item in result["operasyonel_rota"]]
     assert ids[0] == "FRESH", "2 günlük güçlü kanıt eski küçük backlog'un gerisinde kalmamalı."
     assert ids.index("STALE_SMALLER") < ids.index("VERY_OLD")
+    assert result["rota_kaynagi"] == "LEGACY_SAHA_ADAYLARI"
+    assert result["merkezi_rota_kilidi"] is False
     assert result["ana_sentinel_esigi_m2"] == 250
     assert result["mikro_aralik_m2"] == [150, 249]
+
+    # Yeni günlük raporda merkezi saha listesi nihai kapıdır. Burada yalnız FRESH
+    # seçilmişken 5/13 günlük backlog operasyonel_route içine geri girememeli.
+    curated = dict(report)
+    curated["gunun_ilk_3_kontrolu"] = [dict(report["saha_adaylari"][2])]
+    curated_result = build_fresh_operational_route(curated, {}, limit=3)
+    curated_ids = [item["gorev_id"] for item in curated_result["operasyonel_rota"]]
+    assert curated_ids == ["FRESH"], curated_ids
+    assert curated_result["rota_kaynagi"] == "MERKEZI_GUNUN_ILK_3"
+    assert curated_result["merkezi_rota_kilidi"] is True
+
+    empty_curated = dict(report)
+    empty_curated["gunun_ilk_3_kontrolu"] = []
+    empty_result = build_fresh_operational_route(empty_curated, {}, limit=3)
+    assert empty_result["operasyonel_rota"] == []
+    assert empty_result["merkezi_rota_kilidi"] is True
 
     with_repeat = dict(report)
     with_repeat["saha_adaylari"] = [
