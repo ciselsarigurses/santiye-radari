@@ -206,9 +206,13 @@ def _self_check():
     stale = _candidate("STALE", "15.09.2026")
     micro = _candidate("MICRO", "15.09.2026", alan_m2=200)
 
-    assert _BASE_FIRST_FRESH_CLASSIFIER(preopening)
+    # Ana taze-kazı sınıflayıcısı artık sezon sınırını kendi içinde de kilitliyor.
+    # Bu guard ikinci savunma hattı olarak sahne yaşını/future-date durumunu korur;
+    # sezon öncesi örnek ana sınıflayıcıda zaten reddedildiği için blocked listesine
+    # ikinci kez yazılmaz.
+    assert not _BASE_FIRST_FRESH_CLASSIFIER(preopening)
     assert not _guarded_first_fresh(preopening, opening_day)
-    assert _blocked_reason(preopening, opening_day) == "SEZON_ONCESI_SAHNE"
+    assert _blocked_reason(preopening, opening_day) is None
     assert _guarded_first_fresh(opening, opening_day)
     assert not _guarded_first_fresh(missing_date, opening_day)
     assert not _guarded_first_fresh(future, opening_day)
