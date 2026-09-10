@@ -44,6 +44,8 @@ jobs:
           python hydrate_persisted_satellite_metadata.py
           python daily_route_shortlist.py
           python daily_route_freshness_guard.py
+          python operational_route_shape_guard.py
+          python operational_route_freshness_guard.py
 
       - name: Durumu kalıcı kaydet
         env:
@@ -63,9 +65,11 @@ jobs:
             python hydrate_persisted_satellite_metadata.py
             python daily_route_shortlist.py
             python daily_route_freshness_guard.py
+            python operational_route_shape_guard.py
+            python operational_route_freshness_guard.py
           fi
 
-          git add santiye.db SAHA_RAPORU.md latest_report.json
+          git add santiye.db SAHA_RAPORU.md latest_report.json operational_route.json
           if git diff --cached --quiet; then
             echo "Kaydedilecek yeni durum farkı yok."
           else
