@@ -13,23 +13,13 @@
 
 > 15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya en fazla 2 günlük güncel Sentinel kanıtı taşıyan güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.
 
-1. **TEKRAR — Gülbahçe** · yaklaşık 400 m² · Görev `UEC44340AEC` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.331547,26.644338) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331547/26.644338)
+1. **TEKRAR — Gülbahçe** · yaklaşık 400 m² · Görev `UEC44340AEC` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.331547,26.644338)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli bir örnek bulursa o örnek saha teyidi için rotasyonun önüne alınır; bu yine alarm değildir. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
+> 15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.
 
-1. **KALİBRASYON — Dalyan** · yaklaşık 300 m² · 05.09.2026 → 08.09.2026 · BSI Δ 0.117 · RGB Δ 0.202 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.353073,26.307746)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-
-## Temporal-lokal erken sinyal izleme
-
-> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül öncesinde yalnız kalibrasyon/izleme amaçlıdır; ekip rotasına otomatik eklenmez.
-
-1. **TEMPORAL-LOKAL — Çiftlikköy** · yaklaşık 300 m² · yerellik 2.32 · iç BSI Δ 0.119 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.294010,26.276952) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.294010/26.276952)
-   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
-2. **TEMPORAL-LOKAL — Ildır** · yaklaşık 400 m² · yerellik 1.95 · iç BSI Δ 0.172 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.403272,26.486005) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.403272/26.486005)
-   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
