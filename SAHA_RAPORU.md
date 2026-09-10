@@ -13,7 +13,7 @@
 
 > 15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya en fazla 2 günlük güncel Sentinel kanıtı taşıyan güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.
 
-1. **TEKRAR — Gülbahçe** · yaklaşık 400 m² · Görev `UEC44340AEC` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.331547,26.644338)
+1. **TEKRAR — Gülbahçe** · yaklaşık 400 m² · Görev `UEC44340AEC` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.331547,26.644338) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331547/26.644338)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
