@@ -109,4 +109,8 @@ jobs:
           geometry_page = AppTest.from_file("pages/5_Geometri_Ayrisma.py")
           geometry_page.run(timeout=45)
           assert not geometry_page.exception, geometry_page.exception
+
+          current_blind_page = AppTest.from_file("pages/6_Gulbahce_Guncel_Kor_Alanlar.py")
+          current_blind_page.run(timeout=45)
+          assert not current_blind_page.exception, current_blind_page.exception
           PY
