@@ -7,6 +7,12 @@ bu açık provenans işareti bulunan adayları, halen güncel Sentinel kümesind
 adayların arkasına koyar. Ölçek sınıfı önceliği korunur: tarihsel küçük-güçlü aday,
 güncel ama daha geniş bir parsel adayının sırf eski olduğu için arkasına düşmez.
 
+Sahada YIKIM_TEMIZLIK olarak doğrulanan bir görev artık sırf TEKRAR_GIT durumunda diye
+her gün yeniden rotaya yazılmaz. Saha sonucuyla kaydedilen Sentinel sahnesi kalıcı
+başlangıç noktasıdır; aynı görevde bundan daha yeni bir Sentinel hareketi görülürse
+tekrar günlük rotaya girer. Böylece doğru koordinat kaybolmaz, fakat ekip zaten
+bakılmış bir yıkım/parsel temizliği noktasına yeni kanıt olmadan tekrar tekrar gitmez.
+
 15 Eylül 2026 öncesindeki kalibrasyon döneminde saha rotası ayrıca sıkılaştırılır:
 eski/gecikmiş taşınmış adaylar yalnız backlog'da kalır; ilk üçe ancak insanın açıkça
 TEKRAR_GIT dediği kayıt veya en fazla iki günlük güncel Sentinel kanıtı taşıyan güçlü
@@ -25,6 +31,8 @@ import json
 from zoneinfo import ZoneInfo
 
 import daily_route_shortlist as route
+from field_outcome import ensure_outcome_schema
+from scanner import connect
 
 
 ISTANBUL = ZoneInfo("Europe/Istanbul")
@@ -33,6 +41,8 @@ PRESEASON_STRONG_PRIORITIES = {"ERKEN", "PARSEL"}
 PRESEASON_SMALL_MAX_M2 = 800
 PRESEASON_MAX_EVIDENCE_AGE_DAYS = 2
 PRESEASON_ALLOWED_SATELLITE_PRIORITIES = {"YÜKSEK", "ORTA"}
+VERIFIED_FOLLOWUP_OUTCOME = "YIKIM_TEMIZLIK"
+VERIFIED_FOLLOWUP_CLASS = "DOGRULANMIS_YIKIM_TAKIP"
 
 # Gülbahçe ana Uzunkuyu Sentinel bölgesine eklendikten sonra yeni raporlar bölge
 # etiketini "... · Gülbahçe" ile yazar. Eski açık görevler ise tarihsel etiketi
@@ -49,7 +59,9 @@ route.SATELLITE_REGION_LABELS = (
 
 NOTE = (
     "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde "
-    "tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey "
+    "tutar. Sahada doğrulanmış yıkım/parsel temizliği doğru koordinat olarak takipte "
+    "kalır ve ancak doğrulama sahnesinden daha yeni Sentinel hareketinde tekrar rotaya "
+    "çıkar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey "
     "hareketlerinden önce kontrol ettirir; aynı ölçek sınıfında güncel Sentinel "
     "kümesinde görünen aday, yalnız tarihsel ölçüsü geri taşınmış adaya tercih edilir. "
     "Bölge dengesi daha yüksek öncelikli adayı düşürmez."
@@ -57,9 +69,11 @@ NOTE = (
 
 PRESEASON_NOTE = (
     "15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına "
-    "çıkarılmaz. Yalnız insanın TEKRAR_GIT dediği kayıt veya en fazla 2 günlük güncel "
-    "Sentinel kanıtı taşıyan güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar "
-    "arka planda izlenmeye devam eder."
+    "çıkarılmaz. Sahada doğrulanmış yıkım/parsel temizliği yeni Sentinel hareketi gelene "
+    "kadar takip havuzunda kalır. Bunun dışında yalnız insanın TEKRAR_GIT dediği kayıt "
+    "veya en fazla 2 günlük güncel Sentinel kanıtı taşıyan güçlü kompakt "
+    "ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye "
+    "devam eder."
 )
 
 PRESEASON_CALIBRATION_NOTE = (
@@ -96,6 +110,109 @@ def _local_day(value=None):
 
 def _preseason_mode(local_day=None):
     return _local_day(local_day) < FULL_OPERATION_START
+
+
+def _date_from_text(value):
+    raw = str(value or "").strip()
+    for fmt in ("%d.%m.%Y", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(raw[:10], fmt).date()
+        except (TypeError, ValueError):
+            continue
+    return None
+
+
+def _verified_followup_map():
+    """Saha sonucu ile doğrulanan yıkım/temizlik görevlerinin kanıt tabanını getir."""
+    with connect() as connection:
+        ensure_outcome_schema(connection)
+        rows = connection.execute(
+            """SELECT gorev_id,son_tarih,kayit_zamani
+            FROM saha_sonuclari WHERE sonuc=?""",
+            (VERIFIED_FOLLOWUP_OUTCOME,),
+        ).fetchall()
+    return {
+        str(task_id): {
+            "son_tarih": scene_date,
+            "kayit_zamani": recorded_at,
+        }
+        for task_id, scene_date, recorded_at in rows
+        if str(task_id or "").strip()
+    }
+
+
+def _decorate_verified_followups(candidates, followups):
+    """Doğrulanmış yıkımı doğru-koordinat takip kaydı olarak açıkça işaretle.
+
+    Yeni hareket yalnız aynı görevdeki güncel Sentinel kanıt tarihi, saha sonucuyla
+    saklanan kanıt tarihinden ileriyse kabul edilir. Başlangıç sahnesi eksikse güvenli
+    tarafta kalıp kaydı bastırmayız.
+    """
+    decorated = []
+    followups = followups if isinstance(followups, dict) else {}
+    for raw in candidates or []:
+        if not isinstance(raw, dict):
+            continue
+        item = dict(raw)
+        task_id = str(item.get("gorev_id") or "").strip()
+        info = followups.get(task_id)
+        if not isinstance(info, dict):
+            decorated.append(item)
+            continue
+
+        baseline_day = _date_from_text(info.get("son_tarih"))
+        current_day = _date_from_text(item.get("son_tarih"))
+        if baseline_day is None:
+            newer_evidence = True
+        else:
+            newer_evidence = current_day is not None and current_day > baseline_day
+
+        item["saha_dogrulandi_takip"] = True
+        item["takip_sinifi"] = VERIFIED_FOLLOWUP_CLASS
+        item["takip_baslangic_sahne"] = info.get("son_tarih")
+        item["takip_kayit_zamani"] = info.get("kayit_zamani")
+        item["takip_yeni_hareket"] = bool(newer_evidence)
+        item["takip_operasyon_durumu"] = (
+            "YENI_HAREKET_TEKRAR_KONTROL"
+            if newer_evidence
+            else "DOGRULANDI_ARKA_PLAN_TAKIP"
+        )
+        decorated.append(item)
+    return decorated
+
+
+def _verified_followup_waiting(item):
+    """Doğru sahada yıkım doğrulandı; yeni Sentinel hareketi yoksa bugün tekrar gitme."""
+    return bool(
+        isinstance(item, dict)
+        and item.get("saha_dogrulandi_takip") is True
+        and item.get("takip_yeni_hareket") is not True
+    )
+
+
+def _tracking_view(candidates):
+    """Portal/rapor için kalıcı takip havuzunun küçük ve açık bir görünümünü üret."""
+    tracked = []
+    for item in candidates or []:
+        if not isinstance(item, dict) or item.get("saha_dogrulandi_takip") is not True:
+            continue
+        tracked.append(
+            {
+                "gorev_id": item.get("gorev_id"),
+                "mahalle": item.get("mahalle"),
+                "enlem": item.get("enlem"),
+                "boylam": item.get("boylam"),
+                "alan_m2": item.get("alan_m2"),
+                "saha_sonucu": VERIFIED_FOLLOWUP_OUTCOME,
+                "takip_sinifi": item.get("takip_sinifi"),
+                "takip_baslangic_sahne": item.get("takip_baslangic_sahne"),
+                "mevcut_sahne": item.get("son_tarih"),
+                "takip_yeni_hareket": bool(item.get("takip_yeni_hareket")),
+                "takip_operasyon_durumu": item.get("takip_operasyon_durumu"),
+                "harita": item.get("harita"),
+            }
+        )
+    return tracked
 
 
 def _historical_evidence_rank(item):
@@ -145,6 +262,9 @@ def _fresh_preseason_candidate(item):
     if not isinstance(item, dict):
         return False
 
+    if _verified_followup_waiting(item):
+        return False
+
     status = str(item.get("saha_durumu") or "").strip().upper()
     priority = str(item.get("oncelik") or "").strip().upper()
     if status == "TEKRAR_GIT" or priority == "TEKRAR":
@@ -188,6 +308,7 @@ def select_fresh_shortlist(candidates, limit=route.SHORTLIST_LIMIT, local_day=No
         return []
 
     eligible = _normalized_actionable_candidates(candidates)
+    eligible = [item for item in eligible if not _verified_followup_waiting(item)]
     if _preseason_mode(local_day):
         eligible = [item for item in eligible if _fresh_preseason_candidate(item)]
 
@@ -258,8 +379,11 @@ def update_fresh_shortlist(local_day=None):
     day = _local_day(local_day)
     preseason = _preseason_mode(day)
     payload = json.loads(route.REPORT_JSON.read_text(encoding="utf-8"))
-    candidates = payload.get("saha_adaylari", [])
+    raw_candidates = payload.get("saha_adaylari", [])
+    candidates = _decorate_verified_followups(raw_candidates, _verified_followup_map())
     shortlist = select_fresh_shortlist(candidates, local_day=day)
+    payload["saha_adaylari"] = candidates
+    payload["dogrulanmis_takip_sahalari"] = _tracking_view(candidates)
     payload["gunun_ilk_3_kontrolu"] = shortlist
     payload["gunun_ilk_3_notu"] = PRESEASON_NOTE if preseason else NOTE
 
@@ -478,6 +602,56 @@ def _self_check():
     assert _fresh_preseason_evidence(stale_early) is False
     assert _preseason_mode(date(2026, 9, 14)) is True
     assert _preseason_mode(date(2026, 9, 15)) is False
+
+    # Sahada yıkım/parsel temizliği olarak doğrulanan kayıt günlük tekrar rotasına
+    # yapışmamalı; aynı görevde daha yeni Sentinel sahnesi geldiğinde ise en yüksek
+    # TEKRAR önceliğiyle yeniden görünmelidir.
+    followup_info = {
+        "TRACKED_DEMOLITION": {
+            "son_tarih": "08.09.2026",
+            "kayit_zamani": "2026-09-10 15:00 UTC",
+        }
+    }
+    tracked_same_scene = dict(manual_repeat)
+    tracked_same_scene.update(
+        {
+            "gorev_id": "TRACKED_DEMOLITION",
+            "mahalle": "Gülbahçe",
+            "bolge": east,
+            "son_tarih": "08.09.2026",
+        }
+    )
+    decorated_same = _decorate_verified_followups([tracked_same_scene], followup_info)[0]
+    assert decorated_same["saha_dogrulandi_takip"] is True
+    assert decorated_same["takip_yeni_hareket"] is False
+    assert _verified_followup_waiting(decorated_same) is True
+    assert select_fresh_shortlist(
+        [decorated_same], limit=1, local_day=date(2026, 9, 10)
+    ) == []
+    assert select_fresh_shortlist(
+        [decorated_same], limit=1, local_day=date(2026, 9, 15)
+    ) == []
+
+    tracked_new_scene = dict(tracked_same_scene)
+    tracked_new_scene["son_tarih"] = "11.09.2026"
+    decorated_new = _decorate_verified_followups([tracked_new_scene], followup_info)[0]
+    assert decorated_new["takip_yeni_hareket"] is True
+    assert _verified_followup_waiting(decorated_new) is False
+    resurfaced = select_fresh_shortlist(
+        [decorated_new], limit=1, local_day=date(2026, 9, 11)
+    )
+    assert [item["gorev_id"] for item in resurfaced] == ["TRACKED_DEMOLITION"]
+    tracked_view = _tracking_view([decorated_same, decorated_new])
+    assert len(tracked_view) == 2
+    assert tracked_view[0]["takip_operasyon_durumu"] == "DOGRULANDI_ARKA_PLAN_TAKIP"
+    assert tracked_view[1]["takip_operasyon_durumu"] == "YENI_HAREKET_TEKRAR_KONTROL"
+
+    # Eski sonuç kaydında Sentinel başlangıç tarihi yoksa otomatik baskılama yapma.
+    no_baseline = _decorate_verified_followups(
+        [tracked_same_scene],
+        {"TRACKED_DEMOLITION": {"son_tarih": None, "kayit_zamani": None}},
+    )[0]
+    assert no_baseline["takip_yeni_hareket"] is True
 
     sample_md = "\n".join(
         [
