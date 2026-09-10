@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-08 19:52 +0300",
+  "olusturma": "2026-09-11 02:07 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -44,7 +44,14 @@
       "tekrar_dogrulandi_ham": false,
       "tekrar_dogrulama_mekansal_esik_m": 25.0,
       "tekrar_dogrulama_mekansal_guvenli": null,
-      "tekrar_dogrulama_mekansal_not": "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok."
+      "tekrar_dogrulama_mekansal_not": "Henüz farklı Sentinel sahnesinde tekrar güçlü doğrulama yok.",
+      "sinyal_cekirdegi_enlem": 38.287679,
+      "sinyal_cekirdegi_boylam": 26.26642,
+      "sinyal_cekirdegi_sapma_m": 10.0,
+      "koordinat_kalitesi": "KOMSULUK_ICI_10M",
+      "sinyal_cekirdegi_harita": "https://www.google.com/maps/search/?api=1&query=38.287679,26.266420",
+      "sinyal_cekirdegi_kaynagi": "AYNI_BILESEN_EN_GUCLU_COKLU_SPEKTRAL_PIKSEL",
+      "sinyal_cekirdegi_yalniz_diagnostik": true
     },
     {
       "mikro_iz_id": "M064C4375BD",
@@ -152,5 +159,9 @@
   "sinir_watchlist_kurali": "Normal spektral eşiği değiştirmeden yalnız SINIR_TEMPORAL_LOKAL_GUCLU 150-249 m² adaylar kalıcı mikro hafızaya eklenir; alarm/görev/15 Eylül otomatik terfisi yoktur. Aynı bölgede 45 m içindeki mevcut iz yinelenmez; aynı turda tek iz en fazla bir güçlü adayla eşleşir.",
   "tekrar_dogrulanan_ham": 0,
   "mekansal_belirsiz_tekrar": 0,
-  "tekrar_kimlik_kurali": "45 m eşleştirme toleransı iz sürekliliği içindir; iki-sahne tekrar kanıtı yalnız ilk güçlü konuma göre <=25 m sapmada geçerlidir. >25 m ham tekrar arka planda saklanır fakat devam eden aynı mikro şantiye sayılmaz."
+  "tekrar_kimlik_kurali": "45 m eşleştirme toleransı iz sürekliliği içindir; iki-sahne tekrar kanıtı yalnız ilk güçlü konuma göre <=25 m sapmada geçerlidir. >25 m ham tekrar arka planda saklanır fakat devam eden aynı mikro şantiye sayılmaz.",
+  "koordinat_cekirdegi_eslesen_guncel_guclu": 1,
+  "koordinat_cekirdegi_alarm_etkisi": false,
+  "koordinat_cekirdegi_saha_gorevi_etkisi": false,
+  "koordinat_cekirdegi_kurali": "Yalnız aynı koordinat+alan ve aynı Sentinel sahnesiyle eşleşen güncel güçlü MİKRO izine <=15 m aynı-bileşen sinyal çekirdeği eklenir. Temsilci koordinatı değişmez; çekirdek ikinci diagnostik yeniden-kontrol hedefidir."
 }
