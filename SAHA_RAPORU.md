@@ -24,6 +24,15 @@
 1. **KALİBRASYON — Musalla** · yaklaşık 300 m² · 05.09.2026 → 08.09.2026 · BSI Δ 0.124 · RGB Δ 0.205 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.301699,26.302594)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
+## Temporal-lokal erken sinyal izleme
+
+> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül öncesinde yalnız kalibrasyon/izleme amaçlıdır; ekip rotasına otomatik eklenmez.
+
+1. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 500 m² · yerellik 1.73 · iç BSI Δ 0.108 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.396941,26.624761) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.396941/26.624761)
+   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+2. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 600 m² · yerellik 1.71 · iç BSI Δ 0.175 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.372610,26.643880) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.372610/26.643880)
+   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 > **Arka plan görev hafızası:** 15 Eylül öncesi bu tam liste bugünün saha rotası değildir; açık görev hafızasıdır. Operasyon için yalnız 'Günün ilk 3 kontrolü' bölümü kullanılır. Eski/gecikmiş kayıtlar silinmez; yeni Sentinel kanıtıyla yeniden güçlenirse veya insan TEKRAR_GIT verirse tekrar rota havuzuna girebilir.
