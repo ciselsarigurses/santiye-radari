@@ -7,6 +7,8 @@ from urllib.parse import urlencode
 
 import streamlit as st
 
+from coordinate_navigation import load_audit, signal_core_target
+
 
 st.set_page_config(page_title="Bugün Gidilecekler", page_icon="📍", layout="wide")
 
@@ -14,6 +16,7 @@ REPORT_FILE = Path(__file__).resolve().parents[1] / "latest_report.json"
 ISSUE_URL = "https://github.com/ciselsarigurses/santiye-radari/issues/new"
 MAX_DAILY = 10
 ACTIVE_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT"}
+COORDINATE_AUDIT = load_audit()
 
 
 def load_report() -> dict:
@@ -209,6 +212,22 @@ for index, item in enumerate(items, start=1):
     route = map_url(item)
     if route:
         st.link_button("📍 KONUMA GİT", route, use_container_width=True)
+
+    # Ana koordinatı değiştirmeden, aynı güncel Sentinel bileşeninde ölçülen ve
+    # en fazla 20 m kaymış daha güçlü piksel varsa saha ekibine ikinci bir hedef
+    # ver. Bu yalnız 250 m²+ taze ana adaylarda çalışır; MİKRO/arka-plan kayıtlarını
+    # yükseltmez ve kesin adres/parsel iddiası oluşturmaz.
+    signal_target = signal_core_target(item, COORDINATE_AUDIT)
+    if signal_target:
+        st.caption(
+            "🎯 Sinyal çekirdeği: aynı Sentinel değişim kümesindeki daha güçlü piksel; "
+            f"ana noktadan yaklaşık {signal_target['kayma_m']:.0f} m. Kesin adres/parsel değildir."
+        )
+        st.link_button(
+            "🎯 SİNYAL ÇEKİRDEĞİNE GİT",
+            signal_target["harita"],
+            use_container_width=True,
+        )
 
     a, b = st.columns(2)
     a.link_button(
