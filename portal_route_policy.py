@@ -20,21 +20,40 @@ def parse_date(value):
     return None
 
 
+def _verified_followup_waiting(item: dict) -> bool:
+    """Sahada doğrulanmış takip kaydı yeni Sentinel hareketi yoksa pasif kalır.
+
+    Günlük rota üreticisi bu kaydı zaten kısa listeden çıkarır. Portalda da aynı
+    korumayı tekrar uygulamak, eski/stale bir ``gunun_ilk_3_kontrolu`` dosyasının
+    sahada bakılmış yıkım/parsel temizliği noktasını yanlışlıkla yeniden göstermesini
+    engeller. Yeni hareket geldiğinde ``takip_yeni_hareket=True`` olur ve kayıt normal
+    TEKRAR_GIT akışına geri döner.
+    """
+    return bool(
+        isinstance(item, dict)
+        and item.get("saha_dogrulandi_takip") is True
+        and item.get("takip_yeni_hareket") is not True
+    )
+
+
 def is_curated_portal_actionable(item: dict) -> bool:
     """Return True only for operational route rows safe to expose in the field portal.
 
-    Normal KONTROLE_GIT/TEKRAR_GIT rows remain unchanged. The only diagnostic
-    exception is the deliberately-created, one-day post-season dry-ground
-    confirmation: 250-900 m², a genuinely new Sentinel scene dated 15 Sep 2026
-    or later, and still explicitly non-alarm/non-persistent-task. Generic
-    diagnostics and every 150-249 m² MİKRO record remain hidden from the field
-    portal.
+    Normal KONTROLE_GIT/TEKRAR_GIT rows remain unchanged, except a verified field
+    follow-up that is explicitly waiting for newer Sentinel movement stays hidden
+    until that movement exists. The only diagnostic exception is the deliberately-
+    created, one-day post-season dry-ground confirmation: 250-900 m², a genuinely
+    new Sentinel scene dated 15 Sep 2026 or later, and still explicitly non-alarm/
+    non-persistent-task. Generic diagnostics and every 150-249 m² MİKRO record remain
+    hidden from the field portal.
     """
     if not isinstance(item, dict):
         return False
 
     status = str(item.get("saha_durumu") or "KONTROLE_GIT").upper()
     if status in ACTIVE_STATUSES:
+        if status == "TEKRAR_GIT" and _verified_followup_waiting(item):
+            return False
         return True
     if status != "DIAGNOSTIK_DOGRULAMA":
         return False
@@ -65,6 +84,19 @@ def is_curated_portal_actionable(item: dict) -> bool:
 def _self_check() -> None:
     assert is_curated_portal_actionable({"saha_durumu": "KONTROLE_GIT"})
     assert is_curated_portal_actionable({"saha_durumu": "TEKRAR_GIT"})
+
+    passive_followup = {
+        "saha_durumu": "TEKRAR_GIT",
+        "saha_dogrulandi_takip": True,
+        "takip_yeni_hareket": False,
+    }
+    assert not is_curated_portal_actionable(passive_followup), (
+        "Sahada doğrulanmış takip noktası yeni Sentinel hareketi yokken portala "
+        "günlük görev diye dönmemeli"
+    )
+    assert is_curated_portal_actionable(
+        dict(passive_followup, takip_yeni_hareket=True)
+    ), "Yeni hareket görülen doğrulanmış takip noktası yeniden eyleme dönmeli"
 
     valid = {
         "saha_durumu": "DIAGNOSTIK_DOGRULAMA",
