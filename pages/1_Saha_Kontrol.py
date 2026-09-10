@@ -25,6 +25,7 @@ STATUS_LABELS = {
 }
 OUTCOME_BUTTONS = {
     "SANTIYE_KAZI": "🏗️ Şantiye / kazı / temel",
+    "YIKIM_TEMIZLIK": "🧱 Yıkım / parsel temizliği",
     "YOL_ALTYAPI": "🚧 Yol / altyapı",
     "TARLA_BITKI": "🌿 Tarla / bitki",
     "YANLIS_POZITIF": "❌ Yanlış pozitif",
@@ -43,6 +44,11 @@ def issue_link(task_id, status, outcome=None):
     ]
     if outcome:
         body_lines.append(f"Sonuç: {OUTCOME_LABELS.get(outcome, outcome)}")
+        if outcome == "YIKIM_TEMIZLIK":
+            body_lines.append(
+                "Takip: Bu sonuç gerçek fiziksel müdahaledir; yanlış pozitif sayılmaz ve "
+                "yakın takip için TEKRAR_GIT durumunda tutulur."
+            )
     params = {"title": title, "body": "\n".join(body_lines)}
     return ISSUE_URL + "?" + urlencode(params)
 
@@ -182,22 +188,27 @@ def task_card(item, task_id, status, source_label):
         )
 
         st.markdown("**Kontrol tamamlandıysa sonucu seç:**")
-        r1, r2, r3, r4 = st.columns(4)
-        result_columns = [r1, r2, r3, r4]
+        result_columns = st.columns(len(OUTCOME_BUTTONS))
         for column, (outcome, label) in zip(result_columns, OUTCOME_BUTTONS.items()):
+            result_status = "TEKRAR_GIT" if outcome == "YIKIM_TEMIZLIK" else "KONTROL_EDILDI"
             column.link_button(
                 label,
-                issue_link(task_id, "KONTROL_EDILDI", outcome),
+                issue_link(task_id, result_status, outcome),
                 width="stretch",
             )
+        st.caption(
+            "Yıkım / parsel temizliği gerçek zemin müdahalesi olarak ayrı kaydedilir ve "
+            "yakın takipte kalır; tarla, yol ve yanlış pozitif ile aynı sınıfa düşmez."
+        )
 
 
 st.title("✅ Saha Kontrol Merkezi")
 st.caption("Git · tekrar kontrol et · kontrol edildi kararlarını kalıcı olarak yönet.")
 st.info(
-    "Kontrol tamamlandığında sonucu da seç. ‘Gerçek şantiye/kazı’, yol-altyapı, "
-    "tarla-bitki ve yanlış pozitif geri bildirimleri gelecekte uydu yanlış "
-    "pozitiflerini azaltmak için ayrı saklanır."
+    "Kontrol tamamlandığında sonucu da seç. ‘Gerçek şantiye/kazı’, yıkım-parsel temizliği, "
+    "yol-altyapı, tarla-bitki ve yanlış pozitif geri bildirimleri ayrı saklanır. "
+    "Yıkım/parsel temizliği henüz aktif temel sayılmaz; sonraki kazı sinyalini yakalamak için "
+    "yakın takipte tutulur."
 )
 
 report = read_report()
