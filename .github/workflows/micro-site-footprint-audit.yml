@@ -15,6 +15,7 @@ on:
       - "micro_borderline_watchlist_guard.py"
       - "micro_site_identity_guard.py"
       - "micro_site_coordinate_audit.py"
+      - "micro_coordinate_watchlist_bridge.py"
       - "micro_site_audit.py"
       - "micro_site_shortlist.json"
       - "micro_site_temporal_review.json"
@@ -98,6 +99,12 @@ jobs:
 
       - name: Güçlü mikro adayın temsilci ve sinyal çekirdeği koordinatını karşılaştır
         run: python micro_site_coordinate_audit.py
+
+      - name: Mikro koordinat-watchlist köprüsü öz testini çalıştır
+        run: python micro_coordinate_watchlist_bridge.py --check-only
+
+      - name: Aynı-sahne sinyal çekirdeğini kalıcı MİKRO izine ekle
+        run: python micro_coordinate_watchlist_bridge.py
 
       - name: Sonuçları yalnız anlamlı değişiklikte kaydet
         shell: bash
