@@ -4656,7 +4656,9 @@
       "saha_gorevi": false,
       "operasyonel_agirlik": "KALIBRASYON_DIAGNOSTIK",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.396941,26.624761",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.396941/26.624761"
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.396941/26.624761",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -4681,7 +4683,9 @@
       "saha_gorevi": false,
       "operasyonel_agirlik": "KALIBRASYON_DIAGNOSTIK",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.372610,26.643880",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.372610/26.643880"
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.372610/26.643880",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "temporal_lokal_erken_izleme_notu": "15 Eylül öncesinde yalnız kalibrasyon/izleme; alarm veya saha görevi yok.",
@@ -4699,7 +4703,10 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346832,26.641018"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346832,26.641018",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.346832/26.641018",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "bolge_anahtari": "cesme",
@@ -4714,7 +4721,10 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180136,26.510940"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180136,26.510940",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.180136/26.510940",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-10",
