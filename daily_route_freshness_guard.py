@@ -231,7 +231,7 @@ def _historical_evidence_rank(item):
 
 
 def _normalized_actionable_candidates(candidates):
-    """Eski/yeni doğu bölge etiketini tek Gülbahçe-dahil bölge anahtarında birleştir."""
+    """Doğu bölgesini normalize et; yeni hareket bekleyen doğrulanmış takibi rotadan çıkar."""
     eligible = route._actionable_candidates(candidates)
     normalized = []
     for item in eligible:
@@ -239,6 +239,11 @@ def _normalized_actionable_candidates(candidates):
         label = str(updated.get("bolge") or "").strip()
         if label == LEGACY_EAST_REGION:
             updated["bolge"] = CANONICAL_EAST_REGION
+        # Bu yardımcı 15 Eylül sonrası taze-kazı guard'ı tarafından da kullanılır.
+        # Dolayısıyla saha-teyitli yıkım/parsel temizliği, doğrulama sahnesinden daha
+        # yeni Sentinel hareketi gelmedikçe hiçbir operasyonel rota katmanına sızmamalı.
+        if _verified_followup_waiting(updated):
+            continue
         normalized.append(updated)
     return normalized
 
@@ -625,6 +630,7 @@ def _self_check():
     assert decorated_same["saha_dogrulandi_takip"] is True
     assert decorated_same["takip_yeni_hareket"] is False
     assert _verified_followup_waiting(decorated_same) is True
+    assert _normalized_actionable_candidates([decorated_same]) == []
     assert select_fresh_shortlist(
         [decorated_same], limit=1, local_day=date(2026, 9, 10)
     ) == []
@@ -637,6 +643,8 @@ def _self_check():
     decorated_new = _decorate_verified_followups([tracked_new_scene], followup_info)[0]
     assert decorated_new["takip_yeni_hareket"] is True
     assert _verified_followup_waiting(decorated_new) is False
+    normalized_new = _normalized_actionable_candidates([decorated_new])
+    assert [item["gorev_id"] for item in normalized_new] == ["TRACKED_DEMOLITION"]
     resurfaced = select_fresh_shortlist(
         [decorated_new], limit=1, local_day=date(2026, 9, 11)
     )
