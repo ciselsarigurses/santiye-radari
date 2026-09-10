@@ -6,6 +6,7 @@ on:
     paths:
       - "gulbahce_blind_patrol_guard.py"
       - "gulbahce_current_blind_patrol_bridge.py"
+      - "gulbahce_current_blind_urgency_guard.py"
       - "gulbahce_patrol_surface_guard.py"
       - "gulbahce_latest_state_blind_review.py"
       - "gulbahce_micro_blind_capacity.json"
@@ -72,6 +73,15 @@ jobs:
       - name: Seçilen devriyenin güncel körlüğü kapsamasını yeniden ölç
         run: python gulbahce_latest_state_blind_review.py
 
+      - name: Gülbahçe taze güncel-körlük ara-gün koruması öz testi
+        run: python gulbahce_current_blind_urgency_guard.py --check-only
+
+      - name: Taze güncel-sahne körlüğünü ara günde güvenli devriyeye al
+        run: python gulbahce_current_blind_urgency_guard.py
+
+      - name: Ara-gün devriyesinin güncel körlüğü kapsamasını yeniden ölç
+        run: python gulbahce_latest_state_blind_review.py
+
       - name: Gülbahçe su-kıyı devriye koruması öz testi
         run: python gulbahce_patrol_surface_guard.py --check-only
 
@@ -96,6 +106,9 @@ jobs:
             python gulbahce_latest_state_blind_review.py
             python gulbahce_current_blind_patrol_bridge.py --check-only
             python gulbahce_current_blind_patrol_bridge.py
+            python gulbahce_latest_state_blind_review.py
+            python gulbahce_current_blind_urgency_guard.py --check-only
+            python gulbahce_current_blind_urgency_guard.py
             python gulbahce_latest_state_blind_review.py
             python gulbahce_patrol_surface_guard.py --check-only
             python gulbahce_patrol_surface_guard.py
