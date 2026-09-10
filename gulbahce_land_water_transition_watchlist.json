@@ -7,18 +7,25 @@
     150,
     249
   ],
+  "sema_surumu": 2,
   "esleme_mesafesi_m": 75.0,
   "kalite_kor_esleme_mesafesi_m": 125.0,
   "son_degerlendirilen_sentinel_tarihi": "08.09.2026",
   "son_degerlendirilen_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
-  "ayni_sahne_idempotent": true,
+  "ayni_sahne_idempotent": false,
+  "guncel_scl_su_gecis_150plus": 15,
   "guncel_belirsiz_iz": 4,
   "guncel_mikro_150_249": 0,
   "guncel_ana_250plus": 4,
+  "guncel_arka_plan_iz": 11,
+  "guncel_kiyi_arka_plan": 10,
+  "guncel_genis_su_arka_plan": 1,
+  "guncel_ic_kompakt_olmayan_arka_plan": 0,
   "farkli_sahnede_tekrarli_iz": 0,
+  "farkli_sahnede_tekrarli_gecis_izi": 0,
   "kalite_kor_takip": 0,
   "arka_plan_cozuldu": 0,
-  "toplam_hafiza_izi": 4,
+  "toplam_hafiza_izi": 15,
   "izler": [
     {
       "iz_id": "GWS333658057",
@@ -49,7 +56,13 @@
       "son_esleme_mesafe_m": 0.0,
       "kalite_kor_eslesmesi": false,
       "kalite_kor_mesafe_m": null,
-      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez.",
+      "kaynak_sinif": "IC_KARA_SCL_SU_BELIRSIZLIGI",
+      "sinif_gecmisi": [
+        "IC_KARA_SCL_SU_BELIRSIZLIGI"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "arka_plan_takip": false
     },
     {
       "iz_id": "GWS3B496F57F",
@@ -80,7 +93,13 @@
       "son_esleme_mesafe_m": 0.0,
       "kalite_kor_eslesmesi": false,
       "kalite_kor_mesafe_m": null,
-      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez.",
+      "kaynak_sinif": "IC_KARA_SCL_SU_BELIRSIZLIGI",
+      "sinif_gecmisi": [
+        "IC_KARA_SCL_SU_BELIRSIZLIGI"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "arka_plan_takip": false
     },
     {
       "iz_id": "GWS57F62ABBF",
@@ -111,7 +130,13 @@
       "son_esleme_mesafe_m": 0.0,
       "kalite_kor_eslesmesi": false,
       "kalite_kor_mesafe_m": null,
-      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez.",
+      "kaynak_sinif": "IC_KARA_SCL_SU_BELIRSIZLIGI",
+      "sinif_gecmisi": [
+        "IC_KARA_SCL_SU_BELIRSIZLIGI"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "arka_plan_takip": false
     },
     {
       "iz_id": "GWSFB66AAFED",
@@ -142,8 +167,421 @@
       "son_esleme_mesafe_m": 0.0,
       "kalite_kor_eslesmesi": false,
       "kalite_kor_mesafe_m": null,
-      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+      "not": "Tarihsel kara ile güncel SCL=su çelişkisi diagnostik hafızada tutulur. Bu kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez.",
+      "kaynak_sinif": "IC_KARA_SCL_SU_BELIRSIZLIGI",
+      "sinif_gecmisi": [
+        "IC_KARA_SCL_SU_BELIRSIZLIGI"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "arka_plan_takip": false
+    },
+    {
+      "iz_id": "GWS98DF3B854",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.324853,
+      "boylam": 26.661854,
+      "ilk_enlem": 38.324853,
+      "ilk_boylam": 26.661854,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 400,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 1.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWSA64551CD9",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.331366,
+      "boylam": 26.653611,
+      "ilk_enlem": 38.331366,
+      "ilk_boylam": 26.653611,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 400,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 1.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWS0AF75F0A5",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.334712,
+      "boylam": 26.654069,
+      "ilk_enlem": 38.334712,
+      "ilk_boylam": 26.654069,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 400,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 1.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWSDCC6A60D6",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.337064,
+      "boylam": 26.652695,
+      "ilk_enlem": 38.337064,
+      "ilk_boylam": 26.652695,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 400,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 1.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWS39AA92D39",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.337969,
+      "boylam": 26.651551,
+      "ilk_enlem": 38.337969,
+      "ilk_boylam": 26.651551,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 400,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 1.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWSC72DC0EBA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.338511,
+      "boylam": 26.649604,
+      "ilk_enlem": 38.338511,
+      "ilk_boylam": 26.649604,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 1200,
+      "doluluk_orani": 0.75,
+      "tarihsel_suya_yakin_piksel_orani": 1.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWS6BA360586",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.338783,
+      "boylam": 26.647887,
+      "ilk_enlem": 38.338783,
+      "ilk_boylam": 26.647887,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 6401,
+      "doluluk_orani": 0.615,
+      "tarihsel_suya_yakin_piksel_orani": 0.812,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWSAFC84855A",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.339054,
+      "boylam": 26.645597,
+      "ilk_enlem": 38.339054,
+      "ilk_boylam": 26.645597,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 400,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 1.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWS2209D8FFA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "GENIS_SU_YUZEY_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "GENIS_SU_YUZEY_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "GENIS_SU_YUZEY_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.340592,
+      "boylam": 26.644109,
+      "ilk_enlem": 38.340592,
+      "ilk_boylam": 26.644109,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 9202,
+      "doluluk_orani": 0.479,
+      "tarihsel_suya_yakin_piksel_orani": 0.609,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWSBB7B8FE9C",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.344752,
+      "boylam": 26.641934,
+      "ilk_enlem": 38.344752,
+      "ilk_boylam": 26.641934,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 800,
+      "doluluk_orani": 1.0,
+      "tarihsel_suya_yakin_piksel_orani": 1.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
+    },
+    {
+      "iz_id": "GWS82362BC49",
+      "alarm": false,
+      "saha_gorevi": false,
+      "15_eylul_otomatik_terfi": false,
+      "durum": "KIYI_SU_ARKA_PLAN_TAKIP",
+      "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+      "sinif_gecmisi": [
+        "KIYI_SU_ARKA_PLAN"
+      ],
+      "guncel_scl_su_gecisi": true,
+      "guncel_scl_su_belirsizligi": false,
+      "arka_plan_takip": true,
+      "tekrarli_scl_su_belirsizligi": false,
+      "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+      "sentinel_sahne_tarih_gecmisi": [
+        "08.09.2026"
+      ],
+      "sentinel_item_gecmisi": [
+        "S2B_T35SMC_20260908T090037_L2A"
+      ],
+      "ilk_gorulme_tarihi": "08.09.2026",
+      "son_gorulme_tarihi": "08.09.2026",
+      "son_sentinel_item": "S2B_T35SMC_20260908T090037_L2A",
+      "enlem": 38.349546,
+      "boylam": 26.641361,
+      "ilk_enlem": 38.349546,
+      "ilk_boylam": 26.641361,
+      "ilk_konumdan_sapma_m": 0.0,
+      "alan_m2": 1200,
+      "doluluk_orani": 0.5,
+      "tarihsel_suya_yakin_piksel_orani": 1.0,
+      "son_esleme_mesafe_m": 0.0,
+      "kalite_kor_eslesmesi": false,
+      "kalite_kor_mesafe_m": null,
+      "not": "Tarihsel kara ile güncel SCL=su geçişi diagnostik hafızada tutulur. Kıyı/geniş yüzey sınıfları yalnız arka plandır; hiçbir kayıt inşaat/kazı kanıtı değildir ve alarm/saha görevi üretmez."
     }
   ],
-  "yorum": "Bu hafıza katmanı tarihsel kara -> güncel SCL=su çelişkisini sahneler arasında kaybetmez. Tekrar, kalite-kör takip veya çözülme yalnız diagnostik durumdur; hiçbiri inşaat/kazı kabulü, alarm, saha görevi veya 15 Eylül otomatik terfisi değildir."
+  "yorum": "Bu hafıza katmanı tarihsel kara -> güncel SCL=su geçişlerini sahneler arasında kaybetmez. Kompakt iç-kara belirsizliği ile kıyı/geniş yüzey arka planı ayrı durumlarda tutulur. Tekrar, kalite-kör takip veya çözülme yalnız diagnostiktir; hiçbiri inşaat/kazı kabulü, alarm, saha görevi veya 15 Eylül otomatik terfisi değildir."
 }
