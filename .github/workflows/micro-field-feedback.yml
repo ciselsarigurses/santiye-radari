@@ -9,6 +9,7 @@ on:
       - "micro_spectral_borderline_review.json"
       - "santiye.db"
       - "micro_site_field_guard.py"
+      - "micro_demolition_feedback_bridge.py"
       - ".github/workflows/micro-field-feedback.yml"
   schedule:
     # Mikro kısa listeden kısa süre sonra çalışır.
@@ -38,7 +39,7 @@ jobs:
           python-version: "3.12"
 
       - name: Mikro saha geri bildirim korumasını çalıştır
-        run: python micro_site_field_guard.py
+        run: python micro_demolition_feedback_bridge.py
 
       - name: Sonucu yalnız değişiklikte kaydet
         shell: bash
