@@ -13,6 +13,7 @@ st.set_page_config(page_title="Bugün Gidilecekler", page_icon="📍", layout="w
 REPORT_FILE = Path(__file__).resolve().parents[1] / "latest_report.json"
 ISSUE_URL = "https://github.com/ciselsarigurses/santiye-radari/issues/new"
 MAX_DAILY = 10
+ACTIVE_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT"}
 
 
 def load_report() -> dict:
@@ -47,8 +48,8 @@ def evidence_age(item: dict, report_day: date) -> int | None:
 
 
 def is_today_candidate(item: dict, report_day: date) -> bool:
-    status = str(item.get("saha_durumu") or "KONTROLE_GIT")
-    if status not in {"KONTROLE_GIT", "TEKRAR_GIT"}:
+    status = str(item.get("saha_durumu") or "KONTROLE_GIT").upper()
+    if status not in ACTIVE_STATUSES:
         return False
     if status == "TEKRAR_GIT":
         return True
@@ -56,15 +57,20 @@ def is_today_candidate(item: dict, report_day: date) -> bool:
     priority = str(item.get("oncelik") or "").upper()
     age = evidence_age(item, report_day)
     recent = age is not None and age <= 2
-    fresh_priority = any(token in priority for token in ("ERKEN", "PARSEL", "TAZE", "DOĞRULAMA", "DOGRULAMA"))
+    fresh_priority = any(
+        token in priority
+        for token in ("ERKEN", "PARSEL", "TAZE", "DOĞRULAMA", "DOGRULAMA")
+    )
 
-    # Eski backlog'u günlük rota gibi göstermiyoruz. Yeni görüntü veya en fazla
-    # iki günlük güçlü Sentinel kanıtı olan erken/parsel adayları günlük listede kalır.
+    # Eski raporlarda henüz merkezi günlük rota alanı yoksa güvenli fallback.
+    # Yeni raporlarda portal aşağıdaki `gunun_ilk_3_kontrolu` sonucunu doğrudan
+    # kullanır; böylece GECİKEN etiketli olsa bile güncel, küçük-güçlü Sentinel
+    # adayı portal tarafından yanlışlıkla elenmez.
     return bool(item.get("yeni_goruntu")) or (recent and fresh_priority)
 
 
 def sort_key(item: dict, report_day: date):
-    status = str(item.get("saha_durumu") or "KONTROLE_GIT")
+    status = str(item.get("saha_durumu") or "KONTROLE_GIT").upper()
     priority = str(item.get("oncelik") or "").upper()
     age = evidence_age(item, report_day)
     area = item.get("alan_m2")
@@ -82,6 +88,40 @@ def sort_key(item: dict, report_day: date):
     else:
         rank += 3
     return (rank, age if age is not None else 99, area_num)
+
+
+def portal_items(report: dict, report_day: date) -> tuple[list[dict], bool]:
+    """Merkezi saha rotasını kullan; yalnız eski raporlarda yerel fallback uygula.
+
+    `daily_route_freshness_guard` 15 Eylül öncesinde de GECİKEN etiketli ancak
+    en fazla iki günlük, güncel ve küçük-güçlü Sentinel adayını güvenle ilk üçe
+    alabilir. Portalın bunu yeniden farklı kuralla filtrelemesi iki karar motoru
+    yaratıyordu ve örneğin güncel Gülbahçe adayını ekrandan düşürebiliyordu.
+    """
+    if "gunun_ilk_3_kontrolu" in report:
+        curated = []
+        for raw in report.get("gunun_ilk_3_kontrolu") or []:
+            if not isinstance(raw, dict):
+                continue
+            status = str(raw.get("saha_durumu") or "KONTROLE_GIT").upper()
+            if status not in ACTIVE_STATUSES:
+                continue
+            curated.append(dict(raw))
+        curated.sort(
+            key=lambda item: (
+                int(item.get("gunluk_sira") or 999),
+                sort_key(item, report_day),
+            )
+        )
+        return curated[:MAX_DAILY], True
+
+    legacy = [
+        dict(item)
+        for item in report.get("saha_adaylari", [])
+        if isinstance(item, dict) and is_today_candidate(item, report_day)
+    ]
+    legacy.sort(key=lambda item: sort_key(item, report_day))
+    return legacy[:MAX_DAILY], False
 
 
 def issue_url(task_id: str, action: str, name: str = "", phone: str = "", note: str = "") -> str:
@@ -128,9 +168,7 @@ st.caption("Sarıoğlu Yapı · Şantiye Radarı saha ekranı")
 
 report = load_report()
 report_day = parse_date(report.get("rapor_tarihi")) or date.today()
-items = [item for item in report.get("saha_adaylari", []) if isinstance(item, dict)]
-items = [item for item in items if is_today_candidate(item, report_day)]
-items = sorted(items, key=lambda item: sort_key(item, report_day))[:MAX_DAILY]
+items, curated_route = portal_items(report, report_day)
 
 c1, c2 = st.columns(2)
 c1.metric("Bugün gidilecek", len(items))
@@ -141,6 +179,8 @@ if not items:
     st.caption("Eski backlog bu ekranda günlük rota olarak gösterilmez.")
 else:
     st.info("Sırayla kontrol edin. Konuma gitmek için harita düğmesini kullanın; kontrol sonrası sonucu işaretleyin.")
+    if curated_route:
+        st.caption("Liste radarın merkezi ‘Günün ilk 3 kontrolü’ kararından gelir; portal ayrıca aday elemez.")
 
 for index, item in enumerate(items, start=1):
     task_id = str(item.get("gorev_id") or f"RADAR-{index}")
