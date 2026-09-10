@@ -14,7 +14,10 @@ on:
       - "requirements.txt"
       - ".github/workflows/gulbahce-blind-patrol.yml"
   workflow_run:
-    workflows: ["Sentinel Kör Alan Denetimi"]
+    # Tam günlük tarama SAHA_RAPORU/latest_report dosyalarını yeniden ürettiği için
+    # kör-alan katmanını da hemen geri uygula; aksi halde Gülbahçe devriyesi ertesi
+    # günlük rotasyona kadar rapordan geçici olarak düşebiliyordu.
+    workflows: ["Sentinel Kör Alan Denetimi", "Günlük Şantiye Taraması"]
     types: [completed]
   # Yeni Sentinel sahnesi gelmese bile insan kör-alan devriyesi günlük dönmeli.
   # Türkiye UTC+3 olduğundan 00:10 UTC = 03:10 Europe/Istanbul.
