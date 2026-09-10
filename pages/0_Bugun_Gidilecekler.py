@@ -8,6 +8,7 @@ from urllib.parse import urlencode
 import streamlit as st
 
 from coordinate_navigation import load_audit, signal_core_target
+from portal_route_policy import is_curated_portal_actionable
 
 
 st.set_page_config(page_title="Bugün Gidilecekler", page_icon="📍", layout="wide")
@@ -96,18 +97,17 @@ def sort_key(item: dict, report_day: date):
 def portal_items(report: dict, report_day: date) -> tuple[list[dict], bool]:
     """Merkezi saha rotasını kullan; yalnız eski raporlarda yerel fallback uygula.
 
-    `daily_route_freshness_guard` 15 Eylül öncesinde de GECİKEN etiketli ancak
-    en fazla iki günlük, güncel ve küçük-güçlü Sentinel adayını güvenle ilk üçe
-    alabilir. Portalın bunu yeniden farklı kuralla filtrelemesi iki karar motoru
-    yaratıyordu ve örneğin güncel Gülbahçe adayını ekrandan düşürebiliyordu.
+    Merkezi rota normal KONTROLE_GIT/TEKRAR_GIT kayıtlarının yanında yalnız
+    15 Eylül sonrası kuru-zemin korumasının açıkça işaretlediği 250-900 m²
+    tek-günlük DIAGNOSTIK_DOGRULAMA kaydını gösterebilir. 150-249 m² MİKRO ve
+    diğer diagnostik/arka-plan kayıtları portal görevi haline gelmez.
     """
     if "gunun_ilk_3_kontrolu" in report:
         curated = []
         for raw in report.get("gunun_ilk_3_kontrolu") or []:
             if not isinstance(raw, dict):
                 continue
-            status = str(raw.get("saha_durumu") or "KONTROLE_GIT").upper()
-            if status not in ACTIVE_STATUSES:
+            if not is_curated_portal_actionable(raw):
                 continue
             curated.append(dict(raw))
         curated.sort(
@@ -183,7 +183,7 @@ if not items:
 else:
     st.info("Sırayla kontrol edin. Konuma gitmek için harita düğmesini kullanın; kontrol sonrası sonucu işaretleyin.")
     if curated_route:
-        st.caption("Liste radarın merkezi ‘Günün ilk 3 kontrolü’ kararından gelir; portal ayrıca aday elemez.")
+        st.caption("Liste radarın merkezi ‘Günün ilk 3 kontrolü’ kararından gelir; portal ayrıca yalnız güvenli saha eylemi filtresini uygular.")
 
 for index, item in enumerate(items, start=1):
     task_id = str(item.get("gorev_id") or f"RADAR-{index}")
