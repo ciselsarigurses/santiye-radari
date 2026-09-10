@@ -139,7 +139,7 @@ def _is_fresh_excavation_candidate(item):
         return False
 
     # Ölçülmüş geniş/geometrik arka-plan işareti operasyon önceliği olamaz.
-    if item.get("genis_geometri_riski") is True and area >= 10_000:
+    if item.get("genis_geometri_riski") is True:
         return False
     if str(item.get("izleme") or "").strip().upper() == "ARKA_PLAN_GENIS_YUZEY":
         return False
@@ -544,6 +544,10 @@ def _self_check():
     }
 
     assert _is_fresh_excavation_candidate(fresh_excavation)
+    broad_geometry = dict(fresh_excavation)
+    broad_geometry["gorev_id"] = "FRESH_BROAD_GEOMETRY"
+    broad_geometry["genis_geometri_riski"] = True
+    assert not _is_fresh_excavation_candidate(broad_geometry)
     preseason_scene = dict(fresh_excavation)
     preseason_scene["gorev_id"] = "PRESEASON_SCENE"
     preseason_scene["son_tarih"] = "14.09.2026"
