@@ -18,6 +18,7 @@ from scanner import connect
 
 OVERDUE_FIELD_DAYS = 2
 EARLY_EVIDENCE_MAX_DAYS = 2
+FULL_OPERATION_START = datetime(2026, 9, 15).date()
 PARCEL_SCALE_MIN_M2 = 800
 PARCEL_SCALE_MAX_M2 = 2000
 FIELD_OUTCOME_KEYS = (
@@ -105,21 +106,22 @@ def _waiting_days(first_seen, report_date):
     return max((current_date - first_date).days, 0)
 
 
-def _evidence_age_days(evidence_date, report_date):
-    """Uydu kanıtının rapor gününe göre takvim yaşını döndür; belirsizde None."""
-    raw = str(evidence_date or "").strip()
-    parsed = None
-    for fmt in ("%d.%m.%Y", "%Y-%m-%d"):
+def _date_value(value):
+    """ISO veya görünür rapor tarihini takvim gününe çevir; belirsizde None."""
+    raw = str(value or "").strip()
+    for fmt in ("%Y-%m-%d", "%d.%m.%Y"):
         try:
-            parsed = datetime.strptime(raw[:10], fmt).date()
-            break
+            return datetime.strptime(raw[:10], fmt).date()
         except (TypeError, ValueError):
             continue
-    try:
-        current_date = datetime.fromisoformat(str(report_date or "")[:10]).date()
-    except (TypeError, ValueError):
-        return None
-    if parsed is None:
+    return None
+
+
+def _evidence_age_days(evidence_date, report_date):
+    """Uydu kanıtının rapor gününe göre takvim yaşını döndür; belirsizde None."""
+    parsed = _date_value(evidence_date)
+    current_date = _date_value(report_date)
+    if parsed is None or current_date is None:
         return None
     age = (current_date - parsed).days
     return age if age >= 0 else None
@@ -151,17 +153,34 @@ def _is_early_excavation_candidate(item, waiting_days, report_date):
 
 
 def _is_fresh_parcel_scale_candidate(item, waiting_days, report_date):
-    """Taze 800–2.000 m² parsel ölçeğini alarm üretmeden saha sırasında öne al."""
-    if int(waiting_days or 0) >= OVERDUE_FIELD_DAYS:
+    """Taze 800–2.000 m² parsel ölçeğini alarm üretmeden saha sırasında öne al.
+
+    Kalibrasyon döneminde iki gün ve üzeri bekleyen görev GECİKEN kalır. 15 Eylül
+    sonrasında ise görevin kimliği eski olsa bile aynı konum 15 Eylül veya daha yeni
+    güncel Sentinel kanıtında yeniden görünmüşse bekleme yaşı taze parsel kanıtını
+    bastırmaz. Böylece devam eden hafriyat eski görev kimliği yüzünden backlog'a
+    gömülmez; bu yalnız sıralama önceliğidir, yeni alarm/görev üretmez.
+    """
+    evidence_age = _evidence_age_days(item.get("son_tarih"), report_date)
+    if evidence_age is None or evidence_age > EARLY_EVIDENCE_MAX_DAYS:
         return False
+
+    if int(waiting_days or 0) >= OVERDUE_FIELD_DAYS:
+        report_day = _date_value(report_date)
+        evidence_day = _date_value(item.get("son_tarih"))
+        if (
+            report_day is None
+            or evidence_day is None
+            or report_day < FULL_OPERATION_START
+            or evidence_day < FULL_OPERATION_START
+        ):
+            return False
+
     # ``yeni_goruntu`` yalnız rapor gününde yeni Sentinel sahnesi gelip gelmediğini
     # anlatır. Gece yarısından sonra False olur; buna rağmen son_tarih kanıtı hâlâ
     # 1–2 günlük ve güncel analiz kümesinde olabilir. PARSEL önceliğini takvim
     # değişiminde düşürmek yerine gerçek kanıt yaşını ve stale/bulut işaretlerini
     # kullan; böylece alarm sayısı artmadan günlük rota erken hafriyat odağını korur.
-    evidence_age = _evidence_age_days(item.get("son_tarih"), report_date)
-    if evidence_age is None or evidence_age > EARLY_EVIDENCE_MAX_DAYS:
-        return False
     try:
         area_m2 = float(item.get("alan_m2") or 0)
     except (TypeError, ValueError):
@@ -256,6 +275,29 @@ def _priority_policy_self_check():
         1,
         "2026-08-30",
     )
+
+    # Kalibrasyon döneminde yaşlı görev yalnız taze görüntü taşıdığı için PARSEL
+    # olmamalı. Sezon açıldıktan sonra ise 15 Eylül+ gerçek Sentinel kanıtında aynı
+    # parsel ölçeği yeniden görülürse eski görev kimliği taze hareketi bastırmamalı.
+    assert not _is_fresh_parcel_scale_candidate(
+        fresh_parcel, 12, "2026-08-29"
+    )
+    postseason_reobserved = {
+        **fresh_parcel,
+        "son_tarih": "15.09.2026",
+        "yeni_goruntu": True,
+    }
+    assert _is_fresh_parcel_scale_candidate(
+        postseason_reobserved, 12, "2026-09-15"
+    )
+    assert _is_fresh_parcel_scale_candidate(
+        {**postseason_reobserved, "yeni_goruntu": False}, 13, "2026-09-16"
+    ), "15 Eylül sonrası güncel yeniden-görülme saatlik yenilemede korunmalı."
+    assert not _is_fresh_parcel_scale_candidate(
+        {**postseason_reobserved, "son_tarih": "14.09.2026"},
+        12,
+        "2026-09-15",
+    ), "Sezon öncesi Sentinel kanıtı eski görevde PARSEL'e yükselmemeli."
 
 
 def _task_age_map(connection, task_ids, report_date):
@@ -408,14 +450,6 @@ def _active_hotspots(connection, report_date):
                 f"uydu kanıtı en fazla {EARLY_EVIDENCE_MAX_DAYS} günlük. "
                 + str(item.get("oncelik_nedeni") or "")
             ).strip()
-        elif status == "KONTROLE_GIT" and waiting_days >= OVERDUE_FIELD_DAYS:
-            item["uydu_onceligi"] = item.get("oncelik")
-            item["oncelik"] = "GECİKEN"
-            item["gecikmis"] = True
-            item["sinyal"] = (
-                f"{waiting_days} gündür saha kontrolü bekliyor · "
-                + str(item.get("sinyal") or "")
-            )
         elif status == "KONTROLE_GIT" and _is_fresh_parcel_scale_candidate(
             item, waiting_days, report_date
         ):
@@ -428,6 +462,14 @@ def _active_hotspots(connection, report_date):
                 "hareketlerinden önce saha kontrolüne alınır. "
                 + str(item.get("oncelik_nedeni") or "")
             ).strip()
+        elif status == "KONTROLE_GIT" and waiting_days >= OVERDUE_FIELD_DAYS:
+            item["uydu_onceligi"] = item.get("oncelik")
+            item["oncelik"] = "GECİKEN"
+            item["gecikmis"] = True
+            item["sinyal"] = (
+                f"{waiting_days} gündür saha kontrolü bekliyor · "
+                + str(item.get("sinyal") or "")
+            )
         active.append(item)
 
     active.extend(_persisted_open_tasks(connection, known_task_ids, report_date))
