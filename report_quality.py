@@ -23,6 +23,7 @@ PARCEL_SCALE_MIN_M2 = 800
 PARCEL_SCALE_MAX_M2 = 2000
 FIELD_OUTCOME_KEYS = (
     "SANTIYE_KAZI",
+    "YIKIM_TEMIZLIK",
     "YOL_ALTYAPI",
     "TARLA_BITKI",
     "YANLIS_POZITIF",
@@ -551,6 +552,7 @@ def normalize_daily_report(report_date=None):
             summary += (
                 f" · Saha sonucu: {field_outcomes_total} kontrol "
                 f"({field_outcomes['SANTIYE_KAZI']} şantiye/kazı, "
+                f"{field_outcomes['YIKIM_TEMIZLIK']} yıkım/temizlik öncülü, "
                 f"{field_outcomes['YOL_ALTYAPI']} yol/altyapı, "
                 f"{field_outcomes['TARLA_BITKI']} tarla/bitki, "
                 f"{field_outcomes['YANLIS_POZITIF']} yanlış pozitif)"
