@@ -79,33 +79,57 @@ def current_blind_rows(payload):
 
 
 def water_transition_rows(payload):
-    """Tarihsel kara → güncel SCL=su çelişkisini şantiye alarmına karıştırmadan göster."""
+    """Tüm güncel kara→SCL-su geçişlerini alarmdan ayrı arka plan katmanları olarak göster."""
     rows = []
     for item in payload.get("izler") or []:
         if not isinstance(item, dict):
             continue
-        if item.get("guncel_scl_su_belirsizligi") is not True:
+        # Şema v2 genel geçiş bayrağını kullanır. Eski dosyalar için yalnız kompakt
+        # iç-kara belirsizliği görünür kalır; alarm veya görev davranışı değişmez.
+        is_current_transition = item.get("guncel_scl_su_gecisi") is True
+        if not is_current_transition and item.get("guncel_scl_su_belirsizligi") is not True:
             continue
         area = as_float(item.get("alan_m2"))
         lat = as_float(item.get("enlem"))
         lon = as_float(item.get("boylam"))
         if area is None or lat is None or lon is None:
             continue
+
+        source_class = str(item.get("kaynak_sinif") or "")
+        if item.get("guncel_scl_su_belirsizligi") is True:
+            layer_name = "SCL SU BELİRSİZLİĞİ · İÇ KARA"
+            display_reason = str(item.get("durum") or "GUNCEL_SCL_SU_BELIRSIZLIGI")
+            color = [70, 135, 190, 175]
+            radius = 145
+        elif source_class == "KIYI_SU_ARKA_PLAN":
+            layer_name = "KIYI/SU · ARKA PLAN"
+            display_reason = "Tarihsel suya yakın; şantiye alarmından ayrıldı"
+            color = [105, 135, 160, 120]
+            radius = 125
+        elif source_class == "GENIS_SU_YUZEY_ARKA_PLAN":
+            layer_name = "GENİŞ SU/YÜZEY · ARKA PLAN"
+            display_reason = "Geniş/homojen yüzey hareketi; şantiye alarmından ayrıldı"
+            color = [90, 115, 140, 105]
+            radius = 170
+        else:
+            layer_name = "SCL SU GEÇİŞİ · ARKA PLAN"
+            display_reason = str(item.get("durum") or "ARKA_PLAN_TAKIP")
+            color = [100, 125, 150, 115]
+            radius = 130
+
+        seen_count = int(item.get("farkli_sentinel_sahnesi_gorulme_sayisi") or 0)
         rows.append(
             {
-                "katman": "SCL SU BELİRSİZLİĞİ · ARKA PLAN",
+                "katman": layer_name,
                 "durum": "ALARM DEĞİL",
                 "alan_m2": int(round(area)),
                 "enlem": lat,
                 "boylam": lon,
-                "neden": str(item.get("durum") or "GUNCEL_SCL_SU_BELIRSIZLIGI"),
-                "kanıt": (
-                    f"Tarihsel kara → güncel SCL=su; "
-                    f"{int(item.get('farkli_sentinel_sahnesi_gorulme_sayisi') or 0)} farklı sahne"
-                ),
+                "neden": display_reason,
+                "kanıt": f"Tarihsel kara → güncel SCL=su; {seen_count} farklı Sentinel sahnesi",
                 "devriye_mesafe_m": None,
-                "renk": [70, 135, 190, 165],
-                "yaricap": 145,
+                "renk": color,
+                "yaricap": radius,
                 "harita": map_link(lat, lon),
                 "parsel_sorgu": parcel_link(lat, lon),
             }
@@ -129,6 +153,41 @@ def _self_check():
     assert MAIN_MIN_M2 == 250
     assert (MICRO_MIN_M2, MICRO_MAX_M2) == (150, 249)
 
+    water_sample = {
+        "izler": [
+            {
+                "enlem": 38.33,
+                "boylam": 26.65,
+                "alan_m2": 400,
+                "guncel_scl_su_gecisi": True,
+                "guncel_scl_su_belirsizligi": True,
+                "kaynak_sinif": "IC_KARA_SCL_SU_BELIRSIZLIGI",
+                "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+            },
+            {
+                "enlem": 38.34,
+                "boylam": 26.66,
+                "alan_m2": 800,
+                "guncel_scl_su_gecisi": True,
+                "guncel_scl_su_belirsizligi": False,
+                "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+                "farkli_sentinel_sahnesi_gorulme_sayisi": 1,
+            },
+            {
+                "enlem": 38.35,
+                "boylam": 26.67,
+                "alan_m2": 900,
+                "guncel_scl_su_gecisi": False,
+                "guncel_scl_su_belirsizligi": False,
+                "kaynak_sinif": "KIYI_SU_ARKA_PLAN",
+            },
+        ]
+    }
+    water_selected = water_transition_rows(water_sample)
+    assert len(water_selected) == 2
+    assert any(row["katman"] == "KIYI/SU · ARKA PLAN" for row in water_selected)
+    assert all(row["durum"] == "ALARM DEĞİL" for row in water_selected)
+
 
 _self_check()
 
@@ -141,8 +200,9 @@ st.caption(
 st.info(
     "Bu ekran alarm veya saha görevi üretmez. Turuncu alanlar 250–6500 m² güncel kalite "
     "körlüğüdür; yalnız kör-alan devriyesini doğru yere yöneltmek için görünür tutulur. "
-    "Mavi alanlar tarihsel kara → güncel SCL=su çelişkisidir ve şantiye kabul edilmeden "
-    "arka planda izlenir. Ana Sentinel eşiği 250 m², MİKRO diagnostik bandı 150–249 m² olarak korunur."
+    "Mavi tonları tarihsel kara → güncel SCL=su geçişlerini iç-kara belirsizliği, kıyı ve "
+    "geniş yüzey arka planı olarak ayrı gösterir. Ana Sentinel eşiği 250 m², MİKRO "
+    "diagnostik bandı 150–249 m² olarak korunur."
 )
 
 current = load_json("gulbahce_latest_state_blind_review.json")
@@ -156,7 +216,14 @@ m1.metric("Son Sentinel", current.get("kaynak_son_tarih", "Veri yok"))
 m2.metric("Güncel kör 250–6500", len(blind_rows))
 m3.metric("Devriyenin kapsadığı", sum(row["durum"] == "DEVRIYE_KAPSIYOR" for row in blind_rows))
 m4.metric("Güncel kör MİKRO 150–249", int(current.get("guncel_sahne_mikro_kor_150_249", 0) or 0))
-m5.metric("Su/kıyı belirsiz arka plan", len(water_rows))
+m5.metric("SCL-su geçiş izi", len(water_rows))
+
+st.caption(
+    "SCL-su geçiş hafızası: "
+    f"iç-kara belirsiz {int(water.get('guncel_belirsiz_iz', 0) or 0)} · "
+    f"kıyı arka plan {int(water.get('guncel_kiyi_arka_plan', 0) or 0)} · "
+    f"geniş yüzey arka plan {int(water.get('guncel_genis_su_arka_plan', 0) or 0)}."
+)
 
 if current.get("durum") == "ok" and current.get("ayni_sentinel_sahnesi") is True:
     st.success(
@@ -177,11 +244,12 @@ if uncovered:
     )
 
 show_water = st.toggle(
-    "Su/kıyı belirsizliği arka plan katmanını göster",
+    "SCL-su / kıyı / geniş yüzey arka plan katmanlarını göster",
     value=True,
     help=(
         "Bu katman tarihsel kara olup son SCL sınıflamasında su görünen izleri gösterir. "
-        "Şantiye alarmına veya saha görevine çevrilmez."
+        "İç-kara belirsizliği, kıyı ve geniş/homojen yüzey izleri ayrı tutulur; hiçbiri "
+        "şantiye alarmına veya saha görevine çevrilmez."
     ),
 )
 
@@ -226,8 +294,9 @@ else:
     )
     st.caption(
         "Turuncu = en yeni Sentinel sahnesinde kalite/bulut nedeniyle görülemeyen, tarihsel kara "
-        "kanıtlı 250–6500 m² küme · Mavi = tarihsel kara → güncel SCL=su belirsizliği; yalnız "
-        "arka plan takibi. Hiçbiri tek başına inşaat/kazı kabulü değildir."
+        "kanıtlı 250–6500 m² küme · Mavi tonları = tarihsel kara → güncel SCL=su geçişleri; "
+        "iç-kara belirsizliği ile kıyı/geniş yüzey arka planı ayrıdır. Hiçbiri tek başına "
+        "inşaat/kazı kabulü değildir."
     )
     st.dataframe(
         signals[
