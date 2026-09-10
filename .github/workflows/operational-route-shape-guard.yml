@@ -1,0 +1,69 @@
+name: Operasyonel Rota Geometri Koruması
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - operational_route_shape_guard.py
+      - .github/workflows/operational-route-shape-guard.yml
+      - latest_report.json
+      - site_scale_shape_risk_review.json
+  workflow_run:
+    workflows: ["Şantiye Ölçeği Şekil Risk Diagnostiği"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-operational-route-shape-guard
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Koruma testini çalıştır
+        run: python operational_route_shape_guard.py --self-check
+
+      - name: Operasyonel rotayı üret
+        run: python operational_route_shape_guard.py
+
+      - name: Değişiklik biçimini kontrol et
+        run: git diff --check
+
+      - name: Çıktıyı güvenli biçimde kaydet
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Kaynak rapor başka bir workflow tarafından aynı anda güncellendiyse,
+          # en güncel main üzerinde rotayı yeniden hesapla.
+          git restore operational_route.json 2>/dev/null || true
+          git pull --rebase origin main
+          python operational_route_shape_guard.py --self-check
+          python operational_route_shape_guard.py
+          git diff --check
+
+          git add operational_route.json
+          if git diff --cached --quiet; then
+            echo "Operasyonel rota değişmedi; commit gerekmiyor."
+            exit 0
+          fi
+          git commit -m "Rota: geometri riskli eski adayları arka planda tut"
+          git push origin HEAD:main
