@@ -434,7 +434,7 @@ def _self_check():
     }
     fresh = {
         "gorev_id": "F", "saha_durumu": "KONTROLE_GIT", "oncelik": "ERKEN",
-        "alan_m2": 600, "bolge": west, "yeni_goruntu": True,
+        "alan_m2": 600, "bolge": west, "yeni_goruntu": True, "son_tarih": "16.09.2026",
         "uydu_onceligi": "YÜKSEK", "boyut_sinifi": "KUCUK", "enlem": 38.31, "boylam": 26.31,
     }
     backlog = {
