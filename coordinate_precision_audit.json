@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-09",
-  "olusturma": "2026-09-10 08:08 +0300",
+  "rapor_tarihi": "2026-09-10",
+  "olusturma": "2026-09-10 09:23 +0300",
   "amac": "Mevcut Sentinel aday koordinatının geometrik temsil pikseli ile aynı bağlı bileşendeki BSI×RGB değişim gücüne göre sinyal-ağırlıklı temsil pikseli arasındaki farkı ölçmek; koordinatı otomatik değiştirmeden 10 m sınıfı hassasiyet iyileştirmesini doğrulamak.",
   "uyari": "Bu çıktı alarm/görev/eşik değiştirmez. Sinyal-ağırlıklı koordinat yalnız diagnostiktir; saha doğrulaması olmadan kesin adres veya parsel değildir.",
   "bolgeler": {
@@ -9,7 +9,7 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_item": "S2A_T35SMC_20260905T090529_L2A",
       "son_item": "S2B_T35SMC_20260908T090037_L2A",
-      "olculen_aday": 8,
+      "olculen_aday": 13,
       "eslesmeyen_aday": 0,
       "10m_ustu_kayma": 0,
       "20m_ustu_kayma": 0,
@@ -110,6 +110,66 @@
           "sinyal_agirlikli_boylam": 26.319651,
           "geometrik_sinyal_kaymasi_m": 0.0,
           "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Çiftlikköy",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.29401,
+          "mevcut_boylam": 26.276952,
+          "geometrik_enlem": 38.29401,
+          "geometrik_boylam": 26.276952,
+          "sinyal_agirlikli_enlem": 38.29401,
+          "sinyal_agirlikli_boylam": 26.276952,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 500,
+          "mevcut_enlem": 38.416026,
+          "mevcut_boylam": 26.480375,
+          "geometrik_enlem": 38.416026,
+          "geometrik_boylam": 26.480375,
+          "sinyal_agirlikli_enlem": 38.416026,
+          "sinyal_agirlikli_boylam": 26.480375,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 5
+        },
+        {
+          "mahalle": "Ildır",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.401192,
+          "mevcut_boylam": 26.489189,
+          "geometrik_enlem": 38.401192,
+          "geometrik_boylam": 26.489189,
+          "sinyal_agirlikli_enlem": 38.401192,
+          "sinyal_agirlikli_boylam": 26.489189,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Ildır",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.401283,
+          "mevcut_boylam": 26.488617,
+          "geometrik_enlem": 38.401283,
+          "geometrik_boylam": 26.488617,
+          "sinyal_agirlikli_enlem": 38.401283,
+          "sinyal_agirlikli_boylam": 26.488617,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Ildır",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.403182,
+          "mevcut_boylam": 26.486213,
+          "geometrik_enlem": 38.403182,
+          "geometrik_boylam": 26.486213,
+          "sinyal_agirlikli_enlem": 38.403182,
+          "sinyal_agirlikli_boylam": 26.486213,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
         }
       ]
     },
@@ -118,9 +178,9 @@
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "onceki_item": "S2A_T35SMC_20260905T090529_L2A",
       "son_item": "S2B_T35SMC_20260908T090037_L2A",
-      "olculen_aday": 8,
+      "olculen_aday": 17,
       "eslesmeyen_aday": 0,
-      "10m_ustu_kayma": 1,
+      "10m_ustu_kayma": 3,
       "20m_ustu_kayma": 0,
       "maksimum_kayma_m": 14.1,
       "adaylar": [
@@ -135,6 +195,30 @@
           "sinyal_agirlikli_boylam": 26.643995,
           "geometrik_sinyal_kaymasi_m": 14.1,
           "bilesen_piksel": 6
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 400,
+          "mevcut_enlem": 38.385454,
+          "mevcut_boylam": 26.628425,
+          "geometrik_enlem": 38.385454,
+          "geometrik_boylam": 26.628425,
+          "sinyal_agirlikli_enlem": 38.385364,
+          "sinyal_agirlikli_boylam": 26.628539,
+          "geometrik_sinyal_kaymasi_m": 14.1,
+          "bilesen_piksel": 4
+        },
+        {
+          "mahalle": "Ildır",
+          "alan_m2": 400,
+          "mevcut_enlem": 38.403272,
+          "mevcut_boylam": 26.486005,
+          "geometrik_enlem": 38.403272,
+          "geometrik_boylam": 26.486005,
+          "sinyal_agirlikli_enlem": 38.403182,
+          "sinyal_agirlikli_boylam": 26.48612,
+          "geometrik_sinyal_kaymasi_m": 14.1,
+          "bilesen_piksel": 4
         },
         {
           "mahalle": "Mevki doğrulanmadı",
@@ -159,6 +243,18 @@
           "sinyal_agirlikli_boylam": 26.624876,
           "geometrik_sinyal_kaymasi_m": 10.0,
           "bilesen_piksel": 5
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 400,
+          "mevcut_enlem": 38.380389,
+          "mevcut_boylam": 26.630943,
+          "geometrik_enlem": 38.380389,
+          "geometrik_boylam": 26.630943,
+          "sinyal_agirlikli_enlem": 38.380479,
+          "sinyal_agirlikli_boylam": 26.630943,
+          "geometrik_sinyal_kaymasi_m": 10.0,
+          "bilesen_piksel": 4
         },
         {
           "mahalle": "Mevki doğrulanmadı",
@@ -219,6 +315,78 @@
           "sinyal_agirlikli_boylam": 26.622471,
           "geometrik_sinyal_kaymasi_m": 0.0,
           "bilesen_piksel": 4
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.380027,
+          "mevcut_boylam": 26.632203,
+          "geometrik_enlem": 38.380027,
+          "geometrik_boylam": 26.632203,
+          "sinyal_agirlikli_enlem": 38.380027,
+          "sinyal_agirlikli_boylam": 26.632203,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.393956,
+          "mevcut_boylam": 26.676737,
+          "geometrik_enlem": 38.393956,
+          "geometrik_boylam": 26.676737,
+          "sinyal_agirlikli_enlem": 38.393956,
+          "sinyal_agirlikli_boylam": 26.676737,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.393504,
+          "mevcut_boylam": 26.676394,
+          "geometrik_enlem": 38.393504,
+          "geometrik_boylam": 26.676394,
+          "sinyal_agirlikli_enlem": 38.393504,
+          "sinyal_agirlikli_boylam": 26.676394,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.384188,
+          "mevcut_boylam": 26.628997,
+          "geometrik_enlem": 38.384188,
+          "geometrik_boylam": 26.628997,
+          "sinyal_agirlikli_enlem": 38.384188,
+          "sinyal_agirlikli_boylam": 26.628997,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Ildır",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.40273,
+          "mevcut_boylam": 26.486578,
+          "geometrik_enlem": 38.40273,
+          "geometrik_boylam": 26.486578,
+          "sinyal_agirlikli_enlem": 38.40273,
+          "sinyal_agirlikli_boylam": 26.486578,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
+        },
+        {
+          "mahalle": "Ildır",
+          "alan_m2": 300,
+          "mevcut_enlem": 38.403634,
+          "mevcut_boylam": 26.485891,
+          "geometrik_enlem": 38.403634,
+          "geometrik_boylam": 26.485891,
+          "sinyal_agirlikli_enlem": 38.403634,
+          "sinyal_agirlikli_boylam": 26.485891,
+          "geometrik_sinyal_kaymasi_m": 0.0,
+          "bilesen_piksel": 3
         }
       ]
     }
