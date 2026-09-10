@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - operational_route_shape_guard.py
+      - operational_route_freshness_guard.py
       - .github/workflows/operational-route-shape-guard.yml
       - latest_report.json
       - site_scale_shape_risk_review.json
@@ -36,11 +37,15 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Koruma testini çalıştır
-        run: python operational_route_shape_guard.py --self-check
+      - name: Koruma testlerini çalıştır
+        run: |
+          python operational_route_shape_guard.py --self-check
+          python operational_route_freshness_guard.py --self-check
 
       - name: Operasyonel rotayı üret
-        run: python operational_route_shape_guard.py
+        run: |
+          python operational_route_shape_guard.py
+          python operational_route_freshness_guard.py
 
       - name: Değişiklik biçimini kontrol et
         run: git diff --check
@@ -53,11 +58,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Kaynak rapor başka bir workflow tarafından aynı anda güncellendiyse,
-          # en güncel main üzerinde rotayı yeniden hesapla.
+          # en güncel main üzerinde iki korumayı da yeniden hesapla.
           git restore operational_route.json 2>/dev/null || true
           git pull --rebase origin main
           python operational_route_shape_guard.py --self-check
+          python operational_route_freshness_guard.py --self-check
           python operational_route_shape_guard.py
+          python operational_route_freshness_guard.py
           git diff --check
 
           git add operational_route.json
@@ -65,5 +72,5 @@ jobs:
             echo "Operasyonel rota değişmedi; commit gerekmiyor."
             exit 0
           fi
-          git commit -m "Rota: geometri riskli eski adayları arka planda tut"
+          git commit -m "Rota: taze zemin kanıtını gecikmiş backlog önüne al"
           git push origin HEAD:main
