@@ -15,6 +15,7 @@ on:
       - "app.py"
       - "pages/**"
       - "coordinate_navigation.py"
+      - "portal_route_policy.py"
       - "calibration_outcome.py"
       - "field_outcome.py"
       - "field_feedback_audit.py"
@@ -58,6 +59,7 @@ jobs:
           python field_outcome.py --check-only
           python field_feedback_audit.py --check-only
           python coordinate_navigation.py --check-only
+          python portal_route_policy.py
           python -m py_compile apply_field_status.py
 
       - name: Güncel veri ile uygulama açılış testi
