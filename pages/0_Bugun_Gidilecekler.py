@@ -8,7 +8,7 @@ from urllib.parse import urlencode
 import streamlit as st
 
 from coordinate_navigation import load_audit, signal_core_target
-from portal_route_policy import is_curated_portal_actionable
+from portal_route_policy import is_curated_portal_actionable, portal_issue_title
 
 
 st.set_page_config(page_title="Bugün Gidilecekler", page_icon="📍", layout="wide")
@@ -127,8 +127,11 @@ def portal_items(report: dict, report_day: date) -> tuple[list[dict], bool]:
     return legacy[:MAX_DAILY], False
 
 
-def issue_url(task_id: str, action: str, name: str = "", phone: str = "", note: str = "") -> str:
-    title = f"[SAHA-PORTAL] {task_id} {action}"
+def issue_url(task_id: str, action: str, name: str = "", phone: str = "", note: str = "") -> str | None:
+    try:
+        title = portal_issue_title(task_id, action)
+    except ValueError:
+        return None
     body = [
         "Şantiye Radarı sade saha paneli talebi.",
         "",
@@ -181,7 +184,7 @@ if not items:
     st.success("Bugün için güçlü yeni kazı / toprak hareketi adayı yok.")
     st.caption("Eski backlog bu ekranda günlük rota olarak gösterilmez.")
 else:
-    st.info("Sırayla kontrol edin. Konuma gitmek için harita düğmesini kullanın; kontrol sonrası sonucu işaretleyin.")
+    st.info("Sırayla kontrol edin. Konuma gidin; sahada sonucu yalnız Doğru Adres – Takip Et, Potansiyel Müşteri veya Çöp Adres olarak işaretleyin.")
     if curated_route:
         st.caption("Liste radarın merkezi ‘Günün ilk 3 kontrolü’ kararından gelir; portal ayrıca yalnız güvenli saha eylemi filtresini uygular.")
 
@@ -229,17 +232,22 @@ for index, item in enumerate(items, start=1):
             use_container_width=True,
         )
 
-    a, b = st.columns(2)
-    a.link_button(
-        "🔴 GİDİLDİ / KONTROL EDİLDİ",
-        issue_url(task_id, "KONTROL_EDILDI"),
-        use_container_width=True,
-    )
-    b.link_button(
-        "🗑️ ÇÖP ADRES / KALDIR",
-        issue_url(task_id, "COP_ADRES_KALDIR"),
-        use_container_width=True,
-    )
+    follow_url = issue_url(task_id, "DOGRU_ADRES_TAKIP")
+    trash_url = issue_url(task_id, "COP_ADRES_KALDIR")
+    if follow_url and trash_url:
+        a, b = st.columns(2)
+        a.link_button(
+            "📌 DOĞRU ADRES – TAKİP ET",
+            follow_url,
+            use_container_width=True,
+        )
+        b.link_button(
+            "🗑️ ÇÖP ADRES / KALDIR",
+            trash_url,
+            use_container_width=True,
+        )
+    else:
+        st.warning("Bu kaydın doğrulanmış görev kimliği yok; yanlış saha durumuna yazmamak için karar düğmeleri kapalı.")
 
     with st.expander("⭐ Potansiyel müşteri olarak kaydet"):
         with st.form(f"potential_{task_id}"):
@@ -251,12 +259,22 @@ for index, item in enumerate(items, start=1):
             if not name.strip() and not phone.strip():
                 st.warning("En az müşteri/firma adı veya iletişim bilgisi gir.")
             else:
-                st.link_button(
-                    "⭐ POTANSİYEL MÜŞTERİ OLARAK KAYDET",
-                    issue_url(task_id, "POTANSIYEL_MUSTERI", name.strip(), phone.strip(), note.strip()),
-                    use_container_width=True,
+                potential_url = issue_url(
+                    task_id,
+                    "POTANSIYEL_MUSTERI",
+                    name.strip(),
+                    phone.strip(),
+                    note.strip(),
                 )
-                st.caption("Bu ilk entegrasyon sürümünde kayıt güvenli GitHub talebi üzerinden işlenir; kalıcı web-veritabanı bağlantısı sonraki adımda doğrudan butona bağlanacaktır.")
+                if potential_url:
+                    st.link_button(
+                        "⭐ POTANSİYEL MÜŞTERİ OLARAK KAYDET",
+                        potential_url,
+                        use_container_width=True,
+                    )
+                    st.caption("Potansiyel müşteri kaydı ayrı GitHub talebi olarak tutulur; Sentinel saha kalibrasyon sonucunu değiştirmez.")
+                else:
+                    st.warning("Doğrulanmış görev kimliği olmadığı için müşteri kaydı bu radar noktasına bağlanmadı.")
 
     st.divider()
 
