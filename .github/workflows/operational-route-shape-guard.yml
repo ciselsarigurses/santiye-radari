@@ -11,7 +11,7 @@ on:
       - latest_report.json
       - site_scale_shape_risk_review.json
   workflow_run:
-    workflows: ["Şantiye Ölçeği Şekil Risk Diagnostiği"]
+    workflows: ["Şantiye Ölçeği Şekil Risk Diagnostiği", "Günlük Şantiye Taraması"]
     types: [completed]
 
 permissions:
