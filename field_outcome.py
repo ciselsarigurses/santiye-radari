@@ -5,9 +5,9 @@ gelecekte yanlış pozitifleri azaltmak için kullanılabilecek biçimde toplar.
 
 Sentinel saha sonucu yalnız sınıf etiketi olarak bırakılmaz. Sonuç kaydedildiği anda
 görevin raporda görünen alan/konum, Sentinel tarih çifti, ölçek ve öncelik bilgileri de
-aynı satırda saklanır. Böylece saha geri bildirimi daha sonra küçük kazı, yol/altyapı
-ve tarla yanlış pozitiflerini ölçmekte kullanılabilir. Bu modül kendi başına alarm,
-eşik veya görev önceliği değiştirmez.
+aynı satırda saklanır. Böylece saha geri bildirimi daha sonra küçük kazı, yol/altyapı,
+tarla yanlış pozitifleri ve yıkım/parsel temizliği gibi şantiye öncüllerini ölçmekte
+kullanılabilir. Bu modül kendi başına alarm, eşik veya görev önceliği değiştirmez.
 """
 
 from __future__ import annotations
@@ -21,13 +21,20 @@ from scanner import connect
 
 ALLOWED_OUTCOMES = {
     "SANTIYE_KAZI",
+    "YIKIM_TEMIZLIK",
     "YOL_ALTYAPI",
     "TARLA_BITKI",
     "YANLIS_POZITIF",
 }
 
+# Bunlar doğrulanmış fiziksel müdahaledir; henüz aktif temel/kazı sayılmaz ama
+# yanlış pozitif gibi de değerlendirilmemelidir. Kalibrasyon katmanı bu sınıfı
+# ayrı tutarak erken şantiye öncüllerini bastırmaz.
+PRECURSOR_OUTCOMES = {"YIKIM_TEMIZLIK"}
+
 OUTCOME_LABELS = {
     "SANTIYE_KAZI": "Gerçek şantiye / kazı / temel",
+    "YIKIM_TEMIZLIK": "Yıkım / parsel temizliği · yakın takip",
     "YOL_ALTYAPI": "Yol / altyapı çalışması",
     "TARLA_BITKI": "Tarla / bitki değişimi",
     "YANLIS_POZITIF": "Yanlış pozitif / başka neden",
@@ -208,6 +215,7 @@ def _self_check():
     try:
         ensure_outcome_schema(connection)
         assert set(FEATURE_COLUMNS).issubset(_columns(connection, "saha_sonuclari"))
+        assert PRECURSOR_OUTCOMES <= ALLOWED_OUTCOMES
         sample = {
             "mahalle": "Şifne",
             "enlem": 38.346018,
@@ -237,6 +245,18 @@ def _self_check():
         ).fetchone()
         assert row == ("SANTIYE_KAZI", "Şifne", 300.0, "KUCUK", 4), row
 
+        _upsert_outcome(
+            connection,
+            "UTEST_PRECURSOR",
+            "YIKIM_TEMIZLIK",
+            sample,
+            recorded_at="2026-09-02 06:30 UTC",
+        )
+        precursor_row = connection.execute(
+            "SELECT sonuc,alan_m2 FROM saha_sonuclari WHERE gorev_id='UTEST_PRECURSOR'"
+        ).fetchone()
+        assert precursor_row == ("YIKIM_TEMIZLIK", 300.0), precursor_row
+
         # Güncel raporda artık bulunamayan bir tekrar kayıt, mevcut özellik
         # snapshot'ını silmemeli; yalnız sonuç/zaman güncellenmeli.
         _upsert_outcome(
@@ -264,7 +284,8 @@ def main(argv=None):
     _self_check()
     print(
         "Saha sonucu öz testi başarılı: Sentinel görev özellikleri sonuçla birlikte "
-        "saklanıyor ve eksik tekrar kayıt eski snapshot'ı silmiyor."
+        "saklanıyor, yıkım/temizlik öncülü ayrı tutuluyor ve eksik tekrar kayıt eski "
+        "snapshot'ı silmiyor."
     )
 
 
