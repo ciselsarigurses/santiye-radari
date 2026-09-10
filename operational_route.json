@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-10",
-  "kaynak_rapor_olusturma": "2026-09-10 20:25 +03",
+  "kaynak_rapor_olusturma": "2026-09-10 21:24 +03",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -40,9 +40,6 @@
       "uydu_kanit_yasi_gun": 2,
       "takip_gorevi": true,
       "gunluk_sira": 1,
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331547/26.644338",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
       "rota_uydu_kanit_yasi_gun": 2
     }
   ],
