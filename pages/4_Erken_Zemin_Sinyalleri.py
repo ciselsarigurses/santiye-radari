@@ -40,15 +40,22 @@ def parcel_link(lat, lon):
 
 
 def current_main_early_candidates(report):
-    """Ana üretimde ERKEN seçilmiş taze 250–800 m² adayları görünür tutar.
+    """Taze 250–800 m² ana adayları zemin haritasında görünür tutar.
 
     ``yeni_goruntu`` günlük taramanın o gün yeni Sentinel sahnesi görüp görmediğini
     anlatır; yeni sahneden sonraki gün False olması aday kanıtının bayatladığı anlamına
     gelmez. Bu yüzden ana raporun ölçtüğü uydu kanıt yaşı en fazla iki gün olduğu sürece
-    mevcut ERKEN aday haritada kalır. Kanıt yaşı henüz yoksa yalnız gerçekten yeni
-    görüntüyle gelen aday güvenli geri dönüş olarak kabul edilir. Bu katman yeni alarm
-    veya saha görevi üretmez ve 250 m² ana eşiği değiştirmez.
+    hem ERKEN seçilmiş aday hem de radarın merkezi ``gunun_ilk_3_kontrolu`` rotasına
+    aldığı ana aday haritada kalır. Merkezi rota üyeliği yalnız görselleştirme kanıtıdır;
+    yeni alarm/görev üretmez. Kanıt yaşı henüz yoksa yalnız gerçekten yeni görüntüyle
+    gelen aday güvenli geri dönüş olarak kabul edilir. 250 m² ana eşik değişmez.
     """
+    central_task_ids = {
+        str(candidate.get("gorev_id"))
+        for candidate in report.get("gunun_ilk_3_kontrolu", [])
+        if isinstance(candidate, dict) and candidate.get("gorev_id")
+    }
+
     selected = []
     for candidate in report.get("saha_adaylari", []):
         if not isinstance(candidate, dict):
@@ -56,7 +63,11 @@ def current_main_early_candidates(report):
         area = as_float(candidate.get("alan_m2"))
         if area is None or not (250 <= area <= 800):
             continue
-        if str(candidate.get("oncelik") or "").strip().upper() != "ERKEN":
+
+        priority = str(candidate.get("oncelik") or "").strip().upper()
+        task_id = str(candidate.get("gorev_id") or "")
+        is_central_route = bool(task_id and task_id in central_task_ids)
+        if priority != "ERKEN" and not is_central_route:
             continue
 
         evidence_age = as_float(candidate.get("uydu_kanit_yasi_gun"))
@@ -75,6 +86,11 @@ def current_main_early_candidates(report):
         item["enlem"] = lat
         item["boylam"] = lon
         item["alan_m2"] = area
+        item["harita_katmani"] = (
+            "ANA GÜNLÜK ROTA 250–800"
+            if is_central_route and priority != "ERKEN"
+            else "ANA ERKEN 250–800"
+        )
         selected.append(item)
     return selected
 
@@ -86,16 +102,39 @@ def _self_check_main_early_visibility():
         "enlem": 38.27,
         "boylam": 26.36,
         "yeni_goruntu": False,
+        "gorev_id": "EARLY-1",
     }
     fresh = {**base, "uydu_kanit_yasi_gun": 1}
     stale = {**base, "uydu_kanit_yasi_gun": 3}
     fallback_new = {**base, "yeni_goruntu": True}
     below_main_threshold = {**fresh, "alan_m2": 249}
+    central_delayed = {
+        **base,
+        "oncelik": "GECİKEN",
+        "gorev_id": "CENTRAL-1",
+        "alan_m2": 400,
+        "uydu_kanit_yasi_gun": 2,
+    }
+    off_route_delayed = {**central_delayed, "gorev_id": "OFF-ROUTE"}
+    central_stale = {**central_delayed, "uydu_kanit_yasi_gun": 3}
+    central_report = {
+        "saha_adaylari": [central_delayed],
+        "gunun_ilk_3_kontrolu": [{"gorev_id": "CENTRAL-1"}],
+    }
 
     assert len(current_main_early_candidates({"saha_adaylari": [fresh]})) == 1
     assert current_main_early_candidates({"saha_adaylari": [stale]}) == []
     assert len(current_main_early_candidates({"saha_adaylari": [fallback_new]})) == 1
     assert current_main_early_candidates({"saha_adaylari": [below_main_threshold]}) == []
+    central_visible = current_main_early_candidates(central_report)
+    assert len(central_visible) == 1
+    assert central_visible[0]["harita_katmani"] == "ANA GÜNLÜK ROTA 250–800"
+    assert current_main_early_candidates(
+        {"saha_adaylari": [off_route_delayed], "gunun_ilk_3_kontrolu": central_report["gunun_ilk_3_kontrolu"]}
+    ) == []
+    assert current_main_early_candidates(
+        {"saha_adaylari": [central_stale], "gunun_ilk_3_kontrolu": central_report["gunun_ilk_3_kontrolu"]}
+    ) == []
 
 
 def current_edge_risk_candidates(review):
@@ -137,17 +176,19 @@ _self_check_main_early_visibility()
 st.set_page_config(page_title="Erken Zemin Sinyalleri", page_icon="🧭", layout="wide")
 st.title("🧭 Erken Zemin Sinyalleri")
 st.caption(
-    "Ana 250–800 m² uydu kanıtı en fazla 2 günlük Sentinel ERKEN adaylarını, güçlü "
-    "temporal/lokal kanıtı, 150–249 m² MİKRO ŞANTİYE izlerini, Gülbahçe kalite-kör "
-    "ceplerini ve analiz kenarına yaklaşan ana adayları tek zemin haritasında birlikte gösterir."
+    "Ana 250–800 m² uydu kanıtı en fazla 2 günlük ERKEN veya merkezi günlük rota "
+    "adaylarını, güçlü temporal/lokal kanıtı, 150–249 m² MİKRO ŞANTİYE izlerini, "
+    "Gülbahçe kalite-kör ceplerini ve analiz kenarına yaklaşan ana adayları tek zemin "
+    "haritasında birlikte gösterir."
 )
 st.info(
-    "Bu sayfa yeni alarm veya saha görevi üretmez. Kırmızı ana ERKEN noktalar, "
-    "günlük raporda zaten 250 m² ana üretim eşiğiyle seçilmiş ve uydu kanıtı en fazla "
-    "2 günlük mevcut görevlerdir. MİKRO ŞANTİYE katmanı 150–249 m² aralığında yalnız "
-    "güçlü lokal/kompakt + temporal kanıtı olan izleri arka planda tutar. Turuncu "
-    "Gülbahçe noktaları görüntü kalitesi körlüğünü; sarı noktalar ise mevcut ana adayın "
-    "analiz bbox kenarına çok yakın olduğunu gösterir. Bu iki diagnostik katman da kendi "
+    "Bu sayfa yeni alarm veya saha görevi üretmez. Kırmızı ana noktalar, günlük raporda "
+    "zaten 250 m² ana üretim eşiğiyle seçilmiş; ERKEN sınıfında veya radarın merkezi "
+    "‘Günün ilk 3 kontrolü’ rotasında bulunan ve uydu kanıtı en fazla 2 günlük mevcut "
+    "görevlerdir. MİKRO ŞANTİYE katmanı 150–249 m² aralığında yalnız güçlü "
+    "lokal/kompakt + temporal kanıtı olan izleri arka planda tutar. Turuncu Gülbahçe "
+    "noktaları görüntü kalitesi körlüğünü; sarı noktalar ise mevcut ana adayın analiz "
+    "bbox kenarına çok yakın olduğunu gösterir. Bu iki diagnostik katman da kendi "
     "başına şantiye alarmı değildir."
 )
 
@@ -171,7 +212,7 @@ context_pct = as_float(gulbahce.get("baglam_kapsama_yuzde"))
 edge_margin = as_float(gulbahce.get("baglam_kenar_marji_m"))
 
 m1, m2, m3, m4, m5, m6 = st.columns(6)
-m1.metric("Ana ERKEN 250–800 · ≤2 gün", len(main_early))
+m1.metric("Ana güncel 250–800 · ≤2 gün", len(main_early))
 m2.metric("250–900 m² temporal-lokal", int(temporal.get("aday_sayisi", 0) or 0))
 m3.metric("MİKRO güçlü güncel", int(micro.get("guncel_guclu", 0) or 0))
 m4.metric("MİKRO arka plan", int(micro.get("arka_plan_takip", 0) or 0))
@@ -233,7 +274,7 @@ for candidate in main_early:
     area = candidate["alan_m2"]
     rows.append(
         {
-            "katman": "ANA ERKEN 250–800",
+            "katman": candidate.get("harita_katmani", "ANA ERKEN 250–800"),
             "durum": candidate.get("saha_durumu", candidate.get("oncelik", "ERKEN")),
             "bolge": candidate.get("bolge", "-"),
             "mevki": candidate.get("mahalle", "Mevki doğrulanmadı"),
@@ -446,13 +487,13 @@ else:
         use_container_width=True,
     )
     st.caption(
-        "Kırmızı = ana üretimde zaten ERKEN seçilmiş ve uydu kanıtı en fazla 2 günlük "
-        "250–800 m² Sentinel adayı · Mor = 250–900 m² güçlü temporal-lokal diagnostik "
-        "sinyal · Mavi/yeşil = güncel/tekrar doğrulanan MİKRO iz · Gri = eski MİKRO "
-        "arka plan izi · Turuncu = Gülbahçe kalite-kör cebi · Sarı = mevcut ana adayın "
-        "analiz kutusu kenarına temas/yakınlık riski. Turuncu ve sarı katmanlar alarm "
-        "değildir. Harita mevcut kararları ve gözlem/ölçüm risklerini birleştirir; kendi "
-        "başına yeni alarm/görev üretmez."
+        "Kırmızı = ana üretimde ERKEN veya merkezi günlük rotada seçilmiş ve uydu kanıtı "
+        "en fazla 2 günlük 250–800 m² Sentinel adayı · Mor = 250–900 m² güçlü "
+        "temporal-lokal diagnostik sinyal · Mavi/yeşil = güncel/tekrar doğrulanan MİKRO "
+        "iz · Gri = eski MİKRO arka plan izi · Turuncu = Gülbahçe kalite-kör cebi · "
+        "Sarı = mevcut ana adayın analiz kutusu kenarına temas/yakınlık riski. Turuncu "
+        "ve sarı katmanlar alarm değildir. Harita mevcut kararları ve gözlem/ölçüm "
+        "risklerini birleştirir; kendi başına yeni alarm/görev üretmez."
     )
     st.dataframe(
         signals[
