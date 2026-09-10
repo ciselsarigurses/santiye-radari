@@ -45,7 +45,7 @@ jobs:
       github.event_name != 'workflow_run' ||
       github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
@@ -57,6 +57,10 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
 
       - name: 15 Eylül taze kazı önceliği öz testi
         run: python postseason_excavation_priority_guard.py --self-check
