@@ -339,6 +339,7 @@ if strong_count:
                     round(float(row["longitude"]), 6),
                 )
             )
+            core_map = None
             if coord:
                 st.write(
                     "**Sinyal çekirdeği koordinat kalitesi:**",
@@ -348,13 +349,37 @@ if strong_count:
                     "**Temsilci → çekirdek sapması:**",
                     f"{float(coord.get('sinyal_cekirdegi_sapma_m') or 0.0):.1f} m",
                 )
+                try:
+                    core_lat = float(coord.get("sinyal_cekirdegi_enlem"))
+                    core_lon = float(coord.get("sinyal_cekirdegi_boylam"))
+                except (TypeError, ValueError):
+                    core_lat = core_lon = None
+                if core_lat is not None and core_lon is not None:
+                    st.write(
+                        "**Sinyal çekirdeği:**",
+                        f"{core_lat:.6f}, {core_lon:.6f}",
+                    )
+                    core_map = str(
+                        coord.get("cekirdek_harita")
+                        or f"https://www.google.com/maps/search/?api=1&query={core_lat},{core_lon}"
+                    )
 
             st.write("**Karar:**", row["karar_nedeni"])
             st.link_button(
-                "📍 Koordinatı haritada aç",
+                "📍 Temsilci koordinatı haritada aç",
                 row["harita"],
                 use_container_width=True,
             )
+            if core_map:
+                st.link_button(
+                    "🎯 Sinyal çekirdeğini haritada aç",
+                    core_map,
+                    use_container_width=True,
+                )
+                st.caption(
+                    "Sinyal çekirdeği aynı bağlı bileşendeki en güçlü çoklu-spektral pikseldir; "
+                    "adres/parsel değildir ve temsilci koordinatını değiştirmez."
+                )
 else:
     st.warning("Şu anda güçlü MİKRO ŞANTİYE diagnostik adayı yok.")
 
