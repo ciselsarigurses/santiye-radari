@@ -24,6 +24,7 @@ from zoneinfo import ZoneInfo
 ISTANBUL = ZoneInfo("Europe/Istanbul")
 AUDIT_FILE = Path(__file__).with_name("candidate_capacity_audit.json")
 REPORT_FILE = Path(__file__).with_name("latest_report.json")
+MICRO_FIELD_FILE = Path(__file__).with_name("micro_pending_field_checks.json")
 OUTPUT_FILE = Path(__file__).with_name("postseason_capacity_preview.json")
 
 MAIN_ALARM_MIN_M2 = 250
@@ -73,18 +74,44 @@ def _write_preview_if_meaningful(payload):
     return True
 
 
-def _field_counts(report):
-    """Günlük özetten saha kontrol ve doğrulanmış şantiye/kazı sayılarını güvenli oku."""
+def _field_counts(report, micro_feedback=None):
+    """Günlük saha özeti ile ayrı MİKRO manuel saha sonuçlarını güvenli birleştir."""
     summary = str(report.get("ozet") or "")
-    controls = 0
-    confirmed = 0
+    report_controls = 0
+    report_confirmed = 0
     control_match = re.search(r"Saha sonucu:\s*(\d+)\s*kontrol", summary, re.IGNORECASE)
     confirmed_match = re.search(r"\((\d+)\s*şantiye/kazı", summary, re.IGNORECASE)
     if control_match:
-        controls = int(control_match.group(1))
+        report_controls = int(control_match.group(1))
     if confirmed_match:
-        confirmed = int(confirmed_match.group(1))
-    return controls, confirmed
+        report_confirmed = int(confirmed_match.group(1))
+
+    micro_feedback = micro_feedback if isinstance(micro_feedback, dict) else {}
+    micro_controls = 0
+    micro_confirmed = 0
+    seen_ids = set()
+    for record in micro_feedback.get("kayitlar") or []:
+        if not isinstance(record, dict):
+            continue
+        if str(record.get("durum") or "").upper() != "SAHA_KONTROLU_DOGRULANDI":
+            continue
+        record_id = str(record.get("kayit_id") or "").strip()
+        if record_id and record_id in seen_ids:
+            continue
+        if record_id:
+            seen_ids.add(record_id)
+        micro_controls += 1
+        if str(record.get("sonuc") or "").upper() == "SANTIYE_KAZI":
+            micro_confirmed += 1
+
+    return {
+        "kontrol": report_controls + micro_controls,
+        "dogrulanmis_santiye_kazi": report_confirmed + micro_confirmed,
+        "rapor_kontrol": report_controls,
+        "rapor_dogrulanmis_santiye_kazi": report_confirmed,
+        "mikro_manuel_kontrol": micro_controls,
+        "mikro_manuel_dogrulanmis_santiye_kazi": micro_confirmed,
+    }
 
 
 def _region_preview(record):
@@ -124,9 +151,12 @@ def build_preview(now=None):
     now = now or datetime.now(ISTANBUL)
     audit = _load_json(AUDIT_FILE)
     report = _load_json(REPORT_FILE)
+    micro_feedback = _load_json(MICRO_FIELD_FILE)
     report_date = str(report.get("rapor_tarihi") or "")
     audit_date = str(audit.get("rapor_tarihi") or "")
-    controls, confirmed = _field_counts(report)
+    field_counts = _field_counts(report, micro_feedback)
+    controls = field_counts["kontrol"]
+    confirmed = field_counts["dogrulanmis_santiye_kazi"]
 
     field_evidence_ready = (
         controls >= MIN_FIELD_CONTROLS_FOR_POLICY
@@ -179,11 +209,14 @@ def build_preview(now=None):
             "sayısını artırmak yerine >10.000 m² adaylarla bire bir takas kapasitesi ölçülür."
         ),
         "saha_kaniti": {
-            "kontrol": controls,
-            "dogrulanmis_santiye_kazi": confirmed,
+            **field_counts,
             "politika_icin_yeterli": field_evidence_ready,
             "asgari_kontrol": MIN_FIELD_CONTROLS_FOR_POLICY,
             "asgari_dogrulanmis_santiye_kazi": MIN_CONFIRMED_CONSTRUCTION_FOR_POLICY,
+            "mikro_konum_notu": (
+                "MİKRO manuel saha eşleşmesi şantiye/kazı sınıfı kalibrasyonuna dahil edilir; "
+                "GPS/EXIF yoksa koordinat hassasiyeti bağımsız doğrulanmış sayılmaz."
+            ),
         },
         "veri_tazeligi": {
             "gunluk_rapor_tarihi": report_date,
@@ -203,7 +236,25 @@ def _self_check():
     sample_report = {
         "ozet": "Saha sonucu: 2 kontrol (0 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)"
     }
-    assert _field_counts(sample_report) == (2, 0)
+    empty_counts = _field_counts(sample_report, {})
+    assert empty_counts["kontrol"] == 2
+    assert empty_counts["dogrulanmis_santiye_kazi"] == 0
+    assert empty_counts["mikro_manuel_kontrol"] == 0
+
+    sample_micro = {
+        "kayitlar": [
+            {
+                "kayit_id": "MM-TEST-01",
+                "durum": "SAHA_KONTROLU_DOGRULANDI",
+                "sonuc": "SANTIYE_KAZI",
+            }
+        ]
+    }
+    merged_counts = _field_counts(sample_report, sample_micro)
+    assert merged_counts["kontrol"] == 3
+    assert merged_counts["dogrulanmis_santiye_kazi"] == 1
+    assert merged_counts["mikro_manuel_kontrol"] == 1
+    assert merged_counts["mikro_manuel_dogrulanmis_santiye_kazi"] == 1
 
     record = {
         "durum": "ok",
