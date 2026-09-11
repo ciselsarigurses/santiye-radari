@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-10",
+  "rapor_tarihi": "2026-09-11",
   "amac": "Ana 250 m²+ Sentinel saha adaylarında mevcut geometrik koordinat ile aynı üretim bileşenindeki sinyal-ağırlıklı gerçek piksel koordinatı arasındaki farkı ölçmek.",
   "politika": "DIAGNOSTIK_ONLY: alarm, görev, sıralama ve 250 m² ana eşik değişmez; saha kanıtı olmadan koordinat otomatik taşınmaz.",
   "ham_bilesenle_birebir_olculen_aday": 17,
