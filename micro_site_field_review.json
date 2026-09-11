@@ -10,7 +10,7 @@
   "kisa_liste_girdi": 1,
   "sinir_temporal_lokal_guclu_girdi": 0,
   "toplam_kalibrasyon_girdi": 1,
-  "yeni_mikro_inceleme_adayi": 1,
+  "yeni_mikro_inceleme_adayi": 0,
   "guncel_saha_eslesmesi_arka_plan": 0,
   "guncel_saha_eslesmesi_sonuclari": {
     "SANTIYE_KAZI": 0,
@@ -19,7 +19,11 @@
     "YIKIM_TEMIZLIK": 0,
     "YOL_ALTYAPI": 0
   },
-  "inceleme_adaylari": [
+  "inceleme_adaylari": [],
+  "arka_plan_saha_eslesmeleri": [],
+  "not": "Bu katman alarm/görev üretmez. Normal 150-249 m² kısa listeye ek olarak yalnız spektral sınır analizinde temporal + lokal birlikte güçlü bulunan en fazla iki aday kalibrasyon fırsatı olarak görülebilir. Aynı veya daha güncel saha geri bildirimi olan aday yeni fırsat gibi gösterilmez; daha yeni Sentinel sahnesi eski saha sonucunu kalıcı veto olarak kullanmaz. Manuel olarak sahaya gönderilmiş MİKRO adaylar aynı Sentinel sahnesinde tekrar yeni fırsat gibi gösterilmez; sonuç gelene kadar bekleyen-kontrol durumunda tutulur. Daha yeni Sentinel sahnesi eski bekleyen kaydı veto olarak kullanmaz.",
+  "saha_kontrolu_bekleyen_aday": 1,
+  "saha_kontrolu_bekleyenler": [
     {
       "oncelik": "MIKRO_DIAGNOSTIK",
       "alarm": false,
@@ -55,9 +59,13 @@
       "guncel_saha_eslesmesi": false,
       "saha_eslesme_mesafe_m": null,
       "saha_eslesme_gorev_id": null,
-      "saha_eslesme_sonucu": null
+      "saha_eslesme_sonucu": null,
+      "saha_kontrolu_bekliyor": true,
+      "bekleyen_kontrol_mesafe_m": 0.0,
+      "bekleyen_kontrol_talep_tarihi": "2026-09-11",
+      "bekleyen_kontrol_kaynak_sentinel_tarihi": "08.09.2026",
+      "bekleyen_kontrol_notu": "Saha kontrolü için personel gönderilmesi kullanıcı tarafından onaylandı; henüz saha sonucu kaydedilmedi."
     }
   ],
-  "arka_plan_saha_eslesmeleri": [],
-  "not": "Bu katman alarm/görev üretmez. Normal 150-249 m² kısa listeye ek olarak yalnız spektral sınır analizinde temporal + lokal birlikte güçlü bulunan en fazla iki aday kalibrasyon fırsatı olarak görülebilir. Aynı veya daha güncel saha geri bildirimi olan aday yeni fırsat gibi gösterilmez; daha yeni Sentinel sahnesi eski saha sonucunu kalıcı veto olarak kullanmaz."
+  "manuel_kontrol_esleme_yaricapi_m": 35
 }
