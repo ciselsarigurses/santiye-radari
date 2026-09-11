@@ -81,7 +81,7 @@
       "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
       "baglam_yeniden_goruntule": false,
       "karar_sinifi": "SAHA_ZATEN_DOGRULANMIS",
-      "karar_nedeni": "Yaklaşık aynı noktada güncel saha sonucu zaten şantiye/kazı olarak doğrulanmış.",
+      "karar_nedeni": "Güncel saha sonucu adayla eşleştirilerek şantiye/kazı olarak doğrulandı; aday koordinatı GPS/EXIF gibi bağımsız konum kanıtıyla doğrulanmış sayılmaz.",
       "temporal_destek": true,
       "genis_yuzey_riski": false,
       "ana_250m_adaya_yakin": false,
@@ -90,7 +90,11 @@
       "15_eylul_sonrasi_saha_adayi_olabilir": false,
       "saha_eslesme_sonucu": "SANTIYE_KAZI",
       "saha_eslesme_gorev_id": "MM-20260911-CIFTLIKKOY-01",
-      "saha_eslesme_mesafe_m": 0.0
+      "saha_eslesme_mesafe_m": 0.0,
+      "manuel_saha_dogrulamasi": true,
+      "manuel_saha_kanit_tipi": "KULLANICI_SAHA_FOTOGRAFI",
+      "manuel_saha_konum_dogrulama": "KULLANICI_ADAY_ESLEMESI_GPS_EXIF_YOK",
+      "saha_konumu_bagimsiz_dogrulandi": false
     }
   ]
 }
