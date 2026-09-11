@@ -1,15 +1,15 @@
-"""Taze Sentinel görevleri için güvenli ikinci navigasyon hedefi üretir.
+"""Taze 250 m²+ Sentinel ana saha görevleri için güvenli ikinci navigasyon hedefi üretir.
 
 Bu modül üretim aday koordinatını, görev kimliğini, alarm eşiğini veya saha durumunu
-değiştirmez. ``coordinate_precision_audit.json`` içindeki aynı bağlı bileşenden
-seçilmiş BSI×RGB sinyal-ağırlıklı piksel yalnızca şu koşullarda ikinci bir
-"sinyal çekirdeği" hedefi olarak gösterilebilir:
+değiştirmez. ``hotspot_coordinate_audit.json`` içindeki üretimde kullanılan aynı
+Sentinel değişim maskesinden seçilmiş sinyal-ağırlıklı gerçek piksel yalnızca şu
+koşullarda ikinci bir "sinyal çekirdeği" hedefi olarak gösterilebilir:
 
 * görev yeni Sentinel görüntüsünden geliyorsa veya aynı sahnede ilk kez görülmüş
   kanıtı en fazla iki günlükse,
 * görev 250 m²+ ana üretim yolundaysa,
 * audit aynı Sentinel son sahnesine aitse,
-* audit adayı mevcut görev koordinatına yakın ve alanı aynıysa,
+* audit adayı aynı görev kimliğine (varsa), mevcut görev koordinatına ve alana uyuyorsa,
 * önerilen kayma en fazla 20 m ise.
 
 Amaç saha ekibine 10 m sınıfı Sentinel çözünürlüğünde daha odaklı bir kontrol
@@ -30,7 +30,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-AUDIT_FILE = Path(__file__).with_name("coordinate_precision_audit.json")
+AUDIT_FILE = Path(__file__).with_name("hotspot_coordinate_audit.json")
 MAIN_MIN_AREA_M2 = 250
 MATCH_RADIUS_M = 20.0
 MAX_SIGNAL_SHIFT_M = 20.0
@@ -120,6 +120,14 @@ def load_audit(path=AUDIT_FILE):
     return data if isinstance(data, dict) else {}
 
 
+def _row_area(row):
+    """Ana üretim audit'i ve eski diagnostik audit şemalarını güvenle oku."""
+    area = _number(row.get("rapor_alan_m2"))
+    if area is None:
+        area = _number(row.get("alan_m2"))
+    return area
+
+
 def signal_core_target(item, audit_payload):
     """Güvenli ise ikinci navigasyon hedefini döndür; aksi halde ``None``."""
     if not isinstance(item, dict) or not isinstance(audit_payload, dict):
@@ -136,18 +144,26 @@ def signal_core_target(item, audit_payload):
     scene_date = _normalize_date(item.get("son_tarih"))
     if scene_date is None:
         return None
+    item_task_id = str(item.get("gorev_id") or "").strip()
 
     matches = []
     for region_key, region in (audit_payload.get("bolgeler") or {}).items():
-        if not isinstance(region, dict) or region.get("durum") != "ok":
+        if not isinstance(region, dict):
             continue
+        # hotspot_coordinate_audit başarılı bölgelerde `durum` yazmıyor; bazı eski
+        # audit şemalarında ise "ok" kullanılıyor. Yalnız açık hata durumunu dışla.
+        region_status = str(region.get("durum") or "").strip().lower()
+        if region_status and region_status != "ok":
+            continue
+
         audit_scene_date = _item_date(region.get("son_item"))
         if audit_scene_date != scene_date:
             continue
+
         for row in region.get("adaylar") or []:
             if not isinstance(row, dict):
                 continue
-            row_area = _number(row.get("alan_m2"))
+            row_area = _row_area(row)
             raw_lat = _number(row.get("mevcut_enlem"))
             raw_lon = _number(row.get("mevcut_boylam"))
             signal_lat = _number(row.get("sinyal_agirlikli_enlem"))
@@ -155,6 +171,11 @@ def signal_core_target(item, audit_payload):
             shift = _number(row.get("geometrik_sinyal_kaymasi_m"))
             if None in (row_area, raw_lat, raw_lon, signal_lat, signal_lon, shift):
                 continue
+
+            row_task_id = str(row.get("gorev_id") or "").strip()
+            if item_task_id and row_task_id and item_task_id != row_task_id:
+                continue
+
             # Sentinel alanları piksel katlarıdır; aynı bağlı bileşeni yanlış
             # eşlememek için alanın da aynı olmasını şart koş.
             if abs(row_area - area) > 1.0:
@@ -191,14 +212,16 @@ def signal_core_target(item, audit_payload):
 
 
 def _self_check():
+    # Canlı ana üretim audit'inin şemasını taklit et: bölge durum alanı olmadan
+    # `rapor_alan_m2` ve görev kimliği üzerinden güvenli eşleşme.
     audit = {
         "bolgeler": {
             "cesme": {
-                "durum": "ok",
                 "son_item": "S2B_T35SMC_20260915T090620_L2A",
                 "adaylar": [
                     {
-                        "alan_m2": 400,
+                        "gorev_id": "UTEST123",
+                        "rapor_alan_m2": 400,
                         "mevcut_enlem": 38.300000,
                         "mevcut_boylam": 26.300000,
                         "sinyal_agirlikli_enlem": 38.300090,
@@ -210,6 +233,7 @@ def _self_check():
         }
     }
     fresh = {
+        "gorev_id": "UTEST123",
         "yeni_goruntu": True,
         "alan_m2": 400,
         "enlem": 38.300000,
@@ -250,9 +274,16 @@ def _self_check():
     far = dict(fresh, enlem=38.301000)
     assert signal_core_target(far, audit) is None
 
+    wrong_task = dict(fresh, gorev_id="UBASKA")
+    assert signal_core_target(wrong_task, audit) is None
+
     too_far_shift = json.loads(json.dumps(audit))
     too_far_shift["bolgeler"]["cesme"]["adaylar"][0]["geometrik_sinyal_kaymasi_m"] = 30.0
     assert signal_core_target(fresh, too_far_shift) is None
+
+    explicit_error = json.loads(json.dumps(audit))
+    explicit_error["bolgeler"]["cesme"]["durum"] = "hata"
+    assert signal_core_target(fresh, explicit_error) is None
 
 
 def main():
@@ -262,8 +293,9 @@ def main():
     _self_check()
     if args.check_only:
         print(
-            "Sinyal çekirdeği navigasyon öz testi başarılı: yeni veya en fazla 2 günlük "
-            "aynı-sahne ilk-görülme kanıtlı 250 m²+ adayına ikinci hedef veriliyor."
+            "Sinyal çekirdeği navigasyon öz testi başarılı: ana üretim hotspot audit'inden "
+            "yeni veya en fazla 2 günlük aynı-sahne ilk-görülme kanıtlı 250 m²+ adayına "
+            "ikinci hedef veriliyor."
         )
         return
     print("coordinate_navigation yalnız uygulama yardımcı modülüdür; üretim verisini değiştirmez.")
