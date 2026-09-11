@@ -41,6 +41,16 @@ def _candidate_key(item):
     return (str(item.get("bolge") or ""), latitude, longitude)
 
 
+def _independent_location_verification(value):
+    """Yalnız açık GPS/EXIF/koordinat doğrulamasını kesin konum kanıtı say."""
+    marker = str(value or "").strip().upper()
+    return marker in {
+        "GPS_EXIF_DOGRULANDI",
+        "SAHA_GPS_DOGRULANDI",
+        "KOORDINAT_DOGRULANDI",
+    }
+
+
 def _field_matches(field_payload):
     matches = {}
     for item in field_payload.get("arka_plan_saha_eslesmeleri") or []:
@@ -49,11 +59,18 @@ def _field_matches(field_payload):
         key = _candidate_key(item)
         if key is None:
             continue
+        location_verification = item.get("manuel_saha_konum_dogrulama")
         matches[key] = {
             "guncel_saha_eslesmesi": True,
             "saha_eslesme_sonucu": item.get("saha_eslesme_sonucu"),
             "saha_eslesme_gorev_id": item.get("saha_eslesme_gorev_id"),
             "saha_eslesme_mesafe_m": item.get("saha_eslesme_mesafe_m"),
+            "manuel_saha_dogrulamasi": bool(item.get("manuel_saha_dogrulamasi")),
+            "manuel_saha_kanit_tipi": item.get("manuel_saha_kanit_tipi"),
+            "manuel_saha_konum_dogrulama": location_verification,
+            "saha_konumu_bagimsiz_dogrulandi": _independent_location_verification(
+                location_verification
+            ),
         }
     return matches
 
@@ -85,12 +102,18 @@ def _classify(item, field_match=None):
 
     if field_block:
         outcome = str((field_match or {}).get("saha_eslesme_sonucu") or "")
+        exact_location = bool(
+            (field_match or {}).get("saha_konumu_bagimsiz_dogrulandi")
+        )
         if outcome == "SANTIYE_KAZI":
             label = "SAHA_ZATEN_DOGRULANMIS"
-            reason = "Yaklaşık aynı noktada güncel saha sonucu zaten şantiye/kazı olarak doğrulanmış."
+            if exact_location:
+                reason = "Aynı noktada güncel saha sonucu şantiye/kazı olarak ve koordinatı bağımsız konum kanıtıyla doğrulandı."
+            else:
+                reason = "Güncel saha sonucu adayla eşleştirilerek şantiye/kazı olarak doğrulandı; aday koordinatı GPS/EXIF gibi bağımsız konum kanıtıyla doğrulanmış sayılmaz."
         else:
             label = "GUNCEL_SAHA_SONUCU_ARKA_PLAN"
-            reason = "Yaklaşık aynı noktada aynı/güncel Sentinel sahnesiyle ilişkili saha sonucu var; yeni mikro fırsat gibi yükseltilmedi."
+            reason = "Yaklaşık aynı adayla aynı/güncel Sentinel sahnesiyle ilişkili saha sonucu var; yeni mikro fırsat gibi yükseltilmedi."
     elif near_main:
         label = "ANA_250M_ADAYA_YAKIN"
         reason = "Mikro sinyal ana 250 m²+ adayın yakınında; ayrı fırsat olarak çoğaltılmadı."
@@ -228,6 +251,26 @@ def _self_check():
     temporal_only["lokal_kompakt_destek"] = False
     temporal_result = _classify(temporal_only)
     assert temporal_result["karar_sinifi"] == "MIKRO_TEMPORAL_BEKLE"
+
+    field_index = _field_matches(
+        {
+            "arka_plan_saha_eslesmeleri": [
+                {
+                    "bolge": "cesme",
+                    "enlem": 38.30,
+                    "boylam": 26.40,
+                    "saha_eslesme_sonucu": "SANTIYE_KAZI",
+                    "manuel_saha_dogrulamasi": True,
+                    "manuel_saha_kanit_tipi": "KULLANICI_SAHA_FOTOGRAFI",
+                    "manuel_saha_konum_dogrulama": "KULLANICI_ADAY_ESLEMESI_GPS_EXIF_YOK",
+                }
+            ]
+        }
+    )
+    unverified_match = field_index[("cesme", 38.30, 26.40)]
+    assert not unverified_match["saha_konumu_bagimsiz_dogrulandi"]
+    unverified_result = _classify(base, unverified_match)
+    assert "bağımsız konum kanıtıyla doğrulanmış sayılmaz" in unverified_result["karar_nedeni"]
 
 
 def run_review():
