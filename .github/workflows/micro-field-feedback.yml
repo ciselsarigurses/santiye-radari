@@ -7,9 +7,11 @@ on:
       - "micro_site_shortlist.json"
       - "micro_site_audit.json"
       - "micro_spectral_borderline_review.json"
+      - "micro_pending_field_checks.json"
       - "santiye.db"
       - "micro_site_field_guard.py"
       - "micro_demolition_feedback_bridge.py"
+      - "micro_pending_field_bridge.py"
       - ".github/workflows/micro-field-feedback.yml"
   schedule:
     # Mikro kısa listeden kısa süre sonra çalışır.
@@ -40,6 +42,9 @@ jobs:
 
       - name: Mikro saha geri bildirim korumasını çalıştır
         run: python micro_demolition_feedback_bridge.py
+
+      - name: Manuel gönderilen MİKRO adayını tekrar-dispatch'ten koru
+        run: python micro_pending_field_bridge.py
 
       - name: Sonucu yalnız değişiklikte kaydet
         shell: bash
