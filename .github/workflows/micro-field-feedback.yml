@@ -12,6 +12,7 @@ on:
       - "micro_site_field_guard.py"
       - "micro_demolition_feedback_bridge.py"
       - "micro_pending_field_bridge.py"
+      - "micro_field_report_bridge.py"
       - ".github/workflows/micro-field-feedback.yml"
   schedule:
     # Mikro kısa listeden kısa süre sonra çalışır.
@@ -46,17 +47,23 @@ jobs:
       - name: Manuel gönderilen MİKRO adayını tekrar-dispatch'ten koru
         run: python micro_pending_field_bridge.py
 
+      - name: Manuel MİKRO sonucunu merkezi rapor kalibrasyonuna bağla
+        run: |
+          python micro_field_report_bridge.py --self-check
+          python micro_field_report_bridge.py
+
       - name: Sonucu yalnız değişiklikte kaydet
         shell: bash
         run: |
-          if [[ -z "$(git status --porcelain -- micro_site_field_review.json)" ]]; then
+          report_files="micro_site_field_review.json latest_report.json SAHA_RAPORU.md"
+          if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Mikro saha geri bildirim sonucu değişmedi."
             exit 0
           fi
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add micro_site_field_review.json
+          git add $report_files
           git commit -m "Radar: mikro saha geri bildirim sonucunu güncelle"
           git fetch origin main
           git rebase FETCH_HEAD
