@@ -85,7 +85,7 @@ jobs:
             git fetch origin main
             if ! git merge-base --is-ancestor origin/main HEAD; then
               echo "Ana dal yeniden değişti; eski diagnostik sonucu zorlamadan sonraki çalışmaya bırakılıyor."
-              exit 1
+              exit 0
             fi
           fi
 
