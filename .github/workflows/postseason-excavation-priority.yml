@@ -26,6 +26,9 @@ on:
       - "Parsel Ön Kontrol Bağlantıları"
       - "Kuru Zemin Zaman Serisi Denetimi"
       - "Saha Durumunu İşle"
+      # Doğrulanmış MİKRO saha sonucu merkezi rapora işlendiğinde sezon kalibrasyonu
+      # başka bir tetik beklemeden yeniden hesaplansın.
+      - "Mikro Şantiye Saha Geri Bildirim Koruması"
     types: [completed]
   schedule:
     # 15 Eylül 05:30 TSİ: sezon sınırını 11:00 ana taramadan önce uygula.
