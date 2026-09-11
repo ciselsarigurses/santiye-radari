@@ -9,6 +9,7 @@ on:
       - "gulbahce_current_blind_urgency_guard.py"
       - "gulbahce_patrol_surface_guard.py"
       - "gulbahce_latest_state_blind_review.py"
+      - "gulbahce_nearby_blind_check_guard.py"
       - "gulbahce_micro_blind_capacity.json"
       - "parcel_precheck_links.py"
       - "requirements.txt"
@@ -94,6 +95,12 @@ jobs:
       - name: Su-kıyı koruması sonrası güncel körlük kapsamasını yeniden ölç
         run: python gulbahce_latest_state_blind_review.py
 
+      - name: Gülbahçe yakın kör alan ek kontrol diagnostigi öz testi
+        run: python gulbahce_nearby_blind_check_guard.py --check-only
+
+      - name: Seçilen devriyeye yakın ikinci kör kümeyi diagnostik olarak işaretle
+        run: python gulbahce_nearby_blind_check_guard.py
+
       - name: Manuel parsel ön-kontrol katmanı öz testi
         run: python parcel_precheck_links.py --self-check
 
@@ -119,6 +126,8 @@ jobs:
             python gulbahce_patrol_surface_guard.py --check-only
             python gulbahce_patrol_surface_guard.py
             python gulbahce_latest_state_blind_review.py
+            python gulbahce_nearby_blind_check_guard.py --check-only
+            python gulbahce_nearby_blind_check_guard.py
             python parcel_precheck_links.py --self-check
             python parcel_precheck_links.py
           }
