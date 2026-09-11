@@ -1,0 +1,18 @@
+{
+  "alarm": false,
+  "saha_gorevi": false,
+  "amac": "Kullanıcının saha kontrolü için personel gönderdiği MİKRO adayları sonuç gelene kadar aynı Sentinel sahnesinde tekrar yeni fırsat gibi göstermemek.",
+  "kayitlar": [
+    {
+      "durum": "SAHA_KONTROLU_BEKLIYOR",
+      "bolge": "cesme",
+      "yaklasik_mevki": "Çiftlikköy",
+      "enlem": 38.287679,
+      "boylam": 26.266305,
+      "alan_m2": 200,
+      "kaynak_sentinel_tarihi": "08.09.2026",
+      "talep_tarihi": "2026-09-11",
+      "not": "Saha kontrolü için personel gönderilmesi kullanıcı tarafından onaylandı; henüz saha sonucu kaydedilmedi."
+    }
+  ]
+}
