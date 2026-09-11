@@ -18,11 +18,11 @@
   },
   "uyari": "MIKRO_GUCLU_DIAGNOSTIK_KANIT bile alarm veya saha görevi değildir. 15 Eylül sonrası operasyonel yükseltme ayrıca ana rota kuralları, yeni Sentinel sahnesi ve saha kapasitesiyle değerlendirilmelidir.",
   "toplam_aday": 1,
-  "mikro_guclu_diagnostik": 1,
+  "mikro_guclu_diagnostik": 0,
   "gulbahce_toplam": 0,
   "gulbahce_guclu_diagnostik": 0,
   "karar_sayilari": {
-    "MIKRO_GUCLU_DIAGNOSTIK_KANIT": 1
+    "SAHA_ZATEN_DOGRULANMIS": 1
   },
   "adaylar": [
     {
@@ -80,14 +80,17 @@
       "lokal_kompakt_destek": true,
       "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
       "baglam_yeniden_goruntule": false,
-      "karar_sinifi": "MIKRO_GUCLU_DIAGNOSTIK_KANIT",
-      "karar_nedeni": "Spektral kapı + temporal destek + lokal/kompakt karakter birlikte güçlü; 15 Eylül sonrası saha yükseltmesine aday olabilir, fakat otomatik görev değildir.",
+      "karar_sinifi": "SAHA_ZATEN_DOGRULANMIS",
+      "karar_nedeni": "Yaklaşık aynı noktada güncel saha sonucu zaten şantiye/kazı olarak doğrulanmış.",
       "temporal_destek": true,
       "genis_yuzey_riski": false,
       "ana_250m_adaya_yakin": false,
-      "guncel_saha_eslesmesi": false,
-      "mikro_guclu_diagnostik": true,
-      "15_eylul_sonrasi_saha_adayi_olabilir": true
+      "guncel_saha_eslesmesi": true,
+      "mikro_guclu_diagnostik": false,
+      "15_eylul_sonrasi_saha_adayi_olabilir": false,
+      "saha_eslesme_sonucu": "SANTIYE_KAZI",
+      "saha_eslesme_gorev_id": "MM-20260911-CIFTLIKKOY-01",
+      "saha_eslesme_mesafe_m": 0.0
     }
   ]
 }
