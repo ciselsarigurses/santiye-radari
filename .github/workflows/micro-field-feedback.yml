@@ -59,7 +59,10 @@ jobs:
           git add micro_site_field_review.json
           git commit -m "Radar: mikro saha geri bildirim sonucunu güncelle"
           git fetch origin main
-          if ! git merge-base --is-ancestor origin/main HEAD; then
-            git rebase origin/main
+          git rebase FETCH_HEAD
+          if ! git push origin HEAD:main; then
+            echo "main ilk push denemesi sırasında ilerledi; bir kez güvenli yeniden tabanlanıyor."
+            git fetch origin main
+            git rebase FETCH_HEAD
+            git push origin HEAD:main
           fi
-          git push origin HEAD:main
