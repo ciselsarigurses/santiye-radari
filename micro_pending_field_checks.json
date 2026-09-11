@@ -1,10 +1,12 @@
 {
   "alarm": false,
   "saha_gorevi": false,
-  "amac": "Kullanıcının saha kontrolü için personel gönderdiği MİKRO adayları sonuç gelene kadar aynı Sentinel sahnesinde tekrar yeni fırsat gibi göstermemek.",
+  "amac": "Manuel MİKRO saha kontrollerini aynı Sentinel sahnesinde tekrar-dispatch'ten korumak ve doğrulanmış sonuçları kalibrasyon arka planına taşımak; daha yeni Sentinel sahnesini kalıcı olarak veto etmemek.",
   "kayitlar": [
     {
-      "durum": "SAHA_KONTROLU_BEKLIYOR",
+      "kayit_id": "MM-20260911-CIFTLIKKOY-01",
+      "durum": "SAHA_KONTROLU_DOGRULANDI",
+      "sonuc": "SANTIYE_KAZI",
       "bolge": "cesme",
       "yaklasik_mevki": "Çiftlikköy",
       "enlem": 38.287679,
@@ -12,7 +14,10 @@
       "alan_m2": 200,
       "kaynak_sentinel_tarihi": "08.09.2026",
       "talep_tarihi": "2026-09-11",
-      "not": "Saha kontrolü için personel gönderilmesi kullanıcı tarafından onaylandı; henüz saha sonucu kaydedilmedi."
+      "sonuc_tarihi": "2026-09-11",
+      "kanit_tipi": "KULLANICI_SAHA_FOTOGRAFI",
+      "konum_dogrulama": "KULLANICI_ADAY_ESLEMESI_GPS_EXIF_YOK",
+      "not": "Kullanıcının saha fotoğrafında ekskavatör/kazıcı ve hafriyat kamyonu görülüyor; kullanıcı fotoğrafı sabahki Çiftlikköy MİKRO adayıyla eşledi. Fotoğrafta GPS/EXIF koordinat doğrulaması bulunmadığından parsel, adres veya hukuki statü çıkarılmadı. Aynı Sentinel sahnesi için gerçek şantiye/kazı kalibrasyonu olarak tutulur; daha yeni sahne gelirse yeniden değerlendirilir."
     }
   ]
 }
