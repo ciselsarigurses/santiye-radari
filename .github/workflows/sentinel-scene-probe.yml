@@ -9,6 +9,7 @@ on:
       - "sentinel1_blind_target_bridge.py"
       - "sentinel1_rtc_change_diagnostic.py"
       - "sentinel1_rtc_quality_guard.py"
+      - "sentinel1_rtc_target_pair_gapfill.py"
       - "cloud_scene_probe.py"
       - ".github/workflows/sentinel-scene-probe.yml"
   schedule:
@@ -54,6 +55,7 @@ jobs:
           python sentinel1_blind_target_bridge.py --self-check-only
           python sentinel1_rtc_change_diagnostic.py --self-check-only
           python sentinel1_rtc_quality_guard.py --self-check-only
+          python sentinel1_rtc_target_pair_gapfill.py --self-check-only
 
       - name: Sentinel metadata'sında yeni üretim sahnesi ara
         id: probe
@@ -74,6 +76,9 @@ jobs:
 
       - name: Sentinel-1 RTC veri tazelik ve okunabilirlik kalite kapısını çalıştır
         run: python sentinel1_rtc_quality_guard.py --input /tmp/sentinel1-rtc.json
+
+      - name: Bölgesel RTC çiftinin açıklarını hedefe özel taze çiftle diagnostik tamamla
+        run: python sentinel1_rtc_target_pair_gapfill.py --live
 
       - name: Yeni üretim sahnesi varsa ana radar zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
