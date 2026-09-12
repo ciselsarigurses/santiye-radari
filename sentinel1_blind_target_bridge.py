@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from pathlib import Path
 
 import sentinel1_scene_probe as s1
@@ -91,24 +90,40 @@ def _load_targets():
 
 
 def _asset_polarization_map(item):
+    """Yalniz gercek olcum raster assetlerini polarizasyon olarak kabul et.
+
+    STAC kaydindaki thumbnail/schema dosyalarinin baslik/aciklamalarinda VV/VH
+    gibi dizgeler gecse bile bunlar geri-sacilim rasteri degildir. Bu nedenle
+    asset anahtarini (ve yalniz veri rolu varsa tam eslesen basligi) metadata'da
+    ilan edilen polarizasyonlarla eslestiririz.
+    """
+    declared = set(s1._polarizations(item))
     found = {}
     for key, asset in (item.get("assets") or {}).items():
         if not isinstance(asset, dict) or not asset.get("href"):
             continue
-        text = " ".join(
-            str(value or "")
-            for value in (key, asset.get("title"), asset.get("description"))
-        ).upper()
-        for pol in ("VV", "VH", "HH", "HV"):
-            if re.search(rf"(^|[^A-Z]){pol}([^A-Z]|$)", text):
-                found.setdefault(pol, []).append(str(key))
+
+        key_pol = str(key or "").strip().upper()
+        title_pol = str(asset.get("title") or "").strip().upper()
+        roles = {str(role).strip().lower() for role in (asset.get("roles") or []) if role}
+
+        pol = None
+        if key_pol in declared:
+            pol = key_pol
+        elif title_pol in declared and "data" in roles:
+            pol = title_pol
+
+        if pol:
+            found.setdefault(pol, []).append(str(key))
+
     return {pol: sorted(set(keys)) for pol, keys in sorted(found.items())}
 
 
 def _common_raster_polarizations(older, newer):
     old_map = _asset_polarization_map(older)
     new_map = _asset_polarization_map(newer)
-    common = sorted(set(old_map).intersection(new_map))
+    declared_common = set(s1._polarizations(older)).intersection(s1._polarizations(newer))
+    common = sorted(set(old_map).intersection(new_map).intersection(declared_common))
     return common, old_map, new_map
 
 
@@ -201,8 +216,18 @@ def _self_check():
         }
         if assets:
             payload["assets"] = {
-                "vv": {"href": "https://example.test/vv.tif", "title": "VV"},
-                "vh": {"href": "https://example.test/vh.tif", "title": "VH"},
+                "vv": {"href": "https://example.test/vv.tif", "title": "VV", "roles": ["data"]},
+                "vh": {"href": "https://example.test/vh.tif", "title": "VH", "roles": ["data"]},
+                "thumbnail": {
+                    "href": "https://example.test/thumbnail.png",
+                    "title": "HH HV VH VV preview",
+                    "roles": ["thumbnail"],
+                },
+                "schema-product-vv": {
+                    "href": "https://example.test/product-vv.xml",
+                    "title": "VV product schema",
+                    "roles": ["metadata"],
+                },
             }
         return payload
 
@@ -224,6 +249,7 @@ def _self_check():
     row = inspect_region("gulbahce", targets, search_fn=fake_search)
     assert row["durum"] == "HAZIR"
     assert row["ortak_raster_polarizasyonlari"] == ["VH", "VV"]
+    assert row["eski_raster_assetleri"] == {"VH": ["vh"], "VV": ["vv"]}
     assert row["cift_tarafindan_kapsanan_hedef"] == 1
     assert row["raster_karsilastirmaya_hazir_hedef"] == 1
     assert row["alarm"] is False and row["saha_gorevi"] is False
