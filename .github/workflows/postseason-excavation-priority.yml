@@ -26,6 +26,9 @@ on:
       - "Parsel Ön Kontrol Bağlantıları"
       - "Kuru Zemin Zaman Serisi Denetimi"
       - "Saha Durumunu İşle"
+      # Ana tarama günlük ilk-3 rotayı baştan yazdığı için, 15 Eylül sonrası
+      # yıkım/retention/temporal-lokal bileşik önceliklerini hemen yeniden uygula.
+      - "Günlük Şantiye Taraması"
       # Doğrulanmış MİKRO saha sonucu merkezi rapora işlendiğinde sezon kalibrasyonu
       # başka bir tetik beklemeden yeniden hesaplansın.
       - "Mikro Şantiye Saha Geri Bildirim Koruması"
