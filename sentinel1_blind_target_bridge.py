@@ -19,11 +19,11 @@ basina alarm/saha gorevi uretmez.
 from __future__ import annotations
 
 import argparse
-from datetime import date
+from datetime import date, datetime
 import json
 from pathlib import Path
+import sqlite3
 
-import postseason_excavation_priority_guard as post
 import sentinel1_scene_probe as s1
 
 
@@ -32,6 +32,9 @@ MICRO_RANGE_M2 = [150, 249]
 MAX_TARGETS_PER_REGION = 8
 MAX_MICRO_TARGETS_PER_REGION = 2
 MAX_DEMOLITION_TARGETS_PER_REGION = 2
+DEMOLITION_MAX_M2 = 5_000
+DEMOLITION_MAX_AGE_DAYS = 60
+FIELD_DB_FILE = Path(__file__).with_name("santiye.db")
 
 
 def _safe_json(path):
@@ -136,6 +139,60 @@ def _append_micro_calibration_targets(result):
     return result
 
 
+def _parse_field_date(value):
+    text = str(value or "").strip()
+    for fmt in ("%d.%m.%Y", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(text, fmt).date()
+        except ValueError:
+            continue
+    return None
+
+
+def _load_demolition_precursors():
+    """Saha DB'sinden yikim/temizlik sonucunu salt-okunur diagnostik kanit olarak al."""
+    if not FIELD_DB_FILE.exists():
+        return []
+    connection = None
+    try:
+        connection = sqlite3.connect(
+            f"file:{FIELD_DB_FILE}?mode=ro",
+            uri=True,
+            timeout=5,
+        )
+        columns = {
+            str(row[1])
+            for row in connection.execute("PRAGMA table_info(saha_sonuclari)")
+        }
+        required = {"gorev_id", "sonuc", "enlem", "boylam", "alan_m2", "son_tarih"}
+        if not required.issubset(columns):
+            return []
+        rows = connection.execute(
+            """SELECT gorev_id,sonuc,enlem,boylam,alan_m2,son_tarih
+            FROM saha_sonuclari
+            WHERE sonuc = 'YIKIM_TEMIZLIK'
+              AND enlem IS NOT NULL AND boylam IS NOT NULL
+              AND alan_m2 IS NOT NULL AND son_tarih IS NOT NULL"""
+        ).fetchall()
+    except sqlite3.Error:
+        return []
+    finally:
+        if connection is not None:
+            connection.close()
+
+    return [
+        {
+            "gorev_id": str(task_id or "").strip(),
+            "sonuc": str(outcome or "").strip().upper(),
+            "enlem": latitude,
+            "boylam": longitude,
+            "alan_m2": area,
+            "son_tarih": last_date,
+        }
+        for task_id, outcome, latitude, longitude, area, last_date in rows
+    ]
+
+
 def _point_in_bbox(lat, lon, bbox):
     try:
         west, south, east, north = map(float, bbox)
@@ -168,15 +225,15 @@ def _demolition_target(row, today=None):
         area = int(round(float(row.get("alan_m2"))))
     except (TypeError, ValueError):
         return None
-    if not (MIN_MAIN_M2 <= area <= post.FIELD_PRECURSOR_MAX_M2):
+    if not (MIN_MAIN_M2 <= area <= DEMOLITION_MAX_M2):
         return None
 
-    scene_day = post._parse_scene_date(row.get("son_tarih"))
+    scene_day = _parse_field_date(row.get("son_tarih"))
     if scene_day is None:
         return None
     today = today or date.today()
     age_days = (today - scene_day).days
-    if age_days < 0 or age_days > post.FIELD_PRECURSOR_MAX_AGE_DAYS:
+    if age_days < 0 or age_days > DEMOLITION_MAX_AGE_DAYS:
         return None
 
     region_key = _demolition_region(lat, lon)
@@ -212,7 +269,7 @@ def _demolition_target(row, today=None):
 def _append_demolition_precursor_targets(result, field_precursors=None, today=None):
     """Yikim teyidini optik sahne gelmese bile sinirli SAR diagnostigine ekle."""
     if field_precursors is None:
-        field_precursors = post._load_field_precursors()
+        field_precursors = _load_demolition_precursors()
     grouped = {"cesme": [], "uzunkuyu": [], "gulbahce": []}
     for row in field_precursors or []:
         parsed = _demolition_target(row, today=today)
@@ -224,7 +281,7 @@ def _append_demolition_precursor_targets(result, field_precursors=None, today=No
     for region_key, rows in grouped.items():
         rows.sort(
             key=lambda row: (
-                post._parse_scene_date(row.get("saha_oncul_son_tarih")) or date.min,
+                _parse_field_date(row.get("saha_oncul_son_tarih")) or date.min,
                 row.get("alan_m2") or 0,
             ),
             reverse=True,
