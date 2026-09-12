@@ -368,7 +368,7 @@ def _self_check():
 
     def fake_item(day):
         return {
-            "id": f"RTC_{day}",
+            "id": f"RTC_{day:02d}",
             "bbox": bbox,
             "properties": {
                 "datetime": f"2026-09-{day:02d}T16:14:00Z",
