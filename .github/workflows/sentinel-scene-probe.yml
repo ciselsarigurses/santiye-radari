@@ -5,12 +5,13 @@ on:
     branches: [main]
     paths:
       - "sentinel_scene_probe.py"
+      - "sentinel1_scene_probe.py"
       - "cloud_scene_probe.py"
       - ".github/workflows/sentinel-scene-probe.yml"
   schedule:
     # Sentinel metadata'sını saatlik yokla; tam tarama zaten 11:00/15:00/19:00'da
     # çalıştığı için dakikayı :35 seçerek aynı anda ikinci tarama başlatma riskini azalt.
-    # Bant indirilmez: iki üretim + iki geniş-bulut hafif STAC metadata sorgusu yapılır.
+    # Bant indirilmez: optik üretim/bulut ve SAR kapsama için yalnız hafif STAC metadata sorguları yapılır.
     - cron: "35 * * * *"
   workflow_dispatch:
 
@@ -45,6 +46,7 @@ jobs:
         run: |
           python sentinel_scene_probe.py --self-check-only
           python cloud_scene_probe.py --self-check-only
+          python sentinel1_scene_probe.py --self-check-only
 
       - name: Sentinel metadata'sında yeni üretim sahnesi ara
         id: probe
@@ -53,6 +55,9 @@ jobs:
       - name: Global bulut filtresine takılan daha yeni sahneyi ara
         id: cloud_probe
         run: python cloud_scene_probe.py --github-output "$GITHUB_OUTPUT"
+
+      - name: Sentinel-1 SAR kapsama tazeliğini diagnostik izle
+        run: python sentinel1_scene_probe.py --live
 
       - name: Yeni üretim sahnesi varsa ana radar zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
