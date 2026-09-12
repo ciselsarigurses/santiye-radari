@@ -127,9 +127,79 @@ def _common_raster_polarizations(older, newer):
     return common, old_map, new_map
 
 
+def _point_on_segment(lon, lat, a, b, eps=1e-10):
+    try:
+        x1, y1 = float(a[0]), float(a[1])
+        x2, y2 = float(b[0]), float(b[1])
+    except (TypeError, ValueError, IndexError):
+        return False
+    cross = (lon - x1) * (y2 - y1) - (lat - y1) * (x2 - x1)
+    if abs(cross) > eps:
+        return False
+    return min(x1, x2) - eps <= lon <= max(x1, x2) + eps and min(y1, y2) - eps <= lat <= max(y1, y2) + eps
+
+
+def _point_in_ring(lon, lat, ring):
+    if not isinstance(ring, (list, tuple)) or len(ring) < 3:
+        return False
+    inside = False
+    points = list(ring)
+    for idx, current in enumerate(points):
+        previous = points[idx - 1]
+        if _point_on_segment(lon, lat, previous, current):
+            return True
+        try:
+            x1, y1 = float(previous[0]), float(previous[1])
+            x2, y2 = float(current[0]), float(current[1])
+        except (TypeError, ValueError, IndexError):
+            continue
+        if (y1 > lat) == (y2 > lat):
+            continue
+        crossing_lon = (x2 - x1) * (lat - y1) / (y2 - y1) + x1
+        if lon < crossing_lon:
+            inside = not inside
+    return inside
+
+
+def _point_in_polygon(lon, lat, polygon):
+    if not isinstance(polygon, (list, tuple)) or not polygon:
+        return False
+    if not _point_in_ring(lon, lat, polygon[0]):
+        return False
+    return not any(_point_in_ring(lon, lat, hole) for hole in polygon[1:])
+
+
+def _point_in_geometry(item, point):
+    """STAC footprint varsa bbox yerine gercek Polygon/MultiPolygon'u kullan.
+
+    RTC/GRD bbox'i egik SAR seridinin bos koselerini de kapsayabilir. Bu nedenle
+    bbox icindeki bir hedef gercek raster footprint'inin disinda kalabilir ve
+    sonradan nodata okuyabilir. Geometry yok/bozuksa eski bbox davranisina geri
+    donulur; boylece kaynak metadata eksikligi kapsama kaybi yaratmaz.
+    """
+    geometry = item.get("geometry")
+    if not isinstance(geometry, dict):
+        return None
+    kind = str(geometry.get("type") or "")
+    coordinates = geometry.get("coordinates")
+    lat, lon = map(float, point)
+    if kind == "Polygon" and isinstance(coordinates, (list, tuple)):
+        return _point_in_polygon(lon, lat, coordinates)
+    if kind == "MultiPolygon" and isinstance(coordinates, (list, tuple)):
+        return any(_point_in_polygon(lon, lat, polygon) for polygon in coordinates)
+    return None
+
+
+def _point_covered(item, point):
+    precise = _point_in_geometry(item, point)
+    if precise is not None:
+        return bool(precise)
+    return s1._point_in_item(item, point)
+
+
 def _target_covered_by_pair(target, older, newer):
     point = (target["enlem"], target["boylam"])
-    return s1._point_in_item(older, point) and s1._point_in_item(newer, point)
+    return _point_covered(older, point) and _point_covered(newer, point)
 
 
 def inspect_region(region_key, targets, search_fn=s1._search_items):
@@ -254,6 +324,18 @@ def _self_check():
     assert row["raster_karsilastirmaya_hazir_hedef"] == 1
     assert row["alarm"] is False and row["saha_gorevi"] is False
 
+    # Bbox hedefi iceriyor olsa bile gercek SAR footprint'i disinda kalan hedef
+    # kapsanmis sayilmamali. Bu, RTC'de sonradan nodata okunan egik-serit
+    # koselerini daha erken ayirir.
+    geometry_item = fake(11)
+    geometry_item["geometry"] = {
+        "type": "Polygon",
+        "coordinates": [[[26.63, 38.33], [26.65, 38.33], [26.65, 38.34], [26.63, 38.34], [26.63, 38.33]]],
+    }
+    assert s1._point_in_item(geometry_item, (38.341406, 26.643308)) is True
+    assert _point_covered(geometry_item, (38.341406, 26.643308)) is False
+    assert _point_covered(geometry_item, (38.335, 26.64)) is True
+
     def missing_assets(_bbox):
         return {"kaynak": "test", "items": [fake(11, assets=False), fake(5, assets=False)]}
 
@@ -295,7 +377,7 @@ def main():
         "saha_gorevi": False,
         "ana_sentinel_esigi_m2": MIN_MAIN_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
-        "amac": "Optik kor alanlari ayni-geometri Sentinel-1 ciftinin raster karsilastirma uygunluguyla eslemek; geri-sacilim degisimini henuz insaat/kazi kaniti saymamak.",
+        "amac": "Optik kor alanlari ayni-geometri Sentinel-1 ciftinin gercek footprint ve raster karsilastirma uygunluguyla eslemek; geri-sacilim degisimini henuz insaat/kazi kaniti saymamak.",
         "bolgeler": rows,
         "toplam_hedef": sum(int(row.get("hedef_sayisi") or 0) for row in rows),
         "sar_raster_karsilastirmaya_hazir_hedef": sum(int(row.get("raster_karsilastirmaya_hazir_hedef") or 0) for row in rows),
