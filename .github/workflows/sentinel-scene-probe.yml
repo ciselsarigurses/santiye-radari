@@ -10,6 +10,7 @@ on:
       - "sentinel1_rtc_change_diagnostic.py"
       - "sentinel1_rtc_quality_guard.py"
       - "sentinel1_rtc_target_pair_gapfill.py"
+      - "sentinel1_rtc_gapfill_locality_guard.py"
       - "cloud_scene_probe.py"
       - ".github/workflows/sentinel-scene-probe.yml"
   schedule:
@@ -56,6 +57,7 @@ jobs:
           python sentinel1_rtc_change_diagnostic.py --self-check-only
           python sentinel1_rtc_quality_guard.py --self-check-only
           python sentinel1_rtc_target_pair_gapfill.py --self-check-only
+          python sentinel1_rtc_gapfill_locality_guard.py --self-check-only
 
       - name: Sentinel metadata'sında yeni üretim sahnesi ara
         id: probe
@@ -78,7 +80,10 @@ jobs:
         run: python sentinel1_rtc_quality_guard.py --input /tmp/sentinel1-rtc.json
 
       - name: Bölgesel RTC çiftinin açıklarını hedefe özel taze çiftle diagnostik tamamla
-        run: python sentinel1_rtc_target_pair_gapfill.py --live
+        run: python sentinel1_rtc_target_pair_gapfill.py --live | tee /tmp/sentinel1-rtc-gapfill.json
+
+      - name: Hedefe özel RTC gapfill sonuçlarında geniş-yüzey/lokal ayrımını doğrula
+        run: python sentinel1_rtc_gapfill_locality_guard.py --input /tmp/sentinel1-rtc-gapfill.json
 
       - name: Yeni üretim sahnesi varsa ana radar zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
