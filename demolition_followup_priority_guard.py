@@ -7,9 +7,9 @@ politikasını değiştirmez. Ama sahada YIKIM_TEMIZLIK olarak doğrulanmış bi
 dönük bir görev oluşursa, bu görevi ERKEN/PARSEL etiketi taşımasa bile günlük rota
 sıralamasında taze kazı/temel sinyali kadar güçlü bir operasyon kanıtı sayar.
 
-Amaç, sahada doğrulanan "yıkım genellikle yeni inşaatın başlangıcıdır" bilgisini
-sıralamada kullanırken geniş homojen yüzey, kıyı/su, eski taşınmış kanıt veya MİKRO
-katmanı yanlışlıkla alarma yükseltmemektir.
+Son uygulama adımı, kendisinden önce hesaplanan taze-kazı retention, MİKRO→ANA,
+temporal-lokal ve kuru-zemin doğrulama önceliklerini silmez. Yıkım takibi yalnız
+boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir.
 """
 
 from __future__ import annotations
@@ -32,13 +32,15 @@ FOLLOWUP_MAX_M2 = 5_000
 MATCH_DISTANCE_M = 25.0
 MAX_AGE_DAYS = 60
 FULL_OPERATION_START = date(2026, 9, 15)
-NOTE = (
-    base.NOTE
-    + " Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki "
-    "Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev ERKEN/PARSEL etiketi "
-    "taşımasa da yeni inşaat devam sinyali olarak üst sıraya alınır. Bu kural yeni "
-    "alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez."
+DEMOLITION_NOTE = (
+    "Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki "
+    "Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam "
+    "sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, "
+    "MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi "
+    "yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla "
+    "yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez."
 )
+NOTE = f"{base.NOTE} {DEMOLITION_NOTE}"
 
 
 def _eligible_new_main_candidate(item):
@@ -100,10 +102,16 @@ def _demolition_match(item, field_precursors):
         previous_area = base._number(entry.get("alan_m2"), None)
         if previous_lat is None or previous_lon is None or previous_area is None:
             continue
-        if not (base.FIELD_PRECURSOR_MIN_M2 <= previous_area <= base.FIELD_PRECURSOR_MAX_M2):
+        if not (
+            base.FIELD_PRECURSOR_MIN_M2
+            <= previous_area
+            <= base.FIELD_PRECURSOR_MAX_M2
+        ):
             continue
 
-        distance = base._distance_m(latitude, longitude, previous_lat, previous_lon)
+        distance = base._distance_m(
+            latitude, longitude, previous_lat, previous_lon
+        )
         if distance > MATCH_DISTANCE_M:
             continue
         if best_distance is None or distance < best_distance:
@@ -116,10 +124,11 @@ def _demolition_match(item, field_precursors):
                 "saha_oncul_mesafe_m": round(distance, 1),
                 "saha_oncul_son_tarih": previous_date.strftime("%d.%m.%Y"),
                 "saha_oncul_kanit_notu": (
-                    "Sahada doğrulanmış yıkım/parsel temizliğiyle sonraki yeni Sentinel "
-                    "sahnesindeki mevcut 250 m²+ görev 25 m içinde örtüşüyor. Yıkım "
-                    "yüksek olasılıklı yeni inşaat başlangıcı olarak operasyon sırasını "
-                    "güçlendirir; tek başına yeni alarm veya görev üretmez."
+                    "Sahada doğrulanmış yıkım/parsel temizliğiyle sonraki yeni "
+                    "Sentinel sahnesindeki mevcut 250 m²+ görev 25 m içinde "
+                    "örtüşüyor. Yıkım güçlü yeni inşaat başlangıcı kanıtı olarak "
+                    "operasyon sırasını güçlendirir; tek başına yeni alarm veya "
+                    "görev üretmez."
                 ),
             }
     return best
@@ -133,7 +142,9 @@ def _route_key(item, original_index, field_precursors):
         match = _demolition_match(item, field_precursors)
         if match:
             band = 1
-            distance_rank = float(match.get("saha_oncul_mesafe_m") or MATCH_DISTANCE_M)
+            distance_rank = float(
+                match.get("saha_oncul_mesafe_m") or MATCH_DISTANCE_M
+            )
         elif base._is_fresh_excavation_candidate(item):
             band = 2
             distance_rank = MATCH_DISTANCE_M + 1
@@ -144,14 +155,16 @@ def _route_key(item, original_index, field_precursors):
 
 
 def select_shortlist(candidates, field_precursors, limit=route.SHORTLIST_LIMIT):
-    """Mevcut eyleme dönük görevleri yıkım teyidi kanıtıyla yeniden sırala."""
+    """Fallback: tek başına çalışırsa mevcut görevleri yıkım kanıtıyla sırala."""
     cap = max(int(limit), 0)
     if cap <= 0:
         return []
 
     eligible = freshness._normalized_actionable_candidates(candidates)
     indexed = list(enumerate(eligible))
-    indexed.sort(key=lambda pair: _route_key(pair[1], pair[0], field_precursors))
+    indexed.sort(
+        key=lambda pair: _route_key(pair[1], pair[0], field_precursors)
+    )
 
     selected = []
     seen = set()
@@ -174,8 +187,145 @@ def select_shortlist(candidates, field_precursors, limit=route.SHORTLIST_LIMIT):
     return selected
 
 
-def _shortlist_markdown(shortlist):
-    lines = [route.SECTION_TITLE, "", f"> {NOTE}", ""]
+def _protected_task_ids(payload):
+    """Önceki 15 Eylül katmanlarının koruduğu görev kimliklerini topla."""
+    ids = set()
+
+    postseason_meta = (payload or {}).get("postseason_excavation_priority")
+    if isinstance(postseason_meta, dict):
+        for key in (
+            "one_alinan_gorevler",
+            "mikro_oncul_iz_eslesen_gorevler",
+            "temporal_lokal_oncul_eslesen_gorevler",
+            "saha_oncul_eslesen_gorevler",
+        ):
+            ids.update(
+                str(value)
+                for value in postseason_meta.get(key) or []
+                if str(value)
+            )
+
+    retention_meta = (payload or {}).get("postseason_fresh_evidence_retention")
+    if isinstance(retention_meta, dict):
+        ids.update(
+            str(value)
+            for value in retention_meta.get("korunan_gorevler") or []
+            if str(value)
+        )
+
+    return ids
+
+
+def _existing_row_protected(item, protected_ids):
+    """Önceden güçlü kanıtla seçilmiş satır yıkım guard'ı tarafından düşürülmesin."""
+    if not isinstance(item, dict):
+        return False
+    task_id = str(item.get("gorev_id") or "").strip()
+    if base._is_manual_repeat(item):
+        return True
+    if task_id and task_id in protected_ids:
+        return True
+    if item.get("postseason_kuru_zemin_dogrulama") is True:
+        return True
+    if str(item.get("saha_durumu") or "").strip().upper() == "DIAGNOSTIK_DOGRULAMA":
+        return True
+    return any(
+        item.get(key) is True
+        for key in (
+            "mikro_oncul_iz_eslesmesi",
+            "temporal_lokal_oncul_eslesmesi",
+            "saha_oncul_eslesmesi",
+        )
+    )
+
+
+def merge_with_existing_shortlist(
+    existing_shortlist,
+    candidates,
+    field_precursors,
+    protected_ids=None,
+    limit=route.SHORTLIST_LIMIT,
+):
+    """Yıkım takibini önceki birleşik ilk-3'ü silmeden kompoze et.
+
+    Önceki katmanların seçtiği güçlü satırlar korunur. Yeni yıkım takip eşleşmesi
+    boş yere eklenir; rota doluysa yalnız açıkça korunmayan son backlog satırıyla
+    yer değiştirir. Böylece bu son guard retention/temporal/MİKRO/kuru-zemin
+    kararlarını yanlışlıkla sıfırlamaz.
+    """
+    cap = max(int(limit), 0)
+    if cap <= 0:
+        return []
+
+    protected_ids = set(protected_ids or ())
+    current = []
+    seen = set()
+    for raw in existing_shortlist or []:
+        if not isinstance(raw, dict):
+            continue
+        task_id = str(raw.get("gorev_id") or "").strip()
+        if task_id and task_id in seen:
+            continue
+        item = dict(raw)
+        match = _demolition_match(item, field_precursors)
+        if match:
+            item.update(match)
+        if task_id:
+            seen.add(task_id)
+        current.append(item)
+        if len(current) >= cap:
+            break
+
+    if not current:
+        return select_shortlist(candidates, field_precursors, limit=cap)
+
+    matched_candidates = []
+    for original_index, raw in enumerate(
+        freshness._normalized_actionable_candidates(candidates)
+    ):
+        match = _demolition_match(raw, field_precursors)
+        if not match:
+            continue
+        item = dict(raw)
+        item.update(match)
+        matched_candidates.append(
+            (_route_key(item, original_index, field_precursors), item)
+        )
+    matched_candidates.sort(key=lambda pair: pair[0])
+
+    for _, candidate in matched_candidates:
+        task_id = str(candidate.get("gorev_id") or "").strip()
+        if task_id and task_id in seen:
+            continue
+
+        if len(current) < cap:
+            current.append(candidate)
+            if task_id:
+                seen.add(task_id)
+            continue
+
+        replace_index = None
+        for index in range(len(current) - 1, -1, -1):
+            if not _existing_row_protected(current[index], protected_ids):
+                replace_index = index
+                break
+        if replace_index is None:
+            continue
+
+        removed_id = str(current[replace_index].get("gorev_id") or "").strip()
+        if removed_id:
+            seen.discard(removed_id)
+        current[replace_index] = candidate
+        if task_id:
+            seen.add(task_id)
+
+    for index, item in enumerate(current[:cap], start=1):
+        item["gunluk_sira"] = index
+    return current[:cap]
+
+
+def _shortlist_markdown(shortlist, note=NOTE):
+    lines = [route.SECTION_TITLE, "", f"> {note}", ""]
     if not shortlist:
         lines.extend(["Bugün için eyleme dönük aktif uydu görevi yok.", ""])
         return "\n".join(lines)
@@ -185,19 +335,55 @@ def _shortlist_markdown(shortlist):
         priority = str(item.get("oncelik") or "KONTROL")
         neighborhood = str(item.get("mahalle") or "Konum araştırılıyor")
         area = max(base._number(item.get("alan_m2"), 0), 0)
-        area_text = f" · yaklaşık {int(area):,} m²".replace(",", ".") if area else ""
+        area_text = (
+            f" · yaklaşık {int(area):,} m²".replace(",", ".") if area else ""
+        )
         task_id = str(item.get("gorev_id") or "-")
         map_url = str(item.get("harita") or "").strip()
-        route_text = f" · [Yol tarifi]({map_url})" if map_url.startswith(("http://", "https://")) else ""
-        demolition_tag = " · **YIKIM→YENİ HAREKET**" if item.get("yikim_takip_onceligi") else ""
-        fresh_tag = " · **TAZE KAZI ÖNCELİĞİ**" if base._is_fresh_excavation_candidate(item) else ""
-        micro_tag = " · **MİKRO→ANA DEVAM KANITI**" if item.get("mikro_oncul_iz_eslesmesi") else ""
+        route_text = (
+            f" · [Yol tarifi]({map_url})"
+            if map_url.startswith(("http://", "https://"))
+            else ""
+        )
+        demolition_tag = (
+            " · **YIKIM→YENİ HAREKET**"
+            if item.get("yikim_takip_onceligi")
+            else ""
+        )
+        fresh_tag = (
+            " · **TAZE KAZI ÖNCELİĞİ**"
+            if base._is_fresh_excavation_candidate(item)
+            else ""
+        )
+        micro_tag = (
+            " · **MİKRO→ANA DEVAM KANITI**"
+            if item.get("mikro_oncul_iz_eslesmesi")
+            else ""
+        )
+        temporal_tag = (
+            " · **TEMPORAL→ANA DEVAM KANITI**"
+            if item.get("temporal_lokal_oncul_eslesmesi")
+            else ""
+        )
+        dry_tag = (
+            " · **KURU ZEMİN TEYİDİ**"
+            if item.get("postseason_kuru_zemin_dogrulama")
+            else ""
+        )
         lines.append(
-            f"{order}. **{priority} — {neighborhood}**{area_text}{demolition_tag}{fresh_tag}{micro_tag} · "
+            f"{order}. **{priority} — {neighborhood}**{area_text}"
+            f"{demolition_tag}{fresh_tag}{micro_tag}{temporal_tag}{dry_tag} · "
             f"Görev `{task_id}`{route_text}"
         )
     lines.append("")
     return "\n".join(lines)
+
+
+def _combined_note(previous_note):
+    text = str(previous_note or "").strip() or base.NOTE
+    if DEMOLITION_NOTE in text:
+        return text
+    return f"{text} {DEMOLITION_NOTE}".strip()
 
 
 def apply_demolition_followup_priority(local_day=None):
@@ -208,15 +394,23 @@ def apply_demolition_followup_priority(local_day=None):
     payload = json.loads(REPORT_JSON.read_text(encoding="utf-8"))
     candidates = payload.get("saha_adaylari") or []
     field_precursors = base._load_field_precursors()
-    shortlist = select_shortlist(candidates, field_precursors)
+    existing_shortlist = payload.get("gunun_ilk_3_kontrolu") or []
+    protected_ids = _protected_task_ids(payload)
+    shortlist = merge_with_existing_shortlist(
+        existing_shortlist,
+        candidates,
+        field_precursors,
+        protected_ids=protected_ids,
+    )
     matched_ids = [
         str(item.get("gorev_id") or "")
         for item in shortlist
         if item.get("yikim_takip_onceligi") is True
     ]
 
+    combined_note = _combined_note(payload.get("gunun_ilk_3_notu"))
     payload["gunun_ilk_3_kontrolu"] = shortlist
-    payload["gunun_ilk_3_notu"] = NOTE
+    payload["gunun_ilk_3_notu"] = combined_note
     payload["demolition_followup_priority"] = {
         "aktif": True,
         "baslangic_tarihi": FULL_OPERATION_START.isoformat(),
@@ -225,10 +419,13 @@ def apply_demolition_followup_priority(local_day=None):
         "esleme_mesafesi_m": MATCH_DISTANCE_M,
         "azami_yas_gun": MAX_AGE_DAYS,
         "eslesen_gorevler": matched_ids,
+        "onceki_oncelik_katmanlari_korundu": True,
         "not": (
-            "Yalnız mevcut eyleme dönük görevleri yeniden sıralar. Sahada doğrulanmış "
-            "YIKIM_TEMIZLIK sonucu, sonraki yeni Sentinel sahnesinde aynı noktadaki "
-            "250 m²+ görevi güçlü yeni-inşaat devam sinyali yapar; yeni alarm/görev üretmez."
+            "Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve "
+            "kuru-zemin shortlist'i silinmez. YIKIM_TEMIZLIK sonucu, sonraki yeni "
+            "Sentinel sahnesinde aynı noktadaki 250 m²+ mevcut görevi güçlendirir; "
+            "yalnız boş rota kapasitesini kullanır veya korunmayan backlog ile "
+            "yer değiştirir. Yeni alarm/görev üretmez."
         ),
     }
 
@@ -240,7 +437,9 @@ def apply_demolition_followup_priority(local_day=None):
 
     if FIELD_REPORT_MD.exists():
         current = FIELD_REPORT_MD.read_text(encoding="utf-8")
-        updated = route._inject_markdown(current, _shortlist_markdown(shortlist))
+        updated = route._inject_markdown(
+            current, _shortlist_markdown(shortlist, combined_note)
+        )
         if updated != current:
             FIELD_REPORT_MD.write_text(updated, encoding="utf-8")
             changed = True
@@ -293,7 +492,13 @@ def _self_check():
         "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
     }
     repeat = dict(ordinary_fresh)
-    repeat.update({"gorev_id": "REPEAT", "saha_durumu": "TEKRAR_GIT", "oncelik": "TEKRAR"})
+    repeat.update(
+        {
+            "gorev_id": "REPEAT",
+            "saha_durumu": "TEKRAR_GIT",
+            "oncelik": "TEKRAR",
+        }
+    )
 
     assert _eligible_new_main_candidate(demolition_followup)
     assert not base._is_fresh_excavation_candidate(demolition_followup)
@@ -320,17 +525,91 @@ def _self_check():
     far_field[0]["enlem"] = 38.3400
     assert _demolition_match(demolition_followup, far_field) is None
 
-    selected = select_shortlist([ordinary_fresh, demolition_followup], field, limit=2)
-    assert [item["gorev_id"] for item in selected] == ["FOLLOWUP_NORMAL", "ORDINARY_FRESH"], selected
+    selected = select_shortlist(
+        [ordinary_fresh, demolition_followup], field, limit=2
+    )
+    assert [item["gorev_id"] for item in selected] == [
+        "FOLLOWUP_NORMAL",
+        "ORDINARY_FRESH",
+    ], selected
     assert selected[0]["yikim_takip_onceligi"] is True
 
-    selected_repeat = select_shortlist([ordinary_fresh, demolition_followup, repeat], field, limit=3)
+    selected_repeat = select_shortlist(
+        [ordinary_fresh, demolition_followup, repeat], field, limit=3
+    )
     assert selected_repeat[0]["gorev_id"] == "REPEAT", selected_repeat
     assert selected_repeat[1]["gorev_id"] == "FOLLOWUP_NORMAL", selected_repeat
 
+    # Son guard önceki katmanların seçtiği güçlü satırları silmemeli.
+    temporal_fresh = dict(ordinary_fresh)
+    temporal_fresh.update(
+        {
+            "gorev_id": "TEMPORAL_FRESH",
+            "temporal_lokal_oncul_eslesmesi": True,
+        }
+    )
+    backlog = {
+        "gorev_id": "BACKLOG",
+        "saha_durumu": "KONTROLE_GIT",
+        "oncelik": "GECİKEN",
+        "mahalle": "Musalla",
+        "enlem": 38.30,
+        "boylam": 26.30,
+        "alan_m2": 1200,
+        "bolge": west,
+        "yeni_goruntu": False,
+    }
+    merged = merge_with_existing_shortlist(
+        [repeat, temporal_fresh, backlog],
+        [ordinary_fresh, demolition_followup, repeat],
+        field,
+        protected_ids={"TEMPORAL_FRESH"},
+        limit=3,
+    )
+    merged_ids = [item["gorev_id"] for item in merged]
+    assert merged_ids == ["REPEAT", "TEMPORAL_FRESH", "FOLLOWUP_NORMAL"], merged
+    assert merged[1].get("temporal_lokal_oncul_eslesmesi") is True
+    assert merged[2].get("yikim_takip_onceligi") is True
+
+    dry_confirmation = {
+        "gorev_id": "DG",
+        "saha_durumu": "DIAGNOSTIK_DOGRULAMA",
+        "oncelik": "DOĞRULAMA",
+        "alan_m2": 500,
+        "postseason_kuru_zemin_dogrulama": True,
+    }
+    all_protected = merge_with_existing_shortlist(
+        [repeat, temporal_fresh, dry_confirmation],
+        [ordinary_fresh, demolition_followup, repeat],
+        field,
+        protected_ids={"TEMPORAL_FRESH"},
+        limit=3,
+    )
+    assert [item["gorev_id"] for item in all_protected] == [
+        "REPEAT",
+        "TEMPORAL_FRESH",
+        "DG",
+    ], all_protected
+
+    meta_ids = _protected_task_ids(
+        {
+            "postseason_excavation_priority": {
+                "one_alinan_gorevler": ["FRESH"],
+                "temporal_lokal_oncul_eslesen_gorevler": ["TEMP"],
+            },
+            "postseason_fresh_evidence_retention": {
+                "korunan_gorevler": ["RETAINED"]
+            },
+        }
+    )
+    assert meta_ids == {"FRESH", "TEMP", "RETAINED"}
+
     assert MAIN_ALARM_MIN_M2 == 250
     assert base.MICRO_MIN_M2 == 150 and base.MICRO_MAX_M2 == 249
-    print("OK: doğrulanmış yıkım sonrası 250 m²+ yeni hareket öncelik koruması geçti.")
+    print(
+        "OK: yıkım takip guard'ı önceki 15 Eylül öncelik katmanlarını "
+        "silmeden birleşik rotayı koruyor."
+    )
 
 
 def main():
@@ -345,8 +624,13 @@ def main():
     if base._local_day() < FULL_OPERATION_START:
         print("Kalibrasyon modu: 15 Eylül öncesi rapora dokunulmadı.")
         return
-    count = sum(bool(item.get("yikim_takip_onceligi")) for item in shortlist)
-    print(f"Yıkım sonrası yeni hareket önceliği uygulandı: ilk listede {count} doğrulanmış takip eşleşmesi.")
+    count = sum(
+        bool(item.get("yikim_takip_onceligi")) for item in shortlist
+    )
+    print(
+        "Yıkım sonrası yeni hareket önceliği uygulandı: "
+        f"ilk listede {count} doğrulanmış takip eşleşmesi."
+    )
     if not changed:
         print("Rapor zaten güncel.")
 
