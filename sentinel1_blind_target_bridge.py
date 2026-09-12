@@ -6,6 +6,12 @@ bulut/golge nedeniyle goremedigi tarihsel-kara alanlardan hangilerinin guncel
 ve karsilastirilabilir Sentinel-1 cifti tarafindan gercekten kapsandigini ve
 raster karsilastirmasi icin gerekli polarizasyon assetlerinin bulunup
 bulunmadigini olcmektir.
+
+Ana hedef yolu 250 m2 ve ustunde kalir. 150-249 m2 MIKRO katmanindan yalniz
+mevcut guclu diagnostik kapilarini gecen veya sahada SANTIYE_KAZI olarak
+eslestirilmis adaylar ayri bir kalibrasyon hedefi olarak eklenebilir. Bu ekleme
+ana esigi dusurmez ve MIKRO hedefi alarm/saha gorevine donusturmez; amac, ayni
+bilinen lokal mudahalenin SAR tarafinda gorunup gorunmedigini olcmektir.
 """
 
 from __future__ import annotations
@@ -20,6 +26,7 @@ import sentinel1_scene_probe as s1
 MIN_MAIN_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
 MAX_TARGETS_PER_REGION = 8
+MAX_MICRO_TARGETS_PER_REGION = 2
 
 
 def _safe_json(path):
@@ -45,7 +52,83 @@ def _target(lat, lon, area, source, reason=None, locality=None):
         "kaynak": source,
         "neden": reason or "OPTIK_KOR_ALAN",
         "mahalle_yaklasik": locality or "Mevki dogrulanmadi",
+        "hedef_katmani": "ANA_250_PLUS",
     }
+
+
+def _micro_target(row):
+    """Yalniz guclu/gercek saha destekli MIKRO adayini SAR kalibrasyonuna al."""
+    try:
+        lat = float(row.get("enlem"))
+        lon = float(row.get("boylam"))
+        area = int(round(float(row.get("alan_m2"))))
+    except (TypeError, ValueError):
+        return None
+
+    if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+        return None
+    if not (MICRO_RANGE_M2[0] <= area <= MICRO_RANGE_M2[1]):
+        return None
+
+    region_key = str(row.get("bolge") or "").strip().lower()
+    if region_key not in {"cesme", "uzunkuyu", "gulbahce"}:
+        return None
+
+    field_result = str(row.get("saha_eslesme_sonucu") or "").strip().upper()
+    field_confirmed = bool(row.get("manuel_saha_dogrulamasi")) and field_result == "SANTIYE_KAZI"
+    strong_diagnostic = bool(row.get("mikro_guclu_diagnostik"))
+    if not (field_confirmed or strong_diagnostic):
+        return None
+
+    reason = "SAHA_DOGRULANMIS_MIKRO_KALIBRASYON" if field_confirmed else "MIKRO_GUCLU_DIAGNOSTIK"
+    target = {
+        "enlem": round(lat, 6),
+        "boylam": round(lon, 6),
+        "alan_m2": area,
+        "kaynak": "micro_site_decision_review.json",
+        "neden": reason,
+        "mahalle_yaklasik": row.get("yaklasik_mevki") or "Mevki dogrulanmadi",
+        "hedef_katmani": "MIKRO_DIAGNOSTIK",
+        "mikro_guclu_diagnostik": strong_diagnostic,
+        "mikro_saha_dogrulandi": field_confirmed,
+    }
+    return region_key, target
+
+
+def _append_micro_calibration_targets(result):
+    decision = _safe_json("micro_site_decision_review.json")
+    grouped = {"cesme": [], "uzunkuyu": [], "gulbahce": []}
+    for row in decision.get("adaylar") or []:
+        parsed = _micro_target(row)
+        if not parsed:
+            continue
+        region_key, target = parsed
+        grouped[region_key].append(target)
+
+    for region_key, rows in grouped.items():
+        rows.sort(
+            key=lambda row: (
+                bool(row.get("mikro_saha_dogrulandi")),
+                bool(row.get("mikro_guclu_diagnostik")),
+                row.get("alan_m2") or 0,
+            ),
+            reverse=True,
+        )
+        existing = {
+            (round(float(row["enlem"]), 6), round(float(row["boylam"]), 6))
+            for row in result.get(region_key) or []
+        }
+        added = 0
+        for row in rows:
+            key = (round(float(row["enlem"]), 6), round(float(row["boylam"]), 6))
+            if key in existing:
+                continue
+            result[region_key].append(row)
+            existing.add(key)
+            added += 1
+            if added >= MAX_MICRO_TARGETS_PER_REGION:
+                break
+    return result
 
 
 def _load_targets():
@@ -86,7 +169,7 @@ def _load_targets():
             parsed_gul.append(item)
     parsed_gul.sort(key=lambda row: row["alan_m2"], reverse=True)
     result["gulbahce"] = parsed_gul[:MAX_TARGETS_PER_REGION]
-    return result
+    return _append_micro_calibration_targets(result)
 
 
 def _asset_polarization_map(item):
@@ -272,6 +355,36 @@ def inspect_region(region_key, targets, search_fn=s1._search_items):
 def _self_check():
     bbox = s1.AOIS["gulbahce"]["bbox"]
 
+    assert _target(38.2, 26.4, 200, "test") is None
+    parsed_micro = _micro_target(
+        {
+            "bolge": "cesme",
+            "yaklasik_mevki": "Ciftlikkoy",
+            "enlem": 38.287679,
+            "boylam": 26.266305,
+            "alan_m2": 200,
+            "manuel_saha_dogrulamasi": True,
+            "saha_eslesme_sonucu": "SANTIYE_KAZI",
+            "mikro_guclu_diagnostik": False,
+        }
+    )
+    assert parsed_micro is not None
+    micro_region, micro_row = parsed_micro
+    assert micro_region == "cesme"
+    assert micro_row["hedef_katmani"] == "MIKRO_DIAGNOSTIK"
+    assert micro_row["mikro_saha_dogrulandi"] is True
+    assert _micro_target(
+        {
+            "bolge": "cesme",
+            "enlem": 38.28,
+            "boylam": 26.26,
+            "alan_m2": 200,
+            "manuel_saha_dogrulamasi": False,
+            "saha_eslesme_sonucu": "",
+            "mikro_guclu_diagnostik": False,
+        }
+    ) is None
+
     def fake(day, assets=True):
         payload = {
             "id": f"S1_{day}",
@@ -342,7 +455,7 @@ def _self_check():
     row = inspect_region("gulbahce", targets, search_fn=missing_assets)
     assert row["durum"] == "CIFT_VAR_RASTER_ASSET_EKSIK"
     assert row["raster_karsilastirmaya_hazir_hedef"] == 0
-    print("Sentinel-1 optik kor alan hedef koprusu oz testi OK.")
+    print("Sentinel-1 optik kor alan + MIKRO kalibrasyon hedef koprusu oz testi OK.")
 
 
 def main():
@@ -377,7 +490,7 @@ def main():
         "saha_gorevi": False,
         "ana_sentinel_esigi_m2": MIN_MAIN_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
-        "amac": "Optik kor alanlari ayni-geometri Sentinel-1 ciftinin gercek footprint ve raster karsilastirma uygunluguyla eslemek; geri-sacilim degisimini henuz insaat/kazi kaniti saymamak.",
+        "amac": "Optik kor alanlarini ayni-geometri Sentinel-1 ciftinin gercek footprint ve raster karsilastirma uygunluguyla eslemek; saha-dogrulanmis/guclu 150-249 m2 MIKRO adaylarini ayri SAR kalibrasyon hedefi olarak izlemek; geri-sacilim degisimini henuz insaat/kazi kaniti saymamak.",
         "bolgeler": rows,
         "toplam_hedef": sum(int(row.get("hedef_sayisi") or 0) for row in rows),
         "sar_raster_karsilastirmaya_hazir_hedef": sum(int(row.get("raster_karsilastirmaya_hazir_hedef") or 0) for row in rows),
