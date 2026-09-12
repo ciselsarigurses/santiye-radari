@@ -6,6 +6,7 @@ on:
     paths:
       - "sentinel_scene_probe.py"
       - "sentinel1_scene_probe.py"
+      - "sentinel1_blind_target_bridge.py"
       - "cloud_scene_probe.py"
       - ".github/workflows/sentinel-scene-probe.yml"
   schedule:
@@ -47,6 +48,7 @@ jobs:
           python sentinel_scene_probe.py --self-check-only
           python cloud_scene_probe.py --self-check-only
           python sentinel1_scene_probe.py --self-check-only
+          python sentinel1_blind_target_bridge.py --self-check-only
 
       - name: Sentinel metadata'sında yeni üretim sahnesi ara
         id: probe
@@ -58,6 +60,9 @@ jobs:
 
       - name: Sentinel-1 SAR kapsama tazeliğini diagnostik izle
         run: python sentinel1_scene_probe.py --live
+
+      - name: Sentinel-1 SAR çiftini optik kör alan hedefleriyle eşle
+        run: python sentinel1_blind_target_bridge.py --live
 
       - name: Yeni üretim sahnesi varsa ana radar zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
