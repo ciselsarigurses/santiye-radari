@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-09-12",
   "olusturma": "2026-09-12 11:15 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 139 · Geciken kontrol: 138 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 139 · Geciken kontrol: 138 · Tekrar gidilecek: 1 · Saha sonucu: 4 kontrol (1 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)",
   "saha_adaylari": [
     {
       "oncelik": "TEKRAR",
@@ -4748,5 +4748,24 @@
     "durum": "uygulandi",
     "tarih": "2026-09-12",
     "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
+  },
+  "manuel_mikro_saha_kalibrasyonu": {
+    "toplam": 1,
+    "sonuclar": {
+      "SANTIYE_KAZI": 1,
+      "YIKIM_TEMIZLIK": 0,
+      "YOL_ALTYAPI": 0,
+      "TARLA_BITKI": 0,
+      "YANLIS_POZITIF": 0
+    },
+    "bagimsiz_konum_dogrulanan": 0,
+    "alarm": false,
+    "saha_gorevi": false,
+    "ana_uretim_esigi_m2": 250,
+    "mikro_aralik_m2": [
+      150,
+      249
+    ],
+    "not": "Manuel MİKRO saha sonucu sınıf kalibrasyonuna dahil edilir. Yalnız açıkça bağımsız doğrulandı alanı true olan kayıt koordinat hassasiyeti doğrulaması sayılır; GPS/EXIF yokluğu bu sayıyı artırmaz."
   }
 }
