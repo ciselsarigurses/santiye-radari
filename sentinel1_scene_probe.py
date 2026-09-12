@@ -2,20 +2,25 @@
 
 Bu katman alarm veya saha gorevi uretmez. Amaci Sentinel-2 optik sahneleri
 bulut/golge veya tekrar gecikmesi nedeniyle yeni zemin hareketini goremiyorken,
-aynı operasyon kutularinda daha yeni, buluttan bagimsiz Sentinel-1 GRD
-metadata kapsamasinin bulunup bulunmadigini olcmektir.
+operasyon alanlarinda daha yeni, buluttan bagimsiz Sentinel-1 GRD metadata
+kapsamasinin bulunup bulunmadigini olcmektir.
 
-SAR degisimi tek basina kazi/santiye kaniti sayilmaz. Speckle, bakis geometrisi,
-bitki/nem ve bina sacilimi gibi etkiler nedeniyle ancak ayni goreli yorunge +
-ayni orbit yonu + ayni polarizasyon imzasina sahip sahneler ileride ayri bir
-non-alarming diagnostik analizde karsilastirilabilir.
+Sentinel-1 urun granulleri genis uretim bbox'inin tamamini tek bir kayitta
+kaplamak zorunda degildir. Bu nedenle kapsama, STAC sahnesinin hedef bbox ile
+gercek kesisimi ve kritik operasyon noktalarini kapsayip kapsamadigi uzerinden
+olculur. Bu duzeltme yalniz kapsama diagnostigidir; SAR degisimi tek basina
+kazi/santiye kaniti sayilmaz.
+
+Speckle, bakis geometrisi, bitki/nem ve bina sacilimi gibi etkiler nedeniyle
+ileride SAR degisimi karsilastirilacaksa ancak ayni goreli yorunge + ayni orbit
+yonu + ayni polarizasyon imzasina sahip ve en az bir ortak kritik operasyon
+noktasini kapsayan sahneler eslestirilir.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import math
 import os
 import re
 from datetime import datetime, timedelta, timezone
@@ -23,13 +28,42 @@ from pathlib import Path
 
 import requests
 
-from satellite import REGIONS
+from satellite import PLACE_CENTERS, REGIONS
 
 
 EARTH_SEARCH_URL = "https://earth-search.aws.element84.com/v1/search"
 S1_COLLECTION = "sentinel-1"
 SEARCH_DAYS = 24
 TIMEOUT_SECONDS = 35
+
+GULBAHCE_CENTER = PLACE_CENTERS["Gülbahçe"]
+# 2 km operasyon + 150 m analiz baglami. Derece kutusu yalniz metadata sorgusu
+# icindir; kesin idari/kadastral sinir degildir.
+GULBAHCE_DIAGNOSTIC_BBOX = [26.6209, 38.3133, 26.6702, 38.3522]
+
+AOIS = {
+    "cesme": {
+        "bbox": REGIONS["cesme"]["bbox"],
+        "s2_region": "cesme",
+        "kritik_noktalar": {
+            name: PLACE_CENTERS[name]
+            for name in ("Çeşme", "Alaçatı", "Ilıca", "Ovacık", "Çiftlikköy")
+        },
+    },
+    "uzunkuyu": {
+        "bbox": REGIONS["uzunkuyu"]["bbox"],
+        "s2_region": "uzunkuyu",
+        "kritik_noktalar": {
+            name: PLACE_CENTERS[name]
+            for name in ("Uzunkuyu", "Germiyan", "Ildır", "Gülbahçe")
+        },
+    },
+    "gulbahce": {
+        "bbox": GULBAHCE_DIAGNOSTIC_BBOX,
+        "s2_region": "uzunkuyu",
+        "kritik_noktalar": {"Gülbahçe": GULBAHCE_CENTER},
+    },
+}
 
 
 def _iso_datetime(item):
@@ -70,16 +104,43 @@ def _instrument_mode(item):
     return value or None
 
 
-def _item_covers_bbox(item, bbox):
+def _bbox_values(item):
     footprint = item.get("bbox")
     if not isinstance(footprint, (list, tuple)) or len(footprint) < 4:
-        return False
+        return None
     try:
-        west, south, east, north = map(float, bbox)
-        iw, isouth, ie, inorth = map(float, footprint[:4])
+        return tuple(map(float, footprint[:4]))
     except (TypeError, ValueError):
+        return None
+
+
+def _bbox_overlap_fraction(item, target_bbox):
+    footprint = _bbox_values(item)
+    if footprint is None:
+        return 0.0
+    iw, isouth, ie, inorth = footprint
+    west, south, east, north = map(float, target_bbox)
+    width = max(0.0, min(ie, east) - max(iw, west))
+    height = max(0.0, min(inorth, north) - max(isouth, south))
+    target_area = max(0.0, east - west) * max(0.0, north - south)
+    if target_area <= 0:
+        return 0.0
+    return max(0.0, min(1.0, (width * height) / target_area))
+
+
+def _point_in_item(item, point):
+    footprint = _bbox_values(item)
+    if footprint is None:
         return False
-    return iw <= west and isouth <= south and ie >= east and inorth >= north
+    lat, lon = map(float, point)
+    west, south, east, north = footprint
+    return west <= lon <= east and south <= lat <= north
+
+
+def _covered_points(item, region_key):
+    aoi = AOIS.get(region_key) or {}
+    points = aoi.get("kritik_noktalar") or {}
+    return sorted(name for name, point in points.items() if _point_in_item(item, point))
 
 
 def _compatible_signature(item):
@@ -93,7 +154,7 @@ def _compatible_signature(item):
 
 def _usable_item(item, bbox):
     dt = _iso_datetime(item)
-    if dt is None or not _item_covers_bbox(item, bbox):
+    if dt is None or _bbox_overlap_fraction(item, bbox) <= 0:
         return False
     mode = _instrument_mode(item)
     if mode and mode != "IW":
@@ -101,16 +162,23 @@ def _usable_item(item, bbox):
     return True
 
 
-def _find_same_geometry_pair(items, bbox):
+def _find_same_geometry_pair(items, region_key):
+    bbox = AOIS[region_key]["bbox"]
     usable = [item for item in items if _usable_item(item, bbox)]
-    usable.sort(key=lambda row: _iso_datetime(row) or datetime.min.replace(tzinfo=timezone.utc), reverse=True)
+    usable.sort(
+        key=lambda row: _iso_datetime(row) or datetime.min.replace(tzinfo=timezone.utc),
+        reverse=True,
+    )
     for i, latest in enumerate(usable):
         signature = _compatible_signature(latest)
-        if signature is None:
+        latest_points = set(_covered_points(latest, region_key))
+        if signature is None or not latest_points:
             continue
         latest_dt = _iso_datetime(latest)
         for older in usable[i + 1 :]:
             if _compatible_signature(older) != signature:
+                continue
+            if not latest_points.intersection(_covered_points(older, region_key)):
                 continue
             older_dt = _iso_datetime(older)
             if older_dt is None or latest_dt is None or older_dt >= latest_dt:
@@ -138,9 +206,10 @@ def _tracked_s2_date(region_key):
     path = Path("postseason_capacity_preview.json")
     if not path.exists():
         return None
+    s2_region = str((AOIS.get(region_key) or {}).get("s2_region") or region_key)
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
-        item = str(((payload.get("bolgeler") or {}).get(region_key) or {}).get("latest_item") or "")
+        item = str(((payload.get("bolgeler") or {}).get(s2_region) or {}).get("latest_item") or "")
     except (OSError, json.JSONDecodeError):
         return None
     match = re.search(r"(20\d{6})", item)
@@ -153,9 +222,10 @@ def _tracked_s2_date(region_key):
 
 
 def inspect_region(region_key, search_fn=_search_items):
-    bbox = (REGIONS.get(region_key) or {}).get("bbox")
-    if not bbox:
+    aoi = AOIS.get(region_key)
+    if not aoi:
         raise ValueError(f"Bilinmeyen bolge: {region_key}")
+    bbox = aoi["bbox"]
 
     try:
         items = search_fn(bbox)
@@ -168,24 +238,43 @@ def inspect_region(region_key, search_fn=_search_items):
             "saha_gorevi": False,
         }
 
-    usable = [item for item in items if _usable_item(item, bbox)]
-    usable.sort(key=lambda row: _iso_datetime(row) or datetime.min.replace(tzinfo=timezone.utc), reverse=True)
-    latest = usable[0] if usable else None
-    pair = _find_same_geometry_pair(items, bbox)
+    intersecting = [item for item in items if _usable_item(item, bbox)]
+    intersecting.sort(
+        key=lambda row: _iso_datetime(row) or datetime.min.replace(tzinfo=timezone.utc),
+        reverse=True,
+    )
+    critical = [item for item in intersecting if _covered_points(item, region_key)]
+    # Kritik operasyon noktasini kapsayan en yeni sahne tercih edilir. Yalniz
+    # bbox kenarina degmis bir granulu bolgenin gozlemi diye sunmuyoruz.
+    latest = critical[0] if critical else (intersecting[0] if intersecting else None)
+    pair = _find_same_geometry_pair(items, region_key)
     latest_dt = _iso_datetime(latest) if latest else None
     tracked_s2 = _tracked_s2_date(region_key)
+    covered = _covered_points(latest, region_key) if latest else []
+    overlap = _bbox_overlap_fraction(latest, bbox) if latest else 0.0
+
+    if critical:
+        status = "OK_KRITIK_NOKTA_KAPSAMASI"
+    elif intersecting:
+        status = "YALNIZ_BBOX_KESISIMI"
+    else:
+        status = "S1_KESISIMI_BULUNAMADI"
 
     result = {
         "bolge": region_key,
-        "durum": "OK" if latest else "TAM_KAPSAM_S1_BULUNAMADI",
+        "durum": status,
         "aranan_gun": SEARCH_DAYS,
-        "tam_kapsam_sahne_sayisi": len(usable),
+        "stac_ham_sahne_sayisi": len(items),
+        "kesisen_sahne_sayisi": len(intersecting),
+        "kritik_nokta_kapsayan_sahne_sayisi": len(critical),
         "son_s1_item": latest.get("id") if latest else None,
         "son_s1_tarih": latest_dt.date().isoformat() if latest_dt else None,
+        "son_s1_hedef_bbox_ortusme_orani": round(overlap, 4),
+        "son_s1_kapsanan_kritik_noktalar": covered,
         "son_s1_goreli_yorunge": _relative_orbit(latest) if latest else None,
         "son_s1_orbit_yonu": _orbit_state(latest) if latest else None,
         "son_s1_polarizasyon": list(_polarizations(latest)) if latest else [],
-        "ayni_geometri_cifti_var": pair is not None,
+        "ayni_geometri_ortak_nokta_cifti_var": pair is not None,
         "izlenen_s2_tarih": tracked_s2.isoformat() if tracked_s2 else None,
         "s1_s2den_daha_yeni": bool(latest_dt and tracked_s2 and latest_dt.date() > tracked_s2),
         "alarm": False,
@@ -193,6 +282,11 @@ def inspect_region(region_key, search_fn=_search_items):
     }
     if pair:
         older, newer = pair
+        common_points = sorted(
+            set(_covered_points(older, region_key)).intersection(
+                _covered_points(newer, region_key)
+            )
+        )
         result["karsilastirilabilir_s1_cifti"] = {
             "eski_item": older.get("id"),
             "eski_tarih": _iso_datetime(older).date().isoformat() if _iso_datetime(older) else None,
@@ -201,17 +295,19 @@ def inspect_region(region_key, search_fn=_search_items):
             "goreli_yorunge": _relative_orbit(newer),
             "orbit_yonu": _orbit_state(newer),
             "polarizasyon": list(_polarizations(newer)),
+            "ortak_kritik_noktalar": common_points,
         }
     return result
 
 
 def _self_check():
-    bbox = [26.45, 38.18, 26.68, 38.43]
+    region_key = "uzunkuyu"
+    bbox = AOIS[region_key]["bbox"]
 
     def fake(day, orbit=87, state="ascending", pols=("VV", "VH"), bbox_value=None, mode="IW"):
         return {
             "id": f"S1_{day}_{orbit}_{state}",
-            "bbox": bbox_value or [26.0, 38.0, 27.0, 39.0],
+            "bbox": bbox_value or [26.40, 38.10, 26.70, 38.50],
             "properties": {
                 "datetime": f"2026-09-{day:02d}T04:00:00Z",
                 "sat:relative_orbit": orbit,
@@ -221,24 +317,30 @@ def _self_check():
             },
         }
 
+    partial = fake(3, bbox_value=[26.62, 38.30, 26.67, 38.36])
+    outside = fake(2, bbox_value=[26.80, 38.50, 26.90, 38.60])
     items = [
         fake(11, orbit=87),
         fake(10, orbit=14),
         fake(5, orbit=87),
         fake(4, orbit=87, state="descending"),
-        fake(3, orbit=87, bbox_value=[26.55, 38.25, 26.60, 38.30]),
+        partial,
+        outside,
     ]
     assert _usable_item(items[0], bbox)
-    assert not _usable_item(items[-1], bbox)
+    assert _usable_item(partial, bbox)
+    assert not _usable_item(outside, bbox)
+    assert 0 < _bbox_overlap_fraction(partial, bbox) < 1
+    assert "Gülbahçe" in _covered_points(partial, region_key)
     assert _compatible_signature(items[0]) == (87, "ascending", ("VH", "VV"))
-    pair = _find_same_geometry_pair(items, bbox)
+    pair = _find_same_geometry_pair(items, region_key)
     assert pair is not None
     older, latest = pair
     assert older["id"].startswith("S1_5_87")
     assert latest["id"].startswith("S1_11_87")
-    assert _find_same_geometry_pair([fake(11, 87), fake(5, 14)], bbox) is None
+    assert _find_same_geometry_pair([fake(11, 87), fake(5, 14)], region_key) is None
     assert _instrument_mode(fake(11, mode="EW")) == "EW"
-    print("Sentinel-1 SAR kapsama diagnostigi oz testi OK.")
+    print("Sentinel-1 SAR bolgesel kesisim diagnostigi oz testi OK.")
 
 
 def _write_summary(rows):
@@ -250,15 +352,15 @@ def _write_summary(rows):
         "",
         "Bu katman alarm veya saha gorevi uretmez; yalniz optik goruntu boslugunda buluttan bagimsiz gozlem tazeligini olcer.",
         "",
-        "| Bolge | Son S1 | S2'den daha yeni | Ayni geometri cifti | Tam kapsam sahne |",
-        "|---|---|---:|---:|---:|",
+        "| Bolge | Son S1 | S2'den daha yeni | Kritik nokta | Ayni geometri cifti |",
+        "|---|---|---:|---|---:|",
     ]
     for row in rows:
+        covered = ", ".join(row.get("son_s1_kapsanan_kritik_noktalar") or []) or "-"
         lines.append(
             f"| {row.get('bolge')} | {row.get('son_s1_tarih') or row.get('durum')} | "
-            f"{'evet' if row.get('s1_s2den_daha_yeni') else 'hayir'} | "
-            f"{'evet' if row.get('ayni_geometri_cifti_var') else 'hayir'} | "
-            f"{row.get('tam_kapsam_sahne_sayisi', 0)} |"
+            f"{'evet' if row.get('s1_s2den_daha_yeni') else 'hayir'} | {covered} | "
+            f"{'evet' if row.get('ayni_geometri_ortak_nokta_cifti_var') else 'hayir'} |"
         )
     with open(path, "a", encoding="utf-8") as handle:
         handle.write("\n".join(lines) + "\n")
@@ -278,7 +380,7 @@ def main():
         _self_check()
         return 0
 
-    rows = [inspect_region("cesme"), inspect_region("uzunkuyu")]
+    rows = [inspect_region("cesme"), inspect_region("uzunkuyu"), inspect_region("gulbahce")]
     payload = {
         "alarm": False,
         "saha_gorevi": False,
@@ -286,6 +388,7 @@ def main():
         "mikro_aralik_m2": [150, 249],
         "kaynak": "Element 84 Earth Search sentinel-1 metadata",
         "diagnostik": rows,
+        "not": "SAR metadata yalniz kapsama/tazelik diagnostigidir; tek basina insaat, kazi veya saha gorevi uretmez.",
     }
     print(json.dumps(payload, ensure_ascii=False, indent=2))
     _write_summary(rows)
