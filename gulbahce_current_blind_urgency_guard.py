@@ -1,9 +1,11 @@
-"""Gülbahçe taze güncel-sahne körlüğü için ara-gün devriye koruması.
+"""Gülbahçe güncel-sahne körlüğü için ara-gün devriye koruması.
 
 Alarm veya kalıcı saha görevi üretmez. Gülbahçe'nin en yeni Sentinel sahnesinde
 tarihsel kara olduğu doğrulanmış 250-6500 m² bir alan kalite/bulut nedeniyle kör
-kalmışsa, normal iki günlük Gülbahçe duty devriyesi arasındaki tek günlük boşluğu
-yalnız sahne 1-2 günlükken kapatır. Ana 250 m² üretim eşiği ve 150-249 m² MİKRO
+kalmışsa, normal iki günlük Gülbahçe duty devriyesi arasındaki boşluğu kapatır.
+Sahne 1-2 günlükken taze körlük istisnası uygulanır; daha yeni kullanılabilir bir
+Sentinel sahnesi gelmedikçe eskiyen güncel-sahne körlükleri "görünürlük borcu"
+olarak diagnostik rotasyonda tutulur. Ana 250 m² üretim eşiği ve 150-249 m² MİKRO
 diagnostik politikası değişmez.
 """
 
@@ -44,6 +46,14 @@ def _source_age_days(day, source_date):
     if source_day is None or source_day > day:
         return None
     return (day - source_day).days
+
+
+def _visibility_debt_offset(source_age, candidate_count):
+    """Taze pencere sonrası aynı sahnenin kör kümelerini günlük sırayla döndür."""
+    if candidate_count <= 1 or source_age is None:
+        return 0
+    debt_day = max(source_age - MAX_URGENT_AGE_DAYS - 1, 0)
+    return debt_day % candidate_count
 
 
 def apply_fresh_blind_urgency(
@@ -94,35 +104,46 @@ def apply_fresh_blind_urgency(
             "alarm": False,
             "saha_gorevi": False,
             "guncel_sahne_acil_kor_istisnasi": False,
+            "guncel_sahne_kalici_gorunurluk_borcu": False,
             "guncel_sahne_yas_gun": source_age,
             "guncel_sahne_acil_kor_uygun_aday_sayisi": len(eligible),
+            "guncel_sahne_kalici_kor_rotasyon_offset": None,
         }
     )
 
-    urgent = (
+    common = (
         not duty
         and east_key is not None
         and bool(eligible)
         and not already_covered
         and source_age is not None
-        and MIN_URGENT_AGE_DAYS <= source_age <= MAX_URGENT_AGE_DAYS
     )
-    if not urgent:
+    urgent = common and MIN_URGENT_AGE_DAYS <= source_age <= MAX_URGENT_AGE_DAYS
+    visibility_debt = common and source_age > MAX_URGENT_AGE_DAYS
+    if not urgent and not visibility_debt:
         report["kor_alan_saha_devriyesi"] = existing
         report["gulbahce_kor_alan_devriye_korumasi"] = guard
         return report
 
-    # Ara-gün istisnası yalnız en küçük güvenli güncel kör hücreyi temsil eder.
-    # Bir sonraki normal duty günü mevcut sahne-tarihli rotasyona devam eder.
-    chosen = dict(eligible[0])
+    # Taze ara-günde en küçük güvenli kör hücreyi temsil et. En yeni kullanılabilir
+    # sahne yaşlandıysa kör kümeyi unutmak yerine günlük deterministik rotasyonda tut.
+    offset = 0 if urgent else _visibility_debt_offset(source_age, len(eligible))
+    chosen = dict(eligible[offset])
     report["kor_alan_saha_devriyesi"] = (other + [chosen])[:TOTAL_LIMIT]
 
+    reason = (
+        "GULBAHCE_GUNCEL_SAHNE_KOR_ACIL_TEMSIL"
+        if urgent
+        else "GULBAHCE_GUNCEL_SAHNE_KALICI_GORUNURLUK_BORCU"
+    )
     guard.update(
         {
             "uygulandi": True,
-            "neden": "GULBAHCE_GUNCEL_SAHNE_KOR_ACIL_TEMSIL",
+            "neden": reason,
             "guncel_sahne_korlugu_kullanildi": True,
-            "guncel_sahne_acil_kor_istisnasi": True,
+            "guncel_sahne_acil_kor_istisnasi": urgent,
+            "guncel_sahne_kalici_gorunurluk_borcu": visibility_debt,
+            "guncel_sahne_kalici_kor_rotasyon_offset": offset if visibility_debt else None,
             "secilen": {
                 "enlem": chosen["enlem"],
                 "boylam": chosen["boylam"],
@@ -132,18 +153,21 @@ def apply_fresh_blind_urgency(
                 "cekirdek_operasyon": True,
                 "guncel_sahne_korlugu": True,
                 "kaynak_tarihi": chosen["gulbahce_guncel_sahne_tarihi"],
-                "ara_gun_acil_koruma": True,
+                "ara_gun_acil_koruma": urgent,
+                "kalici_gorunurluk_borcu": visibility_debt,
             },
         }
     )
     report["gulbahce_kor_alan_devriye_korumasi"] = guard
     report["kor_alan_saha_devriyesi_notu"] = (
         "Alarm/görev değildir. En yeni Gülbahçe Sentinel sahnesinde tarihsel kara "
-        "kanıtlı 250-6500 m² gerçek kalite körlüğü 1-2 günlükken ve mevcut devriye "
-        "onu kapsamıyorken, normal iki günlük duty döngüsünün ara gününde yalnız en "
-        "küçük güvenli kör hücre doğu kapsama slotunda temsil edilir. Aktif görev ve "
-        "bölgeler arası mesafe korumaları aynen uygulanır; 150-249 m² MİKRO katmanı "
-        "bu istisnaya girmez."
+        "kanıtlı 250-6500 m² gerçek kalite körlüğü mevcut devriye tarafından "
+        "kapsanmıyorsa, 1-2 günlük taze pencerede en küçük güvenli kör hücre ara-gün "
+        "istisnası olarak temsil edilir. Daha yeni kullanılabilir Sentinel sahnesi "
+        "gelmezse aynı en-yeni sahnenin çözülmemiş kara-kör kümeleri görünürlük borcu "
+        "olarak günlük deterministik rotasyonda tutulur; böylece eski tarihsel devriye "
+        "noktası güncel körlüğün önüne geçmez. Aktif görev ve bölgeler arası mesafe "
+        "korumaları aynen uygulanır; 150-249 m² MİKRO katmanı bu istisnaya girmez."
     )
     return report
 
@@ -254,6 +278,10 @@ def _fixtures():
 def _self_check():
     current, audit, report, scan = _fixtures()
 
+    assert _visibility_debt_offset(3, 2) == 0
+    assert _visibility_debt_offset(4, 2) == 1
+    assert _visibility_debt_offset(5, 2) == 0
+
     urgent_day = date(2026, 9, 10)
     assert _is_duty_day(urgent_day) is False
     assert _source_age_days(urgent_day, "08.09.2026") == 2
@@ -262,6 +290,7 @@ def _self_check():
     )
     meta = guarded["gulbahce_kor_alan_devriye_korumasi"]
     assert meta["guncel_sahne_acil_kor_istisnasi"] is True
+    assert meta["guncel_sahne_kalici_gorunurluk_borcu"] is False
     assert meta["secilen"]["alan_m2"] == 400
     east = [
         item
@@ -282,9 +311,12 @@ def _self_check():
     stale_day = apply_fresh_blind_urgency(
         current, audit, report, scan, rotation_day=date(2026, 9, 12)
     )
-    assert stale_day["gulbahce_kor_alan_devriye_korumasi"][
-        "guncel_sahne_acil_kor_istisnasi"
-    ] is False
+    stale_meta = stale_day["gulbahce_kor_alan_devriye_korumasi"]
+    assert stale_meta["guncel_sahne_acil_kor_istisnasi"] is False
+    assert stale_meta["guncel_sahne_kalici_gorunurluk_borcu"] is True
+    assert stale_meta["guncel_sahne_kalici_kor_rotasyon_offset"] == 1
+    assert stale_meta["secilen"]["alan_m2"] == 1600
+    assert stale_meta["secilen"]["kalici_gorunurluk_borcu"] is True
 
     covered = dict(current)
     covered["secilen_devriye_guncel_korlugu_kapsiyor"] = True
@@ -294,8 +326,11 @@ def _self_check():
     assert covered_result["gulbahce_kor_alan_devriye_korumasi"][
         "guncel_sahne_acil_kor_istisnasi"
     ] is False
+    assert covered_result["gulbahce_kor_alan_devriye_korumasi"][
+        "guncel_sahne_kalici_gorunurluk_borcu"
+    ] is False
 
-    print("Gülbahçe taze güncel-körlük ara-gün koruması öz testi başarılı.")
+    print("Gülbahçe güncel-körlük ara-gün/görünürlük-borcu öz testi başarılı.")
 
 
 def main():
@@ -308,9 +343,9 @@ def main():
         return
     changed = update_fresh_blind_urgency()
     print(
-        "Gülbahçe taze güncel-körlük ara-gün koruması güncellendi."
+        "Gülbahçe güncel-körlük ara-gün/görünürlük-borcu koruması güncellendi."
         if changed
-        else "Gülbahçe taze güncel-körlük ara-gün korumasında değişiklik yok."
+        else "Gülbahçe güncel-körlük ara-gün/görünürlük-borcu korumasında değişiklik yok."
     )
 
 
