@@ -9,17 +9,21 @@ bulunmadigini olcmektir.
 
 Ana hedef yolu 250 m2 ve ustunde kalir. 150-249 m2 MIKRO katmanindan yalniz
 mevcut guclu diagnostik kapilarini gecen veya sahada SANTIYE_KAZI olarak
-eslestirilmis adaylar ayri bir kalibrasyon hedefi olarak eklenebilir. Bu ekleme
-ana esigi dusurmez ve MIKRO hedefi alarm/saha gorevine donusturmez; amac, ayni
-bilinen lokal mudahalenin SAR tarafinda gorunup gorunmedigini olcmektir.
+eslestirilmis adaylar ayri bir kalibrasyon hedefi olarak eklenebilir. Ayrica
+250 m2+ sahada dogrulanmis yikim/parsel temizligi noktalari, yeni hafriyat
+baslangicini optik yeni sahne beklemeden SAR ile diagnostik izleyebilmek icin
+ayri saha-oncul hedef olarak eklenir. Bu eklemeler ana esigi dusurmez ve tek
+basina alarm/saha gorevi uretmez.
 """
 
 from __future__ import annotations
 
 import argparse
+from datetime import date
 import json
 from pathlib import Path
 
+import postseason_excavation_priority_guard as post
 import sentinel1_scene_probe as s1
 
 
@@ -27,6 +31,7 @@ MIN_MAIN_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
 MAX_TARGETS_PER_REGION = 8
 MAX_MICRO_TARGETS_PER_REGION = 2
+MAX_DEMOLITION_TARGETS_PER_REGION = 2
 
 
 def _safe_json(path):
@@ -131,6 +136,124 @@ def _append_micro_calibration_targets(result):
     return result
 
 
+def _point_in_bbox(lat, lon, bbox):
+    try:
+        west, south, east, north = map(float, bbox)
+        lat = float(lat)
+        lon = float(lon)
+    except (TypeError, ValueError):
+        return False
+    return west <= lon <= east and south <= lat <= north
+
+
+def _demolition_region(lat, lon):
+    """Saha onculunu en dar diagnostik AOI'ye ata; Gulbahce once gelir."""
+    for region_key in ("gulbahce", "cesme", "uzunkuyu"):
+        aoi = s1.AOIS.get(region_key) or {}
+        if _point_in_bbox(lat, lon, aoi.get("bbox") or []):
+            return region_key
+    return None
+
+
+def _demolition_target(row, today=None):
+    """Taze sahada dogrulanmis 250 m2+ yikimi salt SAR diagnostik hedefe cevir."""
+    if not isinstance(row, dict):
+        return None
+    if str(row.get("sonuc") or "").strip().upper() != "YIKIM_TEMIZLIK":
+        return None
+
+    try:
+        lat = float(row.get("enlem"))
+        lon = float(row.get("boylam"))
+        area = int(round(float(row.get("alan_m2"))))
+    except (TypeError, ValueError):
+        return None
+    if not (MIN_MAIN_M2 <= area <= post.FIELD_PRECURSOR_MAX_M2):
+        return None
+
+    scene_day = post._parse_scene_date(row.get("son_tarih"))
+    if scene_day is None:
+        return None
+    today = today or date.today()
+    age_days = (today - scene_day).days
+    if age_days < 0 or age_days > post.FIELD_PRECURSOR_MAX_AGE_DAYS:
+        return None
+
+    region_key = _demolition_region(lat, lon)
+    if not region_key:
+        return None
+    locality = {
+        "gulbahce": "Gulbahce",
+        "cesme": "Cesme diagnostik bolgesi",
+        "uzunkuyu": "Uzunkuyu genis diagnostik bolgesi",
+    }[region_key]
+    target = _target(
+        lat,
+        lon,
+        area,
+        "santiye.db",
+        "SAHA_DOGRULANMIS_YIKIM_ONCULU",
+        locality,
+    )
+    if target is None:
+        return None
+    target.update(
+        {
+            "hedef_katmani": "SAHA_ONCUL_SAR_DIAGNOSTIK",
+            "saha_dogrulanmis_yikim_onculu": True,
+            "saha_oncul_gorev_id": str(row.get("gorev_id") or "").strip(),
+            "saha_oncul_son_tarih": scene_day.strftime("%d.%m.%Y"),
+            "saha_oncul_yas_gun": age_days,
+        }
+    )
+    return region_key, target
+
+
+def _append_demolition_precursor_targets(result, field_precursors=None, today=None):
+    """Yikim teyidini optik sahne gelmese bile sinirli SAR diagnostigine ekle."""
+    if field_precursors is None:
+        field_precursors = post._load_field_precursors()
+    grouped = {"cesme": [], "uzunkuyu": [], "gulbahce": []}
+    for row in field_precursors or []:
+        parsed = _demolition_target(row, today=today)
+        if not parsed:
+            continue
+        region_key, target = parsed
+        grouped[region_key].append(target)
+
+    for region_key, rows in grouped.items():
+        rows.sort(
+            key=lambda row: (
+                post._parse_scene_date(row.get("saha_oncul_son_tarih")) or date.min,
+                row.get("alan_m2") or 0,
+            ),
+            reverse=True,
+        )
+        existing = {
+            (round(float(row["enlem"]), 6), round(float(row["boylam"]), 6)): row
+            for row in result.get(region_key) or []
+        }
+        added = 0
+        for row in rows:
+            key = (round(float(row["enlem"]), 6), round(float(row["boylam"]), 6))
+            if key in existing:
+                existing[key].update(
+                    {
+                        "saha_dogrulanmis_yikim_onculu": True,
+                        "saha_oncul_gorev_id": row.get("saha_oncul_gorev_id"),
+                        "saha_oncul_son_tarih": row.get("saha_oncul_son_tarih"),
+                        "saha_oncul_yas_gun": row.get("saha_oncul_yas_gun"),
+                    }
+                )
+                continue
+            result[region_key].append(row)
+            existing[key] = row
+            added += 1
+            if added >= MAX_DEMOLITION_TARGETS_PER_REGION:
+                break
+    return result
+
+
 def _load_targets():
     coverage = _safe_json("coverage_blind_area_audit.json")
     regions = coverage.get("bolgeler") or {}
@@ -169,7 +292,8 @@ def _load_targets():
             parsed_gul.append(item)
     parsed_gul.sort(key=lambda row: row["alan_m2"], reverse=True)
     result["gulbahce"] = parsed_gul[:MAX_TARGETS_PER_REGION]
-    return _append_micro_calibration_targets(result)
+    result = _append_micro_calibration_targets(result)
+    return _append_demolition_precursor_targets(result)
 
 
 def _asset_polarization_map(item):
@@ -385,6 +509,34 @@ def _self_check():
         }
     ) is None
 
+    parsed_demolition = _demolition_target(
+        {
+            "gorev_id": "UTESTYIKIM",
+            "sonuc": "YIKIM_TEMIZLIK",
+            "enlem": 38.331547,
+            "boylam": 26.644338,
+            "alan_m2": 400,
+            "son_tarih": "08.09.2026",
+        },
+        today=date(2026, 9, 12),
+    )
+    assert parsed_demolition is not None
+    demolition_region, demolition_row = parsed_demolition
+    assert demolition_region == "gulbahce"
+    assert demolition_row["hedef_katmani"] == "SAHA_ONCUL_SAR_DIAGNOSTIK"
+    assert demolition_row["saha_dogrulanmis_yikim_onculu"] is True
+    assert demolition_row["alan_m2"] == 400
+    assert _demolition_target(
+        {
+            "sonuc": "YIKIM_TEMIZLIK",
+            "enlem": 38.331547,
+            "boylam": 26.644338,
+            "alan_m2": 200,
+            "son_tarih": "08.09.2026",
+        },
+        today=date(2026, 9, 12),
+    ) is None
+
     def fake(day, assets=True):
         payload = {
             "id": f"S1_{day}",
@@ -455,7 +607,7 @@ def _self_check():
     row = inspect_region("gulbahce", targets, search_fn=missing_assets)
     assert row["durum"] == "CIFT_VAR_RASTER_ASSET_EKSIK"
     assert row["raster_karsilastirmaya_hazir_hedef"] == 0
-    print("Sentinel-1 optik kor alan + MIKRO kalibrasyon hedef koprusu oz testi OK.")
+    print("Sentinel-1 optik kor alan + MIKRO + saha-yikim SAR hedef koprusu oz testi OK.")
 
 
 def main():
@@ -490,7 +642,7 @@ def main():
         "saha_gorevi": False,
         "ana_sentinel_esigi_m2": MIN_MAIN_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
-        "amac": "Optik kor alanlarini ayni-geometri Sentinel-1 ciftinin gercek footprint ve raster karsilastirma uygunluguyla eslemek; saha-dogrulanmis/guclu 150-249 m2 MIKRO adaylarini ayri SAR kalibrasyon hedefi olarak izlemek; geri-sacilim degisimini henuz insaat/kazi kaniti saymamak.",
+        "amac": "Optik kor alanlarini ayni-geometri Sentinel-1 ciftinin gercek footprint ve raster karsilastirma uygunluguyla eslemek; saha-dogrulanmis/guclu 150-249 m2 MIKRO adaylarini ve 250 m2+ dogrulanmis yikim/parsel temizligi oncul noktalarini ayri SAR diagnostik hedefleri olarak izlemek; geri-sacilim degisimini henuz insaat/kazi kaniti saymamak.",
         "bolgeler": rows,
         "toplam_hedef": sum(int(row.get("hedef_sayisi") or 0) for row in rows),
         "sar_raster_karsilastirmaya_hazir_hedef": sum(int(row.get("raster_karsilastirmaya_hazir_hedef") or 0) for row in rows),
