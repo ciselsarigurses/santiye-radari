@@ -94,6 +94,8 @@ def _temporal_class(current_score, previous_evidence, previous_locality):
         return "ONCEKI_ARALIK_METRIK_YOK"
     prev_score = float(prev_score)
     if prev_local in BROAD_CLASSES:
+        if current_score >= STRONG_LOCAL_DB and prev_score < 1.0:
+            return "ANI_YENI_LOKAL_BASLANGIC_GENIS_ARKA_PLANLI"
         return "ONCEKI_ARALIK_GENIS_YUZEY_ETKILI"
     if current_score >= STRONG_LOCAL_DB and prev_score < 1.0:
         return "ANI_YENI_LOKAL_BASLANGIC_DESTEKLI"
@@ -213,6 +215,9 @@ def inspect_region(region_row, search_fn=rtc._query_rtc_items, read_fn=rtc._read
         "ani_yeni_lokal_baslangic_destekli": sum(
             1 for row in checked if row.get("temporal_durum") == "ANI_YENI_LOKAL_BASLANGIC_DESTEKLI"
         ),
+        "genis_arka_planli_ani_lokal_baslangic": sum(
+            1 for row in checked if row.get("temporal_durum") == "ANI_YENI_LOKAL_BASLANGIC_GENIS_ARKA_PLANLI"
+        ),
         "ardisik_lokal_hareket": sum(
             1 for row in checked if str(row.get("temporal_durum") or "").startswith("ARDISIK_")
         ),
@@ -245,6 +250,9 @@ def inspect_payload(payload, search_fn=rtc._query_rtc_items, read_fn=rtc._read_t
         "incelenen_guclu_lokal_hedef": sum(int(row.get("incelenecek_guclu_lokal_hedef") or 0) for row in rows),
         "ucuncu_sahne_bulunan_hedef": sum(int(row.get("ucuncu_sahne_bulunan_hedef") or 0) for row in rows),
         "ani_yeni_lokal_baslangic_destekli": sum(int(row.get("ani_yeni_lokal_baslangic_destekli") or 0) for row in rows),
+        "genis_arka_planli_ani_lokal_baslangic": sum(
+            int(row.get("genis_arka_planli_ani_lokal_baslangic") or 0) for row in rows
+        ),
         "ardisik_lokal_hareket": sum(int(row.get("ardisik_lokal_hareket") or 0) for row in rows),
         "bolgeler": rows,
         "not": "Uc sahne sonucu yalniz temporal SAR diagnostigidir; tek basina insaat/kazi alarmi veya saha gorevi uretmez.",
@@ -284,6 +292,11 @@ def self_check():
         {"konservatif_skor_db": 0.4},
         {"durum": "KARISIK_DUSUK_LOKALLIK"},
     ) == "ANI_YENI_LOKAL_BASLANGIC_DESTEKLI"
+    assert _temporal_class(
+        2.4,
+        {"konservatif_skor_db": 0.4},
+        {"durum": "TEK_POL_CEVRE_DEGISIMI"},
+    ) == "ANI_YENI_LOKAL_BASLANGIC_GENIS_ARKA_PLANLI"
     assert _temporal_class(
         2.4,
         {"konservatif_skor_db": 2.1},
