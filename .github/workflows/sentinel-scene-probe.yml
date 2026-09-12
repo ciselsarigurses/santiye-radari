@@ -8,6 +8,7 @@ on:
       - "sentinel1_scene_probe.py"
       - "sentinel1_blind_target_bridge.py"
       - "sentinel1_rtc_change_diagnostic.py"
+      - "sentinel1_rtc_quality_guard.py"
       - "cloud_scene_probe.py"
       - ".github/workflows/sentinel-scene-probe.yml"
   schedule:
@@ -52,6 +53,7 @@ jobs:
           python sentinel1_scene_probe.py --self-check-only
           python sentinel1_blind_target_bridge.py --self-check-only
           python sentinel1_rtc_change_diagnostic.py --self-check-only
+          python sentinel1_rtc_quality_guard.py --self-check-only
 
       - name: Sentinel metadata'sında yeni üretim sahnesi ara
         id: probe
@@ -68,7 +70,10 @@ jobs:
         run: python sentinel1_blind_target_bridge.py --live
 
       - name: Sentinel-1 RTC lokal değişimini kör alan hedeflerinde diagnostik ölç
-        run: python sentinel1_rtc_change_diagnostic.py --live
+        run: python sentinel1_rtc_change_diagnostic.py --live | tee /tmp/sentinel1-rtc.json
+
+      - name: Sentinel-1 RTC veri tazelik ve okunabilirlik kalite kapısını çalıştır
+        run: python sentinel1_rtc_quality_guard.py --input /tmp/sentinel1-rtc.json
 
       - name: Yeni üretim sahnesi varsa ana radar zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
