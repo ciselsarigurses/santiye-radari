@@ -75,7 +75,7 @@ def _write_preview_if_meaningful(payload):
 
 
 def _field_counts(report, micro_feedback=None):
-    """Günlük saha özeti ile ayrı MİKRO manuel saha sonuçlarını güvenli birleştir."""
+    """Günlük saha özeti ile ayrı MİKRO manuel saha sonuçlarını çift saymadan birleştir."""
     summary = str(report.get("ozet") or "")
     report_controls = 0
     report_confirmed = 0
@@ -104,13 +104,27 @@ def _field_counts(report, micro_feedback=None):
         if str(record.get("sonuc") or "").upper() == "SANTIYE_KAZI":
             micro_confirmed += 1
 
+    # micro_field_report_bridge.py manuel MİKRO sonuçlarını merkezi özetin içine zaten
+    # katıyor ve bunu bu metadata ile işaretliyor. Bu işaret varsa ayrı dosyayı ikinci
+    # kez toplama; politika kanıtı olduğundan belirsizlikte eksik saymak, çift saymaktan
+    # daha güvenlidir. Metadata yoksa eski raporlarla geriye uyum için ayrı MİKRO sonucu eklenir.
+    integrated_micro = report.get("manuel_mikro_saha_kalibrasyonu")
+    micro_already_in_report = (
+        isinstance(integrated_micro, dict)
+        and integrated_micro.get("alarm") is False
+        and integrated_micro.get("saha_gorevi") is False
+    )
+    extra_micro_controls = 0 if micro_already_in_report else micro_controls
+    extra_micro_confirmed = 0 if micro_already_in_report else micro_confirmed
+
     return {
-        "kontrol": report_controls + micro_controls,
-        "dogrulanmis_santiye_kazi": report_confirmed + micro_confirmed,
+        "kontrol": report_controls + extra_micro_controls,
+        "dogrulanmis_santiye_kazi": report_confirmed + extra_micro_confirmed,
         "rapor_kontrol": report_controls,
         "rapor_dogrulanmis_santiye_kazi": report_confirmed,
         "mikro_manuel_kontrol": micro_controls,
         "mikro_manuel_dogrulanmis_santiye_kazi": micro_confirmed,
+        "mikro_rapora_zaten_dahil": micro_already_in_report,
     }
 
 
@@ -240,6 +254,7 @@ def _self_check():
     assert empty_counts["kontrol"] == 2
     assert empty_counts["dogrulanmis_santiye_kazi"] == 0
     assert empty_counts["mikro_manuel_kontrol"] == 0
+    assert empty_counts["mikro_rapora_zaten_dahil"] is False
 
     sample_micro = {
         "kayitlar": [
@@ -255,6 +270,22 @@ def _self_check():
     assert merged_counts["dogrulanmis_santiye_kazi"] == 1
     assert merged_counts["mikro_manuel_kontrol"] == 1
     assert merged_counts["mikro_manuel_dogrulanmis_santiye_kazi"] == 1
+    assert merged_counts["mikro_rapora_zaten_dahil"] is False
+
+    integrated_report = {
+        "ozet": "Saha sonucu: 3 kontrol (1 şantiye/kazı, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)",
+        "manuel_mikro_saha_kalibrasyonu": {
+            "toplam": 1,
+            "sonuclar": {"SANTIYE_KAZI": 1},
+            "alarm": False,
+            "saha_gorevi": False,
+        },
+    }
+    deduped_counts = _field_counts(integrated_report, sample_micro)
+    assert deduped_counts["kontrol"] == 3
+    assert deduped_counts["dogrulanmis_santiye_kazi"] == 1
+    assert deduped_counts["mikro_manuel_kontrol"] == 1
+    assert deduped_counts["mikro_rapora_zaten_dahil"] is True
 
     record = {
         "durum": "ok",
