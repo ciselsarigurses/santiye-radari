@@ -7,8 +7,10 @@ ile yakin cevre halkasi arasindaki kontrastin zamansal degisimini olcer.
 
 Lokal kontrast kullanilmasinin nedeni yagis/nem gibi sahne-geneli degisimlerin
 bir kismini bastirip kompakt/lokal mudahaleyi daha ayrik izleyebilmektir.
-Esikler ham kalibrasyon esikleridir; saha geri bildirimi olmadan alarm politikasina
-baglanmaz.
+VV/VH birlikte varsa operasyonel siralama icin iki polarizasyonun daha zayif
+olanini konservatif skor olarak kullanir; tek-polarizasyon baskin sicramalari
+ayri diagnostik sinifta tutar. Esikler ham kalibrasyon esikleridir; saha geri
+bildirimi olmadan alarm politikasina baglanmaz.
 """
 
 from __future__ import annotations
@@ -159,6 +161,51 @@ def _metric(old_summary, new_summary):
     }
 
 
+def _polarization_evidence(metrics):
+    values = {
+        str(pol).upper(): float(row["mutlak_lokal_kontrast_degisim_db"])
+        for pol, row in metrics.items()
+        if isinstance(row, dict) and row.get("mutlak_lokal_kontrast_degisim_db") is not None
+    }
+    if not values:
+        return {
+            "durum": "VERI_YOK",
+            "konservatif_skor_db": None,
+            "ham_medyan_db": None,
+            "tepe_db": None,
+            "yayilim_db": None,
+        }
+
+    vals = list(values.values())
+    vmax = max(vals)
+    vmin = min(vals)
+    vmed = float(np.median(vals))
+    spread = vmax - vmin
+    if len(vals) == 1:
+        status = "TEK_POL_VERISI"
+        conservative = vals[0]
+    elif vmax >= 2.0 and vmin < 1.0:
+        status = "TEK_POL_BASKIN"
+        conservative = vmin
+    elif vmin >= 2.0:
+        status = "CIFT_POL_GUCLU"
+        conservative = vmin
+    elif vmin >= 1.0:
+        status = "CIFT_POL_ORTA"
+        conservative = vmin
+    else:
+        status = "CIFT_POL_ZAYIF"
+        conservative = vmin
+
+    return {
+        "durum": status,
+        "konservatif_skor_db": round(float(conservative), 3),
+        "ham_medyan_db": round(vmed, 3),
+        "tepe_db": round(vmax, 3),
+        "yayilim_db": round(spread, 3),
+    }
+
+
 def _severity(metrics):
     vals = [
         float(row["mutlak_lokal_kontrast_degisim_db"])
@@ -170,9 +217,12 @@ def _severity(metrics):
     vals.sort()
     vmax = max(vals)
     vmed = float(np.median(vals))
+    evidence = _polarization_evidence(metrics)
     # Ham diagnostik esikler: saha kalibrasyonu olmadan alarma baglanmaz.
     if len(vals) >= 2 and min(vals) >= 2.0 and vmax >= 3.0:
         return "YUKSEK_LOKAL_DEGISIM_DIAGNOSTIK"
+    if evidence["durum"] == "TEK_POL_BASKIN":
+        return "TEK_POL_BASKIN_DIAGNOSTIK"
     if vmax >= 2.0 or vmed >= 1.5:
         return "ORTA_LOKAL_DEGISIM_DIAGNOSTIK"
     return "DUSUK_LOKAL_DEGISIM_DIAGNOSTIK"
@@ -235,10 +285,14 @@ def inspect_region(region_key, targets, search_fn=_query_rtc_items, read_fn=_rea
             row["ham_ozet"] = raw
         if errors:
             row["okuma_hatalari"] = errors
+        evidence = _polarization_evidence(pol_metrics)
         row["sar_degisim_durumu"] = _severity(pol_metrics)
+        row["sar_polarizasyon_uyumu"] = evidence["durum"]
         if pol_metrics:
-            vals = [float(v["mutlak_lokal_kontrast_degisim_db"]) for v in pol_metrics.values()]
-            row["sar_lokal_degisim_skor_db"] = round(float(np.median(vals)), 3)
+            row["sar_lokal_degisim_skor_db"] = evidence["konservatif_skor_db"]
+            row["sar_lokal_degisim_ham_medyan_db"] = evidence["ham_medyan_db"]
+            row["sar_lokal_degisim_tepe_db"] = evidence["tepe_db"]
+            row["sar_polarizasyon_yayilim_db"] = evidence["yayilim_db"]
         checked.append(row)
 
     ranked = sorted(
@@ -265,7 +319,10 @@ def inspect_region(region_key, targets, search_fn=_query_rtc_items, read_fn=_rea
                 "alan_m2": r["alan_m2"],
                 "kaynak": r["kaynak"],
                 "sar_degisim_durumu": r["sar_degisim_durumu"],
+                "sar_polarizasyon_uyumu": r.get("sar_polarizasyon_uyumu"),
                 "sar_lokal_degisim_skor_db": r["sar_lokal_degisim_skor_db"],
+                "sar_lokal_degisim_ham_medyan_db": r.get("sar_lokal_degisim_ham_medyan_db"),
+                "sar_lokal_degisim_tepe_db": r.get("sar_lokal_degisim_tepe_db"),
             }
             for r in ranked[:5]
         ],
@@ -289,6 +346,15 @@ def _self_check():
     metric2 = _metric(a, c)
     assert metric2["lokal_kontrast_degisim_db"] > 3.0, metric2
     assert _severity({"VV": metric2, "VH": metric2}) == "YUKSEK_LOKAL_DEGISIM_DIAGNOSTIK"
+
+    single_pol = {
+        "VV": {"mutlak_lokal_kontrast_degisim_db": 4.4},
+        "VH": {"mutlak_lokal_kontrast_degisim_db": 0.123},
+    }
+    single_evidence = _polarization_evidence(single_pol)
+    assert single_evidence["durum"] == "TEK_POL_BASKIN", single_evidence
+    assert single_evidence["konservatif_skor_db"] == 0.123, single_evidence
+    assert _severity(single_pol) == "TEK_POL_BASKIN_DIAGNOSTIK"
 
     targets = [{
         "enlem": 38.341406,
@@ -328,6 +394,7 @@ def _self_check():
     row = inspect_region("gulbahce", targets, search_fn=fake_search, read_fn=fake_read)
     assert row["durum"] == "RTC_LOKAL_DEGISIM_DIAGNOSTIGI_HAZIR", row
     assert row["metrik_uretilen_hedef"] == 1
+    assert row["en_yuksek_diagnostikler"][0]["sar_polarizasyon_uyumu"] == "CIFT_POL_GUCLU"
     assert row["alarm"] is False and row["saha_gorevi"] is False
     print("Sentinel-1 RTC lokal degisim diagnostigi oz testi OK.")
 
@@ -363,7 +430,7 @@ def main():
         "ana_sentinel_esigi_m2": MIN_MAIN_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
         "kalibrasyon_durumu": "HAM_SAR_DIAGNOSTIK_ESIKLERI_SAHA_DOGRULAMASI_BEKLIYOR",
-        "yontem": "RTC merkez-vs-yakin-cevre lokal kontrast degisimi; sahne-geneli nem/yagis etkisini azaltmak icin mutlak parlaklik farkindan ayridir.",
+        "yontem": "RTC merkez-vs-yakin-cevre lokal kontrast degisimi; iki polarizasyon varsa siralama skoru zayif polarizasyona gore konservatiftir, ham medyan/tepe ayrica raporlanir; tek-polarizasyon baskin sicramasi ayri diagnostik siniftir.",
         "bolgeler": rows,
         "toplam_hedef": sum(int(row.get("hedef_sayisi") or 0) for row in rows),
         "metrik_uretilen_hedef": sum(int(row.get("metrik_uretilen_hedef") or 0) for row in rows),
