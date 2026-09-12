@@ -9,8 +9,12 @@ Lokal kontrast kullanilmasinin nedeni yagis/nem gibi sahne-geneli degisimlerin
 bir kismini bastirip kompakt/lokal mudahaleyi daha ayrik izleyebilmektir.
 VV/VH birlikte varsa operasyonel siralama icin iki polarizasyonun daha zayif
 olanini konservatif skor olarak kullanir; tek-polarizasyon baskin sicramalari
-ayri diagnostik sinifta tutar. Esikler ham kalibrasyon esikleridir; saha geri
-bildirimi olmadan alarm politikasina baglanmaz.
+ayri diagnostik sinifta tutar. Ayrica cevre halkasinin kendi zamansal
+degisimini raporlayarak genis/homojen yuzey hareketi ile kompakt lokal
+degisimi birbirinden ayirmaya yardimci olur. Bu mekansal ayrim diagnostiktir;
+mevcut skor, siralama, alarm veya saha gorevi politikasini tek basina degistirmez.
+Esikler ham kalibrasyon esikleridir; saha geri bildirimi olmadan alarm
+politikasina baglanmaz.
 """
 
 from __future__ import annotations
@@ -153,9 +157,12 @@ def _metric(old_summary, new_summary):
     if not old_summary or not new_summary:
         return None
     delta_inner = float(new_summary["merkez_db"]) - float(old_summary["merkez_db"])
+    delta_ring = float(new_summary["cevre_db"]) - float(old_summary["cevre_db"])
     delta_contrast = float(new_summary["lokal_kontrast_db"]) - float(old_summary["lokal_kontrast_db"])
     return {
         "merkez_degisim_db": round(delta_inner, 3),
+        "cevre_degisim_db": round(delta_ring, 3),
+        "mutlak_cevre_degisim_db": round(abs(delta_ring), 3),
         "lokal_kontrast_degisim_db": round(delta_contrast, 3),
         "mutlak_lokal_kontrast_degisim_db": round(abs(delta_contrast), 3),
     }
@@ -203,6 +210,51 @@ def _polarization_evidence(metrics):
         "ham_medyan_db": round(vmed, 3),
         "tepe_db": round(vmax, 3),
         "yayilim_db": round(spread, 3),
+    }
+
+
+def _spatial_locality(metrics):
+    usable = [
+        row
+        for row in metrics.values()
+        if isinstance(row, dict)
+        and row.get("mutlak_lokal_kontrast_degisim_db") is not None
+        and row.get("mutlak_cevre_degisim_db") is not None
+    ]
+    if not usable:
+        return {
+            "durum": "VERI_YOK",
+            "lokal_konservatif_db": None,
+            "cevre_konservatif_db": None,
+            "cevre_tepe_db": None,
+        }
+
+    local_vals = [float(row["mutlak_lokal_kontrast_degisim_db"]) for row in usable]
+    ring_vals = [float(row["mutlak_cevre_degisim_db"]) for row in usable]
+    local_cons = min(local_vals)
+    ring_cons = min(ring_vals)
+    ring_peak = max(ring_vals)
+
+    # Bu siniflandirma yalniz hata bastirma/kalibrasyon diagnostigidir.
+    # Siralama skoru hala merkez-vs-cevre lokal kontrastindan gelir.
+    if len(usable) >= 2 and local_cons >= 2.0 and ring_peak < 1.0:
+        status = "KOMPAKT_LOKAL_DESTEKLI"
+    elif len(usable) >= 2 and local_cons < 1.0 and ring_cons >= 2.0:
+        status = "GENIS_CEVRE_HAREKETI_BASKIN"
+    elif len(usable) >= 2 and ring_cons >= 2.0:
+        status = "GENIS_CEVRE_DEGISIMI_ESLIK_EDIYOR"
+    elif len(usable) >= 2 and local_cons >= 1.0 and ring_peak < 1.0:
+        status = "LOKAL_AYRIM_DESTEKLI"
+    elif ring_peak >= 2.0:
+        status = "TEK_POL_CEVRE_DEGISIMI"
+    else:
+        status = "KARISIK_DUSUK_LOKALLIK"
+
+    return {
+        "durum": status,
+        "lokal_konservatif_db": round(local_cons, 3),
+        "cevre_konservatif_db": round(ring_cons, 3),
+        "cevre_tepe_db": round(ring_peak, 3),
     }
 
 
@@ -286,13 +338,17 @@ def inspect_region(region_key, targets, search_fn=_query_rtc_items, read_fn=_rea
         if errors:
             row["okuma_hatalari"] = errors
         evidence = _polarization_evidence(pol_metrics)
+        locality = _spatial_locality(pol_metrics)
         row["sar_degisim_durumu"] = _severity(pol_metrics)
         row["sar_polarizasyon_uyumu"] = evidence["durum"]
+        row["sar_mekansal_ayrim"] = locality["durum"]
         if pol_metrics:
             row["sar_lokal_degisim_skor_db"] = evidence["konservatif_skor_db"]
             row["sar_lokal_degisim_ham_medyan_db"] = evidence["ham_medyan_db"]
             row["sar_lokal_degisim_tepe_db"] = evidence["tepe_db"]
             row["sar_polarizasyon_yayilim_db"] = evidence["yayilim_db"]
+            row["sar_cevre_degisim_konservatif_db"] = locality["cevre_konservatif_db"]
+            row["sar_cevre_degisim_tepe_db"] = locality["cevre_tepe_db"]
         checked.append(row)
 
     ranked = sorted(
@@ -320,9 +376,12 @@ def inspect_region(region_key, targets, search_fn=_query_rtc_items, read_fn=_rea
                 "kaynak": r["kaynak"],
                 "sar_degisim_durumu": r["sar_degisim_durumu"],
                 "sar_polarizasyon_uyumu": r.get("sar_polarizasyon_uyumu"),
+                "sar_mekansal_ayrim": r.get("sar_mekansal_ayrim"),
                 "sar_lokal_degisim_skor_db": r["sar_lokal_degisim_skor_db"],
                 "sar_lokal_degisim_ham_medyan_db": r.get("sar_lokal_degisim_ham_medyan_db"),
                 "sar_lokal_degisim_tepe_db": r.get("sar_lokal_degisim_tepe_db"),
+                "sar_cevre_degisim_konservatif_db": r.get("sar_cevre_degisim_konservatif_db"),
+                "sar_cevre_degisim_tepe_db": r.get("sar_cevre_degisim_tepe_db"),
             }
             for r in ranked[:5]
         ],
@@ -339,6 +398,7 @@ def _self_check():
     b = _summarize_patch(stable_new, 1)
     metric = _metric(a, b)
     assert abs(metric["lokal_kontrast_degisim_db"]) < 0.01, metric
+    assert metric["mutlak_cevre_degisim_db"] > 0.7, metric
 
     changed = np.ones((9, 9), dtype=float)
     changed[3:6, 3:6] = 2.5
@@ -346,6 +406,14 @@ def _self_check():
     metric2 = _metric(a, c)
     assert metric2["lokal_kontrast_degisim_db"] > 3.0, metric2
     assert _severity({"VV": metric2, "VH": metric2}) == "YUKSEK_LOKAL_DEGISIM_DIAGNOSTIK"
+    assert _spatial_locality({"VV": metric2, "VH": metric2})["durum"] == "KOMPAKT_LOKAL_DESTEKLI"
+
+    broad_new = np.ones((9, 9), dtype=float) * 2.5
+    broad = _summarize_patch(broad_new, 1)
+    broad_metric = _metric(a, broad)
+    broad_locality = _spatial_locality({"VV": broad_metric, "VH": broad_metric})
+    assert abs(broad_metric["lokal_kontrast_degisim_db"]) < 0.01, broad_metric
+    assert broad_locality["durum"] == "GENIS_CEVRE_HAREKETI_BASKIN", broad_locality
 
     single_pol = {
         "VV": {"mutlak_lokal_kontrast_degisim_db": 4.4},
@@ -395,6 +463,7 @@ def _self_check():
     assert row["durum"] == "RTC_LOKAL_DEGISIM_DIAGNOSTIGI_HAZIR", row
     assert row["metrik_uretilen_hedef"] == 1
     assert row["en_yuksek_diagnostikler"][0]["sar_polarizasyon_uyumu"] == "CIFT_POL_GUCLU"
+    assert row["en_yuksek_diagnostikler"][0]["sar_mekansal_ayrim"] == "KOMPAKT_LOKAL_DESTEKLI"
     assert row["alarm"] is False and row["saha_gorevi"] is False
     print("Sentinel-1 RTC lokal degisim diagnostigi oz testi OK.")
 
@@ -430,7 +499,7 @@ def main():
         "ana_sentinel_esigi_m2": MIN_MAIN_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
         "kalibrasyon_durumu": "HAM_SAR_DIAGNOSTIK_ESIKLERI_SAHA_DOGRULAMASI_BEKLIYOR",
-        "yontem": "RTC merkez-vs-yakin-cevre lokal kontrast degisimi; iki polarizasyon varsa siralama skoru zayif polarizasyona gore konservatiftir, ham medyan/tepe ayrica raporlanir; tek-polarizasyon baskin sicramasi ayri diagnostik siniftir.",
+        "yontem": "RTC merkez-vs-yakin-cevre lokal kontrast degisimi; iki polarizasyon varsa siralama skoru zayif polarizasyona gore konservatiftir, ham medyan/tepe ayrica raporlanir; tek-polarizasyon baskin sicramasi ayri diagnostik siniftir; cevre halkasinin zamansal degisimi genis/homojen hareketi kompakt lokal degisimden ayirmak icin ayrica raporlanir ve tek basina alarm/siralama degistirmez.",
         "bolgeler": rows,
         "toplam_hedef": sum(int(row.get("hedef_sayisi") or 0) for row in rows),
         "metrik_uretilen_hedef": sum(int(row.get("metrik_uretilen_hedef") or 0) for row in rows),
