@@ -7,12 +7,14 @@ on:
       - "sentinel_scene_probe.py"
       - "sentinel1_scene_probe.py"
       - "sentinel1_blind_target_bridge.py"
+      - "sentinel1_rtc_change_diagnostic.py"
       - "cloud_scene_probe.py"
       - ".github/workflows/sentinel-scene-probe.yml"
   schedule:
     # Sentinel metadata'sını saatlik yokla; tam tarama zaten 11:00/15:00/19:00'da
     # çalıştığı için dakikayı :35 seçerek aynı anda ikinci tarama başlatma riskini azalt.
-    # Bant indirilmez: optik üretim/bulut ve SAR kapsama için yalnız hafif STAC metadata sorguları yapılır.
+    # Optik üretim/bulut için hafif metadata sorguları yapılır. SAR tarafında yalnız
+    # optik kör alan hedeflerinde küçük RTC pencereleri okunur; tam sahne indirilmez.
     - cron: "35 * * * *"
   workflow_dispatch:
 
@@ -27,7 +29,7 @@ concurrency:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
@@ -40,8 +42,8 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Hafif metadata bağımlılıklarını kur
-        run: pip install 'requests>=2.31,<3' 'numpy>=1.26,<3' 'Pillow>=10,<12'
+      - name: Yoklama bağımlılıklarını kur
+        run: pip install 'requests>=2.31,<3' 'numpy>=1.26,<3' 'Pillow>=10,<12' 'rasterio>=1.4,<2' 'planetary-computer>=1.0,<2'
 
       - name: Yoklama mantığı öz testi
         run: |
@@ -49,6 +51,7 @@ jobs:
           python cloud_scene_probe.py --self-check-only
           python sentinel1_scene_probe.py --self-check-only
           python sentinel1_blind_target_bridge.py --self-check-only
+          python sentinel1_rtc_change_diagnostic.py --self-check-only
 
       - name: Sentinel metadata'sında yeni üretim sahnesi ara
         id: probe
@@ -63,6 +66,9 @@ jobs:
 
       - name: Sentinel-1 SAR çiftini optik kör alan hedefleriyle eşle
         run: python sentinel1_blind_target_bridge.py --live
+
+      - name: Sentinel-1 RTC lokal değişimini kör alan hedeflerinde diagnostik ölç
+        run: python sentinel1_rtc_change_diagnostic.py --live
 
       - name: Yeni üretim sahnesi varsa ana radar zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
