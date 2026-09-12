@@ -8,8 +8,13 @@ kapsamasinin bulunup bulunmadigini olcmektir.
 Sentinel-1 urun granulleri genis uretim bbox'inin tamamini tek bir kayitta
 kaplamak zorunda degildir. Bu nedenle kapsama, STAC sahnesinin hedef bbox ile
 gercek kesisimi ve kritik operasyon noktalarini kapsayip kapsamadigi uzerinden
-olculur. Bu duzeltme yalniz kapsama diagnostigidir; SAR degisimi tek basina
+olculur. Bu yalniz kapsama diagnostigidir; SAR degisimi tek basina
 kazi/santiye kaniti sayilmaz.
+
+Metadata icin once anonim kullanima acik Microsoft Planetary Computer STAC
+Sentinel-1 GRD katalogu kullanilir. Katalog gecici olarak erisilemez veya hic
+sonuc donmezse Element 84 Earth Search sentinel-1 katalogu yedek kaynaktir.
+Hicbir kaynak API anahtari, gizli anahtar veya ucretli servis gerektirmez.
 
 Speckle, bakis geometrisi, bitki/nem ve bina sacilimi gibi etkiler nedeniyle
 ileride SAR degisimi karsilastirilacaksa ancak ayni goreli yorunge + ayni orbit
@@ -31,8 +36,10 @@ import requests
 from satellite import PLACE_CENTERS, REGIONS
 
 
+PC_SEARCH_URL = "https://planetarycomputer.microsoft.com/api/stac/v1/search"
+PC_S1_COLLECTION = "sentinel-1-grd"
 EARTH_SEARCH_URL = "https://earth-search.aws.element84.com/v1/search"
-S1_COLLECTION = "sentinel-1"
+EARTH_S1_COLLECTION = "sentinel-1"
 SEARCH_DAYS = 24
 TIMEOUT_SECONDS = 35
 
@@ -64,6 +71,11 @@ AOIS = {
         "kritik_noktalar": {"Gülbahçe": GULBAHCE_CENTER},
     },
 }
+
+S1_METADATA_SOURCES = (
+    ("Microsoft Planetary Computer", PC_SEARCH_URL, PC_S1_COLLECTION),
+    ("Element 84 Earth Search", EARTH_SEARCH_URL, EARTH_S1_COLLECTION),
+)
 
 
 def _iso_datetime(item):
@@ -138,8 +150,7 @@ def _point_in_item(item, point):
 
 
 def _covered_points(item, region_key):
-    aoi = AOIS.get(region_key) or {}
-    points = aoi.get("kritik_noktalar") or {}
+    points = (AOIS.get(region_key) or {}).get("kritik_noktalar") or {}
     return sorted(name for name, point in points.items() if _point_in_item(item, point))
 
 
@@ -187,19 +198,46 @@ def _find_same_geometry_pair(items, region_key):
     return None
 
 
-def _search_items(bbox, days=SEARCH_DAYS):
+def _query_source(url, collection, bbox, days):
     end = datetime.now(timezone.utc)
     start = end - timedelta(days=days)
     payload = {
-        "collections": [S1_COLLECTION],
+        "collections": [collection],
         "bbox": list(map(float, bbox)),
         "datetime": f"{start:%Y-%m-%dT%H:%M:%SZ}/{end:%Y-%m-%dT%H:%M:%SZ}",
         "limit": 80,
         "sortby": [{"field": "properties.datetime", "direction": "desc"}],
     }
-    response = requests.post(EARTH_SEARCH_URL, json=payload, timeout=TIMEOUT_SECONDS)
+    response = requests.post(url, json=payload, timeout=TIMEOUT_SECONDS)
     response.raise_for_status()
     return response.json().get("features", [])
+
+
+def _search_items(bbox, days=SEARCH_DAYS):
+    errors = []
+    empty_sources = []
+    for name, url, collection in S1_METADATA_SOURCES:
+        try:
+            items = _query_source(url, collection, bbox, days)
+        except requests.RequestException as exc:
+            errors.append({"kaynak": name, "hata": type(exc).__name__})
+            continue
+        if items:
+            return {
+                "kaynak": name,
+                "collection": collection,
+                "items": items,
+                "kaynak_hatalari": errors,
+                "bos_kaynaklar": empty_sources,
+            }
+        empty_sources.append(name)
+    return {
+        "kaynak": None,
+        "collection": None,
+        "items": [],
+        "kaynak_hatalari": errors,
+        "bos_kaynaklar": empty_sources,
+    }
 
 
 def _tracked_s2_date(region_key):
@@ -228,7 +266,7 @@ def inspect_region(region_key, search_fn=_search_items):
     bbox = aoi["bbox"]
 
     try:
-        items = search_fn(bbox)
+        search_result = search_fn(bbox)
     except requests.RequestException as exc:
         return {
             "bolge": region_key,
@@ -238,14 +276,25 @@ def inspect_region(region_key, search_fn=_search_items):
             "saha_gorevi": False,
         }
 
+    if isinstance(search_result, dict) and "items" in search_result:
+        items = search_result.get("items") or []
+        source_name = search_result.get("kaynak")
+        collection = search_result.get("collection")
+        source_errors = search_result.get("kaynak_hatalari") or []
+        empty_sources = search_result.get("bos_kaynaklar") or []
+    else:
+        items = search_result or []
+        source_name = "test"
+        collection = None
+        source_errors = []
+        empty_sources = []
+
     intersecting = [item for item in items if _usable_item(item, bbox)]
     intersecting.sort(
         key=lambda row: _iso_datetime(row) or datetime.min.replace(tzinfo=timezone.utc),
         reverse=True,
     )
     critical = [item for item in intersecting if _covered_points(item, region_key)]
-    # Kritik operasyon noktasini kapsayan en yeni sahne tercih edilir. Yalniz
-    # bbox kenarina degmis bir granulu bolgenin gozlemi diye sunmuyoruz.
     latest = critical[0] if critical else (intersecting[0] if intersecting else None)
     pair = _find_same_geometry_pair(items, region_key)
     latest_dt = _iso_datetime(latest) if latest else None
@@ -257,6 +306,8 @@ def inspect_region(region_key, search_fn=_search_items):
         status = "OK_KRITIK_NOKTA_KAPSAMASI"
     elif intersecting:
         status = "YALNIZ_BBOX_KESISIMI"
+    elif source_errors and not source_name:
+        status = "S1_METADATA_KAYNAKLARI_ERISILEMEDI"
     else:
         status = "S1_KESISIMI_BULUNAMADI"
 
@@ -264,6 +315,10 @@ def inspect_region(region_key, search_fn=_search_items):
         "bolge": region_key,
         "durum": status,
         "aranan_gun": SEARCH_DAYS,
+        "metadata_kaynagi": source_name,
+        "metadata_collection": collection,
+        "bos_kaynaklar": empty_sources,
+        "kaynak_hatalari": source_errors,
         "stac_ham_sahne_sayisi": len(items),
         "kesisen_sahne_sayisi": len(intersecting),
         "kritik_nokta_kapsayan_sahne_sayisi": len(critical),
@@ -340,7 +395,23 @@ def _self_check():
     assert latest["id"].startswith("S1_11_87")
     assert _find_same_geometry_pair([fake(11, 87), fake(5, 14)], region_key) is None
     assert _instrument_mode(fake(11, mode="EW")) == "EW"
-    print("Sentinel-1 SAR bolgesel kesisim diagnostigi oz testi OK.")
+
+    def fake_query(url, collection, query_bbox, days):
+        assert query_bbox == bbox
+        if "planetarycomputer" in url:
+            return items[:2]
+        return []
+
+    original = globals()["_query_source"]
+    try:
+        globals()["_query_source"] = fake_query
+        search = _search_items(bbox)
+        assert search["kaynak"] == "Microsoft Planetary Computer"
+        assert len(search["items"]) == 2
+    finally:
+        globals()["_query_source"] = original
+
+    print("Sentinel-1 SAR acik STAC ve bolgesel kesisim diagnostigi oz testi OK.")
 
 
 def _write_summary(rows):
@@ -352,13 +423,14 @@ def _write_summary(rows):
         "",
         "Bu katman alarm veya saha gorevi uretmez; yalniz optik goruntu boslugunda buluttan bagimsiz gozlem tazeligini olcer.",
         "",
-        "| Bolge | Son S1 | S2'den daha yeni | Kritik nokta | Ayni geometri cifti |",
-        "|---|---|---:|---|---:|",
+        "| Bolge | Kaynak | Son S1 | S2'den daha yeni | Kritik nokta | Ayni geometri cifti |",
+        "|---|---|---|---:|---|---:|",
     ]
     for row in rows:
         covered = ", ".join(row.get("son_s1_kapsanan_kritik_noktalar") or []) or "-"
         lines.append(
-            f"| {row.get('bolge')} | {row.get('son_s1_tarih') or row.get('durum')} | "
+            f"| {row.get('bolge')} | {row.get('metadata_kaynagi') or '-'} | "
+            f"{row.get('son_s1_tarih') or row.get('durum')} | "
             f"{'evet' if row.get('s1_s2den_daha_yeni') else 'hayir'} | {covered} | "
             f"{'evet' if row.get('ayni_geometri_ortak_nokta_cifti_var') else 'hayir'} |"
         )
@@ -386,7 +458,7 @@ def main():
         "saha_gorevi": False,
         "ana_sentinel_esigi_m2": 250,
         "mikro_aralik_m2": [150, 249],
-        "kaynak": "Element 84 Earth Search sentinel-1 metadata",
+        "kaynak_politikasi": "Planetary Computer sentinel-1-grd; sonuc/erisim yoksa Element 84 sentinel-1 yedegi",
         "diagnostik": rows,
         "not": "SAR metadata yalniz kapsama/tazelik diagnostigidir; tek basina insaat, kazi veya saha gorevi uretmez.",
     }
