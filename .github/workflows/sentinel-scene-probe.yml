@@ -10,6 +10,7 @@ on:
       - "sentinel1_rtc_change_diagnostic.py"
       - "sentinel1_rtc_quality_guard.py"
       - "sentinel1_rtc_locality_guard.py"
+      - "sentinel1_rtc_temporal_guard.py"
       - "sentinel1_rtc_target_pair_gapfill.py"
       - "sentinel1_rtc_gapfill_locality_guard.py"
       - "cloud_scene_probe.py"
@@ -58,6 +59,7 @@ jobs:
           python sentinel1_rtc_change_diagnostic.py --self-check-only
           python sentinel1_rtc_quality_guard.py --self-check-only
           python sentinel1_rtc_locality_guard.py --self-check-only
+          python sentinel1_rtc_temporal_guard.py --self-check-only
           python sentinel1_rtc_target_pair_gapfill.py --self-check-only
           python sentinel1_rtc_gapfill_locality_guard.py --self-check-only
 
@@ -83,6 +85,9 @@ jobs:
 
       - name: Ana RTC sonuçlarında kompakt-lokal / geniş-yüzey ayrımını doğrula
         run: python sentinel1_rtc_locality_guard.py --input /tmp/sentinel1-rtc.json
+
+      - name: Güçlü kompakt RTC değişimlerini üçüncü sahneyle temporal ayır
+        run: python sentinel1_rtc_temporal_guard.py --input /tmp/sentinel1-rtc.json
 
       - name: Bölgesel RTC çiftinin açıklarını hedefe özel taze çiftle diagnostik tamamla
         run: python sentinel1_rtc_target_pair_gapfill.py --live | tee /tmp/sentinel1-rtc-gapfill.json
