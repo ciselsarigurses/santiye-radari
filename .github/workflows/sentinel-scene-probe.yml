@@ -87,13 +87,24 @@ jobs:
         run: python sentinel1_rtc_locality_guard.py --input /tmp/sentinel1-rtc.json
 
       - name: Güçlü kompakt RTC değişimlerini üçüncü sahneyle temporal ayır
-        run: python sentinel1_rtc_temporal_guard.py --input /tmp/sentinel1-rtc.json
+        run: python sentinel1_rtc_temporal_guard.py --input /tmp/sentinel1-rtc.json | tee /tmp/sentinel1-rtc-temporal.json
 
       - name: Bölgesel RTC çiftinin açıklarını hedefe özel taze çiftle diagnostik tamamla
         run: python sentinel1_rtc_target_pair_gapfill.py --live | tee /tmp/sentinel1-rtc-gapfill.json
 
       - name: Hedefe özel RTC gapfill sonuçlarında geniş-yüzey/lokal ayrımını doğrula
         run: python sentinel1_rtc_gapfill_locality_guard.py --input /tmp/sentinel1-rtc-gapfill.json
+
+      - name: SAR diagnostiklerini kısa süreli sakla
+        uses: actions/upload-artifact@v4
+        with:
+          name: sentinel-diagnostics-${{ github.run_id }}
+          path: |
+            /tmp/sentinel1-rtc.json
+            /tmp/sentinel1-rtc-temporal.json
+            /tmp/sentinel1-rtc-gapfill.json
+          if-no-files-found: error
+          retention-days: 3
 
       - name: Yeni üretim sahnesi varsa ana radar zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
