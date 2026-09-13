@@ -26,6 +26,15 @@
 2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 1.800 m² · 08.09.2026 → 13.09.2026 · BSI Δ 0.139 · RGB Δ 0.203 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.288041,26.458071)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
+## Temporal-lokal erken sinyal izleme
+
+> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül öncesinde yalnız kalibrasyon/izleme amaçlıdır; ekip rotasına otomatik eklenmez.
+
+1. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 500 m² · yerellik 3.10 · iç BSI Δ 0.163 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.353345,26.676966) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.353345/26.676966)
+   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+2. **TEMPORAL-LOKAL — Alaçatı** · yaklaşık 600 m² · yerellik 2.43 · iç BSI Δ 0.124 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262625,26.380094) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.262625/26.380094)
+   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 > **Arka plan görev hafızası:** 15 Eylül öncesi bu tam liste bugünün saha rotası değildir; açık görev hafızasıdır. Operasyon için yalnız 'Günün ilk 3 kontrolü' bölümü kullanılır. Eski/gecikmiş kayıtlar silinmez; yeni Sentinel kanıtıyla yeniden güçlenirse veya insan TEKRAR_GIT verirse tekrar rota havuzuna girebilir.
