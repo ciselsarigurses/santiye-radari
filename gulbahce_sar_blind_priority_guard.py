@@ -5,6 +5,11 @@ körlük adayları arasında sıralama yapar. Yeni aday üretmez; alarm veya kal
 oluşturmaz. Sentinel-1 haritasındaki güçlü çift-polarizasyonlu kompakt/lokal değişim ve
 temporal başlangıç/devam kanıtı, optik sahneden daha yeniyse normal iki günlük rotasyona
 geçici öncelik verebilir. 150-249 m² MİKRO katmanı bu köprüye girmez.
+
+15 Eylül 2026 ve sonrasında birden fazla uygun SAR destekli kör alan varsa, sezon açılışı
+sonrası yeni SAR kanıtı önce gelir; aynı bantta daha yeni sahne ve ardından daha güçlü skor
+tercih edilir. Sezon öncesi güçlü kanıt silinmez ve post-sezon kanıt yoksa güvenli fallback
+olarak izlenmeye devam eder.
 """
 
 from __future__ import annotations
@@ -41,6 +46,7 @@ from gulbahce_current_blind_patrol_bridge import (
 SAR_MAP_GEOJSON = Path(__file__).with_name("sentinel1_rtc_map.geojson")
 SAR_MATCH_RADIUS_M = 35.0
 MIN_STRONG_SCORE_DB = 2.0
+FULL_OPERATION_START = date(2026, 9, 15)
 SUPPORTED_TEMPORAL = {
     "ANI_YENI_LOKAL_BASLANGIC_DESTEKLI",
     "ARDISIK_GUCLU_LOKAL_HAREKET",
@@ -63,7 +69,35 @@ def _num(value):
         return None
 
 
-def _sar_supported_blind_candidates(eligible, sar_payload, optical_source_date):
+def _operational_sar_sort_key(item, operational_day=None):
+    """Sezon açıldıktan sonra taze post-sezon SAR'ı eski kalibrasyon kanıtının önüne al."""
+    sar_day = _iso_date(item.get("gulbahce_sar_yeni_tarih"))
+    score = float(item.get("gulbahce_sar_lokal_degisim_skor_db") or 0.0)
+    area = int(item.get("alan_m2") or 0)
+    lat = float(item.get("enlem") or 0.0)
+    lon = float(item.get("boylam") or 0.0)
+
+    if operational_day is not None and operational_day >= FULL_OPERATION_START:
+        post_season = sar_day is not None and sar_day >= FULL_OPERATION_START
+        # Post-sezon kanıt varsa önce onu, sonra en yeni sahneyi, sonra daha güçlü skoru seç.
+        return (
+            0 if post_season else 1,
+            -(sar_day.toordinal() if post_season else 0),
+            -score,
+            area,
+            lat,
+            lon,
+        )
+
+    return (0, 0, -score, area, lat, lon)
+
+
+def _sar_supported_blind_candidates(
+    eligible,
+    sar_payload,
+    optical_source_date,
+    operational_day=None,
+):
     """Yalnız güçlü, kompakt ve optikten daha yeni SAR kanıtını eşleştir."""
     optical_day = _parse_source_date(optical_source_date)
     if optical_day is None:
@@ -156,14 +190,7 @@ def _sar_supported_blind_candidates(eligible, sar_payload, optical_source_date):
         )
         supported.append(item)
 
-    supported.sort(
-        key=lambda item: (
-            -float(item.get("gulbahce_sar_lokal_degisim_skor_db") or 0.0),
-            int(item.get("alan_m2") or 0),
-            float(item.get("enlem") or 0.0),
-            float(item.get("boylam") or 0.0),
-        )
-    )
+    supported.sort(key=lambda item: _operational_sar_sort_key(item, operational_day))
     return supported
 
 
@@ -203,7 +230,14 @@ def apply_sar_blind_priority(
         eligible,
         sar_payload,
         optical_source_date,
+        operational_day=day,
     )
+    post_season_supported = [
+        item
+        for item in supported
+        if (_iso_date(item.get("gulbahce_sar_yeni_tarih")) or date.min)
+        >= FULL_OPERATION_START
+    ]
 
     guard = dict(report.get("gulbahce_kor_alan_devriye_korumasi") or {})
     guard.update(
@@ -212,6 +246,8 @@ def apply_sar_blind_priority(
             "saha_gorevi": False,
             "sar_destekli_kor_onceligi_kullanildi": False,
             "sar_destekli_kor_uygun_aday_sayisi": len(supported),
+            "sar_15eylul_taze_oncelik_aktif": day >= FULL_OPERATION_START,
+            "sar_15eylul_taze_uygun_aday_sayisi": len(post_season_supported),
             "sar_destekli_kor_kural": (
                 "GUNCEL_KOR_250_PLUS+SAR_GUCLU_LOKAL+CIFT_POL+KOMPAKT+"
                 "TEMPORAL_DESTEK+SAR_OPTIKTEN_YENI"
@@ -227,6 +263,10 @@ def apply_sar_blind_priority(
     chosen = dict(supported[0])
     chosen["alarm"] = False
     chosen["saha_gorevi"] = False
+    chosen_sar_day = _iso_date(chosen.get("gulbahce_sar_yeni_tarih"))
+    chosen["gulbahce_sar_15eylul_sonrasi"] = bool(
+        chosen_sar_day is not None and chosen_sar_day >= FULL_OPERATION_START
+    )
     report["kor_alan_saha_devriyesi"] = (other + [chosen])[:TOTAL_LIMIT]
 
     guard.update(
@@ -248,6 +288,7 @@ def apply_sar_blind_priority(
                 "sar_temporal_durum": chosen["gulbahce_sar_temporal_durum"],
                 "sar_yeni_tarih": chosen["gulbahce_sar_yeni_tarih"],
                 "sar_esleme_mesafesi_m": chosen["gulbahce_sar_esleme_mesafesi_m"],
+                "sar_15eylul_sonrasi": chosen["gulbahce_sar_15eylul_sonrasi"],
             },
         }
     )
@@ -257,8 +298,10 @@ def apply_sar_blind_priority(
         "tarihsel-kara kanıtlı 250-6500 m² güncel körlük adaylarından biri, optik "
         "sahneden daha yeni Sentinel-1 verisinde çift-polarizasyon güçlü, kompakt/lokal "
         "ve temporal başlangıç/devam kanıtı taşıyorsa normal iki günlük körlük "
-        "rotasyonuna geçici öncelik verir. Yeni aday üretilmez; 150-249 m² MİKRO "
-        "katmanı bu kurala girmez ve alarm/saha görevi açılmaz."
+        "rotasyonuna geçici öncelik verir. 15 Eylül ve sonrasında birden fazla uygun "
+        "SAR adayı varsa post-sezon taze kanıt, sonra daha yeni sahne ve güçlü skor "
+        "öncelenir; eski güçlü kanıt yalnız fallback olarak korunur. Yeni aday "
+        "üretilmez; 150-249 m² MİKRO katmanı bu kurala girmez ve alarm/saha görevi açılmaz."
     )
     return report
 
@@ -401,6 +444,7 @@ def _fixtures():
 def _self_check():
     assert MIN_AREA_M2 == 250
     assert TARGET_MAX_AREA_M2 == 6500
+    assert FULL_OPERATION_START == date(2026, 9, 15)
     current, audit, report, scan, sar = _fixtures()
 
     duty_day = date(2026, 9, 13)
@@ -411,6 +455,7 @@ def _self_check():
     meta = guarded["gulbahce_kor_alan_devriye_korumasi"]
     assert meta["sar_destekli_kor_onceligi_kullanildi"] is True
     assert meta["sar_destekli_kor_uygun_aday_sayisi"] == 1
+    assert meta["sar_15eylul_taze_oncelik_aktif"] is False
     assert meta["secilen"]["alan_m2"] == 400
     assert meta["secilen"]["sar_lokal_degisim_skor_db"] == 3.045
     east = [
@@ -456,6 +501,40 @@ def _self_check():
     assert non_duty["gulbahce_kor_alan_devriye_korumasi"][
         "sar_destekli_kor_onceligi_kullanildi"
     ] is False
+
+    # 15 Eylül sonrasında iki güvenli güçlü aday varsa daha yeni post-sezon kanıt,
+    # daha yüksek skorlu sezon-öncesi kalibrasyon kanıtını geçer. Eski kanıt silinmez.
+    postseason_sar = json.loads(json.dumps(sar))
+    second = json.loads(json.dumps(postseason_sar["features"][0]))
+    second["geometry"]["coordinates"] = [26.641132, 38.346923]
+    second["properties"]["alan_m2"] = 1600
+    second["properties"]["sar_lokal_degisim_skor_db"] = 2.2
+    second["properties"]["yeni_tarih"] = "2026-09-15"
+    postseason_sar["features"].append(second)
+    postseason_day = date(2026, 9, 15)
+    assert _is_duty_day(postseason_day) is True
+    postseason_result = apply_sar_blind_priority(
+        current,
+        audit,
+        report,
+        scan,
+        postseason_sar,
+        rotation_day=postseason_day,
+    )
+    postseason_meta = postseason_result["gulbahce_kor_alan_devriye_korumasi"]
+    assert postseason_meta["sar_15eylul_taze_oncelik_aktif"] is True
+    assert postseason_meta["sar_15eylul_taze_uygun_aday_sayisi"] == 1
+    assert postseason_meta["secilen"]["alan_m2"] == 1600
+    assert postseason_meta["secilen"]["sar_yeni_tarih"] == "2026-09-15"
+    assert postseason_meta["secilen"]["sar_15eylul_sonrasi"] is True
+
+    postseason_fallback = apply_sar_blind_priority(
+        current, audit, report, scan, sar, rotation_day=postseason_day
+    )
+    fallback_meta = postseason_fallback["gulbahce_kor_alan_devriye_korumasi"]
+    assert fallback_meta["sar_15eylul_taze_uygun_aday_sayisi"] == 0
+    assert fallback_meta["secilen"]["alan_m2"] == 400
+    assert fallback_meta["secilen"]["sar_15eylul_sonrasi"] is False
 
     print("Gülbahçe SAR destekli güncel körlük öncelik öz testi başarılı.")
 
