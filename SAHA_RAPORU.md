@@ -27,7 +27,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
 1. **KÖR ALAN — Çeşme** · yaklaşık 1.200 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.325125,26.328924) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.325125/26.328924)
    - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
-2. **KÖR ALAN — Gülbahçe · güncel uydu kör alanı** · yaklaşık 1.600 m² · karışık geçersizlik · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.346923,26.641132) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.346923/26.641132)
+2. **KÖR ALAN — Gülbahçe · güncel uydu kör alanı** · yaklaşık 400 m² · karışık geçersizlik · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.342310,26.642621) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.342310/26.642621)
    - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
 
 ## Bugün sahada kontrol edilecek uydu adayları
