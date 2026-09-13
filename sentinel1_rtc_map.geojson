@@ -378,7 +378,7 @@
         "sar_lokal_degisim_skor_db": 1.796,
         "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
         "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
-        "temporal_durum": "TEMPORAL_KARISIK_DUSUK_KANIT",
+        "temporal_durum": "SAHA_ONCUL_TAZE_LOKAL_YUKSELIS",
         "yeni_tarih": "2026-09-12"
       },
       "type": "Feature"
