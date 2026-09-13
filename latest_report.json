@@ -4612,13 +4612,14 @@
       "gulbahce_sar_temporal_durum": "ANI_YENI_LOKAL_BASLANGIC_DESTEKLI",
       "gulbahce_sar_yeni_tarih": "2026-09-12",
       "gulbahce_sar_esleme_mesafesi_m": 0.0,
+      "gulbahce_sar_15eylul_sonrasi": false,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.342310/26.642621",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-13",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Gülbahçe duty gününde yalnız en yeni optik sahnede tarihsel-kara kanıtlı 250-6500 m² güncel körlük adaylarından biri, optik sahneden daha yeni Sentinel-1 verisinde çift-polarizasyon güçlü, kompakt/lokal ve temporal başlangıç/devam kanıtı taşıyorsa normal iki günlük körlük rotasyonuna geçici öncelik verir. Yeni aday üretilmez; 150-249 m² MİKRO katmanı bu kurala girmez ve alarm/saha görevi açılmaz.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Gülbahçe duty gününde yalnız en yeni optik sahnede tarihsel-kara kanıtlı 250-6500 m² güncel körlük adaylarından biri, optik sahneden daha yeni Sentinel-1 verisinde çift-polarizasyon güçlü, kompakt/lokal ve temporal başlangıç/devam kanıtı taşıyorsa normal iki günlük körlük rotasyonuna geçici öncelik verir. 15 Eylül ve sonrasında birden fazla uygun SAR adayı varsa post-sezon taze kanıt, sonra daha yeni sahne ve güçlü skor öncelenir; eski güçlü kanıt yalnız fallback olarak korunur. Yeni aday üretilmez; 150-249 m² MİKRO katmanı bu kurala girmez ve alarm/saha görevi açılmaz.",
   "gulbahce_kor_alan_devriye_korumasi": {
     "alarm": false,
     "saha_gorevi": false,
@@ -4643,6 +4644,7 @@
       "sar_temporal_durum": "ANI_YENI_LOKAL_BASLANGIC_DESTEKLI",
       "sar_yeni_tarih": "2026-09-12",
       "sar_esleme_mesafesi_m": 0.0,
+      "sar_15eylul_sonrasi": false,
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.342310/26.642621",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
@@ -4654,6 +4656,8 @@
     "guncel_sahne_rotasyon_offset": 2,
     "sar_destekli_kor_onceligi_kullanildi": true,
     "sar_destekli_kor_uygun_aday_sayisi": 1,
+    "sar_15eylul_taze_oncelik_aktif": false,
+    "sar_15eylul_taze_uygun_aday_sayisi": 0,
     "sar_destekli_kor_kural": "GUNCEL_KOR_250_PLUS+SAR_GUCLU_LOKAL+CIFT_POL+KOMPAKT+TEMPORAL_DESTEK+SAR_OPTIKTEN_YENI",
     "guncel_sahne_acil_kor_istisnasi": false,
     "guncel_sahne_kalici_gorunurluk_borcu": false,
