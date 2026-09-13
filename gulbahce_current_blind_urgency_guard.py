@@ -104,7 +104,6 @@ def _target_is_already_covered(current_payload, candidate):
     except (TypeError, ValueError):
         return False
 
-    matched_cluster = False
     for raw in (current_payload or {}).get("guncel_sahne_kor_kumeleri") or []:
         if not isinstance(raw, dict):
             continue
@@ -119,13 +118,10 @@ def _target_is_already_covered(current_payload, candidate):
             and abs(lon - target_lon) <= 0.00001
             and area == target_area
         ):
-            matched_cluster = True
             if "secilen_devriye_kapsiyor" in raw:
                 return raw.get("secilen_devriye_kapsiyor") is True
             break
 
-    if matched_cluster:
-        return False
     return (current_payload or {}).get("secilen_devriye_guncel_korlugu_kapsiyor") is True
 
 
