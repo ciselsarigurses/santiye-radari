@@ -56,6 +56,35 @@ def _visibility_debt_offset(source_age, candidate_count):
     return debt_day % candidate_count
 
 
+def _non_duty_gap_offset(day, source_date, candidate_count):
+    """Duty günleri arasındaki ara-günde farklı bir güncel kör kümeyi temsil et.
+
+    Normal köprü aynı Sentinel sahnesini iki günlük duty döngüsünde küçükten büyüğe
+    ilerletir. Ara-gün koruması sürekli aynı ilk kümeye dönerse, üç adaylı bir sahnede
+    üçüncü küme bir sonraki duty sonrasına kadar görünmeden kalabilir. Bu yardımcı,
+    önceki duty indeksini hesaplar; üç veya daha fazla aday varsa hem önceki hem de
+    bir sonraki duty adayından farklı olan +2 ofsetini, iki aday varsa tek alternatif
+    olan +1 ofsetini seçer. Tarih metadatası bozuksa eski görünürlük-borcu ofsetine
+    güvenli biçimde geri düşer.
+    """
+    if candidate_count <= 1:
+        return 0
+
+    source_day = _parse_source_date(source_date)
+    if source_day is None or source_day > day:
+        return _visibility_debt_offset(_source_age_days(day, source_date), candidate_count)
+
+    elapsed_days = max((day - source_day).days, 0)
+    if _is_duty_day(source_day):
+        previous_duty_step = elapsed_days // 2
+    else:
+        previous_duty_step = max((elapsed_days - 1) // 2, 0)
+
+    previous_duty_offset = previous_duty_step % candidate_count
+    gap_step = 2 if candidate_count >= 3 else 1
+    return (previous_duty_offset + gap_step) % candidate_count
+
+
 def apply_fresh_blind_urgency(
     current_payload,
     audit_payload,
@@ -107,6 +136,7 @@ def apply_fresh_blind_urgency(
             "guncel_sahne_kalici_gorunurluk_borcu": False,
             "guncel_sahne_yas_gun": source_age,
             "guncel_sahne_acil_kor_uygun_aday_sayisi": len(eligible),
+            "guncel_sahne_ara_gun_rotasyon_offset": None,
             "guncel_sahne_kalici_kor_rotasyon_offset": None,
         }
     )
@@ -125,9 +155,10 @@ def apply_fresh_blind_urgency(
         report["gulbahce_kor_alan_devriye_korumasi"] = guard
         return report
 
-    # Taze ara-günde en küçük güvenli kör hücreyi temsil et. En yeni kullanılabilir
-    # sahne yaşlandıysa kör kümeyi unutmak yerine günlük deterministik rotasyonda tut.
-    offset = 0 if urgent else _visibility_debt_offset(source_age, len(eligible))
+    # Duty günlerinin arasında sürekli ilk kör kümeyi tekrar etmek yerine, mevcut
+    # iki günlük rotasyonun boşta bıraktığı farklı kümeyi temsil et. Böylece özellikle
+    # üç adaylı güncel bir sahnede 15 Eylül öncesi/sonrası görünürlük borcu küçülür.
+    offset = _non_duty_gap_offset(day, source_date, len(eligible))
     chosen = dict(eligible[offset])
     report["kor_alan_saha_devriyesi"] = (other + [chosen])[:TOTAL_LIMIT]
 
@@ -143,6 +174,7 @@ def apply_fresh_blind_urgency(
             "guncel_sahne_korlugu_kullanildi": True,
             "guncel_sahne_acil_kor_istisnasi": urgent,
             "guncel_sahne_kalici_gorunurluk_borcu": visibility_debt,
+            "guncel_sahne_ara_gun_rotasyon_offset": offset,
             "guncel_sahne_kalici_kor_rotasyon_offset": offset if visibility_debt else None,
             "secilen": {
                 "enlem": chosen["enlem"],
@@ -162,12 +194,13 @@ def apply_fresh_blind_urgency(
     report["kor_alan_saha_devriyesi_notu"] = (
         "Alarm/görev değildir. En yeni Gülbahçe Sentinel sahnesinde tarihsel kara "
         "kanıtlı 250-6500 m² gerçek kalite körlüğü mevcut devriye tarafından "
-        "kapsanmıyorsa, 1-2 günlük taze pencerede en küçük güvenli kör hücre ara-gün "
-        "istisnası olarak temsil edilir. Daha yeni kullanılabilir Sentinel sahnesi "
-        "gelmezse aynı en-yeni sahnenin çözülmemiş kara-kör kümeleri görünürlük borcu "
-        "olarak günlük deterministik rotasyonda tutulur; böylece eski tarihsel devriye "
-        "noktası güncel körlüğün önüne geçmez. Aktif görev ve bölgeler arası mesafe "
-        "korumaları aynen uygulanır; 150-249 m² MİKRO katmanı bu istisnaya girmez."
+        "kapsanmıyorsa, 1-2 günlük taze pencerede iki günlük duty rotasyonunun boşta "
+        "bıraktığı farklı güvenli kör hücre ara-gün istisnası olarak temsil edilir. "
+        "Daha yeni kullanılabilir Sentinel sahnesi gelmezse aynı en-yeni sahnenin "
+        "çözülmemiş kara-kör kümeleri görünürlük borcu olarak aynı çeşitlendirilmiş "
+        "ara-gün rotasyonunda tutulur; böylece aynı küçük kör hücre gereksiz yere "
+        "tekrar edilmez. Aktif görev ve bölgeler arası mesafe korumaları aynen "
+        "uygulanır; 150-249 m² MİKRO katmanı bu istisnaya girmez."
     )
     return report
 
@@ -281,6 +314,8 @@ def _self_check():
     assert _visibility_debt_offset(3, 2) == 0
     assert _visibility_debt_offset(4, 2) == 1
     assert _visibility_debt_offset(5, 2) == 0
+    assert _is_duty_day(date(2026, 9, 13)) is True
+    assert _non_duty_gap_offset(date(2026, 9, 14), "13.09.2026", 3) == 2
 
     urgent_day = date(2026, 9, 10)
     assert _is_duty_day(urgent_day) is False
@@ -291,7 +326,8 @@ def _self_check():
     meta = guarded["gulbahce_kor_alan_devriye_korumasi"]
     assert meta["guncel_sahne_acil_kor_istisnasi"] is True
     assert meta["guncel_sahne_kalici_gorunurluk_borcu"] is False
-    assert meta["secilen"]["alan_m2"] == 400
+    assert meta["guncel_sahne_ara_gun_rotasyon_offset"] == 1
+    assert meta["secilen"]["alan_m2"] == 1600
     east = [
         item
         for item in guarded["kor_alan_saha_devriyesi"]
@@ -314,8 +350,8 @@ def _self_check():
     stale_meta = stale_day["gulbahce_kor_alan_devriye_korumasi"]
     assert stale_meta["guncel_sahne_acil_kor_istisnasi"] is False
     assert stale_meta["guncel_sahne_kalici_gorunurluk_borcu"] is True
-    assert stale_meta["guncel_sahne_kalici_kor_rotasyon_offset"] == 1
-    assert stale_meta["secilen"]["alan_m2"] == 1600
+    assert stale_meta["guncel_sahne_kalici_kor_rotasyon_offset"] == 0
+    assert stale_meta["secilen"]["alan_m2"] == 400
     assert stale_meta["secilen"]["kalici_gorunurluk_borcu"] is True
 
     covered = dict(current)
