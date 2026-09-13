@@ -10,6 +10,44 @@
   "amac": "15 Eylül öncesi güçlü 250-900 m² temporal-lokal ani zemin izini saklamak; sonraki bağımsız taze 250 m²+ ana adaya yalnız sıralama kanıtı sağlamak.",
   "adaylar": [
     {
+      "temporal_iz_id": "TL-20260913-38.35334-26.67697",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.353345,
+      "boylam": 26.676966,
+      "alan_m2": 500,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Mevki doğrulanmadı",
+      "ilk_guclu_tarih": "13.09.2026",
+      "son_guclu_tarih": "13.09.2026",
+      "son_guclu_sentinel_item": "S2C_T35SMC_20260913T090741_L2A",
+      "sentinel_sahneleri": [
+        "S2C_T35SMC_20260913T090741_L2A"
+      ],
+      "maks_yerellik_orani": 3.1,
+      "maks_ic_bsi_degisim": 0.163
+    },
+    {
+      "temporal_iz_id": "TL-20260913-38.26262-26.38009",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.262625,
+      "boylam": 26.380094,
+      "alan_m2": 600,
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Alaçatı",
+      "ilk_guclu_tarih": "13.09.2026",
+      "son_guclu_tarih": "13.09.2026",
+      "son_guclu_sentinel_item": "S2C_T35SMC_20260913T090741_L2A",
+      "sentinel_sahneleri": [
+        "S2C_T35SMC_20260913T090741_L2A"
+      ],
+      "maks_yerellik_orani": 2.43,
+      "maks_ic_bsi_degisim": 0.1239
+    },
+    {
       "temporal_iz_id": "TL-20260908-38.29401-26.27695",
       "alarm": false,
       "saha_gorevi": false,
@@ -105,6 +143,6 @@
       "maks_ic_bsi_degisim": 0.107
     }
   ],
-  "guclu_iz_sayisi": 5,
-  "guncelleme_tarihi": "2026-09-10 08:08 +0300"
+  "guclu_iz_sayisi": 7,
+  "guncelleme_tarihi": "2026-09-13 19:28 +0300"
 }
