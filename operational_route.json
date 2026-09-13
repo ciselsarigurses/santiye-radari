@@ -43,6 +43,9 @@
       "uydu_onceligi": "NORMAL",
       "erken_parsel": true,
       "gunluk_sira": 1,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.271217/26.376889",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
       "rota_uydu_kanit_yasi_gun": 0
     },
     {
@@ -69,6 +72,9 @@
       "uydu_onceligi": "NORMAL",
       "erken_parsel": true,
       "gunluk_sira": 2,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.281076/26.358687",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
       "rota_uydu_kanit_yasi_gun": 0
     },
     {
@@ -95,6 +101,9 @@
       "uydu_onceligi": "NORMAL",
       "erken_parsel": true,
       "gunluk_sira": 3,
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265519/26.676623",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
       "rota_uydu_kanit_yasi_gun": 0
     }
   ],
