@@ -7,6 +7,8 @@
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
+> **Parsel ön kontrol:** Rota satırlarındaki **Parsel Sorgu'da aç** bağlantısı yalnız radar koordinatını TKGM haritasında açar; ada/parsel otomatik çıkarılmaz ve doğrulanmış kabul edilmez.
+
 ## Günün ilk 3 kontrolü
 
 > 15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Sahada doğrulanmış yıkım/parsel temizliği yeni Sentinel hareketi gelene kadar takip havuzunda kalır. Bunun dışında yalnız insanın TEKRAR_GIT dediği kayıt veya en fazla 2 günlük güncel Sentinel kanıtı taşıyan güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.
@@ -30,7 +32,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** Tekrar saha kontrolü · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.331547,26.644338)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.331547,26.644338) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331547/26.644338)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 2. GECİKEN — Musalla
@@ -40,7 +42,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 17 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303146,26.297443)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.303146,26.297443) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.303146/26.297443)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 3. GECİKEN — Musalla
@@ -50,7 +52,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 17 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301156,26.304197)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301156,26.304197) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.301156/26.304197)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 4. GECİKEN — Musalla
@@ -60,7 +62,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 17 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313366,26.307173)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313366,26.307173) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313366/26.307173)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 5. GECİKEN — Ovacık
@@ -70,7 +72,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 17 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263439,26.318163)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263439,26.318163) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.263439/26.318163)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 6. GECİKEN — Ilıca
@@ -80,7 +82,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 17 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297357,26.355253)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297357,26.355253) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297357/26.355253)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 7. GECİKEN — Gülbahçe
@@ -90,7 +92,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 16 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.333084,26.652352)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.333084,26.652352) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.333084/26.652352)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 8. GECİKEN — Musalla
@@ -100,7 +102,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 16 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294734,26.311523)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.294734,26.311523) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.294734/26.311523)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 9. GECİKEN — Alaçatı
@@ -110,7 +112,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 16 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285689,26.384330)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285689,26.384330) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.285689/26.384330)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 10. GECİKEN — Gülbahçe
@@ -120,7 +122,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 16 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.332190,26.652385)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.332190,26.652385) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332190/26.652385)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 11. GECİKEN — Gülbahçe
@@ -130,7 +132,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 16 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334541,26.651698)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334541,26.651698) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334541/26.651698)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 12. GECİKEN — Dalyan
@@ -140,7 +142,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 16 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.346380,26.301220)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.346380,26.301220) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.346380/26.301220)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 13. GECİKEN — Çiftlikköy
@@ -150,7 +152,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 16 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.287046,26.257491)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.287046,26.257491) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.287046/26.257491)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 14. GECİKEN — Dalyan
@@ -160,7 +162,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 16 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.355244,26.302251)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.355244,26.302251) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.355244/26.302251)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 15. GECİKEN — Çiftlikköy
@@ -170,7 +172,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 24.08.2026 → 26.08.2026
 - **Sinyal:** 16 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.290212,26.271915)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.290212,26.271915) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.290212/26.271915)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 16. GECİKEN — Gülbahçe
@@ -180,7 +182,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 16 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313469,26.638073)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.313469,26.638073) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313469/26.638073)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 17. GECİKEN — Uzunkuyu
@@ -190,7 +192,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 16 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.333094,26.610019)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.333094,26.610019) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.333094/26.610019)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 18. GECİKEN — Uzunkuyu
@@ -200,7 +202,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 16 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334813,26.602576)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334813,26.602576) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334813/26.602576)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 19. GECİKEN — Germiyan
@@ -210,7 +212,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.338330,26.486237)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.338330,26.486237) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338330/26.486237)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 20. GECİKEN — Germiyan
@@ -220,7 +222,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334079,26.491274)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.334079,26.491274) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334079/26.491274)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 21. GECİKEN — Mevki doğrulanmadı
@@ -230,7 +232,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.233862,26.405966)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.233862,26.405966) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.233862/26.405966)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 22. GECİKEN — Mevki doğrulanmadı
@@ -240,7 +242,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.344843,26.469042)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.344843,26.469042) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344843/26.469042)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 23. GECİKEN — Mevki doğrulanmadı
@@ -250,7 +252,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.254665,26.439850)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.254665,26.439850) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.254665/26.439850)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 24. GECİKEN — Germiyan
@@ -260,7 +262,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.320241,26.466180)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.320241,26.466180) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320241/26.466180)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 25. GECİKEN — Mevki doğrulanmadı
@@ -270,7 +272,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.247520,26.432638)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.247520,26.432638) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247520/26.432638)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 26. GECİKEN — Alaçatı
@@ -280,7 +282,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.220838,26.435386)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.220838,26.435386) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.220838/26.435386)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 27. GECİKEN — Ovacık
@@ -290,7 +292,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.219843,26.406080)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.219843,26.406080) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219843/26.406080)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 28. GECİKEN — Uzunkuyu
@@ -300,7 +302,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.208446,26.480489)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.208446,26.480489) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.208446/26.480489)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 29. GECİKEN — Uzunkuyu
@@ -310,7 +312,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.262913,26.573034)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.262913,26.573034) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.262913/26.573034)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 30. GECİKEN — Alaçatı
@@ -320,7 +322,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.249076,26.452004)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.249076,26.452004) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.249076/26.452004)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 31. GECİKEN — Alaçatı
@@ -330,7 +332,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.232526,26.450286)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.232526,26.450286) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.232526/26.450286)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 32. GECİKEN — Uzunkuyu
@@ -340,7 +342,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.201482,26.484496)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.201482,26.484496) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.201482/26.484496)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 33. GECİKEN — Uzunkuyu
@@ -350,7 +352,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.305420,26.536966)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.305420,26.536966) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.305420/26.536966)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 34. GECİKEN — Alaçatı
@@ -360,7 +362,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.246435,26.410087)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.246435,26.410087) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.246435/26.410087)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 35. GECİKEN — Germiyan
@@ -370,7 +372,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.319427,26.476025)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.319427,26.476025) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319427/26.476025)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 36. GECİKEN — Germiyan
@@ -380,7 +382,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.325859,26.469179)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.325859,26.469179) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.325859/26.469179)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 37. GECİKEN — Germiyan
@@ -390,7 +392,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.344761,26.468950)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.344761,26.468950) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344761/26.468950)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 38. GECİKEN — Alaçatı
@@ -400,7 +402,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.242726,26.400585)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.242726,26.400585) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.242726/26.400585)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 39. GECİKEN — Alaçatı
@@ -410,7 +412,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.256836,26.382613)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.256836,26.382613) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.256836/26.382613)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 40. GECİKEN — Mevki doğrulanmadı
@@ -420,7 +422,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.225541,26.421191)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.225541,26.421191) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.225541/26.421191)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 41. GECİKEN — Ovacık
@@ -430,7 +432,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.259188,26.310722)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.259188,26.310722) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.259188/26.310722)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 42. GECİKEN — Şifne
@@ -440,7 +442,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.342672,26.394633)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.342672,26.394633) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.342672/26.394633)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 43. GECİKEN — Germiyan
@@ -450,7 +452,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.332542,26.487156)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.332542,26.487156) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332542/26.487156)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 44. GECİKEN — Germiyan
@@ -460,7 +462,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.330823,26.479828)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.330823,26.479828) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.330823/26.479828)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 45. GECİKEN — Mevki doğrulanmadı
@@ -470,7 +472,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285870,26.484523)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285870,26.484523) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.285870/26.484523)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 46. GECİKEN — Mevki doğrulanmadı
@@ -480,7 +482,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 15 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.349546,26.492767)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.349546,26.492767) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.349546/26.492767)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 47. GECİKEN — Germiyan
@@ -490,7 +492,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.470988)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.470988) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307849/26.470988)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 48. GECİKEN — Mevki doğrulanmadı
@@ -500,7 +502,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.253218,26.415238)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.253218,26.415238) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253218/26.415238)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 49. GECİKEN — Mevki doğrulanmadı
@@ -510,7 +512,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.225450,26.408484)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.225450,26.408484) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.225450/26.408484)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 50. GECİKEN — Mevki doğrulanmadı
@@ -520,7 +522,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.309025,26.462631)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.309025,26.462631) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.309025/26.462631)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 51. GECİKEN — Mevki doğrulanmadı
@@ -530,7 +532,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.240736,26.438133)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.240736,26.438133) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.240736/26.438133)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 52. GECİKEN — Mevki doğrulanmadı
@@ -540,7 +542,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.233229,26.443399)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.233229,26.443399) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.233229/26.443399)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 53. GECİKEN — Mevki doğrulanmadı
@@ -550,7 +552,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.219300,26.413864)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.219300,26.413864) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.219300/26.413864)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 54. GECİKEN — Mevki doğrulanmadı
@@ -560,7 +562,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.241460,26.406080)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.241460,26.406080) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241460/26.406080)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 55. GECİKEN — Germiyan
@@ -570,7 +572,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.329738,26.489876)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.329738,26.489876) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.329738/26.489876)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 56. GECİKEN — Germiyan
@@ -580,7 +582,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.335979,26.483809)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.335979,26.483809) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.335979/26.483809)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 57. GECİKEN — Mevki doğrulanmadı
@@ -590,7 +592,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.344571,26.475452)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.344571,26.475452) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.344571/26.475452)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 58. GECİKEN — Mevki doğrulanmadı
@@ -600,7 +602,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 15 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.253128,26.424511)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.253128,26.424511) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.253128/26.424511)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 59. GECİKEN — Mevki doğrulanmadı
@@ -610,7 +612,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 14 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318432,26.613552)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318432,26.613552) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.318432/26.613552)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 60. GECİKEN — Dalyan
@@ -620,7 +622,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 14 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.338783,26.311638)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.338783,26.311638) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338783/26.311638)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 61. GECİKEN — Ovacık
@@ -630,7 +632,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 26.08.2026 → 29.08.2026
 - **Sinyal:** 14 gündür saha kontrolü bekliyor · Geniş değişim kümesine yalnız köşeden bağlı parsel ölçekli yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.223732,26.393030)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.223732,26.393030) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.223732/26.393030)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 62. GECİKEN — Germiyan
@@ -640,7 +642,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 14 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.317087,26.467118)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.317087,26.467118) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.317087/26.467118)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 63. GECİKEN — Mevki doğrulanmadı
@@ -650,7 +652,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 11 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.224908,26.400471)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.224908,26.400471) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.224908/26.400471)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 64. GECİKEN — Mevki doğrulanmadı
@@ -660,7 +662,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 11 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.227531,26.428861)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.227531,26.428861) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.227531/26.428861)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 65. GECİKEN — Mevki doğrulanmadı
@@ -670,7 +672,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 11 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.308663,26.462996) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308663/26.462996)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 66. GECİKEN — Mevki doğrulanmadı
@@ -680,7 +682,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 10 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.351445,26.467347)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.351445,26.467347) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.351445/26.467347)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 67. GECİKEN — Mevki doğrulanmadı
@@ -690,7 +692,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 10 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.287317,26.501813)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.287317,26.501813) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.287317/26.501813)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 68. GECİKEN — Germiyan
@@ -700,7 +702,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.338692,26.471920)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.338692,26.471920) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.338692/26.471920)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 69. GECİKEN — Mevki doğrulanmadı
@@ -710,7 +712,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.286775,26.505357)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.286775,26.505357) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.286775/26.505357)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 70. GECİKEN — Mevki doğrulanmadı
@@ -720,7 +722,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 10 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.217581,26.453034)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.217581,26.453034) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.217581/26.453034)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 71. GECİKEN — Germiyan
@@ -730,7 +732,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 10 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315537,26.486698)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315537,26.486698) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.315537/26.486698)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 72. GECİKEN — Germiyan
@@ -740,7 +742,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.308935,26.507418)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.308935,26.507418) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308935/26.507418)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 73. GECİKEN — Germiyan
@@ -750,7 +752,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.300432,26.516561)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.300432,26.516561) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.300432/26.516561)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 74. GECİKEN — Germiyan
@@ -760,7 +762,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 10 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.331275,26.484866)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.331275,26.484866) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331275/26.484866)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 75. GECİKEN — Germiyan
@@ -770,7 +772,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.326843,26.494813)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.326843,26.494813) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.326843/26.494813)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 76. GECİKEN — Mevki doğrulanmadı
@@ -780,7 +782,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 10 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.247610,26.561355)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.247610,26.561355) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.247610/26.561355)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 77. GECİKEN — Germiyan
@@ -790,7 +792,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 10 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.320150,26.466775) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.466775)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 78. GECİKEN — Mevki doğrulanmadı
@@ -800,7 +802,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.271579,26.305456)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.271579,26.305456) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.271579/26.305456)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 79. GECİKEN — Germiyan
@@ -810,7 +812,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.325125,26.475131)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.325125,26.475131) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.325125/26.475131)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 80. GECİKEN — Mevki doğrulanmadı
@@ -820,7 +822,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318793,26.615842)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318793,26.615842) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.318793/26.615842)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 81. GECİKEN — Musalla
@@ -830,7 +832,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.298442,26.305571)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.298442,26.305571) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.298442/26.305571)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 82. GECİKEN — Mevki doğrulanmadı
@@ -840,7 +842,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318703,26.610804)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318703,26.610804) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.318703/26.610804)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 83. GECİKEN — Ovacık
@@ -850,7 +852,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.269770,26.311523)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.269770,26.311523) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.269770/26.311523)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 84. GECİKEN — Mevki doğrulanmadı
@@ -860,7 +862,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.278544,26.309921)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.278544,26.309921) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.278544/26.309921)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 85. GECİKEN — Mevki doğrulanmadı
@@ -870,7 +872,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.278453,26.309577)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.278453,26.309577) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.278453/26.309577)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 86. GECİKEN — Alaçatı
@@ -880,7 +882,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.268414,26.364297)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.268414,26.364297) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.268414/26.364297)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 87. GECİKEN — Ovacık
@@ -890,7 +892,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.257288,26.329839)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.257288,26.329839) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.257288/26.329839)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 88. GECİKEN — Mevki doğrulanmadı
@@ -900,7 +902,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.243088,26.419016)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.243088,26.419016) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.243088/26.419016)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 89. GECİKEN — Musalla
@@ -910,7 +912,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297809,26.307975)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297809,26.307975) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297809/26.307975)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 90. GECİKEN — Mevki doğrulanmadı
@@ -920,7 +922,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Geniş değişim kümesine yalnız köşeden bağlı parsel ölçekli yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.215772,26.452672)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.215772,26.452672) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.215772/26.452672)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 91. GECİKEN — Gülbahçe
@@ -930,7 +932,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.319607,26.617445)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.319607,26.617445) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319607/26.617445)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 92. GECİKEN — Çiftlikköy
@@ -940,7 +942,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.272755,26.279585)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.272755,26.279585) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.272755/26.279585)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 93. GECİKEN — Mevki doğrulanmadı
@@ -950,7 +952,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.265248,26.428975)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.265248,26.428975) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265248/26.428975)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 94. GECİKEN — Mevki doğrulanmadı
@@ -960,7 +962,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.242183,26.456240)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.242183,26.456240) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.242183/26.456240)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 95. GECİKEN — Germiyan
@@ -970,7 +972,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.327386,26.485083)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.327386,26.485083) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.327386/26.485083)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 96. GECİKEN — Şifne
@@ -980,7 +982,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.326029,26.460133)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.326029,26.460133) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.326029/26.460133)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 97. GECİKEN — Germiyan
@@ -990,7 +992,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315990,26.468605)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315990,26.468605) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.315990/26.468605)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 98. GECİKEN — Germiyan
@@ -1000,7 +1002,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.314271,26.488069)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.314271,26.488069) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.314271/26.488069)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 99. GECİKEN — Germiyan
@@ -1010,7 +1012,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315447,26.502953)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315447,26.502953) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.315447/26.502953)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 100. GECİKEN — Mevki doğrulanmadı
@@ -1020,7 +1022,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.288764,26.482687)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.288764,26.482687) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.288764/26.482687)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 101. GECİKEN — Germiyan
@@ -1030,7 +1032,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.305950,26.512455)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.305950,26.512455) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.305950/26.512455)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 102. GECİKEN — Germiyan
@@ -1040,7 +1042,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.322954,26.474215)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.322954,26.474215) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.322954/26.474215)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 103. GECİKEN — Mevki doğrulanmadı
@@ -1050,7 +1052,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.257741,26.451317)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.257741,26.451317) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.257741/26.451317)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 104. GECİKEN — Mevki doğrulanmadı
@@ -1060,7 +1062,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.218576,26.408370)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.218576,26.408370) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.218576/26.408370)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 105. GECİKEN — Germiyan
@@ -1070,7 +1072,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315537,26.486671)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.315537,26.486671) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.315537/26.486671)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 106. GECİKEN — Mevki doğrulanmadı
@@ -1080,7 +1082,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 29.08.2026 → 03.09.2026
 - **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.237932,26.448780)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.237932,26.448780) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.237932/26.448780)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 107. GECİKEN — Alaçatı
@@ -1090,7 +1092,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.279720,26.375973)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.279720,26.375973) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.279720/26.375973)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 108. GECİKEN — Alaçatı
@@ -1100,7 +1102,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.282162,26.376774)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.282162,26.376774) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.282162/26.376774)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 109. GECİKEN — Alaçatı
@@ -1110,7 +1112,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.280353,26.376889)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.280353,26.376889) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.280353/26.376889)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 110. GECİKEN — Alaçatı
@@ -1120,7 +1122,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.278996,26.379636)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.278996,26.379636) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.278996/26.379636)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 111. GECİKEN — Alaçatı
@@ -1130,7 +1132,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.277820,26.400700)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.277820,26.400700) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.277820/26.400700)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 112. GECİKEN — Ovacık
@@ -1140,7 +1142,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.268052,26.315644)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.268052,26.315644) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.268052/26.315644)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 113. GECİKEN — Alaçatı
@@ -1150,7 +1152,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.275197,26.357314)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.275197,26.357314) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.275197/26.357314)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 114. GECİKEN — Ovacık
@@ -1160,7 +1162,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.271579,26.314614)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.271579,26.314614) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.271579/26.314614)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 115. GECİKEN — Mevki doğrulanmadı
@@ -1170,7 +1172,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318974,26.611824)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.318974,26.611824) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.318974/26.611824)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 116. GECİKEN — Gülbahçe
@@ -1180,7 +1182,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.314452,26.640674)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.314452,26.640674) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.314452/26.640674)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 117. GECİKEN — Mevki doğrulanmadı
@@ -1190,7 +1192,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.429322,26.576220)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.429322,26.576220) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.429322/26.576220)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 118. GECİKEN — Musalla
@@ -1200,7 +1202,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.298081,26.310264)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.298081,26.310264) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.298081/26.310264)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 119. GECİKEN — Alaçatı
@@ -1210,7 +1212,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.282704,26.376431)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.282704,26.376431) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.282704/26.376431)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 120. GECİKEN — Çiftlikköy
@@ -1220,7 +1222,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.279991,26.254056)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.279991,26.254056) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.279991/26.254056)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 121. GECİKEN — Alaçatı
@@ -1230,7 +1232,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.282433,26.365212)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.282433,26.365212) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.282433/26.365212)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 122. GECİKEN — Çiftlikköy
@@ -1240,7 +1242,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285780,26.239060)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.285780,26.239060) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.285780/26.239060)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 123. GECİKEN — Ovacık
@@ -1250,7 +1252,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.264524,26.319537)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.264524,26.319537) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.264524/26.319537)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 124. GECİKEN — Alaçatı
@@ -1260,7 +1262,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.267780,26.366014)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.267780,26.366014) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.267780/26.366014)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 125. GECİKEN — Ovacık
@@ -1270,7 +1272,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.251319,26.312554)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.251319,26.312554) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.251319/26.312554)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 126. GECİKEN — Ilıca
@@ -1280,7 +1282,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 8 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.307668,26.355711)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.307668,26.355711) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307668/26.355711)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 127. GECİKEN — Mevki doğrulanmadı
@@ -1290,7 +1292,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 03.09.2026 → 05.09.2026
 - **Sinyal:** 7 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.265157,26.679599)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.265157,26.679599) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265157/26.679599)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 128. GECİKEN — Musalla
@@ -1300,7 +1302,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297086,26.303281)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297086,26.303281) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297086/26.303281)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 129. GECİKEN — Mevki doğrulanmadı
@@ -1310,7 +1312,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263077,26.677997)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.263077,26.677997) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.263077/26.677997)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 130. GECİKEN — Dalyan
@@ -1320,7 +1322,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.362661,26.309348)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.362661,26.309348) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.362661/26.309348)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 131. GECİKEN — Ovacık
@@ -1330,7 +1332,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.270856,26.314271)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.270856,26.314271) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.270856/26.314271)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 132. GECİKEN — Mevki doğrulanmadı
@@ -1340,7 +1342,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297086,26.666090)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.297086,26.666090) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297086/26.666090)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 133. GECİKEN — Çiftlikköy
@@ -1350,7 +1352,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.282614,26.257262)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.282614,26.257262) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.282614/26.257262)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 134. GECİKEN — Ovacık
@@ -1360,7 +1362,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.269770,26.312096)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.269770,26.312096) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.269770/26.312096)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 135. GECİKEN — Musalla
@@ -1370,7 +1372,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.307126,26.299503)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.307126,26.299503) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307126/26.299503)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 136. GECİKEN — Ovacık
@@ -1380,7 +1382,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.277730,26.325718)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.277730,26.325718) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.277730/26.325718)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 137. GECİKEN — Ilıca
@@ -1390,7 +1392,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301246,26.354337)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.301246,26.354337) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.301246/26.354337)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 138. GECİKEN — Çiftlikköy
@@ -1400,7 +1402,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** 05.09.2026 → 08.09.2026
 - **Sinyal:** 5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
 - **Öncelik nedeni:** Eşik üstü uydu değişimi; normal saha sırası.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.275559,26.281874)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.275559,26.281874) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.275559/26.281874)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ### 139. GECİKEN — Mevki doğrulanmadı
@@ -1410,7 +1412,7 @@ Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 - **Görüntü aralığı:** - → -
 - **Sinyal:** 5 gündür saha kontrolü bekliyor
 - **Öncelik nedeni:** -
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.222918,26.391885)
+- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.222918,26.391885) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.222918/26.391885)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
 ## Bugünün yeni internet / sosyal medya bulguları
