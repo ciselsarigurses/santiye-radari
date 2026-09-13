@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-13 19:38 +0300",
+  "olusturma": "2026-09-13 19:42 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "otomatik_alarm": false,
@@ -49,7 +49,8 @@
       "ani_baslangic_orani": 53.47,
       "uc_sahne_gecerli_oran": 1.0,
       "en_yakin_250plus_m": 22,
-      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor."
+      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor.",
+      "son_esleme_mesafe_m": 0.0
     },
     {
       "mikro_iz_id": "MPEBF7CA504",
@@ -82,7 +83,8 @@
       "ani_baslangic_orani": 51.96,
       "uc_sahne_gecerli_oran": 1.0,
       "en_yakin_250plus_m": 28,
-      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor."
+      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor.",
+      "son_esleme_mesafe_m": 0.0
     },
     {
       "mikro_iz_id": "MP9712B7C80",
@@ -115,7 +117,8 @@
       "ani_baslangic_orani": 21.19,
       "uc_sahne_gecerli_oran": 1.0,
       "en_yakin_250plus_m": 10,
-      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor."
+      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor.",
+      "son_esleme_mesafe_m": 0.0
     },
     {
       "mikro_iz_id": "MPB918BE700",
@@ -148,7 +151,8 @@
       "ani_baslangic_orani": 7.04,
       "uc_sahne_gecerli_oran": 1.0,
       "en_yakin_250plus_m": 30,
-      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor."
+      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor.",
+      "son_esleme_mesafe_m": 0.0
     },
     {
       "mikro_iz_id": "MPC23861AFE",
@@ -181,7 +185,8 @@
       "ani_baslangic_orani": 11.34,
       "uc_sahne_gecerli_oran": 1.0,
       "en_yakin_250plus_m": 41,
-      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor."
+      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor.",
+      "son_esleme_mesafe_m": 0.0
     },
     {
       "mikro_iz_id": "MPC739F16D4",
@@ -214,7 +219,8 @@
       "ani_baslangic_orani": 10.38,
       "uc_sahne_gecerli_oran": 1.0,
       "en_yakin_250plus_m": 10,
-      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor."
+      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor.",
+      "son_esleme_mesafe_m": 0.0
     },
     {
       "mikro_iz_id": "MPFDC884DFF",
@@ -247,7 +253,8 @@
       "ani_baslangic_orani": 14.09,
       "uc_sahne_gecerli_oran": 1.0,
       "en_yakin_250plus_m": 14,
-      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor."
+      "karar_nedeni": "Ana 250 m²+ adaya yakın olduğu için bağımsız şantiye sayılmayan; ancak güçlü spektral/kompakt + temporal kanıtı bulunan 150-249 m² parça kalıcı diagnostik hafızada tutuluyor.",
+      "son_esleme_mesafe_m": 0.0
     },
     {
       "mikro_iz_id": "MP2C53DB376",
