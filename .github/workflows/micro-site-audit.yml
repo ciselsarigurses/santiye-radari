@@ -24,6 +24,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   # Bu katman santiye.db yazmaz; yalnız MİKRO/Gülbahçe diagnostik JSON'larını
@@ -146,3 +147,24 @@ jobs:
 
           echo "MİKRO diagnostik üç güvenli yeniden hesaplama denemesinde kaydedilemedi."
           exit 1
+
+      - name: Yeni-sahne zincirinde MİKRO kısa listeyi bekletmeden başlat
+        if: ${{ success() && github.event_name == 'workflow_dispatch' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          response_code="$(curl -sS -o /tmp/micro-shortlist-dispatch.txt -w '%{http_code}' \
+            -L -X POST \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "https://api.github.com/repos/${REPOSITORY}/actions/workflows/micro-site-shortlist.yml/dispatches" \
+            -d '{"ref":"main"}')"
+          if [[ "$response_code" != "204" ]]; then
+            cat /tmp/micro-shortlist-dispatch.txt
+            echo "MİKRO kısa liste workflow'u başlatılamadı; HTTP ${response_code}."
+            exit 1
+          fi
+          echo "MİKRO kısa liste, yeni-sahne diagnostik taramasının hemen ardından workflow_dispatch ile başlatıldı."
