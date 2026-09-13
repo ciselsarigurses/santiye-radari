@@ -116,7 +116,12 @@ def _layer(row, temporal):
     temporal_status = str((temporal or {}).get("temporal_durum") or "").strip().upper()
 
     if target_layer == "MIKRO_DIAGNOSTIK":
-        return "SAR_MIKRO_DIAGNOSTIK"
+        # Haritada aktif MIKRO adayi yalniz mevcut birlesik MIKRO karar kapisini
+        # gecmis hedef olsun. Sahada zaten dogrulanmis kalibrasyon noktasi SAR'da
+        # zayifsa veri kaybolmaz; dusuk-kanit arka planinda izlenir.
+        if bool(row.get("mikro_guclu_diagnostik")):
+            return "SAR_MIKRO_DIAGNOSTIK"
+        return "SAR_DUSUK_KANIT_ARKA_PLAN"
     if target_layer == "SAHA_ONCUL_SAR_DIAGNOSTIK":
         if score is not None and score >= 2.0 and spatial == "KOMPAKT_LOKAL_DESTEKLI":
             return "SAR_SAHA_ONCUL_GUCLENIYOR"
@@ -279,6 +284,7 @@ def _self_check():
                         "sar_lokal_degisim_skor_db": 0.438,
                         "sar_mekansal_ayrim": "TEK_POL_CEVRE_DEGISIMI",
                         "mikro_saha_dogrulandi": True,
+                        "mikro_guclu_diagnostik": False,
                     }
                 ],
             },
@@ -306,8 +312,23 @@ def _self_check():
     layers = {f["properties"]["harita_katmani"] for f in geo["features"]}
     assert "SAR_GUCLU_LOKAL_GENIS_ARKA_PLANLI" in layers
     assert "SAR_SAHA_ONCUL" in layers
-    assert "SAR_MIKRO_DIAGNOSTIK" in layers
+    assert "SAR_DUSUK_KANIT_ARKA_PLAN" in layers
     assert "SAR_GENIS_YUZEY_ARKA_PLAN" in layers
+    assert _layer(
+        {
+            "hedef_katmani": "MIKRO_DIAGNOSTIK",
+            "mikro_guclu_diagnostik": True,
+        },
+        {},
+    ) == "SAR_MIKRO_DIAGNOSTIK"
+    assert _layer(
+        {
+            "hedef_katmani": "MIKRO_DIAGNOSTIK",
+            "mikro_saha_dogrulandi": True,
+            "mikro_guclu_diagnostik": False,
+        },
+        {},
+    ) == "SAR_DUSUK_KANIT_ARKA_PLAN"
     assert geo["alarm"] is False and geo["saha_gorevi"] is False
     assert geo["ana_sentinel_esigi_m2"] == 250
     assert geo["mikro_aralik_m2"] == [150, 249]
