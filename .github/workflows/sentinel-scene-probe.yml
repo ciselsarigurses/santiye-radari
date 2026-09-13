@@ -25,7 +25,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   actions: write
 
 concurrency:
@@ -116,6 +116,34 @@ jobs:
             /tmp/sentinel1-rtc-map.geojson
           if-no-files-found: error
           retention-days: 3
+
+      - name: SAR harita snapshotını yalnız güncelse yayınla
+        shell: bash
+        run: |
+          # Streamlit SAR Güncel Zemin sayfası repodaki snapshotı okur. Artifact
+          # tek başına sayfayı güncellemediği için saatlik ölçümü semantik değişim
+          # varsa repoya yansıt. Main bu koşu sırasında ilerlediyse eski hedef setini
+          # yayınlamak yerine bu turu atla; sonraki saatlik yoklama güncel main ile üretir.
+          git fetch origin main
+          if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+            echo "Main bu yoklama sırasında ilerledi; eski SAR snapshotı yayınlanmadı."
+            exit 0
+          fi
+
+          cp /tmp/sentinel1-rtc-map.geojson sentinel1_rtc_map.geojson
+          if git diff --quiet -- sentinel1_rtc_map.geojson; then
+            echo "SAR harita snapshotında semantik değişiklik yok."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+          git add sentinel1_rtc_map.geojson
+          git commit -m "Radar: saatlik SAR harita snapshotını güncelle"
+          if ! git push origin HEAD:main; then
+            echo "Main push anında ilerledi; stale snapshot zorlanmadı. Sonraki saatlik yoklama yeniden üretecek."
+            exit 0
+          fi
 
       - name: Yeni üretim sahnesi varsa ana radar zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
