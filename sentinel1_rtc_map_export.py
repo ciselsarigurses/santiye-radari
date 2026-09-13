@@ -130,6 +130,12 @@ def _layer(row, temporal):
             return "SAR_MIKRO_DIAGNOSTIK"
         return "SAR_DUSUK_KANIT_ARKA_PLAN"
     if target_layer == "SAHA_ONCUL_SAR_DIAGNOSTIK":
+        # Temporal guard sahada dogrulanmis yikim/temizlik onculunde zayif tabandan
+        # yeni, cift-polarizasyonlu ve lokal bir yukselisi ayri sinifa koyuyorsa,
+        # 2 dB guclu-esigini bekletmeden haritada "gucleniyor" olarak gorunur kıl.
+        # Bu yalniz diagnostik sunumdur; alarm/gorev uretmez ve 250 m2 esigini degistirmez.
+        if temporal_status == "SAHA_ONCUL_TAZE_LOKAL_YUKSELIS":
+            return "SAR_SAHA_ONCUL_GUCLENIYOR"
         if score is not None and score >= 2.0 and spatial == "KOMPAKT_LOKAL_DESTEKLI":
             return "SAR_SAHA_ONCUL_GUCLENIYOR"
         return "SAR_SAHA_ONCUL"
@@ -345,6 +351,14 @@ def _self_check():
         },
         {},
     ) == "SAR_DUSUK_KANIT_ARKA_PLAN"
+    assert _layer(
+        {
+            "hedef_katmani": "SAHA_ONCUL_SAR_DIAGNOSTIK",
+            "sar_lokal_degisim_skor_db": 1.8,
+            "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
+        },
+        {"temporal_durum": "SAHA_ONCUL_TAZE_LOKAL_YUKSELIS"},
+    ) == "SAR_SAHA_ONCUL_GUCLENIYOR"
     assert _layer(
         {
             "hedef_katmani": "ANA_250_PLUS",
