@@ -205,10 +205,10 @@
       "properties": {
         "alan_m2": 10801,
         "alarm": false,
-        "arka_plan": false,
+        "arka_plan": true,
         "bolge": "cesme",
         "eski_tarih": "2026-09-06",
-        "harita_katmani": "SAR_LOKAL_ORTA",
+        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
         "hedef_katmani": "ANA_250_PLUS",
         "kaynak": "coverage_blind_area_audit.json",
         "mahalle_yaklasik": "Ilıca",
@@ -803,10 +803,9 @@
     }
   ],
   "layer_counts": {
-    "SAR_DUSUK_KANIT_ARKA_PLAN": 13,
+    "SAR_DUSUK_KANIT_ARKA_PLAN": 14,
     "SAR_GENIS_YUZEY_ARKA_PLAN": 5,
     "SAR_GUCLU_LOKAL": 1,
-    "SAR_LOKAL_ORTA": 1,
     "SAR_SAHA_ONCUL": 1
   },
   "mikro_aralik_m2": [
