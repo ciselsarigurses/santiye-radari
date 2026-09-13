@@ -14,6 +14,7 @@ from pathlib import Path
 
 MAIN_MIN_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
+LARGE_UNCONFIRMED_AREA_M2 = 10_000
 BACKGROUND_LAYERS = {
     "SAR_GENIS_YUZEY_ARKA_PLAN",
     "SAR_DUSUK_KANIT_ARKA_PLAN",
@@ -23,6 +24,11 @@ BROAD_SPATIAL = {
     "GENIS_CEVRE_HAREKETI_BASKIN",
     "GENIS_CEVRE_DEGISIMI_ESLIK_EDIYOR",
     "TEK_POL_CEVRE_DEGISIMI",
+}
+TEMPORAL_LOCAL_SUPPORT = {
+    "ANI_YENI_LOKAL_BASLANGIC_DESTEKLI",
+    "ARDISIK_GUCLU_LOKAL_HAREKET",
+    "ARDISIK_ORTA_LOKAL_HAREKET",
 }
 
 
@@ -113,6 +119,7 @@ def _layer(row, temporal):
     target_layer = str(row.get("hedef_katmani") or "").strip().upper()
     spatial = str(row.get("sar_mekansal_ayrim") or "").strip().upper()
     score = _num(row.get("sar_lokal_degisim_skor_db"))
+    area = _num(row.get("alan_m2"))
     temporal_status = str((temporal or {}).get("temporal_durum") or "").strip().upper()
 
     if target_layer == "MIKRO_DIAGNOSTIK":
@@ -135,6 +142,15 @@ def _layer(row, temporal):
     if spatial in BROAD_SPATIAL:
         return "SAR_GENIS_YUZEY_ARKA_PLAN"
     if score >= 1.0 and spatial == "LOKAL_AYRIM_DESTEKLI":
+        # 10.000 m2+ orta-kuvvette tek aralik lokal sinyal, operasyon tarafinda da
+        # taze-kazi onceligi alamaz. Temporal ani baslangic/devam kaniti yoksa haritada
+        # aktif aday gibi gostermek yerine veriyi koruyup arka planda izle.
+        if (
+            area is not None
+            and area >= LARGE_UNCONFIRMED_AREA_M2
+            and temporal_status not in TEMPORAL_LOCAL_SUPPORT
+        ):
+            return "SAR_DUSUK_KANIT_ARKA_PLAN"
         return "SAR_LOKAL_ORTA"
     return "SAR_DUSUK_KANIT_ARKA_PLAN"
 
@@ -329,6 +345,33 @@ def _self_check():
         },
         {},
     ) == "SAR_DUSUK_KANIT_ARKA_PLAN"
+    assert _layer(
+        {
+            "hedef_katmani": "ANA_250_PLUS",
+            "alan_m2": 12_000,
+            "sar_lokal_degisim_skor_db": 1.5,
+            "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
+        },
+        {},
+    ) == "SAR_DUSUK_KANIT_ARKA_PLAN"
+    assert _layer(
+        {
+            "hedef_katmani": "ANA_250_PLUS",
+            "alan_m2": 800,
+            "sar_lokal_degisim_skor_db": 1.5,
+            "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
+        },
+        {},
+    ) == "SAR_LOKAL_ORTA"
+    assert _layer(
+        {
+            "hedef_katmani": "ANA_250_PLUS",
+            "alan_m2": 12_000,
+            "sar_lokal_degisim_skor_db": 1.5,
+            "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
+        },
+        {"temporal_durum": "ARDISIK_ORTA_LOKAL_HAREKET"},
+    ) == "SAR_LOKAL_ORTA"
     assert geo["alarm"] is False and geo["saha_gorevi"] is False
     assert geo["ana_sentinel_esigi_m2"] == 250
     assert geo["mikro_aralik_m2"] == [150, 249]
