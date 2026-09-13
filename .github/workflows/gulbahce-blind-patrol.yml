@@ -7,10 +7,12 @@ on:
       - "gulbahce_blind_patrol_guard.py"
       - "gulbahce_current_blind_patrol_bridge.py"
       - "gulbahce_current_blind_urgency_guard.py"
+      - "gulbahce_sar_blind_priority_guard.py"
       - "gulbahce_patrol_surface_guard.py"
       - "gulbahce_latest_state_blind_review.py"
       - "gulbahce_nearby_blind_check_guard.py"
       - "gulbahce_micro_blind_capacity.json"
+      - "sentinel1_rtc_map.geojson"
       - "parcel_precheck_links.py"
       - "requirements.txt"
       - ".github/workflows/gulbahce-blind-patrol.yml"
@@ -77,6 +79,15 @@ jobs:
       - name: Seçilen devriyenin güncel körlüğü kapsamasını yeniden ölç
         run: python gulbahce_latest_state_blind_review.py
 
+      - name: Gülbahçe güçlü SAR körlük önceliği öz testi
+        run: python gulbahce_sar_blind_priority_guard.py --check-only
+
+      - name: Güçlü SAR+temporal kanıtını güncel körlük devriyesinde öncele
+        run: python gulbahce_sar_blind_priority_guard.py
+
+      - name: SAR önceliği sonrası güncel körlük kapsamasını yeniden ölç
+        run: python gulbahce_latest_state_blind_review.py
+
       - name: Gülbahçe taze güncel-körlük ara-gün koruması öz testi
         run: python gulbahce_current_blind_urgency_guard.py --check-only
 
@@ -119,6 +130,9 @@ jobs:
             python gulbahce_latest_state_blind_review.py
             python gulbahce_current_blind_patrol_bridge.py --check-only
             python gulbahce_current_blind_patrol_bridge.py
+            python gulbahce_latest_state_blind_review.py
+            python gulbahce_sar_blind_priority_guard.py --check-only
+            python gulbahce_sar_blind_priority_guard.py
             python gulbahce_latest_state_blind_review.py
             python gulbahce_current_blind_urgency_guard.py --check-only
             python gulbahce_current_blind_urgency_guard.py
