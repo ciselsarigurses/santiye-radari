@@ -13,9 +13,9 @@
   "yeni_mikro_inceleme_adayi": 0,
   "guncel_saha_eslesmesi_arka_plan": 1,
   "guncel_saha_eslesmesi_sonuclari": {
-    "SANTIYE_KAZI": 1,
+    "SANTIYE_KAZI": 0,
     "TARLA_BITKI": 0,
-    "YANLIS_POZITIF": 0,
+    "YANLIS_POZITIF": 1,
     "YIKIM_TEMIZLIK": 0,
     "YOL_ALTYAPI": 0
   },
@@ -56,11 +56,11 @@
       "guncel_saha_eslesmesi": true,
       "saha_eslesme_mesafe_m": 0.0,
       "saha_eslesme_gorev_id": "MM-20260911-CIFTLIKKOY-01",
-      "saha_eslesme_sonucu": "SANTIYE_KAZI",
+      "saha_eslesme_sonucu": "YANLIS_POZITIF",
       "saha_kontrolu_bekliyor": false,
       "manuel_saha_dogrulamasi": true,
-      "manuel_saha_dogrulama_tarihi": "2026-09-11",
-      "manuel_saha_kanit_tipi": "KULLANICI_SAHA_FOTOGRAFI",
+      "manuel_saha_dogrulama_tarihi": "2026-09-13",
+      "manuel_saha_kanit_tipi": "KULLANICI_SAHA_GERI_BILDIRIMI",
       "manuel_saha_konum_dogrulama": "KULLANICI_ADAY_ESLEMESI_GPS_EXIF_YOK",
       "saha_arka_plan_nedeni": "Aynı Sentinel sahnesindeki MİKRO aday için manuel saha sonucu kaydedildi; yeni fırsat gibi tekrar gösterilmedi. Daha yeni Sentinel sahnesinde hareket yeniden oluşursa aday tekrar normal değerlendirmeye döner."
     }
@@ -105,11 +105,11 @@
       "guncel_saha_eslesmesi": true,
       "saha_eslesme_mesafe_m": 0.0,
       "saha_eslesme_gorev_id": "MM-20260911-CIFTLIKKOY-01",
-      "saha_eslesme_sonucu": "SANTIYE_KAZI",
+      "saha_eslesme_sonucu": "YANLIS_POZITIF",
       "saha_kontrolu_bekliyor": false,
       "manuel_saha_dogrulamasi": true,
-      "manuel_saha_dogrulama_tarihi": "2026-09-11",
-      "manuel_saha_kanit_tipi": "KULLANICI_SAHA_FOTOGRAFI",
+      "manuel_saha_dogrulama_tarihi": "2026-09-13",
+      "manuel_saha_kanit_tipi": "KULLANICI_SAHA_GERI_BILDIRIMI",
       "manuel_saha_konum_dogrulama": "KULLANICI_ADAY_ESLEMESI_GPS_EXIF_YOK",
       "saha_arka_plan_nedeni": "Aynı Sentinel sahnesindeki MİKRO aday için manuel saha sonucu kaydedildi; yeni fırsat gibi tekrar gösterilmedi. Daha yeni Sentinel sahnesinde hareket yeniden oluşursa aday tekrar normal değerlendirmeye döner."
     }
