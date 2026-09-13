@@ -11,6 +11,7 @@ on:
       - "sentinel1_rtc_quality_guard.py"
       - "sentinel1_rtc_locality_guard.py"
       - "sentinel1_rtc_temporal_guard.py"
+      - "sentinel1_rtc_medium_temporal_guard.py"
       - "sentinel1_rtc_target_pair_gapfill.py"
       - "sentinel1_rtc_gapfill_locality_guard.py"
       - "sentinel1_rtc_map_export.py"
@@ -61,6 +62,7 @@ jobs:
           python sentinel1_rtc_quality_guard.py --self-check-only
           python sentinel1_rtc_locality_guard.py --self-check-only
           python sentinel1_rtc_temporal_guard.py --self-check-only
+          python sentinel1_rtc_medium_temporal_guard.py --self-check-only
           python sentinel1_rtc_target_pair_gapfill.py --self-check-only
           python sentinel1_rtc_gapfill_locality_guard.py --self-check-only
           python sentinel1_rtc_map_export.py --self-check-only
@@ -97,13 +99,21 @@ jobs:
       - name: Hedefe özel RTC gapfill sonuçlarında geniş-yüzey/lokal ayrımını doğrula
         run: python sentinel1_rtc_gapfill_locality_guard.py --input /tmp/sentinel1-rtc-gapfill.json
 
-      - name: SAR diagnostiklerini harita GeoJSON katmanına dönüştür
+      - name: SAR diagnostiklerinden temel harita GeoJSON katmanını üret
         run: |
           python sentinel1_rtc_map_export.py \
             --rtc /tmp/sentinel1-rtc.json \
             --temporal /tmp/sentinel1-rtc-temporal.json \
             --gapfill /tmp/sentinel1-rtc-gapfill.json \
-            --output /tmp/sentinel1-rtc-map.geojson
+            --output /tmp/sentinel1-rtc-map-base.geojson
+
+      - name: Orta kuvvette lokal ANA sinyallerini üçüncü sahneyle ayır ve haritayı güvenli sonlandır
+        run: |
+          python sentinel1_rtc_medium_temporal_guard.py \
+            --input /tmp/sentinel1-rtc.json \
+            --base-map /tmp/sentinel1-rtc-map-base.geojson \
+            --map-output /tmp/sentinel1-rtc-map.geojson \
+            | tee /tmp/sentinel1-rtc-medium-temporal.json
 
       - name: SAR diagnostiklerini kısa süreli sakla
         uses: actions/upload-artifact@v4
@@ -112,6 +122,7 @@ jobs:
           path: |
             /tmp/sentinel1-rtc.json
             /tmp/sentinel1-rtc-temporal.json
+            /tmp/sentinel1-rtc-medium-temporal.json
             /tmp/sentinel1-rtc-gapfill.json
             /tmp/sentinel1-rtc-map.geojson
           if-no-files-found: error
