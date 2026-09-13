@@ -5557,6 +5557,7 @@
     "guncel_sahne_yas_gun": 0,
     "guncel_sahne_acil_kor_uygun_aday_sayisi": 3,
     "guncel_sahne_ara_gun_rotasyon_offset": null,
+    "guncel_sahne_ara_gun_hedefi_zaten_kapsaniyor": false,
     "guncel_sahne_kalici_kor_rotasyon_offset": null
   },
   "gulbahce_devriye_yuzey_korumasi": {
