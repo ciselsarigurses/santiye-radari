@@ -36,6 +36,9 @@ MICRO_RANGE_M2 = [150, 249]
 MIN_PAIR_GAP_HOURS = 24
 STRONG_LOCAL_DB = 2.0
 PRECURSOR_MIN_DB = 1.0
+PRECURSOR_RISE_MIN_DB = 1.5
+PRECURSOR_RISE_MIN_DELTA_DB = 1.0
+PRECURSOR_PREVIOUS_MAX_DB = 1.0
 PRECURSOR_LAYER = "SAHA_ONCUL_SAR_DIAGNOSTIK"
 EXPECTED_REGIONS = {"cesme", "uzunkuyu", "gulbahce"}
 LOCAL_CLASSES = {"KOMPAKT_LOKAL_DESTEKLI", "LOKAL_AYRIM_DESTEKLI"}
@@ -119,6 +122,33 @@ def _is_field_precursor(target):
     return bool(target.get("saha_dogrulanmis_yikim_onculu")) or str(
         target.get("hedef_katmani") or ""
     ) == PRECURSOR_LAYER
+
+
+def _field_precursor_rise_class(target, current_score, previous_evidence, previous_locality):
+    """Sahada dogrulanmis onculde zayif tabandan taze lokal yukselisi ayir."""
+    if not _is_field_precursor(target):
+        return None
+    if str(target.get("sar_polarizasyon_uyumu") or "") not in {"CIFT_POL_ORTA", "CIFT_POL_GUCLU"}:
+        return None
+    if str(target.get("sar_mekansal_ayrim") or "") not in LOCAL_CLASSES:
+        return None
+    prev_score = previous_evidence.get("konservatif_skor_db")
+    if prev_score is None:
+        return None
+    try:
+        prev_score = float(prev_score)
+        current_score = float(current_score)
+    except (TypeError, ValueError):
+        return None
+    if str(previous_locality.get("durum") or "VERI_YOK") in BROAD_CLASSES:
+        return None
+    if current_score < PRECURSOR_RISE_MIN_DB:
+        return None
+    if prev_score >= PRECURSOR_PREVIOUS_MAX_DB:
+        return None
+    if (current_score - prev_score) < PRECURSOR_RISE_MIN_DELTA_DB:
+        return None
+    return "SAHA_ONCUL_TAZE_LOKAL_YUKSELIS"
 
 
 def _selection_mode(target):
@@ -232,6 +262,9 @@ def inspect_region(region_row, search_fn=rtc._query_rtc_items, read_fn=rtc._read
             current_score = float(target.get("sar_lokal_degisim_skor_db"))
         except (TypeError, ValueError):
             current_score = 0.0
+        temporal_status = _field_precursor_rise_class(
+            target, current_score, evidence, locality
+        ) or _temporal_class(current_score, evidence, locality)
         prev_dt = s1._iso_datetime(predecessor)
         old_dt = s1._iso_datetime(current_old)
         row.update({
@@ -242,7 +275,7 @@ def inspect_region(region_row, search_fn=rtc._query_rtc_items, read_fn=rtc._read
             "onceki_sar_polarizasyon_uyumu": evidence.get("durum"),
             "onceki_sar_mekansal_ayrim": locality.get("durum"),
             "onceki_sar_cevre_degisim_tepe_db": locality.get("cevre_tepe_db"),
-            "temporal_durum": _temporal_class(current_score, evidence, locality),
+            "temporal_durum": temporal_status,
         })
         if previous_metrics:
             row["onceki_polarizasyon_metrikleri"] = previous_metrics
@@ -258,6 +291,9 @@ def inspect_region(region_row, search_fn=rtc._query_rtc_items, read_fn=rtc._read
             1
             for row in checked
             if row.get("temporal_secim_nedeni") == "SAHA_ONCUL_ORTA_PLUS" and row.get("onceki_item")
+        ),
+        "saha_oncul_taze_lokal_yukselis": sum(
+            1 for row in checked if row.get("temporal_durum") == "SAHA_ONCUL_TAZE_LOKAL_YUKSELIS"
         ),
         "ani_yeni_lokal_baslangic_destekli": sum(
             1 for row in checked if row.get("temporal_durum") == "ANI_YENI_LOKAL_BASLANGIC_DESTEKLI"
@@ -302,6 +338,9 @@ def inspect_payload(payload, search_fn=rtc._query_rtc_items, read_fn=rtc._read_t
         "ucuncu_sahne_bulunan_hedef": sum(int(row.get("ucuncu_sahne_bulunan_hedef") or 0) for row in rows),
         "saha_oncul_ucuncu_sahne_bulunan": sum(
             int(row.get("saha_oncul_ucuncu_sahne_bulunan") or 0) for row in rows
+        ),
+        "saha_oncul_taze_lokal_yukselis": sum(
+            int(row.get("saha_oncul_taze_lokal_yukselis") or 0) for row in rows
         ),
         "ani_yeni_lokal_baslangic_destekli": sum(int(row.get("ani_yeni_lokal_baslangic_destekli") or 0) for row in rows),
         "genis_arka_planli_ani_lokal_baslangic": sum(
@@ -381,6 +420,36 @@ def self_check():
         "saha_dogrulanmis_yikim_onculu": False,
     }
     assert _selection_mode(ordinary_medium) is None
+
+    rising_precursor = {
+        **precursor,
+        "sar_lokal_degisim_skor_db": 1.8,
+        "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
+    }
+    assert _field_precursor_rise_class(
+        rising_precursor,
+        1.8,
+        {"konservatif_skor_db": 0.45},
+        {"durum": "KARISIK_DUSUK_LOKALLIK"},
+    ) == "SAHA_ONCUL_TAZE_LOKAL_YUKSELIS"
+    assert _field_precursor_rise_class(
+        ordinary_medium,
+        1.8,
+        {"konservatif_skor_db": 0.45},
+        {"durum": "KARISIK_DUSUK_LOKALLIK"},
+    ) is None
+    assert _field_precursor_rise_class(
+        rising_precursor,
+        1.4,
+        {"konservatif_skor_db": 0.45},
+        {"durum": "KARISIK_DUSUK_LOKALLIK"},
+    ) is None
+    assert _field_precursor_rise_class(
+        rising_precursor,
+        1.8,
+        {"konservatif_skor_db": 0.45},
+        {"durum": "GENIS_CEVRE_HAREKETI_BASKIN"},
+    ) is None
     print("Sentinel-1 RTC uc sahne temporal guard self-check OK")
 
 
