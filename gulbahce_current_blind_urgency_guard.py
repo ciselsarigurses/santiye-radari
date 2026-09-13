@@ -85,6 +85,50 @@ def _non_duty_gap_offset(day, source_date, candidate_count):
     return (previous_duty_offset + gap_step) % candidate_count
 
 
+def _target_is_already_covered(current_payload, candidate):
+    """Seçilecek ara-gün kümesinin kendisinin mevcut devriyece kapsanıp kapsanmadığını ölç.
+
+    `secilen_devriye_guncel_korlugu_kapsiyor` yalnız *bir* güncel kör kümenin
+    kapsandığını söyler; birden fazla küme varken bunu tüm sahne için kullanmak kalan
+    körlüğü yanlışlıkla kapatabiliyordu. Güncel review küme-bazlı kapsama bilgisini
+    taşıyorsa hedef koordinatla eşleştir; eski payloadlarda küme metadatası yoksa
+    geriye dönük olarak global bite güvenli biçimde düş.
+    """
+    if not isinstance(candidate, dict):
+        return False
+
+    try:
+        target_lat = float(candidate.get("enlem"))
+        target_lon = float(candidate.get("boylam"))
+        target_area = int(candidate.get("alan_m2") or 0)
+    except (TypeError, ValueError):
+        return False
+
+    matched_cluster = False
+    for raw in (current_payload or {}).get("guncel_sahne_kor_kumeleri") or []:
+        if not isinstance(raw, dict):
+            continue
+        try:
+            lat = float(raw.get("enlem"))
+            lon = float(raw.get("boylam"))
+            area = int(raw.get("alan_m2") or 0)
+        except (TypeError, ValueError):
+            continue
+        if (
+            abs(lat - target_lat) <= 0.00001
+            and abs(lon - target_lon) <= 0.00001
+            and area == target_area
+        ):
+            matched_cluster = True
+            if "secilen_devriye_kapsiyor" in raw:
+                return raw.get("secilen_devriye_kapsiyor") is True
+            break
+
+    if matched_cluster:
+        return False
+    return (current_payload or {}).get("secilen_devriye_guncel_korlugu_kapsiyor") is True
+
+
 def apply_fresh_blind_urgency(
     current_payload,
     audit_payload,
@@ -118,14 +162,12 @@ def apply_fresh_blind_urgency(
 
     source_date = str((current_payload or {}).get("kaynak_son_tarih") or "")
     source_age = _source_age_days(day, source_date)
-    already_covered = (
-        (current_payload or {}).get("secilen_devriye_guncel_korlugu_kapsiyor") is True
-        or any(
-            item.get("gulbahce_guncel_sahne_korlugu") is True
-            and str(item.get("gulbahce_guncel_sahne_tarihi") or "") == source_date
-            for item in existing
-        )
-    )
+    offset = None
+    chosen = None
+    if not duty and eligible and source_age is not None:
+        offset = _non_duty_gap_offset(day, source_date, len(eligible))
+        chosen = dict(eligible[offset])
+    target_already_covered = _target_is_already_covered(current_payload, chosen)
 
     guard = dict(report.get("gulbahce_kor_alan_devriye_korumasi") or {})
     guard.update(
@@ -136,7 +178,8 @@ def apply_fresh_blind_urgency(
             "guncel_sahne_kalici_gorunurluk_borcu": False,
             "guncel_sahne_yas_gun": source_age,
             "guncel_sahne_acil_kor_uygun_aday_sayisi": len(eligible),
-            "guncel_sahne_ara_gun_rotasyon_offset": None,
+            "guncel_sahne_ara_gun_rotasyon_offset": offset,
+            "guncel_sahne_ara_gun_hedefi_zaten_kapsaniyor": target_already_covered,
             "guncel_sahne_kalici_kor_rotasyon_offset": None,
         }
     )
@@ -144,8 +187,8 @@ def apply_fresh_blind_urgency(
     common = (
         not duty
         and east_key is not None
-        and bool(eligible)
-        and not already_covered
+        and chosen is not None
+        and not target_already_covered
         and source_age is not None
     )
     urgent = common and MIN_URGENT_AGE_DAYS <= source_age <= MAX_URGENT_AGE_DAYS
@@ -158,8 +201,6 @@ def apply_fresh_blind_urgency(
     # Duty günlerinin arasında sürekli ilk kör kümeyi tekrar etmek yerine, mevcut
     # iki günlük rotasyonun boşta bıraktığı farklı kümeyi temsil et. Böylece özellikle
     # üç adaylı güncel bir sahnede 15 Eylül öncesi/sonrası görünürlük borcu küçülür.
-    offset = _non_duty_gap_offset(day, source_date, len(eligible))
-    chosen = dict(eligible[offset])
     report["kor_alan_saha_devriyesi"] = (other + [chosen])[:TOTAL_LIMIT]
 
     reason = (
@@ -196,10 +237,11 @@ def apply_fresh_blind_urgency(
         "kanıtlı 250-6500 m² gerçek kalite körlüğü mevcut devriye tarafından "
         "kapsanmıyorsa, 1-2 günlük taze pencerede iki günlük duty rotasyonunun boşta "
         "bıraktığı farklı güvenli kör hücre ara-gün istisnası olarak temsil edilir. "
-        "Daha yeni kullanılabilir Sentinel sahnesi gelmezse aynı en-yeni sahnenin "
-        "çözülmemiş kara-kör kümeleri görünürlük borcu olarak aynı çeşitlendirilmiş "
-        "ara-gün rotasyonunda tutulur; böylece aynı küçük kör hücre gereksiz yere "
-        "tekrar edilmez. Aktif görev ve bölgeler arası mesafe korumaları aynen "
+        "Kapsama kararı tüm sahne için tek bit yerine seçilecek kör küme bazında ölçülür; "
+        "bir kümenin kapsanması kalan kümeleri yanlışlıkla kapatmaz. Daha yeni "
+        "kullanılabilir Sentinel sahnesi gelmezse aynı en-yeni sahnenin çözülmemiş "
+        "kara-kör kümeleri görünürlük borcu olarak aynı çeşitlendirilmiş ara-gün "
+        "rotasyonunda tutulur. Aktif görev ve bölgeler arası mesafe korumaları aynen "
         "uygulanır; 150-249 m² MİKRO katmanı bu istisnaya girmez."
     )
     return report
@@ -365,6 +407,56 @@ def _self_check():
     assert covered_result["gulbahce_kor_alan_devriye_korumasi"][
         "guncel_sahne_kalici_gorunurluk_borcu"
     ] is False
+
+    # Gerçek 13 Eylül durumunu temsil et: bir kör küme mevcut devriyece kapsanmış
+    # olsa bile üçlü setin ara-gün hedefi olan üçüncü küme hâlâ açıksa global kapsama
+    # biti diğer kümeyi yanlışlıkla bastırmamalı.
+    partial = {
+        "durum": "ok",
+        "ayni_sentinel_sahnesi": True,
+        "kaynak_son_tarih": "13.09.2026",
+        "kaynak_son_item": "S2_20260913",
+        "kara_referans_sahne_sayisi": 8,
+        "secilen_devriye_guncel_korlugu_kapsiyor": True,
+        "guncel_sahne_kor_kumeleri": [
+            {
+                "enlem": 38.341225,
+                "boylam": 26.643308,
+                "alan_m2": 400,
+                "neden": "BULUT",
+                "yuzey_kaniti": "TARIHSEL_KARA",
+                "secilen_devriye_kapsiyor": True,
+            },
+            {
+                "enlem": 38.341586,
+                "boylam": 26.643079,
+                "alan_m2": 400,
+                "neden": "BULUT",
+                "yuzey_kaniti": "TARIHSEL_KARA",
+                "secilen_devriye_kapsiyor": False,
+            },
+            {
+                "enlem": 38.325306,
+                "boylam": 26.659450,
+                "alan_m2": 800,
+                "neden": "BULUT",
+                "yuzey_kaniti": "TARIHSEL_KARA",
+                "secilen_devriye_kapsiyor": False,
+            },
+        ],
+    }
+    partial_report = dict(report)
+    partial_report["rapor_tarihi"] = "2026-09-14"
+    partial_result = apply_fresh_blind_urgency(
+        partial, audit, partial_report, scan, rotation_day=date(2026, 9, 14)
+    )
+    partial_meta = partial_result["gulbahce_kor_alan_devriye_korumasi"]
+    assert partial_meta["guncel_sahne_acil_kor_istisnasi"] is True
+    assert partial_meta["guncel_sahne_ara_gun_rotasyon_offset"] == 2
+    assert partial_meta["guncel_sahne_ara_gun_hedefi_zaten_kapsaniyor"] is False
+    assert partial_meta["secilen"]["alan_m2"] == 800
+    assert round(partial_meta["secilen"]["enlem"], 6) == 38.325306
+    assert round(partial_meta["secilen"]["boylam"], 6) == 26.659450
 
     print("Gülbahçe güncel-körlük ara-gün/görünürlük-borcu öz testi başarılı.")
 
