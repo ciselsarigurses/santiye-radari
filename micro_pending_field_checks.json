@@ -6,7 +6,7 @@
     {
       "kayit_id": "MM-20260911-CIFTLIKKOY-01",
       "durum": "SAHA_KONTROLU_DOGRULANDI",
-      "sonuc": "SANTIYE_KAZI",
+      "sonuc": "YANLIS_POZITIF",
       "bolge": "cesme",
       "yaklasik_mevki": "Çiftlikköy",
       "enlem": 38.287679,
@@ -14,10 +14,12 @@
       "alan_m2": 200,
       "kaynak_sentinel_tarihi": "08.09.2026",
       "talep_tarihi": "2026-09-11",
-      "sonuc_tarihi": "2026-09-11",
-      "kanit_tipi": "KULLANICI_SAHA_FOTOGRAFI",
+      "sonuc_tarihi": "2026-09-13",
+      "kanit_tipi": "KULLANICI_SAHA_GERI_BILDIRIMI",
       "konum_dogrulama": "KULLANICI_ADAY_ESLEMESI_GPS_EXIF_YOK",
-      "not": "Kullanıcının saha fotoğrafında ekskavatör/kazıcı ve hafriyat kamyonu görülüyor; kullanıcı fotoğrafı sabahki Çiftlikköy MİKRO adayıyla eşledi. Fotoğrafta GPS/EXIF koordinat doğrulaması bulunmadığından parsel, adres veya hukuki statü çıkarılmadı. Aynı Sentinel sahnesi için gerçek şantiye/kazı kalibrasyonu olarak tutulur; daha yeni sahne gelirse yeniden değerlendirilir."
+      "duzeltme_kaynagi": "GitHub issue #7",
+      "duzeltme_tarihi": "2026-09-13",
+      "not": "13.09.2026 saha geri bildirimi bu MİKRO adayındaki hareketin belediye bahçe/peyzaj temizliği olduğunu ve inşaat beklenmediğini bildirdi. Aktif MİKRO/şantiye adayı değildir; yanlış-pozitif kalibrasyon arka planında tutulur. Daha yeni Sentinel sahnesinde bağımsız güçlü kompakt/temporal müdahale oluşursa yeniden değerlendirilir. Koordinat bağımsız GPS/EXIF ile doğrulanmış sayılmaz."
     }
   ]
 }
