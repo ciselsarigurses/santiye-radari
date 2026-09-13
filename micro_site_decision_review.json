@@ -22,7 +22,7 @@
   "gulbahce_toplam": 0,
   "gulbahce_guclu_diagnostik": 0,
   "karar_sayilari": {
-    "SAHA_ZATEN_DOGRULANMIS": 1
+    "GUNCEL_SAHA_SONUCU_ARKA_PLAN": 1
   },
   "adaylar": [
     {
@@ -80,19 +80,19 @@
       "lokal_kompakt_destek": true,
       "lokalite_sinifi": "LOKAL_KOMPAKT_TEMPORAL_DESTEK",
       "baglam_yeniden_goruntule": false,
-      "karar_sinifi": "SAHA_ZATEN_DOGRULANMIS",
-      "karar_nedeni": "Güncel saha sonucu adayla eşleştirilerek şantiye/kazı olarak doğrulandı; aday koordinatı GPS/EXIF gibi bağımsız konum kanıtıyla doğrulanmış sayılmaz.",
+      "karar_sinifi": "GUNCEL_SAHA_SONUCU_ARKA_PLAN",
+      "karar_nedeni": "Yaklaşık aynı adayla aynı/güncel Sentinel sahnesiyle ilişkili saha sonucu var; yeni mikro fırsat gibi yükseltilmedi.",
       "temporal_destek": true,
       "genis_yuzey_riski": false,
       "ana_250m_adaya_yakin": false,
       "guncel_saha_eslesmesi": true,
       "mikro_guclu_diagnostik": false,
       "15_eylul_sonrasi_saha_adayi_olabilir": false,
-      "saha_eslesme_sonucu": "SANTIYE_KAZI",
+      "saha_eslesme_sonucu": "YANLIS_POZITIF",
       "saha_eslesme_gorev_id": "MM-20260911-CIFTLIKKOY-01",
       "saha_eslesme_mesafe_m": 0.0,
       "manuel_saha_dogrulamasi": true,
-      "manuel_saha_kanit_tipi": "KULLANICI_SAHA_FOTOGRAFI",
+      "manuel_saha_kanit_tipi": "KULLANICI_SAHA_GERI_BILDIRIMI",
       "manuel_saha_konum_dogrulama": "KULLANICI_ADAY_ESLEMESI_GPS_EXIF_YOK",
       "saha_konumu_bagimsiz_dogrulandi": false
     }
