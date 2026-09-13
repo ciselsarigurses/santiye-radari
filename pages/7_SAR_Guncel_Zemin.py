@@ -63,6 +63,7 @@ def style_for_layer(layer):
         "SAR_LOKAL_ORTA": ([125, 75, 210, 220], 175),
         "SAR_SAHA_ONCUL_GUCLENIYOR": ([235, 125, 25, 235], 205),
         "SAR_SAHA_ONCUL": ([235, 155, 35, 220], 170),
+        "SAR_MIKRO_SAHA_DOGRULANMIS": ([20, 165, 120, 235], 180),
         "SAR_MIKRO_DIAGNOSTIK": ([30, 135, 210, 225], 150),
         "SAR_GENIS_YUZEY_ARKA_PLAN": ([110, 125, 140, 150], 135),
         "SAR_DUSUK_KANIT_ARKA_PLAN": ([145, 150, 155, 120], 115),
@@ -78,6 +79,7 @@ def display_layer(layer):
         "SAR_LOKAL_ORTA": "SAR · LOKAL ORTA KANIT",
         "SAR_SAHA_ONCUL_GUCLENIYOR": "SAR · SAHA ÖNCÜLÜ GÜÇLENİYOR",
         "SAR_SAHA_ONCUL": "SAR · SAHA ÖNCÜLÜ İZLEME",
+        "SAR_MIKRO_SAHA_DOGRULANMIS": "MİKRO · SAHADA ŞANTİYE/KAZI DOĞRULANDI",
         "SAR_MIKRO_DIAGNOSTIK": "SAR · MİKRO 150–249 DIAGNOSTIK",
         "SAR_GENIS_YUZEY_ARKA_PLAN": "SAR · GENİŞ YÜZEY ARKA PLAN",
         "SAR_DUSUK_KANIT_ARKA_PLAN": "SAR · DÜŞÜK KANIT ARKA PLAN",
@@ -101,11 +103,22 @@ def feature_rows(payload):
         area = as_float(props.get("alan_m2"))
         if lat is None or lon is None:
             continue
-        layer = str(props.get("harita_katmani") or "")
+        source_layer = str(props.get("harita_katmani") or "")
+        field_confirmed_micro = (
+            bool(props.get("mikro_saha_dogrulandi"))
+            and area is not None
+            and MICRO_RANGE_M2[0] <= area <= MICRO_RANGE_M2[1]
+        )
+        # SAR sinyali zayıf olsa bile sahada SANTIYE_KAZI olarak eşleşmiş MİKRO nokta
+        # sıradan düşük-kanıt arka planında kaybolmasın. Bu yalnız kalibrasyon görünürlüğüdür;
+        # 250 m² ana eşik değişmez ve alarm/saha görevi üretilmez.
+        layer = "SAR_MIKRO_SAHA_DOGRULANMIS" if field_confirmed_micro else source_layer
         color, radius = style_for_layer(layer)
         score = as_float(props.get("sar_lokal_degisim_skor_db"))
         env_peak = as_float(props.get("sar_cevre_degisim_tepe_db"))
         evidence = []
+        if field_confirmed_micro:
+            evidence.append("saha: şantiye/kazı doğrulandı")
         if score is not None:
             evidence.append(f"lokal Δ {score:.3f} dB")
         if props.get("sar_polarizasyon_uyumu"):
@@ -120,8 +133,12 @@ def feature_rows(payload):
             {
                 "katman_kodu": layer,
                 "katman": display_layer(layer),
-                "arka_plan": layer in BACKGROUND_LAYERS,
-                "durum": "ALARM DEĞİL · DIAGNOSTIK",
+                "arka_plan": False if field_confirmed_micro else source_layer in BACKGROUND_LAYERS,
+                "durum": (
+                    "SAHA DOĞRULANDI · MİKRO KALİBRASYON · ALARM DEĞİL"
+                    if field_confirmed_micro
+                    else "ALARM DEĞİL · DIAGNOSTIK"
+                ),
                 "bolge": str(props.get("bolge") or "-").upper(),
                 "mevki": props.get("mahalle_yaklasik") or "Mevki doğrulanmadı",
                 "alan_m2": int(round(area)) if area is not None else None,
@@ -146,14 +163,16 @@ st.set_page_config(page_title="SAR Güncel Zemin", page_icon="📡", layout="wid
 st.title("📡 SAR Güncel Zemin")
 st.caption(
     "Sentinel-1 RTC aynı-geometri çiftinde ölçülen kompakt/lokal geri-saçılım değişimini; "
-    "MİKRO diagnostik, saha-doğrulanmış yıkım öncülü ve geniş-yüzey arka planından "
-    "ayırarak Çeşme, Uzunkuyu ve Gülbahçe için tek haritada gösterir."
+    "MİKRO diagnostik, sahada doğrulanmış MİKRO kalibrasyonu, saha-doğrulanmış yıkım öncülü "
+    "ve geniş-yüzey arka planından ayırarak Çeşme, Uzunkuyu ve Gülbahçe için tek haritada gösterir."
 )
 st.info(
     "Bu sayfa alarm veya saha görevi üretmez. Ana Sentinel alarm eşiği 250 m² olarak "
-    "korunur; 150–249 m² MİKRO katmanı yalnız diagnostiktir. Geniş/homojen çevre, "
-    "tek-polarizasyon ve düşük kanıtlı değişimler silinmez; arka planda tutulur. "
-    "Koordinatlar radar örnekleme/hedef temsil noktalarıdır, kesin parsel sınırı değildir."
+    "korunur; 150–249 m² MİKRO katmanı yalnız diagnostik/kalibrasyon amaçlıdır. "
+    "Sahada şantiye/kazı olarak doğrulanmış MİKRO noktalar görünür tutulur ancak ana alarm "
+    "yoluna terfi etmez. Geniş/homojen çevre, tek-polarizasyon ve düşük kanıtlı değişimler "
+    "silinmez; arka planda tutulur. Koordinatlar radar örnekleme/hedef temsil noktalarıdır, "
+    "kesin parsel sınırı değildir."
 )
 
 snapshot = load_snapshot()
@@ -178,15 +197,23 @@ latest_text = ", ".join(latest_dates) if latest_dates else "Veri yok"
 
 strong_layers = {"SAR_GUCLU_LOKAL", "SAR_GUCLU_LOKAL_GENIS_ARKA_PLANLI"}
 field_layers = {"SAR_SAHA_ONCUL", "SAR_SAHA_ONCUL_GUCLENIYOR"}
+micro_layers = {"SAR_MIKRO_DIAGNOSTIK", "SAR_MIKRO_SAHA_DOGRULANMIS"}
 
 m1, m2, m3, m4, m5 = st.columns(5)
 m1.metric("RTC yeni sahne", latest_text)
 m2.metric("SAR hedef", len(df))
 m3.metric("Güçlü kompakt/lokal", int(df["katman_kodu"].isin(strong_layers).sum()) if not df.empty else 0)
 m4.metric("Saha öncülü", int(df["katman_kodu"].isin(field_layers).sum()) if not df.empty else 0)
-m5.metric("MİKRO SAR diagnostik", int((df["katman_kodu"] == "SAR_MIKRO_DIAGNOSTIK").sum()) if not df.empty else 0)
+m5.metric("MİKRO görünür", int(df["katman_kodu"].isin(micro_layers).sum()) if not df.empty else 0)
 
 if not df.empty:
+    confirmed_micro = df[df["katman_kodu"] == "SAR_MIKRO_SAHA_DOGRULANMIS"]
+    if not confirmed_micro.empty:
+        st.success(
+            f"Sahada şantiye/kazı olarak doğrulanmış {len(confirmed_micro)} MİKRO kalibrasyon noktası "
+            "haritada görünür tutuluyor. Bu doğrulama 250 m² ana alarm eşiğini düşürmez."
+        )
+
     broad_bg = df[df["katman_kodu"] == "SAR_GUCLU_LOKAL_GENIS_ARKA_PLANLI"]
     if not broad_bg.empty:
         strongest = broad_bg.sort_values("sar_skor_db", ascending=False).iloc[0]
@@ -203,8 +230,8 @@ show_background = st.toggle(
     "Geniş-yüzey ve düşük-kanıt arka planını göster",
     value=False,
     help=(
-        "Kapalıyken güçlü/lokal, saha öncülü ve MİKRO diagnostik hedefler önde kalır. "
-        "Arka plan verisi silinmez; bu anahtarla tekrar görünür olur."
+        "Kapalıyken güçlü/lokal, saha öncülü, MİKRO diagnostik ve sahada doğrulanmış MİKRO "
+        "kalibrasyon noktaları önde kalır. Arka plan verisi silinmez; bu anahtarla tekrar görünür olur."
     ),
 )
 
@@ -295,6 +322,7 @@ with st.expander("Kaynak ve güvenlik notları"):
     st.write("Bölge sayıları:", snapshot.get("region_counts") or {})
     st.caption(
         "Sentinel-1 geri-saçılım değişimi tek başına şantiye/kazı kanıtı değildir. "
-        "Adres, ada/parsel veya hukuki statü otomatik türetilmez. TKGM bağlantısı yalnız "
+        "Sahada doğrulanmış MİKRO etiketi yalnız mevcut saha geri bildiriminden gelir; "
+        "adres, ada/parsel veya hukuki statü otomatik türetilmez. TKGM bağlantısı yalnız "
         "verilen koordinatı kullanıcı tarafından manuel kontrol etmek içindir."
     )
