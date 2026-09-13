@@ -360,7 +360,7 @@
         "arka_plan": false,
         "bolge": "gulbahce",
         "eski_tarih": "2026-09-06",
-        "harita_katmani": "SAR_SAHA_ONCUL",
+        "harita_katmani": "SAR_SAHA_ONCUL_GUCLENIYOR",
         "hedef_katmani": "SAHA_ONCUL_SAR_DIAGNOSTIK",
         "kaynak": "santiye.db",
         "mahalle_yaklasik": "Gulbahce",
@@ -806,7 +806,7 @@
     "SAR_DUSUK_KANIT_ARKA_PLAN": 14,
     "SAR_GENIS_YUZEY_ARKA_PLAN": 5,
     "SAR_GUCLU_LOKAL": 1,
-    "SAR_SAHA_ONCUL": 1
+    "SAR_SAHA_ONCUL_GUCLENIYOR": 1
   },
   "mikro_aralik_m2": [
     150,
