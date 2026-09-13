@@ -13,6 +13,7 @@ on:
       - "micro_demolition_feedback_bridge.py"
       - "micro_pending_field_bridge.py"
       - "micro_field_report_bridge.py"
+      - "micro_site_decision_guard.py"
       - ".github/workflows/micro-field-feedback.yml"
   schedule:
     # Mikro kısa listeden kısa süre sonra çalışır.
@@ -41,6 +42,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Karar sentezi için hafif bağımlılıkları kur
+        run: pip install "requests>=2.31,<3" "numpy>=1.26,<3" "Pillow>=10,<12"
+
       - name: Mikro saha geri bildirim korumasını çalıştır
         run: python micro_demolition_feedback_bridge.py
 
@@ -52,10 +56,15 @@ jobs:
           python micro_field_report_bridge.py --self-check
           python micro_field_report_bridge.py
 
+      - name: Saha sonucunu MİKRO karar sentezine aynı çalışmada uygula
+        run: |
+          python micro_site_decision_guard.py --check-only
+          python micro_site_decision_guard.py
+
       - name: Sonucu yalnız değişiklikte kaydet
         shell: bash
         run: |
-          report_files="micro_site_field_review.json latest_report.json SAHA_RAPORU.md"
+          report_files="micro_site_field_review.json micro_site_decision_review.json latest_report.json SAHA_RAPORU.md"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Mikro saha geri bildirim sonucu değişmedi."
             exit 0
