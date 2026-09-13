@@ -13,6 +13,7 @@ on:
       - "sentinel1_rtc_temporal_guard.py"
       - "sentinel1_rtc_target_pair_gapfill.py"
       - "sentinel1_rtc_gapfill_locality_guard.py"
+      - "sentinel1_rtc_map_export.py"
       - "cloud_scene_probe.py"
       - ".github/workflows/sentinel-scene-probe.yml"
   schedule:
@@ -62,6 +63,7 @@ jobs:
           python sentinel1_rtc_temporal_guard.py --self-check-only
           python sentinel1_rtc_target_pair_gapfill.py --self-check-only
           python sentinel1_rtc_gapfill_locality_guard.py --self-check-only
+          python sentinel1_rtc_map_export.py --self-check-only
 
       - name: Sentinel metadata'sında yeni üretim sahnesi ara
         id: probe
@@ -95,6 +97,14 @@ jobs:
       - name: Hedefe özel RTC gapfill sonuçlarında geniş-yüzey/lokal ayrımını doğrula
         run: python sentinel1_rtc_gapfill_locality_guard.py --input /tmp/sentinel1-rtc-gapfill.json
 
+      - name: SAR diagnostiklerini harita GeoJSON katmanına dönüştür
+        run: |
+          python sentinel1_rtc_map_export.py \
+            --rtc /tmp/sentinel1-rtc.json \
+            --temporal /tmp/sentinel1-rtc-temporal.json \
+            --gapfill /tmp/sentinel1-rtc-gapfill.json \
+            --output /tmp/sentinel1-rtc-map.geojson
+
       - name: SAR diagnostiklerini kısa süreli sakla
         uses: actions/upload-artifact@v4
         with:
@@ -103,6 +113,7 @@ jobs:
             /tmp/sentinel1-rtc.json
             /tmp/sentinel1-rtc-temporal.json
             /tmp/sentinel1-rtc-gapfill.json
+            /tmp/sentinel1-rtc-map.geojson
           if-no-files-found: error
           retention-days: 3
 
