@@ -2,6 +2,10 @@ name: Operasyonel Rota Geometri Koruması
 
 on:
   workflow_dispatch:
+  schedule:
+    # GITHUB_TOKEN ile atılan bot commitleri yeni push workflow'u açmayabilir.
+    # Workflow-run zinciri kaçarsa rota en geç bir sonraki saatlik kontrolde yenilensin.
+    - cron: '13 * * * *'
   push:
     branches: [main]
     paths:
