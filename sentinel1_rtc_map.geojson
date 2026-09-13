@@ -1,7 +1,7 @@
 {
   "alarm": false,
   "ana_sentinel_esigi_m2": 250,
-  "feature_count": 21,
+  "feature_count": 20,
   "features": [
     {
       "geometry": {
@@ -148,44 +148,6 @@
         "sar_cevre_degisim_tepe_db": 0.438,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
         "sar_lokal_degisim_skor_db": 0.659,
-        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-09-12"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          26.266305,
-          38.287679
-        ],
-        "type": "Point"
-      },
-      "id": "cesme:38.287679:26.266305",
-      "properties": {
-        "alan_m2": 200,
-        "alarm": false,
-        "arka_plan": true,
-        "bolge": "cesme",
-        "eski_tarih": "2026-09-06",
-        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
-        "hedef_katmani": "MIKRO_DIAGNOSTIK",
-        "kaynak": "micro_site_decision_review.json",
-        "mahalle_yaklasik": "Çiftlikköy",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": true,
-        "neden": "SAHA_DOGRULANMIS_MIKRO_KALIBRASYON",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": false,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": null,
-        "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.227,
-        "sar_cevre_degisim_tepe_db": 0.636,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.333,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
         "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
@@ -803,7 +765,7 @@
     }
   ],
   "layer_counts": {
-    "SAR_DUSUK_KANIT_ARKA_PLAN": 14,
+    "SAR_DUSUK_KANIT_ARKA_PLAN": 13,
     "SAR_GENIS_YUZEY_ARKA_PLAN": 5,
     "SAR_GUCLU_LOKAL": 1,
     "SAR_SAHA_ONCUL_GUCLENIYOR": 1
@@ -815,7 +777,7 @@
   "name": "sentinel1_rtc_ground_diagnostics",
   "not": "Harita katmani diagnostiktir; Sentinel-1 geri sacilim degisimi tek basina insaat/kazi kaniti, alarm, saha gorevi, adres veya parsel dogrulamasi degildir.",
   "region_counts": {
-    "cesme": 9,
+    "cesme": 8,
     "gulbahce": 4,
     "uzunkuyu": 8
   },
