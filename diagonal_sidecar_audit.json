@@ -1,13 +1,13 @@
 {
   "rapor_tarihi": "2026-09-13",
-  "olusturma": "2026-09-13 15:17 +03",
+  "olusturma": "2026-09-13 17:43 +03",
   "amac": "Diyagonal 800-10.000 m² yan-kümeleri yalnız yerini aldıkları normal şantiye-ölçeği adayından daha güçlü Sentinel kanıtı taşıyorsa, toplam 24 aday ve ölçek dağılımını değiştirmeden terfi ettirmek; ilk yan-küme için de güvenli karşılaştırma uygulamak ve mevcut sahneyi geriye dönük değiştirmemek.",
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "durum": "ok",
-      "latest_item": "S2B_T35SMC_20260908T090037_L2A",
-      "ham_aday": 13,
+      "latest_item": "S2C_T35SMC_20260913T090741_L2A",
+      "ham_aday": 22,
       "guvenli_diyagonal_yan_kume_havuzu": 0,
       "erken_parsel_yan_kume": 0,
       "mevcut_kota": 1,
@@ -16,28 +16,28 @@
       "simulasyon_kota": 2,
       "simulasyon_secili_yan_kume": 0,
       "son_secili_yan_kume": 0,
-      "toplam_aday_mevcut": 13,
-      "toplam_aday_simulasyon": 13,
-      "toplam_aday_son": 13,
+      "toplam_aday_mevcut": 22,
+      "toplam_aday_simulasyon": 22,
+      "toplam_aday_son": 22,
       "olcek_dagilimi_mevcut": {
         "kucuk": 0,
-        "santiye_olcegi": 13,
+        "santiye_olcegi": 22,
         "genis": 0
       },
       "olcek_dagilimi_simulasyon": {
         "kucuk": 0,
-        "santiye_olcegi": 13,
+        "santiye_olcegi": 22,
         "genis": 0
       },
       "olcek_dagilimi_son": {
         "kucuk": 0,
-        "santiye_olcegi": 13,
+        "santiye_olcegi": 22,
         "genis": 0
       },
       "ilk_yan_kume_karari": "ilk_yan_kume_yok",
       "ikinci_yan_kume_karari": "ilk_yan_kume_gecmedi",
       "uyarlamali_karar": "ilk_yan_kume_yok",
-      "sahne_politikasi": "ayni_yeni_sahne_tekrar",
+      "sahne_politikasi": "yeni_sahne",
       "uygulanan_karar": "ilk_yan_kume_yok",
       "ilk_takas_eklenen": [],
       "ilk_takas_cikarilan": [],
@@ -50,8 +50,8 @@
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "durum": "ok",
-      "latest_item": "S2B_T35SMC_20260908T090037_L2A",
-      "ham_aday": 4,
+      "latest_item": "S2C_T35SMC_20260913T090741_L2A",
+      "ham_aday": 9,
       "guvenli_diyagonal_yan_kume_havuzu": 0,
       "erken_parsel_yan_kume": 0,
       "mevcut_kota": 1,
@@ -60,28 +60,28 @@
       "simulasyon_kota": 2,
       "simulasyon_secili_yan_kume": 0,
       "son_secili_yan_kume": 0,
-      "toplam_aday_mevcut": 4,
-      "toplam_aday_simulasyon": 4,
-      "toplam_aday_son": 4,
+      "toplam_aday_mevcut": 9,
+      "toplam_aday_simulasyon": 9,
+      "toplam_aday_son": 9,
       "olcek_dagilimi_mevcut": {
-        "kucuk": 1,
-        "santiye_olcegi": 3,
+        "kucuk": 0,
+        "santiye_olcegi": 9,
         "genis": 0
       },
       "olcek_dagilimi_simulasyon": {
-        "kucuk": 1,
-        "santiye_olcegi": 3,
+        "kucuk": 0,
+        "santiye_olcegi": 9,
         "genis": 0
       },
       "olcek_dagilimi_son": {
-        "kucuk": 1,
-        "santiye_olcegi": 3,
+        "kucuk": 0,
+        "santiye_olcegi": 9,
         "genis": 0
       },
       "ilk_yan_kume_karari": "ilk_yan_kume_yok",
       "ikinci_yan_kume_karari": "ilk_yan_kume_gecmedi",
       "uyarlamali_karar": "ilk_yan_kume_yok",
-      "sahne_politikasi": "ayni_yeni_sahne_tekrar",
+      "sahne_politikasi": "yeni_sahne",
       "uygulanan_karar": "ilk_yan_kume_yok",
       "ilk_takas_eklenen": [],
       "ilk_takas_cikarilan": [],
