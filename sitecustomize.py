@@ -6,10 +6,10 @@ içindeki sınırsız aday sarmalayıcısı eski imzada kaldığı için yalnız
 TypeError oluştu; ağ kullanmayan self-check bunu yakalamadı.
 
 Bu dosya geçici ve geri alınabilir bir çalışma-zamanı köprüsüdür. Yalnız doğrudan
-aday dengeleme ve uyarlamalı diyagonal koruma komutlarında devreye girer. 250 m² ana
-eşiği, 150–249 m² MİKRO politikası, aday kotası veya Sentinel spektral eşikleri
-değişmez. Tarımsal bağlamı düşürmek yerine orijinal üretim hotspot fonksiyonuna aynen
-aktarır; böylece tarla/geniş homojen yüzey bastırması korunur.
+aday dengeleme, uyarlamalı diyagonal koruma ve dedupe-sonrası kota onarımında devreye
+girer. 250 m² ana eşiği, 150–249 m² MİKRO politikası, aday kotası veya Sentinel
+spektral eşikleri değişmez. Tarımsal bağlamı düşürmek yerine orijinal üretim hotspot
+fonksiyonuna aynen aktarır; böylece tarla/geniş homojen yüzey bastırması korunur.
 """
 
 from __future__ import annotations
@@ -22,6 +22,7 @@ from pathlib import Path
 _TARGET_SCRIPTS = {
     "rebalance_satellite_candidates.py",
     "adaptive_sidecar_guard.py",
+    "post_dedupe_construction_quota_runner.py",
 }
 
 
