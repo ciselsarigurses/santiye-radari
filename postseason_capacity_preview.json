@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-14",
-  "olusturma": "2026-09-14 20:27 +0300",
+  "olusturma": "2026-09-14 22:21 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -34,29 +34,29 @@
   },
   "bolgeler": {
     "cesme": {
-      "durum": "denetim_hatasi",
+      "durum": "ok",
       "latest_item": "S2C_T35SMC_20260913T090741_L2A",
-      "ham_800_10000": 0,
-      "raporda_800_10000": 0,
+      "ham_800_10000": 22,
+      "raporda_800_10000": 22,
       "raporda_10000_ustu": 0,
       "mevcut_post_dedupe_hedefi": 8,
       "diagnostik_15eylul_senaryosu": 10,
-      "senaryoya_eksik": 10,
+      "senaryoya_eksik": 0,
       "bire_bir_takasla_teorik_ek_kapasite": 0,
-      "teorik_son_800_10000": 0,
-      "senaryo_kapasite_acisindan_mumkun": false
+      "teorik_son_800_10000": 22,
+      "senaryo_kapasite_acisindan_mumkun": true
     },
     "uzunkuyu": {
-      "durum": "denetim_hatasi",
+      "durum": "ok",
       "latest_item": "S2C_T35SMC_20260913T090741_L2A",
-      "ham_800_10000": 0,
-      "raporda_800_10000": 0,
+      "ham_800_10000": 9,
+      "raporda_800_10000": 8,
       "raporda_10000_ustu": 0,
       "mevcut_post_dedupe_hedefi": 8,
       "diagnostik_15eylul_senaryosu": 10,
-      "senaryoya_eksik": 10,
+      "senaryoya_eksik": 2,
       "bire_bir_takasla_teorik_ek_kapasite": 0,
-      "teorik_son_800_10000": 0,
+      "teorik_son_800_10000": 8,
       "senaryo_kapasite_acisindan_mumkun": false
     }
   },
