@@ -86,7 +86,15 @@ def _actionable_candidates(candidates):
             continue
         task_id = str(raw.get("gorev_id") or "").strip()
         status = str(raw.get("saha_durumu") or "KONTROLE_GIT").strip().upper()
-        if not task_id or task_id in seen or status not in ACTIVE_STATUSES:
+        agricultural_risk = bool(raw.get("tarim_riski"))
+        route_suitable = raw.get("rota_uygun", True) is not False
+        if (
+            not task_id
+            or task_id in seen
+            or status not in ACTIVE_STATUSES
+            or agricultural_risk
+            or not route_suitable
+        ):
             continue
         try:
             latitude = float(raw.get("enlem"))
@@ -526,9 +534,15 @@ def _self_check():
             "mahalle": "Ildır", "enlem": 38.42, "boylam": 26.57, "alan_m2": 400,
             "bolge": east,
         },
+        {
+            "gorev_id": "U6", "saha_durumu": "KONTROLE_GIT", "oncelik": "ERKEN",
+            "mahalle": "Alaçatı", "enlem": 38.26, "boylam": 26.38, "alan_m2": 600,
+            "bolge": west, "tarim_riski": True, "rota_uygun": False,
+        },
     ]
     chosen = select_shortlist(sample)
     assert [item["gorev_id"] for item in chosen] == ["U3", "U1", "U5"]
+    assert "U6" not in {item["gorev_id"] for item in _actionable_candidates(sample)}
     assert [item["gunluk_sira"] for item in chosen] == [1, 2, 3]
     assert {item["bolge"] for item in chosen} == {west, east}
 
