@@ -11,6 +11,7 @@ on:
     paths:
       - operational_route_shape_guard.py
       - operational_route_freshness_guard.py
+      - route_coordinate_link_guard.py
       - .github/workflows/operational-route-shape-guard.yml
       - latest_report.json
       - site_scale_shape_risk_review.json
@@ -45,11 +46,13 @@ jobs:
         run: |
           python operational_route_shape_guard.py --self-check
           python operational_route_freshness_guard.py --self-check
+          python route_coordinate_link_guard.py --self-check
 
       - name: Operasyonel rotayı üret
         run: |
           python operational_route_shape_guard.py
           python operational_route_freshness_guard.py
+          python route_coordinate_link_guard.py
 
       - name: Değişiklik biçimini kontrol et
         run: git diff --check
@@ -62,13 +65,15 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Kaynak rapor başka bir workflow tarafından aynı anda güncellendiyse,
-          # en güncel main üzerinde iki korumayı da yeniden hesapla.
+          # en güncel main üzerinde üç korumayı da yeniden hesapla.
           git restore operational_route.json 2>/dev/null || true
           git pull --rebase origin main
           python operational_route_shape_guard.py --self-check
           python operational_route_freshness_guard.py --self-check
+          python route_coordinate_link_guard.py --self-check
           python operational_route_shape_guard.py
           python operational_route_freshness_guard.py
+          python route_coordinate_link_guard.py
           git diff --check
 
           git add operational_route.json
