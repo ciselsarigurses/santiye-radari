@@ -22,6 +22,14 @@ MAX_ANALYSIS_DIMENSION = 2800
 # deniz-gölge farklarını çıplak zemin gibi gösterebilir. Yaklaşık 30 m kıyı
 # tamponu, doğrudan saha alarmı üretmeden önce bu karma pikselleri dışarıda tutar.
 COASTAL_WATER_BUFFER_PIXELS = 3
+# Güçlü 250–2.000 m² çekirdek, daha düşük eşikli çok geniş bir çıplak-zemin
+# halesinin yalnız küçük bir parçasıysa çoğu kez sürülmüş/temizlenmiş tarla
+# parçasıdır. Güçlü çekirdeği silmeyiz; tarımsal bağlam olarak işaretleyip
+# operasyonel kısa listeden çıkarırız. Böylece yeni ve daha kompakt bir hareket
+# sonraki sahnede yeniden değerlendirilebilir.
+AGRICULTURAL_CONTEXT_MIN_AREA_M2 = 8_000
+AGRICULTURAL_CONTEXT_MIN_RATIO = 6.0
+AGRICULTURAL_CONTEXT_MAX_CORE_M2 = 2_000
 # Mahalle sınırı verisi olmadan yalnız en yakın merkez adı kullanılmaktadır.
 # Merkezden çok uzaktaki noktaya yanlış mahalle adı vermek yerine etiketi açıkça
 # doğrulanmamış bırakıyoruz.
@@ -414,6 +422,7 @@ def _hotspots(
     bbox,
     pixel_area_m2,
     small_site_mask=None,
+    agricultural_context_mask=None,
     limit=HOTSPOT_LIMIT,
     small_quota=SMALL_HOTSPOT_QUOTA,
 ):
@@ -425,6 +434,21 @@ def _hotspots(
     height, width = change_mask.shape
     west, south, east, north = bbox
     results = []
+
+    agricultural_labels = None
+    agricultural_component_pixels = {}
+    if agricultural_context_mask is not None:
+        agricultural_labels = np.zeros(change_mask.shape, dtype="int32")
+        for label, context_component in enumerate(
+            _connected_components(agricultural_context_mask),
+            start=1,
+        ):
+            context_pixels = np.asarray(context_component, dtype="int32")
+            agricultural_labels[
+                context_pixels[:, 0],
+                context_pixels[:, 1],
+            ] = label
+            agricultural_component_pixels[label] = len(context_component)
 
     for component in components:
         area_m2 = len(component) * pixel_area_m2
@@ -443,6 +467,24 @@ def _hotspots(
             )
         if is_small and strong_fraction < 0.50:
             continue
+
+        agricultural_context_area_m2 = 0.0
+        if agricultural_labels is not None:
+            overlapping = agricultural_labels[pixels[:, 0], pixels[:, 1]]
+            labels, counts = np.unique(overlapping[overlapping > 0], return_counts=True)
+            if labels.size:
+                best_label = int(labels[int(np.argmax(counts))])
+                agricultural_context_area_m2 = (
+                    agricultural_component_pixels.get(best_label, 0) * pixel_area_m2
+                )
+        agricultural_context_ratio = (
+            agricultural_context_area_m2 / max(area_m2, pixel_area_m2)
+        )
+        agricultural_risk = bool(
+            area_m2 <= AGRICULTURAL_CONTEXT_MAX_CORE_M2
+            and agricultural_context_area_m2 >= AGRICULTURAL_CONTEXT_MIN_AREA_M2
+            and agricultural_context_ratio >= AGRICULTURAL_CONTEXT_MIN_RATIO
+        )
 
         centroid = pixels.mean(axis=0)
         distance_to_centroid = np.sum((pixels - centroid) ** 2, axis=1)
@@ -463,6 +505,17 @@ def _hotspots(
                     else "Bitişik yüzey/toprak değişimi adayı"
                 ),
                 "boyut_sinifi": "KUCUK" if is_small else "STANDART",
+                "tarim_riski": agricultural_risk,
+                "tarim_baglam_alani_m2": round(agricultural_context_area_m2),
+                "tarim_baglam_orani": round(agricultural_context_ratio, 2),
+                "tarim_riski_nedeni": (
+                    "Küçük güçlü çekirdek, en az 8.000 m² geniş ve düşük eşikli "
+                    "çıplak-zemin/bitki kaybı halesinin içinde; tarla sürümü veya "
+                    "geniş arazi temizliği olasılığı yüksek."
+                    if agricultural_risk
+                    else None
+                ),
+                "rota_uygun": not agricultural_risk,
             }
         )
 
@@ -556,6 +609,20 @@ def analyze_sentinel_change(region_key, pair=None):
         & (brightness_gain > 0.055)
         & (rgb_difference > 0.14)
     )
+    # Ana eşik yalnız en güçlü parçayı yakalayıp sürülmüş tarlayı 500–800 m²
+    # "kompakt aday" gibi gösterebilir. Daha gevşek bu maske alarm üretmez;
+    # yalnız çekirdeğin çevresinde kilometrekareye yayılmayan fakat tarla ölçeğinde
+    # devam eden homojen değişim olup olmadığını ölçer.
+    agricultural_context_signal = (
+        valid
+        & (vegetation_loss > 0.07)
+        & (latest_ndvi < 0.38)
+        & (rgb_difference > 0.055)
+    )
+    agricultural_context_signal = _retain_components(
+        agricultural_context_signal,
+        minimum_pixels=5,
+    )
 
     change_mask = _clean_mask(
         soil_signal | strong_visual_change,
@@ -597,6 +664,7 @@ def analyze_sentinel_change(region_key, pair=None):
             bbox,
             pixel_area_m2,
             small_site_mask=small_site_signal,
+            agricultural_context_mask=agricultural_context_signal,
         ),
         "latest_item": latest["id"],
         "older_item": older["id"],
