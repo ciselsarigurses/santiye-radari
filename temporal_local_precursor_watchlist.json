@@ -18,7 +18,7 @@
       "alan_m2": 500,
       "bolge_anahtari": "uzunkuyu",
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Mevki doğrulanmadı",
+      "mahalle": "Özbek",
       "ilk_guclu_tarih": "13.09.2026",
       "son_guclu_tarih": "13.09.2026",
       "son_guclu_sentinel_item": "S2C_T35SMC_20260913T090741_L2A",
@@ -144,5 +144,5 @@
     }
   ],
   "guclu_iz_sayisi": 7,
-  "guncelleme_tarihi": "2026-09-13 19:28 +0300"
+  "guncelleme_tarihi": "2026-09-14 20:30 +0300"
 }
