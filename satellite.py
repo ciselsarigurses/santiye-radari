@@ -84,8 +84,12 @@ PLACE_CENTERS = {
     "Germiyan": (38.3220, 26.4970),
     "Uzunkuyu": (38.2843, 26.5510),
     "Ildır": (38.3840, 26.4840),
-    # Operasyonel mahalle referansıdır; idari/kadastral sınır veya ada/parsel değildir.
+    # Operasyonel mahalle referanslarıdır; idari/kadastral sınır veya ada/parsel değildir.
     "Gülbahçe": (38.33278, 26.64556),
+    # Doğu analiz kutusunun batı Özbek kesimindeki noktaların Uzunkuyu/Gülbahçe
+    # olarak yanlış etiketlenmesini önler. Merkez koordinatı yalnız yakın-mevki
+    # adı içindir; parsel veya idari sınır iddiası taşımaz.
+    "Özbek": (38.364447, 26.704461),
 }
 
 
