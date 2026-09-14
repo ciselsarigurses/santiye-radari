@@ -25,5 +25,9 @@
   "not": "Kısa liste de alarm/görev değildir. Yalnız 150-249 m² ham mikro havuzdaki örtüşme tekrarları, geniş yüzey kümeleri ve her adayın kendi bölgesindeki aynı kaynak Sentinel gününe ait 250+ aday parçaları ayıklanmıştır. Farklı bölgenin farklı tarihli kanıtı veya eski saha backlog'u mikro sinyali bastırmaz. Saha rotasına geçmek için ayrıca temporal devam/ani başlangıç veya güvenilir açık-web/yapılaşma doğrulaması gerekir. Köşe teması nedeniyle 250+ ebeveyne birleşmiş açıkça işaretli 4-komşu MİKRO kurtarmalarda ana-adaya yakınlık tek başına eleme değildir; geniş-yüzey ve güçlü spektral kısa-liste kapıları ile sonraki temporal/lokal doğrulamalar zorunlu kalır.",
   "diyagonal_mikro_kurtarma_tekil": 0,
   "diyagonal_mikro_kurtarma_kisa_liste": 0,
-  "diyagonal_mikro_yakinlik_istisnasi": 0
+  "diyagonal_mikro_yakinlik_istisnasi": 0,
+  "saha_geri_bildirim_arka_plan": [],
+  "saha_geri_bildirim_bastirilan": 0,
+  "saha_geri_bildirim_kayit_sayisi": 1,
+  "saha_geri_bildirim_notu": "Görev kimliği olmayan doğrulanmış saha yanlış-pozitifleri aynı veya daha eski Sentinel kanıtında aktif MİKRO kısa listeden çıkarılır fakat arka planda tutulur. Daha yeni uydu kanıtı kalıcı kara listeye alınmaz."
 }
