@@ -6,7 +6,8 @@ ise yerinde kalırsa özet 99 aktif görev derken son başlık 105 görünebilir
 algılama, alarm, görev, Sentinel eşiği veya SQLite verisini değiştirmez; yalnız
 "Bugün sahada kontrol edilecek uydu adayları" bölümündeki kalan `### N.` başlıklarını
 1..N olarak yeniden numaralandırır ve blok sayısının latest_report.json içindeki
-`saha_adaylari` sayısıyla aynı olduğunu doğrular.
+`rota_uygun=true` saha adaylarıyla aynı olduğunu doğrular. `rota_uygun=false` arka
+plan/Takip adayları JSON'da korunur ancak operasyon markdown bölümüne dahil edilmez.
 """
 
 from __future__ import annotations
@@ -24,6 +25,14 @@ SECTION_TITLE = "## Bugün sahada kontrol edilecek uydu adayları"
 HEADING_RE = re.compile(r"^(###\s+)\d+(\.\s+.+)$")
 
 
+def _operational_count(items):
+    """daily_report.py ile aynı rota filtresini kullanarak operasyon adedini döndür."""
+    return sum(
+        isinstance(item, dict) and bool(item.get("rota_uygun", True))
+        for item in items
+    )
+
+
 def _active_count():
     if not REPORT_JSON.exists():
         raise RuntimeError("latest_report.json yok")
@@ -36,7 +45,7 @@ def _active_count():
     items = payload.get("saha_adaylari") or []
     if not isinstance(items, list):
         raise RuntimeError("saha_adaylari liste değil")
-    return sum(isinstance(item, dict) for item in items)
+    return _operational_count(items)
 
 
 def renumber_operational_section(lines):
@@ -88,6 +97,14 @@ def _self_check():
     assert "### 3. BEKLEYEN — C" in text
     assert "### 44. Bu başlık operasyon bölümü dışında" in text
     assert "### 105. BEKLEYEN — C" not in text
+    assert _operational_count(
+        [
+            {"rota_uygun": True},
+            {"rota_uygun": False},
+            {},
+            "gecersiz",
+        ]
+    ) == 2
 
 
 def apply_guard():
@@ -104,12 +121,12 @@ def apply_guard():
         if expected == 0:
             return {"durum": "bolum_yok_aktif_yok", "aktif": 0, "degisti": False}
         raise RuntimeError(
-            f"Operasyon bölümü yok ama latest_report.json {expected} aktif aday içeriyor"
+            f"Operasyon bölümü yok ama latest_report.json {expected} rota adayı içeriyor"
         )
     if actual != expected:
         raise RuntimeError(
-            "Operasyon markdown blok sayısı latest_report.json ile uyuşmuyor: "
-            f"markdown={actual}, json={expected}"
+            "Operasyon markdown blok sayısı latest_report.json rota adaylarıyla uyuşmuyor: "
+            f"markdown={actual}, json_rota={expected}"
         )
 
     rendered = "\n".join(updated)
@@ -125,14 +142,14 @@ def main(check_only=False):
     _self_check()
     if check_only:
         print(
-            "Saha raporu sıra koruması öz testi başarılı: yalnız operasyon markdown "
-            "başlıklarını yeniden numaralandırıyor."
+            "Saha raporu sıra koruması öz testi başarılı: yalnız rota-uygun operasyon "
+            "markdown başlıklarını yeniden numaralandırıyor."
         )
         return
     result = apply_guard()
     print(
         "Saha raporu sıra koruması: "
-        f"{result['aktif']} aktif blok; "
+        f"{result['aktif']} rota-uygun aktif blok; "
         + ("numaralar düzeltildi." if result["degisti"] else "numaralar zaten tutarlı.")
     )
 
