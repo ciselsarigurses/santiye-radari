@@ -42,6 +42,11 @@ CESME_ADMIN_ENVELOPE = [26.230389, 38.189583, 26.527519, 38.427113]
 WESTERN_CESME_GUARD_POINTS = {
     "Çiftlik batı kıyı koridoru": (38.28649, 26.23423),
 }
+# Bazı yakın-mevki adları yalnız üretim kutusunun sınırındaki adayları doğru
+# etiketlemek için dışarıdaki gerçek yer merkezini referans alır. Bunlar tarama
+# hedefi değildir; aksi halde doğru bir etiket çıpası eklemek kapsamı istemeden
+# büyütür ve kalite kontrolünü anlamsız biçimde kırar.
+LABEL_ONLY_PLACE_REFERENCES = {"Özbek"}
 
 
 def _contains(bbox, latitude, longitude):
@@ -153,10 +158,14 @@ def check_configuration():
 
 def check_coverage():
     report_boxes = [REGIONS[key]["bbox"] for key in REPORT_REGIONS]
+    assert LABEL_ONLY_PLACE_REFERENCES <= set(PLACE_CENTERS), (
+        "Etiket-only mevki referansı PLACE_CENTERS içinde tanımlı değil."
+    )
     uncovered = [
         name
         for name, (latitude, longitude) in PLACE_CENTERS.items()
-        if not any(_contains(box, latitude, longitude) for box in report_boxes)
+        if name not in LABEL_ONLY_PLACE_REFERENCES
+        and not any(_contains(box, latitude, longitude) for box in report_boxes)
     ]
     assert not uncovered, (
         "Günlük uydu taramasının dışında kalan takip merkezi var: "
