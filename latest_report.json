@@ -5792,5 +5792,23 @@
     "durum": "uygulandi",
     "tarih": "2026-09-14",
     "kural": "15 Eylul 2026 oncesi eski/gecikmis backlog ilk-3 saha rotasina geri yazilamaz; yalniz taze guclu Sentinel kaniti veya insan TEKRAR talebi gecer."
+  },
+  "kapasite_santiye_devriyesi": [],
+  "kapasite_santiye_devriyesi_meta": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "olusturma": "2026-09-14 22:05 +0300",
+    "bolgeler": {
+      "cesme": {
+        "durum": "uretim_kotasi_yeterli",
+        "uretim_santiye_olcegi": 22,
+        "tavan_disinda_uygun_havuz": 0
+      },
+      "uzunkuyu": {
+        "durum": "uretim_kotasi_yeterli",
+        "uretim_santiye_olcegi": 8,
+        "tavan_disinda_uygun_havuz": 0
+      }
+    }
   }
 }
