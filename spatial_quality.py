@@ -79,7 +79,15 @@ def _coverage_edge_distance_m(latitude, longitude):
     return max(margins) if margins else 0.0
 
 
-def _expected_priority(area_m2, size_class, signal):
+def _expected_priority(area_m2, size_class, signal, route_suitable=True):
+    """Üretim raporundaki saha/arka-plan öncelik sözleşmesini doğrular.
+
+    Tarımsal veya geniş-homojen bağlam nedeniyle ekip rotasına uygun olmayan
+    adaylar silinmez; ``TAKİP`` olarak arka planda tutulur. Bu ayrım m² önceliğinin
+    önündedir ve ana 250 m² eşiğini değiştirmez.
+    """
+    if not route_suitable:
+        return "TAKİP"
     strong_small = (
         str(size_class or "").upper() == "KUCUK"
         or "küçük, güçlü" in str(signal or "").casefold()
@@ -110,6 +118,11 @@ def _self_test_coverage_edges():
     assert _coverage_edge_distance_m(*outer_edge_point) < EDGE_WARNING_METERS, (
         "Gerçek dış kapsama kenarı yanlışlıkla güvenli sayıldı."
     )
+
+    # Tarımsal/geniş-homojen bağlam adayı alarm rotasından çıkar ama tamamen
+    # kaybolmaz; canlı rapor sözleşmesinde TAKİP olarak kalır.
+    assert _expected_priority(800, "STANDART", "Bitişik yüzey değişimi", False) == "TAKİP"
+    assert _expected_priority(800, "STANDART", "Bitişik yüzey değişimi", True) == "NORMAL"
 
 
 def validate_report(payload):
@@ -171,11 +184,22 @@ def validate_report(payload):
                     f"Aday #{index}: KUCUK sınıfı güçlü küçük-saha sinyali taşımıyor."
                 )
 
-        expected_priority = _expected_priority(area_m2, size_class, signal)
+        agricultural_risk = bool(item.get("tarim_riski"))
+        route_suitable = bool(item.get("rota_uygun", True)) and not agricultural_risk
+        expected_priority = _expected_priority(
+            area_m2,
+            size_class,
+            signal,
+            route_suitable=route_suitable,
+        )
         actual_priority = str(item.get("oncelik") or "")
         if actual_priority != expected_priority:
             raise AssertionError(
                 f"Aday #{index}: öncelik {actual_priority!r}, beklenen {expected_priority!r}."
+            )
+        if actual_priority == "TAKİP" and route_suitable:
+            raise AssertionError(
+                f"Aday #{index}: TAKİP önceliği için rota dışı/tarımsal arka-plan kanıtı yok."
             )
 
         route = str(item.get("harita") or "")
