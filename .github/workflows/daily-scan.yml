@@ -64,6 +64,11 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Repo kökündeki dar kapsamlı sitecustomize köprüsünü Python başlangıcında
+    # görünür kılar. Köprü yalnız aday dengeleme ve adaptive guard komutlarında
+    # devreye girer; diğer tarama adımlarının davranışını değiştirmez.
+    env:
+      PYTHONPATH: ${{ github.workspace }}
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
