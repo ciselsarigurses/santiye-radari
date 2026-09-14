@@ -11,6 +11,8 @@ on:
       - "micro_site_shortlist.py"
       - "micro_site_cross_day_cluster_guard.py"
       - "micro_diagonal_recovery.py"
+      - "manual_field_feedback.json"
+      - "manual_field_feedback_guard.py"
       - "gulbahce_micro_candidate_review.py"
       - "gulbahce_micro_cross_day_review_guard.py"
       - "micro_spectral_borderline_guard.py"
@@ -54,6 +56,9 @@ jobs:
 
       - name: Diyagonal MİKRO kurtarmalarda yakınlığı tek başına eleme nedeni yapma
         run: python micro_diagonal_recovery.py --augment-shortlist
+
+      - name: Saha yanlış-pozitiflerini aynı veya eski sahnede aktif listeden çıkar
+        run: python manual_field_feedback_guard.py
 
       - name: Gülbahçe ham mikro adaylarının kaynak-gün uyumlu eleme nedenini açıkla
         run: python gulbahce_micro_cross_day_review_guard.py
