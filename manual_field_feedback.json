@@ -1,0 +1,18 @@
+{
+  "surum": 1,
+  "kayitlar": [
+    {
+      "id": "FP-20260913-CIFTLIKKOY-001",
+      "kaynak": "github_issue_7",
+      "sonuc_tarihi": "2026-09-13",
+      "mahalle": "Çiftlikköy",
+      "enlem": 38.287679,
+      "boylam": 26.266305,
+      "yaklasik_alan_m2": 200,
+      "eslesme_yaricapi_m": 25,
+      "sonuc": "YANLIS_POZITIF",
+      "neden": "Belediye bahçe temizliği; sahada inşaat beklenmiyor.",
+      "politika": "Aynı veya daha eski Sentinel sahnesindeki yakın MİKRO adayı aktif kısa listeden çıkar; arka planda izlenir. Sonuç tarihinden daha yeni uydu sinyali kalıcı olarak engellenmez ve normal güçlü-kanıt kapılarından yeniden değerlendirilir."
+    }
+  ]
+}
