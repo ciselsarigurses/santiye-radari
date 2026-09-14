@@ -13,24 +13,15 @@
 
 > 15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Sahada doğrulanmış yıkım/parsel temizliği yeni Sentinel hareketi gelene kadar takip havuzunda kalır. Bunun dışında yalnız insanın TEKRAR_GIT dediği kayıt veya en fazla 2 günlük güncel Sentinel kanıtı taşıyan güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.
 
-1. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `U2BB259F1F0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.271217,26.376889) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.271217/26.376889)
-2. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `UA33F96652F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.281076,26.358687) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.281076/26.358687)
-3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265519/26.676623)
+1. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `U2BB259F1F0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.271217,26.376889)
+2. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `UA33F96652F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.281076,26.358687)
+3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
 > 15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.
 
 Bugün ekip gönderilecek ek kalibrasyon noktası yok.
-
-## Kör alan saha devriyesi
-
-> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
-
-1. **KÖR ALAN — Şifne** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.341315,26.430692) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.341315/26.430692)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
-2. **KÖR ALAN — Gülbahçe · güncel uydu kör alanı** · yaklaşık 400 m² · karışık geçersizlik · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.341225,26.643308) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.341225/26.643308)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
