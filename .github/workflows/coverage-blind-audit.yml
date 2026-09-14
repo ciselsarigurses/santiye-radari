@@ -20,6 +20,7 @@ on:
       - "final_calibration_diversity_guard.py"
       - "calibration_cross_layer_diversity_guard.py"
       - "preseason_route_final_guard.py"
+      - "postseason_excavation_priority_guard.py"
       - "satellite.py"
       - ".github/workflows/coverage-blind-audit.yml"
   workflow_run:
@@ -126,6 +127,12 @@ jobs:
       - name: 15 Eylül öncesi saha rota invariantını son kez doğrula
         run: python preseason_route_final_guard.py
 
+      - name: 15 Eylül sonrası taze hafriyat önceliği öz testi
+        run: python postseason_excavation_priority_guard.py --self-check
+
+      - name: 15 Eylül sonrası taze hafriyat önceliğini son kez koru
+        run: python postseason_excavation_priority_guard.py
+
       - name: Kanonik kuru zemin raporunu geri yükle
         run: git checkout -- dry_ground_gap_audit.json
 
@@ -155,6 +162,7 @@ jobs:
             python calibration_note_guard.py --check-only
             python calibration_note_guard.py
             python preseason_route_final_guard.py
+            python postseason_excavation_priority_guard.py
             git checkout -- dry_ground_gap_audit.json
           }
 
