@@ -241,16 +241,40 @@ def _report_hotspots(connection, report_date):
             area_m2 = max(_number(item.get("alan_m2"), 0), 0)
             signal = str(item.get("sinyal") or "Yüzey değişimi adayı")
             size_class = str(item.get("boyut_sinifi") or "")
+            agricultural_risk = bool(item.get("tarim_riski"))
+            route_suitable = bool(item.get("rota_uygun", True)) and not agricultural_risk
+            priority = (
+                _field_priority(area_m2, size_class, signal)
+                if route_suitable
+                else "TAKİP"
+            )
+            priority_reason = (
+                _priority_reason(area_m2, size_class, signal)
+                if route_suitable
+                else str(
+                    item.get("tarim_riski_nedeni")
+                    or "Geniş ve homojen tarımsal zemin değişimi içinde; ekip rotasına alınmaz."
+                )
+            )
             results.append(
                 {
-                    "oncelik": _field_priority(area_m2, size_class, signal),
-                    "oncelik_nedeni": _priority_reason(area_m2, size_class, signal),
+                    "oncelik": priority,
+                    "oncelik_nedeni": priority_reason,
                     "mahalle": str(item.get("mahalle") or "Yakın mevki bilinmiyor"),
                     "enlem": round(latitude, 6),
                     "boylam": round(longitude, 6),
                     "alan_m2": round(area_m2),
                     "sinyal": signal,
                     "boyut_sinifi": size_class or None,
+                    "tarim_riski": agricultural_risk,
+                    "tarim_baglam_alani_m2": round(
+                        max(_number(item.get("tarim_baglam_alani_m2"), 0), 0)
+                    ),
+                    "tarim_baglam_orani": round(
+                        max(_number(item.get("tarim_baglam_orani"), 0), 0), 2
+                    ),
+                    "tarim_riski_nedeni": item.get("tarim_riski_nedeni"),
+                    "rota_uygun": route_suitable,
                     "bolge": str(row[1] or row[0] or "-"),
                     "onceki_tarih": row[2],
                     "son_tarih": row[3],
@@ -262,7 +286,7 @@ def _report_hotspots(connection, report_date):
                     ),
                 }
             )
-    priority_order = {"YÜKSEK": 0, "ORTA": 1, "NORMAL": 2}
+    priority_order = {"YÜKSEK": 0, "ORTA": 1, "NORMAL": 2, "TAKİP": 3}
     return sorted(
         results,
         key=lambda item: (
@@ -339,8 +363,11 @@ def _write_public_report(report_date, created, summary, hotspots, details):
         "## Bugün sahada kontrol edilecek uydu adayları",
         "",
     ]
-    if hotspots:
-        for index, item in enumerate(hotspots, start=1):
+    route_hotspots = [
+        item for item in hotspots if bool(item.get("rota_uygun", True))
+    ]
+    if route_hotspots:
+        for index, item in enumerate(route_hotspots, start=1):
             area_text = f"{int(item['alan_m2']):,}".replace(",", ".")
             interval = (
                 f"{_md_text(item.get('onceki_tarih'))} → "
@@ -366,7 +393,10 @@ def _write_public_report(report_date, created, summary, hotspots, details):
     else:
         lines.extend(
             [
-                "Bugünkü raporda eşik üstünde yeni uydu hareket adayı yok.",
+                (
+                    "Bugünkü raporda ekip rotasına uygun yeni uydu hareket adayı yok. "
+                    "Tarımsal riskli değişimler yalnız arka planda izlenir."
+                ),
                 "",
             ]
         )
