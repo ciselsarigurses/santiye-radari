@@ -13,27 +13,15 @@
 
 > 15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Sahada doğrulanmış yıkım/parsel temizliği yeni Sentinel hareketi gelene kadar takip havuzunda kalır. Bunun dışında yalnız insanın TEKRAR_GIT dediği kayıt veya en fazla 2 günlük güncel Sentinel kanıtı taşıyan güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.
 
-1. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `U2BB259F1F0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.271217,26.376889) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.271217/26.376889)
-2. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `UA33F96652F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.281076,26.358687) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.281076/26.358687)
-3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265519/26.676623)
+1. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `U2BB259F1F0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.271217,26.376889)
+2. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `UA33F96652F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.281076,26.358687)
+3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; aynı sahne kaldıkça bölge başına en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel çifti için zaman-serisi denetimi değişim öncesi sakin olup sonradan birden güçlenen güvenli bir örnek bulursa o örnek saha teyidi için rotasyonun önüne alınır; bu yine alarm değildir. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday dört kişilik havuzu dolduramaz. Amaç daha fazla farklı noktadan gerçek hafriyat / yanlış pozitif saha etiketi toplayarak algoritmayı iki bölgede de kalibre etmektir.
+> 15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.
 
-1. **KALİBRASYON — Ovacık** · yaklaşık 1.400 m² · 08.09.2026 → 13.09.2026 · BSI Δ 0.110 · RGB Δ 0.194 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.256927,26.309348)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 1.800 m² · 08.09.2026 → 13.09.2026 · BSI Δ 0.139 · RGB Δ 0.203 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.288041,26.458071)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-
-## Temporal-lokal erken sinyal izleme
-
-> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül öncesinde yalnız kalibrasyon/izleme amaçlıdır; ekip rotasına otomatik eklenmez.
-
-1. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 500 m² · yerellik 3.10 · iç BSI Δ 0.163 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.353345,26.676966) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.353345/26.676966)
-   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
-2. **TEMPORAL-LOKAL — Alaçatı** · yaklaşık 600 m² · yerellik 2.43 · iç BSI Δ 0.124 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262625,26.380094) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.262625/26.380094)
-   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+Bugün ekip gönderilecek ek kalibrasyon noktası yok.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
