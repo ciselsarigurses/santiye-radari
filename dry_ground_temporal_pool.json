@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-14",
-  "olusturma": "2026-09-14 15:26 +0300",
+  "olusturma": "2026-09-14 20:29 +0300",
   "amac": "Mevcut alarm üretim maskesinin dışında kalan düşük-NDVI 250-2.000 m² kuru zemin spektral değişimlerini BSI ile ölçmek; ayrıca kompaktlık, uzun/kısa oranı, 120 m yerel kümelenme ve ana Sentinel kıyı tamponu riskini saha kalibrasyonu için kaydetmek; alarm/görev üretmez.",
   "esikler": {
     "alan_m2": [
@@ -1842,7 +1842,7 @@
           "izole_saha_benzeri": false
         },
         {
-          "mahalle": "Mevki doğrulanmadı",
+          "mahalle": "Özbek",
           "enlem": 38.353345,
           "boylam": 26.676966,
           "alan_m2": 500,
@@ -2541,7 +2541,7 @@
           "izole_saha_benzeri": false
         },
         {
-          "mahalle": "Mevki doğrulanmadı",
+          "mahalle": "Özbek",
           "enlem": 38.353345,
           "boylam": 26.676966,
           "alan_m2": 500,
@@ -2915,7 +2915,7 @@
     },
     "temsil_edilen_mahalle_sayilari": {
       "cesme": 9,
-      "uzunkuyu": 3
+      "uzunkuyu": 4
     },
     "not": "Yalnız diagnostik zaman-serisi ve saha kalibrasyonu içindir; alarm/görev/eşik üretmez. En güçlü çekirdek korunur, kalan slotlar mümkün olduğunda farklı mahallelere yayılır."
   }

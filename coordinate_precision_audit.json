@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-14",
-  "olusturma": "2026-09-14 15:28 +0300",
+  "olusturma": "2026-09-14 20:31 +0300",
   "amac": "Mevcut Sentinel aday koordinatının geometrik temsil pikseli ile aynı bağlı bileşendeki BSI×RGB değişim gücüne göre sinyal-ağırlıklı temsil pikseli arasındaki farkı ölçmek; koordinatı otomatik değiştirmeden 10 m sınıfı hassasiyet iyileştirmesini doğrulamak.",
   "uyari": "Bu çıktı alarm/görev/eşik değiştirmez. Sinyal-ağırlıklı koordinat yalnız diagnostiktir; saha doğrulaması olmadan kesin adres veya parsel değildir.",
   "bolgeler": {
@@ -725,7 +725,7 @@
           "bilesen_piksel": 3
         },
         {
-          "mahalle": "Mevki doğrulanmadı",
+          "mahalle": "Özbek",
           "alan_m2": 500,
           "mevcut_enlem": 38.353345,
           "mevcut_boylam": 26.676966,

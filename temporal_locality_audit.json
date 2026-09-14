@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-14",
-  "olusturma": "2026-09-14 15:28 +0300",
+  "olusturma": "2026-09-14 20:30 +0300",
   "amac": "250-900 m² temporal kuru-zemin adayında 3x3 değişimin hemen dışındaki 5x5 halkaya göre yerel mi yaygın mı olduğunu ölçmek.",
   "esikler": {
     "kucuk_orta_maks_alan_m2": 900,
@@ -746,7 +746,7 @@
       "ani_adaylarda_yaygin_cevre_riski": 1,
       "adaylar": [
         {
-          "mahalle": "Mevki doğrulanmadı",
+          "mahalle": "Özbek",
           "enlem": 38.353345,
           "boylam": 26.676966,
           "alan_m2": 500,
