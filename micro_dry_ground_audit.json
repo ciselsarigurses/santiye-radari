@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-13 19:29 +0300",
+  "olusturma": "2026-09-14 19:31 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -3332,7 +3332,7 @@
         {
           "alarm": false,
           "saha_gorevi": false,
-          "mahalle": "Mevki doğrulanmadı",
+          "mahalle": "Özbek",
           "enlem": 38.350993,
           "boylam": 26.675363,
           "alan_m2": 200,
@@ -3368,7 +3368,7 @@
         {
           "alarm": false,
           "saha_gorevi": false,
-          "mahalle": "Mevki doğrulanmadı",
+          "mahalle": "Özbek",
           "enlem": 38.354068,
           "boylam": 26.676852,
           "alan_m2": 200,
@@ -3404,7 +3404,7 @@
         {
           "alarm": false,
           "saha_gorevi": false,
-          "mahalle": "Mevki doğrulanmadı",
+          "mahalle": "Özbek",
           "enlem": 38.380118,
           "boylam": 26.676508,
           "alan_m2": 200,
@@ -3728,7 +3728,7 @@
         {
           "alarm": false,
           "saha_gorevi": false,
-          "mahalle": "Mevki doğrulanmadı",
+          "mahalle": "Özbek",
           "enlem": 38.354521,
           "boylam": 26.676852,
           "alan_m2": 200,
