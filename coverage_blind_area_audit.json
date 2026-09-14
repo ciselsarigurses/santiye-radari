@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-13 19:30 +0300",
+  "olusturma": "2026-09-14 17:54 +0300",
   "amac": "Son açık Sentinel tarihlerinde SCL=4/5 ile kara olduğu bağımsız olarak kanıtlanan piksellerde, ana çift ve mevcut eski/yeni bulut-gölge zaman-serisi tamamlamalarından sonra gözlemsiz kalan alanı ve üretime dokunmadan çoklu uygun yedek sahnelerin yalnız kapsama bakımından sağlayabileceği ek geri kazanımı ölçmek; alarm veya görev üretmez.",
   "minimum_alan_m2": 250,
   "kara_referans_sahne_tavani": 8,
@@ -664,7 +664,7 @@
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "mahalle_yaklasik": "Özbek",
           "enlem": 38.347556,
           "boylam": 26.677882,
           "alan_m2": 19203,
@@ -699,7 +699,7 @@
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "mahalle_yaklasik": "Özbek",
           "enlem": 38.353435,
           "boylam": 26.676508,
           "alan_m2": 13202,
@@ -848,10 +848,38 @@
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
+          "mahalle_yaklasik": "Özbek",
+          "enlem": 38.356058,
+          "boylam": 26.676165,
+          "alan_m2": 400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Özbek",
+          "enlem": 38.366369,
+          "boylam": 26.679714,
+          "alan_m2": 400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Özbek",
+          "enlem": 38.376681,
+          "boylam": 26.679714,
+          "alan_m2": 400,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
           "mahalle_yaklasik": "Şifne",
           "enlem": 38.348822,
           "boylam": 26.45166,
           "alan_m2": 4001,
+          "neden": "KARISIK_GECERSIZLIK"
+        },
+        {
+          "mahalle_yaklasik": "Özbek",
+          "enlem": 38.347556,
+          "boylam": 26.677882,
+          "alan_m2": 19203,
           "neden": "KARISIK_GECERSIZLIK"
         }
       ],
@@ -871,7 +899,7 @@
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "mahalle_yaklasik": "Özbek",
           "enlem": 38.347556,
           "boylam": 26.677882,
           "alan_m2": 19203,
@@ -899,7 +927,7 @@
           "neden": "KARISIK_GECERSIZLIK"
         },
         {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "mahalle_yaklasik": "Özbek",
           "enlem": 38.353435,
           "boylam": 26.676508,
           "alan_m2": 13202,
@@ -985,7 +1013,7 @@
           "neden": "BULUT_GOLGE_KALICI"
         },
         {
-          "mahalle_yaklasik": "Mevki doğrulanmadı",
+          "mahalle_yaklasik": "Özbek",
           "enlem": 38.359405,
           "boylam": 26.676966,
           "alan_m2": 5601,
