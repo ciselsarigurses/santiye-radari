@@ -1,0 +1,94 @@
+name: Operasyonel Rota Koordinat Piksel Denetimi
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "route_coordinate_precision_audit.py"
+      - ".github/workflows/route-coordinate-precision-audit.yml"
+  workflow_run:
+    workflows: ["Operasyonel Rota Geometri Koruması", "Günlük Şantiye Taraması"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-route-coordinate-precision
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Rota koordinat audit öz testi
+        run: python route_coordinate_precision_audit.py --self-test
+
+      - name: Operasyonel rotayı kendi Sentinel tarih çiftiyle ölç
+        run: python route_coordinate_precision_audit.py
+
+      - name: Çıktıyı doğrula
+        shell: bash
+        run: |
+          test -f route_coordinate_precision_audit.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('route_coordinate_precision_audit.json').read_text(encoding='utf-8'))
+          if int(data.get('rota_hedefi') or 0) and not (data.get('hedefler') or data.get('hatalar')):
+              raise SystemExit('Rota hedefleri vardı fakat audit ne ölçüm ne hata üretti.')
+          print('Rota koordinat audit çıktısı yapısal olarak geçerli.')
+          PY
+
+      - name: Sonucu yalnız anlamlı değişiklikte güvenli kaydet
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          git add route_coordinate_precision_audit.json
+          if git diff --cached --quiet; then
+            echo "Rota koordinat audit sonucu değişmedi; commit yok."
+            exit 0
+          fi
+
+          git commit -m "Radar: rota koordinat piksel auditini güncelle"
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "Main audit sırasında ilerledi; en güncel rota üzerinde yeniden ölçülüyor."
+            git reset --hard origin/main
+            python route_coordinate_precision_audit.py --self-test
+            python route_coordinate_precision_audit.py
+            git add route_coordinate_precision_audit.json
+            if git diff --cached --quiet; then
+              echo "Yeniden ölçüm sonrası semantik değişiklik yok."
+              exit 0
+            fi
+            git commit -m "Radar: rota koordinat piksel auditini güncelle"
+            git fetch origin main
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              echo "Main yeniden ilerledi; stale koordinat audit sonucu zorlanmadı."
+              exit 0
+            fi
+          fi
+
+          git push origin HEAD:main
