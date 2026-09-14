@@ -13,9 +13,9 @@
 
 > 15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Sahada doğrulanmış yıkım/parsel temizliği yeni Sentinel hareketi gelene kadar takip havuzunda kalır. Bunun dışında yalnız insanın TEKRAR_GIT dediği kayıt veya en fazla 2 günlük güncel Sentinel kanıtı taşıyan güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.
 
-1. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `UA33F96652F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.281076,26.358687)
-2. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623)
-3. **PARSEL — Çiftlikköy** · yaklaşık 900 m² · Görev `UB970574B24` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.283247,26.256460)
+1. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `UA33F96652F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.281076,26.358687) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.281076/26.358687)
+2. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265519/26.676623)
+3. **PARSEL — Çiftlikköy** · yaklaşık 900 m² · Görev `UB970574B24` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.283247,26.256460) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.283247/26.256460)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
