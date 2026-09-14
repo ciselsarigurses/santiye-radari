@@ -15,6 +15,7 @@ on:
       - "sentinel1_rtc_target_pair_gapfill.py"
       - "sentinel1_rtc_gapfill_locality_guard.py"
       - "sentinel1_rtc_map_export.py"
+      - "sentinel1_rtc_snapshot_guard.py"
       - "cloud_scene_probe.py"
       - ".github/workflows/sentinel-scene-probe.yml"
   schedule:
@@ -66,6 +67,7 @@ jobs:
           python sentinel1_rtc_target_pair_gapfill.py --self-check-only
           python sentinel1_rtc_gapfill_locality_guard.py --self-check-only
           python sentinel1_rtc_map_export.py --self-check-only
+          python sentinel1_rtc_snapshot_guard.py --self-check-only
 
       - name: Sentinel metadata'sında yeni üretim sahnesi ara
         id: probe
@@ -141,7 +143,16 @@ jobs:
             exit 0
           fi
 
-          cp /tmp/sentinel1-rtc-map.geojson sentinel1_rtc_map.geojson
+          # Canlı RTC sağlayıcısı geçici hata verip 0 özellik ürettiyse, bunu gerçek
+          # 'aday yok' sonucu sanıp son geçerli diagnostik/arka-plan haritasını silme.
+          # Kaynak düzeldiğinde yeni snapshot normal şekilde yayınlanır.
+          python sentinel1_rtc_snapshot_guard.py \
+            --rtc /tmp/sentinel1-rtc.json \
+            --candidate /tmp/sentinel1-rtc-map.geojson \
+            --current sentinel1_rtc_map.geojson \
+            --output /tmp/sentinel1-rtc-map-publish.geojson
+
+          cp /tmp/sentinel1-rtc-map-publish.geojson sentinel1_rtc_map.geojson
           if git diff --quiet -- sentinel1_rtc_map.geojson; then
             echo "SAR harita snapshotında semantik değişiklik yok."
             exit 0
