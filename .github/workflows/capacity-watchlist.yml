@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - "capacity_watchlist.py"
+      - "candidate_capacity_audit.py"
+      - "rebalance_satellite_candidates.py"
+      - "satellite.py"
+      - "sitecustomize.py"
       - ".github/workflows/capacity-watchlist.yml"
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
@@ -40,6 +44,31 @@ jobs:
 
       - name: Kapasite devriyesi kalite kontrolü
         run: python capacity_watchlist.py --check-only
+
+      - name: Hotspot imza uyumluluğunu canlı denetimde doğrula
+        run: |
+          python candidate_capacity_audit.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path("candidate_capacity_audit.json").read_text(encoding="utf-8"))
+          signature_errors = {}
+          for region, record in (payload.get("bolgeler") or {}).items():
+              error = str((record or {}).get("hata") or "")
+              if (
+                  (record or {}).get("durum") == "denetim_hatasi"
+                  and "TypeError" in error
+                  and "agricultural_context_mask" in error
+              ):
+                  signature_errors[region] = error
+          if signature_errors:
+              raise SystemExit(
+                  "Hotspot agricultural_context_mask imza regresyonu: "
+                  + repr(signature_errors)
+              )
+          print("Kapasite canlı denetiminde agricultural_context_mask imza regresyonu yok.")
+          PY
 
       - name: Mevcut sahne kapasite devriyesini üret
         run: python capacity_watchlist.py
