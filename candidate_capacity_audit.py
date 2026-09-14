@@ -40,6 +40,7 @@ def _uncapped_hotspots(
     bbox,
     pixel_area_m2,
     small_site_mask=None,
+    agricultural_context_mask=None,
     limit=satellite.HOTSPOT_LIMIT,
     small_quota=satellite.SMALL_HOTSPOT_QUOTA,
 ):
@@ -49,6 +50,7 @@ def _uncapped_hotspots(
         bbox,
         pixel_area_m2,
         small_site_mask=small_site_mask,
+        agricultural_context_mask=agricultural_context_mask,
         limit=RAW_LIMIT,
         small_quota=0,
     )
@@ -453,6 +455,7 @@ def audit_capacity():
                 bbox,
                 pixel_area_m2,
                 small_site_mask=None,
+                agricultural_context_mask=None,
                 limit=satellite.HOTSPOT_LIMIT,
                 small_quota=satellite.SMALL_HOTSPOT_QUOTA,
             ):
@@ -470,6 +473,7 @@ def audit_capacity():
                     bbox,
                     pixel_area_m2,
                     small_site_mask=small_site_mask,
+                    agricultural_context_mask=agricultural_context_mask,
                 )
 
             raw_result = _analyze_with_hotspot_function(
