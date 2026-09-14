@@ -5573,7 +5573,7 @@
       "gunluk_sira": 3
     }
   ],
-  "gunun_ilk_3_notu": "15 Eylül öncesi kalibrasyon modu: eski/gecikmiş uydu backlog'u ilk saha rotasına çıkarılmaz. Sahada doğrulanmış yıkım/parsel temizliği yeni Sentinel hareketi gelene kadar takip havuzunda kalır. Bunun dışında yalnız insanın TEKRAR_GIT dediği kayıt veya en fazla 2 günlük güncel Sentinel kanıtı taşıyan güçlü kompakt ERKEN/PARSEL-küçük saha sinyali gösterilir; diğer kayıtlar arka planda izlenmeye devam eder.",
+  "gunun_ilk_3_notu": "15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.",
   "kuru_zemin_kalibrasyon_kontrolu": [],
   "kuru_zemin_kalibrasyon_notu": "15 Eylül öncesi kuru-zemin diagnostikleri arka planda kalibrasyon havuzunda tutulur; sırf veri toplamak için ekip rotasına eklenmez.",
   "dogrulanmis_takip_sahalari": [
@@ -5826,5 +5826,61 @@
       "saha_gorevi": false,
       "aciklama": "Aynı günlük rapor yeniden işlendiğinde daha önce arka plana ayrılmış geniş-yüzey diagnostik kayıtları sessizce düşürülmez."
     }
+  },
+  "postseason_excavation_priority": {
+    "aktif": true,
+    "baslangic_tarihi": "2026-09-15",
+    "ana_alarm_alt_esigi_m2": 250,
+    "taze_kazi_oncelik_ust_siniri_m2": 5000,
+    "mikro_santiye": "150-249 m² diagnostik; doğrudan saha görevine yükseltilmez",
+    "mikro_oncul_esleme_mesafesi_m": 25.0,
+    "mikro_oncul_iz_eslesen_gorevler": [],
+    "saha_oncul_sonuclari": [
+      "YIKIM_TEMIZLIK"
+    ],
+    "saha_oncul_esleme_mesafesi_m": 25.0,
+    "saha_oncul_azami_yas_gun": 60,
+    "saha_oncul_eslesen_gorevler": [],
+    "one_alinan_gorevler": [],
+    "not": "Yalnız mevcut aktif görevlerin sırasını değiştirir; alarm/görev üretmez. Daha eski güçlü MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği yalnız zaten bağımsız 250 m²+ taze ana adayda sıralama kanıtıdır. TEKRAR_GIT en yüksek öncelikte kalır.",
+    "temporal_lokal_oncul_esleme_mesafesi_m": 25.0,
+    "temporal_lokal_oncul_eslesen_gorevler": [],
+    "temporal_lokal_oncul_notu": "Daha eski güçlü 250-900 m² ani+lokal diagnostik yalnız zaten bağımsız taze 250 m²+ ana aday için sıralama kanıtıdır; alarm/görev üretmez."
+  },
+  "postseason_fresh_evidence_retention": {
+    "aktif": true,
+    "baslangic_tarihi": "2026-09-15",
+    "koruma_suresi_gun": 2,
+    "ana_alarm_alt_esigi_m2": 250,
+    "taze_kazi_oncelik_ust_siniri_m2": 5000,
+    "korunan_gorevler": [],
+    "mikro_santiye": "150-249 m² diagnostik; doğrudan saha görevine yükseltilmez",
+    "not": "Yeni alarm/görev üretmez. Görev kimliği sezon öncesinden açık olsa bile yalnız 15 Eylül ve sonrasına ait, tarihsel-taşınmamış ve en fazla 2 günlük güncel Sentinel kanıtlı güçlü ana-alarm adayının rota önceliğini saatlik rapor yenilemeleri arasında korur."
+  },
+  "postseason_kuru_zemin_dogrulama": {
+    "aktif": true,
+    "baslangic_tarihi": "2026-09-15",
+    "ana_alarm_alt_esigi_m2": 250,
+    "diagnostik_aralik_m2": [
+      250,
+      900
+    ],
+    "yeni_sahne_bolgeleri": [],
+    "guclu_aday_sayisi": 0,
+    "rotaya_alinan": [],
+    "alarm": false,
+    "kalici_saha_gorevi": false,
+    "kural": "Yalnız o gün yeni Sentinel sahnesi + uzun-temporal ani başlangıç + kararlı geçmiş zemin + yörünge güveni + izole/non-lineer geometri + lokal 5x5 çevre kontrastı. TEKRAR_GIT ve taze ana üretim hafriyat adayları düşürülmez."
+  },
+  "demolition_followup_priority": {
+    "aktif": true,
+    "baslangic_tarihi": "2026-09-15",
+    "ana_alarm_alt_esigi_m2": 250,
+    "mikro_santiye": "150-249 m² diagnostik; doğrudan saha görevine yükseltilmez",
+    "esleme_mesafesi_m": 25.0,
+    "azami_yas_gun": 60,
+    "eslesen_gorevler": [],
+    "onceki_oncelik_katmanlari_korundu": true,
+    "not": "Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin shortlist'i silinmez. YIKIM_TEMIZLIK sonucu, sonraki yeni Sentinel sahnesinde aynı noktadaki 250 m²+ mevcut görevi güçlendirir; yalnız boş rota kapasitesini kullanır veya korunmayan backlog ile yer değiştirir. Yeni alarm/görev üretmez."
   }
 }
