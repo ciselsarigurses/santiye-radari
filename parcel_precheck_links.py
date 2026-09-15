@@ -1,9 +1,10 @@
-"""Radar koordinatlarına manuel TKGM Parsel Sorgu ön-kontrol bağlantısı ekler.
+"""Operasyonel radar adaylarına manuel TKGM Parsel Sorgu ön-kontrol bağlantısı ekler.
 
 Bu katman ada/parsel VERİSİ üretmez ve TKGM servisinden veri çekmez. Sentinel
 koordinatı yaklaşık değişim merkezi olduğu için yalnız resmi Parsel Sorgu
 arayüzünü aynı koordinatta açan bir bağlantı üretir. Ada/parsel kullanıcı
-kontrolüyle doğrulanana kadar ``MANUEL_DOGRULAMA_GEREKLI`` kalır.
+kontrolüyle doğrulanana kadar ``MANUEL_DOGRULAMA_GEREKLI`` kalır. Manuel
+bağlantı tek başına radar skoru, alarm veya saha önceliği kanıtı değildir.
 """
 
 from __future__ import annotations
@@ -23,6 +24,11 @@ PARCEL_NOTE = (
     "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında "
     "manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
 )
+PARCEL_POLICY = {
+    "kapsam": "YALNIZ_OPERASYONEL_SAHA_ADAYLARI",
+    "kanit_durumu": "MANUEL_LINK_KANIT_DEGIL",
+    "oncelik_etkisi": "YOK_DOGRULANANA_KADAR",
+}
 REPORT_NOTICE = (
     "> **Parsel ön kontrol:** Rota satırlarındaki **Parsel Sorgu'da aç** bağlantısı "
     "yalnız radar koordinatını TKGM haritasında açar; ada/parsel otomatik "
@@ -61,7 +67,7 @@ def parcel_query_url(latitude, longitude):
 
 
 def _enrich_coordinates(node):
-    """JSON içindeki koordinatlı sözlüklere yalnız manuel ön-kontrol metadatası ekle."""
+    """Verilen koordinatlı sözlüklere yalnız manuel ön-kontrol metadatası ekle."""
     changed = 0
     if isinstance(node, dict):
         url = parcel_query_url(node.get("enlem"), node.get("boylam"))
@@ -127,8 +133,13 @@ def update_report_files():
     if REPORT_JSON.exists():
         original = REPORT_JSON.read_text(encoding="utf-8")
         payload = json.loads(original)
-        json_changes = _enrich_coordinates(payload)
+        # Parsel bağlantısı yalnız sahaya çıkabilecek operasyonel adaylarda tutulur.
+        # Kalibrasyon, MİKRO ve diğer diagnostik katmanlarda manuel linki kanıt gibi
+        # çoğaltmamak hem provenance'ı netleştirir hem workflow'lar arası gereksiz
+        # rapor churn'ünü azaltır.
+        json_changes = _enrich_coordinates(payload.get("saha_adaylari", []))
         payload["parsel_on_kontrol_notu"] = PARCEL_NOTE
+        payload["parsel_on_kontrol_politikasi"] = PARCEL_POLICY
         rendered = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
         if rendered != original:
             REPORT_JSON.write_text(rendered, encoding="utf-8")
@@ -152,6 +163,8 @@ def _self_check():
     )
     assert parcel_query_url("x", 26.3) is None
     assert parcel_query_url(91, 26.3) is None
+    assert PARCEL_POLICY["kanit_durumu"] == "MANUEL_LINK_KANIT_DEGIL"
+    assert PARCEL_POLICY["oncelik_etkisi"] == "YOK_DOGRULANANA_KADAR"
 
     sample = {
         "saha_adaylari": [
@@ -159,12 +172,12 @@ def _self_check():
             {"enlem": None, "boylam": 26.3},
         ]
     }
-    changes = _enrich_coordinates(sample)
+    changes = _enrich_coordinates(sample["saha_adaylari"])
     assert changes == 3
     item = sample["saha_adaylari"][0]
     assert item["ada_parsel_durumu"] == PARCEL_STATUS
     assert item["parsel_sorgu"].endswith("/38.338783/26.311638")
-    assert _enrich_coordinates(sample) == 0
+    assert _enrich_coordinates(sample["saha_adaylari"]) == 0
 
     markdown = (
         "> **Konum kuralı:** Test.\n\n"
