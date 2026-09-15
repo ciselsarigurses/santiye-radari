@@ -6282,7 +6282,14 @@
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.272846,26.384788",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": false,
+      "zaman_serisi_ani_baslangic_orani": 0.99,
+      "zaman_serisi_onceki_bsi_degisim": 0.1649,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": true,
+      "kalibrasyon_rotasyon_gun": 0,
+      "kalibrasyon_rotasyon_havuzu": 4
     },
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -6305,10 +6312,18 @@
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319607,26.564084",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": true,
+      "zaman_serisi_ani_baslangic_orani": 4.45,
+      "zaman_serisi_onceki_bsi_degisim": 0.0339,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
+      "kalibrasyon_rotasyon_gun": 0,
+      "kalibrasyon_rotasyon_havuzu": 3,
+      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir.",
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında bölge başına en fazla bir, toplam iki örnek seçilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; sahne değişmezse en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel tarih çiftine ait zaman-serisi denetimi güvenli ani başlangıç desteği verirse bu örnek saha teyidi için rotasyonun önüne alınır; alarm/görev statüsü değişmez. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday ilk dört kişilik kalibrasyon havuzuna alınmaz.",
   "dogrulanmis_takip_sahalari": [
     {
       "gorev_id": "UEC44340AEC",
@@ -6371,7 +6386,7 @@
       "cesme",
       "uzunkuyu"
     ],
-    "guclu_aday_sayisi": 0,
+    "guclu_aday_sayisi": 1,
     "rotaya_alinan": [],
     "alarm": false,
     "kalici_saha_gorevi": false,
