@@ -6,144 +6,288 @@
     150,
     249
   ],
-  "durum": "ok",
+  "durum": "veri_tarihi_uyusmuyor",
   "amac": "Gülbahçe 2 km operasyon alanında yalnız EN YENİ Sentinel SCL sahnesinde kalite nedeniyle görülemeyen pikselleri, son açık tarihlerde SCL=4/5 ile bağımsız olarak kara olduğu kanıtlanmış yüzeylerde ölçmek; iki-sahne temporal körlüğünü güncel-sahne körlüğüyle karıştırmamak.",
-  "kaynak_son_tarih": "13.09.2026",
-  "kaynak_son_item": "S2C_T35SMC_20260913T090741_L2A",
+  "kaynak_son_tarih": "15.09.2026",
+  "kaynak_son_item": "S2A_T35SMC_20260915T090428_L2A",
   "coverage_son_tarih": "13.09.2026",
   "coverage_son_item": "S2C_T35SMC_20260913T090741_L2A",
-  "ayni_sentinel_sahnesi": true,
+  "ayni_sentinel_sahnesi": false,
   "kara_referans_sahne_sayisi": 8,
   "kara_referans_tarihleri": [
+    "13.09.2026",
     "08.09.2026",
     "05.09.2026",
     "03.09.2026",
     "29.08.2026",
     "26.08.2026",
     "24.08.2026",
-    "19.08.2026",
-    "16.08.2026"
+    "19.08.2026"
   ],
-  "ikili_sahne_korlugu_250plus_diagnostik": 3,
+  "ikili_sahne_korlugu_250plus_diagnostik": 0,
   "guncel_sahne_mikro_kor_150_249": 0,
-  "guncel_sahne_kor_250_6500": 3,
+  "guncel_sahne_kor_250_6500": 9,
   "guncel_sahne_kor_6500ustu": 0,
   "secilen_devriye_eslesen_kor_kume": 1,
   "secilen_devriye_guncel_korlugu_kapsiyor": true,
   "guncel_sahne_mikro_kor_kumeleri": [],
   "guncel_sahne_kor_kumeleri": [
     {
-      "enlem": 38.341225,
-      "boylam": 26.643308,
+      "enlem": 38.328652,
+      "boylam": 26.652008,
       "alan_m2": 400,
       "neden": "BULUT",
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 45,
+      "secilen_devriyeye_mesafe_m": 1584,
       "secilen_devriye_kapsiyor": false,
-      "secilen_devriyeye_yakin_ek_kontrol": true,
-      "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
+      "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
-      "enlem": 38.341586,
-      "boylam": 26.643079,
+      "enlem": 38.331185,
+      "boylam": 26.653611,
       "alan_m2": 400,
       "neden": "BULUT",
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 0,
-      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_mesafe_m": 1429,
+      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_yakin_ek_kontrol": false
+    },
+    {
+      "enlem": 38.331728,
+      "boylam": 26.653382,
+      "alan_m2": 400,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_KARA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": 1370,
+      "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
-      "enlem": 38.325306,
-      "boylam": 26.65945,
-      "alan_m2": 800,
+      "enlem": 38.333265,
+      "boylam": 26.653382,
+      "alan_m2": 400,
       "neden": "BULUT",
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 2299,
+      "secilen_devriyeye_mesafe_m": 1244,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
-    }
-  ],
-  "guncel_sahne_buyuk_kor_kumeleri": [],
-  "tarihsel_su_kalite_kor_150plus": 0,
-  "cozulmemis_yuzey_kalite_kor_150plus": 0,
-  "tarihsel_kara_guncel_su_150plus": 23,
-  "tarihsel_su_ornekleri": [],
-  "cozulmemis_yuzey_ornekleri": [],
-  "tarihsel_kara_guncel_su_ornekleri": [
-    {
-      "enlem": 38.324311,
-      "boylam": 26.662541,
-      "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
-      "alarm": false,
-      "saha_gorevi": false
     },
     {
-      "enlem": 38.324853,
-      "boylam": 26.661854,
+      "enlem": 38.334712,
+      "boylam": 26.653611,
       "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
-      "saha_gorevi": false
-    },
-    {
-      "enlem": 38.325034,
-      "boylam": 26.661396,
-      "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
-      "alarm": false,
-      "saha_gorevi": false
-    },
-    {
-      "enlem": 38.326482,
-      "boylam": 26.658649,
-      "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
-      "alarm": false,
-      "saha_gorevi": false
-    },
-    {
-      "enlem": 38.327748,
-      "boylam": 26.657733,
-      "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
-      "alarm": false,
-      "saha_gorevi": false
-    },
-    {
-      "enlem": 38.330461,
-      "boylam": 26.652924,
-      "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
-      "alarm": false,
-      "saha_gorevi": false
-    },
-    {
-      "enlem": 38.330642,
-      "boylam": 26.655443,
-      "alan_m2": 400,
-      "neden": "GUNCEL_SCL_SU",
-      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
-      "alarm": false,
-      "saha_gorevi": false
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": 1152,
+      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
       "enlem": 38.334712,
       "boylam": 26.654069,
       "alan_m2": 400,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_KARA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": 1184,
+      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_yakin_ek_kontrol": false
+    },
+    {
+      "enlem": 38.346923,
+      "boylam": 26.641132,
+      "alan_m2": 400,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_KARA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": 658,
+      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_yakin_ek_kontrol": false
+    },
+    {
+      "enlem": 38.341496,
+      "boylam": 26.643193,
+      "alan_m2": 800,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_KARA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": 32,
+      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_yakin_ek_kontrol": false
+    },
+    {
+      "enlem": 38.318522,
+      "boylam": 26.654871,
+      "alan_m2": 1900,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_KARA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "secilen_devriyeye_mesafe_m": 2706,
+      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_yakin_ek_kontrol": false
+    }
+  ],
+  "guncel_sahne_buyuk_kor_kumeleri": [],
+  "tarihsel_su_kalite_kor_150plus": 11,
+  "cozulmemis_yuzey_kalite_kor_150plus": 0,
+  "tarihsel_kara_guncel_su_150plus": 8,
+  "tarihsel_su_ornekleri": [
+    {
+      "enlem": 38.338059,
+      "boylam": 26.650291,
+      "alan_m2": 800,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.342581,
+      "boylam": 26.658763,
+      "alan_m2": 1200,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.323768,
+      "boylam": 26.664487,
+      "alan_m2": 1600,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.337335,
+      "boylam": 26.660366,
+      "alan_m2": 1600,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.340953,
+      "boylam": 26.661625,
+      "alan_m2": 1600,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.342581,
+      "boylam": 26.657504,
+      "alan_m2": 1600,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.33625,
+      "boylam": 26.661625,
+      "alan_m2": 3601,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.348913,
+      "boylam": 26.655214,
+      "alan_m2": 4201,
+      "neden": "BULUT",
+      "yuzey_kaniti": "TARIHSEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    }
+  ],
+  "cozulmemis_yuzey_ornekleri": [],
+  "tarihsel_kara_guncel_su_ornekleri": [
+    {
+      "enlem": 38.339777,
+      "boylam": 26.644452,
+      "alan_m2": 400,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.343215,
+      "boylam": 26.64285,
+      "alan_m2": 400,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.349275,
+      "boylam": 26.640674,
+      "alan_m2": 400,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.349275,
+      "boylam": 26.641132,
+      "alan_m2": 400,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.349727,
+      "boylam": 26.641476,
+      "alan_m2": 800,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.338692,
+      "boylam": 26.649032,
+      "alan_m2": 2000,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.344029,
+      "boylam": 26.642392,
+      "alan_m2": 4701,
+      "neden": "GUNCEL_SCL_SU",
+      "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "enlem": 38.347827,
+      "boylam": 26.641247,
+      "alan_m2": 5601,
       "neden": "GUNCEL_SCL_SU",
       "yuzey_kaniti": "TARIHSEL_KARA_GUNCEL_SU",
       "alarm": false,
@@ -153,7 +297,7 @@
   "yorum": "Bu sonuç alarm/görev değildir. MİKRO temporal analizde iki sahnenin de geçerli olması gerekir; bu yüzden ikili-sahne körlüğü ayrı bir diagnostiktir. Buradaki 'güncel-sahne kör' sayısı yalnız en yeni sahnenin geçersiz olduğu ve tarihsel kara kanıtı bulunan alanları içerir. Tarihsel su, çözülememiş yüzey ve tarihsel kara olup güncel SCL=su görünen alanlar şantiye körlüğüne karıştırılmaz; arka planda ayrı tutulur.",
   "secilen_devriye_kapsama_yaricapi_m": 35,
   "yakin_ek_kontrol_yaricapi_m": 150,
-  "secilen_devriyeye_yakin_ek_kontrol_sayisi": 1,
-  "secilen_devriyeye_yakin_ek_kontrol_alan_m2": 400,
+  "secilen_devriyeye_yakin_ek_kontrol_sayisi": 0,
+  "secilen_devriyeye_yakin_ek_kontrol_alan_m2": 0,
   "yakin_ek_kontrol_yorumu": "Yakın ek kontrol yalnız 250 m²+ güncel-sahne kör kümeleri için saha verimliliği diagnostigidir. 'Devriye kapsıyor' sayılmaz, alarm/görev üretmez ve erişilebilirlik sahada değerlendirilir."
 }
