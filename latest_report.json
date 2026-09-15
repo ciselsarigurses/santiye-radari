@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-09-15",
   "olusturma": "2026-09-15 19:15 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 24 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır · Gülbahçe: 4 hareket bölgesi adayı · Aktif saha görevi: 186 · Geciken kontrol: 164 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif) · Arka plan geniş yüzey: 2",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 24 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır · Gülbahçe: 4 hareket bölgesi adayı · Aktif saha görevi: 186 · Geciken kontrol: 164 · Tekrar gidilecek: 1 · Arka plan geniş yüzey: 2 · Saha sonucu: 4 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 2 yanlış pozitif)",
   "saha_adaylari": [
     {
       "oncelik": "TEKRAR",
@@ -6633,5 +6633,24 @@
       "Mevki doğrulanmadı"
     ],
     "kural": "Ana ilk-3 veya kor-alan devriyesi mahallesini, ayni temporal/yerellik kalite sinifinda guvenli alternatif varsa alarm-disi kalibrasyonda tekrar etme."
+  },
+  "manuel_mikro_saha_kalibrasyonu": {
+    "toplam": 1,
+    "sonuclar": {
+      "SANTIYE_KAZI": 0,
+      "YIKIM_TEMIZLIK": 0,
+      "YOL_ALTYAPI": 0,
+      "TARLA_BITKI": 0,
+      "YANLIS_POZITIF": 1
+    },
+    "bagimsiz_konum_dogrulanan": 0,
+    "alarm": false,
+    "saha_gorevi": false,
+    "ana_uretim_esigi_m2": 250,
+    "mikro_aralik_m2": [
+      150,
+      249
+    ],
+    "not": "Manuel MİKRO saha sonucu sınıf kalibrasyonuna dahil edilir. Yalnız açıkça bağımsız doğrulandı alanı true olan kayıt koordinat hassasiyeti doğrulaması sayılır; GPS/EXIF yokluğu bu sayıyı artırmaz."
   }
 }
