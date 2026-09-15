@@ -10,6 +10,25 @@
   "amac": "15 Eylül öncesi güçlü 250-900 m² temporal-lokal ani zemin izini saklamak; sonraki bağımsız taze 250 m²+ ana adaya yalnız sıralama kanıtı sağlamak.",
   "adaylar": [
     {
+      "temporal_iz_id": "TL-20260915-38.31961-26.56408",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.319607,
+      "boylam": 26.564084,
+      "alan_m2": 700,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Mevki doğrulanmadı",
+      "ilk_guclu_tarih": "15.09.2026",
+      "son_guclu_tarih": "15.09.2026",
+      "son_guclu_sentinel_item": "S2A_T35SMC_20260915T090428_L2A",
+      "sentinel_sahneleri": [
+        "S2A_T35SMC_20260915T090428_L2A"
+      ],
+      "maks_yerellik_orani": 4.78,
+      "maks_ic_bsi_degisim": 0.1509
+    },
+    {
       "temporal_iz_id": "TL-20260913-38.35334-26.67697",
       "alarm": false,
       "saha_gorevi": false,
@@ -162,6 +181,6 @@
       "maks_ic_bsi_degisim": 0.107
     }
   ],
-  "guclu_iz_sayisi": 8,
-  "guncelleme_tarihi": "2026-09-15 10:19 +0300"
+  "guclu_iz_sayisi": 9,
+  "guncelleme_tarihi": "2026-09-15 19:25 +0300"
 }
