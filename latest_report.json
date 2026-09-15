@@ -5949,5 +5949,10 @@
       249
     ],
     "not": "Manuel MİKRO saha sonucu sınıf kalibrasyonuna dahil edilir. Yalnız açıkça bağımsız doğrulandı alanı true olan kayıt koordinat hassasiyeti doğrulaması sayılır; GPS/EXIF yokluğu bu sayıyı artırmaz."
+  },
+  "parsel_on_kontrol_politikasi": {
+    "kapsam": "YALNIZ_OPERASYONEL_SAHA_ADAYLARI",
+    "kanit_durumu": "MANUEL_LINK_KANIT_DEGIL",
+    "oncelik_etkisi": "YOK_DOGRULANANA_KADAR"
   }
 }
