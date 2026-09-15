@@ -6,13 +6,13 @@
     150,
     249
   ],
-  "durum": "veri_tarihi_uyusmuyor",
+  "durum": "ok",
   "amac": "Gülbahçe 2 km operasyon alanında yalnız EN YENİ Sentinel SCL sahnesinde kalite nedeniyle görülemeyen pikselleri, son açık tarihlerde SCL=4/5 ile bağımsız olarak kara olduğu kanıtlanmış yüzeylerde ölçmek; iki-sahne temporal körlüğünü güncel-sahne körlüğüyle karıştırmamak.",
   "kaynak_son_tarih": "15.09.2026",
   "kaynak_son_item": "S2A_T35SMC_20260915T090428_L2A",
-  "coverage_son_tarih": "13.09.2026",
-  "coverage_son_item": "S2C_T35SMC_20260913T090741_L2A",
-  "ayni_sentinel_sahnesi": false,
+  "coverage_son_tarih": "15.09.2026",
+  "coverage_son_item": "S2A_T35SMC_20260915T090428_L2A",
+  "ayni_sentinel_sahnesi": true,
   "kara_referans_sahne_sayisi": 8,
   "kara_referans_tarihleri": [
     "13.09.2026",
@@ -40,8 +40,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1584,
-      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_mesafe_m": 0,
+      "secilen_devriye_kapsiyor": true,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -52,7 +52,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1429,
+      "secilen_devriyeye_mesafe_m": 313,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -64,7 +64,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1370,
+      "secilen_devriyeye_mesafe_m": 361,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -76,7 +76,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1244,
+      "secilen_devriyeye_mesafe_m": 524,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -88,7 +88,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1152,
+      "secilen_devriyeye_mesafe_m": 685,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -100,7 +100,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1184,
+      "secilen_devriyeye_mesafe_m": 694,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -112,7 +112,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 658,
+      "secilen_devriyeye_mesafe_m": 2232,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -124,8 +124,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 32,
-      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_mesafe_m": 1615,
+      "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -136,7 +136,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 2706,
+      "secilen_devriyeye_mesafe_m": 1148,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     }

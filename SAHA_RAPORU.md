@@ -17,6 +17,15 @@
 2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UADFA62B1D0` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.320150,26.562138) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.562138)
 3. **PARSEL — Musalla** · yaklaşık 1.800 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UCF568A03B1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313186,26.307059) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313186/26.307059)
 
+## Kör alan saha devriyesi
+
+> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
+
+1. **KÖR ALAN — Alaçatı** · yaklaşık 300 m² · karışık geçersizlik · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.288222,26.405966) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.288222/26.405966)
+   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+2. **KÖR ALAN — Gülbahçe · güncel uydu kör alanı** · yaklaşık 400 m² · karışık geçersizlik · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.328652,26.652008) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.328652/26.652008)
+   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 ### 1. TEKRAR — Gülbahçe
