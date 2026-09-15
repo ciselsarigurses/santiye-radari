@@ -316,9 +316,12 @@ def _shortlist_markdown(shortlist, note):
         area = _number(item.get("alan_m2"), 0)
         area_text = f" · yaklaşık {int(area):,} m²".replace(",", ".") if area else ""
         tag = " · **KURU ZEMİN TEYİDİ**" if item.get("postseason_kuru_zemin_dogrulama") else ""
+        task_id = str(item.get("gorev_id") or "-")
         map_url = str(item.get("harita") or "").strip()
         route_text = f" · [Yol tarifi]({map_url})" if map_url.startswith(("http://", "https://")) else ""
-        lines.append(f"{order}. **{priority} — {neighborhood}**{area_text}{tag}{route_text}")
+        lines.append(
+            f"{order}. **{priority} — {neighborhood}**{area_text}{tag} · Görev `{task_id}`{route_text}"
+        )
     lines.append("")
     return "\n".join(lines)
 
@@ -444,6 +447,9 @@ def _self_check():
     merged = merge_confirmation([repeat, fresh, backlog], selected)
     assert [item.get("gorev_id") for item in merged] == ["R", "F", selected[0]["gorev_id"]], merged
     assert selected[0]["alan_m2"] >= MAIN_ALARM_MIN_M2
+    markdown = _shortlist_markdown(merged, "test")
+    assert "Görev `R`" in markdown
+    assert f"Görev `{selected[0]['gorev_id']}`" in markdown
 
 
 if __name__ == "__main__":
