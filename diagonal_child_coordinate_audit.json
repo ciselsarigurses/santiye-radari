@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-15",
-  "olusturma": "2026-09-15 15:21 +03",
+  "olusturma": "2026-09-15 18:50 +03",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -9,18 +9,18 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2C_T35SMC_20260913T090741_L2A",
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
       "durum": "denetim_hatasi",
       "ebeveynler": [],
-      "latest_item": "S2C_T35SMC_20260913T090741_L2A",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
       "hata": "TypeError: audit.<locals>.capture_hotspots() got an unexpected keyword argument 'agricultural_context_mask'"
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2C_T35SMC_20260913T090741_L2A",
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
       "durum": "denetim_hatasi",
       "ebeveynler": [],
-      "latest_item": "S2C_T35SMC_20260913T090741_L2A",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
       "hata": "TypeError: audit.<locals>.capture_hotspots() got an unexpected keyword argument 'agricultural_context_mask'"
     }
   }

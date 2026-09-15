@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-15",
-  "olusturma": "2026-09-15 15:22 +03",
+  "olusturma": "2026-09-15 18:51 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -12,16 +12,16 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2C_T35SMC_20260913T090741_L2A",
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
       "durum": "denetim_hatasi",
-      "latest_item": "S2C_T35SMC_20260913T090741_L2A",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
       "hata": "TypeError: _analyze_region.<locals>.audited_hotspots() got an unexpected keyword argument 'agricultural_context_mask'"
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2C_T35SMC_20260913T090741_L2A",
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
       "durum": "denetim_hatasi",
-      "latest_item": "S2C_T35SMC_20260913T090741_L2A",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
       "hata": "TypeError: _analyze_region.<locals>.audited_hotspots() got an unexpected keyword argument 'agricultural_context_mask'"
     }
   }

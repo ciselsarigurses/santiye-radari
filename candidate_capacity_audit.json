@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-15",
-  "olusturma": "2026-09-15 15:19 +03",
+  "olusturma": "2026-09-15 18:48 +03",
   "amac": "24 aday tavanının ve 8-komşu piksel geometrisinin 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
   "diagnostik_santiye_olcegi_m2": [
     800,
@@ -10,77 +10,88 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2C_T35SMC_20260913T090741_L2A",
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
       "durum": "ok",
-      "latest_item": "S2C_T35SMC_20260913T090741_L2A",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
       "aday_tavani": 24,
-      "ham_uygun_aday": 22,
-      "tavan_sonrasi_aday": 22,
-      "raporda_kalan_aday": 22,
-      "tavan_disinda_kalan": 0,
-      "ham_secimden_farkli": 0,
-      "tavana_ulasti": false,
+      "ham_uygun_aday": 26,
+      "tavan_sonrasi_aday": 24,
+      "raporda_kalan_aday": 24,
+      "tavan_disinda_kalan": 2,
+      "ham_secimden_farkli": 2,
+      "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
-        "kucuk_250_800": 0,
+        "kucuk_250_800": 1,
         "santiye_olcegi_800_10000": 22,
-        "genis_10000_ustu": 0
+        "genis_10000_ustu": 3
       },
       "tavan_sonrasi_olcek_dagilimi": {
-        "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 22,
-        "genis_10000_ustu": 0
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 20,
+        "genis_10000_ustu": 3
       },
       "raporda_olcek_dagilimi": {
-        "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 22,
-        "genis_10000_ustu": 0
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 20,
+        "genis_10000_ustu": 3
       },
       "tavan_disinda_olcek_dagilimi": {
         "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 0,
+        "santiye_olcegi_800_10000": 2,
         "genis_10000_ustu": 0
       },
       "ham_secimden_farkli_olcek_dagilimi": {
         "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 0,
+        "santiye_olcegi_800_10000": 2,
         "genis_10000_ustu": 0
       },
       "baglanti_geometrisi": {
-        "sekiz_komsu_gecerli_aday": 22,
-        "dort_komsu_gecerli_aday": 22,
-        "diyagonal_birlesmis_ebeveyn": 0,
+        "sekiz_komsu_gecerli_aday": 26,
+        "dort_komsu_gecerli_aday": 26,
+        "diyagonal_birlesmis_ebeveyn": 1,
         "ayrisan_kucuk_250_800": 0,
-        "ayrisan_santiye_olcegi_800_10000": 0,
-        "genis_ebeveynden_ayrisan_250_10000": 0,
-        "ornekler": [],
+        "ayrisan_santiye_olcegi_800_10000": 1,
+        "genis_ebeveynden_ayrisan_250_10000": 1,
+        "ornekler": [
+          {
+            "enlem": 38.275649,
+            "boylam": 26.341287,
+            "sekiz_komsu_alan_m2": 37904,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              1500,
+              35703
+            ]
+          }
+        ],
         "yorum": "4-komşu değerleri üretim alarmı değildir; yalnız köşeden temasın 8-komşu kümeleri birleştirip birleştirmediğini ölçer."
       }
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2C_T35SMC_20260913T090741_L2A",
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
       "durum": "ok",
-      "latest_item": "S2C_T35SMC_20260913T090741_L2A",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
       "aday_tavani": 24,
-      "ham_uygun_aday": 9,
-      "tavan_sonrasi_aday": 9,
-      "raporda_kalan_aday": 8,
+      "ham_uygun_aday": 4,
+      "tavan_sonrasi_aday": 4,
+      "raporda_kalan_aday": 4,
       "tavan_disinda_kalan": 0,
-      "ham_secimden_farkli": 1,
+      "ham_secimden_farkli": 0,
       "tavana_ulasti": false,
       "ham_olcek_dagilimi": {
-        "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 9,
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 3,
         "genis_10000_ustu": 0
       },
       "tavan_sonrasi_olcek_dagilimi": {
-        "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 9,
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 3,
         "genis_10000_ustu": 0
       },
       "raporda_olcek_dagilimi": {
-        "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 8,
+        "kucuk_250_800": 1,
+        "santiye_olcegi_800_10000": 3,
         "genis_10000_ustu": 0
       },
       "tavan_disinda_olcek_dagilimi": {
@@ -90,28 +101,17 @@
       },
       "ham_secimden_farkli_olcek_dagilimi": {
         "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 1,
+        "santiye_olcegi_800_10000": 0,
         "genis_10000_ustu": 0
       },
       "baglanti_geometrisi": {
-        "sekiz_komsu_gecerli_aday": 9,
-        "dort_komsu_gecerli_aday": 10,
-        "diyagonal_birlesmis_ebeveyn": 1,
+        "sekiz_komsu_gecerli_aday": 4,
+        "dort_komsu_gecerli_aday": 4,
+        "diyagonal_birlesmis_ebeveyn": 0,
         "ayrisan_kucuk_250_800": 0,
-        "ayrisan_santiye_olcegi_800_10000": 2,
+        "ayrisan_santiye_olcegi_800_10000": 0,
         "genis_ebeveynden_ayrisan_250_10000": 0,
-        "ornekler": [
-          {
-            "enlem": 38.266605,
-            "boylam": 26.676852,
-            "sekiz_komsu_alan_m2": 2800,
-            "dort_komsu_alt_aday_sayisi": 2,
-            "dort_komsu_alt_alanlar_m2": [
-              1000,
-              1800
-            ]
-          }
-        ],
+        "ornekler": [],
         "yorum": "4-komşu değerleri üretim alarmı değildir; yalnız köşeden temasın 8-komşu kümeleri birleştirip birleştirmediğini ölçer."
       }
     }
