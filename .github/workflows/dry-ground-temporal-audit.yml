@@ -29,7 +29,7 @@ jobs:
   audit:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
@@ -99,6 +99,7 @@ jobs:
       - name: Diagnostik raporu kaydet
         run: |
           report_files="dry_ground_temporal_pool.json dry_ground_temporal_audit.json temporal_locality_audit.json coordinate_precision_audit.json latest_report.json SAHA_RAPORU.md"
+          max_attempts=5
 
           regenerate_reports() {
             echo "Güncel main üzerinde temporal diagnostikler yeniden üretiliyor."
@@ -117,7 +118,7 @@ jobs:
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
 
-          for attempt in 1 2 3; do
+          for attempt in $(seq 1 "$max_attempts"); do
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
               echo "Kuru zemin zaman serisi, yerellik, koordinat ve kalibrasyon raporu değişmedi."
               exit 0
@@ -128,7 +129,7 @@ jobs:
 
             git fetch origin main
             if ! git merge-base --is-ancestor origin/main HEAD; then
-              echo "Ana dal değişti; eski diagnostik rapor atılıyor ve güncel main üzerinde yeniden hesaplanıyor (${attempt}/3)."
+              echo "Ana dal değişti; eski diagnostik rapor atılıyor ve güncel main üzerinde yeniden hesaplanıyor (${attempt}/${max_attempts})."
               git reset --hard origin/main
               regenerate_reports
               continue
@@ -138,11 +139,11 @@ jobs:
               exit 0
             fi
 
-            echo "Push sırasında main ilerlemiş olabilir; güncel main üzerinde yeniden hesaplanıyor (${attempt}/3)."
+            echo "Push sırasında main ilerlemiş olabilir; güncel main üzerinde yeniden hesaplanıyor (${attempt}/${max_attempts})."
             git fetch origin main
             git reset --hard origin/main
             regenerate_reports
           done
 
-          echo "Diagnostik rapor üç güvenli yeniden hesaplama denemesinde kaydedilemedi."
+          echo "Diagnostik rapor ${max_attempts} güvenli yeniden hesaplama denemesinde kaydedilemedi."
           exit 1
