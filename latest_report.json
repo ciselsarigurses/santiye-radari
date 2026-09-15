@@ -5752,5 +5752,23 @@
     "eslesen_gorevler": [],
     "onceki_oncelik_katmanlari_korundu": true,
     "not": "Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin shortlist'i silinmez. YIKIM_TEMIZLIK sonucu, sonraki yeni Sentinel sahnesinde aynı noktadaki 250 m²+ mevcut görevi güçlendirir; yalnız boş rota kapasitesini kullanır veya korunmayan backlog ile yer değiştirir. Yeni alarm/görev üretmez."
+  },
+  "kapasite_santiye_devriyesi": [],
+  "kapasite_santiye_devriyesi_meta": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "olusturma": "2026-09-15 11:24 +0300",
+    "bolgeler": {
+      "cesme": {
+        "durum": "uretim_kotasi_yeterli",
+        "uretim_santiye_olcegi": 22,
+        "tavan_disinda_uygun_havuz": 0
+      },
+      "uzunkuyu": {
+        "durum": "uretim_kotasi_yeterli",
+        "uretim_santiye_olcegi": 8,
+        "tavan_disinda_uygun_havuz": 0
+      }
+    }
   }
 }
