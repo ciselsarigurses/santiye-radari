@@ -17,6 +17,15 @@
 2. **GECİKEN — Musalla** · yaklaşık 400 m² · Görev `U7798D390CA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.294734,26.311523)
 3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623)
 
+## Temporal-lokal erken sinyal izleme
+
+> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül sonrası bunlar yüksek diagnostik ağırlıkla izlenir; görev açma kuralı değişmez.
+
+1. **TEMPORAL-LOKAL — Özbek** · yaklaşık 500 m² · yerellik 3.10 · iç BSI Δ 0.163 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.353345,26.676966) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.353345/26.676966)
+   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+2. **TEMPORAL-LOKAL — Alaçatı** · yaklaşık 600 m² · yerellik 2.43 · iç BSI Δ 0.124 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262625,26.380094) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.262625/26.380094)
+   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 ### 1. TEKRAR — Gülbahçe
