@@ -13,8 +13,9 @@ kazi/santiye kaniti sayilmaz.
 
 Metadata icin once anonim kullanima acik Microsoft Planetary Computer STAC
 Sentinel-1 GRD katalogu kullanilir. Katalog gecici olarak erisilemez veya hic
-sonuc donmezse Element 84 Earth Search sentinel-1 katalogu yedek kaynaktir.
-Hicbir kaynak API anahtari, gizli anahtar veya ucretli servis gerektirmez.
+sonuc donmezse Copernicus Data Space Ecosystem (CDSE) STAC sentinel-1-grd
+katalogu yedek kaynaktir. Iki katalog da metadata aramasi icin API anahtari,
+gizli anahtar veya ucretli servis gerektirmez.
 
 Speckle, bakis geometrisi, bitki/nem ve bina sacilimi gibi etkiler nedeniyle
 ileride SAR degisimi karsilastirilacaksa ancak ayni goreli yorunge + ayni orbit
@@ -38,8 +39,8 @@ from satellite import PLACE_CENTERS, REGIONS
 
 PC_SEARCH_URL = "https://planetarycomputer.microsoft.com/api/stac/v1/search"
 PC_S1_COLLECTION = "sentinel-1-grd"
-EARTH_SEARCH_URL = "https://earth-search.aws.element84.com/v1/search"
-EARTH_S1_COLLECTION = "sentinel-1"
+CDSE_SEARCH_URL = "https://stac.dataspace.copernicus.eu/v1/search"
+CDSE_S1_COLLECTION = "sentinel-1-grd"
 SEARCH_DAYS = 24
 TIMEOUT_SECONDS = 35
 
@@ -74,7 +75,7 @@ AOIS = {
 
 S1_METADATA_SOURCES = (
     ("Microsoft Planetary Computer", PC_SEARCH_URL, PC_S1_COLLECTION),
-    ("Element 84 Earth Search", EARTH_SEARCH_URL, EARTH_S1_COLLECTION),
+    ("Copernicus Data Space STAC", CDSE_SEARCH_URL, CDSE_S1_COLLECTION),
 )
 
 
@@ -411,6 +412,26 @@ def _self_check():
     finally:
         globals()["_query_source"] = original
 
+    def fake_fallback_query(url, collection, query_bbox, days):
+        assert query_bbox == bbox
+        if "planetarycomputer" in url:
+            raise requests.ConnectionError("test")
+        if "dataspace.copernicus.eu" in url:
+            assert collection == "sentinel-1-grd"
+            return items[:2]
+        return []
+
+    try:
+        globals()["_query_source"] = fake_fallback_query
+        fallback = _search_items(bbox)
+        assert fallback["kaynak"] == "Copernicus Data Space STAC"
+        assert len(fallback["items"]) == 2
+        assert fallback["kaynak_hatalari"] == [
+            {"kaynak": "Microsoft Planetary Computer", "hata": "ConnectionError"}
+        ]
+    finally:
+        globals()["_query_source"] = original
+
     print("Sentinel-1 SAR acik STAC ve bolgesel kesisim diagnostigi oz testi OK.")
 
 
@@ -458,7 +479,7 @@ def main():
         "saha_gorevi": False,
         "ana_sentinel_esigi_m2": 250,
         "mikro_aralik_m2": [150, 249],
-        "kaynak_politikasi": "Planetary Computer sentinel-1-grd; sonuc/erisim yoksa Element 84 sentinel-1 yedegi",
+        "kaynak_politikasi": "Planetary Computer sentinel-1-grd; sonuc/erisim yoksa Copernicus Data Space STAC sentinel-1-grd yedegi",
         "diagnostik": rows,
         "not": "SAR metadata yalniz kapsama/tazelik diagnostigidir; tek basina insaat, kazi veya saha gorevi uretmez.",
     }
