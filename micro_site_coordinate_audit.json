@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-09-13 18:06 +0300",
+  "olusturma": "2026-09-15 19:43 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -9,11 +9,32 @@
   ],
   "amac": "Güçlü mikro diagnostik adayın bağlı bileşen temsilcisi ile aynı bileşendeki en güçlü çoklu-spektral piksel merkezini karşılaştırmak.",
   "uyari": "Sinyal çekirdeği ikinci diagnostik koordinattır; alarm/görev üretmez, adres veya parsel değildir ve mevcut temsilci koordinatını otomatik değiştirmez.",
-  "guclu_aday": 0,
-  "eslesen": 0,
+  "guclu_aday": 1,
+  "eslesen": 1,
   "eslesmeyen": 0,
   "koordinat_incele": 0,
-  "maksimum_sapma_m": 0.0,
-  "adaylar": [],
+  "maksimum_sapma_m": 10.0,
+  "adaylar": [
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "bolge": "cesme",
+      "yaklasik_mevki": "Mevki doğrulanmadı",
+      "alan_m2": 200,
+      "enlem": 38.282433,
+      "boylam": 26.311867,
+      "sinyal_cekirdegi_enlem": 38.282343,
+      "sinyal_cekirdegi_boylam": 26.311867,
+      "sinyal_cekirdegi_sapma_m": 10.0,
+      "koordinat_kalitesi": "KOMSULUK_ICI_10M",
+      "cekirdek_skor": 12.2445,
+      "cekirdek_rgb_degisim": 0.4405,
+      "cekirdek_ndvi_kaybi": 0.2177,
+      "cekirdek_parlaklik_artisi": 0.4405,
+      "temsilci_harita": "https://www.google.com/maps/search/?api=1&query=38.282433,26.311867",
+      "cekirdek_harita": "https://www.google.com/maps/search/?api=1&query=38.282343,26.311867",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A"
+    }
+  ],
   "eslesmeyen_adaylar": []
 }
