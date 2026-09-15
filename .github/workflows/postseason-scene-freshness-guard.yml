@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "postseason_scene_freshness_guard.py"
+      - "demolition_followup_priority_guard.py"
       - ".github/workflows/postseason-scene-freshness-guard.yml"
   workflow_run:
     workflows:
@@ -45,14 +46,23 @@ jobs:
       - name: Sezon sahne tazelik öz testi
         run: python postseason_scene_freshness_guard.py --self-check
 
-      - name: Sezon sınırını uygula
-        run: python postseason_scene_freshness_guard.py
+      - name: Yıkım sonrası yeni hareket önceliği öz testi
+        run: python demolition_followup_priority_guard.py --self-check
+
+      - name: Sezon sınırını ve yıkım takip önceliğini uygula
+        run: |
+          # Sahne tazelik guard'ı ilk-3 görünümünü yeniden kurabilir. Bu nedenle
+          # doğrulanmış yıkım/parsel temizliği sonrası yeni 250 m²+ Sentinel
+          # hareketini hemen ardından tekrar kompoze et; 250 m² ana ve
+          # 150–249 m² MİKRO eşik/politikalarına dokunma.
+          python postseason_scene_freshness_guard.py
+          python demolition_followup_priority_guard.py
 
       - name: Yalnız semantik değişiklik varsa güvenli biçimde kaydet
         run: |
           report_files="latest_report.json SAHA_RAPORU.md"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-            echo "Sahne tazelik guard'ı için rapor değişikliği gerekmiyor."
+            echo "Sahne tazelik + yıkım takip guard'ı için rapor değişikliği gerekmiyor."
             exit 0
           fi
 
@@ -63,15 +73,17 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python postseason_scene_freshness_guard.py --self-check
+            python demolition_followup_priority_guard.py --self-check
             python postseason_scene_freshness_guard.py
+            python demolition_followup_priority_guard.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
-              echo "En güncel main üzerinde sahne tazelik rapor değişikliği gerekmiyor."
+              echo "En güncel main üzerinde sahne tazelik + yıkım takip rapor değişikliği gerekmiyor."
               exit 0
             fi
 
             git add $report_files
-            git commit -m "Radar: 15 Eylül sahne tazelik guard'ını uygula"
+            git commit -m "Radar: 15 Eylül sahne tazeliği sonrası yıkım takip önceliğini koru"
             if git push origin HEAD:main; then
               exit 0
             fi
@@ -80,5 +92,5 @@ jobs:
             sleep $((attempt * 2))
           done
 
-          echo "15 Eylül sahne tazelik guard'ı üç güvenli denemede kaydedilemedi."
+          echo "15 Eylül sahne tazelik + yıkım takip guard'ı üç güvenli denemede kaydedilemedi."
           exit 1
