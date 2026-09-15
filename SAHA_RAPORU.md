@@ -13,9 +13,9 @@
 
 > 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
 
-1. **GECİKEN — Alaçatı** · yaklaşık 300 m² · Görev `UB3F1CABF9E` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.282433,26.365212)
-2. **GECİKEN — Musalla** · yaklaşık 400 m² · Görev `U7798D390CA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.294734,26.311523)
-3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623)
+1. **GECİKEN — Alaçatı** · yaklaşık 300 m² · Görev `UB3F1CABF9E` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.282433,26.365212) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.282433/26.365212)
+2. **GECİKEN — Musalla** · yaklaşık 400 m² · Görev `U7798D390CA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.294734,26.311523) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.294734/26.311523)
+3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265519/26.676623)
 
 ## Bugün sahada kontrol edilecek uydu adayları
 

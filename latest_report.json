@@ -5604,7 +5604,10 @@
       "zaman_serisi_istikrarsiz_zemin_riski": false,
       "kalibrasyon_rotasyon_gun": 2,
       "kalibrasyon_rotasyon_havuzu": 4,
-      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC_ROTASYON"
+      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC_ROTASYON",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.256927/26.309348",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -5635,7 +5638,10 @@
       "zaman_serisi_istikrarsiz_zemin_riski": false,
       "kalibrasyon_rotasyon_gun": 2,
       "kalibrasyon_rotasyon_havuzu": 4,
-      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC_ROTASYON"
+      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC_ROTASYON",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.288041/26.458071",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin dışında bölge başına en fazla bir, toplam iki örnek tutulur. Nihai Sentinel kör-alan devriyesi aynı mahalleyi de seçmişse güvenli bir kuru-zemin alternatifi tercih edilir; alternatif yoksa mevcut kalibrasyon korunur. Ana ilk-3 saha rotası veya nihai kör-alan devriyesiyle aynı mahallede kalan alarm-dışı kalibrasyon, temporal/yerellik kalite sınıfını düşürmeden güvenli alternatif varsa farklı mahalleye taşınır; eş kalite alternatif yoksa güçlü mevcut nokta korunur. Temporal ani-başlangıç desteği olan güvenli adaylar aynı Sentinel sahnesinde en güçlü dört mahalle-çeşitli aday arasında günlük döner; 250-900 m² adayda güvenilir yaygın çevre değişimi varsa temporal acil havuzdan çıkarılır. Aynı boyut sınıfında 3x3 merkez değişimi 5x5 çevre halkasına göre belirgin biçimde lokal kalan aday saha kalibrasyonunda önce gelir; bu yine alarm değildir.",
@@ -5652,7 +5658,10 @@
       "mevcut_sahne": "08.09.2026",
       "takip_yeni_hareket": false,
       "takip_operasyon_durumu": "DOGRULANDI_ARKA_PLAN_TAKIP",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.331547,26.644338"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.331547,26.644338",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331547/26.644338",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "postseason_excavation_priority": {
@@ -5771,7 +5780,10 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.399654,26.475358"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.399654,26.475358",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.399654/26.475358",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "bolge_anahtari": "cesme",
@@ -5786,7 +5798,10 @@
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346652,26.322856"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346652,26.322856",
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.346652/26.322856",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-15",
@@ -5870,7 +5885,9 @@
       "saha_gorevi": false,
       "operasyonel_agirlik": "YUKSEK_DIAGNOSTIK",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.353345,26.676966",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.353345/26.676966"
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.353345/26.676966",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     },
     {
       "mahalle": "Alaçatı",
@@ -5895,7 +5912,9 @@
       "saha_gorevi": false,
       "operasyonel_agirlik": "YUKSEK_DIAGNOSTIK",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.262625,26.380094",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.262625/26.380094"
+      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.262625/26.380094",
+      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
     }
   ],
   "temporal_lokal_erken_izleme_notu": "15 Eylül ve sonrasında güçlü temporal-lokal aday yüksek diagnostik ağırlık alır; bu katman yine alarm veya saha görevi üretmez.",
