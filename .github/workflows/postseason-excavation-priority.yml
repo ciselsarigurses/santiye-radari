@@ -91,6 +91,12 @@ jobs:
 
       - name: Sezon durumuna göre operasyon önceliğini uygula
         run: |
+          # Saha/diğer guard'lar tam aday listesini güncellemiş olabilir. Önce ilk-3
+          # görünümünü güncel saha_adaylari ile yeniden kur; sonra bütün sezon
+          # katmanlarını aynı sırayla kompoze et. Böylece TEKRAR_GIT tam listede
+          # birinciyken özet ilk-3'te eski kalamaz.
+          python daily_route_shortlist.py
+          python daily_route_freshness_guard.py
           python postseason_excavation_priority_guard.py
           python postseason_fresh_evidence_guard.py
           python temporal_local_precursor_guard.py
@@ -155,6 +161,8 @@ jobs:
             python temporal_local_precursor_guard.py --self-check
             python postseason_dry_ground_retention_guard.py --self-check
             python postseason_capacity_preview.py --check-only
+            python daily_route_shortlist.py
+            python daily_route_freshness_guard.py
             python postseason_excavation_priority_guard.py
             python postseason_fresh_evidence_guard.py
             python temporal_local_precursor_guard.py
