@@ -6,6 +6,7 @@ on:
     paths:
       - "capacity_watchlist.py"
       - "candidate_capacity_audit.py"
+      - "candidate_capacity_examples.py"
       - "rebalance_satellite_candidates.py"
       - "satellite.py"
       - "sitecustomize.py"
@@ -43,7 +44,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Kapasite devriyesi kalite kontrolü
-        run: python capacity_watchlist.py --check-only
+        run: |
+          python capacity_watchlist.py --check-only
+          python candidate_capacity_examples.py --check-only
 
       - name: Hotspot imza uyumluluğunu canlı denetimde doğrula
         run: |
@@ -70,12 +73,15 @@ jobs:
           print("Kapasite canlı denetiminde agricultural_context_mask imza regresyonu yok.")
           PY
 
+      - name: Tavan dışı aday koordinat örneklerini üret
+        run: python candidate_capacity_examples.py
+
       - name: Mevcut sahne kapasite devriyesini üret
         run: python capacity_watchlist.py
 
       - name: Rapor değişikliğini kaydet
         run: |
-          report_files="SAHA_RAPORU.md latest_report.json"
+          report_files="SAHA_RAPORU.md latest_report.json candidate_capacity_examples.json"
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
             echo "Kapasite devriyesi raporunda değişiklik yok."
             exit 0
@@ -92,6 +98,9 @@ jobs:
             git reset --hard origin/main
             pip install -r requirements.txt
             python capacity_watchlist.py --check-only
+            python candidate_capacity_examples.py --check-only
+            python candidate_capacity_audit.py
+            python candidate_capacity_examples.py
             python capacity_watchlist.py
 
             if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
