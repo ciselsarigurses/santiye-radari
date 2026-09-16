@@ -6259,20 +6259,20 @@
       "gunluk_sira": 3
     }
   ],
-  "gunun_ilk_3_notu": "15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.",
+  "gunun_ilk_3_notu": "15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
-      "mahalle": "Çeşme",
-      "enlem": 38.32621,
-      "boylam": 26.31221,
-      "alan_m2": 400,
-      "ortalama_bsi_degisim": 0.135,
-      "ortalama_rgb_farki": 0.2023,
+      "mahalle": "Alaçatı",
+      "enlem": 38.272846,
+      "boylam": 26.384788,
+      "alan_m2": 1000,
+      "ortalama_bsi_degisim": 0.1932,
+      "ortalama_rgb_farki": 0.1159,
       "kiyi_su_tamponu_riski": false,
       "kiyi_su_tamponu_orani": 0.0,
       "uzun_kisa_orani": 2.0,
-      "kutu_doluluk_orani": 0.5,
-      "kompaktlik": 0.256,
+      "kutu_doluluk_orani": 0.556,
+      "kompaktlik": 0.388,
       "saha_benzeri_geometri": true,
       "lineer_geometri_riski": false,
       "yakindaki_kuru_degisim_120m": 0,
@@ -6281,20 +6281,8 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.326210,26.312210",
-      "kalibrasyon_durumu": "ALARM_DEGIL",
-      "zaman_serisi_ani_baslangic_destegi": false,
-      "zaman_serisi_ani_baslangic_orani": 1.18,
-      "zaman_serisi_onceki_bsi_degisim": 0.0912,
-      "zaman_serisi_gecerli_oran": 1.0,
-      "zaman_serisi_istikrarsiz_zemin_riski": false,
-      "yerellik_lokal_ani_baslangic_destegi": false,
-      "yerellik_yaygin_cevre_degisim_riski": false,
-      "yerellik_orani": 1.41,
-      "yerellik_cevre_halka_son_bsi_degisim": 0.0761,
-      "yerellik_cevre_halka_gecerli_oran": 1.0,
-      "kalibrasyon_rotasyon_gun": 1,
-      "kalibrasyon_rotasyon_havuzu": 4
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.272846,26.384788",
+      "kalibrasyon_durumu": "ALARM_DEGIL"
     },
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -6317,23 +6305,10 @@
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319607,26.564084",
-      "kalibrasyon_durumu": "ALARM_DEGIL",
-      "zaman_serisi_ani_baslangic_destegi": true,
-      "zaman_serisi_ani_baslangic_orani": 4.45,
-      "zaman_serisi_onceki_bsi_degisim": 0.0339,
-      "zaman_serisi_gecerli_oran": 1.0,
-      "zaman_serisi_istikrarsiz_zemin_riski": false,
-      "yerellik_lokal_ani_baslangic_destegi": true,
-      "yerellik_yaygin_cevre_degisim_riski": false,
-      "yerellik_orani": 4.78,
-      "yerellik_cevre_halka_son_bsi_degisim": 0.0316,
-      "yerellik_cevre_halka_gecerli_oran": 1.0,
-      "kalibrasyon_rotasyon_gun": 1,
-      "kalibrasyon_rotasyon_havuzu": 3,
-      "kalibrasyon_nedeni": "ZAMAN_SERISI_LOKAL_ANI_BASLANGIC_ROTASYON"
+      "kalibrasyon_durumu": "ALARM_DEGIL"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin dışında bölge başına en fazla bir, toplam iki örnek tutulur. Nihai Sentinel kör-alan devriyesi aynı mahalleyi de seçmişse güvenli bir kuru-zemin alternatifi tercih edilir; alternatif yoksa mevcut kalibrasyon korunur. Ana ilk-3 saha rotası veya nihai kör-alan devriyesiyle aynı mahallede kalan alarm-dışı kalibrasyon, temporal/yerellik kalite sınıfını düşürmeden güvenli alternatif varsa farklı mahalleye taşınır; eş kalite alternatif yoksa güçlü mevcut nokta korunur. Temporal ani-başlangıç desteği olan güvenli adaylar aynı Sentinel sahnesinde en güçlü dört mahalle-çeşitli aday arasında günlük döner; 250-900 m² adayda güvenilir yaygın çevre değişimi varsa temporal acil havuzdan çıkarılır. Aynı boyut sınıfında 3x3 merkez değişimi 5x5 çevre halkasına göre belirgin biçimde lokal kalan aday saha kalibrasyonunda önce gelir; bu yine alarm değildir.",
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir.",
   "dogrulanmis_takip_sahalari": [
     {
       "gorev_id": "UEC44340AEC",
@@ -6365,7 +6340,10 @@
     "saha_oncul_azami_yas_gun": 60,
     "saha_oncul_eslesen_gorevler": [],
     "one_alinan_gorevler": [],
-    "not": "Yalnız mevcut aktif görevlerin sırasını değiştirir; alarm/görev üretmez. Daha eski güçlü MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği yalnız zaten bağımsız 250 m²+ taze ana adayda sıralama kanıtıdır. TEKRAR_GIT en yüksek öncelikte kalır."
+    "not": "Yalnız mevcut aktif görevlerin sırasını değiştirir; alarm/görev üretmez. Daha eski güçlü MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği yalnız zaten bağımsız 250 m²+ taze ana adayda sıralama kanıtıdır. TEKRAR_GIT en yüksek öncelikte kalır.",
+    "temporal_lokal_oncul_esleme_mesafesi_m": 25.0,
+    "temporal_lokal_oncul_eslesen_gorevler": [],
+    "temporal_lokal_oncul_notu": "Daha eski güçlü 250-900 m² ani+lokal diagnostik yalnız zaten bağımsız taze 250 m²+ ana aday için sıralama kanıtıdır; alarm/görev üretmez."
   },
   "postseason_fresh_evidence_retention": {
     "aktif": true,
