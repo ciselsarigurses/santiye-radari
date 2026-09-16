@@ -1,42 +1,124 @@
 """Günlük saha rotasını Çeşme–Uzunkuyu operasyon odağında tutar.
 
 Kullanıcı yönlendirmesine göre Gülbahçe şu an günlük ekip rotası önceliği değildir.
-Bu guard yalnız mahalle etiketi açıkça ``Gülbahçe`` olan aktif adaylarda
-``rota_uygun=False`` işaretler; kaydı, alarmı veya saha görevini silmez. Uzunkuyu,
-Germiyan, Ildır veya mevkii doğrulanmamış adayları coğrafi tahminle elemez.
+Ayrıca ``manual_field_feedback.json`` içinde ``MEVCUT_MUSTERI`` olarak doğrulanan
+konumlar gerçek şantiye sinyali sayılmaya devam eder, fakat yeni müşteri saha
+rotasına tekrar gönderilmez. Bu ayrım model kalibrasyonunu bozmadan operasyonel
+zaman kaybını önler.
+
+Bu guard yalnız ``rota_uygun=False`` işaretler; kaydı, alarmı veya saha görevini
+silmez. Uzunkuyu, Germiyan, Ildır veya mevkii doğrulanmamış adayları coğrafi
+tahminle elemez.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 from typing import Any
 
 
-REPORT_FILE = Path(__file__).with_name("latest_report.json")
+BASE_DIR = Path(__file__).resolve().parent
+REPORT_FILE = BASE_DIR / "latest_report.json"
+FEEDBACK_FILE = BASE_DIR / "manual_field_feedback.json"
 LOW_PRIORITY_NEIGHBORHOODS = {"gülbahçe"}
+KNOWN_CUSTOMER_OUTCOME = "MEVCUT_MUSTERI"
+DEFAULT_CUSTOMER_RADIUS_M = 30.0
+MAX_CUSTOMER_RADIUS_M = 50.0
 
 
 def _normalize(value: Any) -> str:
     return str(value or "").strip().casefold()
 
 
-def apply_focus(report: dict[str, Any]) -> dict[str, Any]:
+def _number(value: Any, default: float | None = None) -> float | None:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _distance_m(first: dict[str, Any], second: dict[str, Any]) -> float:
+    lat1 = _number(first.get("enlem"))
+    lon1 = _number(first.get("boylam"))
+    lat2 = _number(second.get("enlem"))
+    lon2 = _number(second.get("boylam"))
+    if None in (lat1, lon1, lat2, lon2):
+        return float("inf")
+    mean_lat = math.radians((float(lat1) + float(lat2)) / 2.0)
+    north = (float(lat2) - float(lat1)) * 110570.0
+    east = (float(lon2) - float(lon1)) * 111320.0 * math.cos(mean_lat)
+    return math.hypot(north, east)
+
+
+def _load_known_customers() -> list[dict[str, Any]]:
+    try:
+        payload = json.loads(FEEDBACK_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    rows = payload.get("kayitlar") if isinstance(payload, dict) else []
+    return [
+        dict(row)
+        for row in (rows or [])
+        if isinstance(row, dict)
+        and str(row.get("sonuc") or "").strip().upper() == KNOWN_CUSTOMER_OUTCOME
+    ]
+
+
+def _matching_customer(
+    candidate: dict[str, Any], known_customers: list[dict[str, Any]]
+) -> tuple[dict[str, Any], float] | None:
+    for record in known_customers:
+        radius = _number(record.get("eslesme_yaricapi_m"), DEFAULT_CUSTOMER_RADIUS_M)
+        radius = max(5.0, min(float(radius or DEFAULT_CUSTOMER_RADIUS_M), MAX_CUSTOMER_RADIUS_M))
+        distance = _distance_m(candidate, record)
+        if distance <= radius:
+            return record, distance
+    return None
+
+
+def apply_focus(
+    report: dict[str, Any], known_customers: list[dict[str, Any]] | None = None
+) -> dict[str, Any]:
+    known_customers = _load_known_customers() if known_customers is None else known_customers
     result = dict(report)
     candidates = []
     background = []
+
     for raw in report.get("saha_adaylari") or []:
         if not isinstance(raw, dict):
             continue
         item = dict(raw)
+        reasons: list[str] = []
+
         if _normalize(item.get("mahalle")) in LOW_PRIORITY_NEIGHBORHOODS:
             item["rota_uygun"] = False
             item["operasyon_odak_disinda"] = True
-            item["operasyon_odak_notu"] = (
+            reasons.append(
                 "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; "
                 "kayıt silinmeden arka planda izleniyor."
             )
+
+        customer_match = _matching_customer(item, known_customers)
+        if customer_match is not None:
+            record, distance = customer_match
+            item["rota_uygun"] = False
+            item["mevcut_musteri"] = True
+            item["mevcut_musteri_kayit_id"] = record.get("id")
+            item["mevcut_musteri_mesafe_m"] = round(distance, 1)
+            item["mevcut_musteri_notu"] = record.get("neden")
+            # Bu sinyal yanlış pozitif değildir: model için gerçek yapılaşma referansı
+            # olarak korunur, yalnız yeni müşteri saha rotasından çıkarılır.
+            item["model_kalibrasyon_sinifi"] = "POZITIF_SANTIYE"
+            reasons.append(
+                "Konum mevcut müşteri sahası olarak doğrulandı; gerçek şantiye sinyali "
+                "kalibrasyonda korunuyor fakat yeni müşteri kontrol rotasına alınmıyor."
+            )
+
+        if reasons:
+            item["operasyon_odak_notu"] = " ".join(reasons)
             background.append(
                 {
                     "gorev_id": item.get("gorev_id"),
@@ -45,35 +127,77 @@ def apply_focus(report: dict[str, Any]) -> dict[str, Any]:
                     "boylam": item.get("boylam"),
                     "alan_m2": item.get("alan_m2"),
                     "saha_durumu": item.get("saha_durumu"),
+                    "operasyon_odak_disinda": bool(item.get("operasyon_odak_disinda")),
+                    "mevcut_musteri": bool(item.get("mevcut_musteri")),
+                    "mevcut_musteri_kayit_id": item.get("mevcut_musteri_kayit_id"),
                 }
             )
         candidates.append(item)
+
     result["saha_adaylari"] = candidates
     result["operasyon_odak_arka_plan"] = background
     result["operasyon_odak_arka_plan_sayi"] = len(background)
+    result["mevcut_musteri_arka_plan_sayi"] = sum(
+        1 for row in background if row.get("mevcut_musteri")
+    )
     result["operasyon_odak_notu"] = (
-        "Günlük rota Çeşme yarımadası–Uzunkuyu odağındadır. Yalnız açıkça Gülbahçe "
-        "etiketli adaylar rota dışı arka planda tutulur; doğrulanmamış mevki coğrafi "
+        "Günlük rota Çeşme yarımadası–Uzunkuyu odağındadır. Açıkça Gülbahçe etiketli "
+        "adaylar ve doğrulanmış mevcut müşteri sahaları günlük yeni-müşteri rotasının "
+        "dışında tutulur. Mevcut müşteri sinyali yanlış pozitif sayılmaz; model "
+        "kalibrasyonunda gerçek şantiye olarak korunur. Doğrulanmamış mevki coğrafi "
         "tahminle elenmez."
     )
     return result
 
 
 def _self_check() -> None:
-    base = {"gorev_id": "A", "rota_uygun": True, "saha_durumu": "TEKRAR_GIT"}
+    base = {"gorev_id": "A", "rota_uygun": True, "saha_durumu": "KONTROLE_GIT"}
+    known = [
+        {
+            "id": "CUSTOMER-TEST",
+            "sonuc": KNOWN_CUSTOMER_OUTCOME,
+            "enlem": 38.286413,
+            "boylam": 26.240205,
+            "eslesme_yaricapi_m": 30,
+            "neden": "test",
+        }
+    ]
     report = {
         "saha_adaylari": [
             {**base, "mahalle": "Gülbahçe", "enlem": 38.331547, "boylam": 26.644338},
-            {**base, "gorev_id": "B", "mahalle": "Mevki doğrulanmadı", "enlem": 38.32015, "boylam": 26.562138},
-            {**base, "gorev_id": "C", "mahalle": "Uzunkuyu", "enlem": 38.32, "boylam": 26.56},
+            {
+                **base,
+                "gorev_id": "B",
+                "mahalle": "Mevki doğrulanmadı",
+                "enlem": 38.32015,
+                "boylam": 26.562138,
+            },
+            {
+                **base,
+                "gorev_id": "C",
+                "mahalle": "Çiftlikköy",
+                "enlem": 38.286413,
+                "boylam": 26.240205,
+            },
+            {
+                **base,
+                "gorev_id": "D",
+                "mahalle": "Çiftlikköy",
+                "enlem": 38.287413,
+                "boylam": 26.240205,
+            },
         ]
     }
-    result = apply_focus(report)
+    result = apply_focus(report, known)
     rows = {row["gorev_id"]: row for row in result["saha_adaylari"]}
     assert rows["A"]["rota_uygun"] is False
     assert rows["B"]["rota_uygun"] is True
-    assert rows["C"]["rota_uygun"] is True
-    assert result["operasyon_odak_arka_plan_sayi"] == 1
+    assert rows["C"]["rota_uygun"] is False
+    assert rows["C"]["mevcut_musteri"] is True
+    assert rows["C"]["model_kalibrasyon_sinifi"] == "POZITIF_SANTIYE"
+    assert rows["D"]["rota_uygun"] is True
+    assert result["operasyon_odak_arka_plan_sayi"] == 2
+    assert result["mevcut_musteri_arka_plan_sayi"] == 1
 
 
 def main() -> None:
@@ -92,7 +216,11 @@ def main() -> None:
         raise RuntimeError("latest_report.json nesne olmalıdır.")
     result = apply_focus(report)
     REPORT_FILE.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Operasyon odak koruması: arka_plan={result['operasyon_odak_arka_plan_sayi']}")
+    print(
+        "Operasyon odak koruması: "
+        f"arka_plan={result['operasyon_odak_arka_plan_sayi']}, "
+        f"mevcut_musteri={result['mevcut_musteri_arka_plan_sayi']}"
+    )
 
 
 if __name__ == "__main__":
