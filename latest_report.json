@@ -5741,7 +5741,15 @@
       "mevcut_musteri_mesafe_m": 0.0,
       "mevcut_musteri_notu": "Kullanıcı Apple Maps ile paylaştığı ve radarın Ovacık'ta yakaladığı sahayı mevcut müşteri olarak doğruladı; sinyal gerçek yapılaşma/şantiye referansıdır fakat yeni müşteri saha kontrolü gerektirmez.",
       "model_kalibrasyon_sinifi": "POZITIF_SANTIYE",
-      "operasyon_odak_notu": "Konum mevcut müşteri sahası olarak doğrulandı; gerçek şantiye sinyali kalibrasyonda korunuyor fakat yeni müşteri kontrol rotasına alınmıyor."
+      "operasyon_odak_notu": "Konum mevcut müşteri sahası olarak doğrulandı; gerçek şantiye sinyali kalibrasyonda korunuyor fakat yeni müşteri kontrol rotasına alınmıyor.",
+      "saha_geri_bildirim_ana_bastirma": true,
+      "saha_geri_bildirim_id": "OP-20260916-OVACIK-001",
+      "saha_geri_bildirim_sonuc": "MEVCUT_MUSTERI",
+      "saha_geri_bildirim_neden": "Kullanıcı Apple Maps ile paylaştığı ve radarın Ovacık'ta yakaladığı sahayı mevcut müşteri olarak doğruladı; sinyal gerçek yapılaşma/şantiye referansıdır fakat yeni müşteri saha kontrolü gerektirmez.",
+      "saha_geri_bildirim_sonuc_tarihi": "2026-09-16",
+      "saha_geri_bildirim_mesafe_m": 0.0,
+      "saha_geri_bildirim_operasyon_bastirma": true,
+      "yeniden_degerlendirme": "Pozitif şantiye kanıtı korunur; mevcut müşteri statüsü değişmedikçe yeni-müşteri günlük saha rotasına alınmaz."
     },
     {
       "oncelik": "PARSEL",
@@ -6537,10 +6545,20 @@
       "saha_geri_bildirim_id": "FP-20260916-REISDERE-001",
       "sonuc": "YANLIS_POZITIF",
       "mesafe_m": 0.0
+    },
+    {
+      "gorev_id": "UA65167A849",
+      "enlem": 38.271217,
+      "boylam": 26.338883,
+      "alan_m2": 1000,
+      "son_tarih": "15.09.2026",
+      "saha_geri_bildirim_id": "OP-20260916-OVACIK-001",
+      "sonuc": "MEVCUT_MUSTERI",
+      "mesafe_m": 0.0
     }
   ],
-  "ana_saha_geri_bildirim_bastirilan_sayi": 1,
-  "ana_saha_geri_bildirim_notu": "Doğrulanmış negatif saha sonuçları aynı/eski Sentinel kanıtında yalnız günlük rota uygunluğunu kapatır; görev/alarm silinmez ve daha yeni uydu kanıtı engellenmez.",
+  "ana_saha_geri_bildirim_bastirilan_sayi": 2,
+  "ana_saha_geri_bildirim_notu": "Doğrulanmış negatif saha sonuçları aynı/eski Sentinel kanıtında günlük rota uygunluğunu kapatır; mevcut müşteriler pozitif şantiye referansı olarak korunur fakat müşteri statüsü değişmedikçe yeni-müşteri rotasına alınmaz. Alarm/görev silinmez.",
   "operasyon_odak_arka_plan": [
     {
       "gorev_id": "UEC44340AEC",
