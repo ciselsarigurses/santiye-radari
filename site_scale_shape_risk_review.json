@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-10",
-  "olusturma": "2026-09-10 15:25 +0300",
+  "rapor_tarihi": "2026-09-16",
+  "olusturma": "2026-09-16 15:29 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -17,67 +17,21 @@
     "uzun_ince_min_uzun_kisa_orani": 5.0,
     "dusuk_kompaktlik_max": 0.15
   },
-  "nihai_sekil_riski_toplam": 1,
+  "nihai_sekil_riski_toplam": 0,
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2B_T35SMC_20260908T090037_L2A",
-      "durum": "ok",
-      "latest_item": "S2B_T35SMC_20260908T090037_L2A",
-      "ham_sekil_riski": 0,
-      "nihai_sekil_riski": 0,
-      "nihai_cozulen_sekil_riski": 0,
-      "nihai_ornekler": [],
-      "nihai_cozulen_ornekler": []
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
+      "durum": "denetim_hatasi",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
+      "hata": "TypeError: _analyze_region.<locals>.audited_hotspots() got an unexpected keyword argument 'agricultural_context_mask'"
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2B_T35SMC_20260908T090037_L2A",
-      "durum": "ok",
-      "latest_item": "S2B_T35SMC_20260908T090037_L2A",
-      "ham_sekil_riski": 1,
-      "nihai_sekil_riski": 1,
-      "nihai_cozulen_sekil_riski": 1,
-      "nihai_ornekler": [
-        {
-          "enlem": 38.263077,
-          "boylam": 26.677997,
-          "alan_m2": 6901,
-          "olcek": "santiye_olcegi_800_10000",
-          "piksel": 69,
-          "satir_span": 29,
-          "sutun_span": 13,
-          "uzun_kisa_orani": 2.23,
-          "kutu_doluluk_orani": 0.183,
-          "kompaktlik": 0.123,
-          "uzun_ince": false,
-          "dusuk_kompaktlik": true,
-          "sekil_riski": "DUSUK_KOMPAKTLIK",
-          "alarm": false,
-          "saha_gorevi": false,
-          "harita": "https://www.google.com/maps/dir/?api=1&destination=38.263077,26.677997"
-        }
-      ],
-      "nihai_cozulen_ornekler": [
-        {
-          "enlem": 38.263077,
-          "boylam": 26.677997,
-          "alan_m2": 6901,
-          "olcek": "santiye_olcegi_800_10000",
-          "piksel": 69,
-          "satir_span": 29,
-          "sutun_span": 13,
-          "uzun_kisa_orani": 2.23,
-          "kutu_doluluk_orani": 0.183,
-          "kompaktlik": 0.123,
-          "uzun_ince": false,
-          "dusuk_kompaktlik": true,
-          "sekil_riski": "DUSUK_KOMPAKTLIK",
-          "alarm": false,
-          "saha_gorevi": false,
-          "harita": "https://www.google.com/maps/dir/?api=1&destination=38.263077,26.677997"
-        }
-      ]
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
+      "durum": "denetim_hatasi",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
+      "hata": "TypeError: _analyze_region.<locals>.audited_hotspots() got an unexpected keyword argument 'agricultural_context_mask'"
     }
   },
   "yorum": "Şekil riski tek başına yol, tarla veya yanlış pozitif kararı değildir. 800 m² üstü-10.000 m² bandındaki uzun-ince/düşük-kompakt kümeler silinmez; temporal/lokal değişim, saha geri bildirimi ve güvenilir ek kanıtla kalibre edilmek üzere koordinatlı arka-plan diagnostik olarak tutulur. 250 m² ana eşik ve 150-249 m² MİKRO politikası değişmez."
