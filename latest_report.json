@@ -6298,20 +6298,20 @@
       "gunluk_sira": 3
     }
   ],
-  "gunun_ilk_3_notu": "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; bölge dengesi daha yüksek öncelikli adayı düşürmez.",
+  "gunun_ilk_3_notu": "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; bölge dengesi daha yüksek öncelikli adayı düşürmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
-      "mahalle": "Alaçatı",
-      "enlem": 38.272846,
-      "boylam": 26.384788,
-      "alan_m2": 1000,
-      "ortalama_bsi_degisim": 0.1932,
-      "ortalama_rgb_farki": 0.1159,
+      "mahalle": "Çeşme",
+      "enlem": 38.32621,
+      "boylam": 26.31221,
+      "alan_m2": 400,
+      "ortalama_bsi_degisim": 0.135,
+      "ortalama_rgb_farki": 0.2023,
       "kiyi_su_tamponu_riski": false,
       "kiyi_su_tamponu_orani": 0.0,
       "uzun_kisa_orani": 2.0,
-      "kutu_doluluk_orani": 0.556,
-      "kompaktlik": 0.388,
+      "kutu_doluluk_orani": 0.5,
+      "kompaktlik": 0.256,
       "saha_benzeri_geometri": true,
       "lineer_geometri_riski": false,
       "yakindaki_kuru_degisim_120m": 0,
@@ -6320,8 +6320,15 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.272846,26.384788",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.326210,26.312210",
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": false,
+      "zaman_serisi_ani_baslangic_orani": 1.18,
+      "zaman_serisi_onceki_bsi_degisim": 0.0912,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
+      "kalibrasyon_rotasyon_gun": 1,
+      "kalibrasyon_rotasyon_havuzu": 4
     },
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -6344,10 +6351,18 @@
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319607,26.564084",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": true,
+      "zaman_serisi_ani_baslangic_orani": 4.45,
+      "zaman_serisi_onceki_bsi_degisim": 0.0339,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
+      "kalibrasyon_rotasyon_gun": 1,
+      "kalibrasyon_rotasyon_havuzu": 3,
+      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir.",
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında bölge başına en fazla bir, toplam iki örnek seçilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; sahne değişmezse en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel tarih çiftine ait zaman-serisi denetimi güvenli ani başlangıç desteği verirse bu örnek saha teyidi için rotasyonun önüne alınır; alarm/görev statüsü değişmez. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday ilk dört kişilik kalibrasyon havuzuna alınmaz.",
   "dogrulanmis_takip_sahalari": [
     {
       "gorev_id": "UEC44340AEC",
