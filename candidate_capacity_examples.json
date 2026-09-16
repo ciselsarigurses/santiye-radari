@@ -1,0 +1,90 @@
+{
+  "rapor_tarihi": "2026-09-16",
+  "alarm": false,
+  "saha_gorevi": false,
+  "ana_sentinel_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "ornek_limit": 8,
+  "amac": "Kapasite tavanı veya rapor seçimi dışında kalan 250 m²+ Sentinel adaylarının koordinatlarını diagnostik olarak görünür tutmak; alarm/görev ve üretim eşiği değiştirilmez.",
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
+      "durum": "ok",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
+      "ana_sentinel_esigi_m2": 250,
+      "aday_tavani": 24,
+      "ham_uygun_aday": 26,
+      "tavan_sonrasi_aday": 24,
+      "raporda_kalan_aday": 24,
+      "tavan_disinda_kalan": 2,
+      "tavan_disinda_ornekler": [
+        {
+          "enlem": 38.286413,
+          "boylam": 26.240205,
+          "alan_m2": 900,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 2900,
+          "tarim_baglam_orani": 3.22,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.286413,26.240205"
+        },
+        {
+          "enlem": 38.276373,
+          "boylam": 26.343805,
+          "alan_m2": 900,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 0,
+          "tarim_baglam_orani": 0.0,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.276373,26.343805"
+        }
+      ],
+      "rapor_secimi_disinda_kalan": 2,
+      "rapor_secimi_disinda_ornekler": [
+        {
+          "enlem": 38.32612,
+          "boylam": 26.311867,
+          "alan_m2": 900,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 1500,
+          "tarim_baglam_orani": 1.67,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.326120,26.311867"
+        },
+        {
+          "enlem": 38.30604,
+          "boylam": 26.327893,
+          "alan_m2": 900,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 0,
+          "tarim_baglam_orani": 0.0,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.306040,26.327893"
+        }
+      ]
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "son_item": "S2A_T35SMC_20260915T090428_L2A",
+      "durum": "ok",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
+      "ana_sentinel_esigi_m2": 250,
+      "aday_tavani": 24,
+      "ham_uygun_aday": 4,
+      "tavan_sonrasi_aday": 4,
+      "raporda_kalan_aday": 4,
+      "tavan_disinda_kalan": 0,
+      "tavan_disinda_ornekler": [],
+      "rapor_secimi_disinda_kalan": 0,
+      "rapor_secimi_disinda_ornekler": []
+    }
+  }
+}
