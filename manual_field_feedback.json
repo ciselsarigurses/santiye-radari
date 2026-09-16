@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "kayitlar": [
     {
       "id": "FP-20260913-CIFTLIKKOY-001",
@@ -13,6 +13,32 @@
       "sonuc": "YANLIS_POZITIF",
       "neden": "Belediye bahçe temizliği; sahada inşaat beklenmiyor.",
       "politika": "Aynı veya daha eski Sentinel sahnesindeki yakın MİKRO adayı aktif kısa listeden çıkar; arka planda izlenir. Sonuç tarihinden daha yeni uydu sinyali kalıcı olarak engellenmez ve normal güçlü-kanıt kapılarından yeniden değerlendirilir."
+    },
+    {
+      "id": "FN-20260916-CESME-001",
+      "kaynak": "github_issue_8",
+      "sonuc_tarihi": "2026-09-16",
+      "mahalle": null,
+      "enlem": 38.34184646606445,
+      "boylam": 26.432861328125,
+      "yaklasik_alan_m2": null,
+      "eslesme_yaricapi_m": 25,
+      "sonuc": "DOGRULANMIS_KAZI",
+      "neden": "Sahada aktif kazı kullanıcı tarafından doğrulandı; 15 Eylül Sentinel ana/MİKRO üretim listesi bu noktayı kaçırdı.",
+      "politika": "Yanlış-negatif kalibrasyon referansıdır. Tek başına otomatik alarm/görev üretmez; daha yeni Sentinel-2/Sentinel-1 kanıtında bu koordinat çevresinin neden kaçtığı incelenir ve benzer küçük/lokal kazı imzası için eşik düşürmeden kalibrasyon yapılır."
+    },
+    {
+      "id": "FP-20260916-REISDERE-001",
+      "kaynak": "github_issue_9",
+      "sonuc_tarihi": "2026-09-16",
+      "mahalle": "Reisdere",
+      "enlem": 38.32214,
+      "boylam": 26.407912,
+      "yaklasik_alan_m2": 500,
+      "eslesme_yaricapi_m": 25,
+      "sonuc": "YANLIS_POZITIF",
+      "neden": "Saha fotoğrafında aktif kazı yok; düzlenmiş/topraklı alan ve moloz-yığın mevcut. 13→15 Eylül Sentinel değişimi erken hafriyat olarak aşırı yorumlandı.",
+      "politika": "Aynı veya daha eski Sentinel kanıtındaki yakın ana aday günlük rotadan çıkarılır fakat görev/alarm silinmez. Sonuç tarihinden daha yeni, bağımsız ve güçlü kompakt Sentinel/SAR müdahalesi normal kapılardan yeniden değerlendirilebilir."
     }
   ]
 }
