@@ -1,5 +1,5 @@
 {
-  "surum": 2,
+  "surum": 3,
   "kayitlar": [
     {
       "id": "FP-20260913-CIFTLIKKOY-001",
@@ -41,16 +41,16 @@
       "politika": "Aynı veya daha eski Sentinel kanıtındaki yakın ana aday günlük rotadan çıkarılır fakat görev/alarm silinmez. Sonuç tarihinden daha yeni, bağımsız ve güçlü kompakt Sentinel/SAR müdahalesi normal kapılardan yeniden değerlendirilebilir."
     },
     {
-      "id": "OP-20260916-CIFTLIKKOY-001",
+      "id": "OP-20260916-OVACIK-001",
       "kaynak": "kullanici_musteri_dogrulamasi",
       "sonuc_tarihi": "2026-09-16",
-      "mahalle": "Çiftlikköy",
-      "enlem": 38.286413,
-      "boylam": 26.240205,
-      "yaklasik_alan_m2": 900,
+      "mahalle": "Ovacık",
+      "enlem": 38.271217,
+      "boylam": 26.338883,
+      "yaklasik_alan_m2": 1000,
       "eslesme_yaricapi_m": 30,
       "sonuc": "MEVCUT_MUSTERI",
-      "neden": "Radarın bulduğu saha kullanıcı tarafından mevcut müşteri olarak doğrulandı; sinyal gerçek yapılaşma/şantiye referansıdır fakat yeni müşteri saha kontrolü gerektirmez.",
+      "neden": "Kullanıcı Apple Maps ile paylaştığı ve radarın Ovacık'ta yakaladığı sahayı mevcut müşteri olarak doğruladı; sinyal gerçek yapılaşma/şantiye referansıdır fakat yeni müşteri saha kontrolü gerektirmez.",
       "politika": "Yanlış pozitif sayma. Model kalibrasyonunda pozitif şantiye referansı olarak koru; mevcut müşteri statüsü değişmedikçe günlük yeni-müşteri saha rotasına tekrar alma."
     }
   ]
