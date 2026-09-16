@@ -1,10 +1,15 @@
-"""Doğrulanmış saha yanlış-pozitiflerini ana günlük rotadan güvenle çıkarır.
+"""Doğrulanmış saha geri bildirimlerini ana günlük rotaya güvenle uygular.
 
-Bu katman alarm/görev silmez ve 250 m² ana üretim eşiğini değiştirmez. Yalnız
-``manual_field_feedback.json`` içindeki güvenilir negatif saha sonuçlarını, aynı
-veya daha eski Sentinel kanıtıyla eşleşen ana saha adaylarına uygular ve
-``rota_uygun=False`` işaretler. Daha yeni Sentinel sahnesi kalıcı olarak
-bastırılmaz; normal güçlü-kanıt kapılarından yeniden değerlendirilebilir.
+Bu katman alarm/görev silmez ve 250 m² ana üretim eşiğini değiştirmez.
+``manual_field_feedback.json`` içindeki güvenilir negatif saha sonuçlarını aynı
+veya daha eski Sentinel kanıtıyla eşleşen ana saha adaylarında ``rota_uygun=False``
+işaretler. Daha yeni Sentinel sahnesi negatif saha kararınca kalıcı bastırılmaz;
+normal güçlü-kanıt kapılarından yeniden değerlendirilebilir.
+
+``MEVCUT_MUSTERI`` pozitif bir şantiye sinyali olarak kalibrasyonda korunur;
+ancak kullanıcı yeni-müşteri saha rotasında tekrar ziyaret istemediği için müşteri
+statüsü değişmedikçe eşleşen aday ``rota_uygun=False`` olur. Bu işlem alarmı,
+görevi veya pozitif şantiye kanıtını silmez.
 
 Pozitif ``DOGRULANMIS_KAZI`` kayıtları bu guard tarafından otomatik alarm/göreve
 çevrilmez; yalnız kalibrasyon kaydı olarak registry'de tutulur.
@@ -24,6 +29,7 @@ BASE = Path(__file__).resolve().parent
 REPORT_FILE = BASE / "latest_report.json"
 REGISTRY_FILE = BASE / "manual_field_feedback.json"
 NEGATIVE_OUTCOMES = {"YANLIS_POZITIF", "TARIMSAL", "DOGAL_DEGISIM"}
+ROUTE_SUPPRESSION_OUTCOMES = {"MEVCUT_MUSTERI"}
 DEFAULT_RADIUS_M = 25.0
 MAX_RADIUS_M = 50.0
 MAIN_MIN_M2 = 250.0
@@ -69,25 +75,37 @@ def _distance_m(first: dict[str, Any], second: dict[str, Any]) -> float:
     return math.hypot(north, east)
 
 
+def _outcome(record: dict[str, Any]) -> str:
+    return str(record.get("sonuc") or "").strip().upper()
+
+
 def _eligible_feedback(record: dict[str, Any]) -> bool:
-    return str(record.get("sonuc") or "").strip().upper() in NEGATIVE_OUTCOMES
+    return _outcome(record) in (NEGATIVE_OUTCOMES | ROUTE_SUPPRESSION_OUTCOMES)
 
 
 def _match(candidate: dict[str, Any], records: list[dict[str, Any]]):
     area = _number(candidate.get("alan_m2"), 0.0) or 0.0
     if area < MAIN_MIN_M2:
         return None
-    if str(candidate.get("saha_durumu") or "").strip().upper() == "TEKRAR_GIT":
-        return None
 
     candidate_day = _candidate_date(candidate)
+    candidate_status = str(candidate.get("saha_durumu") or "").strip().upper()
     for record in records:
         if not _eligible_feedback(record):
             continue
-        feedback_day = _parse_date(record.get("sonuc_tarihi"))
-        # Daha yeni Sentinel kanıtı eski saha kararınca kalıcı bastırılamaz.
-        if candidate_day is not None and feedback_day is not None and candidate_day > feedback_day:
-            continue
+        outcome = _outcome(record)
+
+        if outcome in NEGATIVE_OUTCOMES:
+            # TEKRAR_GIT, önceki saha kararından bağımsız aktif takip isteğidir.
+            if candidate_status == "TEKRAR_GIT":
+                continue
+            feedback_day = _parse_date(record.get("sonuc_tarihi"))
+            # Daha yeni Sentinel kanıtı eski negatif saha kararınca kalıcı bastırılamaz.
+            if candidate_day is not None and feedback_day is not None and candidate_day > feedback_day:
+                continue
+
+        # MEVCUT_MUSTERI için tarih kapısı uygulanmaz: sinyal pozitif kalır fakat
+        # mevcut müşteri statüsü değişene kadar yeni-müşteri saha rotasına dönmez.
         radius = _number(record.get("eslesme_yaricapi_m"), DEFAULT_RADIUS_M) or DEFAULT_RADIUS_M
         radius = max(1.0, min(float(radius), MAX_RADIUS_M))
         distance = _distance_m(candidate, record)
@@ -107,6 +125,7 @@ def apply_guard(report: dict[str, Any], records: list[dict[str, Any]]) -> dict[s
         match = _match(item, records)
         if match is not None:
             record, distance = match
+            outcome = _outcome(record)
             item["rota_uygun"] = False
             item["saha_geri_bildirim_ana_bastirma"] = True
             item["saha_geri_bildirim_id"] = record.get("id")
@@ -114,10 +133,17 @@ def apply_guard(report: dict[str, Any], records: list[dict[str, Any]]) -> dict[s
             item["saha_geri_bildirim_neden"] = record.get("neden")
             item["saha_geri_bildirim_sonuc_tarihi"] = record.get("sonuc_tarihi")
             item["saha_geri_bildirim_mesafe_m"] = round(distance, 1)
-            item["yeniden_degerlendirme"] = (
-                "Bu saha sonucu yalnız aynı/eski uydu kanıtını günlük rotadan çıkarır; "
-                "daha yeni Sentinel/SAR müdahalesi normal kanıt kapılarından yeniden değerlendirilebilir."
-            )
+            if outcome in ROUTE_SUPPRESSION_OUTCOMES:
+                item["saha_geri_bildirim_operasyon_bastirma"] = True
+                item["yeniden_degerlendirme"] = (
+                    "Pozitif şantiye kanıtı korunur; mevcut müşteri statüsü değişmedikçe "
+                    "yeni-müşteri günlük saha rotasına alınmaz."
+                )
+            else:
+                item["yeniden_degerlendirme"] = (
+                    "Bu saha sonucu yalnız aynı/eski uydu kanıtını günlük rotadan çıkarır; "
+                    "daha yeni Sentinel/SAR müdahalesi normal kanıt kapılarından yeniden değerlendirilebilir."
+                )
             suppressed.append(
                 {
                     "gorev_id": item.get("gorev_id"),
@@ -136,8 +162,9 @@ def apply_guard(report: dict[str, Any], records: list[dict[str, Any]]) -> dict[s
     result["ana_saha_geri_bildirim_bastirilan"] = suppressed
     result["ana_saha_geri_bildirim_bastirilan_sayi"] = len(suppressed)
     result["ana_saha_geri_bildirim_notu"] = (
-        "Doğrulanmış negatif saha sonuçları aynı/eski Sentinel kanıtında yalnız günlük rota "
-        "uygunluğunu kapatır; görev/alarm silinmez ve daha yeni uydu kanıtı engellenmez."
+        "Doğrulanmış negatif saha sonuçları aynı/eski Sentinel kanıtında günlük rota uygunluğunu kapatır; "
+        "mevcut müşteriler pozitif şantiye referansı olarak korunur fakat müşteri statüsü değişmedikçe "
+        "yeni-müşteri rotasına alınmaz. Alarm/görev silinmez."
     )
     return result
 
@@ -170,6 +197,15 @@ def _self_check() -> None:
             "boylam": 26.432861,
             "sonuc": "DOGRULANMIS_KAZI",
         },
+        {
+            "id": "CUSTOMER-TEST",
+            "sonuc_tarihi": "2026-09-16",
+            "enlem": 38.271217,
+            "boylam": 26.338883,
+            "eslesme_yaricapi_m": 30,
+            "sonuc": "MEVCUT_MUSTERI",
+            "neden": "test",
+        },
     ]
     base = {
         "gorev_id": "A",
@@ -195,6 +231,20 @@ def _self_check() -> None:
 
     positive = dict(base, enlem=38.341846, boylam=26.432861)
     assert apply_guard({"saha_adaylari": [positive]}, records)["saha_adaylari"][0]["rota_uygun"] is True
+
+    customer = dict(
+        base,
+        gorev_id="CUSTOMER",
+        enlem=38.271217,
+        boylam=26.338883,
+        alan_m2=1000,
+        son_tarih="17.09.2026",
+        saha_durumu="TEKRAR_GIT",
+    )
+    customer_guarded = apply_guard({"saha_adaylari": [customer]}, records)
+    assert customer_guarded["saha_adaylari"][0]["rota_uygun"] is False
+    assert customer_guarded["saha_adaylari"][0]["saha_geri_bildirim_operasyon_bastirma"] is True
+    assert customer_guarded["ana_saha_geri_bildirim_bastirilan_sayi"] == 1
 
 
 def main() -> None:
