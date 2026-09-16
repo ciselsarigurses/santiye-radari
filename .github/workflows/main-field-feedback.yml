@@ -1,0 +1,83 @@
+name: Ana Saha Geri Bildirim Koruması
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "manual_field_feedback.json"
+      - "main_field_feedback_guard.py"
+      - ".github/workflows/main-field-feedback.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-main-field-feedback
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Ana saha geri bildirim öz testi
+        run: python main_field_feedback_guard.py --self-check
+
+      - name: Saha geri bildirimini ana rotaya uygula
+        run: |
+          python main_field_feedback_guard.py
+          python daily_route_shortlist.py
+          python operational_route_shape_guard.py --self-check
+          python operational_route_shape_guard.py
+
+      - name: Yalnız semantik değişiklik varsa kaydet
+        run: |
+          files="latest_report.json SAHA_RAPORU.md operational_route.json"
+          if [[ -z "$(git status --porcelain -- $files)" ]]; then
+            echo "Ana saha geri bildirimi için rapor değişikliği gerekmiyor."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git add $files
+            git commit -m "Radar: doğrulanmış saha sonucunu ana rotaya uygula"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Main ilerledi; güncel main üzerinde saha geri bildirimini yeniden uyguluyorum (${attempt}/3)."
+            git fetch origin main
+            git reset --hard origin/main
+            python main_field_feedback_guard.py --self-check
+            python main_field_feedback_guard.py
+            python daily_route_shortlist.py
+            python operational_route_shape_guard.py --self-check
+            python operational_route_shape_guard.py
+            if [[ -z "$(git status --porcelain -- $files)" ]]; then
+              echo "Güncel main üzerinde ek rapor değişikliği gerekmiyor."
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+
+          echo "Ana saha geri bildirimi üç güvenli denemede kaydedilemedi."
+          exit 1
