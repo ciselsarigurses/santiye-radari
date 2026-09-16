@@ -54,21 +54,29 @@ jobs:
 
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
-          git add "$output"
-          git commit -m "Radar: şantiye ölçeği şekil risk diagnostigini güncelle"
 
-          git fetch origin main
-          if ! git merge-base --is-ancestor origin/main HEAD; then
-            echo "Ana dal ilerledi; en güncel main üzerinde diagnostik bir kez yeniden üretiliyor."
+          for attempt in 1 2 3; do
+            echo "Kayıt denemesi ${attempt}/3: en güncel main üzerinde diagnostik yeniden üretiliyor."
+            git fetch origin main
             git reset --hard origin/main
             python site_scale_shape_risk_guard.py --check-only
             python site_scale_shape_risk_guard.py
+
             if [[ -z "$(git status --porcelain -- "$output")" ]]; then
               echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
               exit 0
             fi
+
             git add "$output"
             git commit -m "Radar: şantiye ölçeği şekil risk diagnostigini güncelle"
-          fi
+            if git push origin HEAD:main; then
+              echo "Diagnostik güvenli biçimde kaydedildi."
+              exit 0
+            fi
 
-          git push origin HEAD:main
+            echo "Ana dal yeniden ilerledi; güvenli yeniden deneme yapılacak."
+            sleep $((attempt * 2))
+          done
+
+          echo "Üç denemede de ana dal yazma yarışı çözülemedi."
+          exit 1
