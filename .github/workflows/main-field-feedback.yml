@@ -6,7 +6,13 @@ on:
     paths:
       - "manual_field_feedback.json"
       - "main_field_feedback_guard.py"
+      - "operation_focus_guard.py"
       - ".github/workflows/main-field-feedback.yml"
+  workflow_run:
+    workflows:
+      - "Günlük Şantiye Taraması"
+      - "15 Eylül Taze Kazı Öncelik Koruması"
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -18,6 +24,9 @@ concurrency:
 
 jobs:
   guard:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -36,12 +45,15 @@ jobs:
       - name: Bağımlılıkları kur
         run: pip install -r requirements.txt
 
-      - name: Ana saha geri bildirim öz testi
-        run: python main_field_feedback_guard.py --self-check
+      - name: Saha geri bildirim ve operasyon odağı öz testleri
+        run: |
+          python main_field_feedback_guard.py --self-check
+          python operation_focus_guard.py --self-check
 
-      - name: Saha geri bildirimini ana rotaya uygula
+      - name: Saha geri bildirimini ve Çeşme–Uzunkuyu odağını rotaya uygula
         run: |
           python main_field_feedback_guard.py
+          python operation_focus_guard.py
           python daily_route_shortlist.py
           python operational_route_shape_guard.py --self-check
           python operational_route_shape_guard.py
@@ -50,7 +62,7 @@ jobs:
         run: |
           files="latest_report.json SAHA_RAPORU.md operational_route.json"
           if [[ -z "$(git status --porcelain -- $files)" ]]; then
-            echo "Ana saha geri bildirimi için rapor değişikliği gerekmiyor."
+            echo "Ana saha geri bildirimi/operasyon odağı için rapor değişikliği gerekmiyor."
             exit 0
           fi
 
@@ -59,16 +71,18 @@ jobs:
 
           for attempt in 1 2 3; do
             git add $files
-            git commit -m "Radar: doğrulanmış saha sonucunu ana rotaya uygula"
+            git commit -m "Radar: saha geri bildirimini ve Çeşme-Uzunkuyu odağını uygula"
             if git push origin HEAD:main; then
               exit 0
             fi
 
-            echo "Main ilerledi; güncel main üzerinde saha geri bildirimini yeniden uyguluyorum (${attempt}/3)."
+            echo "Main ilerledi; güncel main üzerinde guard'ları yeniden uyguluyorum (${attempt}/3)."
             git fetch origin main
             git reset --hard origin/main
             python main_field_feedback_guard.py --self-check
+            python operation_focus_guard.py --self-check
             python main_field_feedback_guard.py
+            python operation_focus_guard.py
             python daily_route_shortlist.py
             python operational_route_shape_guard.py --self-check
             python operational_route_shape_guard.py
@@ -79,5 +93,5 @@ jobs:
             sleep $((attempt * 2))
           done
 
-          echo "Ana saha geri bildirimi üç güvenli denemede kaydedilemedi."
+          echo "Saha geri bildirimi/operasyon odağı üç güvenli denemede kaydedilemedi."
           exit 1
