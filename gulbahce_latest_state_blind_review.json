@@ -24,7 +24,7 @@
     "24.08.2026",
     "19.08.2026"
   ],
-  "ikili_sahne_korlugu_250plus_diagnostik": 0,
+  "ikili_sahne_korlugu_250plus_diagnostik": 9,
   "guncel_sahne_mikro_kor_150_249": 0,
   "guncel_sahne_kor_250_6500": 9,
   "guncel_sahne_kor_6500ustu": 0,
@@ -40,8 +40,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 0,
-      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_mesafe_m": 685,
+      "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -52,7 +52,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 313,
+      "secilen_devriyeye_mesafe_m": 390,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -64,7 +64,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 361,
+      "secilen_devriyeye_mesafe_m": 331,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -76,7 +76,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 524,
+      "secilen_devriyeye_mesafe_m": 161,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -88,8 +88,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 685,
-      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_mesafe_m": 0,
+      "secilen_devriye_kapsiyor": true,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -100,9 +100,10 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 694,
+      "secilen_devriyeye_mesafe_m": 40,
       "secilen_devriye_kapsiyor": false,
-      "secilen_devriyeye_yakin_ek_kontrol": false
+      "secilen_devriyeye_yakin_ek_kontrol": true,
+      "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
     },
     {
       "enlem": 38.346923,
@@ -112,7 +113,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 2232,
+      "secilen_devriyeye_mesafe_m": 1735,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -124,7 +125,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1615,
+      "secilen_devriyeye_mesafe_m": 1179,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -136,7 +137,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1148,
+      "secilen_devriyeye_mesafe_m": 1794,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     }
@@ -297,7 +298,7 @@
   "yorum": "Bu sonuç alarm/görev değildir. MİKRO temporal analizde iki sahnenin de geçerli olması gerekir; bu yüzden ikili-sahne körlüğü ayrı bir diagnostiktir. Buradaki 'güncel-sahne kör' sayısı yalnız en yeni sahnenin geçersiz olduğu ve tarihsel kara kanıtı bulunan alanları içerir. Tarihsel su, çözülememiş yüzey ve tarihsel kara olup güncel SCL=su görünen alanlar şantiye körlüğüne karıştırılmaz; arka planda ayrı tutulur.",
   "secilen_devriye_kapsama_yaricapi_m": 35,
   "yakin_ek_kontrol_yaricapi_m": 150,
-  "secilen_devriyeye_yakin_ek_kontrol_sayisi": 0,
-  "secilen_devriyeye_yakin_ek_kontrol_alan_m2": 0,
+  "secilen_devriyeye_yakin_ek_kontrol_sayisi": 1,
+  "secilen_devriyeye_yakin_ek_kontrol_alan_m2": 400,
   "yakin_ek_kontrol_yorumu": "Yakın ek kontrol yalnız 250 m²+ güncel-sahne kör kümeleri için saha verimliliği diagnostigidir. 'Devriye kapsıyor' sayılmaz, alarm/görev üretmez ve erişilebilirlik sahada değerlendirilir."
 }
