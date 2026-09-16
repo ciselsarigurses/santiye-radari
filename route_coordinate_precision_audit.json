@@ -8,7 +8,7 @@
   "ham_mask_eslesmedi": 0,
   "10m_ustu_mevcut_sinyal_farki": 0,
   "20m_ustu_mevcut_sinyal_farki": 0,
-  "maksimum_mevcut_sinyal_farki_m": 0.0,
+  "maksimum_mevcut_sinyal_farki_m": 10.0,
   "sahne_ciftleri": [
     {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
@@ -73,25 +73,25 @@
       "otomatik_tasima": false
     },
     {
-      "gorev_id": "UA65167A849",
+      "gorev_id": "UD53CF00647",
       "oncelik": "PARSEL",
-      "mahalle": "Ovacık",
+      "mahalle": "Musalla",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
       "alan_m2": 1000,
-      "mevcut_enlem": 38.271217,
-      "mevcut_boylam": 26.338883,
+      "mevcut_enlem": 38.30812,
+      "mevcut_boylam": 26.326863,
       "durum": "OLCULDU",
       "bilesen_alan_m2": 1000,
       "alan_benzerligi": 1.0,
       "bilesen_piksel": 10,
-      "geometrik_enlem": 38.271217,
-      "geometrik_boylam": 26.338883,
-      "sinyal_agirlikli_enlem": 38.271217,
-      "sinyal_agirlikli_boylam": 26.338883,
+      "geometrik_enlem": 38.30812,
+      "geometrik_boylam": 26.326863,
+      "sinyal_agirlikli_enlem": 38.30812,
+      "sinyal_agirlikli_boylam": 26.326749,
       "mevcut_geometrik_fark_m": 0.0,
-      "mevcut_sinyal_agirlikli_fark_m": 0.0,
+      "mevcut_sinyal_agirlikli_fark_m": 10.0,
       "otomatik_tasima": false
     }
   ],
