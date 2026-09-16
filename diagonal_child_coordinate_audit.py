@@ -196,6 +196,7 @@ def audit():
                 bbox,
                 pixel_area_m2,
                 small_site_mask=None,
+                agricultural_context_mask=None,
                 limit=satellite.HOTSPOT_LIMIT,
                 small_quota=satellite.SMALL_HOTSPOT_QUOTA,
             ):
@@ -212,6 +213,7 @@ def audit():
                     bbox,
                     pixel_area_m2,
                     small_site_mask=small_site_mask,
+                    agricultural_context_mask=agricultural_context_mask,
                     limit=limit,
                     small_quota=small_quota,
                 )
