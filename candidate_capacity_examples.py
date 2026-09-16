@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -71,12 +72,8 @@ def _examples(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def build_examples() -> dict[str, Any]:
     ensure_daily_schema()
-    report_date = ISTANBUL.localize if False else None  # timezone nesnesini yanlışlıkla dönüştürme koruması
-    del report_date
     # candidate_capacity_audit ile aynı yerel günü kullan; çıktı sahne değişmedikçe
     # timestamp yüzünden her çalışmada değişmesin.
-    from datetime import datetime
-
     report_date = datetime.now(ISTANBUL).strftime("%Y-%m-%d")
     stored = capacity._stored_snapshot(report_date)
     regions: dict[str, Any] = {}
@@ -181,7 +178,7 @@ def _self_check() -> None:
     assert row["boyut_sinifi"] == "STANDART"
     assert "bilinmeyen" not in row
     assert row["harita"].endswith("38.123456,26.654321")
-    assert _examples([sample] * 20).__len__() == EXAMPLE_LIMIT
+    assert len(_examples([sample] * 20)) == EXAMPLE_LIMIT
 
 
 def main() -> None:
