@@ -17,6 +17,13 @@
 2. **PARSEL — Musalla** · yaklaşık 1.800 m² · Görev `UCF568A03B1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313186,26.307059)
 3. **PARSEL — Ovacık** · yaklaşık 1.000 m² · Görev `UA65167A849` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.271217,26.338883)
 
+## Temporal-lokal erken sinyal izleme
+
+> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül sonrası bunlar yüksek diagnostik ağırlıkla izlenir; görev açma kuralı değişmez.
+
+1. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 700 m² · yerellik 4.78 · iç BSI Δ 0.151 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.319607,26.564084) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319607/26.564084)
+   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 ### 1. TEKRAR — Gülbahçe
