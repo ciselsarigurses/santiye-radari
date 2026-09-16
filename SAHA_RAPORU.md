@@ -3,7 +3,7 @@
 **Rapor tarihi:** 2026-09-16
 **Hazırlanma:** 2026-09-16 19:15 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 188 · Geciken kontrol: 164 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)
+**Özet:** İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 186 · Geciken kontrol: 164 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif) · Arka plan geniş yüzey: 2
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
@@ -1759,26 +1759,6 @@
 
 ### 175. YÜKSEK — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
-- **Koordinat:** `38.275649, 26.341287`
-- **Değişim alanı:** yaklaşık 37.904 m²
-- **Görüntü aralığı:** 13.09.2026 → 15.09.2026
-- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.275649,26.341287)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 176. YÜKSEK — Ovacık
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
-- **Koordinat:** `38.274293, 26.344721`
-- **Değişim alanı:** yaklaşık 23.402 m²
-- **Görüntü aralığı:** 13.09.2026 → 15.09.2026
-- **Sinyal:** Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.274293,26.344721)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
-### 177. YÜKSEK — Ovacık
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.274745, 26.3319`
 - **Değişim alanı:** yaklaşık 10.801 m²
 - **Görüntü aralığı:** 13.09.2026 → 15.09.2026
@@ -1787,7 +1767,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.274745,26.331900)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 178. YÜKSEK — Ovacık
+### 176. YÜKSEK — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.27583, 26.333617`
 - **Değişim alanı:** yaklaşık 8.601 m²
@@ -1797,7 +1777,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.275830,26.333617)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 179. YÜKSEK — Ovacık
+### 177. YÜKSEK — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.274383, 26.338311`
 - **Değişim alanı:** yaklaşık 7.901 m²
@@ -1807,7 +1787,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.274383,26.338311)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 180. YÜKSEK — Ovacık
+### 178. YÜKSEK — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.273026, 26.340944`
 - **Değişim alanı:** yaklaşık 6.001 m²
@@ -1817,7 +1797,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.273026,26.340944)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 181. YÜKSEK — Mevki doğrulanmadı
+### 179. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.257921, 26.677195`
 - **Değişim alanı:** yaklaşık 5.901 m²
@@ -1827,7 +1807,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.257921,26.677195)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 182. YÜKSEK — Mevki doğrulanmadı
+### 180. YÜKSEK — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.259369, 26.678111`
 - **Değişim alanı:** yaklaşık 5.001 m²
@@ -1837,7 +1817,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.259369,26.678111)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 183. ORTA — Musalla
+### 181. ORTA — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.295639, 26.306028`
 - **Değişim alanı:** yaklaşık 3.700 m²
@@ -1847,7 +1827,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.295639,26.306028)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 184. ORTA — Ovacık
+### 182. ORTA — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.277006, 26.3406`
 - **Değişim alanı:** yaklaşık 3.500 m²
@@ -1857,7 +1837,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.277006,26.340600)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 185. ORTA — Ovacık
+### 183. ORTA — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.276554, 26.34289`
 - **Değişim alanı:** yaklaşık 3.200 m²
@@ -1867,7 +1847,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.276554,26.342890)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 186. ORTA — Ovacık
+### 184. ORTA — Ovacık
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ovacık
 - **Koordinat:** `38.27167, 26.342432`
 - **Değişim alanı:** yaklaşık 2.300 m²
@@ -1877,7 +1857,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.271670,26.342432)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 187. ORTA — Ilıca
+### 185. ORTA — Ilıca
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Ilıca
 - **Koordinat:** `38.300794, 26.352963`
 - **Değişim alanı:** yaklaşık 2.100 m²
@@ -1887,7 +1867,7 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.300794,26.352963)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 188. ORTA — Musalla
+### 186. ORTA — Musalla
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Musalla
 - **Koordinat:** `38.307216, 26.314271`
 - **Değişim alanı:** yaklaşık 2.000 m²
@@ -1907,3 +1887,10 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması değildir; yanlış pozitifler saha kontrolüyle elenir.
+
+## Arka planda izlenen geniş yüzey hareketleri
+
+> Bu bölüm **şantiye alarmı veya saha görevi değildir**. 10.000 m² üstü ve ölçülen düşük-kompaktlık riski taşıyan geniş değişimler; tarım, toprak temizliği, doğal/kırsal yüzey hareketi veya başka geniş arazi müdahalesi olasılığı nedeniyle operasyon listesinden ayrılır. Ham radar kaydı silinmez; yeni görüntüde kompakt/parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa yeniden değerlendirilir.
+
+- **Ovacık · yaklaşık 37.904 m²** — kompaktlık 0.067; koordinat `38.275649, 26.341287` · kanıt `hareket_json` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.275649,26.341287) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.275649/26.341287)
+- **Ovacık · yaklaşık 23.402 m²** — kompaktlık 0.127; koordinat `38.274293, 26.344721` · kanıt `hareket_json` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.274293,26.344721) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.274293/26.344721)
