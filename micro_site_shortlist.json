@@ -94,6 +94,6 @@
   "diyagonal_mikro_yakinlik_istisnasi": 1,
   "saha_geri_bildirim_arka_plan": [],
   "saha_geri_bildirim_bastirilan": 0,
-  "saha_geri_bildirim_kayit_sayisi": 3,
+  "saha_geri_bildirim_kayit_sayisi": 4,
   "saha_geri_bildirim_notu": "Görev kimliği olmayan doğrulanmış saha yanlış-pozitifleri aynı veya daha eski Sentinel kanıtında aktif MİKRO kısa listeden çıkarılır fakat arka planda tutulur. Daha yeni uydu kanıtı kalıcı kara listeye alınmaz."
 }
