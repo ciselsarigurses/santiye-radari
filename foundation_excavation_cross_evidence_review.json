@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "Temel/kepçe kazısı için morfoloji ve lokal/seyrek değişim diagnostiklerini çaprazlamak",
   "gercek_derinlik_olcumu": false,
   "ana_uretim_esigi_m2": 250,
@@ -36,6 +36,13 @@
       "sonuc": "YANLIS_POZITIF",
       "lokal_seed_yakaladi": false,
       "en_yakin_seed_mesafe_m": 2572.4,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": false,
+      "en_yakin_morfoloji_mesafe_m": 2284.8,
+      "morfoloji_puani": null,
+      "morfoloji_seviyesi": null,
+      "morfoloji_regresyon_uyumlu": true,
+      "capraz_kanit_yakaladi": false,
       "regresyon_uyumlu": true
     },
     {
@@ -43,13 +50,27 @@
       "sonuc": "DOGRULANMIS_KAZI",
       "lokal_seed_yakaladi": true,
       "en_yakin_seed_mesafe_m": 21.5,
-      "regresyon_uyumlu": true
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": false,
+      "en_yakin_morfoloji_mesafe_m": 3081.3,
+      "morfoloji_puani": null,
+      "morfoloji_seviyesi": null,
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
+      "regresyon_uyumlu": false
     },
     {
       "id": "FP-20260916-REISDERE-001",
       "sonuc": "YANLIS_POZITIF",
       "lokal_seed_yakaladi": false,
       "en_yakin_seed_mesafe_m": 1731.1,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": true,
+      "en_yakin_morfoloji_mesafe_m": 0.0,
+      "morfoloji_puani": 90,
+      "morfoloji_seviyesi": "YUKSEK",
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
       "regresyon_uyumlu": true
     },
     {
@@ -57,6 +78,13 @@
       "sonuc": "MEVCUT_MUSTERI",
       "lokal_seed_yakaladi": false,
       "en_yakin_seed_mesafe_m": 3969.8,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": true,
+      "en_yakin_morfoloji_mesafe_m": 0.0,
+      "morfoloji_puani": 75,
+      "morfoloji_seviyesi": "YUKSEK",
+      "morfoloji_regresyon_uyumlu": true,
+      "capraz_kanit_yakaladi": false,
       "regresyon_uyumlu": true
     },
     {
@@ -64,6 +92,13 @@
       "sonuc": "YANLIS_POZITIF",
       "lokal_seed_yakaladi": false,
       "en_yakin_seed_mesafe_m": 4152.5,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": true,
+      "en_yakin_morfoloji_mesafe_m": 0.0,
+      "morfoloji_puani": 90,
+      "morfoloji_seviyesi": "YUKSEK",
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
       "regresyon_uyumlu": true
     },
     {
@@ -71,6 +106,13 @@
       "sonuc": "YANLIS_POZITIF",
       "lokal_seed_yakaladi": false,
       "en_yakin_seed_mesafe_m": 2235.7,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": true,
+      "en_yakin_morfoloji_mesafe_m": 0.0,
+      "morfoloji_puani": 90,
+      "morfoloji_seviyesi": "YUKSEK",
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
       "regresyon_uyumlu": true
     },
     {
@@ -78,12 +120,109 @@
       "sonuc": "YANLIS_POZITIF",
       "lokal_seed_yakaladi": false,
       "en_yakin_seed_mesafe_m": 1020.1,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": true,
+      "en_yakin_morfoloji_mesafe_m": 0.0,
+      "morfoloji_puani": 65,
+      "morfoloji_seviyesi": "YUKSEK",
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
       "regresyon_uyumlu": true
     }
   ],
-  "toplam_regresyon_uyumsuz": 0,
-  "regresyon_uyumsuzluklari": [],
+  "toplam_regresyon_uyumsuz": 1,
+  "regresyon_uyumsuzluklari": [
+    {
+      "id": "FN-20260916-CESME-001",
+      "sonuc": "DOGRULANMIS_KAZI",
+      "lokal_seed_yakaladi": true,
+      "en_yakin_seed_mesafe_m": 21.5,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": false,
+      "en_yakin_morfoloji_mesafe_m": 3081.3,
+      "morfoloji_puani": null,
+      "morfoloji_seviyesi": null,
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
+      "regresyon_uyumlu": false
+    }
+  ],
+  "morfoloji_regresyon_uyumsuz_sayisi": 5,
+  "morfoloji_regresyon_uyumsuzluklari": [
+    {
+      "id": "FN-20260916-CESME-001",
+      "sonuc": "DOGRULANMIS_KAZI",
+      "lokal_seed_yakaladi": true,
+      "en_yakin_seed_mesafe_m": 21.5,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": false,
+      "en_yakin_morfoloji_mesafe_m": 3081.3,
+      "morfoloji_puani": null,
+      "morfoloji_seviyesi": null,
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
+      "regresyon_uyumlu": false
+    },
+    {
+      "id": "FP-20260916-REISDERE-001",
+      "sonuc": "YANLIS_POZITIF",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 1731.1,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": true,
+      "en_yakin_morfoloji_mesafe_m": 0.0,
+      "morfoloji_puani": 90,
+      "morfoloji_seviyesi": "YUKSEK",
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
+      "regresyon_uyumlu": true
+    },
+    {
+      "id": "FP-20260917-UZUNKUYU-001",
+      "sonuc": "YANLIS_POZITIF",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 4152.5,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": true,
+      "en_yakin_morfoloji_mesafe_m": 0.0,
+      "morfoloji_puani": 90,
+      "morfoloji_seviyesi": "YUKSEK",
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
+      "regresyon_uyumlu": true
+    },
+    {
+      "id": "FP-20260917-MUSALLA-001",
+      "sonuc": "YANLIS_POZITIF",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 2235.7,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": true,
+      "en_yakin_morfoloji_mesafe_m": 0.0,
+      "morfoloji_puani": 90,
+      "morfoloji_seviyesi": "YUKSEK",
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
+      "regresyon_uyumlu": true
+    },
+    {
+      "id": "FP-20260917-MUSALLA-002",
+      "sonuc": "YANLIS_POZITIF",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 1020.1,
+      "lokal_seed_regresyon_uyumlu": true,
+      "morfoloji_yakaladi": true,
+      "en_yakin_morfoloji_mesafe_m": 0.0,
+      "morfoloji_puani": 65,
+      "morfoloji_seviyesi": "YUKSEK",
+      "morfoloji_regresyon_uyumlu": false,
+      "capraz_kanit_yakaladi": false,
+      "regresyon_uyumlu": true
+    }
+  ],
+  "lokal_seed_regresyon_uyumsuz_sayisi": 0,
+  "lokal_seed_regresyon_uyumsuzluklari": [],
   "aktif_coklu_kanit_diagnostik": 0,
   "rota_kapisi_hazir": false,
-  "rota_kapisi_notu": "Çapraz kanıt yalnız diagnostiktir. Pozitif saha referansı sayısı henüz yetersiz; ayrıca Sentinel-1/SAR veya ikinci tarih desteği olmadan operasyona bağlanmaz."
+  "rota_kapisi_notu": "Çapraz kanıt yalnız diagnostiktir. Pozitif saha referansı sayısı henüz yetersiz; morfoloji ve lokal-seed katmanlarının saha regresyonları birlikte geçmeden ve ayrıca Sentinel-1/SAR veya ikinci tarih desteği olmadan operasyona bağlanmaz."
 }
