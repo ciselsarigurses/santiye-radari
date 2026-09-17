@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "foundation_excavation_morphology_audit.py"
+      - "excavation_reference_signature_audit.py"
       - "satellite.py"
       - "manual_field_feedback.json"
       - ".github/workflows/foundation-excavation-morphology-audit.yml"
@@ -24,7 +25,7 @@ jobs:
   diagnose:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 18
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
@@ -40,17 +41,21 @@ jobs:
       - name: Bağımlılıkları kur
         run: pip install -r requirements.txt
 
-      - name: Temel kazısı proxy öz testi
-        run: python foundation_excavation_morphology_audit.py --check-only
-
-      - name: Morfoloji ve saha kalibrasyonu diagnostigini üret
-        run: python foundation_excavation_morphology_audit.py
-
-      - name: Diagnostik sonucu güvenli kaydet
+      - name: Temel kazısı diagnostik öz testleri
         run: |
-          output="foundation_excavation_morphology_review.json"
-          if [[ -z "$(git status --porcelain -- "$output")" ]]; then
-            echo "Temel kazısı morfoloji sonucu değişmedi."
+          python foundation_excavation_morphology_audit.py --check-only
+          python excavation_reference_signature_audit.py --check-only
+
+      - name: Morfoloji ve saha referans diagnostiklerini üret
+        run: |
+          python foundation_excavation_morphology_audit.py
+          python excavation_reference_signature_audit.py
+
+      - name: Diagnostik sonuçlarını güvenli kaydet
+        run: |
+          outputs="foundation_excavation_morphology_review.json excavation_reference_signature_review.json"
+          if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
+            echo "Temel kazısı diagnostik sonuçları değişmedi."
             exit 0
           fi
 
@@ -61,17 +66,19 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python foundation_excavation_morphology_audit.py --check-only
+            python excavation_reference_signature_audit.py --check-only
             python foundation_excavation_morphology_audit.py
+            python excavation_reference_signature_audit.py
 
-            if [[ -z "$(git status --porcelain -- "$output")" ]]; then
+            if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
               echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
               exit 0
             fi
 
-            git add "$output"
-            git commit -m "Radar: temel kazısı morfoloji diagnostigini güncelle"
+            git add $outputs
+            git commit -m "Radar: temel kazısı diagnostiklerini güncelle"
             if git push origin HEAD:main; then
-              echo "Diagnostik güvenli biçimde kaydedildi."
+              echo "Diagnostikler güvenli biçimde kaydedildi."
               exit 0
             fi
 
