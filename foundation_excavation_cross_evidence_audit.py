@@ -28,6 +28,7 @@ MATCH_RADIUS_M = 45.0
 DEFAULT_FEEDBACK_RADIUS_M = 30.0
 MAIN_THRESHOLD_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
+POSITIVE_LEVELS = {"ORTA", "YUKSEK"}
 
 
 def _load(path):
@@ -132,6 +133,34 @@ def _feedback_guard(candidate, scene_date, feedback):
     return matches[0]
 
 
+def _morphology_records(payload):
+    records = []
+    for region in (payload or {}).get("bolgeler", {}).values():
+        if not isinstance(region, dict):
+            continue
+        records.extend(
+            item
+            for item in region.get("en_yuksek_ornekler", [])
+            if isinstance(item, dict)
+            and _point(item) is not None
+            and str(item.get("temel_kazi_proxy_seviyesi") or "").upper() in POSITIVE_LEVELS
+        )
+    return records
+
+
+def _seed_records(payload):
+    records = []
+    for region in (payload or {}).get("bolgeler", {}).values():
+        if not isinstance(region, dict):
+            continue
+        records.extend(
+            item
+            for item in region.get("lokal_seed_diagnostik_adaylari", [])
+            if isinstance(item, dict) and _point(item) is not None
+        )
+    return records
+
+
 def _cross_region(region_key, morphology_region, seed_region, feedback):
     if not isinstance(morphology_region, dict) or morphology_region.get("durum") != "ok":
         return {"durum": "atlandi", "neden": "morfoloji_hazir_degil"}
@@ -153,7 +182,7 @@ def _cross_region(region_key, morphology_region, seed_region, feedback):
         for item in morphology_region.get("en_yuksek_ornekler", [])
         if isinstance(item, dict)
         and _point(item) is not None
-        and str(item.get("temel_kazi_proxy_seviyesi") or "").upper() in {"ORTA", "YUKSEK"}
+        and str(item.get("temel_kazi_proxy_seviyesi") or "").upper() in POSITIVE_LEVELS
     ]
 
     combined = []
@@ -210,36 +239,69 @@ def _cross_region(region_key, morphology_region, seed_region, feedback):
     }
 
 
-def _calibration_regression(seed_payload, feedback):
+def _calibration_regression(morphology_payload, seed_payload, feedback):
+    """Saha referansını seed, morfoloji ve gerçek çapraz kanıt düzeyinde ölçer.
+
+    Önceki sürüm yalnız lokal-seed sonucunu "çapraz regresyon" diye raporluyordu.
+    Bu, gerçek kazı seed tarafından yakalanıp morfoloji katmanı tarafından kaçırıldığında
+    kör noktayı gizliyordu. Burada her iki katman ayrı ve birlikte raporlanır.
+    """
+
     results = []
-    all_seed_records = []
-    for region in (seed_payload or {}).get("bolgeler", {}).values():
-        if not isinstance(region, dict):
-            continue
-        all_seed_records.extend(
-            item
-            for item in region.get("lokal_seed_diagnostik_adaylari", [])
-            if isinstance(item, dict)
-        )
+    morphology_records = _morphology_records(morphology_payload)
+    seed_records = _seed_records(seed_payload)
 
     for item in feedback:
         expected = str(item.get("sonuc") or "").upper()
-        seed, distance = _nearest(item, all_seed_records)
-        radius = max(_number(item.get("eslesme_yaricapi_m"), DEFAULT_FEEDBACK_RADIUS_M), MATCH_RADIUS_M)
-        seed_match = bool(seed is not None and distance is not None and distance <= radius)
+        radius = max(
+            _number(item.get("eslesme_yaricapi_m"), DEFAULT_FEEDBACK_RADIUS_M),
+            MATCH_RADIUS_M,
+        )
+        seed, seed_distance = _nearest(item, seed_records)
+        morphology, morphology_distance = _nearest(item, morphology_records)
+        seed_match = bool(seed is not None and seed_distance is not None and seed_distance <= radius)
+        morphology_match = bool(
+            morphology is not None
+            and morphology_distance is not None
+            and morphology_distance <= radius
+        )
+        cross_match = bool(seed_match and morphology_match)
+
         if expected == "DOGRULANMIS_KAZI":
-            ok = seed_match
+            seed_ok = seed_match
+            morphology_ok = morphology_match
+            cross_ok = cross_match
         elif expected == "YANLIS_POZITIF":
-            ok = not seed_match
+            seed_ok = not seed_match
+            morphology_ok = not morphology_match
+            cross_ok = not cross_match
         else:
-            ok = True
+            # MEVCUT_MUSTERI satış rotasından bastırılır; kazı evresi kesin olmadığı
+            # için temel-kazısı regresyonunun geçme/kalma hesabını etkilemez.
+            seed_ok = True
+            morphology_ok = True
+            cross_ok = True
+
         results.append(
             {
                 "id": item.get("id"),
                 "sonuc": expected,
                 "lokal_seed_yakaladi": seed_match,
-                "en_yakin_seed_mesafe_m": round(distance, 1) if distance is not None else None,
-                "regresyon_uyumlu": bool(ok),
+                "en_yakin_seed_mesafe_m": round(seed_distance, 1) if seed_distance is not None else None,
+                "lokal_seed_regresyon_uyumlu": bool(seed_ok),
+                "morfoloji_yakaladi": morphology_match,
+                "en_yakin_morfoloji_mesafe_m": (
+                    round(morphology_distance, 1) if morphology_distance is not None else None
+                ),
+                "morfoloji_puani": (
+                    morphology.get("temel_kazi_proxy_puani") if morphology_match else None
+                ),
+                "morfoloji_seviyesi": (
+                    morphology.get("temel_kazi_proxy_seviyesi") if morphology_match else None
+                ),
+                "morfoloji_regresyon_uyumlu": bool(morphology_ok),
+                "capraz_kanit_yakaladi": cross_match,
+                "regresyon_uyumlu": bool(cross_ok),
             }
         )
     return results
@@ -264,8 +326,14 @@ def audit(morphology_payload=None, seed_payload=None, feedback_payload=None):
             feedback,
         )
 
-    regression = _calibration_regression(seed_payload, feedback)
+    regression = _calibration_regression(morphology_payload, seed_payload, feedback)
     failures = [item for item in regression if not item.get("regresyon_uyumlu")]
+    morphology_failures = [
+        item for item in regression if not item.get("morfoloji_regresyon_uyumlu")
+    ]
+    seed_failures = [
+        item for item in regression if not item.get("lokal_seed_regresyon_uyumlu")
+    ]
     active_cross = sum(
         1
         for region in regions.values()
@@ -274,7 +342,7 @@ def audit(morphology_payload=None, seed_payload=None, feedback_payload=None):
         if item.get("coklu_kanit_diagnostik")
     )
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Temel/kepçe kazısı için morfoloji ve lokal/seyrek değişim diagnostiklerini çaprazlamak",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
@@ -286,11 +354,16 @@ def audit(morphology_payload=None, seed_payload=None, feedback_payload=None):
         "kalibrasyon_regresyonu": regression,
         "toplam_regresyon_uyumsuz": len(failures),
         "regresyon_uyumsuzluklari": failures,
+        "morfoloji_regresyon_uyumsuz_sayisi": len(morphology_failures),
+        "morfoloji_regresyon_uyumsuzluklari": morphology_failures,
+        "lokal_seed_regresyon_uyumsuz_sayisi": len(seed_failures),
+        "lokal_seed_regresyon_uyumsuzluklari": seed_failures,
         "aktif_coklu_kanit_diagnostik": active_cross,
         "rota_kapisi_hazir": False,
         "rota_kapisi_notu": (
             "Çapraz kanıt yalnız diagnostiktir. Pozitif saha referansı sayısı henüz yetersiz; "
-            "ayrıca Sentinel-1/SAR veya ikinci tarih desteği olmadan operasyona bağlanmaz."
+            "morfoloji ve lokal-seed katmanlarının saha regresyonları birlikte geçmeden ve ayrıca "
+            "Sentinel-1/SAR veya ikinci tarih desteği olmadan operasyona bağlanmaz."
         ),
     }
 
@@ -308,14 +381,7 @@ def _self_check():
                         "alan_m2": 500,
                         "temel_kazi_proxy_puani": 80,
                         "temel_kazi_proxy_seviyesi": "YUKSEK",
-                    },
-                    {
-                        "enlem": 38.310000,
-                        "boylam": 26.310000,
-                        "alan_m2": 600,
-                        "temel_kazi_proxy_puani": 75,
-                        "temel_kazi_proxy_seviyesi": "YUKSEK",
-                    },
+                    }
                 ],
             }
         }
@@ -333,7 +399,15 @@ def _self_check():
                         "max_rgb_5x5": 0.28,
                         "ortalama_rgb_9x9": 0.05,
                         "soil_mask_orani_5x5": 0.04,
-                    }
+                    },
+                    {
+                        "enlem": 38.320010,
+                        "boylam": 26.320010,
+                        "ortalama_rgb_5x5": 0.06,
+                        "max_rgb_5x5": 0.29,
+                        "ortalama_rgb_9x9": 0.05,
+                        "soil_mask_orani_5x5": 0.04,
+                    },
                 ],
             }
         }
@@ -347,7 +421,15 @@ def _self_check():
                 "enlem": 38.300000,
                 "boylam": 26.300000,
                 "eslesme_yaricapi_m": 30,
-            }
+            },
+            {
+                "id": "TP-SEED-ONLY",
+                "sonuc": "DOGRULANMIS_KAZI",
+                "sonuc_tarihi": "2026-09-17",
+                "enlem": 38.320000,
+                "boylam": 26.320000,
+                "eslesme_yaricapi_m": 30,
+            },
         ]
     }
     payload = audit(morphology, seeds, feedback)
@@ -355,6 +437,13 @@ def _self_check():
     assert region["coklu_kanit_eslesmesi"] == 1, region
     assert region["kalibrasyonla_engellenen"] == 1, region
     assert region["adaylar"][0]["saha_gorevi"] is False
+
+    by_id = {item["id"]: item for item in payload["kalibrasyon_regresyonu"]}
+    assert by_id["FP"]["capraz_kanit_yakaladi"] is True
+    assert by_id["FP"]["regresyon_uyumlu"] is False
+    assert by_id["TP-SEED-ONLY"]["lokal_seed_yakaladi"] is True
+    assert by_id["TP-SEED-ONLY"]["morfoloji_yakaladi"] is False
+    assert by_id["TP-SEED-ONLY"]["regresyon_uyumlu"] is False
     assert payload["rota_kapisi_hazir"] is False
 
 
