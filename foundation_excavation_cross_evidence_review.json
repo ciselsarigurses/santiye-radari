@@ -1,0 +1,89 @@
+{
+  "surum": 1,
+  "amac": "Temel/kepçe kazısı için morfoloji ve lokal/seyrek değişim diagnostiklerini çaprazlamak",
+  "gercek_derinlik_olcumu": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "alarm": false,
+  "saha_gorevi": false,
+  "eslesme_yaricapi_m": 45.0,
+  "bolgeler": {
+    "cesme": {
+      "durum": "ok",
+      "son_tarih": "15.09.2026",
+      "morfoloji_orta_yuksek_ornek": 12,
+      "lokal_seed_adayi": 20,
+      "coklu_kanit_eslesmesi": 0,
+      "kalibrasyonla_engellenen": 0,
+      "adaylar": []
+    },
+    "uzunkuyu": {
+      "durum": "ok",
+      "son_tarih": "15.09.2026",
+      "morfoloji_orta_yuksek_ornek": 3,
+      "lokal_seed_adayi": 10,
+      "coklu_kanit_eslesmesi": 0,
+      "kalibrasyonla_engellenen": 0,
+      "adaylar": []
+    }
+  },
+  "kalibrasyon_regresyonu": [
+    {
+      "id": "FP-20260913-CIFTLIKKOY-001",
+      "sonuc": "YANLIS_POZITIF",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 2572.4,
+      "regresyon_uyumlu": true
+    },
+    {
+      "id": "FN-20260916-CESME-001",
+      "sonuc": "DOGRULANMIS_KAZI",
+      "lokal_seed_yakaladi": true,
+      "en_yakin_seed_mesafe_m": 21.5,
+      "regresyon_uyumlu": true
+    },
+    {
+      "id": "FP-20260916-REISDERE-001",
+      "sonuc": "YANLIS_POZITIF",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 1731.1,
+      "regresyon_uyumlu": true
+    },
+    {
+      "id": "OP-20260916-OVACIK-001",
+      "sonuc": "MEVCUT_MUSTERI",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 3969.8,
+      "regresyon_uyumlu": true
+    },
+    {
+      "id": "FP-20260917-UZUNKUYU-001",
+      "sonuc": "YANLIS_POZITIF",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 4152.5,
+      "regresyon_uyumlu": true
+    },
+    {
+      "id": "FP-20260917-MUSALLA-001",
+      "sonuc": "YANLIS_POZITIF",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 2235.7,
+      "regresyon_uyumlu": true
+    },
+    {
+      "id": "FP-20260917-MUSALLA-002",
+      "sonuc": "YANLIS_POZITIF",
+      "lokal_seed_yakaladi": false,
+      "en_yakin_seed_mesafe_m": 1020.1,
+      "regresyon_uyumlu": true
+    }
+  ],
+  "toplam_regresyon_uyumsuz": 0,
+  "regresyon_uyumsuzluklari": [],
+  "aktif_coklu_kanit_diagnostik": 0,
+  "rota_kapisi_hazir": false,
+  "rota_kapisi_notu": "Çapraz kanıt yalnız diagnostiktir. Pozitif saha referansı sayısı henüz yetersiz; ayrıca Sentinel-1/SAR veya ikinci tarih desteği olmadan operasyona bağlanmaz."
+}
