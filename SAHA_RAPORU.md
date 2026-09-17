@@ -13,9 +13,9 @@
 
 > 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.
 
-1. **PARSEL — Çiftlikköy** · yaklaşık 900 m² · Görev `UDDB45C61BD` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.286413,26.240205) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.286413/26.240205)
-2. **PARSEL — Ovacık** · yaklaşık 1.500 m² · Görev `UF0E768CF64` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.275649,26.342546) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.275649/26.342546)
-3. **PARSEL — Ovacık** · yaklaşık 1.700 m² · Görev `UA8723BA5C7` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.254304,26.310379) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.254304/26.310379)
+1. **PARSEL — Çiftlikköy** · yaklaşık 900 m² · Görev `UDDB45C61BD` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.286413,26.240205)
+2. **PARSEL — Ovacık** · yaklaşık 1.500 m² · Görev `UF0E768CF64` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.275649,26.342546)
+3. **PARSEL — Ovacık** · yaklaşık 1.700 m² · Görev `UA8723BA5C7` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.254304,26.310379)
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
