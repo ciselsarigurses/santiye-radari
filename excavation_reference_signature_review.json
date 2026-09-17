@@ -1,0 +1,306 @@
+{
+  "surum": 1,
+  "amac": "Saha doğrulamalarında gerçek kazı ile tarla/bahçe yanlış pozitiflerinin ham Sentinel imzasını karşılaştırmak",
+  "alarm": false,
+  "saha_gorevi": false,
+  "gercek_derinlik_olcumu": false,
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "durum": "ok",
+      "onceki_tarih": "13.09.2026",
+      "son_tarih": "15.09.2026",
+      "older_item": "S2C_T35SMC_20260913T090741_L2A",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
+      "referanslar": [
+        {
+          "id": "FP-20260913-CIFTLIKKOY-001",
+          "sonuc": "YANLIS_POZITIF",
+          "enlem": 38.287679,
+          "boylam": 26.266305,
+          "piksel_satir": 1573,
+          "piksel_sutun": 404,
+          "merkez_gecerli": true,
+          "merkez": {
+            "onceki_ndvi": 0.1822,
+            "son_ndvi": 0.1649,
+            "bitki_kaybi": 0.0173,
+            "parlaklik_degisim": -0.0549,
+            "rgb_farki": 0.0549,
+            "mevcut_soil_mask": false,
+            "mevcut_strong_visual": false,
+            "mevcut_small_mask": false,
+            "koyu_alt_toprak_proxy": false
+          },
+          "cevre_5x5": {
+            "gecerli_piksel": 25,
+            "ortalama_parlaklik_degisim": -0.0088,
+            "min_parlaklik_degisim": -0.0889,
+            "max_parlaklik_degisim": 0.0902,
+            "ortalama_rgb_farki": 0.0467,
+            "max_rgb_farki": 0.0902,
+            "ortalama_bitki_kaybi": -0.0185,
+            "max_bitki_kaybi": 0.0458,
+            "son_ndvi_ortalama": 0.2696,
+            "kalici_bitki_orani": 0.12,
+            "ciplak_zemin_orani": 0.76,
+            "parlak_artis_orani": 0.2,
+            "koyulasma_orani": 0.44,
+            "soil_mask_orani": 0.0,
+            "strong_visual_orani": 0.0,
+            "small_mask_orani": 0.0,
+            "koyu_alt_toprak_proxy_orani": 0.0
+          },
+          "cevre_9x9": {
+            "gecerli_piksel": 81,
+            "ortalama_parlaklik_degisim": -0.0102,
+            "ortalama_rgb_farki": 0.0411,
+            "koyulasma_orani": 0.3827,
+            "koyu_alt_toprak_proxy_orani": 0.0
+          }
+        },
+        {
+          "id": "FN-20260916-CESME-001",
+          "sonuc": "DOGRULANMIS_KAZI",
+          "enlem": 38.341846,
+          "boylam": 26.432861,
+          "piksel_satir": 974,
+          "piksel_sutun": 1859,
+          "merkez_gecerli": true,
+          "merkez": {
+            "onceki_ndvi": 0.121,
+            "son_ndvi": 0.1606,
+            "bitki_kaybi": -0.0396,
+            "parlaklik_degisim": 0.0118,
+            "rgb_farki": 0.0458,
+            "mevcut_soil_mask": false,
+            "mevcut_strong_visual": false,
+            "mevcut_small_mask": false,
+            "koyu_alt_toprak_proxy": false
+          },
+          "cevre_5x5": {
+            "gecerli_piksel": 25,
+            "ortalama_parlaklik_degisim": 0.0473,
+            "min_parlaklik_degisim": -0.0353,
+            "max_parlaklik_degisim": 0.298,
+            "ortalama_rgb_farki": 0.0629,
+            "max_rgb_farki": 0.298,
+            "ortalama_bitki_kaybi": 0.0299,
+            "max_bitki_kaybi": 0.1879,
+            "son_ndvi_ortalama": 0.1909,
+            "kalici_bitki_orani": 0.0,
+            "ciplak_zemin_orani": 0.96,
+            "parlak_artis_orani": 0.4,
+            "koyulasma_orani": 0.12,
+            "soil_mask_orani": 0.04,
+            "strong_visual_orani": 0.04,
+            "small_mask_orani": 0.0,
+            "koyu_alt_toprak_proxy_orani": 0.0
+          },
+          "cevre_9x9": {
+            "gecerli_piksel": 81,
+            "ortalama_parlaklik_degisim": 0.0236,
+            "ortalama_rgb_farki": 0.0482,
+            "koyulasma_orani": 0.1728,
+            "koyu_alt_toprak_proxy_orani": 0.0
+          }
+        },
+        {
+          "id": "FP-20260916-REISDERE-001",
+          "sonuc": "YANLIS_POZITIF",
+          "enlem": 38.32214,
+          "boylam": 26.407912,
+          "piksel_satir": 1192,
+          "piksel_sutun": 1641,
+          "merkez_gecerli": true,
+          "merkez": {
+            "onceki_ndvi": 0.1412,
+            "son_ndvi": -0.1587,
+            "bitki_kaybi": 0.2999,
+            "parlaklik_degisim": 0.2196,
+            "rgb_farki": 0.2562,
+            "mevcut_soil_mask": true,
+            "mevcut_strong_visual": true,
+            "mevcut_small_mask": true,
+            "koyu_alt_toprak_proxy": false
+          },
+          "cevre_5x5": {
+            "gecerli_piksel": 25,
+            "ortalama_parlaklik_degisim": 0.0681,
+            "min_parlaklik_degisim": -0.1111,
+            "max_parlaklik_degisim": 0.4314,
+            "ortalama_rgb_farki": 0.1176,
+            "max_rgb_farki": 0.4314,
+            "ortalama_bitki_kaybi": 0.0583,
+            "max_bitki_kaybi": 0.3724,
+            "son_ndvi_ortalama": 0.1854,
+            "kalici_bitki_orani": 0.04,
+            "ciplak_zemin_orani": 0.8,
+            "parlak_artis_orani": 0.6,
+            "koyulasma_orani": 0.28,
+            "soil_mask_orani": 0.16,
+            "strong_visual_orani": 0.08,
+            "small_mask_orani": 0.16,
+            "koyu_alt_toprak_proxy_orani": 0.08
+          },
+          "cevre_9x9": {
+            "gecerli_piksel": 81,
+            "ortalama_parlaklik_degisim": 0.0218,
+            "ortalama_rgb_farki": 0.0761,
+            "koyulasma_orani": 0.3086,
+            "koyu_alt_toprak_proxy_orani": 0.0741
+          }
+        },
+        {
+          "id": "FP-20260917-MUSALLA-001",
+          "sonuc": "YANLIS_POZITIF",
+          "enlem": 38.313186,
+          "boylam": 26.307059,
+          "piksel_satir": 1291,
+          "piksel_sutun": 760,
+          "merkez_gecerli": true,
+          "merkez": {
+            "onceki_ndvi": 0.5202,
+            "son_ndvi": 0.1351,
+            "bitki_kaybi": 0.3851,
+            "parlaklik_degisim": 0.315,
+            "rgb_farki": 0.315,
+            "mevcut_soil_mask": true,
+            "mevcut_strong_visual": true,
+            "mevcut_small_mask": true,
+            "koyu_alt_toprak_proxy": false
+          },
+          "cevre_5x5": {
+            "gecerli_piksel": 25,
+            "ortalama_parlaklik_degisim": 0.1565,
+            "min_parlaklik_degisim": -0.0105,
+            "max_parlaklik_degisim": 0.3268,
+            "ortalama_rgb_farki": 0.1576,
+            "max_rgb_farki": 0.3268,
+            "ortalama_bitki_kaybi": 0.1974,
+            "max_bitki_kaybi": 0.3857,
+            "son_ndvi_ortalama": 0.1997,
+            "kalici_bitki_orani": 0.12,
+            "ciplak_zemin_orani": 0.84,
+            "parlak_artis_orani": 0.96,
+            "koyulasma_orani": 0.0,
+            "soil_mask_orani": 0.6,
+            "strong_visual_orani": 0.2,
+            "small_mask_orani": 0.52,
+            "koyu_alt_toprak_proxy_orani": 0.0
+          },
+          "cevre_9x9": {
+            "gecerli_piksel": 81,
+            "ortalama_parlaklik_degisim": 0.0773,
+            "ortalama_rgb_farki": 0.0849,
+            "koyulasma_orani": 0.037,
+            "koyu_alt_toprak_proxy_orani": 0.0
+          }
+        },
+        {
+          "id": "FP-20260917-MUSALLA-002",
+          "sonuc": "YANLIS_POZITIF",
+          "enlem": 38.30812,
+          "boylam": 26.326863,
+          "piksel_satir": 1347,
+          "piksel_sutun": 933,
+          "merkez_gecerli": true,
+          "merkez": {
+            "onceki_ndvi": 0.1883,
+            "son_ndvi": 0.2101,
+            "bitki_kaybi": -0.0218,
+            "parlaklik_degisim": -0.2954,
+            "rgb_farki": 0.2954,
+            "mevcut_soil_mask": false,
+            "mevcut_strong_visual": true,
+            "mevcut_small_mask": false,
+            "koyu_alt_toprak_proxy": true
+          },
+          "cevre_5x5": {
+            "gecerli_piksel": 25,
+            "ortalama_parlaklik_degisim": -0.1944,
+            "min_parlaklik_degisim": -0.3072,
+            "max_parlaklik_degisim": -0.0641,
+            "ortalama_rgb_farki": 0.1944,
+            "max_rgb_farki": 0.3072,
+            "ortalama_bitki_kaybi": -0.0455,
+            "max_bitki_kaybi": 0.023,
+            "son_ndvi_ortalama": 0.3866,
+            "kalici_bitki_orani": 0.52,
+            "ciplak_zemin_orani": 0.48,
+            "parlak_artis_orani": 0.0,
+            "koyulasma_orani": 1.0,
+            "soil_mask_orani": 0.0,
+            "strong_visual_orani": 0.4,
+            "small_mask_orani": 0.0,
+            "koyu_alt_toprak_proxy_orani": 0.48
+          },
+          "cevre_9x9": {
+            "gecerli_piksel": 81,
+            "ortalama_parlaklik_degisim": -0.1365,
+            "ortalama_rgb_farki": 0.1366,
+            "koyulasma_orani": 0.9877,
+            "koyu_alt_toprak_proxy_orani": 0.3951
+          }
+        }
+      ]
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "durum": "ok",
+      "onceki_tarih": "13.09.2026",
+      "son_tarih": "15.09.2026",
+      "older_item": "S2C_T35SMC_20260913T090741_L2A",
+      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
+      "referanslar": [
+        {
+          "id": "FP-20260917-UZUNKUYU-001",
+          "sonuc": "YANLIS_POZITIF",
+          "enlem": 38.32015,
+          "boylam": 26.562138,
+          "piksel_satir": 1214,
+          "piksel_sutun": 979,
+          "merkez_gecerli": true,
+          "merkez": {
+            "onceki_ndvi": 0.3012,
+            "son_ndvi": -0.1116,
+            "bitki_kaybi": 0.4128,
+            "parlaklik_degisim": 0.1033,
+            "rgb_farki": 0.1529,
+            "mevcut_soil_mask": true,
+            "mevcut_strong_visual": false,
+            "mevcut_small_mask": true,
+            "koyu_alt_toprak_proxy": false
+          },
+          "cevre_5x5": {
+            "gecerli_piksel": 25,
+            "ortalama_parlaklik_degisim": 0.0356,
+            "min_parlaklik_degisim": -0.0824,
+            "max_parlaklik_degisim": 0.1556,
+            "ortalama_rgb_farki": 0.0748,
+            "max_rgb_farki": 0.1725,
+            "ortalama_bitki_kaybi": 0.1034,
+            "max_bitki_kaybi": 0.4128,
+            "son_ndvi_ortalama": 0.1631,
+            "kalici_bitki_orani": 0.04,
+            "ciplak_zemin_orani": 0.88,
+            "parlak_artis_orani": 0.4,
+            "koyulasma_orani": 0.12,
+            "soil_mask_orani": 0.2,
+            "strong_visual_orani": 0.0,
+            "small_mask_orani": 0.12,
+            "koyu_alt_toprak_proxy_orani": 0.0
+          },
+          "cevre_9x9": {
+            "gecerli_piksel": 81,
+            "ortalama_parlaklik_degisim": 0.0004,
+            "ortalama_rgb_farki": 0.0427,
+            "koyulasma_orani": 0.284,
+            "koyu_alt_toprak_proxy_orani": 0.0123
+          }
+        }
+      ]
+    }
+  },
+  "not": "Bu dosya yalnız kalibrasyon diagnostigidir; eşik veya rota kararı vermez."
+}
