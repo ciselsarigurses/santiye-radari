@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-16",
+  "rapor_tarihi": "2026-09-17",
   "amac": "Güncel 250 m²+ ana Sentinel adaylarının bağlı bileşeninin analiz bbox kenarına değip değmediğini ölçerek alan/merkez koordinatı kırpma riskini görünür kılmak.",
   "politika": "DIAGNOSTIK_ONLY: 250 m² ana eşik, alarm ve saha görevi değişmez. Kenar teması bbox genişletme/yeniden ölçüm kanıtıdır; tek başına yeni alarm değildir.",
   "ana_uretim_esigi_m2": 250,
@@ -99,7 +99,7 @@
         },
         {
           "gorev_id": "U0383533D73",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Musalla",
           "enlem": 38.295639,
           "boylam": 26.306028,
@@ -231,7 +231,7 @@
         },
         {
           "gorev_id": "UB28A755E52",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Musalla",
           "enlem": 38.307216,
           "boylam": 26.314271,
@@ -275,7 +275,7 @@
         },
         {
           "gorev_id": "U57689760DA",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.274745,
           "boylam": 26.3319,
@@ -297,7 +297,7 @@
         },
         {
           "gorev_id": "UCED69C8780",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.27583,
           "boylam": 26.333617,
@@ -341,7 +341,7 @@
         },
         {
           "gorev_id": "UF52D1A554D",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.27167,
           "boylam": 26.342432,
@@ -363,7 +363,7 @@
         },
         {
           "gorev_id": "U48CEFB0028",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.273026,
           "boylam": 26.340944,
@@ -385,7 +385,7 @@
         },
         {
           "gorev_id": "UEE14784F1F",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.274383,
           "boylam": 26.338311,
@@ -407,7 +407,7 @@
         },
         {
           "gorev_id": "U58F954E4A4",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.277006,
           "boylam": 26.3406,
@@ -429,7 +429,7 @@
         },
         {
           "gorev_id": "U3951CE8B6B",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.276554,
           "boylam": 26.34289,
@@ -451,7 +451,7 @@
         },
         {
           "gorev_id": "U88BF6DBCB5",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Reisdere",
           "enlem": 38.32214,
           "boylam": 26.407912,
@@ -473,7 +473,7 @@
         },
         {
           "gorev_id": "UC8F94C51AA",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Ilıca",
           "enlem": 38.300794,
           "boylam": 26.352963,
@@ -524,7 +524,7 @@
       "adaylar": [
         {
           "gorev_id": "UBEB793B25F",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.259369,
           "boylam": 26.678111,
@@ -546,7 +546,7 @@
         },
         {
           "gorev_id": "U475CF927D9",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.257921,
           "boylam": 26.677195,
@@ -590,7 +590,7 @@
         },
         {
           "gorev_id": "UADFA62B1D0",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.32015,
           "boylam": 26.562138,
