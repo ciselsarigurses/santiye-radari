@@ -47,7 +47,7 @@ jobs:
           cache: pip
 
       - name: Bağımlılıkları kur
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt 'planetary-computer>=1.0,<2'
 
       - name: Temel kazısı diagnostik öz testleri
         run: |
