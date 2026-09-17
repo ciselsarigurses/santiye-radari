@@ -1,0 +1,83 @@
+name: Temel Kazısı Morfoloji Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "foundation_excavation_morphology_audit.py"
+      - "satellite.py"
+      - "manual_field_feedback.json"
+      - ".github/workflows/foundation-excavation-morphology-audit.yml"
+  workflow_run:
+    workflows: ["Günlük Şantiye Taraması"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-foundation-morphology
+  cancel-in-progress: true
+
+jobs:
+  diagnose:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Temel kazısı proxy öz testi
+        run: python foundation_excavation_morphology_audit.py --check-only
+
+      - name: Morfoloji ve saha kalibrasyonu diagnostigini üret
+        run: python foundation_excavation_morphology_audit.py
+
+      - name: Diagnostik sonucu güvenli kaydet
+        run: |
+          output="foundation_excavation_morphology_review.json"
+          if [[ -z "$(git status --porcelain -- "$output")" ]]; then
+            echo "Temel kazısı morfoloji sonucu değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python foundation_excavation_morphology_audit.py --check-only
+            python foundation_excavation_morphology_audit.py
+
+            if [[ -z "$(git status --porcelain -- "$output")" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add "$output"
+            git commit -m "Radar: temel kazısı morfoloji diagnostigini güncelle"
+            if git push origin HEAD:main; then
+              echo "Diagnostik güvenli biçimde kaydedildi."
+              exit 0
+            fi
+
+            echo "Ana dal ilerledi; yeniden denenecek."
+            sleep $((attempt * 2))
+          done
+
+          echo "Üç denemede de diagnostik kaydı tamamlanamadı."
+          exit 1
