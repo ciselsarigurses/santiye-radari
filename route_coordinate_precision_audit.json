@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-16",
-  "kaynak_rapor_olusturma": "2026-09-16 19:15 +03",
+  "rapor_tarihi": "2026-09-17",
+  "kaynak_rapor_olusturma": "2026-09-17 11:17 +03",
   "politika": "DIAGNOSTIK_ONLY: koordinat otomatik taşınmaz; alarm/görev/sıra/250 m² ana eşik/150–249 m² MİKRO politikası değişmez.",
   "rota_hedefi": 3,
   "olculen": 3,
@@ -11,45 +11,15 @@
   "maksimum_mevcut_sinyal_farki_m": 10.0,
   "sahne_ciftleri": [
     {
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "onceki_tarih": "13.09.2026",
-      "son_tarih": "15.09.2026",
-      "onceki_item": "S2C_T35SMC_20260913T090741_L2A",
-      "son_item": "S2A_T35SMC_20260915T090428_L2A",
-      "hedef_sayisi": 1
-    },
-    {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
       "onceki_item": "S2C_T35SMC_20260913T090741_L2A",
       "son_item": "S2A_T35SMC_20260915T090428_L2A",
-      "hedef_sayisi": 2
+      "hedef_sayisi": 3
     }
   ],
   "hedefler": [
-    {
-      "gorev_id": "UADFA62B1D0",
-      "oncelik": "ERKEN",
-      "mahalle": "Mevki doğrulanmadı",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "onceki_tarih": "13.09.2026",
-      "son_tarih": "15.09.2026",
-      "alan_m2": 400,
-      "mevcut_enlem": 38.32015,
-      "mevcut_boylam": 26.562138,
-      "durum": "OLCULDU",
-      "bilesen_alan_m2": 400,
-      "alan_benzerligi": 1.0,
-      "bilesen_piksel": 4,
-      "geometrik_enlem": 38.32015,
-      "geometrik_boylam": 26.562138,
-      "sinyal_agirlikli_enlem": 38.32015,
-      "sinyal_agirlikli_boylam": 26.562138,
-      "mevcut_geometrik_fark_m": 0.0,
-      "mevcut_sinyal_agirlikli_fark_m": 0.0,
-      "otomatik_tasima": false
-    },
     {
       "gorev_id": "UCF568A03B1",
       "oncelik": "PARSEL",
@@ -68,6 +38,28 @@
       "geometrik_boylam": 26.307059,
       "sinyal_agirlikli_enlem": 38.313186,
       "sinyal_agirlikli_boylam": 26.307059,
+      "mevcut_geometrik_fark_m": 0.0,
+      "mevcut_sinyal_agirlikli_fark_m": 0.0,
+      "otomatik_tasima": false
+    },
+    {
+      "gorev_id": "UDDB45C61BD",
+      "oncelik": "PARSEL",
+      "mahalle": "Çiftlikköy",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "13.09.2026",
+      "son_tarih": "15.09.2026",
+      "alan_m2": 900,
+      "mevcut_enlem": 38.286413,
+      "mevcut_boylam": 26.240205,
+      "durum": "OLCULDU",
+      "bilesen_alan_m2": 900,
+      "alan_benzerligi": 1.0,
+      "bilesen_piksel": 9,
+      "geometrik_enlem": 38.286413,
+      "geometrik_boylam": 26.240205,
+      "sinyal_agirlikli_enlem": 38.286413,
+      "sinyal_agirlikli_boylam": 26.240205,
       "mevcut_geometrik_fark_m": 0.0,
       "mevcut_sinyal_agirlikli_fark_m": 0.0,
       "otomatik_tasima": false
