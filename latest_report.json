@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-09-17",
   "olusturma": "2026-09-17 11:17 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 188 · Geciken kontrol: 180 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 186 · Geciken kontrol: 178 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif) · Arka plan geniş yüzey: 2",
   "saha_adaylari": [
     {
       "oncelik": "TEKRAR",
@@ -5015,62 +5015,6 @@
       "oncelik": "GECİKEN",
       "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
       "mahalle": "Ovacık",
-      "enlem": 38.275649,
-      "boylam": 26.341287,
-      "alan_m2": 37904,
-      "sinyal": "2 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "STANDART",
-      "tarim_riski": false,
-      "tarim_baglam_alani_m2": 138513,
-      "tarim_baglam_orani": 3.65,
-      "tarim_riski_nedeni": null,
-      "rota_uygun": true,
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "13.09.2026",
-      "son_tarih": "15.09.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.275649,26.341287",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "U2EA42E5271",
-      "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-09-15",
-      "bekleme_gun": 2,
-      "gecikmis": true,
-      "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
-    },
-    {
-      "oncelik": "GECİKEN",
-      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
-      "mahalle": "Ovacık",
-      "enlem": 38.274293,
-      "boylam": 26.344721,
-      "alan_m2": 23402,
-      "sinyal": "2 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "STANDART",
-      "tarim_riski": false,
-      "tarim_baglam_alani_m2": 68807,
-      "tarim_baglam_orani": 2.94,
-      "tarim_riski_nedeni": null,
-      "rota_uygun": true,
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "13.09.2026",
-      "son_tarih": "15.09.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.274293,26.344721",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "U6BD9480A21",
-      "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-09-15",
-      "bekleme_gun": 2,
-      "gecikmis": true,
-      "uydu_kanit_yasi_gun": 2,
-      "uydu_onceligi": "YÜKSEK"
-    },
-    {
-      "oncelik": "GECİKEN",
-      "oncelik_nedeni": "Çok geniş bitişik zemin/yüzey değişimi.",
-      "mahalle": "Ovacık",
       "enlem": 38.274745,
       "boylam": 26.3319,
       "alan_m2": 10801,
@@ -5883,5 +5827,82 @@
     "alarm": false,
     "yeni_saha_gorevi": false,
     "not": "TAZE KAZI sıralama bandı yalnız 15 Eylül 2026 veya daha yeni Sentinel sahnesine verilir. Sezon öncesi sinyal silinmez; normal/backlog kanıtı olarak izlenir. 150-249 m² MİKRO doğrudan saha görevine yükseltilmez."
+  },
+  "arka_plan_genis_yuzey_hareketleri": [
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Ovacık",
+      "enlem": 38.275649,
+      "boylam": 26.341287,
+      "alan_m2": 37904,
+      "genis_kompaktlik": 0.067,
+      "genis_geometri_riski": true,
+      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+      "kanit_kaynagi": "hareket_json",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.275649,26.341287",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.275649/26.341287",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "cesme"
+      ]
+    },
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Ovacık",
+      "enlem": 38.274293,
+      "boylam": 26.344721,
+      "alan_m2": 23402,
+      "genis_kompaktlik": 0.127,
+      "genis_geometri_riski": true,
+      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+      "kanit_kaynagi": "hareket_json",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.274293,26.344721",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.274293/26.344721",
+      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
+      "kaynak_bolgeler": [
+        "cesme"
+      ]
+    }
+  ],
+  "arka_plan_kurali": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "min_alan_m2": 10000,
+    "dusuk_kompaktlik_max": 0.15,
+    "manuel_tekrar_override": true,
+    "kanit": "hareket_json; metadata yoksa aynı tarihli bağımsız şekil denetimi",
+    "aciklama": "Yalnız 10.000 m² üstü + ölçülmüş düşük-kompaktlık riski birlikteyse operasyon listesinden ayrılır. Ham Sentinel/radar kaydı silinmez.",
+    "yaklasik_provenans": {
+      "aktif": true,
+      "maksimum_esleme_m": 25.0,
+      "minimum_alan_benzerligi": 0.6,
+      "kanit": "shape_false_positive_audit üretim seçimi + nihai yaklaşık provenans doğrulaması",
+      "aciklama": "BBox/yeniden-pikselleştirme nedeniyle birkaç metre kayan düşük-kompaktlık geniş kümeler yalnız şekil denetiminin kendi 25 m / 0.60 güven sınırında arka plana ayrılır."
+    },
+    "tarihsel_tasima": {
+      "aktif": true,
+      "yalniz_yeni_goruntu_false": true,
+      "minimum_bekleme_gun": 1,
+      "minimum_alan_m2": 10000,
+      "maksimum_esleme_m": 25.0,
+      "minimum_alan_benzerligi": 0.6,
+      "kanit": "aynı-gün shape_false_positive_audit üretim seçimi",
+      "aciklama": "Yalnız tarihsel/gecikmiş geniş görev, güncel düşük-kompaktlık geometriyle güvenli provenans sınırında yeniden eşleşirse arka plana ayrılır. Taze görev ve insanın TEKRAR_GIT kararı korunur."
+    },
+    "tekrar_calistirma_koruması": {
+      "aktif": true,
+      "yalniz_ayni_rapor_tarihi": true,
+      "alarm": false,
+      "saha_gorevi": false,
+      "aciklama": "Aynı günlük rapor yeniden işlendiğinde daha önce arka plana ayrılmış geniş-yüzey diagnostik kayıtları sessizce düşürülmez."
+    }
   }
 }
