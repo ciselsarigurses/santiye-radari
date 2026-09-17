@@ -419,6 +419,7 @@ def _analyze_region(region_key, pair, final_candidates=None):
         bbox,
         pixel_area_m2,
         small_site_mask=None,
+        agricultural_context_mask=None,
         limit=satellite.HOTSPOT_LIMIT,
         small_quota=satellite.SMALL_HOTSPOT_QUOTA,
     ):
@@ -445,6 +446,7 @@ def _analyze_region(region_key, pair, final_candidates=None):
             bbox,
             pixel_area_m2,
             small_site_mask=small_site_mask,
+            agricultural_context_mask=agricultural_context_mask,
             limit=limit,
             small_quota=small_quota,
         )
@@ -491,13 +493,11 @@ def _analyze_region(region_key, pair, final_candidates=None):
     return {
         "ham_gecerli_aday": len(captured["base_records"]),
         "diyagonal_yan_kume_geometri": len(captured["sidecar_records"]),
-        # Geriye uyumluluk: eski alanlar ham satellite._hotspots seçimini gösterir.
         "uretim_secimi": len(captured["selected"]),
         "ham_sekil_dagilimi": _summarize(captured["base_records"]),
         "uretim_secimi_sekil_dagilimi": _summarize(raw_selected_records),
         "secili_genis_sekil_isaretli": len(raw_flagged),
         "secili_genis_sekil_ornekleri": _examples(raw_flagged),
-        # Asıl operasyonel çıktı: rebalance + dedupe sonrasında DB'de kalan adaylar.
         "nihai_rapor_secimi": len(final_candidates),
         "nihai_rapor_eslesen_geometri": len(final_selected_records),
         "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": len(exact_sidecars),
