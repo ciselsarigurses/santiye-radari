@@ -9,8 +9,8 @@ merkez-vs-çevre lokal kontrast değişimiyle kontrol eder. SAR sahnesi optik
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import json
-import math
 from pathlib import Path
 
 import sentinel1_rtc_change_diagnostic as rtc
@@ -30,13 +30,16 @@ def _load_review():
 
 
 def _parse_date(value):
-    if not value:
+    """Repo içindeki iki tarih biçimini aynı şekilde karşılaştırılabilir yap."""
+    text = str(value or "").strip()
+    if not text:
         return None
-    try:
-        y, m, d = str(value).split("-")
-        return int(y), int(m), int(d)
-    except Exception:
-        return None
+    for fmt in ("%Y-%m-%d", "%d.%m.%Y", "%Y-%m-%dT%H:%M:%S"):
+        try:
+            return datetime.strptime(text[:19], fmt).date()
+        except ValueError:
+            continue
+    return None
 
 
 def _sar_temporally_relevant(sar_new_date, optical_old_date):
@@ -79,11 +82,17 @@ def _analyze_region(region_key, region):
     for row in result.get("hedefler") or []:
         strong = _strong_local(row)
         cross = bool(strong and temporal_ok)
+        pol_metrics = row.get("polarizasyon_metrikleri") or {}
+        read_errors = row.get("okuma_hatalari") or {}
         rows.append({
             "enlem": row.get("enlem"),
             "boylam": row.get("boylam"),
             "s2_seed_morfoloji_puani": row.get("s2_seed_morfoloji_puani"),
             "s2_seed_morfoloji_seviyesi": row.get("s2_seed_morfoloji_seviyesi"),
+            "rtc_cifti_kapsiyor": row.get("rtc_cifti_kapsiyor"),
+            "sar_degisim_durumu": row.get("sar_degisim_durumu"),
+            "sar_metrik_var": bool(pol_metrics),
+            "sar_okuma_hatalari": read_errors or None,
             "sar_lokal_degisim_skor_db": row.get("sar_lokal_degisim_skor_db"),
             "sar_polarizasyon_uyumu": row.get("sar_polarizasyon_uyumu"),
             "sar_mekansal_ayrim": row.get("sar_mekansal_ayrim"),
@@ -104,6 +113,9 @@ def _analyze_region(region_key, region):
         reverse=True,
     )
     cross_rows = [x for x in rows if x["s2_sar_capraz_destek"]]
+    covered_rows = [x for x in rows if x.get("rtc_cifti_kapsiyor") is True]
+    metric_rows = [x for x in rows if x.get("sar_metrik_var") is True]
+    error_rows = [x for x in rows if x.get("sar_okuma_hatalari")]
     return {
         "bolge": region.get("bolge") or region_key,
         "durum": result.get("durum"),
@@ -113,6 +125,9 @@ def _analyze_region(region_key, region):
         "sar_yeni_tarih": sar_new,
         "sar_optik_doneme_zamansal_uygun": temporal_ok,
         "hedef_sayisi": len(rows),
+        "rtc_cifti_kapsayan_hedef": len(covered_rows),
+        "sar_metrik_uretilen_hedef": len(metric_rows),
+        "sar_okuma_hatasi_olan_hedef": len(error_rows),
         "s2_sar_capraz_destekli_sayi": len(cross_rows),
         "capraz_destekli_adaylar": cross_rows[:10],
         "tum_sar_sonuclari": rows,
@@ -122,8 +137,10 @@ def _analyze_region(region_key, region):
 
 
 def _self_check():
+    assert _parse_date("13.09.2026") == _parse_date("2026-09-13")
+    assert _sar_temporally_relevant("2026-09-17", "13.09.2026")
     assert _sar_temporally_relevant("2026-09-15", "2026-09-13")
-    assert not _sar_temporally_relevant("2026-09-12", "2026-09-13")
+    assert not _sar_temporally_relevant("2026-09-12", "13.09.2026")
     assert _strong_local({
         "sar_lokal_degisim_skor_db": 2.2,
         "sar_mekansal_ayrim": "KOMPAKT_LOKAL_DESTEKLI",
@@ -154,7 +171,7 @@ def audit():
             }
 
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Lokal S2 temel/kepçe seedlerini zamansal olarak uygun Sentinel-1 RTC lokal desteğiyle çapraz denetlemek",
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
@@ -166,6 +183,7 @@ def audit():
         "bolgeler": regions,
         "not": (
             "SAR yalnız optik değişim dönemine zamansal olarak yetişiyorsa çapraz destek sayılır. "
+            "Tarih karşılaştırması YYYY-MM-DD ve DD.MM.YYYY biçimlerini birlikte destekler. "
             "Bu katman tek başına saha görevi üretmez; saha kalibrasyonu olmadan rota kapısına bağlanmaz."
         ),
     }
