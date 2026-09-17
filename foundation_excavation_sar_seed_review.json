@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "Lokal S2 temel/kepçe seedlerini zamansal olarak uygun Sentinel-1 RTC lokal desteğiyle çapraz denetlemek",
   "ana_uretim_esigi_m2": 250,
   "mikro_aralik_m2": [
@@ -19,8 +19,11 @@
       "s2_son_tarih": "15.09.2026",
       "sar_eski_tarih": "2026-09-11",
       "sar_yeni_tarih": "2026-09-17",
-      "sar_optik_doneme_zamansal_uygun": false,
+      "sar_optik_doneme_zamansal_uygun": true,
       "hedef_sayisi": 20,
+      "rtc_cifti_kapsayan_hedef": 20,
+      "sar_metrik_uretilen_hedef": 0,
+      "sar_okuma_hatasi_olan_hedef": 20,
       "s2_sar_capraz_destekli_sayi": 0,
       "capraz_destekli_adaylar": [],
       "tum_sar_sonuclari": [
@@ -29,12 +32,25 @@
           "boylam": 26.343119,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -44,12 +60,25 @@
           "boylam": 26.511741,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -59,12 +88,25 @@
           "boylam": 26.343805,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -74,12 +116,25 @@
           "boylam": 26.289658,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -89,12 +144,25 @@
           "boylam": 26.380895,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -104,12 +172,25 @@
           "boylam": 26.306944,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -119,12 +200,25 @@
           "boylam": 26.353307,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -134,12 +228,25 @@
           "boylam": 26.307975,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -149,12 +256,25 @@
           "boylam": 26.297443,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -164,12 +284,25 @@
           "boylam": 26.348041,
           "s2_seed_morfoloji_puani": 95,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -179,12 +312,25 @@
           "boylam": 26.432982,
           "s2_seed_morfoloji_puani": 95,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -194,12 +340,25 @@
           "boylam": 26.343347,
           "s2_seed_morfoloji_puani": 95,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -209,12 +368,25 @@
           "boylam": 26.388107,
           "s2_seed_morfoloji_puani": 95,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -224,12 +396,25 @@
           "boylam": 26.290345,
           "s2_seed_morfoloji_puani": 95,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -239,12 +424,25 @@
           "boylam": 26.332358,
           "s2_seed_morfoloji_puani": 95,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -254,12 +452,25 @@
           "boylam": 26.332129,
           "s2_seed_morfoloji_puani": 95,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -269,12 +480,25 @@
           "boylam": 26.328122,
           "s2_seed_morfoloji_puani": 95,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -284,12 +508,25 @@
           "boylam": 26.290345,
           "s2_seed_morfoloji_puani": 93,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -299,12 +536,25 @@
           "boylam": 26.285766,
           "s2_seed_morfoloji_puani": 93,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -314,12 +564,25 @@
           "boylam": 26.383872,
           "s2_seed_morfoloji_puani": 93,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -335,8 +598,11 @@
       "s2_son_tarih": "15.09.2026",
       "sar_eski_tarih": "2026-09-11",
       "sar_yeni_tarih": "2026-09-17",
-      "sar_optik_doneme_zamansal_uygun": false,
+      "sar_optik_doneme_zamansal_uygun": true,
       "hedef_sayisi": 10,
+      "rtc_cifti_kapsayan_hedef": 8,
+      "sar_metrik_uretilen_hedef": 0,
+      "sar_okuma_hatasi_olan_hedef": 8,
       "s2_sar_capraz_destekli_sayi": 0,
       "capraz_destekli_adaylar": [],
       "tum_sar_sonuclari": [
@@ -345,12 +611,25 @@
           "boylam": 26.570724,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -360,12 +639,25 @@
           "boylam": 26.555383,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -375,12 +667,25 @@
           "boylam": 26.472267,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -390,12 +695,25 @@
           "boylam": 26.471351,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -405,12 +723,16 @@
           "boylam": 26.623273,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": false,
+          "sar_degisim_durumu": "KARSILASTIRMA_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": null,
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": null,
           "sar_mekansal_ayrim": null,
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -420,12 +742,25 @@
           "boylam": 26.484746,
           "s2_seed_morfoloji_puani": 100,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -435,12 +770,25 @@
           "boylam": 26.455438,
           "s2_seed_morfoloji_puani": 93,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -450,12 +798,16 @@
           "boylam": 26.653153,
           "s2_seed_morfoloji_puani": 90,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": false,
+          "sar_degisim_durumu": "KARSILASTIRMA_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": null,
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": null,
           "sar_mekansal_ayrim": null,
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -465,12 +817,25 @@
           "boylam": 26.516,
           "s2_seed_morfoloji_puani": 90,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -480,12 +845,25 @@
           "boylam": 26.515085,
           "s2_seed_morfoloji_puani": 85,
           "s2_seed_morfoloji_seviyesi": "YUKSEK",
+          "rtc_cifti_kapsiyor": true,
+          "sar_degisim_durumu": "VERI_YOK",
+          "sar_metrik_var": false,
+          "sar_okuma_hatalari": {
+            "VH": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            },
+            "VV": {
+              "eski": "RasterioIOError",
+              "yeni": "RasterioIOError"
+            }
+          },
           "sar_lokal_degisim_skor_db": null,
           "sar_polarizasyon_uyumu": "VERI_YOK",
           "sar_mekansal_ayrim": "VERI_YOK",
           "sar_cevre_degisim_tepe_db": null,
           "sar_guclu_lokal_destek": false,
-          "sar_optik_doneme_zamansal_uygun": false,
+          "sar_optik_doneme_zamansal_uygun": true,
           "s2_sar_capraz_destek": false,
           "alarm": false,
           "saha_gorevi": false
@@ -495,5 +873,5 @@
       "saha_gorevi": false
     }
   },
-  "not": "SAR yalnız optik değişim dönemine zamansal olarak yetişiyorsa çapraz destek sayılır. Bu katman tek başına saha görevi üretmez; saha kalibrasyonu olmadan rota kapısına bağlanmaz."
+  "not": "SAR yalnız optik değişim dönemine zamansal olarak yetişiyorsa çapraz destek sayılır. Tarih karşılaştırması YYYY-MM-DD ve DD.MM.YYYY biçimlerini birlikte destekler. Bu katman tek başına saha görevi üretmez; saha kalibrasyonu olmadan rota kapısına bağlanmaz."
 }
