@@ -19,7 +19,7 @@ permissions:
 
 concurrency:
   group: santiye-radari-foundation-morphology
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   diagnose:
