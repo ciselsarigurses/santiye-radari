@@ -11,11 +11,11 @@
 
 ## Günün ilk 3 kontrolü
 
-> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.
+> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
 
-1. **PARSEL — Musalla** · yaklaşık 1.800 m² · Görev `UCF568A03B1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313186,26.307059) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313186/26.307059)
-2. **PARSEL — Çiftlikköy** · yaklaşık 900 m² · Görev `UDDB45C61BD` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.286413,26.240205) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.286413/26.240205)
-3. **PARSEL — Musalla** · yaklaşık 1.000 m² · Görev `UD53CF00647` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.308120,26.326863) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308120/26.326863)
+1. **PARSEL — Musalla** · yaklaşık 1.800 m² · Görev `UCF568A03B1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313186,26.307059)
+2. **PARSEL — Çiftlikköy** · yaklaşık 900 m² · Görev `UDDB45C61BD` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.286413,26.240205)
+3. **PARSEL — Musalla** · yaklaşık 1.000 m² · Görev `UD53CF00647` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.308120,26.326863)
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
