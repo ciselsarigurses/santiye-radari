@@ -11,7 +11,7 @@
   "rota_limit": 3,
   "geometri_riski_eslesme_m": 25.0,
   "geometri_riski_min_alan_orani": 0.85,
-  "geometri_arka_plan_toplam": 2,
+  "geometri_arka_plan_toplam": 0,
   "rota_degisti": false,
   "temel_rota_gorevleri": [
     "UDDB45C61BD",
@@ -50,7 +50,8 @@
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.286413/26.240205",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-      "gunluk_sira": 1
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 2
     },
     {
       "oncelik": "PARSEL",
@@ -83,7 +84,8 @@
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.275649/26.342546",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-      "gunluk_sira": 2
+      "gunluk_sira": 2,
+      "rota_uydu_kanit_yasi_gun": 2
     },
     {
       "oncelik": "PARSEL",
@@ -116,30 +118,25 @@
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.254304/26.310379",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-      "gunluk_sira": 3
+      "gunluk_sira": 3,
+      "rota_uydu_kanit_yasi_gun": 2
     }
   ],
-  "geometri_arka_plan": [
-    {
-      "gorev_id": "UEE14784F1F",
-      "enlem": 38.274383,
-      "boylam": 26.338311,
-      "alan_m2": 7901,
-      "son_tarih": "15.09.2026",
-      "sekil_riski": "DUSUK_KOMPAKTLIK",
-      "kompaktlik": 0.099,
-      "neden": "Gecikmiş aday aynı Sentinel sahnesinde düşük-kompakt/uzun-ince geometri riski taşıyor; silinmedi, günlük rotada arka planda tutuldu."
-    },
-    {
-      "gorev_id": "U48CEFB0028",
-      "enlem": 38.273026,
-      "boylam": 26.340944,
-      "alan_m2": 6001,
-      "son_tarih": "15.09.2026",
-      "sekil_riski": "DUSUK_KOMPAKTLIK",
-      "kompaktlik": 0.097,
-      "neden": "Gecikmiş aday aynı Sentinel sahnesinde düşük-kompakt/uzun-ince geometri riski taşıyor; silinmedi, günlük rotada arka planda tutuldu."
-    }
+  "geometri_arka_plan": [],
+  "yorum": "Bu çıktı yeni alarm veya saha görevi üretmez. Yalnız gecikmiş 800–10.000 m² adaylarda aynı Sentinel sahnesiyle doğrulanmış düşük-kompakt/uzun-ince geometri riskini günlük rota sıralamasında arka plana alır. Taze ERKEN/PARSEL, TEKRAR_GIT, 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez.",
+  "rota_kaynagi": "MERKEZI_GUNUN_ILK_3",
+  "merkezi_rota_kilidi": true,
+  "tazelik_korumasi": true,
+  "tazelik_sirasi_degisti": false,
+  "geometri_sonrasi_rota_gorevleri": [
+    "UDDB45C61BD",
+    "UF0E768CF64",
+    "UA8723BA5C7"
   ],
-  "yorum": "Bu çıktı yeni alarm veya saha görevi üretmez. Yalnız gecikmiş 800–10.000 m² adaylarda aynı Sentinel sahnesiyle doğrulanmış düşük-kompakt/uzun-ince geometri riskini günlük rota sıralamasında arka plana alır. Taze ERKEN/PARSEL, TEKRAR_GIT, 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez."
+  "tazelik_sonrasi_rota_gorevleri": [
+    "UDDB45C61BD",
+    "UF0E768CF64",
+    "UA8723BA5C7"
+  ],
+  "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur."
 }
