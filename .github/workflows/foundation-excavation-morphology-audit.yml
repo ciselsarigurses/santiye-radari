@@ -7,6 +7,7 @@ on:
       - "foundation_excavation_morphology_audit.py"
       - "excavation_reference_signature_audit.py"
       - "localized_excavation_seed_audit.py"
+      - "seed_centered_excavation_morphology_audit.py"
       - "foundation_excavation_cross_evidence_audit.py"
       - "satellite.py"
       - "manual_field_feedback.json"
@@ -48,6 +49,7 @@ jobs:
           python foundation_excavation_morphology_audit.py --check-only
           python excavation_reference_signature_audit.py --check-only
           python localized_excavation_seed_audit.py --check-only
+          python seed_centered_excavation_morphology_audit.py --check-only
           python foundation_excavation_cross_evidence_audit.py --check-only
 
       - name: Morfoloji ve saha referans diagnostiklerini üret
@@ -55,11 +57,12 @@ jobs:
           python foundation_excavation_morphology_audit.py
           python excavation_reference_signature_audit.py
           python localized_excavation_seed_audit.py
+          python seed_centered_excavation_morphology_audit.py
           python foundation_excavation_cross_evidence_audit.py
 
       - name: Diagnostik sonuçlarını güvenli kaydet
         run: |
-          outputs="foundation_excavation_morphology_review.json excavation_reference_signature_review.json localized_excavation_seed_review.json foundation_excavation_cross_evidence_review.json"
+          outputs="foundation_excavation_morphology_review.json excavation_reference_signature_review.json localized_excavation_seed_review.json seed_centered_excavation_morphology_review.json foundation_excavation_cross_evidence_review.json"
           if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
             echo "Temel kazısı diagnostik sonuçları değişmedi."
             exit 0
@@ -74,10 +77,12 @@ jobs:
             python foundation_excavation_morphology_audit.py --check-only
             python excavation_reference_signature_audit.py --check-only
             python localized_excavation_seed_audit.py --check-only
+            python seed_centered_excavation_morphology_audit.py --check-only
             python foundation_excavation_cross_evidence_audit.py --check-only
             python foundation_excavation_morphology_audit.py
             python excavation_reference_signature_audit.py
             python localized_excavation_seed_audit.py
+            python seed_centered_excavation_morphology_audit.py
             python foundation_excavation_cross_evidence_audit.py
 
             if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
