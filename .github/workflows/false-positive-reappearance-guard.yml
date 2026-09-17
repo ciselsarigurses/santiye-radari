@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "false_positive_reappearance_guard.py"
+      - "seed_centered_excavation_morphology_review.json"
       - ".github/workflows/false-positive-reappearance-guard.yml"
   workflow_dispatch:
 
@@ -41,7 +42,7 @@ jobs:
       - name: Yeniden-belirme kuralı öz testi
         run: python false_positive_reappearance_guard.py --check-only
 
-      - name: Yeni güçlü küçük-saha kanıtını kontrol et
+      - name: Yeni güçlü küçük-saha + temel morfolojisi kanıtını kontrol et
         run: python false_positive_reappearance_guard.py
 
       - name: Güvenli durum değişikliğini kaydet
