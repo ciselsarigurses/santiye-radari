@@ -6340,17 +6340,17 @@
   "gunun_ilk_3_notu": "15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
-      "mahalle": "Germiyan",
-      "enlem": 38.333989,
-      "boylam": 26.473048,
-      "alan_m2": 300,
-      "ortalama_bsi_degisim": 0.1207,
-      "ortalama_rgb_farki": 0.149,
+      "mahalle": "Alaçatı",
+      "enlem": 38.272846,
+      "boylam": 26.384788,
+      "alan_m2": 1000,
+      "ortalama_bsi_degisim": 0.1932,
+      "ortalama_rgb_farki": 0.1159,
       "kiyi_su_tamponu_riski": false,
       "kiyi_su_tamponu_orani": 0.0,
-      "uzun_kisa_orani": 1.5,
-      "kutu_doluluk_orani": 0.5,
-      "kompaktlik": 0.377,
+      "uzun_kisa_orani": 2.0,
+      "kutu_doluluk_orani": 0.556,
+      "kompaktlik": 0.388,
       "saha_benzeri_geometri": true,
       "lineer_geometri_riski": false,
       "yakindaki_kuru_degisim_120m": 0,
@@ -6359,15 +6359,8 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.333989,26.473048",
-      "kalibrasyon_durumu": "ALARM_DEGIL",
-      "zaman_serisi_ani_baslangic_destegi": false,
-      "zaman_serisi_ani_baslangic_orani": 1.26,
-      "zaman_serisi_onceki_bsi_degisim": 0.0577,
-      "zaman_serisi_gecerli_oran": 1.0,
-      "zaman_serisi_istikrarsiz_zemin_riski": false,
-      "kalibrasyon_rotasyon_gun": 2,
-      "kalibrasyon_rotasyon_havuzu": 4
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.272846,26.384788",
+      "kalibrasyon_durumu": "ALARM_DEGIL"
     },
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -6390,18 +6383,10 @@
       "onceki_tarih": "13.09.2026",
       "son_tarih": "15.09.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319607,26.564084",
-      "kalibrasyon_durumu": "ALARM_DEGIL",
-      "zaman_serisi_ani_baslangic_destegi": true,
-      "zaman_serisi_ani_baslangic_orani": 4.45,
-      "zaman_serisi_onceki_bsi_degisim": 0.0339,
-      "zaman_serisi_gecerli_oran": 1.0,
-      "zaman_serisi_istikrarsiz_zemin_riski": false,
-      "kalibrasyon_rotasyon_gun": 2,
-      "kalibrasyon_rotasyon_havuzu": 3,
-      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC"
+      "kalibrasyon_durumu": "ALARM_DEGIL"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında bölge başına en fazla bir, toplam iki örnek seçilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; sahne değişmezse en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel tarih çiftine ait zaman-serisi denetimi güvenli ani başlangıç desteği verirse bu örnek saha teyidi için rotasyonun önüne alınır; alarm/görev statüsü değişmez. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday ilk dört kişilik kalibrasyon havuzuna alınmaz.",
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir.",
   "dogrulanmis_takip_sahalari": [
     {
       "gorev_id": "UEC44340AEC",
