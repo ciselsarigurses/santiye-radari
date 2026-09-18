@@ -27,7 +27,10 @@ MAIN_THRESHOLD_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
 LOCAL_SUPPORT = {"KOMPAKT_LOKAL_DESTEKLI", "LOKAL_AYRIM_DESTEKLI"}
 STRONG_DB = 2.0
-MAX_CANDIDATES_PER_REGION = 20
+# Seed-merkezli katman normalde ilk 20 morfoloji adayını, ayrıca en fazla 20
+# referans-çekirdeği öncelikli adayı dışarı verir. SAR denetimi bu ikinci grubu
+# yeniden kesmemeli; 40 hedef runtime'ı sınırlarken tüm diagnostik havuzu korur.
+MAX_CANDIDATES_PER_REGION = 40
 CALIBRATION_SOURCE = "SAHA_DOGRULANMIS_KAZI_KALIBRASYON"
 
 
@@ -218,6 +221,7 @@ def _self_check():
         "sar_lokal_degisim_skor_db": 2.2,
         "sar_mekansal_ayrim": "GENIS_CEVRE_DEGISIMI_ESLIK_EDIYOR",
     })
+    assert MAX_CANDIDATES_PER_REGION >= 40
 
 
 def audit():
