@@ -6,9 +6,10 @@ konumlar gerçek şantiye sinyali sayılmaya devam eder, fakat yeni müşteri sa
 rotasına tekrar gönderilmez. Bu ayrım model kalibrasyonunu bozmadan operasyonel
 zaman kaybını önler.
 
-Bu guard yalnız ``rota_uygun=False`` işaretler; kaydı, alarmı veya saha görevini
-silmez. Uzunkuyu, Germiyan, Ildır veya mevkii doğrulanmamış adayları coğrafi
-tahminle elemez.
+Bu guard aday kayıtlarını silmez. Gülbahçe adaylarını ``rota_uygun=False`` ile
+arka plana alır; Gülbahçe kör-alan devriyesini de operasyonel saha rotasından
+çıkarıp diagnostik arka planda korur. Uzunkuyu, Germiyan, Ildır veya mevkii
+doğrulanmamış adayları coğrafi tahminle elemez.
 """
 
 from __future__ import annotations
@@ -79,6 +80,18 @@ def _matching_customer(
     return None
 
 
+def _is_low_priority_patrol(item: dict[str, Any]) -> bool:
+    """Yalnız açık Gülbahçe işaretini bastır; karma doğu bölgesi etiketini kullanma."""
+    if item.get("gulbahce_operasyonel_kapsama") is True:
+        return True
+    if item.get("gulbahce_cekirdek_operasyon") is True:
+        return True
+    for key in ("mahalle", "mahalle_yaklasik", "mevki"):
+        if "gülbahçe" in _normalize(item.get(key)):
+            return True
+    return False
+
+
 def apply_focus(
     report: dict[str, Any], known_customers: list[dict[str, Any]] | None = None
 ) -> dict[str, Any]:
@@ -134,7 +147,29 @@ def apply_focus(
             )
         candidates.append(item)
 
+    patrol = []
+    patrol_background = []
+    for raw in report.get("kor_alan_saha_devriyesi") or []:
+        if not isinstance(raw, dict):
+            continue
+        item = dict(raw)
+        if _is_low_priority_patrol(item):
+            item["alarm"] = False
+            item["saha_gorevi"] = False
+            item["rota_uygun"] = False
+            item["operasyon_odak_disinda"] = True
+            item["operasyon_odak_notu"] = (
+                "Gülbahçe operasyonel öncelik dışında; kör-alan gözlemi diagnostik "
+                "arka planda korunur ve günlük saha rotasına gönderilmez."
+            )
+            patrol_background.append(item)
+            continue
+        patrol.append(item)
+
     result["saha_adaylari"] = candidates
+    result["kor_alan_saha_devriyesi"] = patrol
+    result["operasyon_odak_disinda_devriye"] = patrol_background
+    result["operasyon_odak_disinda_devriye_sayi"] = len(patrol_background)
     result["operasyon_odak_arka_plan"] = background
     result["operasyon_odak_arka_plan_sayi"] = len(background)
     result["mevcut_musteri_arka_plan_sayi"] = sum(
@@ -143,9 +178,11 @@ def apply_focus(
     result["operasyon_odak_notu"] = (
         "Günlük rota Çeşme yarımadası–Uzunkuyu odağındadır. Açıkça Gülbahçe etiketli "
         "adaylar ve doğrulanmış mevcut müşteri sahaları günlük yeni-müşteri rotasının "
-        "dışında tutulur. Mevcut müşteri sinyali yanlış pozitif sayılmaz; model "
-        "kalibrasyonunda gerçek şantiye olarak korunur. Doğrulanmamış mevki coğrafi "
-        "tahminle elenmez."
+        "dışında tutulur. Açık Gülbahçe kör-alan devriyeleri diagnostik arka planda "
+        "korunur fakat saha rotasına girmez. Mevcut müşteri sinyali yanlış pozitif "
+        "sayılmaz; model kalibrasyonunda gerçek şantiye olarak korunur. Doğrulanmamış "
+        "mevki veya Gülbahçe kelimesi geçen karma doğu-bölgesi etiketi coğrafi tahminle "
+        "elenmez."
     )
     return result
 
@@ -186,7 +223,26 @@ def _self_check() -> None:
                 "enlem": 38.287413,
                 "boylam": 26.240205,
             },
-        ]
+        ],
+        "kor_alan_saha_devriyesi": [
+            {
+                "bolge_anahtari": "east",
+                "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+                "mahalle": "Ildır",
+                "enlem": 38.40,
+                "boylam": 26.47,
+                "saha_gorevi": False,
+            },
+            {
+                "bolge_anahtari": "east",
+                "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+                "mahalle": "Mevki doğrulanmadı",
+                "enlem": 38.333,
+                "boylam": 26.646,
+                "gulbahce_operasyonel_kapsama": True,
+                "saha_gorevi": False,
+            },
+        ],
     }
     result = apply_focus(report, known)
     rows = {row["gorev_id"]: row for row in result["saha_adaylari"]}
@@ -198,6 +254,12 @@ def _self_check() -> None:
     assert rows["D"]["rota_uygun"] is True
     assert result["operasyon_odak_arka_plan_sayi"] == 2
     assert result["mevcut_musteri_arka_plan_sayi"] == 1
+    # Karma doğu bölgesi etiketindeki Gülbahçe kelimesi Ildır devriyesini elememeli.
+    assert len(result["kor_alan_saha_devriyesi"]) == 1
+    assert result["kor_alan_saha_devriyesi"][0]["mahalle"] == "Ildır"
+    # Açık Gülbahçe kapsama bayrağı operasyon rotasından ayrılmalı ama silinmemeli.
+    assert result["operasyon_odak_disinda_devriye_sayi"] == 1
+    assert result["operasyon_odak_disinda_devriye"][0]["rota_uygun"] is False
 
 
 def main() -> None:
@@ -219,7 +281,8 @@ def main() -> None:
     print(
         "Operasyon odak koruması: "
         f"arka_plan={result['operasyon_odak_arka_plan_sayi']}, "
-        f"mevcut_musteri={result['mevcut_musteri_arka_plan_sayi']}"
+        f"mevcut_musteri={result['mevcut_musteri_arka_plan_sayi']}, "
+        f"devriye_arka_plan={result['operasyon_odak_disinda_devriye_sayi']}"
     )
 
 
