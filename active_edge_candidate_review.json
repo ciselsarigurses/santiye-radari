@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-17",
+  "rapor_tarihi": "2026-09-18",
   "amac": "Güncel 250 m²+ ana Sentinel adaylarının bağlı bileşeninin analiz bbox kenarına değip değmediğini ölçerek alan/merkez koordinatı kırpma riskini görünür kılmak.",
   "politika": "DIAGNOSTIK_ONLY: 250 m² ana eşik, alarm ve saha görevi değişmez. Kenar teması bbox genişletme/yeniden ölçüm kanıtıdır; tek başına yeni alarm değildir.",
   "ana_uretim_esigi_m2": 250,
@@ -33,7 +33,7 @@
       "adaylar": [
         {
           "gorev_id": "UDDB45C61BD",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Çiftlikköy",
           "enlem": 38.286413,
           "boylam": 26.240205,
@@ -121,7 +121,7 @@
         },
         {
           "gorev_id": "UCF568A03B1",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Musalla",
           "enlem": 38.313186,
           "boylam": 26.307059,
@@ -187,7 +187,7 @@
         },
         {
           "gorev_id": "UA8723BA5C7",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.254304,
           "boylam": 26.310379,
@@ -253,7 +253,7 @@
         },
         {
           "gorev_id": "UD53CF00647",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Musalla",
           "enlem": 38.30812,
           "boylam": 26.326863,
@@ -319,7 +319,7 @@
         },
         {
           "gorev_id": "UA65167A849",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.271217,
           "boylam": 26.338883,
@@ -568,7 +568,7 @@
         },
         {
           "gorev_id": "U135C9ACAE2",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Gülbahçe",
           "enlem": 38.331094,
           "boylam": 26.63724,
