@@ -272,12 +272,12 @@
     {
       "geometry": {
         "coordinates": [
-          26.311867,
-          38.282433
+          26.37769,
+          38.298533
         ],
         "type": "Point"
       },
-      "id": "cesme:38.282433:26.311867",
+      "id": "cesme:38.298533:26.377690",
       "properties": {
         "alan_m2": 200,
         "alarm": false,
@@ -287,7 +287,7 @@
         "harita_katmani": "SAR_MIKRO_DIAGNOSTIK",
         "hedef_katmani": "MIKRO_DIAGNOSTIK",
         "kaynak": "micro_site_decision_review.json",
-        "mahalle_yaklasik": "Mevki doğrulanmadı",
+        "mahalle_yaklasik": "Alaçatı",
         "mikro_guclu_diagnostik": true,
         "mikro_saha_dogrulandi": false,
         "neden": "MIKRO_GUCLU_DIAGNOSTIK",
@@ -296,12 +296,12 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.56,
-        "sar_cevre_degisim_tepe_db": 0.652,
+        "sar_cevre_degisim_konservatif_db": 0.342,
+        "sar_cevre_degisim_tepe_db": 0.831,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.551,
-        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
+        "sar_lokal_degisim_skor_db": 1.035,
+        "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
+        "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
         "temporal_durum": null,
         "yeni_tarih": "2026-09-18"
       },
