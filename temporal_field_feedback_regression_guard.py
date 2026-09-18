@@ -20,6 +20,7 @@ import satellite
 FEEDBACK_JSON = Path(__file__).with_name("manual_field_feedback.json")
 REVIEW_PATHS = (
     Path(__file__).with_name("foundation_excavation_morphology_review.json"),
+    Path(__file__).with_name("seed_centered_excavation_morphology_review.json"),
     Path(__file__).with_name("foundation_excavation_cross_evidence_review.json"),
 )
 POSITIVE_RESULT = "DOGRULANMIS_KAZI"
@@ -119,10 +120,48 @@ def _patch_morphology(review, statuses):
                 ignored.append(str(item.get("id")))
         failures = [
             item for item in calibration
-            if isinstance(item, dict) and item.get("regresyon_uyumlu") is False
+            if isinstance(item, dict)
+            and item.get("regresyon_degerlendirildi") is not False
+            and item.get("regresyon_uyumlu") is False
         ]
         region["regresyon_uyumsuz_sayisi"] = len(failures)
         region["regresyon_uyumsuz_ornekler"] = failures
+        top_failures.extend({"bolge_anahtari": region_key, **item} for item in failures)
+    review["toplam_regresyon_uyumsuz"] = len(top_failures)
+    review["regresyon_uyumsuzluklari"] = top_failures
+    return ignored
+
+
+def _patch_seed_centered_morphology(review, statuses):
+    """Seed-merkezli regresyonu da saha tarihine göre güvenli hale getirir.
+
+    Route-gate bu çıktının ``toplam_regresyon_uyumsuz`` alanını okuduğu için,
+    16 Eylül'de doğrulanan kazı 15 Eylül optiğine karşı geçme/kalma sinyali
+    üretemez. Yanlış pozitifler ise aynen regresyonda kalır.
+    """
+
+    regions = review.get("bolgeler") if isinstance(review, dict) else {}
+    if not isinstance(regions, dict):
+        return []
+    ignored = []
+    top_failures = []
+    for region_key, region in regions.items():
+        if not isinstance(region, dict):
+            continue
+        calibration = region.get("saha_referans_regresyonu")
+        if not isinstance(calibration, list):
+            continue
+        for item in calibration:
+            if _patch_item(item, statuses) and item.get("regresyon_degerlendirildi") is False:
+                ignored.append(str(item.get("id")))
+        failures = [
+            item for item in calibration
+            if isinstance(item, dict)
+            and item.get("regresyon_degerlendirildi") is not False
+            and item.get("regresyon_uyumlu") is False
+        ]
+        region["regresyon_uyumsuz_sayisi"] = len(failures)
+        region["regresyon_uyumsuzluklari"] = failures
         top_failures.extend({"bolge_anahtari": region_key, **item} for item in failures)
     review["toplam_regresyon_uyumsuz"] = len(top_failures)
     review["regresyon_uyumsuzluklari"] = top_failures
@@ -139,7 +178,9 @@ def _patch_cross_evidence(review, statuses):
             ignored.append(str(item.get("id")))
     failures = [
         item for item in calibration
-        if isinstance(item, dict) and item.get("regresyon_uyumlu") is False
+        if isinstance(item, dict)
+        and item.get("regresyon_degerlendirildi") is not False
+        and item.get("regresyon_uyumlu") is False
     ]
     review["toplam_regresyon_uyumsuz"] = len(failures)
     review["regresyon_uyumsuzluklari"] = failures
@@ -161,6 +202,8 @@ def _apply(path, feedback_records):
     statuses = _positive_statuses(review, feedback_records)
     if path.name == "foundation_excavation_morphology_review.json":
         ignored = _patch_morphology(review, statuses)
+    elif path.name == "seed_centered_excavation_morphology_review.json":
+        ignored = _patch_seed_centered_morphology(review, statuses)
     elif path.name == "foundation_excavation_cross_evidence_review.json":
         ignored = _patch_cross_evidence(review, statuses)
     else:
@@ -196,6 +239,25 @@ def _self_check():
     _patch_item(sample, statuses)
     assert sample["regresyon_uyumlu"] is None, sample
     assert sample["regresyon_degerlendirildi"] is False, sample
+
+    seed_review = {
+        "bolgeler": {
+            "cesme": {
+                "saha_referans_regresyonu": [
+                    {"id": "FN-TEST", "sonuc": POSITIVE_RESULT, "regresyon_uyumlu": True},
+                    {"id": "FP-TEST", "sonuc": "YANLIS_POZITIF", "regresyon_uyumlu": True},
+                ]
+            }
+        },
+        "toplam_regresyon_uyumsuz": 0,
+        "regresyon_uyumsuzluklari": [],
+    }
+    ignored = _patch_seed_centered_morphology(seed_review, statuses)
+    assert ignored == ["FN-TEST"], ignored
+    patched_positive = seed_review["bolgeler"]["cesme"]["saha_referans_regresyonu"][0]
+    assert patched_positive["regresyon_uyumlu"] is None, patched_positive
+    assert patched_positive["regresyon_degerlendirildi"] is False, patched_positive
+    assert seed_review["toplam_regresyon_uyumsuz"] == 0, seed_review
 
 
 def main():
