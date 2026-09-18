@@ -72,8 +72,8 @@ jobs:
           python foundation_excavation_reference_similarity_audit.py
           python foundation_excavation_sar_seed_audit.py
           python foundation_excavation_cross_evidence_audit.py
-          python foundation_excavation_route_gate_audit.py
           python temporal_field_feedback_regression_guard.py
+          python foundation_excavation_route_gate_audit.py
 
       - name: Diagnostik sonuçlarını güvenli kaydet
         run: |
@@ -105,8 +105,8 @@ jobs:
             python foundation_excavation_reference_similarity_audit.py
             python foundation_excavation_sar_seed_audit.py
             python foundation_excavation_cross_evidence_audit.py
-            python foundation_excavation_route_gate_audit.py
             python temporal_field_feedback_regression_guard.py
+            python foundation_excavation_route_gate_audit.py
 
             if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
               echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
