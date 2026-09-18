@@ -7,7 +7,9 @@ birleştirmek ve saha geri bildirimlerini kapı öncesinde uygulamaktır.
 
 250 m² ana eşik korunur. 150–249 m² MİKRO yalnız diagnostik kalır. Bilinen yanlış
 pozitifler aynı/eski optik sahneyle geri gelemez; mevcut müşteri yeni satış fırsatı
-sayılmaz. Rota kapısı, saha kalibrasyonu yeterli olana kadar kapalıdır.
+sayılmaz. Rota kapısı, saha kalibrasyonu yeterli olana kadar kapalıdır. Doğrulanmış
+kazı kalibrasyonu yalnız saha doğrulama tarihine eşit veya daha yeni Sentinel-2
+sahnesiyle zamansal olarak geçerli hale gelmiş referanslardan sayılır.
 """
 
 from __future__ import annotations
@@ -23,6 +25,7 @@ BASE = Path(__file__).resolve().parent
 MORPHOLOGY_JSON = BASE / "seed_centered_excavation_morphology_review.json"
 SAR_JSON = BASE / "foundation_excavation_sar_seed_review.json"
 FEEDBACK_JSON = BASE / "manual_field_feedback.json"
+REFERENCE_SIMILARITY_JSON = BASE / "foundation_excavation_reference_similarity_review.json"
 OUTPUT_JSON = BASE / "foundation_excavation_route_gate_review.json"
 
 MAIN_THRESHOLD_M2 = 250
@@ -216,10 +219,15 @@ def _analyze_region(region_key, morphology_region, sar_region, feedback):
     }
 
 
-def audit(morphology=None, sar=None, feedback=None):
+def audit(morphology=None, sar=None, feedback=None, reference_similarity=None):
     morphology = morphology if isinstance(morphology, dict) else _load(MORPHOLOGY_JSON)
     sar = sar if isinstance(sar, dict) else _load(SAR_JSON)
     feedback = feedback if isinstance(feedback, dict) else _load(FEEDBACK_JSON)
+    reference_similarity = (
+        reference_similarity
+        if isinstance(reference_similarity, dict)
+        else _load(REFERENCE_SIMILARITY_JSON)
+    )
     feedback_rows = _feedback_records(feedback)
 
     regions = {}
@@ -231,10 +239,21 @@ def audit(morphology=None, sar=None, feedback=None):
             feedback_rows,
         )
 
-    confirmed_excavations = sum(
+    field_confirmed_excavations = sum(
         1 for item in feedback_rows
         if str(item.get("sonuc") or "").upper() == "DOGRULANMIS_KAZI"
     )
+    try:
+        confirmed_excavations = int(reference_similarity.get("dogrulanmis_kazi_referans_sayisi") or 0)
+    except (TypeError, ValueError):
+        confirmed_excavations = 0
+    try:
+        temporally_invalid_excavations = int(
+            reference_similarity.get("zamansal_gecersiz_dogrulanmis_kazi_referans_sayisi") or 0
+        )
+    except (TypeError, ValueError):
+        temporally_invalid_excavations = 0
+
     total_high = sum(region["ana_esik_yuksek_guven_sayisi"] for region in regions.values())
     route_ready = bool(
         confirmed_excavations >= MIN_CONFIRMED_EXCAVATIONS_FOR_ROUTE
@@ -242,7 +261,7 @@ def audit(morphology=None, sar=None, feedback=None):
         and total_high > 0
     )
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Lokal temel/kepçe morfolojisi + zamansal uygun SAR + saha kalibrasyonu ile konservatif rota kapısı diagnostigi",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
@@ -250,15 +269,18 @@ def audit(morphology=None, sar=None, feedback=None):
         "alarm": False,
         "saha_gorevi": False,
         "uretim_filtresi": False,
+        "saha_dogrulanmis_kazi_sayisi": field_confirmed_excavations,
         "dogrulanmis_kazi_referansi": confirmed_excavations,
+        "zamansal_gecersiz_dogrulanmis_kazi_referansi": temporally_invalid_excavations,
         "rota_kapisi_icin_min_dogrulanmis_kazi": MIN_CONFIRMED_EXCAVATIONS_FOR_ROUTE,
         "toplam_yuksek_guven_diagnostik": total_high,
         "rota_kapisi_hazir": route_ready,
         "bolgeler": regions,
         "not": (
-            "Rota kapısı yalnız diagnostiktir. En az iki doğrulanmış kazı referansı, sıfır seed-merkezli "
-            "morfoloji regresyon uyumsuzluğu ve aynı koordinatta zamansal uygun Sentinel-1 çapraz desteği "
-            "olmadan saha görevi üretilmez."
+            "Rota kapısı yalnız diagnostiktir. En az iki zamansal geçerli doğrulanmış kazı referansı, sıfır "
+            "seed-merkezli morfoloji regresyon uyumsuzluğu ve aynı koordinatta zamansal uygun Sentinel-1 "
+            "çapraz desteği olmadan saha görevi üretilmez. Saha doğrulaması tek başına kalibrasyon referansı "
+            "sayılmaz; Sentinel-2 son sahnesi doğrulama tarihine yetişmelidir."
         ),
     }
 
@@ -332,10 +354,26 @@ def _self_check():
             },
         ]
     }
-    payload = audit(morphology, sar, feedback)
+    valid_references = {
+        "dogrulanmis_kazi_referans_sayisi": 2,
+        "zamansal_gecersiz_dogrulanmis_kazi_referans_sayisi": 0,
+    }
+    payload = audit(morphology, sar, feedback, valid_references)
     assert payload["bolgeler"]["cesme"]["ana_esik_yuksek_guven_sayisi"] == 1
     assert payload["bolgeler"]["cesme"]["mikro_coklu_kanit_sayisi"] == 1
+    assert payload["saha_dogrulanmis_kazi_sayisi"] == 2
+    assert payload["dogrulanmis_kazi_referansi"] == 2
     assert payload["rota_kapisi_hazir"] is True
+
+    temporally_invalid_references = {
+        "dogrulanmis_kazi_referans_sayisi": 0,
+        "zamansal_gecersiz_dogrulanmis_kazi_referans_sayisi": 2,
+    }
+    payload = audit(morphology, sar, feedback, temporally_invalid_references)
+    assert payload["saha_dogrulanmis_kazi_sayisi"] == 2
+    assert payload["dogrulanmis_kazi_referansi"] == 0
+    assert payload["zamansal_gecersiz_dogrulanmis_kazi_referansi"] == 2
+    assert payload["rota_kapisi_hazir"] is False
 
     feedback["kayitlar"].append(
         {
@@ -347,13 +385,18 @@ def _self_check():
             "eslesme_yaricapi_m": 25,
         }
     )
-    payload = audit(morphology, sar, feedback)
+    payload = audit(morphology, sar, feedback, valid_references)
     assert payload["bolgeler"]["cesme"]["ana_esik_yuksek_guven_sayisi"] == 0
     assert payload["rota_kapisi_hazir"] is False
 
     no_sar = json.loads(json.dumps(sar))
     no_sar["bolgeler"]["cesme"]["tum_sar_sonuclari"][0]["s2_sar_capraz_destek"] = False
-    payload = audit(morphology, no_sar, {"kayitlar": feedback["kayitlar"][:2]})
+    payload = audit(
+        morphology,
+        no_sar,
+        {"kayitlar": feedback["kayitlar"][:2]},
+        valid_references,
+    )
     assert payload["bolgeler"]["cesme"]["ana_esik_yuksek_guven_sayisi"] == 0
 
 
