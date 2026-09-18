@@ -57,7 +57,12 @@
       "morfoloji_seviyesi": null,
       "morfoloji_regresyon_uyumlu": false,
       "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": false
+      "regresyon_uyumlu": null,
+      "temporal_valid": false,
+      "regresyon_degerlendirildi": false,
+      "saha_dogrulama_tarihi": "2026-09-16",
+      "uydu_son_tarihi": "2026-09-15",
+      "temporal_not": "Saha doğrulaması son kullanılabilir uydu sahnesinden yeni; pozitif gerçek bu sahneye karşı regresyon başarısızlığı sayılmaz."
     },
     {
       "id": "FP-20260916-REISDERE-001",
@@ -130,39 +135,10 @@
       "regresyon_uyumlu": true
     }
   ],
-  "toplam_regresyon_uyumsuz": 1,
-  "regresyon_uyumsuzluklari": [
-    {
-      "id": "FN-20260916-CESME-001",
-      "sonuc": "DOGRULANMIS_KAZI",
-      "lokal_seed_yakaladi": true,
-      "en_yakin_seed_mesafe_m": 21.5,
-      "lokal_seed_regresyon_uyumlu": true,
-      "morfoloji_yakaladi": false,
-      "en_yakin_morfoloji_mesafe_m": 3081.3,
-      "morfoloji_puani": null,
-      "morfoloji_seviyesi": null,
-      "morfoloji_regresyon_uyumlu": false,
-      "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": false
-    }
-  ],
-  "morfoloji_regresyon_uyumsuz_sayisi": 5,
+  "toplam_regresyon_uyumsuz": 0,
+  "regresyon_uyumsuzluklari": [],
+  "morfoloji_regresyon_uyumsuz_sayisi": 4,
   "morfoloji_regresyon_uyumsuzluklari": [
-    {
-      "id": "FN-20260916-CESME-001",
-      "sonuc": "DOGRULANMIS_KAZI",
-      "lokal_seed_yakaladi": true,
-      "en_yakin_seed_mesafe_m": 21.5,
-      "lokal_seed_regresyon_uyumlu": true,
-      "morfoloji_yakaladi": false,
-      "en_yakin_morfoloji_mesafe_m": 3081.3,
-      "morfoloji_puani": null,
-      "morfoloji_seviyesi": null,
-      "morfoloji_regresyon_uyumlu": false,
-      "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": false
-    },
     {
       "id": "FP-20260916-REISDERE-001",
       "sonuc": "YANLIS_POZITIF",
@@ -224,5 +200,12 @@
   "lokal_seed_regresyon_uyumsuzluklari": [],
   "aktif_coklu_kanit_diagnostik": 0,
   "rota_kapisi_hazir": false,
-  "rota_kapisi_notu": "Çapraz kanıt yalnız diagnostiktir. Pozitif saha referansı sayısı henüz yetersiz; morfoloji ve lokal-seed katmanlarının saha regresyonları birlikte geçmeden ve ayrıca Sentinel-1/SAR veya ikinci tarih desteği olmadan operasyona bağlanmaz."
+  "rota_kapisi_notu": "Çapraz kanıt yalnız diagnostiktir. Pozitif saha referansı sayısı henüz yetersiz; morfoloji ve lokal-seed katmanlarının saha regresyonları birlikte geçmeden ve ayrıca Sentinel-1/SAR veya ikinci tarih desteği olmadan operasyona bağlanmaz.",
+  "temporal_saha_regresyon_kapisi": {
+    "aktif": true,
+    "kural": "DOGRULANMIS_KAZI yalnız uydu_son_tarihi >= saha_dogrulama_tarihi ise regresyona girer",
+    "zamansal_olarak_degerlendirilmemis_pozitifler": [
+      "FN-20260916-CESME-001"
+    ]
+  }
 }

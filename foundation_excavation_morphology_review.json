@@ -387,7 +387,12 @@
           "en_yakin_mesafe_m": 3081.3,
           "proxy_puani": null,
           "proxy_seviyesi": null,
-          "regresyon_uyumlu": false
+          "regresyon_uyumlu": null,
+          "temporal_valid": false,
+          "regresyon_degerlendirildi": false,
+          "saha_dogrulama_tarihi": "2026-09-16",
+          "uydu_son_tarihi": "2026-09-15",
+          "temporal_not": "Saha doğrulaması son kullanılabilir uydu sahnesinden yeni; pozitif gerçek bu sahneye karşı regresyon başarısızlığı sayılmaz."
         },
         {
           "id": "FP-20260916-REISDERE-001",
@@ -423,19 +428,8 @@
           "regresyon_uyumlu": false
         }
       ],
-      "regresyon_uyumsuz_sayisi": 4,
+      "regresyon_uyumsuz_sayisi": 3,
       "regresyon_uyumsuz_ornekler": [
-        {
-          "id": "FN-20260916-CESME-001",
-          "sonuc": "DOGRULANMIS_KAZI",
-          "enlem": 38.341846,
-          "boylam": 26.432861,
-          "ham_maske_yakaladi": false,
-          "en_yakin_mesafe_m": 3081.3,
-          "proxy_puani": null,
-          "proxy_seviyesi": null,
-          "regresyon_uyumlu": false
-        },
         {
           "id": "FP-20260916-REISDERE-001",
           "sonuc": "YANLIS_POZITIF",
@@ -626,20 +620,8 @@
       ]
     }
   },
-  "toplam_regresyon_uyumsuz": 5,
+  "toplam_regresyon_uyumsuz": 4,
   "regresyon_uyumsuzluklari": [
-    {
-      "bolge_anahtari": "cesme",
-      "id": "FN-20260916-CESME-001",
-      "sonuc": "DOGRULANMIS_KAZI",
-      "enlem": 38.341846,
-      "boylam": 26.432861,
-      "ham_maske_yakaladi": false,
-      "en_yakin_mesafe_m": 3081.3,
-      "proxy_puani": null,
-      "proxy_seviyesi": null,
-      "regresyon_uyumlu": false
-    },
     {
       "bolge_anahtari": "cesme",
       "id": "FP-20260916-REISDERE-001",
@@ -689,5 +671,12 @@
       "regresyon_uyumlu": false
     }
   ],
-  "not": "İlk sürüm yalnız diagnostiktir. Tek Sentinel-2 spektral/toprak değişimi operasyon görevi üretmez. Saha kalibrasyonu yeterince çoğalmadan bu puan rota kapısına bağlanmamalıdır."
+  "not": "İlk sürüm yalnız diagnostiktir. Tek Sentinel-2 spektral/toprak değişimi operasyon görevi üretmez. Saha kalibrasyonu yeterince çoğalmadan bu puan rota kapısına bağlanmamalıdır.",
+  "temporal_saha_regresyon_kapisi": {
+    "aktif": true,
+    "kural": "DOGRULANMIS_KAZI yalnız uydu_son_tarihi >= saha_dogrulama_tarihi ise regresyona girer",
+    "zamansal_olarak_degerlendirilmemis_pozitifler": [
+      "FN-20260916-CESME-001"
+    ]
+  }
 }
