@@ -13,10 +13,16 @@
 
 > 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.
 
-1. **GECİKEN — Alaçatı** · yaklaşık 300 m² · Görev `UB3F1CABF9E` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.282433,26.365212)
-2. **GECİKEN — Musalla** · yaklaşık 400 m² · Görev `U7798D390CA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.294734,26.311523)
-3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623)
+1. **GECİKEN — Alaçatı** · yaklaşık 300 m² · Görev `UB3F1CABF9E` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.282433,26.365212) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.282433/26.365212)
+2. **GECİKEN — Musalla** · yaklaşık 400 m² · Görev `U7798D390CA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.294734,26.311523) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.294734/26.311523)
+3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265519/26.676623)
 
+## Kör alan saha devriyesi
+
+> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
+
+1. **KÖR ALAN — Musalla** · yaklaşık 400 m² · karışık geçersizlik · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.297176,26.280271) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.297176/26.280271)
+   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
 ## Bugün sahada kontrol edilecek uydu adayları
 
 ### 1. GECİKEN — Musalla
