@@ -26,8 +26,7 @@ OUTPUT_JSON = Path(__file__).with_name("localized_excavation_seed_review.json")
 MAIN_THRESHOLD_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
 
-# 13→15 Eylül saha doğrulamalarından ölçülen, geniş tarla değişimine karşı
-# lokal kazı çekirdeğini seçmek için temkinli diagnostik sınırlar.
+# Geniş/planar tarla değişimine karşı mevcut parlak-lokal diagnostik sınırlar.
 MAX_LOCAL_MEAN_RGB = 0.09
 MAX_CONTEXT_MEAN_RGB = 0.06
 MIN_LOCAL_MAX_RGB = 0.20
@@ -36,6 +35,24 @@ MAX_BRIGHT_FRACTION = 0.50
 MIN_SOIL_FRACTION = 0.01
 MAX_SOIL_FRACTION = 0.08
 MAX_DARK_FRACTION = 0.35
+
+# 15→18 Eylül taze Sentinel-2 penceresinde doğrulanmış gerçek kazı düşük kontrastlı
+# kaldı: soil-mask=0, max RGB≈0.112, fakat 5x5 çevrede çıplak zemin≈0.92,
+# koyulaşma≈0.24 ve küçük bir koyu-alt-toprak proxy'si var. Bu ikinci dal yalnız
+# diagnostiktir; üretim/rota eşiklerini gevşetmez.
+LOW_MIN_LOCAL_MEAN_RGB = 0.035
+LOW_MAX_LOCAL_MEAN_RGB = 0.070
+LOW_MIN_LOCAL_MAX_RGB = 0.10
+LOW_MAX_LOCAL_MAX_RGB = 0.18
+LOW_MAX_CONTEXT_MEAN_RGB = 0.055
+LOW_MIN_BARE_FRACTION = 0.85
+LOW_MAX_PERSISTENT_VEG_FRACTION = 0.05
+LOW_MIN_BRIGHT_FRACTION = 0.15
+LOW_MAX_BRIGHT_FRACTION = 0.45
+LOW_MIN_DARK_FRACTION = 0.18
+LOW_MAX_DARK_FRACTION = 0.35
+LOW_MIN_DARK_SUBSOIL_FRACTION = 0.01
+LOW_MAX_DARK_SUBSOIL_FRACTION = 0.08
 
 
 def _safe_fraction(mask, valid):
@@ -52,10 +69,13 @@ def _window_metrics(arrays, row, col):
     rgb9 = signature._window(arrays["rgb_difference"], row, col, 4)
     bg5 = signature._window(arrays["brightness_gain"], row, col, 2)
     soil5 = signature._window(arrays["current_soil"], row, col, 2)
+    ndvi5 = signature._window(arrays["latest_ndvi"], row, col, 2)
+    dark_subsoil5 = signature._window(arrays["dark_subsoil"], row, col, 2)
 
     rgb5_values = rgb5[valid5]
     rgb9_values = rgb9[valid9]
     bg5_values = bg5[valid5]
+    ndvi5_values = ndvi5[valid5]
     valid5_count = max(int(np.count_nonzero(valid5)), 1)
 
     return {
@@ -65,10 +85,13 @@ def _window_metrics(arrays, row, col):
         "parlak_artis_orani_5x5": round(float(np.count_nonzero(bg5_values > 0.035) / valid5_count), 4),
         "koyulasma_orani_5x5": round(float(np.count_nonzero(bg5_values < -0.025) / valid5_count), 4),
         "soil_mask_orani_5x5": round(_safe_fraction(soil5, valid5), 4),
+        "kalici_bitki_orani_5x5": round(float(np.count_nonzero(ndvi5_values > 0.35) / valid5_count), 4),
+        "ciplak_zemin_orani_5x5": round(float(np.count_nonzero(ndvi5_values < 0.30) / valid5_count), 4),
+        "koyu_alt_toprak_proxy_orani_5x5": round(_safe_fraction(dark_subsoil5, valid5), 4),
     }
 
 
-def _passes(metrics):
+def _passes_primary(metrics):
     return bool(
         metrics["max_rgb_5x5"] >= MIN_LOCAL_MAX_RGB
         and metrics["ortalama_rgb_5x5"] <= MAX_LOCAL_MEAN_RGB
@@ -77,6 +100,33 @@ def _passes(metrics):
         and MIN_SOIL_FRACTION <= metrics["soil_mask_orani_5x5"] <= MAX_SOIL_FRACTION
         and metrics["koyulasma_orani_5x5"] <= MAX_DARK_FRACTION
     )
+
+
+def _passes_low_contrast(metrics):
+    return bool(
+        LOW_MIN_LOCAL_MEAN_RGB <= metrics["ortalama_rgb_5x5"] <= LOW_MAX_LOCAL_MEAN_RGB
+        and LOW_MIN_LOCAL_MAX_RGB <= metrics["max_rgb_5x5"] <= LOW_MAX_LOCAL_MAX_RGB
+        and metrics["ortalama_rgb_9x9"] <= LOW_MAX_CONTEXT_MEAN_RGB
+        and metrics["ciplak_zemin_orani_5x5"] >= LOW_MIN_BARE_FRACTION
+        and metrics["kalici_bitki_orani_5x5"] <= LOW_MAX_PERSISTENT_VEG_FRACTION
+        and LOW_MIN_BRIGHT_FRACTION <= metrics["parlak_artis_orani_5x5"] <= LOW_MAX_BRIGHT_FRACTION
+        and LOW_MIN_DARK_FRACTION <= metrics["koyulasma_orani_5x5"] <= LOW_MAX_DARK_FRACTION
+        and LOW_MIN_DARK_SUBSOIL_FRACTION
+        <= metrics["koyu_alt_toprak_proxy_orani_5x5"]
+        <= LOW_MAX_DARK_SUBSOIL_FRACTION
+    )
+
+
+def _passes(metrics):
+    return _passes_primary(metrics) or _passes_low_contrast(metrics)
+
+
+def _pass_class(metrics):
+    if _passes_primary(metrics):
+        return "PARLAK_LOKAL"
+    if _passes_low_contrast(metrics):
+        return "DUSUK_KONTRAST_KAZI_PROXY"
+    return None
 
 
 def _location(row, col, bbox, shape):
@@ -108,6 +158,7 @@ def _reference_checks(region_key, arrays):
                 "enlem": round(float(item["enlem"]), 6),
                 "boylam": round(float(item["boylam"]), 6),
                 "lokal_kazi_seed_uyumu": detected,
+                "seed_sinifi": _pass_class(metrics),
                 "regresyon_uyumlu": detected == expected_positive,
                 **metrics,
             }
@@ -116,14 +167,23 @@ def _reference_checks(region_key, arrays):
 
 
 def _discover(region_key, arrays):
-    # Seed pikselleri geniş/planar değişimi değil, kuvvetli ve parlak lokal değişimi
-    # başlatır. Nihai karar komşuluk seyrekliğine göre verilir.
-    seed = (
+    # Ana parlak-lokal seed aynen korunur. Düşük-kontrast dal yalnız diagnostik
+    # havuza 0.10–0.20 RGB farkı piksellerini ekler; komşuluk koşulları geçmeden
+    # aday olmaz ve alarm/saha görevi üretmez.
+    primary_seed = (
         arrays["valid"]
         & (arrays["rgb_difference"] >= MIN_LOCAL_MAX_RGB)
         & (arrays["brightness_gain"] > 0.035)
         & (arrays["latest_ndvi"] < 0.35)
     )
+    low_contrast_seed = (
+        arrays["valid"]
+        & (arrays["rgb_difference"] >= LOW_MIN_LOCAL_MAX_RGB)
+        & (arrays["rgb_difference"] < MIN_LOCAL_MAX_RGB)
+        & (arrays["latest_ndvi"] < 0.30)
+    )
+    seed = primary_seed | low_contrast_seed
+
     candidates = []
     for component in satellite._connected_components(seed):
         pixels = np.asarray(component, dtype="int32")
@@ -140,11 +200,12 @@ def _discover(region_key, arrays):
                 "boylam": longitude,
                 "seed_piksel": len(component),
                 "spektral_etki_alani_m2": len(component) * 100,
+                "seed_sinifi": _pass_class(metrics),
                 "alarm": False,
                 "saha_gorevi": False,
                 "neden_diagnostik": (
-                    "Kuvvetli değişim 5x5/9x9 çevrede seyrek ve lokal; tarla düzeltmesi gibi "
-                    "geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir."
+                    "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; "
+                    "tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir."
                 ),
                 **metrics,
             }
@@ -154,22 +215,94 @@ def _discover(region_key, arrays):
 
 
 def _self_check():
-    true_like = {
+    # Mevcut parlak-lokal dalın eski sentetik pozitif kontrolü.
+    bright_local = {
         "ortalama_rgb_5x5": 0.0629,
         "max_rgb_5x5": 0.298,
         "ortalama_rgb_9x9": 0.0482,
         "parlak_artis_orani_5x5": 0.4,
         "koyulasma_orani_5x5": 0.12,
         "soil_mask_orani_5x5": 0.04,
+        "kalici_bitki_orani_5x5": 0.0,
+        "ciplak_zemin_orani_5x5": 0.92,
+        "koyu_alt_toprak_proxy_orani_5x5": 0.0,
     }
-    reisdere = dict(true_like, ortalama_rgb_5x5=0.1176, soil_mask_orani_5x5=0.16)
-    musalla_bright = dict(true_like, ortalama_rgb_5x5=0.1576, parlak_artis_orani_5x5=0.96)
-    musalla_dark = dict(true_like, ortalama_rgb_5x5=0.1944, parlak_artis_orani_5x5=0.0, soil_mask_orani_5x5=0.0)
-    uzunkuyu = dict(true_like, max_rgb_5x5=0.1725, soil_mask_orani_5x5=0.20)
-    assert _passes(true_like)
+
+    # 15→18 Eylül Sentinel-2'de exact saha referanslarından ölçülen değerler.
+    confirmed_excavation = {
+        "ortalama_rgb_5x5": 0.0443,
+        "max_rgb_5x5": 0.1124,
+        "ortalama_rgb_9x9": 0.0437,
+        "parlak_artis_orani_5x5": 0.28,
+        "koyulasma_orani_5x5": 0.24,
+        "soil_mask_orani_5x5": 0.0,
+        "kalici_bitki_orani_5x5": 0.0,
+        "ciplak_zemin_orani_5x5": 0.92,
+        "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+    }
+    ciftlik_aux = {
+        "ortalama_rgb_5x5": 0.0441,
+        "max_rgb_5x5": 0.098,
+        "ortalama_rgb_9x9": 0.0375,
+        "parlak_artis_orani_5x5": 0.44,
+        "koyulasma_orani_5x5": 0.24,
+        "soil_mask_orani_5x5": 0.0,
+        "kalici_bitki_orani_5x5": 0.08,
+        "ciplak_zemin_orani_5x5": 0.64,
+        "koyu_alt_toprak_proxy_orani_5x5": 0.0,
+    }
+    reisdere = {
+        "ortalama_rgb_5x5": 0.1144,
+        "max_rgb_5x5": 0.4131,
+        "ortalama_rgb_9x9": 0.0732,
+        "parlak_artis_orani_5x5": 0.20,
+        "koyulasma_orani_5x5": 0.64,
+        "soil_mask_orani_5x5": 0.0,
+        "kalici_bitki_orani_5x5": 0.08,
+        "ciplak_zemin_orani_5x5": 0.72,
+        "koyu_alt_toprak_proxy_orani_5x5": 0.36,
+    }
+    musalla_1 = {
+        "ortalama_rgb_5x5": 0.0333,
+        "max_rgb_5x5": 0.0797,
+        "ortalama_rgb_9x9": 0.0373,
+        "parlak_artis_orani_5x5": 0.32,
+        "koyulasma_orani_5x5": 0.12,
+        "soil_mask_orani_5x5": 0.0,
+        "kalici_bitki_orani_5x5": 0.0,
+        "ciplak_zemin_orani_5x5": 0.92,
+        "koyu_alt_toprak_proxy_orani_5x5": 0.0,
+    }
+    musalla_2 = {
+        "ortalama_rgb_5x5": 0.20,
+        "max_rgb_5x5": 0.315,
+        "ortalama_rgb_9x9": 0.1461,
+        "parlak_artis_orani_5x5": 1.0,
+        "koyulasma_orani_5x5": 0.0,
+        "soil_mask_orani_5x5": 0.0,
+        "kalici_bitki_orani_5x5": 0.40,
+        "ciplak_zemin_orani_5x5": 0.52,
+        "koyu_alt_toprak_proxy_orani_5x5": 0.0,
+    }
+    uzunkuyu = {
+        "ortalama_rgb_5x5": 0.0769,
+        "max_rgb_5x5": 0.1752,
+        "ortalama_rgb_9x9": 0.0454,
+        "parlak_artis_orani_5x5": 0.08,
+        "koyulasma_orani_5x5": 0.52,
+        "soil_mask_orani_5x5": 0.0,
+        "kalici_bitki_orani_5x5": 0.24,
+        "ciplak_zemin_orani_5x5": 0.56,
+        "koyu_alt_toprak_proxy_orani_5x5": 0.12,
+    }
+
+    assert _passes_primary(bright_local)
+    assert _passes_low_contrast(confirmed_excavation)
+    assert _pass_class(confirmed_excavation) == "DUSUK_KONTRAST_KAZI_PROXY"
+    assert not _passes(ciftlik_aux)
     assert not _passes(reisdere)
-    assert not _passes(musalla_bright)
-    assert not _passes(musalla_dark)
+    assert not _passes(musalla_1)
+    assert not _passes(musalla_2)
     assert not _passes(uzunkuyu)
 
 
@@ -205,7 +338,7 @@ def audit():
                 "hata": f"{type(exc).__name__}: {exc}",
             }
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Geniş tarla yüzey değişiminden farklı, lokal/seyrek temel kazısı seed hipotezini test etmek",
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
@@ -213,19 +346,35 @@ def audit():
         "saha_gorevi": False,
         "uretim_filtresi": False,
         "esikler": {
-            "max_ortalama_rgb_5x5": MAX_LOCAL_MEAN_RGB,
-            "max_ortalama_rgb_9x9": MAX_CONTEXT_MEAN_RGB,
-            "min_max_rgb_5x5": MIN_LOCAL_MAX_RGB,
-            "parlak_artis_orani_5x5": [MIN_BRIGHT_FRACTION, MAX_BRIGHT_FRACTION],
-            "soil_mask_orani_5x5": [MIN_SOIL_FRACTION, MAX_SOIL_FRACTION],
-            "max_koyulasma_orani_5x5": MAX_DARK_FRACTION,
+            "parlak_lokal": {
+                "max_ortalama_rgb_5x5": MAX_LOCAL_MEAN_RGB,
+                "max_ortalama_rgb_9x9": MAX_CONTEXT_MEAN_RGB,
+                "min_max_rgb_5x5": MIN_LOCAL_MAX_RGB,
+                "parlak_artis_orani_5x5": [MIN_BRIGHT_FRACTION, MAX_BRIGHT_FRACTION],
+                "soil_mask_orani_5x5": [MIN_SOIL_FRACTION, MAX_SOIL_FRACTION],
+                "max_koyulasma_orani_5x5": MAX_DARK_FRACTION,
+            },
+            "dusuk_kontrast_kazi_proxy": {
+                "ortalama_rgb_5x5": [LOW_MIN_LOCAL_MEAN_RGB, LOW_MAX_LOCAL_MEAN_RGB],
+                "max_rgb_5x5": [LOW_MIN_LOCAL_MAX_RGB, LOW_MAX_LOCAL_MAX_RGB],
+                "max_ortalama_rgb_9x9": LOW_MAX_CONTEXT_MEAN_RGB,
+                "min_ciplak_zemin_orani_5x5": LOW_MIN_BARE_FRACTION,
+                "max_kalici_bitki_orani_5x5": LOW_MAX_PERSISTENT_VEG_FRACTION,
+                "parlak_artis_orani_5x5": [LOW_MIN_BRIGHT_FRACTION, LOW_MAX_BRIGHT_FRACTION],
+                "koyulasma_orani_5x5": [LOW_MIN_DARK_FRACTION, LOW_MAX_DARK_FRACTION],
+                "koyu_alt_toprak_proxy_orani_5x5": [
+                    LOW_MIN_DARK_SUBSOIL_FRACTION,
+                    LOW_MAX_DARK_SUBSOIL_FRACTION,
+                ],
+            },
         },
         "toplam_regresyon_uyumsuz": len(all_failures),
         "regresyon_uyumsuzluklari": all_failures,
         "bolgeler": regions,
         "not": (
-            "Bir doğrulanmış gerçek kazı ve saha yanlış-pozitiflerinden türetilmiş ilk hipotezdir. "
-            "Yeni saha doğrulamaları, temporal devamlılık ve Sentinel-1 desteği olmadan rotaya bağlanmaz."
+            "Düşük-kontrast dal 15→18 Eylül doğrulanmış kazı imzasını yalnız diagnostik havuzda geri çağırır. "
+            "250 m² ana eşik, 150–249 m² MİKRO politikası, alarm/görev ve rota kapıları değişmez; "
+            "yeni saha doğrulamaları, temporal devamlılık ve bağımsız kanıt olmadan üretime bağlanmaz."
         ),
     }
 
