@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "Lokal kazı seed çevresinde temel/kepçe kazısı morfolojisini diagnostik olarak puanlamak",
   "gercek_derinlik_olcumu": false,
   "ana_uretim_esigi_m2": 250,
@@ -31,6 +31,8 @@
       "saha_gorevi": false,
       "lokal_seed_sayisi": 526,
       "orta_yuksek_seed_morfoloji": 526,
+      "referans_cekirdek_oncelikli_girdi_sayisi": 9,
+      "referans_cekirdek_oncelikli_disari_aktarilan_sayi": 9,
       "adaylar": [
         {
           "enlem": 38.315085,
@@ -76,7 +78,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.329105,
@@ -122,7 +125,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.284966,
@@ -168,7 +172,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.304412,
@@ -215,7 +220,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.3443,
@@ -261,7 +267,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.320783,
@@ -308,7 +315,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.313638,
@@ -354,7 +362,8 @@
             "toprak sinyali lokal ölçekte sınırlı"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.342039,
@@ -401,7 +410,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.398117,
@@ -448,7 +458,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.361395,
@@ -494,7 +505,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.303327,
@@ -540,7 +552,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.415845,
@@ -586,7 +599,8 @@
             "toprak sinyali lokal ölçekte sınırlı"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.316713,
@@ -632,7 +646,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.347285,
@@ -678,7 +693,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.356149,
@@ -724,7 +740,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.343848,
@@ -769,7 +786,8 @@
             "toprak sinyali lokal ölçekte sınırlı"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.285418,
@@ -814,7 +832,8 @@
             "sınırlı parlak hafriyat/çıplak-zemin zonu"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.285327,
@@ -861,7 +880,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.416207,
@@ -908,7 +928,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.368269,
@@ -955,7 +976,421 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
+        },
+        {
+          "enlem": 38.288945,
+          "boylam": 26.382842,
+          "seed_piksel": 4,
+          "spektral_etki_alani_m2": 400,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0465,
+          "max_rgb_5x5": 0.119,
+          "ortalama_rgb_9x9": 0.0451,
+          "parlak_artis_orani_5x5": 0.28,
+          "koyulasma_orani_5x5": 0.28,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 1.0,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 4,
+          "uzun_kisa_orani": 4.0,
+          "kutu_doluluk_orani": 1.0,
+          "merkez_rgb_ortalama": 0.0596,
+          "dis_cevre_rgb_ortalama": 0.0426,
+          "merkez_dis_konsantrasyon": 1.399,
+          "tepe_merkez_orani": 1.995,
+          "cekirdek_degisim_orani": 0.308,
+          "dis_cevre_degisim_orani": 0.107,
+          "parlak_zon_orani": 0.385,
+          "koyu_zon_orani": 0.231,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 85,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "kapalı/kompakt yerel doluluk",
+            "merkez çevreden daha güçlü değişiyor",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.306221,
+          "boylam": 26.347927,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0502,
+          "max_rgb_5x5": 0.1359,
+          "ortalama_rgb_9x9": 0.0426,
+          "parlak_artis_orani_5x5": 0.28,
+          "koyulasma_orani_5x5": 0.24,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 0.96,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 1.0,
+          "merkez_rgb_ortalama": 0.0555,
+          "dis_cevre_rgb_ortalama": 0.0395,
+          "merkez_dis_konsantrasyon": 1.405,
+          "tepe_merkez_orani": 2.449,
+          "cekirdek_degisim_orani": 0.231,
+          "dis_cevre_degisim_orani": 0.036,
+          "parlak_zon_orani": 0.231,
+          "koyu_zon_orani": 0.231,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 95,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "merkez çevreden daha güçlü değişiyor",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.288403,
+          "boylam": 26.275578,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0493,
+          "max_rgb_5x5": 0.1137,
+          "ortalama_rgb_9x9": 0.0464,
+          "parlak_artis_orani_5x5": 0.24,
+          "koyulasma_orani_5x5": 0.28,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 1.0,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 1.0,
+          "merkez_rgb_ortalama": 0.0504,
+          "dis_cevre_rgb_ortalama": 0.0443,
+          "merkez_dis_konsantrasyon": 1.138,
+          "tepe_merkez_orani": 2.257,
+          "cekirdek_degisim_orani": 0.154,
+          "dis_cevre_degisim_orani": 0.018,
+          "parlak_zon_orani": 0.308,
+          "koyu_zon_orani": 0.154,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 80,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.318432,
+          "boylam": 26.418672,
+          "seed_piksel": 3,
+          "spektral_etki_alani_m2": 300,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0494,
+          "max_rgb_5x5": 0.119,
+          "ortalama_rgb_9x9": 0.0388,
+          "parlak_artis_orani_5x5": 0.28,
+          "koyulasma_orani_5x5": 0.24,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 0.92,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 3,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "merkez_rgb_ortalama": 0.0555,
+          "dis_cevre_rgb_ortalama": 0.0359,
+          "merkez_dis_konsantrasyon": 1.545,
+          "tepe_merkez_orani": 2.025,
+          "cekirdek_degisim_orani": 0.231,
+          "dis_cevre_degisim_orani": 0.018,
+          "parlak_zon_orani": 0.462,
+          "koyu_zon_orani": 0.077,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 95,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "merkez çevreden daha güçlü değişiyor",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.292744,
+          "boylam": 26.278325,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0495,
+          "max_rgb_5x5": 0.1255,
+          "ortalama_rgb_9x9": 0.049,
+          "parlak_artis_orani_5x5": 0.28,
+          "koyulasma_orani_5x5": 0.24,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 1.0,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.5,
+          "merkez_rgb_ortalama": 0.0454,
+          "dis_cevre_rgb_ortalama": 0.0513,
+          "merkez_dis_konsantrasyon": 0.886,
+          "tepe_merkez_orani": 2.704,
+          "cekirdek_degisim_orani": 0.154,
+          "dis_cevre_degisim_orani": 0.054,
+          "parlak_zon_orani": 0.154,
+          "koyu_zon_orani": 0.308,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 75,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "lokal kuvvetli çekirdek",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [
+            "merkez-çevre kontrastı zayıf"
+          ],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.286865,
+          "boylam": 26.385131,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0466,
+          "max_rgb_5x5": 0.1346,
+          "ortalama_rgb_9x9": 0.0423,
+          "parlak_artis_orani_5x5": 0.28,
+          "koyulasma_orani_5x5": 0.24,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 1.0,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.5,
+          "merkez_rgb_ortalama": 0.0557,
+          "dis_cevre_rgb_ortalama": 0.0412,
+          "merkez_dis_konsantrasyon": 1.351,
+          "tepe_merkez_orani": 2.417,
+          "cekirdek_degisim_orani": 0.154,
+          "dis_cevre_degisim_orani": 0.071,
+          "parlak_zon_orani": 0.308,
+          "koyu_zon_orani": 0.231,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 95,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "merkez çevreden daha güçlü değişiyor",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.280443,
+          "boylam": 26.40402,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0453,
+          "max_rgb_5x5": 0.1242,
+          "ortalama_rgb_9x9": 0.043,
+          "parlak_artis_orani_5x5": 0.32,
+          "koyulasma_orani_5x5": 0.24,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 1.0,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.5,
+          "merkez_rgb_ortalama": 0.0486,
+          "dis_cevre_rgb_ortalama": 0.0422,
+          "merkez_dis_konsantrasyon": 1.15,
+          "tepe_merkez_orani": 2.557,
+          "cekirdek_degisim_orani": 0.154,
+          "dis_cevre_degisim_orani": 0.089,
+          "parlak_zon_orani": 0.308,
+          "koyu_zon_orani": 0.231,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 90,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "lokal kuvvetli çekirdek",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.308935,
+          "boylam": 26.350445,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0462,
+          "max_rgb_5x5": 0.1242,
+          "ortalama_rgb_9x9": 0.0429,
+          "parlak_artis_orani_5x5": 0.36,
+          "koyulasma_orani_5x5": 0.24,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 0.96,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 3,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.75,
+          "merkez_rgb_ortalama": 0.0578,
+          "dis_cevre_rgb_ortalama": 0.0383,
+          "merkez_dis_konsantrasyon": 1.511,
+          "tepe_merkez_orani": 2.148,
+          "cekirdek_degisim_orani": 0.231,
+          "dis_cevre_degisim_orani": 0.054,
+          "parlak_zon_orani": 0.462,
+          "koyu_zon_orani": 0.308,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 95,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "merkez çevreden daha güçlü değişiyor",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.287589,
+          "boylam": 26.275234,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0373,
+          "max_rgb_5x5": 0.1033,
+          "ortalama_rgb_9x9": 0.0446,
+          "parlak_artis_orani_5x5": 0.28,
+          "koyulasma_orani_5x5": 0.2,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 0.96,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.5,
+          "merkez_rgb_ortalama": 0.0473,
+          "dis_cevre_rgb_ortalama": 0.0425,
+          "merkez_dis_konsantrasyon": 1.113,
+          "tepe_merkez_orani": 2.185,
+          "cekirdek_degisim_orani": 0.154,
+          "dis_cevre_degisim_orani": 0.125,
+          "parlak_zon_orani": 0.462,
+          "koyu_zon_orani": 0.231,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 80,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
         }
       ],
       "saha_referans_regresyonu": [
@@ -1031,6 +1466,8 @@
       "saha_gorevi": false,
       "lokal_seed_sayisi": 213,
       "orta_yuksek_seed_morfoloji": 213,
+      "referans_cekirdek_oncelikli_girdi_sayisi": 4,
+      "referans_cekirdek_oncelikli_disari_aktarilan_sayi": 4,
       "adaylar": [
         {
           "enlem": 38.297809,
@@ -1076,7 +1513,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.279448,
@@ -1122,7 +1560,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.316713,
@@ -1168,7 +1607,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.355244,
@@ -1213,7 +1653,8 @@
             "toprak sinyali lokal ölçekte sınırlı"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.347285,
@@ -1259,7 +1700,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.344209,
@@ -1306,7 +1748,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.253037,
@@ -1352,7 +1795,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.419191,
@@ -1397,7 +1841,8 @@
             "sınırlı parlak hafriyat/çıplak-zemin zonu"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.236847,
@@ -1442,7 +1887,8 @@
             "sınırlı parlak hafriyat/çıplak-zemin zonu"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.263439,
@@ -1488,7 +1934,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.270946,
@@ -1534,7 +1981,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.22934,
@@ -1580,7 +2028,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.269951,
@@ -1626,7 +2075,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.270403,
@@ -1672,7 +2122,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.251047,
@@ -1718,7 +2169,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.284785,
@@ -1764,7 +2216,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.249419,
@@ -1810,7 +2263,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.283518,
@@ -1856,7 +2310,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.228887,
@@ -1902,7 +2357,8 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
         },
         {
           "enlem": 38.252585,
@@ -1948,7 +2404,189 @@
             "parlak-koyu ikincil zon birlikteliği"
           ],
           "negatif_kanitlar": [],
-          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir."
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": false
+        },
+        {
+          "enlem": 38.318341,
+          "boylam": 26.466429,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0462,
+          "max_rgb_5x5": 0.1176,
+          "ortalama_rgb_9x9": 0.0478,
+          "parlak_artis_orani_5x5": 0.28,
+          "koyulasma_orani_5x5": 0.24,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 0.92,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 1.0,
+          "kutu_doluluk_orani": 0.5,
+          "merkez_rgb_ortalama": 0.0488,
+          "dis_cevre_rgb_ortalama": 0.0459,
+          "merkez_dis_konsantrasyon": 1.062,
+          "tepe_merkez_orani": 2.412,
+          "cekirdek_degisim_orani": 0.154,
+          "dis_cevre_degisim_orani": 0.071,
+          "parlak_zon_orani": 0.231,
+          "koyu_zon_orani": 0.385,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 75,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.330823,
+          "boylam": 26.64388,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0462,
+          "max_rgb_5x5": 0.1242,
+          "ortalama_rgb_9x9": 0.0395,
+          "parlak_artis_orani_5x5": 0.32,
+          "koyulasma_orani_5x5": 0.28,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 1.0,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 1.0,
+          "merkez_rgb_ortalama": 0.0552,
+          "dis_cevre_rgb_ortalama": 0.0322,
+          "merkez_dis_konsantrasyon": 1.714,
+          "tepe_merkez_orani": 2.25,
+          "cekirdek_degisim_orani": 0.154,
+          "dis_cevre_degisim_orani": 0.018,
+          "parlak_zon_orani": 0.462,
+          "koyu_zon_orani": 0.308,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 95,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "merkez çevreden daha güçlü değişiyor",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.257288,
+          "boylam": 26.51165,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0424,
+          "max_rgb_5x5": 0.1307,
+          "ortalama_rgb_9x9": 0.0395,
+          "parlak_artis_orani_5x5": 0.24,
+          "koyulasma_orani_5x5": 0.24,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.04,
+          "ciplak_zemin_orani_5x5": 0.92,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.04,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 1.0,
+          "merkez_rgb_ortalama": 0.0462,
+          "dis_cevre_rgb_ortalama": 0.0396,
+          "merkez_dis_konsantrasyon": 1.166,
+          "tepe_merkez_orani": 2.832,
+          "cekirdek_degisim_orani": 0.154,
+          "dis_cevre_degisim_orani": 0.054,
+          "parlak_zon_orani": 0.308,
+          "koyu_zon_orani": 0.231,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 90,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "lokal kuvvetli çekirdek",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
+        },
+        {
+          "enlem": 38.345928,
+          "boylam": 26.474786,
+          "seed_piksel": 2,
+          "spektral_etki_alani_m2": 200,
+          "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "Kuvvetli veya düşük-kontrast lokal değişim 5x5/9x9 çevrede kompakt/seyrek; tarla düzeltmesi gibi geniş homojen değişim göstermiyor. Alan tahmini kazı alanı değildir.",
+          "ortalama_rgb_5x5": 0.0479,
+          "max_rgb_5x5": 0.1137,
+          "ortalama_rgb_9x9": 0.0428,
+          "parlak_artis_orani_5x5": 0.28,
+          "koyulasma_orani_5x5": 0.2,
+          "soil_mask_orani_5x5": 0.0,
+          "kalici_bitki_orani_5x5": 0.0,
+          "ciplak_zemin_orani_5x5": 0.92,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.08,
+          "bilesen_piksel": 2,
+          "uzun_kisa_orani": 2.0,
+          "kutu_doluluk_orani": 1.0,
+          "merkez_rgb_ortalama": 0.0485,
+          "dis_cevre_rgb_ortalama": 0.0417,
+          "merkez_dis_konsantrasyon": 1.163,
+          "tepe_merkez_orani": 2.293,
+          "cekirdek_degisim_orani": 0.154,
+          "dis_cevre_degisim_orani": 0.071,
+          "parlak_zon_orani": 0.308,
+          "koyu_zon_orani": 0.231,
+          "soil_orani": 0.0,
+          "seed_merkezli_morfoloji_puani": 80,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "pozitif_kanitlar": [
+            "lokal ve küçük müdahale bileşeni",
+            "uzun-şerit olmayan yerel geometri",
+            "kapalı/kompakt yerel doluluk",
+            "çekirdek değişimi seyrek/lokal",
+            "dış çevre büyük ölçüde stabil",
+            "sınırlı parlak hafriyat/çıplak-zemin zonu",
+            "parlak-koyu ikincil zon birlikteliği"
+          ],
+          "negatif_kanitlar": [],
+          "uyari": "Gerçek kazı derinliği değildir; Sentinel-2 10 m lokal morfoloji proxy'sidir.",
+          "referans_cekirdek_oncelikli": true
         }
       ],
       "saha_referans_regresyonu": [
@@ -1967,7 +2605,7 @@
       "regresyon_uyumsuzluklari": []
     }
   },
-  "not": "Geniş ana morfoloji bileşenleri yerine lokal-seed merkezli ikinci hipotezdir. Yeni saha pozitifleri, temporal devamlılık ve Sentinel-1/SAR desteği olmadan rotaya bağlanmaz.",
+  "not": "Geniş ana morfoloji bileşenleri yerine lokal-seed merkezli ikinci hipotezdir. İlk 20 morfoloji adayı yanında, doğrulanmış kazı imzasının çekirdeğinde kalan 150 m²+ diagnostik adaylar da downstream SAR/rota denetiminde kaybolmamaları için korunur. Yeni saha pozitifleri, temporal devamlılık ve Sentinel-1/SAR desteği olmadan rotaya bağlanmaz.",
   "temporal_saha_regresyon_kapisi": {
     "aktif": true,
     "kural": "DOGRULANMIS_KAZI yalnız uydu_son_tarihi >= saha_dogrulama_tarihi ise regresyona girer",
