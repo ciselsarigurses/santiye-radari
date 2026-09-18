@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-18",
-  "kaynak_rapor_olusturma": "2026-09-18 11:15 +03",
+  "kaynak_rapor_olusturma": "2026-09-18 15:18 +03",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -12,13 +12,43 @@
   "geometri_riski_eslesme_m": 25.0,
   "geometri_riski_min_alan_orani": 0.85,
   "geometri_arka_plan_toplam": 0,
-  "rota_degisti": false,
+  "rota_degisti": true,
   "temel_rota_gorevleri": [
     "UB3F1CABF9E",
     "U7798D390CA",
-    "U031FF2812C"
+    "UADFA62B1D0"
   ],
   "operasyonel_rota": [
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.32015,
+      "boylam": 26.562138,
+      "alan_m2": 400,
+      "sinyal": "3 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "KUCUK",
+      "tarim_riski": false,
+      "tarim_baglam_alani_m2": 1100,
+      "tarim_baglam_orani": 2.75,
+      "tarim_riski_nedeni": null,
+      "rota_uygun": true,
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_tarih": "13.09.2026",
+      "son_tarih": "15.09.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.320150,26.562138",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UADFA62B1D0",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-09-15",
+      "bekleme_gun": 3,
+      "gecikmis": true,
+      "uydu_kanit_yasi_gun": 3,
+      "uydu_onceligi": "ORTA",
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 3
+    },
     {
       "oncelik": "GECİKEN",
       "mahalle": "Alaçatı",
@@ -49,10 +79,7 @@
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "ORTA",
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.282433/26.365212",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-      "gunluk_sira": 1,
+      "gunluk_sira": 2,
       "rota_uydu_kanit_yasi_gun": 13
     },
     {
@@ -85,47 +112,8 @@
       "tarihsel_esleme_mesafe_m": 8.9,
       "uydu_onceligi": "ORTA",
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.294734/26.311523",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-      "gunluk_sira": 2,
-      "rota_uydu_kanit_yasi_gun": 23
-    },
-    {
-      "oncelik": "GECİKEN",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.265519,
-      "boylam": 26.676623,
-      "alan_m2": 800,
-      "sinyal": "5 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "onceki_tarih": "08.09.2026",
-      "son_tarih": "13.09.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623",
-      "konum_notu": "Koordinat açık saha görevinin yaklaşık merkezidir. Alan ve sinyal son eşleşen uydu adayından en fazla 25 m tarihsel eşleşmeyle taşınmıştır; son yeniden analizde küme tekrar görünmediği için saha teyidi beklenmektedir.",
-      "gorev_id": "U031FF2812C",
-      "saha_durumu": "KONTROLE_GIT",
-      "takip_gorevi": false,
-      "gecikmis": true,
-      "ilk_gorulme": "2026-09-13",
-      "bekleme_gun": 5,
-      "kontrol_sayisi": 0,
-      "son_islem": "2026-09-13",
-      "adres": null,
-      "ada": null,
-      "parsel": null,
-      "firma": null,
-      "proje": null,
-      "boyut_sinifi": "STANDART",
-      "tarihsel_esleme_mesafe_m": 0.0,
-      "uydu_onceligi": "NORMAL",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.265519/26.676623",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
       "gunluk_sira": 3,
-      "rota_uydu_kanit_yasi_gun": 5
+      "rota_uydu_kanit_yasi_gun": 23
     }
   ],
   "geometri_arka_plan": [],
@@ -133,16 +121,16 @@
   "rota_kaynagi": "MERKEZI_GUNUN_ILK_3",
   "merkezi_rota_kilidi": true,
   "tazelik_korumasi": true,
-  "tazelik_sirasi_degisti": false,
+  "tazelik_sirasi_degisti": true,
   "geometri_sonrasi_rota_gorevleri": [
     "UB3F1CABF9E",
     "U7798D390CA",
-    "U031FF2812C"
+    "UADFA62B1D0"
   ],
   "tazelik_sonrasi_rota_gorevleri": [
+    "UADFA62B1D0",
     "UB3F1CABF9E",
-    "U7798D390CA",
-    "U031FF2812C"
+    "U7798D390CA"
   ],
   "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur."
 }
