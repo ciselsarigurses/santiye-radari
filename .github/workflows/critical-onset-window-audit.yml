@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - "critical_onset_window_audit.py"
-      - "sentinel1_support_audit.py"
+      - "sentinel1_scene_probe.py"
       - "satellite.py"
       - ".github/workflows/critical-onset-window-audit.yml"
   schedule:
