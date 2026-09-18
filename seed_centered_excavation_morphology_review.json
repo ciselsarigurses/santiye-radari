@@ -885,7 +885,12 @@
           "seed_merkezli_morfoloji_puani": 95,
           "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
           "tespit": true,
-          "regresyon_uyumlu": true
+          "regresyon_uyumlu": null,
+          "temporal_valid": false,
+          "regresyon_degerlendirildi": false,
+          "saha_dogrulama_tarihi": "2026-09-16",
+          "uydu_son_tarihi": "2026-09-15",
+          "temporal_not": "Saha doğrulaması son kullanılabilir uydu sahnesinden yeni; pozitif gerçek bu sahneye karşı regresyon başarısızlığı sayılmaz."
         },
         {
           "id": "FP-20260916-REISDERE-001",
@@ -1371,5 +1376,12 @@
       "regresyon_uyumsuzluklari": []
     }
   },
-  "not": "Geniş ana morfoloji bileşenleri yerine lokal-seed merkezli ikinci hipotezdir. Yeni saha pozitifleri, temporal devamlılık ve Sentinel-1/SAR desteği olmadan rotaya bağlanmaz."
+  "not": "Geniş ana morfoloji bileşenleri yerine lokal-seed merkezli ikinci hipotezdir. Yeni saha pozitifleri, temporal devamlılık ve Sentinel-1/SAR desteği olmadan rotaya bağlanmaz.",
+  "temporal_saha_regresyon_kapisi": {
+    "aktif": true,
+    "kural": "DOGRULANMIS_KAZI yalnız uydu_son_tarihi >= saha_dogrulama_tarihi ise regresyona girer",
+    "zamansal_olarak_degerlendirilmemis_pozitifler": [
+      "FN-20260916-CESME-001"
+    ]
+  }
 }
