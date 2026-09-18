@@ -1,7 +1,7 @@
 {
   "rapor_tarihi": "2026-09-18",
   "olusturma": "2026-09-18 17:45 +03",
-  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 23 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır · Gülbahçe: 8 hareket bölgesi adayı · Aktif saha görevi: 216 · Geciken kontrol: 187 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)",
+  "ozet": "İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 23 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır · Gülbahçe: 8 hareket bölgesi adayı · Aktif saha görevi: 216 · Geciken kontrol: 187 · Tekrar gidilecek: 1 · Saha sonucu: 4 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 2 yanlış pozitif)",
   "saha_adaylari": [
     {
       "oncelik": "TEKRAR",
@@ -7669,5 +7669,24 @@
   ],
   "operasyon_odak_arka_plan_sayi": 10,
   "mevcut_musteri_arka_plan_sayi": 1,
-  "operasyon_odak_notu": "Günlük rota Çeşme yarımadası–Uzunkuyu odağındadır. Açıkça Gülbahçe etiketli adaylar ve doğrulanmış mevcut müşteri sahaları günlük yeni-müşteri rotasının dışında tutulur. Açık Gülbahçe kör-alan devriyeleri diagnostik arka planda korunur fakat saha rotasına girmez. Mevcut müşteri sinyali yanlış pozitif sayılmaz; model kalibrasyonunda gerçek şantiye olarak korunur. Doğrulanmamış mevki veya Gülbahçe kelimesi geçen karma doğu-bölgesi etiketi coğrafi tahminle elenmez."
+  "operasyon_odak_notu": "Günlük rota Çeşme yarımadası–Uzunkuyu odağındadır. Açıkça Gülbahçe etiketli adaylar ve doğrulanmış mevcut müşteri sahaları günlük yeni-müşteri rotasının dışında tutulur. Açık Gülbahçe kör-alan devriyeleri diagnostik arka planda korunur fakat saha rotasına girmez. Mevcut müşteri sinyali yanlış pozitif sayılmaz; model kalibrasyonunda gerçek şantiye olarak korunur. Doğrulanmamış mevki veya Gülbahçe kelimesi geçen karma doğu-bölgesi etiketi coğrafi tahminle elenmez.",
+  "manuel_mikro_saha_kalibrasyonu": {
+    "toplam": 1,
+    "sonuclar": {
+      "SANTIYE_KAZI": 0,
+      "YIKIM_TEMIZLIK": 0,
+      "YOL_ALTYAPI": 0,
+      "TARLA_BITKI": 0,
+      "YANLIS_POZITIF": 1
+    },
+    "bagimsiz_konum_dogrulanan": 0,
+    "alarm": false,
+    "saha_gorevi": false,
+    "ana_uretim_esigi_m2": 250,
+    "mikro_aralik_m2": [
+      150,
+      249
+    ],
+    "not": "Manuel MİKRO saha sonucu sınıf kalibrasyonuna dahil edilir. Yalnız açıkça bağımsız doğrulandı alanı true olan kayıt koordinat hassasiyeti doğrulaması sayılır; GPS/EXIF yokluğu bu sayıyı artırmaz."
+  }
 }
