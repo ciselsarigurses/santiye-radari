@@ -63,6 +63,15 @@ def _distance(left, right):
     return math.sqrt(sum(parts) / len(parts))
 
 
+def _missing_reference_ids(by_id):
+    available = set(by_id)
+    missing = []
+    if CORE_POSITIVE_ID not in available:
+        missing.append(CORE_POSITIVE_ID)
+    missing.extend(sorted(CORE_NEGATIVE_IDS - available))
+    return missing
+
+
 def _reference_bank(region_arrays):
     by_id = {}
     for region_key, arrays in region_arrays.items():
@@ -70,7 +79,7 @@ def _reference_bank(region_arrays):
             item_id = str(item.get("id") or "")
             if item_id == CORE_POSITIVE_ID or item_id in CORE_NEGATIVE_IDS:
                 by_id[item_id] = item
-    missing = [CORE_POSITIVE_ID, *sorted(CORE_NEGATIVE_IDS - set(by_id))]
+    missing = _missing_reference_ids(by_id)
     if missing:
         raise RuntimeError(f"Eksik çekirdek regresyon referansı: {missing}")
     return by_id
@@ -128,6 +137,10 @@ def _self_check():
     near_positive["max_rgb_5x5"] = 0.125
     assert _distance(positive, positive) == 0.0
     assert _distance(near_positive, positive) < _distance(near_positive, reisdere)
+
+    complete_reference_ids = {CORE_POSITIVE_ID, *CORE_NEGATIVE_IDS}
+    assert _missing_reference_ids(complete_reference_ids) == []
+    assert _missing_reference_ids(CORE_NEGATIVE_IDS) == [CORE_POSITIVE_ID]
 
 
 def audit():
