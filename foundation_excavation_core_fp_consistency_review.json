@@ -1,0 +1,88 @@
+{
+  "surum": 1,
+  "amac": "Rota FP-klon bastırmasının kullanıcının çekirdek 1+4 regresyon setiyle tutarlılığını ölçmek",
+  "fp_klon_esigi": 0.25,
+  "cekirdek_regresyon_yanlis_pozitif_idleri": [
+    "FP-20260916-REISDERE-001",
+    "FP-20260917-MUSALLA-001",
+    "FP-20260917-MUSALLA-002",
+    "FP-20260917-UZUNKUYU-001"
+  ],
+  "cekirdek_regresyon_tam": true,
+  "yalniz_yardimci_fp_nedeniyle_bastirilan_toplam": 4,
+  "recall_riski_var": true,
+  "alarm": false,
+  "saha_gorevi": false,
+  "uretim_filtresi": false,
+  "bolgeler": {
+    "cesme": {
+      "mevcut_fp_klon_bastirma_sayisi": 5,
+      "yalniz_yardimci_fp_nedeniyle_bastirilan_sayi": 2,
+      "cekirdek_fp_de_bastiran_sayi": 3,
+      "eslesmeyen_bastirilmis_aday": 0,
+      "yalniz_yardimci_fp_adaylari": [
+        {
+          "enlem": 38.308935,
+          "boylam": 26.350445,
+          "spektral_etki_alani_m2": 200,
+          "morfoloji_puani": 95.0,
+          "mevcut_bastirma_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "mevcut_bastirma_uzakligi": 0.133,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.251,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.133,
+          "yalniz_yardimci_fp_nedeniyle_bastiriliyor": true
+        },
+        {
+          "enlem": 38.292744,
+          "boylam": 26.278325,
+          "spektral_etki_alani_m2": 200,
+          "morfoloji_puani": 75.0,
+          "mevcut_bastirma_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "mevcut_bastirma_uzakligi": 0.247,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.256,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.247,
+          "yalniz_yardimci_fp_nedeniyle_bastiriliyor": true
+        }
+      ]
+    },
+    "uzunkuyu": {
+      "mevcut_fp_klon_bastirma_sayisi": 7,
+      "yalniz_yardimci_fp_nedeniyle_bastirilan_sayi": 2,
+      "cekirdek_fp_de_bastiran_sayi": 5,
+      "eslesmeyen_bastirilmis_aday": 0,
+      "yalniz_yardimci_fp_adaylari": [
+        {
+          "enlem": 38.251047,
+          "boylam": 26.460933,
+          "spektral_etki_alani_m2": 200,
+          "morfoloji_puani": 100.0,
+          "mevcut_bastirma_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "mevcut_bastirma_uzakligi": 0.221,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.331,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.221,
+          "yalniz_yardimci_fp_nedeniyle_bastiriliyor": true
+        },
+        {
+          "enlem": 38.330823,
+          "boylam": 26.64388,
+          "spektral_etki_alani_m2": 200,
+          "morfoloji_puani": 95.0,
+          "mevcut_bastirma_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "mevcut_bastirma_uzakligi": 0.202,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.308,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.202,
+          "yalniz_yardimci_fp_nedeniyle_bastiriliyor": true
+        }
+      ]
+    }
+  },
+  "not": "Bu çıktı rota kararını değiştirmez. Yalnız yardımcı/tarihsel bir yanlış-pozitifin, kullanıcının dört çekirdek negatifinden hiçbiri 0.25 eşiğinde değilken adayı bastırdığı durumları recall riski olarak işaretler."
+}
