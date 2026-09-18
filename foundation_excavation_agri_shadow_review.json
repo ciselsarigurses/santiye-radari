@@ -32,88 +32,52 @@
       "sonuc": "YANLIS_POZITIF",
       "enlem": 38.32214,
       "boylam": 26.407912,
-      "eslesti": true,
-      "en_yakin_mesafe_m": 0.0,
-      "uydu_son_tarihi": "2026-09-15",
+      "eslesti": false,
+      "en_yakin_mesafe_m": 1849.1,
+      "uydu_son_tarihi": "2026-09-18",
       "saha_sonuc_tarihi": "2026-09-16",
-      "yanlis_pozitif_temporal_regresyon_gecerli": true,
-      "pozitif_temporal_regresyon_gecerli": false,
-      "ham_proxy_puani": 90,
-      "ham_proxy_seviyesi": "YUKSEK",
-      "golge_proxy_puani": 60,
-      "golge_proxy_seviyesi": "ORTA",
-      "kalibrasyonlu_tarim_baglam_riski": true,
-      "seyrek_kanit_riski": false,
-      "golge_negatif_kanitlar": [
-        "kalibrasyonlu tarla/bahçe çevre baskısı"
-      ]
+      "yanlis_pozitif_temporal_regresyon_gecerli": false,
+      "pozitif_temporal_regresyon_gecerli": false
     },
     {
       "id": "FP-20260917-MUSALLA-001",
       "sonuc": "YANLIS_POZITIF",
       "enlem": 38.313186,
       "boylam": 26.307059,
-      "eslesti": true,
-      "en_yakin_mesafe_m": 0.0,
-      "uydu_son_tarihi": "2026-09-15",
+      "eslesti": false,
+      "en_yakin_mesafe_m": 2469.2,
+      "uydu_son_tarihi": "2026-09-18",
       "saha_sonuc_tarihi": "2026-09-17",
-      "yanlis_pozitif_temporal_regresyon_gecerli": true,
-      "pozitif_temporal_regresyon_gecerli": false,
-      "ham_proxy_puani": 90,
-      "ham_proxy_seviyesi": "YUKSEK",
-      "golge_proxy_puani": 60,
-      "golge_proxy_seviyesi": "ORTA",
-      "kalibrasyonlu_tarim_baglam_riski": true,
-      "seyrek_kanit_riski": false,
-      "golge_negatif_kanitlar": [
-        "kalibrasyonlu tarla/bahçe çevre baskısı"
-      ]
+      "yanlis_pozitif_temporal_regresyon_gecerli": false,
+      "pozitif_temporal_regresyon_gecerli": false
     },
     {
       "id": "FP-20260917-MUSALLA-002",
       "sonuc": "YANLIS_POZITIF",
       "enlem": 38.30812,
       "boylam": 26.326863,
-      "eslesti": true,
-      "en_yakin_mesafe_m": 0.0,
-      "uydu_son_tarihi": "2026-09-15",
+      "eslesti": false,
+      "en_yakin_mesafe_m": 1733.6,
+      "uydu_son_tarihi": "2026-09-18",
       "saha_sonuc_tarihi": "2026-09-17",
-      "yanlis_pozitif_temporal_regresyon_gecerli": true,
-      "pozitif_temporal_regresyon_gecerli": false,
-      "ham_proxy_puani": 65,
-      "ham_proxy_seviyesi": "YUKSEK",
-      "golge_proxy_puani": 50,
-      "golge_proxy_seviyesi": "ORTA",
-      "kalibrasyonlu_tarim_baglam_riski": false,
-      "seyrek_kanit_riski": true,
-      "golge_negatif_kanitlar": [
-        "güçlü çekirdek ve bitişik sınırlı ikincil zon desteği yok"
-      ]
+      "yanlis_pozitif_temporal_regresyon_gecerli": false,
+      "pozitif_temporal_regresyon_gecerli": false
     },
     {
       "id": "FP-20260917-UZUNKUYU-001",
       "sonuc": "YANLIS_POZITIF",
       "enlem": 38.32015,
       "boylam": 26.562138,
-      "eslesti": true,
-      "en_yakin_mesafe_m": 0.0,
-      "uydu_son_tarihi": "2026-09-15",
+      "eslesti": false,
+      "en_yakin_mesafe_m": 2496.3,
+      "uydu_son_tarihi": "2026-09-18",
       "saha_sonuc_tarihi": "2026-09-17",
-      "yanlis_pozitif_temporal_regresyon_gecerli": true,
-      "pozitif_temporal_regresyon_gecerli": false,
-      "ham_proxy_puani": 90,
-      "ham_proxy_seviyesi": "YUKSEK",
-      "golge_proxy_puani": 60,
-      "golge_proxy_seviyesi": "ORTA",
-      "kalibrasyonlu_tarim_baglam_riski": true,
-      "seyrek_kanit_riski": false,
-      "golge_negatif_kanitlar": [
-        "kalibrasyonlu tarla/bahçe çevre baskısı"
-      ]
+      "yanlis_pozitif_temporal_regresyon_gecerli": false,
+      "pozitif_temporal_regresyon_gecerli": false
     }
   ],
-  "degerlendirilen_kritik_fp_sayisi": 4,
-  "kritik_fp_yuksek_once": 4,
+  "degerlendirilen_kritik_fp_sayisi": 0,
+  "kritik_fp_yuksek_once": 0,
   "kritik_fp_yuksek_sonra": 0,
   "kritik_fp_golge_regresyon_geciyor": true,
   "dogrulanmis_kazi_referansi": {
@@ -122,30 +86,23 @@
     "enlem": 38.341846,
     "boylam": 26.432861,
     "eslesti": false,
-    "en_yakin_mesafe_m": 3081.3,
-    "uydu_son_tarihi": "2026-09-15",
+    "en_yakin_mesafe_m": 3812.4,
+    "uydu_son_tarihi": "2026-09-18",
     "saha_sonuc_tarihi": "2026-09-16",
     "yanlis_pozitif_temporal_regresyon_gecerli": false,
-    "pozitif_temporal_regresyon_gecerli": false
+    "pozitif_temporal_regresyon_gecerli": true
   },
   "mevcut_musteri_pozitif_kontrolu": {
     "id": "OP-20260916-OVACIK-001",
     "sonuc": "MEVCUT_MUSTERI",
     "enlem": 38.271217,
     "boylam": 26.338883,
-    "eslesti": true,
-    "en_yakin_mesafe_m": 0.0,
-    "uydu_son_tarihi": "2026-09-15",
+    "eslesti": false,
+    "en_yakin_mesafe_m": 2948.7,
+    "uydu_son_tarihi": "2026-09-18",
     "saha_sonuc_tarihi": "2026-09-16",
     "yanlis_pozitif_temporal_regresyon_gecerli": false,
-    "pozitif_temporal_regresyon_gecerli": false,
-    "ham_proxy_puani": 75,
-    "ham_proxy_seviyesi": "YUKSEK",
-    "golge_proxy_puani": 75,
-    "golge_proxy_seviyesi": "YUKSEK",
-    "kalibrasyonlu_tarim_baglam_riski": false,
-    "seyrek_kanit_riski": false,
-    "golge_negatif_kanitlar": []
+    "pozitif_temporal_regresyon_gecerli": false
   },
   "not": "Bu katman yalnız gölge diagnostiktir. Yanlış-pozitif kararları yalnız aynı/eski uydu sahnesi için regresyona girer; daha yeni Sentinel kanıtı kalıcı olarak engellenmez. Doğrulanmış kazı ise yalnız uydu tarihi saha doğrulama tarihine ulaştığında pozitif regresyona alınır."
 }
