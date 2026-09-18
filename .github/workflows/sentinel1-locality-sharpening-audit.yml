@@ -1,0 +1,35 @@
+name: Sentinel-1 lokallik keskinlesme auditi
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - sentinel1_rtc_map.geojson
+      - sentinel1_locality_sharpening_audit.py
+      - .github/workflows/sentinel1-locality-sharpening-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Self test
+        run: python sentinel1_locality_sharpening_audit.py --self-test
+
+      - name: Audit current SAR map
+        run: |
+          python sentinel1_locality_sharpening_audit.py \
+            --input sentinel1_rtc_map.geojson \
+            --output /tmp/sentinel1_locality_sharpening_review.json
+          cat /tmp/sentinel1_locality_sharpening_review.json
