@@ -7,6 +7,7 @@ on:
       - "manual_field_feedback.json"
       - "main_field_feedback_guard.py"
       - "operation_focus_guard.py"
+      - "public_route_guard.py"
       - ".github/workflows/main-field-feedback.yml"
   workflow_run:
     workflows:
@@ -49,11 +50,13 @@ jobs:
         run: |
           python main_field_feedback_guard.py --self-check
           python operation_focus_guard.py --self-check
+          python public_route_guard.py --self-check
 
       - name: Saha geri bildirimini ve Çeşme–Uzunkuyu odağını rotaya uygula
         run: |
           python main_field_feedback_guard.py
           python operation_focus_guard.py
+          python public_route_guard.py
           python daily_route_shortlist.py
           python operational_route_shape_guard.py --self-check
           python operational_route_shape_guard.py
@@ -81,8 +84,10 @@ jobs:
             git reset --hard origin/main
             python main_field_feedback_guard.py --self-check
             python operation_focus_guard.py --self-check
+            python public_route_guard.py --self-check
             python main_field_feedback_guard.py
             python operation_focus_guard.py
+            python public_route_guard.py
             python daily_route_shortlist.py
             python operational_route_shape_guard.py --self-check
             python operational_route_shape_guard.py
