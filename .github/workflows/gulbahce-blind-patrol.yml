@@ -11,6 +11,7 @@ on:
       - "gulbahce_patrol_surface_guard.py"
       - "gulbahce_latest_state_blind_review.py"
       - "gulbahce_nearby_blind_check_guard.py"
+      - "operation_focus_guard.py"
       - "gulbahce_micro_blind_capacity.json"
       - "sentinel1_rtc_map.geojson"
       - "parcel_precheck_links.py"
@@ -118,6 +119,12 @@ jobs:
       - name: Gülbahçe raporunda parsel ön-kontrol bilgisini koru
         run: python parcel_precheck_links.py
 
+      - name: Çeşme–Uzunkuyu operasyon odağı öz testi
+        run: python operation_focus_guard.py --self-check
+
+      - name: Gülbahçe devriyesini diagnostik arka plana al
+        run: python operation_focus_guard.py
+
       - name: Güvenli rapor değişikliğini kaydet
         run: |
           report_files="latest_report.json SAHA_RAPORU.md gulbahce_latest_state_blind_review.json"
@@ -144,6 +151,8 @@ jobs:
             python gulbahce_nearby_blind_check_guard.py
             python parcel_precheck_links.py --self-check
             python parcel_precheck_links.py
+            python operation_focus_guard.py --self-check
+            python operation_focus_guard.py
           }
 
           if [[ -z "$(git status --porcelain -- $report_files)" ]]; then
