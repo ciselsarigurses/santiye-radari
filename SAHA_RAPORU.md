@@ -11,20 +11,11 @@
 
 ## Günün ilk 3 kontrolü
 
-> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
+> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.
 
 1. **GECİKEN — Alaçatı** · yaklaşık 300 m² · Görev `UB3F1CABF9E` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.282433,26.365212)
 2. **GECİKEN — Musalla** · yaklaşık 400 m² · Görev `U7798D390CA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.294734,26.311523)
 3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U031FF2812C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.265519,26.676623)
-
-## Ek kuru zemin kalibrasyon kontrolü
-
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
-
-1. **KALİBRASYON — Alaçatı** · yaklaşık 1.000 m² · 13.09.2026 → 15.09.2026 · BSI Δ 0.193 · RGB Δ 0.116 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.272846,26.384788)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 700 m² · 13.09.2026 → 15.09.2026 · BSI Δ 0.186 · RGB Δ 0.182 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.319607,26.564084)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
