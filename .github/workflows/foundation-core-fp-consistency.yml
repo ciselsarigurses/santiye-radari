@@ -1,0 +1,76 @@
+name: Temel Kazısı Çekirdek FP Tutarlılık Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "foundation_excavation_core_fp_consistency_audit.py"
+      - ".github/workflows/foundation-core-fp-consistency.yml"
+  workflow_run:
+    workflows: ["Temel Kazısı Morfoloji Diagnostiği"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-foundation-core-fp-consistency
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Öz test
+        run: python foundation_excavation_core_fp_consistency_audit.py --check-only
+
+      - name: Çekirdek FP tutarlılığını ölç
+        run: python foundation_excavation_core_fp_consistency_audit.py
+
+      - name: Diagnostiği güvenli kaydet
+        run: |
+          output="foundation_excavation_core_fp_consistency_review.json"
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Çekirdek FP tutarlılık çıktısı değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python foundation_excavation_core_fp_consistency_audit.py --check-only
+            python foundation_excavation_core_fp_consistency_audit.py
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add "$output"
+            git commit -m "Radar: çekirdek FP tutarlılık diagnostigini güncelle"
+            if git push origin HEAD:main; then
+              echo "Çekirdek FP tutarlılık diagnostiği kaydedildi."
+              exit 0
+            fi
+
+            sleep $((attempt * 2))
+          done
+
+          echo "Diagnostik üç denemede kaydedilemedi."
+          exit 1
