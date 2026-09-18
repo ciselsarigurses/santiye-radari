@@ -31,8 +31,16 @@ OUTPUT_JSON = BASE / "foundation_excavation_route_gate_review.json"
 MAIN_THRESHOLD_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
 MATCH_RADIUS_M = 45.0
+REFERENCE_SIMILARITY_MATCH_RADIUS_M = 5.0
 MIN_MORPHOLOGY_SCORE = 65
 MIN_CONFIRMED_EXCAVATIONS_FOR_ROUTE = 2
+
+# Mevcut 13→15 Eylül aday havuzunda en küçük yanlış-pozitif spektral uzaklığı
+# 0.315; gerçek-kazı çevresindeki kaçırılmış adayın uzaklığı 0.476. 0.25,
+# bugünkü adayları budamadan gelecekte saha yanlış-pozitifine çok yakın
+# spektral klonları rota kapısından önce bastıran konservatif bir eşiktir.
+FP_SPECTRAL_CLONE_MAX_DISTANCE = 0.25
+
 FIELD_NEGATIVE_TERMS = (
     "tarla",
     "tarım",
@@ -148,6 +156,43 @@ def _sar_records(region):
     ]
 
 
+def _reference_similarity_records(region):
+    return [
+        item for item in (region.get("adaylar") or [])
+        if isinstance(item, dict) and _point(item) is not None
+    ]
+
+
+def _fp_spectral_clone_effect(candidate, similarity_rows):
+    similarity, match_distance = _nearest(candidate, similarity_rows)
+    if (
+        similarity is None
+        or match_distance is None
+        or match_distance > REFERENCE_SIMILARITY_MATCH_RADIUS_M
+    ):
+        return {
+            "baskilandi": False,
+            "eslesme_mesafe_m": None,
+            "yanlis_pozitif_id": None,
+            "yanlis_pozitif_uzakligi": None,
+        }
+
+    try:
+        fp_distance = float(similarity.get("yanlis_pozitif_uzakligi"))
+    except (TypeError, ValueError):
+        fp_distance = None
+    suppressed = bool(
+        fp_distance is not None
+        and fp_distance <= FP_SPECTRAL_CLONE_MAX_DISTANCE
+    )
+    return {
+        "baskilandi": suppressed,
+        "eslesme_mesafe_m": round(match_distance, 1),
+        "yanlis_pozitif_id": similarity.get("en_yakin_yanlis_pozitif_id"),
+        "yanlis_pozitif_uzakligi": round(fp_distance, 3) if fp_distance is not None else None,
+    }
+
+
 def _candidate_area(candidate):
     try:
         return int(candidate.get("spektral_etki_alani_m2") or 0)
@@ -164,9 +209,16 @@ def _field_negative_evidence(candidate):
     return hits
 
 
-def _analyze_region(region_key, morphology_region, sar_region, feedback):
+def _analyze_region(
+    region_key,
+    morphology_region,
+    sar_region,
+    feedback,
+    reference_similarity_region=None,
+):
     scene_date = _date(morphology_region.get("son_tarih"))
     sar_rows = _sar_records(sar_region)
+    similarity_rows = _reference_similarity_records(reference_similarity_region or {})
     rows = []
 
     for candidate in morphology_region.get("adaylar") or []:
@@ -179,10 +231,12 @@ def _analyze_region(region_key, morphology_region, sar_region, feedback):
         morphology_level = str(candidate.get("seed_merkezli_morfoloji_seviyesi") or "").upper()
         field_negative_evidence = _field_negative_evidence(candidate)
         field_context_block = bool(field_negative_evidence)
+        fp_clone_effect = _fp_spectral_clone_effect(candidate, similarity_rows)
         morphology_ok = bool(
             morphology_score >= MIN_MORPHOLOGY_SCORE
             and morphology_level == "YUKSEK"
             and not field_context_block
+            and not fp_clone_effect["baskilandi"]
         )
 
         sar, sar_distance = _nearest(candidate, sar_rows)
@@ -213,6 +267,10 @@ def _analyze_region(region_key, morphology_region, sar_region, feedback):
             "morfoloji_yuksek": morphology_ok,
             "tarla_bahce_baskilandi": field_context_block,
             "tarla_bahce_negatif_kanit": field_negative_evidence,
+            "yanlis_pozitif_spektral_klon_baskilandi": fp_clone_effect["baskilandi"],
+            "en_yakin_yanlis_pozitif_id": fp_clone_effect["yanlis_pozitif_id"],
+            "yanlis_pozitif_spektral_uzakligi": fp_clone_effect["yanlis_pozitif_uzakligi"],
+            "referans_benzerlik_eslesme_mesafe_m": fp_clone_effect["eslesme_mesafe_m"],
             "sar_mesafe_m": round(sar_distance, 1) if sar_distance is not None else None,
             "sar_capraz_destek": sar_ok,
             "sar_lokal_degisim_skor_db": sar.get("sar_lokal_degisim_skor_db") if sar else None,
@@ -242,6 +300,9 @@ def _analyze_region(region_key, morphology_region, sar_region, feedback):
         "sar_optik_doneme_zamansal_uygun": sar_region.get("sar_optik_doneme_zamansal_uygun"),
         "aday_sayisi": len(rows),
         "tarla_bahce_baskilanan_sayisi": sum(1 for item in rows if item["tarla_bahce_baskilandi"]),
+        "yanlis_pozitif_spektral_klon_baskilanan_sayisi": sum(
+            1 for item in rows if item["yanlis_pozitif_spektral_klon_baskilandi"]
+        ),
         "coklu_kanit_sayisi": sum(1 for item in rows if item["coklu_kanit"]),
         "ana_esik_yuksek_guven_sayisi": sum(1 for item in rows if item["yuksek_guven_diagnostik"]),
         "mikro_coklu_kanit_sayisi": sum(1 for item in rows if item["mikro_diagnostik"]),
@@ -267,6 +328,7 @@ def audit(morphology=None, sar=None, feedback=None, reference_similarity=None):
             (morphology.get("bolgeler") or {}).get(region_key) or {},
             (sar.get("bolgeler") or {}).get(region_key) or {},
             feedback_rows,
+            (reference_similarity.get("bolgeler") or {}).get(region_key) or {},
         )
 
     field_confirmed_excavations = sum(
@@ -291,11 +353,12 @@ def audit(morphology=None, sar=None, feedback=None, reference_similarity=None):
         and total_high > 0
     )
     return {
-        "surum": 3,
+        "surum": 4,
         "amac": "Lokal temel/kepçe morfolojisi + zamansal uygun SAR + saha kalibrasyonu ile konservatif rota kapısı diagnostigi",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
+        "yanlis_pozitif_spektral_klon_esigi": FP_SPECTRAL_CLONE_MAX_DISTANCE,
         "alarm": False,
         "saha_gorevi": False,
         "uretim_filtresi": False,
@@ -310,8 +373,9 @@ def audit(morphology=None, sar=None, feedback=None, reference_similarity=None):
             "Rota kapısı yalnız diagnostiktir. En az iki zamansal geçerli doğrulanmış kazı referansı, sıfır "
             "seed-merkezli morfoloji regresyon uyumsuzluğu ve aynı koordinatta zamansal uygun Sentinel-1 "
             "çapraz desteği olmadan saha görevi üretilmez. Morfoloji kaynağındaki tarla/şerit/sıra/geniş "
-            "homojen negatif kanıtı güçlü veto olarak uygulanır. Saha doğrulaması tek başına kalibrasyon "
-            "referansı sayılmaz; Sentinel-2 son sahnesi doğrulama tarihine yetişmelidir."
+            "homojen negatif kanıtı güçlü veto olarak uygulanır. Ayrıca saha yanlış-pozitif spektral "
+            "referansına 0.25 veya daha yakın klonlar rota kapısından önce bastırılır. Saha doğrulaması "
+            "tek başına kalibrasyon referansı sayılmaz; Sentinel-2 son sahnesi doğrulama tarihine yetişmelidir."
         ),
     }
 
@@ -411,6 +475,44 @@ def _self_check():
     assert payload["saha_dogrulanmis_kazi_sayisi"] == 2
     assert payload["dogrulanmis_kazi_referansi"] == 2
     assert payload["rota_kapisi_hazir"] is True
+
+    clone_references = {
+        "dogrulanmis_kazi_referans_sayisi": 2,
+        "zamansal_gecersiz_dogrulanmis_kazi_referans_sayisi": 0,
+        "bolgeler": {
+            "cesme": {
+                "adaylar": [
+                    {
+                        "enlem": 38.30,
+                        "boylam": 26.30,
+                        "en_yakin_yanlis_pozitif_id": "FP-CLONE",
+                        "yanlis_pozitif_uzakligi": 0.24,
+                    },
+                    {
+                        "enlem": 38.31,
+                        "boylam": 26.31,
+                        "en_yakin_yanlis_pozitif_id": "FP-NOT-CLONE",
+                        "yanlis_pozitif_uzakligi": 0.315,
+                    },
+                ]
+            }
+        },
+    }
+    payload = audit(morphology, sar, feedback, clone_references)
+    clone_row = next(
+        item for item in payload["bolgeler"]["cesme"]["adaylar"]
+        if item["enlem"] == 38.30 and item["boylam"] == 26.30
+    )
+    non_clone_row = next(
+        item for item in payload["bolgeler"]["cesme"]["adaylar"]
+        if item["enlem"] == 38.31 and item["boylam"] == 26.31
+    )
+    assert clone_row["yanlis_pozitif_spektral_klon_baskilandi"] is True
+    assert clone_row["morfoloji_yuksek"] is False
+    assert non_clone_row["yanlis_pozitif_spektral_klon_baskilandi"] is False
+    assert payload["bolgeler"]["cesme"]["yanlis_pozitif_spektral_klon_baskilanan_sayisi"] == 1
+    assert payload["bolgeler"]["cesme"]["ana_esik_yuksek_guven_sayisi"] == 0
+    assert payload["rota_kapisi_hazir"] is False
 
     temporally_invalid_references = {
         "dogrulanmis_kazi_referans_sayisi": 0,
