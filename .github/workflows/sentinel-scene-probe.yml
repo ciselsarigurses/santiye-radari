@@ -6,6 +6,7 @@ on:
     paths:
       - "sentinel_scene_probe.py"
       - "sentinel1_scene_probe.py"
+      - "critical_onset_window_audit.py"
       - "sentinel1_blind_target_bridge.py"
       - "sentinel1_rtc_change_diagnostic.py"
       - "sentinel1_rtc_quality_guard.py"
@@ -58,6 +59,7 @@ jobs:
           python sentinel_scene_probe.py --self-check-only
           python cloud_scene_probe.py --self-check-only
           python sentinel1_scene_probe.py --self-check-only
+          python critical_onset_window_audit.py --self-check-only
           python sentinel1_blind_target_bridge.py --self-check-only
           python sentinel1_rtc_change_diagnostic.py --self-check-only
           python sentinel1_rtc_quality_guard.py --self-check-only
@@ -79,6 +81,9 @@ jobs:
 
       - name: Sentinel-1 SAR kapsama tazeliğini diagnostik izle
         run: python sentinel1_scene_probe.py --live
+
+      - name: 15-17 Eylül kritik pencere veri uygunluğunu doğrula
+        run: python critical_onset_window_audit.py --live --output /tmp/critical-onset-window.json
 
       - name: Sentinel-1 SAR çiftini optik kör alan hedefleriyle eşle
         run: python sentinel1_blind_target_bridge.py --live
@@ -122,6 +127,7 @@ jobs:
         with:
           name: sentinel-diagnostics-${{ github.run_id }}
           path: |
+            /tmp/critical-onset-window.json
             /tmp/sentinel1-rtc.json
             /tmp/sentinel1-rtc-temporal.json
             /tmp/sentinel1-rtc-medium-temporal.json
