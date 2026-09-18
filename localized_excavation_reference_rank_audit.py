@@ -34,6 +34,10 @@ CORE_NEGATIVE_IDS = {
 # arasındaki imza mesafesinin yarısıdır. Bu, iki referansın orta düzleminden önce
 # kalan konservatif bir diagnostik komşuluk üretir; alarm/rota eşiği değildir.
 POSITIVE_CORE_RADIUS_FRACTION = 0.5
+# Doğrulanmış gerçek kazının kendi çevresindeki seed, yeni satış/kazı adayı değildir.
+# Bu yarıçap yalnız diagnostik kısa listede kalibrasyon noktasını yeni adaylardan
+# ayırır; üretim eşiğini veya saha geri bildirim politikasını değiştirmez.
+KNOWN_POSITIVE_RADIUS_M = 45.0
 METRIC_KEYS = (
     "ortalama_rgb_5x5",
     "max_rgb_5x5",
@@ -65,6 +69,26 @@ def _distance(left, right):
         scale = METRIC_SCALES[key]
         parts.append(((float(left[key]) - float(right[key])) / scale) ** 2)
     return math.sqrt(sum(parts) / len(parts))
+
+
+def _point(item):
+    try:
+        return float(item["enlem"]), float(item["boylam"])
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def _distance_m(left, right):
+    left_point = _point(left)
+    right_point = _point(right)
+    if left_point is None or right_point is None:
+        return None
+    lat1, lon1 = left_point
+    lat2, lon2 = right_point
+    mean_lat = math.radians((lat1 + lat2) / 2)
+    north = (lat1 - lat2) * 110570
+    east = (lon1 - lon2) * 111320 * math.cos(mean_lat)
+    return math.hypot(north, east)
 
 
 def _positive_core_radius(positive, negatives):
@@ -102,6 +126,18 @@ def _rank_candidate(candidate, positive, negatives, positive_core_radius):
     )
     margin = nearest_negative_distance - positive_distance
     core_ratio = positive_distance / positive_core_radius if positive_core_radius > 0 else math.inf
+    positive_reference_distance_m = _distance_m(candidate, positive)
+    known_positive_reference = bool(
+        positive_reference_distance_m is not None
+        and positive_reference_distance_m <= KNOWN_POSITIVE_RADIUS_M
+    )
+    main_band = bool(candidate.get("spektral_etki_alani_m2", 0) >= MAIN_THRESHOLD_M2)
+    micro_band = bool(
+        MICRO_RANGE_M2[0]
+        <= candidate.get("spektral_etki_alani_m2", 0)
+        <= MICRO_RANGE_M2[1]
+    )
+    in_positive_core = bool(positive_distance <= positive_core_radius)
     return {
         **candidate,
         "dogrulanmis_kazi_imza_uzakligi": round(positive_distance, 4),
@@ -111,12 +147,19 @@ def _rank_candidate(candidate, positive, negatives, positive_core_radius):
         "dogrulanmis_kaziya_daha_yakin": bool(margin > 0),
         "pozitif_cekirdek_yaricap": round(positive_core_radius, 4),
         "pozitif_cekirdek_orani": round(core_ratio, 4) if math.isfinite(core_ratio) else None,
-        "pozitif_cekirdek_icinde": bool(positive_distance <= positive_core_radius),
-        "ana_esik": bool(candidate.get("spektral_etki_alani_m2", 0) >= MAIN_THRESHOLD_M2),
-        "mikro_bant": bool(
-            MICRO_RANGE_M2[0]
-            <= candidate.get("spektral_etki_alani_m2", 0)
-            <= MICRO_RANGE_M2[1]
+        "pozitif_cekirdek_icinde": in_positive_core,
+        "dogrulanmis_kazi_referans_mesafe_m": (
+            round(positive_reference_distance_m, 1)
+            if positive_reference_distance_m is not None
+            else None
+        ),
+        "bilinen_pozitif_kalibrasyon_cevresi": known_positive_reference,
+        "ana_esik": main_band,
+        "mikro_bant": micro_band,
+        "yeni_alan_esikli_cekirdek_diagnostik": bool(
+            in_positive_core
+            and not known_positive_reference
+            and (main_band or micro_band)
         ),
         "alarm": False,
         "saha_gorevi": False,
@@ -125,6 +168,8 @@ def _rank_candidate(candidate, positive, negatives, positive_core_radius):
 
 def _self_check():
     positive = {
+        "enlem": 38.341846,
+        "boylam": 26.432861,
         "ortalama_rgb_5x5": 0.0443,
         "max_rgb_5x5": 0.1124,
         "ortalama_rgb_9x9": 0.0437,
@@ -136,6 +181,8 @@ def _self_check():
         "koyu_alt_toprak_proxy_orani_5x5": 0.04,
     }
     reisdere = {
+        "enlem": 38.322140,
+        "boylam": 26.407912,
         "ortalama_rgb_5x5": 0.1144,
         "max_rgb_5x5": 0.4131,
         "ortalama_rgb_9x9": 0.0732,
@@ -147,6 +194,7 @@ def _self_check():
         "koyu_alt_toprak_proxy_orani_5x5": 0.36,
     }
     near_positive = dict(positive)
+    near_positive["enlem"] = 38.342500
     near_positive["max_rgb_5x5"] = 0.125
     assert _distance(positive, positive) == 0.0
     assert _distance(near_positive, positive) < _distance(near_positive, reisdere)
@@ -156,8 +204,10 @@ def _self_check():
     ranked_positive = _rank_candidate(positive, positive, {"reisdere": reisdere}, core_radius)
     assert ranked_positive["pozitif_cekirdek_icinde"] is True
     assert ranked_positive["pozitif_cekirdek_orani"] == 0.0
+    assert ranked_positive["bilinen_pozitif_kalibrasyon_cevresi"] is True
     ranked_negative = _rank_candidate(reisdere, positive, {"reisdere": reisdere}, core_radius)
     assert ranked_negative["pozitif_cekirdek_icinde"] is False
+    assert ranked_negative["bilinen_pozitif_kalibrasyon_cevresi"] is False
 
     complete_reference_ids = {CORE_POSITIVE_ID, *CORE_NEGATIVE_IDS}
     assert _missing_reference_ids(complete_reference_ids) == []
@@ -202,6 +252,7 @@ def audit():
         ranked.sort(
             key=lambda item: (
                 not item["pozitif_cekirdek_icinde"],
+                item["bilinen_pozitif_kalibrasyon_cevresi"],
                 -item["pozitif_ayrim_marji"],
                 item["dogrulanmis_kazi_imza_uzakligi"],
                 -item["max_rgb_5x5"],
@@ -219,18 +270,31 @@ def audit():
             "pozitif_cekirdek_aday_sayisi": sum(
                 1 for item in ranked if item["pozitif_cekirdek_icinde"]
             ),
+            "bilinen_pozitif_kalibrasyon_cevresi_aday_sayisi": sum(
+                1 for item in ranked if item["bilinen_pozitif_kalibrasyon_cevresi"]
+            ),
+            "yeni_alan_esikli_cekirdek_diagnostik_sayisi": sum(
+                1 for item in ranked if item["yeni_alan_esikli_cekirdek_diagnostik"]
+            ),
             "referans_benzerlik_kisa_listesi": ranked[:12],
+            "yeni_alan_esikli_cekirdek_kisa_listesi": [
+                item for item in ranked if item["yeni_alan_esikli_cekirdek_diagnostik"]
+            ][:12],
         }
 
     all_ranked.sort(
         key=lambda item: (
             not item["pozitif_cekirdek_icinde"],
+            item["bilinen_pozitif_kalibrasyon_cevresi"],
             -item["pozitif_ayrim_marji"],
             item["dogrulanmis_kazi_imza_uzakligi"],
         )
     )
+    new_area_qualified_core = [
+        item for item in all_ranked if item["yeni_alan_esikli_cekirdek_diagnostik"]
+    ]
     return {
-        "surum": 2,
+        "surum": 3,
         "amac": "Düşük-kontrast kazı seedlerini 1 gerçek kazı + 4 çekirdek tarla/bahçe yanlış pozitifiyle referans-benzerlik sırasına koymak",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
@@ -242,6 +306,7 @@ def audit():
         "cekirdek_regresyon_yanlis_pozitif_idleri": sorted(CORE_NEGATIVE_IDS),
         "pozitif_cekirdek_yaricap_orani": POSITIVE_CORE_RADIUS_FRACTION,
         "pozitif_cekirdek_yaricap": round(positive_core_radius, 4),
+        "bilinen_pozitif_kalibrasyon_yaricapi_m": KNOWN_POSITIVE_RADIUS_M,
         "pozitife_en_yakin_cekirdek_yanlis_pozitif_id": nearest_reference_negative_id,
         "pozitife_en_yakin_cekirdek_yanlis_pozitif_imza_uzakligi": round(
             nearest_reference_negative_distance, 4
@@ -254,13 +319,19 @@ def audit():
         "toplam_pozitif_cekirdek_aday": sum(
             1 for item in all_ranked if item["pozitif_cekirdek_icinde"]
         ),
+        "toplam_bilinen_pozitif_kalibrasyon_cevresi_aday": sum(
+            1 for item in all_ranked if item["bilinen_pozitif_kalibrasyon_cevresi"]
+        ),
+        "toplam_yeni_alan_esikli_cekirdek_diagnostik": len(new_area_qualified_core),
         "genel_referans_benzerlik_kisa_listesi": all_ranked[:20],
+        "yeni_alan_esikli_cekirdek_kisa_listesi": new_area_qualified_core[:20],
         "bolgeler": regions,
         "not": (
             "Bu çıktı yalnız diagnostiktir. İmza mesafesi gerçek kazı derinliği veya saha doğrulaması değildir; "
             "tek pozitif referans nedeniyle rota/alarm üretmez. Pozitif çekirdek yarıçapı, doğrulanmış kazı ile "
-            "en yakın dört çekirdek tarla-bahçe yanlış pozitifinden en yakınının imza mesafesinin yarısıdır; "
-            "bu yalnız konservatif bir benzerlik komşuluğudur. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez."
+            "en yakın dört çekirdek tarla-bahçe yanlış pozitifinden en yakınının imza mesafesinin yarısıdır. "
+            "Doğrulanmış kazının 45 m çevresi yeni aday kısa listesinden ayrıca ayrılır; bu yalnız aynı bilinen "
+            "kalibrasyon sahasını yeni fırsat sanmayı önler. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez."
         ),
     }
 
