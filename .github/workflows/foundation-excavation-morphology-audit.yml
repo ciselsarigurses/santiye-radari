@@ -23,6 +23,11 @@ on:
   workflow_run:
     workflows: ["Günlük Şantiye Taraması"]
     types: [completed]
+  # workflow_run ana tetikleyicidir. GitHub bağımlı-workflow olayını geciktirir
+  # veya kaçırırsa, ana taramaların (08/12/16 UTC) yaklaşık 3,5 saat sonrasında
+  # tazelik fallback'i diagnostikleri yeniden üretir. Yeni servis/secret gerekmez.
+  schedule:
+    - cron: "30 11,15,19 * * *"
   workflow_dispatch:
 
 permissions:
