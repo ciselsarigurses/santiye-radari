@@ -1,0 +1,55 @@
+name: Kritik başlangıç penceresi Sentinel denetimi
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "critical_onset_window_audit.py"
+      - "sentinel1_support_audit.py"
+      - "satellite.py"
+      - ".github/workflows/critical-onset-window-audit.yml"
+  schedule:
+    # Ana taramanın Sentinel tazelik kontrolleriyle aynı saatlerde çalışır.
+    # Türkiye saati UTC+3: 11:00, 15:00, 19:00.
+    - cron: "0 8,12,16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: critical-onset-window-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Kritik pencere mantık öz testi
+        run: python critical_onset_window_audit.py --self-check-only
+
+      - name: Canlı Sentinel-2 ve Sentinel-1 tarihlerini denetle
+        run: python critical_onset_window_audit.py --live --output critical_onset_window_availability.json
+
+      - name: Denetim çıktısını artifact olarak sakla
+        uses: actions/upload-artifact@v4
+        with:
+          name: critical-onset-window-availability
+          path: critical_onset_window_availability.json
+          if-no-files-found: error
+          retention-days: 7
