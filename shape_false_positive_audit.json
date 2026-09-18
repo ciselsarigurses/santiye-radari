@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-09-18",
-  "olusturma": "2026-09-18 15:20 +03",
+  "olusturma": "2026-09-18 17:48 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -12,161 +12,103 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2A_T35SMC_20260915T090428_L2A",
+      "son_item": "S2B_T35SMC_20260918T085916_L2A",
       "durum": "ok",
-      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
-      "ham_gecerli_aday": 26,
-      "diyagonal_yan_kume_geometri": 1,
+      "latest_item": "S2B_T35SMC_20260918T085916_L2A",
+      "ham_gecerli_aday": 34,
+      "diyagonal_yan_kume_geometri": 0,
       "uretim_secimi": 24,
       "ham_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 1,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 22,
+          "toplam": 28,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 2
+          "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 3,
+          "toplam": 2,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 2
+          "dusuk_kompaktlik": 0
         }
       },
       "uretim_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 1,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 20,
+          "toplam": 18,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 2
+          "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 3,
+          "toplam": 2,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 2
+          "dusuk_kompaktlik": 0
         }
       },
-      "secili_genis_sekil_isaretli": 2,
-      "secili_genis_sekil_ornekleri": [
-        {
-          "enlem": 38.275649,
-          "boylam": 26.341287,
-          "alan_m2": 37904,
-          "olcek": "genis_10000_ustu",
-          "piksel": 379,
-          "satir_span": 40,
-          "sutun_span": 23,
-          "uzun_kisa_orani": 1.74,
-          "kutu_doluluk_orani": 0.412,
-          "kompaktlik": 0.067,
-          "uzun_ince": false,
-          "dusuk_kompaktlik": true
-        },
-        {
-          "enlem": 38.274293,
-          "boylam": 26.344721,
-          "alan_m2": 23402,
-          "olcek": "genis_10000_ustu",
-          "piksel": 234,
-          "satir_span": 28,
-          "sutun_span": 19,
-          "uzun_kisa_orani": 1.47,
-          "kutu_doluluk_orani": 0.44,
-          "kompaktlik": 0.127,
-          "uzun_ince": false,
-          "dusuk_kompaktlik": true
-        }
-      ],
-      "nihai_rapor_secimi": 24,
-      "nihai_rapor_eslesen_geometri": 24,
-      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 1,
+      "secili_genis_sekil_isaretli": 0,
+      "secili_genis_sekil_ornekleri": [],
+      "nihai_rapor_secimi": 23,
+      "nihai_rapor_eslesen_geometri": 23,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 24,
+      "nihai_rapor_cozulen_geometri": 23,
       "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 1,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 20,
+          "toplam": 17,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 2
+          "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 3,
+          "toplam": 2,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 2
+          "dusuk_kompaktlik": 0
         }
       },
       "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": {
         "kucuk_250_800": {
-          "toplam": 1,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 20,
+          "toplam": 17,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 2
+          "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 3,
+          "toplam": 2,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 2
+          "dusuk_kompaktlik": 0
         }
       },
-      "nihai_secili_genis_sekil_isaretli": 2,
-      "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 2,
-      "nihai_secili_genis_sekil_ornekleri": [
-        {
-          "enlem": 38.275649,
-          "boylam": 26.341287,
-          "alan_m2": 37904,
-          "olcek": "genis_10000_ustu",
-          "piksel": 379,
-          "satir_span": 40,
-          "sutun_span": 23,
-          "uzun_kisa_orani": 1.74,
-          "kutu_doluluk_orani": 0.412,
-          "kompaktlik": 0.067,
-          "uzun_ince": false,
-          "dusuk_kompaktlik": true
-        },
-        {
-          "enlem": 38.274293,
-          "boylam": 26.344721,
-          "alan_m2": 23402,
-          "olcek": "genis_10000_ustu",
-          "piksel": 234,
-          "satir_span": 28,
-          "sutun_span": 19,
-          "uzun_kisa_orani": 1.47,
-          "kutu_doluluk_orani": 0.44,
-          "kompaktlik": 0.127,
-          "uzun_ince": false,
-          "dusuk_kompaktlik": true
-        }
-      ],
+      "nihai_secili_genis_sekil_isaretli": 0,
+      "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 0,
+      "nihai_secili_genis_sekil_ornekleri": [],
       "nihai_cozulemeyen_geometri_ornekleri": []
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2A_T35SMC_20260915T090428_L2A",
+      "son_item": "S2B_T35SMC_20260918T085916_L2A",
       "durum": "ok",
-      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
-      "ham_gecerli_aday": 4,
+      "latest_item": "S2B_T35SMC_20260918T085916_L2A",
+      "ham_gecerli_aday": 10,
       "diyagonal_yan_kume_geometri": 0,
-      "uretim_secimi": 4,
+      "uretim_secimi": 10,
       "ham_sekil_dagilimi": {
         "kucuk_250_800": {
           "toplam": 1,
@@ -174,9 +116,9 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 3,
+          "toplam": 9,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 0
+          "dusuk_kompaktlik": 1
         },
         "genis_10000_ustu": {
           "toplam": 0,
@@ -191,9 +133,9 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 3,
+          "toplam": 9,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 0
+          "dusuk_kompaktlik": 1
         },
         "genis_10000_ustu": {
           "toplam": 0,
@@ -203,11 +145,11 @@
       },
       "secili_genis_sekil_isaretli": 0,
       "secili_genis_sekil_ornekleri": [],
-      "nihai_rapor_secimi": 4,
-      "nihai_rapor_eslesen_geometri": 4,
+      "nihai_rapor_secimi": 8,
+      "nihai_rapor_eslesen_geometri": 8,
       "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 4,
+      "nihai_rapor_cozulen_geometri": 8,
       "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
@@ -218,9 +160,9 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 3,
+          "toplam": 7,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 0
+          "dusuk_kompaktlik": 1
         },
         "genis_10000_ustu": {
           "toplam": 0,
@@ -235,9 +177,9 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 3,
+          "toplam": 7,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 0
+          "dusuk_kompaktlik": 1
         },
         "genis_10000_ustu": {
           "toplam": 0,
