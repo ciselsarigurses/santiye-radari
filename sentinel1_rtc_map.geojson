@@ -205,10 +205,10 @@
       "properties": {
         "alan_m2": 9601,
         "alarm": false,
-        "arka_plan": false,
+        "arka_plan": true,
         "bolge": "cesme",
         "eski_tarih": "2026-09-11",
-        "harita_katmani": "SAR_GUCLU_LOKAL",
+        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
         "hedef_katmani": "ANA_250_PLUS",
         "kaynak": "coverage_blind_area_audit.json",
         "mahalle_yaklasik": "Mevki doğrulanmadı",
@@ -993,9 +993,8 @@
     }
   ],
   "layer_counts": {
-    "SAR_DUSUK_KANIT_ARKA_PLAN": 14,
+    "SAR_DUSUK_KANIT_ARKA_PLAN": 15,
     "SAR_GENIS_YUZEY_ARKA_PLAN": 8,
-    "SAR_GUCLU_LOKAL": 1,
     "SAR_LOKAL_ORTA": 1,
     "SAR_MIKRO_DIAGNOSTIK": 1,
     "SAR_SAHA_ONCUL": 1
