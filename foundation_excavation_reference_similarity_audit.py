@@ -10,6 +10,11 @@ referansı ancak kullanılan Sentinel-2 son sahnesi saha doğrulama tarihine eş
 daha yeniyse pozitif spektral referans sayılır. Böylece kazının sahada doğrulandığı
 tarihten daha eski görüntü, yanlışlıkla "kazı imzası" olarak öğrenilmez.
 
+Kullanıcının açıkça verdiği regresyon seti 1 gerçek kazı + 4 tarla/bahçe yanlış
+pozitifinden oluşur. Diğer tarihsel yanlış pozitifler genel bastırma diagnostiginde
+korunur ancak çekirdek regresyon marjını veto etmez. Böylece bağımsız bir bahçe
+temizliği örneği, kullanıcının tanımladığı dört negatif örneğin yerine geçmez.
+
 Tek doğrulanmış kazı referansı bulunduğu için bu sonuç bir sınıflandırıcı değildir
 ve rota kapısını tek başına açamaz. 250 m² ana eşik ile 150–249 m² MİKRO politikası
 değişmez.
@@ -32,6 +37,17 @@ OUTPUT_JSON = BASE / "foundation_excavation_reference_similarity_review.json"
 
 MAIN_THRESHOLD_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
+
+# Kullanıcının açıkça "bu beş örneği regresyon seti olarak kullan" dediği çekirdek set.
+CORE_POSITIVE_IDS = frozenset({"FN-20260916-CESME-001"})
+CORE_NEGATIVE_IDS = frozenset(
+    {
+        "FP-20260916-REISDERE-001",
+        "FP-20260917-UZUNKUYU-001",
+        "FP-20260917-MUSALLA-001",
+        "FP-20260917-MUSALLA-002",
+    }
+)
 
 # Farkların karşılaştırılabilir hale gelmesi için kaba, sabit ölçekler. Bunlar
 # model parametresi değil; yalnız diagnostik uzaklığı normalize eder.
@@ -150,18 +166,41 @@ def _flatten_references(payload, field_feedback=None):
                 if temporally_valid:
                     positives.append(row)
                 else:
-                    excluded_positive.append({
-                        "id": row["id"],
-                        "bolge": region_key,
-                        "sentinel_son_tarih": scene_date.isoformat() if scene_date else None,
-                        "saha_dogrulama_tarihi": field_date.isoformat() if field_date else None,
-                        "neden": "SENTINEL_SAHNESI_SAHA_DOGRULAMASINDAN_ESKI_VEYA_TARIH_EKSIK",
-                    })
+                    excluded_positive.append(
+                        {
+                            "id": row["id"],
+                            "bolge": region_key,
+                            "sentinel_son_tarih": (
+                                scene_date.isoformat() if scene_date else None
+                            ),
+                            "saha_dogrulama_tarihi": (
+                                field_date.isoformat() if field_date else None
+                            ),
+                            "neden": (
+                                "SENTINEL_SAHNESI_SAHA_DOGRULAMASINDAN_"
+                                "ESKI_VEYA_TARIH_EKSIK"
+                            ),
+                        }
+                    )
             elif row["sonuc"] == "YANLIS_POZITIF":
                 # Yanlış-pozitif referansı, saha geri bildiriminin özellikle o eski
                 # radar sinyalini reddetmesi nedeniyle tarihsel olarak kullanılabilir.
                 negatives.append(row)
     return positives, negatives, excluded_positive
+
+
+def _partition_core_references(positives, negatives):
+    """Kullanıcının beşli regresyon setini diğer tarihsel referanslardan ayır."""
+    core_positives = [
+        item for item in positives if str(item.get("id") or "") in CORE_POSITIVE_IDS
+    ]
+    core_negatives = [
+        item for item in negatives if str(item.get("id") or "") in CORE_NEGATIVE_IDS
+    ]
+    auxiliary_negatives = [
+        item for item in negatives if str(item.get("id") or "") not in CORE_NEGATIVE_IDS
+    ]
+    return core_positives, core_negatives, auxiliary_negatives
 
 
 def _nearest(vector, references):
@@ -182,23 +221,45 @@ def _candidate_area(candidate):
         return 0
 
 
-def _score_candidate(candidate, positives, negatives):
-    vector = _candidate_vector(candidate)
-    if vector is None:
-        return None
-
-    positive, positive_distance = _nearest(vector, positives)
-    negative, negative_distance = _nearest(vector, negatives)
+def _positive_like(positive_distance, negative_distance):
     margin = None
     if positive_distance is not None and negative_distance is not None:
         margin = negative_distance - positive_distance
-
     positive_like = bool(
         positive_distance is not None
         and negative_distance is not None
         and positive_distance <= POSITIVE_DISTANCE_MAX
         and margin is not None
         and margin >= POSITIVE_MARGIN_MIN
+    )
+    return positive_like, margin
+
+
+def _score_candidate(
+    candidate,
+    positives,
+    negatives,
+    core_positives=None,
+    core_negatives=None,
+    auxiliary_negatives=None,
+):
+    vector = _candidate_vector(candidate)
+    if vector is None:
+        return None
+
+    positive, positive_distance = _nearest(vector, positives)
+    negative, negative_distance = _nearest(vector, negatives)
+    positive_like, margin = _positive_like(positive_distance, negative_distance)
+
+    # Çekirdek regresyon skoru, yalnız kullanıcının açıkça verdiği 1+4 referansla
+    # hesaplanır. Bu metrik diagnostiktir ve mevcut genel skorun semantiğini bozmaz.
+    core_positive, core_positive_distance = _nearest(vector, core_positives or [])
+    core_negative, core_negative_distance = _nearest(vector, core_negatives or [])
+    core_positive_like, core_margin = _positive_like(
+        core_positive_distance, core_negative_distance
+    )
+    auxiliary_negative, auxiliary_negative_distance = _nearest(
+        vector, auxiliary_negatives or []
     )
 
     area_m2 = _candidate_area(candidate)
@@ -213,22 +274,69 @@ def _score_candidate(candidate, positives, negatives):
         "morfoloji_seviyesi": candidate.get("seed_merkezli_morfoloji_seviyesi"),
         "ana_esik": main_band,
         "mikro_bant": micro_band,
+        # Geriye dönük uyumluluk: mevcut alanlar tüm tarihsel negatifleri kullanır.
         "en_yakin_dogrulanmis_kazi_id": positive.get("id") if positive else None,
-        "dogrulanmis_kazi_uzakligi": round(positive_distance, 3) if positive_distance is not None else None,
+        "dogrulanmis_kazi_uzakligi": (
+            round(positive_distance, 3) if positive_distance is not None else None
+        ),
         "en_yakin_yanlis_pozitif_id": negative.get("id") if negative else None,
-        "yanlis_pozitif_uzakligi": round(negative_distance, 3) if negative_distance is not None else None,
+        "yanlis_pozitif_uzakligi": (
+            round(negative_distance, 3) if negative_distance is not None else None
+        ),
         "referans_ayrim_marji": round(margin, 3) if margin is not None else None,
         "dogrulanmis_kazi_referansina_daha_yakin": positive_like,
+        # Yeni paralel çekirdek regresyon metriği: yalnız kullanıcının beşli seti.
+        "cekirdek_regresyon_dogrulanmis_kazi_id": (
+            core_positive.get("id") if core_positive else None
+        ),
+        "cekirdek_regresyon_dogrulanmis_kazi_uzakligi": (
+            round(core_positive_distance, 3)
+            if core_positive_distance is not None
+            else None
+        ),
+        "cekirdek_regresyon_yanlis_pozitif_id": (
+            core_negative.get("id") if core_negative else None
+        ),
+        "cekirdek_regresyon_yanlis_pozitif_uzakligi": (
+            round(core_negative_distance, 3)
+            if core_negative_distance is not None
+            else None
+        ),
+        "cekirdek_regresyon_ayrim_marji": (
+            round(core_margin, 3) if core_margin is not None else None
+        ),
+        "cekirdek_regresyon_dogrulanmis_kaziya_daha_yakin": core_positive_like,
+        "yardimci_yanlis_pozitif_id": (
+            auxiliary_negative.get("id") if auxiliary_negative else None
+        ),
+        "yardimci_yanlis_pozitif_uzakligi": (
+            round(auxiliary_negative_distance, 3)
+            if auxiliary_negative_distance is not None
+            else None
+        ),
         "alarm": False,
         "saha_gorevi": False,
     }
 
 
 def audit(morphology=None, references=None, field_feedback=None):
-    morphology = morphology if isinstance(morphology, dict) else _load(MORPHOLOGY_JSON)
-    references = references if isinstance(references, dict) else _load(REFERENCE_JSON)
-    field_feedback = field_feedback if isinstance(field_feedback, dict) else _load(FIELD_FEEDBACK_JSON)
-    positives, negatives, excluded_positive = _flatten_references(references, field_feedback)
+    morphology = (
+        morphology if isinstance(morphology, dict) else _load(MORPHOLOGY_JSON)
+    )
+    references = (
+        references if isinstance(references, dict) else _load(REFERENCE_JSON)
+    )
+    field_feedback = (
+        field_feedback
+        if isinstance(field_feedback, dict)
+        else _load(FIELD_FEEDBACK_JSON)
+    )
+    positives, negatives, excluded_positive = _flatten_references(
+        references, field_feedback
+    )
+    core_positives, core_negatives, auxiliary_negatives = _partition_core_references(
+        positives, negatives
+    )
 
     regions = {}
     for region_key, region in (morphology.get("bolgeler") or {}).items():
@@ -238,7 +346,14 @@ def audit(morphology=None, references=None, field_feedback=None):
         for candidate in region.get("adaylar") or []:
             if not isinstance(candidate, dict):
                 continue
-            scored = _score_candidate(candidate, positives, negatives)
+            scored = _score_candidate(
+                candidate,
+                positives,
+                negatives,
+                core_positives,
+                core_negatives,
+                auxiliary_negatives,
+            )
             if scored is not None:
                 rows.append(scored)
         rows.sort(
@@ -255,14 +370,29 @@ def audit(morphology=None, references=None, field_feedback=None):
             "son_tarih": region.get("son_tarih"),
             "aday_sayisi": len(rows),
             "pozitif_referansa_daha_yakin_sayi": sum(
-                1 for item in rows if item["dogrulanmis_kazi_referansina_daha_yakin"]
+                1
+                for item in rows
+                if item["dogrulanmis_kazi_referansina_daha_yakin"]
+            ),
+            "cekirdek_regresyonda_pozitife_daha_yakin_sayi": sum(
+                1
+                for item in rows
+                if item["cekirdek_regresyon_dogrulanmis_kaziya_daha_yakin"]
             ),
             "adaylar": rows,
         }
 
+    core_complete = bool(
+        len(core_positives) == len(CORE_POSITIVE_IDS)
+        and len(core_negatives) == len(CORE_NEGATIVE_IDS)
+    )
+
     return {
-        "surum": 2,
-        "amac": "Seed-merkezli temel/kepçe adaylarını doğrulanmış kazı ve tarla/bahçe saha referanslarına spektral benzerlikle karşılaştırmak",
+        "surum": 3,
+        "amac": (
+            "Seed-merkezli temel/kepçe adaylarını doğrulanmış kazı ve tarla/bahçe "
+            "saha referanslarına spektral benzerlikle karşılaştırmak"
+        ),
         "gercek_derinlik_olcumu": False,
         "alarm": False,
         "saha_gorevi": False,
@@ -271,16 +401,28 @@ def audit(morphology=None, references=None, field_feedback=None):
         "mikro_aralik_m2": MICRO_RANGE_M2,
         "dogrulanmis_kazi_referans_sayisi": len(positives),
         "yanlis_pozitif_referans_sayisi": len(negatives),
-        "zamansal_gecersiz_dogrulanmis_kazi_referans_sayisi": len(excluded_positive),
+        "zamansal_gecersiz_dogrulanmis_kazi_referans_sayisi": len(
+            excluded_positive
+        ),
         "zamansal_gecersiz_dogrulanmis_kazi_referanslari": excluded_positive,
+        "cekirdek_regresyon_pozitif_idleri": sorted(CORE_POSITIVE_IDS),
+        "cekirdek_regresyon_yanlis_pozitif_idleri": sorted(CORE_NEGATIVE_IDS),
+        "cekirdek_regresyon_pozitif_referans_sayisi": len(core_positives),
+        "cekirdek_regresyon_yanlis_pozitif_referans_sayisi": len(core_negatives),
+        "yardimci_yanlis_pozitif_referans_sayisi": len(auxiliary_negatives),
+        "cekirdek_regresyon_tam": core_complete,
         "pozitif_marj_esigi": POSITIVE_MARGIN_MIN,
         "pozitif_uzaklik_tavani": POSITIVE_DISTANCE_MAX,
         "bolgeler": regions,
         "not": (
-            "DOGRULANMIS_KAZI pozitif imzası yalnız kullanılan Sentinel son sahnesi saha doğrulama "
-            "tarihine eşit veya daha yeniyse geçerlidir. Daha eski sahne, kazı başlamış gibi öğrenilmez. "
-            "Tek doğrulanmış kazı referansı nedeniyle bu çıktı yalnız sıralama diagnostigidir. "
-            "Rota, alarm veya saha görevi üretmez; SAR zorunlu kapı olarak yorumlanmaz."
+            "DOGRULANMIS_KAZI pozitif imzası yalnız kullanılan Sentinel son sahnesi "
+            "saha doğrulama tarihine eşit veya daha yeniyse geçerlidir. Daha eski "
+            "sahne, kazı başlamış gibi öğrenilmez. Kullanıcının beşli regresyon seti "
+            "ayrı çekirdek metrikte 1 gerçek kazı + 4 belirtilen yanlış pozitif ile "
+            "hesaplanır; diğer tarihsel yanlış pozitifler yalnız yardımcı bastırma "
+            "diagnostiğidir. Tek doğrulanmış kazı referansı nedeniyle bu çıktı yalnız "
+            "sıralama diagnostigidir. Rota, alarm veya saha görevi üretmez; SAR "
+            "zorunlu kapı olarak yorumlanmaz."
         ),
     }
 
@@ -355,8 +497,16 @@ def _self_check():
     }
     feedback = {
         "kayitlar": [
-            {"id": "TP", "sonuc": "DOGRULANMIS_KAZI", "sonuc_tarihi": "2026-09-16"},
-            {"id": "FP", "sonuc": "YANLIS_POZITIF", "sonuc_tarihi": "2026-09-16"},
+            {
+                "id": "TP",
+                "sonuc": "DOGRULANMIS_KAZI",
+                "sonuc_tarihi": "2026-09-16",
+            },
+            {
+                "id": "FP",
+                "sonuc": "YANLIS_POZITIF",
+                "sonuc_tarihi": "2026-09-16",
+            },
         ]
     }
     payload = audit(morphology, references, feedback)
@@ -377,7 +527,26 @@ def _self_check():
     assert stale_payload["zamansal_gecersiz_dogrulanmis_kazi_referans_sayisi"] == 1
     stale_rows = stale_payload["bolgeler"]["cesme"]["adaylar"]
     assert all(row["en_yakin_dogrulanmis_kazi_id"] is None for row in stale_rows)
-    assert all(row["dogrulanmis_kazi_referansina_daha_yakin"] is False for row in stale_rows)
+    assert all(
+        row["dogrulanmis_kazi_referansina_daha_yakin"] is False
+        for row in stale_rows
+    )
+
+    # Kullanıcının 1+4 çekirdek regresyon seti, ek tarihsel negatiflerden ayrılmalı.
+    dummy_vector = [0.1] * len(FEATURES)
+    core_positive_rows = [
+        {"id": "FN-20260916-CESME-001", "vector": dummy_vector}
+    ]
+    negative_rows = [
+        {"id": item_id, "vector": dummy_vector} for item_id in CORE_NEGATIVE_IDS
+    ] + [{"id": "FP-EXTRA", "vector": dummy_vector}]
+    core_pos, core_neg, aux_neg = _partition_core_references(
+        core_positive_rows, negative_rows
+    )
+    assert len(core_pos) == 1
+    assert len(core_neg) == 4
+    assert len(aux_neg) == 1
+    assert aux_neg[0]["id"] == "FP-EXTRA"
 
 
 def main():
