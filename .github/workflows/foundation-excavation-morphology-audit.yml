@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "foundation_excavation_morphology_audit.py"
+      - "foundation_excavation_agri_shadow_guard.py"
       - "excavation_reference_signature_audit.py"
       - "localized_excavation_seed_audit.py"
       - "seed_centered_excavation_morphology_audit.py"
@@ -54,6 +55,7 @@ jobs:
       - name: Temel kazısı diagnostik öz testleri
         run: |
           python foundation_excavation_morphology_audit.py --check-only
+          python foundation_excavation_agri_shadow_guard.py --check-only
           python excavation_reference_signature_audit.py --check-only
           python localized_excavation_seed_audit.py --check-only
           python seed_centered_excavation_morphology_audit.py --check-only
@@ -66,6 +68,7 @@ jobs:
       - name: Morfoloji ve saha referans diagnostiklerini üret
         run: |
           python foundation_excavation_morphology_audit.py
+          python foundation_excavation_agri_shadow_guard.py
           python excavation_reference_signature_audit.py
           python localized_excavation_seed_audit.py
           python seed_centered_excavation_morphology_audit.py
@@ -77,7 +80,7 @@ jobs:
 
       - name: Diagnostik sonuçlarını güvenli kaydet
         run: |
-          outputs="foundation_excavation_morphology_review.json excavation_reference_signature_review.json localized_excavation_seed_review.json seed_centered_excavation_morphology_review.json foundation_excavation_reference_similarity_review.json foundation_excavation_sar_seed_review.json foundation_excavation_cross_evidence_review.json foundation_excavation_route_gate_review.json"
+          outputs="foundation_excavation_morphology_review.json foundation_excavation_agri_shadow_review.json excavation_reference_signature_review.json localized_excavation_seed_review.json seed_centered_excavation_morphology_review.json foundation_excavation_reference_similarity_review.json foundation_excavation_sar_seed_review.json foundation_excavation_cross_evidence_review.json foundation_excavation_route_gate_review.json"
           if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
             echo "Temel kazısı diagnostik sonuçları değişmedi."
             exit 0
@@ -90,6 +93,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python foundation_excavation_morphology_audit.py --check-only
+            python foundation_excavation_agri_shadow_guard.py --check-only
             python excavation_reference_signature_audit.py --check-only
             python localized_excavation_seed_audit.py --check-only
             python seed_centered_excavation_morphology_audit.py --check-only
@@ -99,6 +103,7 @@ jobs:
             python foundation_excavation_route_gate_audit.py --check-only
             python temporal_field_feedback_regression_guard.py --check-only
             python foundation_excavation_morphology_audit.py
+            python foundation_excavation_agri_shadow_guard.py
             python excavation_reference_signature_audit.py
             python localized_excavation_seed_audit.py
             python seed_centered_excavation_morphology_audit.py
