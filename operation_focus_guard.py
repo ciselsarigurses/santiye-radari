@@ -8,8 +8,11 @@ zaman kaybını önler.
 
 Bu guard aday kayıtlarını silmez. Gülbahçe adaylarını ``rota_uygun=False`` ile
 arka plana alır; Gülbahçe kör-alan devriyesini de operasyonel saha rotasından
-çıkarıp diagnostik arka planda korur. Uzunkuyu, Germiyan, Ildır veya mevkii
-doğrulanmamış adayları coğrafi tahminle elemez.
+çıkarıp diagnostik arka planda korur. Son aşamada kullanıcıya gösterilen
+``SAHA_RAPORU.md`` içinde de açık Gülbahçe saha yönlendirmelerini temizler; böylece
+JSON doğru olsa bile daha eski bir markdown üretim adımı Gülbahçe'yi yeniden saha
+rotası gibi gösteremez. Uzunkuyu, Germiyan, Ildır veya mevkii doğrulanmamış adayları
+coğrafi tahminle elemez.
 """
 
 from __future__ import annotations
@@ -17,12 +20,14 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 from pathlib import Path
 from typing import Any
 
 
 BASE_DIR = Path(__file__).resolve().parent
 REPORT_FILE = BASE_DIR / "latest_report.json"
+FIELD_REPORT_FILE = BASE_DIR / "SAHA_RAPORU.md"
 FEEDBACK_FILE = BASE_DIR / "manual_field_feedback.json"
 LOW_PRIORITY_NEIGHBORHOODS = {"gülbahçe"}
 KNOWN_CUSTOMER_OUTCOME = "MEVCUT_MUSTERI"
@@ -90,6 +95,86 @@ def _is_low_priority_patrol(item: dict[str, Any]) -> bool:
         if "gülbahçe" in _normalize(item.get(key)):
             return True
     return False
+
+
+def _sanitize_field_report(text: str) -> tuple[str, int]:
+    """Açık Gülbahçe saha yönlendirmelerini markdown'dan çıkarır.
+
+    Yalnız kullanıcıya operasyon rotası gibi sunulan üç bölüm hedeflenir:
+    günün ilk kontrolleri, kör-alan saha devriyesi ve saha adayları. Karma doğu
+    bölgesi açıklamasında geçen ``Gülbahçe`` kelimesi tek başına eleme sebebi
+    değildir; doğrudan aday/devriye satırı veya aday başlığı Gülbahçe olmalıdır.
+    """
+    lines = text.splitlines()
+    output: list[str] = []
+    section = ""
+    skip_candidate_block = False
+    skip_blind_item = False
+    first3_index = 0
+    blind_index = 0
+    candidate_index = 0
+    removed = 0
+
+    for line in lines:
+        if line.startswith("## "):
+            section = _normalize(line)
+            skip_candidate_block = False
+            skip_blind_item = False
+            first3_index = 0
+            blind_index = 0
+            candidate_index = 0
+            output.append(line)
+            continue
+
+        if "günün ilk 3 kontrolü" in section:
+            match = re.match(r"^(\d+)\.\s+(.*)$", line)
+            if match:
+                if "gülbahçe" in _normalize(match.group(2)):
+                    removed += 1
+                    continue
+                first3_index += 1
+                line = f"{first3_index}. {match.group(2)}"
+            output.append(line)
+            continue
+
+        if "kör alan saha devriyesi" in section:
+            match = re.match(r"^(\d+)\.\s+(\*\*KÖR ALAN\s+—\s+.*)$", line)
+            if match:
+                skip_blind_item = "gülbahçe" in _normalize(match.group(2))
+                if skip_blind_item:
+                    removed += 1
+                    continue
+                blind_index += 1
+                line = f"{blind_index}. {match.group(2)}"
+            elif skip_blind_item:
+                # Kör alan maddesinin açıklama/boş satırlarını da bir sonraki
+                # numaralı madde veya bölüm başlığına kadar göstermeyiz.
+                if not re.match(r"^\d+\.\s+", line):
+                    continue
+                skip_blind_item = False
+            output.append(line)
+            continue
+
+        if "bugün sahada kontrol edilecek uydu adayları" in section:
+            heading = re.match(r"^###\s+\d+\.\s+(.*)$", line)
+            if heading:
+                skip_candidate_block = "gülbahçe" in _normalize(heading.group(1))
+                if skip_candidate_block:
+                    removed += 1
+                    continue
+                candidate_index += 1
+                line = f"### {candidate_index}. {heading.group(1)}"
+                output.append(line)
+                continue
+            if skip_candidate_block:
+                continue
+            output.append(line)
+            continue
+
+        output.append(line)
+
+    suffix = "\n" if text.endswith("\n") else ""
+    return "\n".join(output).rstrip("\n") + suffix, removed
 
 
 def apply_focus(
@@ -261,6 +346,40 @@ def _self_check() -> None:
     assert result["operasyon_odak_disinda_devriye_sayi"] == 1
     assert result["operasyon_odak_disinda_devriye"][0]["rota_uygun"] is False
 
+    sample_md = """# Şantiye Radarı
+
+## Günün ilk 3 kontrolü
+
+1. **PARSEL — Gülbahçe** · test
+2. **PARSEL — Ovacık** · test
+
+## Kör alan saha devriyesi
+
+1. **KÖR ALAN — Musalla** · test
+   - Saha notu: kalır
+2. **KÖR ALAN — Gülbahçe · güncel uydu kör alanı** · test
+   - Saha notu: çıkar
+
+## Bugün sahada kontrol edilecek uydu adayları
+
+### 1. TEKRAR — Gülbahçe
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Gülbahçe
+- **Koordinat:** `38.33, 26.64`
+
+### 2. NORMAL — Ildır
+- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Ildır
+- **Koordinat:** `38.40, 26.47`
+"""
+    cleaned, removed = _sanitize_field_report(sample_md)
+    assert removed == 3
+    assert "PARSEL — Gülbahçe" not in cleaned
+    assert "KÖR ALAN — Gülbahçe" not in cleaned
+    assert "TEKRAR — Gülbahçe" not in cleaned
+    assert "1. **PARSEL — Ovacık**" in cleaned
+    assert "1. **KÖR ALAN — Musalla**" in cleaned
+    assert "### 1. NORMAL — Ildır" in cleaned
+    assert "Uzunkuyu · Germiyan · Ildır · Gülbahçe / Ildır" in cleaned
+
 
 def main() -> None:
     parser = argparse.ArgumentParser()
@@ -278,11 +397,20 @@ def main() -> None:
         raise RuntimeError("latest_report.json nesne olmalıdır.")
     result = apply_focus(report)
     REPORT_FILE.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    markdown_removed = 0
+    if FIELD_REPORT_FILE.exists():
+        original_md = FIELD_REPORT_FILE.read_text(encoding="utf-8")
+        cleaned_md, markdown_removed = _sanitize_field_report(original_md)
+        if cleaned_md != original_md:
+            FIELD_REPORT_FILE.write_text(cleaned_md, encoding="utf-8")
+
     print(
         "Operasyon odak koruması: "
         f"arka_plan={result['operasyon_odak_arka_plan_sayi']}, "
         f"mevcut_musteri={result['mevcut_musteri_arka_plan_sayi']}, "
-        f"devriye_arka_plan={result['operasyon_odak_disinda_devriye_sayi']}"
+        f"devriye_arka_plan={result['operasyon_odak_disinda_devriye_sayi']}, "
+        f"markdown_cikarilan={markdown_removed}"
     )
 
 
