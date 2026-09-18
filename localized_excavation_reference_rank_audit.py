@@ -30,6 +30,10 @@ CORE_NEGATIVE_IDS = {
     "FP-20260917-MUSALLA-001",
     "FP-20260917-MUSALLA-002",
 }
+# Pozitif çekirdek yarıçapı, doğrulanmış kazı ile en yakın çekirdek yanlış pozitif
+# arasındaki imza mesafesinin yarısıdır. Bu, iki referansın orta düzleminden önce
+# kalan konservatif bir diagnostik komşuluk üretir; alarm/rota eşiği değildir.
+POSITIVE_CORE_RADIUS_FRACTION = 0.5
 METRIC_KEYS = (
     "ortalama_rgb_5x5",
     "max_rgb_5x5",
@@ -63,6 +67,11 @@ def _distance(left, right):
     return math.sqrt(sum(parts) / len(parts))
 
 
+def _positive_core_radius(positive, negatives):
+    nearest_negative_distance = min(_distance(positive, item) for item in negatives.values())
+    return nearest_negative_distance * POSITIVE_CORE_RADIUS_FRACTION
+
+
 def _missing_reference_ids(by_id):
     available = set(by_id)
     missing = []
@@ -85,13 +94,14 @@ def _reference_bank(region_arrays):
     return by_id
 
 
-def _rank_candidate(candidate, positive, negatives):
+def _rank_candidate(candidate, positive, negatives, positive_core_radius):
     positive_distance = _distance(candidate, positive)
     nearest_negative_id, nearest_negative_distance = min(
         ((item_id, _distance(candidate, item)) for item_id, item in negatives.items()),
         key=lambda pair: pair[1],
     )
     margin = nearest_negative_distance - positive_distance
+    core_ratio = positive_distance / positive_core_radius if positive_core_radius > 0 else math.inf
     return {
         **candidate,
         "dogrulanmis_kazi_imza_uzakligi": round(positive_distance, 4),
@@ -99,6 +109,9 @@ def _rank_candidate(candidate, positive, negatives):
         "en_yakin_cekirdek_yanlis_pozitif_imza_uzakligi": round(nearest_negative_distance, 4),
         "pozitif_ayrim_marji": round(margin, 4),
         "dogrulanmis_kaziya_daha_yakin": bool(margin > 0),
+        "pozitif_cekirdek_yaricap": round(positive_core_radius, 4),
+        "pozitif_cekirdek_orani": round(core_ratio, 4) if math.isfinite(core_ratio) else None,
+        "pozitif_cekirdek_icinde": bool(positive_distance <= positive_core_radius),
         "ana_esik": bool(candidate.get("spektral_etki_alani_m2", 0) >= MAIN_THRESHOLD_M2),
         "mikro_bant": bool(
             MICRO_RANGE_M2[0]
@@ -138,6 +151,14 @@ def _self_check():
     assert _distance(positive, positive) == 0.0
     assert _distance(near_positive, positive) < _distance(near_positive, reisdere)
 
+    core_radius = _positive_core_radius(positive, {"reisdere": reisdere})
+    assert math.isclose(core_radius, _distance(positive, reisdere) / 2.0)
+    ranked_positive = _rank_candidate(positive, positive, {"reisdere": reisdere}, core_radius)
+    assert ranked_positive["pozitif_cekirdek_icinde"] is True
+    assert ranked_positive["pozitif_cekirdek_orani"] == 0.0
+    ranked_negative = _rank_candidate(reisdere, positive, {"reisdere": reisdere}, core_radius)
+    assert ranked_negative["pozitif_cekirdek_icinde"] is False
+
     complete_reference_ids = {CORE_POSITIVE_ID, *CORE_NEGATIVE_IDS}
     assert _missing_reference_ids(complete_reference_ids) == []
     assert _missing_reference_ids(CORE_NEGATIVE_IDS) == [CORE_POSITIVE_ID]
@@ -159,6 +180,11 @@ def audit():
     references = _reference_bank(region_arrays)
     positive = references[CORE_POSITIVE_ID]
     negatives = {item_id: references[item_id] for item_id in CORE_NEGATIVE_IDS}
+    positive_core_radius = _positive_core_radius(positive, negatives)
+    nearest_reference_negative_id, nearest_reference_negative_distance = min(
+        ((item_id, _distance(positive, item)) for item_id, item in negatives.items()),
+        key=lambda pair: pair[1],
+    )
 
     regions = {}
     all_ranked = []
@@ -169,9 +195,13 @@ def audit():
             for item in discovered
             if item.get("seed_sinifi") == "DUSUK_KONTRAST_KAZI_PROXY"
         ]
-        ranked = [_rank_candidate(item, positive, negatives) for item in low_contrast]
+        ranked = [
+            _rank_candidate(item, positive, negatives, positive_core_radius)
+            for item in low_contrast
+        ]
         ranked.sort(
             key=lambda item: (
+                not item["pozitif_cekirdek_icinde"],
                 -item["pozitif_ayrim_marji"],
                 item["dogrulanmis_kazi_imza_uzakligi"],
                 -item["max_rgb_5x5"],
@@ -186,17 +216,21 @@ def audit():
             "pozitife_daha_yakin_aday_sayisi": sum(
                 1 for item in ranked if item["dogrulanmis_kaziya_daha_yakin"]
             ),
+            "pozitif_cekirdek_aday_sayisi": sum(
+                1 for item in ranked if item["pozitif_cekirdek_icinde"]
+            ),
             "referans_benzerlik_kisa_listesi": ranked[:12],
         }
 
     all_ranked.sort(
         key=lambda item: (
+            not item["pozitif_cekirdek_icinde"],
             -item["pozitif_ayrim_marji"],
             item["dogrulanmis_kazi_imza_uzakligi"],
         )
     )
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Düşük-kontrast kazı seedlerini 1 gerçek kazı + 4 çekirdek tarla/bahçe yanlış pozitifiyle referans-benzerlik sırasına koymak",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
@@ -206,17 +240,27 @@ def audit():
         "uretim_filtresi": False,
         "cekirdek_regresyon_pozitif_id": CORE_POSITIVE_ID,
         "cekirdek_regresyon_yanlis_pozitif_idleri": sorted(CORE_NEGATIVE_IDS),
+        "pozitif_cekirdek_yaricap_orani": POSITIVE_CORE_RADIUS_FRACTION,
+        "pozitif_cekirdek_yaricap": round(positive_core_radius, 4),
+        "pozitife_en_yakin_cekirdek_yanlis_pozitif_id": nearest_reference_negative_id,
+        "pozitife_en_yakin_cekirdek_yanlis_pozitif_imza_uzakligi": round(
+            nearest_reference_negative_distance, 4
+        ),
         "eksik_bolge_hatalari": errors,
         "toplam_dusuk_kontrast_aday": len(all_ranked),
         "toplam_pozitife_daha_yakin_aday": sum(
             1 for item in all_ranked if item["dogrulanmis_kaziya_daha_yakin"]
         ),
+        "toplam_pozitif_cekirdek_aday": sum(
+            1 for item in all_ranked if item["pozitif_cekirdek_icinde"]
+        ),
         "genel_referans_benzerlik_kisa_listesi": all_ranked[:20],
         "bolgeler": regions,
         "not": (
             "Bu çıktı yalnız diagnostiktir. İmza mesafesi gerçek kazı derinliği veya saha doğrulaması değildir; "
-            "tek pozitif referans nedeniyle rota/alarm üretmez. Dört çekirdek tarla-bahçe yanlış pozitifi negatif "
-            "referans olarak kullanılır. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez."
+            "tek pozitif referans nedeniyle rota/alarm üretmez. Pozitif çekirdek yarıçapı, doğrulanmış kazı ile "
+            "en yakın dört çekirdek tarla-bahçe yanlış pozitifinden en yakınının imza mesafesinin yarısıdır; "
+            "bu yalnız konservatif bir benzerlik komşuluğudur. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez."
         ),
     }
 
