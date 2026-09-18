@@ -25,9 +25,11 @@ import satellite
 
 
 OUTPUT_JSON = Path(__file__).with_name("seed_centered_excavation_morphology_review.json")
+REFERENCE_RANK_JSON = Path(__file__).with_name("localized_excavation_reference_rank_review.json")
 MAIN_THRESHOLD_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
 MATCH_RADIUS_M = 45.0
+REFERENCE_PRIORITY_MATCH_RADIUS_M = 5.0
 HIGH_SCORE = 65
 MEDIUM_SCORE = 45
 
@@ -260,6 +262,49 @@ def _nearest_candidate(item, candidates):
     return nearest, nearest_distance
 
 
+def _reference_priority_rows(region_key):
+    try:
+        payload = json.loads(REFERENCE_RANK_JSON.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    return [
+        item
+        for item in (payload.get("yeni_alan_esikli_cekirdek_kisa_listesi") or [])
+        if isinstance(item, dict)
+        and item.get("bolge_anahtari") == region_key
+        and "enlem" in item
+        and "boylam" in item
+    ]
+
+
+def _priority_export_candidates(scored, priority_rows, base_limit=20):
+    selected = [dict(item) for item in scored[:base_limit]]
+    for item in selected:
+        item["referans_cekirdek_oncelikli"] = any(
+            _distance_m(
+                (item["enlem"], item["boylam"]),
+                (priority["enlem"], priority["boylam"]),
+            ) <= REFERENCE_PRIORITY_MATCH_RADIUS_M
+            for priority in priority_rows
+        )
+
+    for priority in priority_rows:
+        nearest, distance = _nearest_candidate(priority, scored)
+        if nearest is None or distance is None or distance > REFERENCE_PRIORITY_MATCH_RADIUS_M:
+            continue
+        already_selected = any(
+            _distance_m(
+                (nearest["enlem"], nearest["boylam"]),
+                (item["enlem"], item["boylam"]),
+            ) <= REFERENCE_PRIORITY_MATCH_RADIUS_M
+            for item in selected
+        )
+        if already_selected:
+            continue
+        selected.append({**nearest, "referans_cekirdek_oncelikli": True})
+    return selected
+
+
 def _analyze_region(region_key):
     arrays = signature._region_arrays(region_key)
     seed_candidates = seed_audit._discover(region_key, arrays)
@@ -273,6 +318,8 @@ def _analyze_region(region_key):
             -float(x.get("max_rgb_5x5") or 0),
         )
     )
+    priority_rows = _reference_priority_rows(region_key)
+    exported_candidates = _priority_export_candidates(scored, priority_rows)
 
     feedback = []
     bbox = arrays["bbox"]
@@ -320,7 +367,11 @@ def _analyze_region(region_key):
             1 for x in scored
             if x["seed_merkezli_morfoloji_seviyesi"] in {"ORTA", "YUKSEK"}
         ),
-        "adaylar": scored[:20],
+        "referans_cekirdek_oncelikli_girdi_sayisi": len(priority_rows),
+        "referans_cekirdek_oncelikli_disari_aktarilan_sayi": sum(
+            1 for item in exported_candidates if item.get("referans_cekirdek_oncelikli") is True
+        ),
+        "adaylar": exported_candidates,
         "saha_referans_regresyonu": feedback,
         "regresyon_uyumsuz_sayisi": len(failures),
         "regresyon_uyumsuzluklari": failures,
@@ -339,6 +390,20 @@ def _self_check():
     mask[4, 5] = True
     component = _center_component(mask, 4, 4)
     assert len(component) == 2
+
+    scored = [
+        {
+            "enlem": 38.30 + index * 0.001,
+            "boylam": 26.30,
+            "seed_merkezli_morfoloji_puani": 100 - index,
+        }
+        for index in range(25)
+    ]
+    priority = [{"enlem": scored[-1]["enlem"], "boylam": scored[-1]["boylam"]}]
+    exported = _priority_export_candidates(scored, priority)
+    assert len(exported) == 21
+    assert exported[-1]["enlem"] == scored[-1]["enlem"]
+    assert exported[-1]["referans_cekirdek_oncelikli"] is True
 
 
 def audit():
@@ -359,7 +424,7 @@ def audit():
                 "hata": f"{type(exc).__name__}: {exc}",
             }
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Lokal kazı seed çevresinde temel/kepçe kazısı morfolojisini diagnostik olarak puanlamak",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
@@ -373,6 +438,8 @@ def audit():
         "bolgeler": regions,
         "not": (
             "Geniş ana morfoloji bileşenleri yerine lokal-seed merkezli ikinci hipotezdir. "
+            "İlk 20 morfoloji adayı yanında, doğrulanmış kazı imzasının çekirdeğinde kalan 150 m²+ "
+            "diagnostik adaylar da downstream SAR/rota denetiminde kaybolmamaları için korunur. "
             "Yeni saha pozitifleri, temporal devamlılık ve Sentinel-1/SAR desteği olmadan rotaya bağlanmaz."
         ),
     }
