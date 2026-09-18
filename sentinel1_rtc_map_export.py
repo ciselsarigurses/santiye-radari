@@ -141,6 +141,11 @@ def _layer(row, temporal):
         return "SAR_SAHA_ONCUL"
     if score is None:
         return "SAR_VERI_YOK"
+    if temporal_status == "TEMPORAL_KARISIK_DUSUK_KANIT":
+        # Mevcut aralik guclu/lokal gorunse bile onceki aralikta da benzer kuvvette
+        # hareket varsa bu 15-17 Eylul'e ozgu taze baslangic kaniti degildir.
+        # Veriyi silme; aktif SAR katmanindan dusuk-kanit arka planina indir.
+        return "SAR_DUSUK_KANIT_ARKA_PLAN"
     if score >= 2.0 and spatial == "KOMPAKT_LOKAL_DESTEKLI":
         if temporal_status == "ANI_YENI_LOKAL_BASLANGIC_GENIS_ARKA_PLANLI":
             return "SAR_GUCLU_LOKAL_GENIS_ARKA_PLANLI"
@@ -386,6 +391,15 @@ def _self_check():
         },
         {"temporal_durum": "ARDISIK_ORTA_LOKAL_HAREKET"},
     ) == "SAR_LOKAL_ORTA"
+    assert _layer(
+        {
+            "hedef_katmani": "ANA_250_PLUS",
+            "alan_m2": 9601,
+            "sar_lokal_degisim_skor_db": 3.034,
+            "sar_mekansal_ayrim": "KOMPAKT_LOKAL_DESTEKLI",
+        },
+        {"temporal_durum": "TEMPORAL_KARISIK_DUSUK_KANIT"},
+    ) == "SAR_DUSUK_KANIT_ARKA_PLAN"
     assert geo["alarm"] is False and geo["saha_gorevi"] is False
     assert geo["ana_sentinel_esigi_m2"] == 250
     assert geo["mikro_aralik_m2"] == [150, 249]
