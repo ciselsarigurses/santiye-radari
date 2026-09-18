@@ -33,6 +33,18 @@ MICRO_RANGE_M2 = [150, 249]
 MATCH_RADIUS_M = 45.0
 MIN_MORPHOLOGY_SCORE = 65
 MIN_CONFIRMED_EXCAVATIONS_FOR_ROUTE = 2
+FIELD_NEGATIVE_TERMS = (
+    "tarla",
+    "tarım",
+    "tarim",
+    "şerit",
+    "serit",
+    "sıra",
+    "sira",
+    "geniş homojen",
+    "genis homojen",
+    "planar",
+)
 
 
 def _load(path):
@@ -143,6 +155,15 @@ def _candidate_area(candidate):
         return 0
 
 
+def _field_negative_evidence(candidate):
+    hits = []
+    for evidence in candidate.get("negatif_kanitlar") or []:
+        text = str(evidence or "").strip().lower()
+        if text and any(term in text for term in FIELD_NEGATIVE_TERMS):
+            hits.append(str(evidence))
+    return hits
+
+
 def _analyze_region(region_key, morphology_region, sar_region, feedback):
     scene_date = _date(morphology_region.get("son_tarih"))
     sar_rows = _sar_records(sar_region)
@@ -156,7 +177,13 @@ def _analyze_region(region_key, morphology_region, sar_region, feedback):
         except (TypeError, ValueError):
             morphology_score = 0.0
         morphology_level = str(candidate.get("seed_merkezli_morfoloji_seviyesi") or "").upper()
-        morphology_ok = morphology_score >= MIN_MORPHOLOGY_SCORE and morphology_level == "YUKSEK"
+        field_negative_evidence = _field_negative_evidence(candidate)
+        field_context_block = bool(field_negative_evidence)
+        morphology_ok = bool(
+            morphology_score >= MIN_MORPHOLOGY_SCORE
+            and morphology_level == "YUKSEK"
+            and not field_context_block
+        )
 
         sar, sar_distance = _nearest(candidate, sar_rows)
         sar_ok = bool(
@@ -184,6 +211,8 @@ def _analyze_region(region_key, morphology_region, sar_region, feedback):
             "spektral_etki_alani_m2": area_m2,
             "morfoloji_puani": morphology_score,
             "morfoloji_yuksek": morphology_ok,
+            "tarla_bahce_baskilandi": field_context_block,
+            "tarla_bahce_negatif_kanit": field_negative_evidence,
             "sar_mesafe_m": round(sar_distance, 1) if sar_distance is not None else None,
             "sar_capraz_destek": sar_ok,
             "sar_lokal_degisim_skor_db": sar.get("sar_lokal_degisim_skor_db") if sar else None,
@@ -212,6 +241,7 @@ def _analyze_region(region_key, morphology_region, sar_region, feedback):
         "sar_yeni_tarih": sar_region.get("sar_yeni_tarih"),
         "sar_optik_doneme_zamansal_uygun": sar_region.get("sar_optik_doneme_zamansal_uygun"),
         "aday_sayisi": len(rows),
+        "tarla_bahce_baskilanan_sayisi": sum(1 for item in rows if item["tarla_bahce_baskilandi"]),
         "coklu_kanit_sayisi": sum(1 for item in rows if item["coklu_kanit"]),
         "ana_esik_yuksek_guven_sayisi": sum(1 for item in rows if item["yuksek_guven_diagnostik"]),
         "mikro_coklu_kanit_sayisi": sum(1 for item in rows if item["mikro_diagnostik"]),
@@ -261,7 +291,7 @@ def audit(morphology=None, sar=None, feedback=None, reference_similarity=None):
         and total_high > 0
     )
     return {
-        "surum": 2,
+        "surum": 3,
         "amac": "Lokal temel/kepçe morfolojisi + zamansal uygun SAR + saha kalibrasyonu ile konservatif rota kapısı diagnostigi",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
@@ -279,8 +309,9 @@ def audit(morphology=None, sar=None, feedback=None, reference_similarity=None):
         "not": (
             "Rota kapısı yalnız diagnostiktir. En az iki zamansal geçerli doğrulanmış kazı referansı, sıfır "
             "seed-merkezli morfoloji regresyon uyumsuzluğu ve aynı koordinatta zamansal uygun Sentinel-1 "
-            "çapraz desteği olmadan saha görevi üretilmez. Saha doğrulaması tek başına kalibrasyon referansı "
-            "sayılmaz; Sentinel-2 son sahnesi doğrulama tarihine yetişmelidir."
+            "çapraz desteği olmadan saha görevi üretilmez. Morfoloji kaynağındaki tarla/şerit/sıra/geniş "
+            "homojen negatif kanıtı güçlü veto olarak uygulanır. Saha doğrulaması tek başına kalibrasyon "
+            "referansı sayılmaz; Sentinel-2 son sahnesi doğrulama tarihine yetişmelidir."
         ),
     }
 
@@ -306,6 +337,14 @@ def _self_check():
                         "seed_merkezli_morfoloji_puani": 80,
                         "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
                     },
+                    {
+                        "enlem": 38.32,
+                        "boylam": 26.32,
+                        "spektral_etki_alani_m2": 300,
+                        "seed_merkezli_morfoloji_puani": 90,
+                        "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+                        "negatif_kanitlar": ["şerit/tarla benzeri geometri"],
+                    },
                 ],
             },
             "uzunkuyu": {"son_tarih": "15.09.2026", "adaylar": []},
@@ -328,6 +367,12 @@ def _self_check():
                         "boylam": 26.31,
                         "s2_sar_capraz_destek": True,
                         "sar_lokal_degisim_skor_db": 2.6,
+                    },
+                    {
+                        "enlem": 38.32,
+                        "boylam": 26.32,
+                        "s2_sar_capraz_destek": True,
+                        "sar_lokal_degisim_skor_db": 3.0,
                     },
                 ],
             },
@@ -361,6 +406,8 @@ def _self_check():
     payload = audit(morphology, sar, feedback, valid_references)
     assert payload["bolgeler"]["cesme"]["ana_esik_yuksek_guven_sayisi"] == 1
     assert payload["bolgeler"]["cesme"]["mikro_coklu_kanit_sayisi"] == 1
+    assert payload["bolgeler"]["cesme"]["tarla_bahce_baskilanan_sayisi"] == 1
+    assert payload["bolgeler"]["cesme"]["adaylar"][2]["tarla_bahce_baskilandi"] is True
     assert payload["saha_dogrulanmis_kazi_sayisi"] == 2
     assert payload["dogrulanmis_kazi_referansi"] == 2
     assert payload["rota_kapisi_hazir"] is True
