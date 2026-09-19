@@ -1,0 +1,340 @@
+{
+  "surum": 1,
+  "amac": "13/15/16/17 Eylül exact Sentinel-2 ve Sentinel-1 veri/geometri uygunluğunu açıkça doğrulamak",
+  "alarm": false,
+  "saha_gorevi": false,
+  "uretim_filtresi": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "tarihler": [
+    "2026-09-13",
+    "2026-09-15",
+    "2026-09-16",
+    "2026-09-17"
+  ],
+  "istenen_exact_ciftler": [
+    "2026-09-13->2026-09-15",
+    "2026-09-15->2026-09-16",
+    "2026-09-15->2026-09-17",
+    "2026-09-16->2026-09-17"
+  ],
+  "sentinel2": {
+    "cesme": {
+      "durum": "ok",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "tarihler": {
+        "2026-09-13": {
+          "tam_kapsam_morfoloji_sahnesi": 1,
+          "tam_kapsam_bsi_sahnesi": 1,
+          "minimum_bulut_yuzde": 0.566,
+          "itemler": [
+            "S2C_T35SMC_20260913T090741_L2A"
+          ]
+        },
+        "2026-09-15": {
+          "tam_kapsam_morfoloji_sahnesi": 1,
+          "tam_kapsam_bsi_sahnesi": 1,
+          "minimum_bulut_yuzde": 11.067,
+          "itemler": [
+            "S2A_T35SMC_20260915T090428_L2A"
+          ]
+        },
+        "2026-09-16": {
+          "tam_kapsam_morfoloji_sahnesi": 0,
+          "tam_kapsam_bsi_sahnesi": 0,
+          "minimum_bulut_yuzde": null,
+          "itemler": []
+        },
+        "2026-09-17": {
+          "tam_kapsam_morfoloji_sahnesi": 0,
+          "tam_kapsam_bsi_sahnesi": 0,
+          "minimum_bulut_yuzde": null,
+          "itemler": []
+        }
+      },
+      "exact_ciftler": {
+        "2026-09-13->2026-09-15": {
+          "morfoloji": {
+            "exact_cift_var": true,
+            "ayni_mgrs_var": true,
+            "ayni_goreli_yorunge_var": true,
+            "durum": "EXACT_AYNI_YORUNGE"
+          },
+          "bsi": {
+            "exact_cift_var": true,
+            "ayni_mgrs_var": true,
+            "ayni_goreli_yorunge_var": true,
+            "durum": "EXACT_AYNI_YORUNGE"
+          }
+        },
+        "2026-09-15->2026-09-16": {
+          "morfoloji": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          },
+          "bsi": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          }
+        },
+        "2026-09-15->2026-09-17": {
+          "morfoloji": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          },
+          "bsi": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          }
+        },
+        "2026-09-16->2026-09-17": {
+          "morfoloji": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          },
+          "bsi": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          }
+        }
+      }
+    },
+    "uzunkuyu": {
+      "durum": "ok",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "tarihler": {
+        "2026-09-13": {
+          "tam_kapsam_morfoloji_sahnesi": 1,
+          "tam_kapsam_bsi_sahnesi": 1,
+          "minimum_bulut_yuzde": 0.566,
+          "itemler": [
+            "S2C_T35SMC_20260913T090741_L2A"
+          ]
+        },
+        "2026-09-15": {
+          "tam_kapsam_morfoloji_sahnesi": 1,
+          "tam_kapsam_bsi_sahnesi": 1,
+          "minimum_bulut_yuzde": 11.067,
+          "itemler": [
+            "S2A_T35SMC_20260915T090428_L2A"
+          ]
+        },
+        "2026-09-16": {
+          "tam_kapsam_morfoloji_sahnesi": 0,
+          "tam_kapsam_bsi_sahnesi": 0,
+          "minimum_bulut_yuzde": null,
+          "itemler": []
+        },
+        "2026-09-17": {
+          "tam_kapsam_morfoloji_sahnesi": 0,
+          "tam_kapsam_bsi_sahnesi": 0,
+          "minimum_bulut_yuzde": null,
+          "itemler": []
+        }
+      },
+      "exact_ciftler": {
+        "2026-09-13->2026-09-15": {
+          "morfoloji": {
+            "exact_cift_var": true,
+            "ayni_mgrs_var": true,
+            "ayni_goreli_yorunge_var": true,
+            "durum": "EXACT_AYNI_YORUNGE"
+          },
+          "bsi": {
+            "exact_cift_var": true,
+            "ayni_mgrs_var": true,
+            "ayni_goreli_yorunge_var": true,
+            "durum": "EXACT_AYNI_YORUNGE"
+          }
+        },
+        "2026-09-15->2026-09-16": {
+          "morfoloji": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          },
+          "bsi": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          }
+        },
+        "2026-09-15->2026-09-17": {
+          "morfoloji": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          },
+          "bsi": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          }
+        },
+        "2026-09-16->2026-09-17": {
+          "morfoloji": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          },
+          "bsi": {
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
+          }
+        }
+      }
+    }
+  },
+  "sentinel1": {
+    "cesme": {
+      "durum": "ok",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "kaynak": "Microsoft Planetary Computer",
+      "kaynak_hatalari": [],
+      "bos_kaynaklar": [],
+      "tarihler": {
+        "2026-09-13": {
+          "aoi_kesisen_iw_sahnesi": 0,
+          "kapsanan_kritik_noktalar": [],
+          "itemler": []
+        },
+        "2026-09-15": {
+          "aoi_kesisen_iw_sahnesi": 0,
+          "kapsanan_kritik_noktalar": [],
+          "itemler": []
+        },
+        "2026-09-16": {
+          "aoi_kesisen_iw_sahnesi": 0,
+          "kapsanan_kritik_noktalar": [],
+          "itemler": []
+        },
+        "2026-09-17": {
+          "aoi_kesisen_iw_sahnesi": 2,
+          "kapsanan_kritik_noktalar": [
+            "Alaçatı",
+            "Ilıca",
+            "Ovacık",
+            "Çeşme",
+            "Çiftlikköy"
+          ],
+          "itemler": [
+            "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8",
+            "S1C_IW_GRDH_1SDV_20260917T042231_20260917T042256_009482_012DCF"
+          ]
+        }
+      },
+      "exact_ciftler": {
+        "2026-09-13->2026-09-15": {
+          "exact_cift_var": false,
+          "ayni_orbit_imzasi_var": false,
+          "ortak_kritik_nokta_var": false,
+          "durum": "VERI_YOK"
+        },
+        "2026-09-15->2026-09-16": {
+          "exact_cift_var": false,
+          "ayni_orbit_imzasi_var": false,
+          "ortak_kritik_nokta_var": false,
+          "durum": "VERI_YOK"
+        },
+        "2026-09-15->2026-09-17": {
+          "exact_cift_var": false,
+          "ayni_orbit_imzasi_var": false,
+          "ortak_kritik_nokta_var": false,
+          "durum": "VERI_YOK"
+        },
+        "2026-09-16->2026-09-17": {
+          "exact_cift_var": false,
+          "ayni_orbit_imzasi_var": false,
+          "ortak_kritik_nokta_var": false,
+          "durum": "VERI_YOK"
+        }
+      }
+    },
+    "uzunkuyu": {
+      "durum": "ok",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "kaynak": "Microsoft Planetary Computer",
+      "kaynak_hatalari": [],
+      "bos_kaynaklar": [],
+      "tarihler": {
+        "2026-09-13": {
+          "aoi_kesisen_iw_sahnesi": 0,
+          "kapsanan_kritik_noktalar": [],
+          "itemler": []
+        },
+        "2026-09-15": {
+          "aoi_kesisen_iw_sahnesi": 0,
+          "kapsanan_kritik_noktalar": [],
+          "itemler": []
+        },
+        "2026-09-16": {
+          "aoi_kesisen_iw_sahnesi": 0,
+          "kapsanan_kritik_noktalar": [],
+          "itemler": []
+        },
+        "2026-09-17": {
+          "aoi_kesisen_iw_sahnesi": 2,
+          "kapsanan_kritik_noktalar": [
+            "Germiyan",
+            "Gülbahçe",
+            "Ildır",
+            "Uzunkuyu"
+          ],
+          "itemler": [
+            "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8",
+            "S1C_IW_GRDH_1SDV_20260917T042231_20260917T042256_009482_012DCF"
+          ]
+        }
+      },
+      "exact_ciftler": {
+        "2026-09-13->2026-09-15": {
+          "exact_cift_var": false,
+          "ayni_orbit_imzasi_var": false,
+          "ortak_kritik_nokta_var": false,
+          "durum": "VERI_YOK"
+        },
+        "2026-09-15->2026-09-16": {
+          "exact_cift_var": false,
+          "ayni_orbit_imzasi_var": false,
+          "ortak_kritik_nokta_var": false,
+          "durum": "VERI_YOK"
+        },
+        "2026-09-15->2026-09-17": {
+          "exact_cift_var": false,
+          "ayni_orbit_imzasi_var": false,
+          "ortak_kritik_nokta_var": false,
+          "durum": "VERI_YOK"
+        },
+        "2026-09-16->2026-09-17": {
+          "exact_cift_var": false,
+          "ayni_orbit_imzasi_var": false,
+          "ortak_kritik_nokta_var": false,
+          "durum": "VERI_YOK"
+        }
+      }
+    }
+  },
+  "not": "VERI_YOK veya EXACT_GEOMETRI_ESLESMIYOR olan çift için görüntü varmış gibi temporal fark üretilmez. Metadata uygunluğu kazı/şantiye kanıtı değildir; yalnız hangi exact karşılaştırmanın fiziksel olarak kurulabileceğini gösterir."
+}
