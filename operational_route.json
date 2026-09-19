@@ -86,7 +86,26 @@
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
       "gunluk_sira": 2,
       "rota_uydu_kanit_yasi_gun": 0
-    },
+    }
+  ],
+  "geometri_arka_plan": [],
+  "yorum": "Bu çıktı yeni alarm veya saha görevi üretmez. Yalnız gecikmiş 800–10.000 m² adaylarda aynı Sentinel sahnesiyle doğrulanmış düşük-kompakt/uzun-ince geometri riskini günlük rota sıralamasında arka plana alır. Taze ERKEN/PARSEL, TEKRAR_GIT, 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez.",
+  "rota_kaynagi": "MERKEZI_GUNUN_ILK_3",
+  "merkezi_rota_kilidi": true,
+  "tazelik_korumasi": true,
+  "tazelik_sirasi_degisti": false,
+  "geometri_sonrasi_rota_gorevleri": [
+    "U2EBF2F9DD1",
+    "UA1A64C2BEA",
+    "U92D437BB80"
+  ],
+  "tazelik_sonrasi_rota_gorevleri": [
+    "U2EBF2F9DD1",
+    "UA1A64C2BEA",
+    "U92D437BB80"
+  ],
+  "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur.",
+  "operasyon_odak_arka_plan": [
     {
       "oncelik": "ERKEN",
       "oncelik_nedeni": "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali ve uydu kanıtı en fazla 2 günlük. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
@@ -119,24 +138,22 @@
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
       "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
       "gunluk_sira": 3,
-      "rota_uydu_kanit_yasi_gun": 0
+      "rota_uydu_kanit_yasi_gun": 0,
+      "operasyon_odak_disinda": true,
+      "operasyon_koridor_notu": "Çeşme–Uzunkuyu günlük operasyon koridorunun konservatif doğu sınırının ötesinde; mahalle tahmini yapılmadan diagnostik arka planda tutuldu."
     }
   ],
-  "geometri_arka_plan": [],
-  "yorum": "Bu çıktı yeni alarm veya saha görevi üretmez. Yalnız gecikmiş 800–10.000 m² adaylarda aynı Sentinel sahnesiyle doğrulanmış düşük-kompakt/uzun-ince geometri riskini günlük rota sıralamasında arka plana alır. Taze ERKEN/PARSEL, TEKRAR_GIT, 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez.",
-  "rota_kaynagi": "MERKEZI_GUNUN_ILK_3",
-  "merkezi_rota_kilidi": true,
-  "tazelik_korumasi": true,
-  "tazelik_sirasi_degisti": false,
-  "geometri_sonrasi_rota_gorevleri": [
+  "operasyon_odak_arka_plan_sayi": 1,
+  "operasyon_odak_sonrasi_rota_gorevleri": [
     "U2EBF2F9DD1",
-    "UA1A64C2BEA",
-    "U92D437BB80"
+    "UA1A64C2BEA"
   ],
-  "tazelik_sonrasi_rota_gorevleri": [
-    "U2EBF2F9DD1",
-    "UA1A64C2BEA",
-    "U92D437BB80"
-  ],
-  "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur."
+  "operasyon_koridoru": {
+    "tanim": "Çeşme yarımadası–Uzunkuyu günlük saha hattı",
+    "uzunkuyu_referans_boylam": 26.562138,
+    "konservatif_dogu_siniri_boylam": 26.6,
+    "mahalle_tahmini": false
+  },
+  "operasyon_koridor_korumasi": true,
+  "operasyon_koridor_notu": "Son kapı yalnız günlük rota sunumunu sınırlar; adayları/alarmları silmez ve yeni görev üretmez. Açık Gülbahçe, mevcut müşteri, rota_uygun=false veya 26.600000 boylamının doğusundaki belirsiz adaylar diagnostik arka planda kalır. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez."
 }
