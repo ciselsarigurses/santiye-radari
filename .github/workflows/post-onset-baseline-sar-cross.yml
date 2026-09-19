@@ -1,0 +1,82 @@
+name: Baseline Sonrası SAR Çapraz Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "post_onset_baseline_sar_cross_audit.py"
+      - "post_onset_baseline_vegetation_guard_review.json"
+      - "foundation_excavation_sar_seed_review.json"
+      - "manual_field_feedback.json"
+      - ".github/workflows/post-onset-baseline-sar-cross.yml"
+  workflow_run:
+    workflows:
+      - "Baseline Bitki Negatif Bağlam Diagnostiği"
+      - "Temel Kazısı Morfoloji Diagnostiği"
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-post-onset-baseline-sar-cross
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Öz testi çalıştır
+        run: python post_onset_baseline_sar_cross_audit.py --check-only
+
+      - name: Baseline + SAR çapraz diagnostiğini üret
+        run: python post_onset_baseline_sar_cross_audit.py
+
+      - name: Diagnostiği güvenli kaydet
+        run: |
+          output="post_onset_baseline_sar_cross_review.json"
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Baseline+SAR diagnostiğinde semantik değişiklik yok."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python post_onset_baseline_sar_cross_audit.py --check-only
+            python post_onset_baseline_sar_cross_audit.py
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add $output
+            git commit -m "Radar: baseline sonrası SAR çapraz diagnostiğini güncelle"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Ana dal ilerledi; yeniden denenecek (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Baseline+SAR diagnostik kaydı tamamlanamadı."
+          exit 1
