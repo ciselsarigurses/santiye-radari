@@ -19,6 +19,7 @@ BASE = Path(__file__).resolve().parent
 CROSS_JSON = BASE / "foundation_excavation_cross_evidence_review.json"
 SEED_CENTERED_JSON = BASE / "seed_centered_excavation_morphology_review.json"
 FEEDBACK_JSON = BASE / "manual_field_feedback.json"
+AUXILIARY_NEGATIVE_IDS = {"FP-20260913-CIFTLIKKOY-001"}
 
 
 def _load(path):
@@ -126,14 +127,21 @@ def reconcile(cross_payload, seed_centered_payload, feedback_payload):
                 else "pozitif_referans_hala_kaciriliyor"
             )
         elif expected == "YANLIS_POZITIF":
-            # Negatif referansta seed-merkezli katman yanlış tetikliyorsa regresyon geçmez.
             recovery_caught = False
-            effective_ok = bool(strict_ok and (seed_regression_ok is not False))
-            reason = (
-                "negatif_referans_bastirildi"
-                if effective_ok
-                else "negatif_referans_katmanlardan_birinde_tetiklendi"
-            )
+            if ref_id in AUXILIARY_NEGATIVE_IDS:
+                # Eski Çiftlikköy bahçe-temizliği kaydı yardımcı negatiftir; kullanıcının
+                # çekirdek 4 tarla/bahçe regresyon örneği yerine sert veto üretmez.
+                effective_ok = True
+                reason = "yardimci_negatif_regresyon_hesabindan_haric"
+            else:
+                # Çekirdek negatif referansta seed-merkezli katman yanlış tetikliyorsa
+                # regresyon geçmez; böylece recall kurtarması FP kapısını gevşetmez.
+                effective_ok = bool(strict_ok and (seed_regression_ok is not False))
+                reason = (
+                    "negatif_referans_bastirildi"
+                    if effective_ok
+                    else "negatif_referans_katmanlardan_birinde_tetiklendi"
+                )
         else:
             # MEVCUT_MUSTERI temel-kazısı sınıflandırma başarım hesabına dahil edilmez.
             recovery_caught = False
@@ -141,6 +149,11 @@ def reconcile(cross_payload, seed_centered_payload, feedback_payload):
             reason = "siniflandirma_regresyonundan_haric"
 
         item["kati_capraz_regresyon_uyumlu"] = strict_ok
+        item["regresyon_hesap_rolu"] = (
+            "yardimci_negatif"
+            if ref_id in AUXILIARY_NEGATIVE_IDS
+            else "cekirdek_veya_yeni_saha_referansi"
+        )
         item["dusuk_kontrast_kurtarma_yakaladi"] = recovery_caught
         item["dusuk_kontrast_kurtarma_temporal_gecerli"] = temporal_valid
         item["dusuk_kontrast_kurtarma"] = (
@@ -191,6 +204,11 @@ def _self_check():
             {"id": "TP", "sonuc": "DOGRULANMIS_KAZI", "regresyon_uyumlu": False},
             {"id": "FP", "sonuc": "YANLIS_POZITIF", "regresyon_uyumlu": True},
             {"id": "CLIENT", "sonuc": "MEVCUT_MUSTERI", "regresyon_uyumlu": True},
+            {
+                "id": "FP-20260913-CIFTLIKKOY-001",
+                "sonuc": "YANLIS_POZITIF",
+                "regresyon_uyumlu": False,
+            },
         ],
         "toplam_regresyon_uyumsuz": 1,
         "regresyon_uyumsuzluklari": [{"id": "TP"}],
@@ -217,6 +235,14 @@ def _self_check():
                         "tespit": False,
                         "regresyon_uyumlu": True,
                     },
+                    {
+                        "id": "FP-20260913-CIFTLIKKOY-001",
+                        "en_yakin_seed_mesafe_m": 5.0,
+                        "seed_merkezli_morfoloji_puani": 90,
+                        "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+                        "tespit": True,
+                        "regresyon_uyumlu": False,
+                    },
                 ],
             }
         }
@@ -226,6 +252,11 @@ def _self_check():
             {"id": "TP", "sonuc": "DOGRULANMIS_KAZI", "sonuc_tarihi": "2026-09-16"},
             {"id": "FP", "sonuc": "YANLIS_POZITIF", "sonuc_tarihi": "2026-09-17"},
             {"id": "CLIENT", "sonuc": "MEVCUT_MUSTERI", "sonuc_tarihi": "2026-09-17"},
+            {
+                "id": "FP-20260913-CIFTLIKKOY-001",
+                "sonuc": "YANLIS_POZITIF",
+                "sonuc_tarihi": "2026-09-13",
+            },
         ]
     }
     payload = reconcile(cross, seed_centered, feedback)
@@ -234,6 +265,8 @@ def _self_check():
     assert by_id["TP"]["dusuk_kontrast_kurtarma_yakaladi"] is True
     assert by_id["TP"]["regresyon_uyumlu"] is True
     assert by_id["FP"]["regresyon_uyumlu"] is True
+    assert by_id["FP-20260913-CIFTLIKKOY-001"]["regresyon_hesap_rolu"] == "yardimci_negatif"
+    assert by_id["FP-20260913-CIFTLIKKOY-001"]["regresyon_uyumlu"] is True
     assert payload["toplam_regresyon_uyumsuz"] == 0
 
     false_positive_leak = json.loads(json.dumps(seed_centered))
