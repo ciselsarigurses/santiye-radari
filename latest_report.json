@@ -7807,5 +7807,7 @@
     "uygulandi": false,
     "elendi": 0,
     "neden": "GUNCEL_SAHNE_INCELEMESI_ESLESMIYOR"
-  }
+  },
+  "temporal_lokal_erken_izleme": [],
+  "temporal_lokal_erken_izleme_notu": "15 Eylül ve sonrasında güçlü temporal-lokal aday yüksek diagnostik ağırlık alır; bu katman yine alarm veya saha görevi üretmez."
 }

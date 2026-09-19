@@ -17,6 +17,12 @@
 2. **ERKEN — Germiyan** · yaklaşık 500 m² · Görev `UA1A64C2BEA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313095,26.471675)
 3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · Görev `U92D437BB80` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.368450,26.643880)
 
+## Temporal-lokal erken sinyal izleme
+
+> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül sonrası bunlar yüksek diagnostik ağırlıkla izlenir; görev açma kuralı değişmez.
+
+Bu turda güvenli temporal-lokal erken sinyal yok.
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 ### 1. ERKEN — Ilıca
