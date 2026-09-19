@@ -1,5 +1,5 @@
 {
-  "surum": 4,
+  "surum": 5,
   "amac": "Lokal temel/kepçe morfolojisi + zamansal uygun SAR + saha kalibrasyonu ile konservatif rota kapısı diagnostigi",
   "gercek_derinlik_olcumu": false,
   "ana_uretim_esigi_m2": 250,
@@ -25,7 +25,7 @@
       "sar_optik_doneme_zamansal_uygun": true,
       "aday_sayisi": 29,
       "tarla_bahce_baskilanan_sayisi": 0,
-      "yanlis_pozitif_spektral_klon_baskilanan_sayisi": 5,
+      "yanlis_pozitif_spektral_klon_baskilanan_sayisi": 3,
       "coklu_kanit_sayisi": 0,
       "ana_esik_yuksek_guven_sayisi": 0,
       "mikro_coklu_kanit_sayisi": 0,
@@ -53,7 +53,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.505,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.539,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.329105,
@@ -78,7 +83,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.558,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.426,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.284966,
@@ -103,7 +113,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-UZUNKUYU-001",
+          "cekirdek_fp_uzakligi": 0.538,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.497,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.304412,
@@ -128,7 +143,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.507,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.412,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.3443,
@@ -153,7 +173,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.48,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.413,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.320783,
@@ -178,7 +203,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.496,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.372,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.313638,
@@ -203,7 +233,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.397,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.431,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.342039,
@@ -228,7 +263,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.411,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.342,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.398117,
@@ -253,7 +293,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.408,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.395,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.361395,
@@ -278,7 +323,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.385,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.342,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.303327,
@@ -303,7 +353,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.423,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.413,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.415845,
@@ -328,7 +383,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-UZUNKUYU-001",
+          "cekirdek_fp_uzakligi": 0.46,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.439,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.316713,
@@ -353,7 +413,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.42,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.385,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.347285,
@@ -378,7 +443,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.415,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.407,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.356149,
@@ -403,7 +473,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.43,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.362,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.343848,
@@ -428,7 +503,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.406,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.514,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.285418,
@@ -453,7 +533,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.343,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.492,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.285327,
@@ -478,7 +563,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.389,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.453,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.416207,
@@ -503,7 +593,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.357,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.305,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.368269,
@@ -528,7 +623,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.522,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.316,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.306221,
@@ -553,7 +653,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.267,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.255,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.318432,
@@ -578,7 +683,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.25,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.244,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.286865,
@@ -603,17 +713,22 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.261,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.252,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.308935,
           "boylam": 26.350445,
           "spektral_etki_alani_m2": 200,
           "morfoloji_puani": 95.0,
-          "morfoloji_yuksek": false,
+          "morfoloji_yuksek": true,
           "tarla_bahce_baskilandi": false,
           "tarla_bahce_negatif_kanit": [],
-          "yanlis_pozitif_spektral_klon_baskilandi": true,
+          "yanlis_pozitif_spektral_klon_baskilandi": false,
           "en_yakin_yanlis_pozitif_id": "FP-20260913-CIFTLIKKOY-001",
           "yanlis_pozitif_spektral_uzakligi": 0.133,
           "referans_benzerlik_eslesme_mesafe_m": 0.0,
@@ -628,7 +743,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.251,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.133,
+          "yalniz_yardimci_fp_benzerligi": true
         },
         {
           "enlem": 38.280443,
@@ -653,7 +773,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.243,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.188,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.288945,
@@ -678,7 +803,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.311,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.254,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.288403,
@@ -703,7 +833,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.327,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.309,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.287589,
@@ -728,17 +863,22 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.165,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.251,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.292744,
           "boylam": 26.278325,
           "spektral_etki_alani_m2": 200,
           "morfoloji_puani": 75.0,
-          "morfoloji_yuksek": false,
+          "morfoloji_yuksek": true,
           "tarla_bahce_baskilandi": false,
           "tarla_bahce_negatif_kanit": [],
-          "yanlis_pozitif_spektral_klon_baskilandi": true,
+          "yanlis_pozitif_spektral_klon_baskilandi": false,
           "en_yakin_yanlis_pozitif_id": "FP-20260913-CIFTLIKKOY-001",
           "yanlis_pozitif_spektral_uzakligi": 0.247,
           "referans_benzerlik_eslesme_mesafe_m": 0.0,
@@ -753,9 +893,16 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.256,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.247,
+          "yalniz_yardimci_fp_benzerligi": true
         }
-      ]
+      ],
+      "cekirdek_fp_klon_baskilanan_sayisi": 3,
+      "yalniz_yardimci_fp_benzerligi_sayisi": 2
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
@@ -764,7 +911,7 @@
       "sar_optik_doneme_zamansal_uygun": true,
       "aday_sayisi": 24,
       "tarla_bahce_baskilanan_sayisi": 0,
-      "yanlis_pozitif_spektral_klon_baskilanan_sayisi": 7,
+      "yanlis_pozitif_spektral_klon_baskilanan_sayisi": 5,
       "coklu_kanit_sayisi": 0,
       "ana_esik_yuksek_guven_sayisi": 0,
       "mikro_coklu_kanit_sayisi": 0,
@@ -792,7 +939,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.424,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.446,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.279448,
@@ -817,7 +969,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.468,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.435,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.316713,
@@ -842,7 +999,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.51,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.444,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.355244,
@@ -867,7 +1029,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.436,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.456,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.347285,
@@ -892,7 +1059,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.387,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.384,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.344209,
@@ -917,7 +1089,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.348,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.377,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.253037,
@@ -942,7 +1119,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.262,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.298,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.419191,
@@ -967,7 +1149,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.319,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.337,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.236847,
@@ -992,7 +1179,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-UZUNKUYU-001",
+          "cekirdek_fp_uzakligi": 0.417,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.417,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.263439,
@@ -1017,7 +1209,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-UZUNKUYU-001",
+          "cekirdek_fp_uzakligi": 0.409,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.463,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.270946,
@@ -1042,7 +1239,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.268,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.338,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.22934,
@@ -1067,7 +1269,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-UZUNKUYU-001",
+          "cekirdek_fp_uzakligi": 0.412,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.462,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.269951,
@@ -1092,7 +1299,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.307,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.326,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.270403,
@@ -1117,17 +1329,22 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.287,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.27,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.251047,
           "boylam": 26.460933,
           "spektral_etki_alani_m2": 200,
           "morfoloji_puani": 100.0,
-          "morfoloji_yuksek": false,
+          "morfoloji_yuksek": true,
           "tarla_bahce_baskilandi": false,
           "tarla_bahce_negatif_kanit": [],
-          "yanlis_pozitif_spektral_klon_baskilandi": true,
+          "yanlis_pozitif_spektral_klon_baskilandi": false,
           "en_yakin_yanlis_pozitif_id": "FP-20260913-CIFTLIKKOY-001",
           "yanlis_pozitif_spektral_uzakligi": 0.221,
           "referans_benzerlik_eslesme_mesafe_m": 0.0,
@@ -1142,7 +1359,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.331,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.221,
+          "yalniz_yardimci_fp_benzerligi": true
         },
         {
           "enlem": 38.284785,
@@ -1167,7 +1389,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.237,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.321,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.249419,
@@ -1192,7 +1419,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.216,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.267,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.283518,
@@ -1217,7 +1449,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.207,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.264,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.228887,
@@ -1242,7 +1479,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.257,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.254,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.252585,
@@ -1267,17 +1509,22 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.309,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.368,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.330823,
           "boylam": 26.64388,
           "spektral_etki_alani_m2": 200,
           "morfoloji_puani": 95.0,
-          "morfoloji_yuksek": false,
+          "morfoloji_yuksek": true,
           "tarla_bahce_baskilandi": false,
           "tarla_bahce_negatif_kanit": [],
-          "yanlis_pozitif_spektral_klon_baskilandi": true,
+          "yanlis_pozitif_spektral_klon_baskilandi": false,
           "en_yakin_yanlis_pozitif_id": "FP-20260913-CIFTLIKKOY-001",
           "yanlis_pozitif_spektral_uzakligi": 0.202,
           "referans_benzerlik_eslesme_mesafe_m": 0.0,
@@ -1292,7 +1539,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.308,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.202,
+          "yalniz_yardimci_fp_benzerligi": true
         },
         {
           "enlem": 38.257288,
@@ -1317,7 +1569,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.274,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.307,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.345928,
@@ -1342,7 +1599,12 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.185,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.252,
+          "yalniz_yardimci_fp_benzerligi": false
         },
         {
           "enlem": 38.318341,
@@ -1367,10 +1629,20 @@
           "geri_bildirim_engeli": false,
           "geri_bildirim": null,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "cekirdek_fp_id": "FP-20260917-MUSALLA-001",
+          "cekirdek_fp_uzakligi": 0.245,
+          "yardimci_fp_id": "FP-20260913-CIFTLIKKOY-001",
+          "yardimci_fp_uzakligi": 0.243,
+          "yalniz_yardimci_fp_benzerligi": false
         }
-      ]
+      ],
+      "cekirdek_fp_klon_baskilanan_sayisi": 5,
+      "yalniz_yardimci_fp_benzerligi_sayisi": 2
     }
   },
-  "not": "Rota kapısı yalnız diagnostiktir. En az iki zamansal geçerli doğrulanmış kazı referansı, sıfır seed-merkezli morfoloji regresyon uyumsuzluğu ve aynı koordinatta zamansal uygun Sentinel-1 çapraz desteği olmadan saha görevi üretilmez. Morfoloji kaynağındaki tarla/şerit/sıra/geniş homojen negatif kanıtı güçlü veto olarak uygulanır. Ayrıca saha yanlış-pozitif spektral referansına 0.25 veya daha yakın klonlar rota kapısından önce bastırılır. Saha doğrulaması tek başına kalibrasyon referansı sayılmaz; Sentinel-2 son sahnesi doğrulama tarihine yetişmelidir."
+  "not": "Rota kapısı yalnız diagnostiktir. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez. Tarla/bahçe morfoloji negatifleri ve kullanıcının dört çekirdek yanlış-pozitifine 0.25 veya daha yakın spektral klonlar sert veto olarak kalır. Tarihsel yardımcı yanlış-pozitif benzerliği tek başına veto değildir; adayın çoklu-kanıt, SAR, saha geri bildirimi ve kalibrasyon kapıları aynen uygulanır. En az iki zamansal geçerli doğrulanmış kazı referansı olmadan rota kapısı açılmaz.",
+  "fp_klon_politikasi": "Kullanıcının dört çekirdek yanlış-pozitifi sert veto; tarihsel yardımcı yanlış-pozitif tek başına yalnız diagnostik negatif kanıt",
+  "toplam_cekirdek_fp_klon_baskilanan": 8,
+  "toplam_yalniz_yardimci_fp_benzerligi": 4
 }
