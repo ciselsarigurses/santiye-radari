@@ -1,0 +1,85 @@
+name: 15-17 Eylül Onset SAR Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "foundation_excavation_onset_sar_audit.py"
+      - ".github/workflows/foundation-excavation-onset-sar-audit.yml"
+  workflow_run:
+    workflows: ["Temel Kazısı Morfoloji Diagnostiği"]
+    types: [completed]
+  schedule:
+    # Ana Sentinel kontrollerinden kısa süre sonra; Türkiye saati 11:20, 15:20, 19:20.
+    - cron: "20 8,12,16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-foundation-onset-sar
+  cancel-in-progress: true
+
+jobs:
+  diagnose:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt 'planetary-computer>=1.0,<2'
+
+      - name: Onset SAR öz testi
+        run: python foundation_excavation_onset_sar_audit.py --check-only
+
+      - name: 11→17 Eylül RTC aday ve regresyon diagnostiğini üret
+        run: python foundation_excavation_onset_sar_audit.py
+
+      - name: Diagnostiği güvenli kaydet
+        run: |
+          output="foundation_excavation_onset_sar_review.json"
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Onset SAR diagnostiği değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python foundation_excavation_onset_sar_audit.py --check-only
+            python foundation_excavation_onset_sar_audit.py
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add "$output"
+            git commit -m "Radar: 15-17 Eylül onset SAR diagnostiğini güncelle"
+            if git push origin HEAD:main; then
+              echo "Onset SAR diagnostiği kaydedildi."
+              exit 0
+            fi
+
+            echo "Ana dal ilerledi; onset SAR diagnostiği yeniden üretilecek."
+            sleep $((attempt * 2))
+          done
+
+          echo "Onset SAR diagnostiği üç denemede kaydedilemedi."
+          exit 1
