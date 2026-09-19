@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-18",
+  "rapor_tarihi": "2026-09-19",
   "amac": "15 Eylül sonrası kuru-zemin teyit filtresini yasak döneminde gölge modunda ölçmek; operasyonel alarm/görev üretmeden güçlü aday hacmini kalibre etmek.",
   "ana_alarm_alt_esigi_m2": 250,
   "diagnostik_aralik_m2": [
@@ -13,35 +13,19 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2A_T35SMC_20260915T090428_L2A",
-      "son_tarih": "15.09.2026",
+      "son_item": "S2B_T35SMC_20260918T085916_L2A",
+      "son_tarih": "18.09.2026",
       "guclu_golge_aday": 0,
       "ana_goreve_yakin_oldugu_icin_atlanan": 0
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2A_T35SMC_20260915T090428_L2A",
-      "son_tarih": "15.09.2026",
-      "guclu_golge_aday": 1,
+      "son_item": "S2B_T35SMC_20260918T085916_L2A",
+      "son_tarih": "18.09.2026",
+      "guclu_golge_aday": 0,
       "ana_goreve_yakin_oldugu_icin_atlanan": 0
     }
   },
-  "guclu_golge_aday_sayisi": 1,
-  "adaylar": [
-    {
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.319607,
-      "boylam": 26.564084,
-      "alan_m2": 700,
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2A_T35SMC_20260915T090428_L2A",
-      "yerellik_orani": 4.78,
-      "uzun_temporal_ani_baslangic_orani": 4.45,
-      "son_cift_bsi_degisim": 0.1509,
-      "alarm": false,
-      "saha_gorevi": false,
-      "gölge_kalibrasyon": true,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319607,26.564084"
-    }
-  ]
+  "guclu_golge_aday_sayisi": 0,
+  "adaylar": []
 }
