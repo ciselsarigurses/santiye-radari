@@ -11,20 +11,11 @@
 
 ## Günün ilk 3 kontrolü
 
-> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
+> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.
 
-1. **ERKEN — Ilıca** · yaklaşık 700 m² · Görev `U2EBF2F9DD1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.318703,26.387192) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.318703/26.387192)
-2. **ERKEN — Germiyan** · yaklaşık 500 m² · Görev `UA1A64C2BEA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313095,26.471675) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313095/26.471675)
-3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · Görev `U92D437BB80` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.368450,26.643880) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.368450/26.643880)
-
-## Ek kuru zemin kalibrasyon kontrolü
-
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
-
-1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 500 m² · 15.09.2026 → 18.09.2026 · BSI Δ 0.192 · RGB Δ 0.188 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.319517,26.564084) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319517/26.564084)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Alaçatı** · yaklaşık 500 m² · 15.09.2026 → 18.09.2026 · BSI Δ 0.155 · RGB Δ 0.175 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.295819,26.380094) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.295819/26.380094)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+1. **ERKEN — Ilıca** · yaklaşık 700 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `U2EBF2F9DD1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.318703,26.387192)
+2. **ERKEN — Germiyan** · yaklaşık 500 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UA1A64C2BEA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313095,26.471675)
+3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `U92D437BB80` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.368450,26.643880)
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
