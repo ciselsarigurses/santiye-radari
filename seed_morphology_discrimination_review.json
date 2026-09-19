@@ -1,0 +1,51 @@
+{
+  "surum": 1,
+  "amac": "Seed-merkezli temel/kepçe morfoloji proxy skorunun ayırt ediciliğini ölçmek",
+  "uretim_filtresi": false,
+  "alarm": false,
+  "saha_gorevi": false,
+  "rota_degistirir": false,
+  "ana_uretim_esigi_degisti": false,
+  "mikro_politikasi_degisti": false,
+  "doygunluk_esigi": 0.95,
+  "minimum_seed": 20,
+  "skor_doygunlugu_var": true,
+  "doygun_bolgeler": [
+    "cesme",
+    "uzunkuyu"
+  ],
+  "bagimsiz_kanit_zorunlulugu": true,
+  "bolgeler": {
+    "cesme": {
+      "lokal_seed_sayisi": 526,
+      "orta_yuksek_seed_morfoloji": 526,
+      "orta_yuksek_orani": 1.0,
+      "disari_aktarilan_aday_sayisi": 29,
+      "tavan_100_puanli_disari_aktarilan": 20,
+      "tavan_100_puan_orani": 0.6897,
+      "skor_doygunlugu_riski": true,
+      "tek_basina_guven_kaniti_olarak_kullanilabilir": false,
+      "not": "Morfoloji seviyesi aday havuzunun neredeyse tamamını ORTA/YUKSEK işaretliyor; bu katman ayırt edici değildir ve bağımsız SAR/temporal/yapılaşma kanıtı olmadan yüksek güven veya KONTROLE_GIT üretmemelidir."
+    },
+    "uzunkuyu": {
+      "lokal_seed_sayisi": 213,
+      "orta_yuksek_seed_morfoloji": 213,
+      "orta_yuksek_orani": 1.0,
+      "disari_aktarilan_aday_sayisi": 24,
+      "tavan_100_puanli_disari_aktarilan": 20,
+      "tavan_100_puan_orani": 0.8333,
+      "skor_doygunlugu_riski": true,
+      "tek_basina_guven_kaniti_olarak_kullanilabilir": false,
+      "not": "Morfoloji seviyesi aday havuzunun neredeyse tamamını ORTA/YUKSEK işaretliyor; bu katman ayırt edici değildir ve bağımsız SAR/temporal/yapılaşma kanıtı olmadan yüksek güven veya KONTROLE_GIT üretmemelidir."
+    }
+  },
+  "cekirdek_regresyon": {
+    "cekirdek_referans_sayisi": 5,
+    "bulunan_cekirdek_referans_sayisi": 5,
+    "eksik_cekirdek_referanslar": [],
+    "gercek_kazi_referansi_korundu": true,
+    "yanlis_pozitif_regresyon_ihlalleri": [],
+    "cekirdek_regresyon_saglikli": true
+  },
+  "operasyonel_yorum": "Doygunluk varken morfoloji puanı yalnız diagnostik/ranking girdisidir; bağımsız SAR, temporal devamlılık veya başka yapılaşma desteği olmadan yüksek güvenli temel/kepçe adayı sayılmaz."
+}
