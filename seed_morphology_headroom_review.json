@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "Morfoloji 100-puan tavanının ranking bilgisini gizleyip gizlemediğini ölçmek",
   "uretim_filtresi": false,
   "alarm": false,
@@ -9,15 +9,18 @@
   "mikro_politikasi_degisti": false,
   "gercek_derinlik_olcumu": false,
   "ham_skor_yalniz_diagnostik": true,
-  "gercek_kazi_referansi_disari_aktarilan_havuzda": false,
+  "dogrulanmis_saha_yeni_aday_sayilmaz": true,
+  "gercek_kazi_regresyonu_saglikli": true,
+  "gercek_kazi_ham_puani_kesin": true,
   "yalniz_tavan_acmak_yeterli": false,
+  "morfoloji_toplamsal_ranking_kalibrasyon_riski": true,
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "15.09.2026",
       "son_tarih": "18.09.2026",
-      "disari_aktarilan_aday_sayisi": 29,
-      "tavan_100_aday_sayisi": 20,
+      "disari_aktarilan_yeni_aday_sayisi": 29,
+      "tavan_100_yeni_aday_sayisi": 20,
       "kirpilmis_skor_dagilimi": {
         "sayi": 29,
         "benzersiz_sayi": 6,
@@ -51,24 +54,27 @@
       "tavan_altinda_kaybolan_benzersiz_ham_skor_sayisi": 5,
       "gercek_kazi_referansi": {
         "id": "FN-20260916-CESME-001",
-        "yalniz_bu_bolgede_degerlendirildi": true,
-        "en_yakin_disari_aktarilan_aday_mesafe_m": 2870.1,
-        "45m_icinde_eslesme": false,
-        "kirpilmis_morfoloji_puani": null,
-        "ham_morfoloji_puani": null,
-        "ham_skor_sirasi": null,
-        "ham_skorda_referansin_ustundeki_aday_sayisi": null,
-        "tum_tavan_adaylarinin_altinda": false
+        "regresyonda_var": true,
+        "tespit": true,
+        "regresyon_uyumlu": true,
+        "en_yakin_seed_mesafe_m": 11.2,
+        "kirpilmis_morfoloji_puani": 75,
+        "ham_morfoloji_puani": 75,
+        "ham_puan_kesin": true,
+        "yeni_aday_havuzuna_eklenmesi_beklenmez": true,
+        "ham_skorla_yeni_adaylar_arasina_eklense_sirasi": 29,
+        "ham_skorda_referansin_ustundeki_yeni_aday_sayisi": 28,
+        "tum_100_puan_yeni_adaylarinin_ham_skorundan_dusuk": true
       },
       "yalniz_tavani_acmak_referans_rankingini_kurtarir": false,
-      "yorum": "Ham skor yalnız diagnostiktir; üretim veya rota kararında kullanılmaz."
+      "yorum": "Gerçek kazı referansı 100'ün altında olduğu için ham puanı kesin biliniyor ve tüm 100-puan yeni adaylarının ham skorundan da düşük. Yalnız skor tavanını kaldırmak ranking/recall sorununu çözmez; aynı-katman pozitiflerinin toplamsal aşırı ödüllendirilmesi yeniden kalibre edilmelidir."
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "onceki_tarih": "15.09.2026",
       "son_tarih": "18.09.2026",
-      "disari_aktarilan_aday_sayisi": 24,
-      "tavan_100_aday_sayisi": 20,
+      "disari_aktarilan_yeni_aday_sayisi": 24,
+      "tavan_100_yeni_aday_sayisi": 20,
       "kirpilmis_skor_dagilimi": {
         "sayi": 24,
         "benzersiz_sayi": 5,
@@ -102,18 +108,21 @@
       "tavan_altinda_kaybolan_benzersiz_ham_skor_sayisi": 3,
       "gercek_kazi_referansi": {
         "id": "FN-20260916-CESME-001",
-        "yalniz_bu_bolgede_degerlendirildi": false,
-        "en_yakin_disari_aktarilan_aday_mesafe_m": null,
-        "45m_icinde_eslesme": false,
+        "regresyonda_var": false,
+        "tespit": false,
+        "regresyon_uyumlu": false,
+        "en_yakin_seed_mesafe_m": null,
         "kirpilmis_morfoloji_puani": null,
         "ham_morfoloji_puani": null,
-        "ham_skor_sirasi": null,
-        "ham_skorda_referansin_ustundeki_aday_sayisi": null,
-        "tum_tavan_adaylarinin_altinda": false
+        "ham_puan_kesin": false,
+        "yeni_aday_havuzuna_eklenmesi_beklenmez": true,
+        "ham_skorla_yeni_adaylar_arasina_eklense_sirasi": null,
+        "ham_skorda_referansin_ustundeki_yeni_aday_sayisi": null,
+        "tum_100_puan_yeni_adaylarinin_ham_skorundan_dusuk": false
       },
       "yalniz_tavani_acmak_referans_rankingini_kurtarir": null,
       "yorum": "Ham skor yalnız diagnostiktir; üretim veya rota kararında kullanılmaz."
     }
   },
-  "operasyonel_yorum": "Bu ölçüm üretim kararını değiştirmez; ham skor yalnız diagnostiktir."
+  "operasyonel_yorum": "Gerçek kazı regresyonu yakalanıyor ancak puanı 75; dışa aktarılan 100-puan yeni adayların ham skorları da 100 veya üzerinde. Sorun yalnız 100 puan kırpması değil, toplamsal morfoloji kanıtlarının yeni adayları saha-doğrulamalı pozitiften fazla ödüllendirmesi. Üretim eşiği gevşetilmemeli; morfoloji bağımsız SAR/temporal kanıt olmadan KONTROLE_GIT üretmemeli."
 }
