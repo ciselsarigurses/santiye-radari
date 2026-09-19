@@ -6,52 +6,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.526165,
-          38.19723
-        ],
-        "type": "Point"
-      },
-      "id": "cesme:38.197230:26.526165",
-      "properties": {
-        "alan_m2": 8301,
-        "alarm": false,
-        "arka_plan": true,
-        "bolge": "cesme",
-        "eski_tarih": "2026-09-12",
-        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
-        "hedef_katmani": "ANA_250_PLUS",
-        "kaynak": "coverage_blind_area_audit.json",
-        "mahalle_yaklasik": "Mevki doğrulanmadı",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": false,
-        "neden": "BULUT_GOLGE_KALICI",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": false,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": null,
-        "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.333,
-        "sar_cevre_degisim_tepe_db": 1.097,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 2.135,
-        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "CIFT_POL_GUCLU",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-09-18"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          26.527424,
+          26.527539,
           38.203562
         ],
         "type": "Point"
       },
-      "id": "cesme:38.203562:26.527424",
+      "id": "cesme:38.203562:26.527539",
       "properties": {
-        "alan_m2": 10401,
+        "alan_m2": 11601,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -68,10 +30,10 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.568,
-        "sar_cevre_degisim_tepe_db": 1.241,
+        "sar_cevre_degisim_konservatif_db": 0.949,
+        "sar_cevre_degisim_tepe_db": 1.172,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 1.656,
+        "sar_lokal_degisim_skor_db": 1.57,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
         "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
         "temporal_durum": null,
@@ -89,7 +51,7 @@
       },
       "id": "cesme:38.206094:26.529256",
       "properties": {
-        "alan_m2": 13801,
+        "alan_m2": 13001,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -120,14 +82,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.421649,
-          38.21731
+          26.326405,
+          38.230968
         ],
         "type": "Point"
       },
-      "id": "cesme:38.217310:26.421649",
+      "id": "cesme:38.230968:26.326405",
       "properties": {
-        "alan_m2": 8001,
+        "alan_m2": 10801,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -144,10 +106,48 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 1.1,
-        "sar_cevre_degisim_tepe_db": 1.329,
+        "sar_cevre_degisim_konservatif_db": 0.104,
+        "sar_cevre_degisim_tepe_db": 0.986,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.637,
+        "sar_lokal_degisim_skor_db": 0.116,
+        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
+        "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
+        "temporal_durum": null,
+        "yeni_tarih": "2026-09-18"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          26.401501,
+          38.243992
+        ],
+        "type": "Point"
+      },
+      "id": "cesme:38.243992:26.401501",
+      "properties": {
+        "alan_m2": 21202,
+        "alarm": false,
+        "arka_plan": true,
+        "bolge": "cesme",
+        "eski_tarih": "2026-09-12",
+        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
+        "hedef_katmani": "ANA_250_PLUS",
+        "kaynak": "coverage_blind_area_audit.json",
+        "mahalle_yaklasik": "Mevki doğrulanmadı",
+        "mikro_guclu_diagnostik": false,
+        "mikro_saha_dogrulandi": false,
+        "neden": "KARISIK_GECERSIZLIK",
+        "onceki_sar_lokal_degisim_skor_db": null,
+        "saha_dogrulanmis_yikim_onculu": false,
+        "saha_gorevi": false,
+        "saha_oncul_gorev_id": null,
+        "saha_oncul_son_tarih": null,
+        "sar_cevre_degisim_konservatif_db": 0.399,
+        "sar_cevre_degisim_tepe_db": 1.117,
+        "sar_kaynak_tipi": "BOLGESEL_RTC",
+        "sar_lokal_degisim_skor_db": 0.797,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
         "sar_polarizasyon_uyumu": "TEK_POL_BASKIN",
         "temporal_durum": null,
@@ -158,14 +158,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.401272,
-          38.243812
+          26.385589,
+          38.248153
         ],
         "type": "Point"
       },
-      "id": "cesme:38.243812:26.401272",
+      "id": "cesme:38.248153:26.385589",
       "properties": {
-        "alan_m2": 16802,
+        "alan_m2": 10801,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -182,12 +182,12 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.469,
-        "sar_cevre_degisim_tepe_db": 0.656,
+        "sar_cevre_degisim_konservatif_db": 0.185,
+        "sar_cevre_degisim_tepe_db": 0.201,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 1.032,
-        "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
-        "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
+        "sar_lokal_degisim_skor_db": 0.312,
+        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
+        "sar_polarizasyon_uyumu": "TEK_POL_BASKIN",
         "temporal_durum": null,
         "yeni_tarih": "2026-09-18"
       },
@@ -196,52 +196,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.385589,
-          38.248243
+          26.29149,
+          38.261268
         ],
         "type": "Point"
       },
-      "id": "cesme:38.248243:26.385589",
+      "id": "cesme:38.261268:26.291490",
       "properties": {
-        "alan_m2": 9601,
-        "alarm": false,
-        "arka_plan": false,
-        "bolge": "cesme",
-        "eski_tarih": "2026-09-12",
-        "harita_katmani": "SAR_LOKAL_ORTA",
-        "hedef_katmani": "ANA_250_PLUS",
-        "kaynak": "coverage_blind_area_audit.json",
-        "mahalle_yaklasik": "Mevki doğrulanmadı",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": false,
-        "neden": "KARISIK_GECERSIZLIK",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": false,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": null,
-        "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.481,
-        "sar_cevre_degisim_tepe_db": 0.522,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 1.019,
-        "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
-        "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-09-18"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          26.291605,
-          38.261178
-        ],
-        "type": "Point"
-      },
-      "id": "cesme:38.261178:26.291605",
-      "properties": {
-        "alan_m2": 14401,
+        "alan_m2": 17202,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -258,12 +220,50 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.203,
-        "sar_cevre_degisim_tepe_db": 1.969,
+        "sar_cevre_degisim_konservatif_db": 0.149,
+        "sar_cevre_degisim_tepe_db": 1.815,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 1.353,
+        "sar_lokal_degisim_skor_db": 0.196,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
+        "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
+        "temporal_durum": null,
+        "yeni_tarih": "2026-09-18"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          26.378377,
+          38.261901
+        ],
+        "type": "Point"
+      },
+      "id": "cesme:38.261901:26.378377",
+      "properties": {
+        "alan_m2": 16002,
+        "alarm": false,
+        "arka_plan": true,
+        "bolge": "cesme",
+        "eski_tarih": "2026-09-12",
+        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
+        "hedef_katmani": "ANA_250_PLUS",
+        "kaynak": "coverage_blind_area_audit.json",
+        "mahalle_yaklasik": "Alaçatı",
+        "mikro_guclu_diagnostik": false,
+        "mikro_saha_dogrulandi": false,
+        "neden": "KARISIK_GECERSIZLIK",
+        "onceki_sar_lokal_degisim_skor_db": null,
+        "saha_dogrulanmis_yikim_onculu": false,
+        "saha_gorevi": false,
+        "saha_oncul_gorev_id": null,
+        "saha_oncul_son_tarih": null,
+        "sar_cevre_degisim_konservatif_db": 0.401,
+        "sar_cevre_degisim_tepe_db": 0.467,
+        "sar_kaynak_tipi": "BOLGESEL_RTC",
+        "sar_lokal_degisim_skor_db": 0.344,
+        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
+        "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
         "yeni_tarih": "2026-09-18"
       },
@@ -310,14 +310,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.292062,
-          38.317889
+          26.291605,
+          38.317798
         ],
         "type": "Point"
       },
-      "id": "cesme:38.317889:26.292062",
+      "id": "cesme:38.317798:26.291605",
       "properties": {
-        "alan_m2": 8801,
+        "alan_m2": 14001,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -334,10 +334,10 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.279,
-        "sar_cevre_degisim_tepe_db": 0.704,
+        "sar_cevre_degisim_konservatif_db": 0.029,
+        "sar_cevre_degisim_tepe_db": 1.398,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.037,
+        "sar_lokal_degisim_skor_db": 0.558,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
         "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
@@ -664,7 +664,7 @@
       },
       "id": "uzunkuyu:38.187643:26.536150",
       "properties": {
-        "alan_m2": 108519,
+        "alan_m2": 104518,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -702,7 +702,7 @@
       },
       "id": "uzunkuyu:38.190537:26.621098",
       "properties": {
-        "alan_m2": 16003,
+        "alan_m2": 19903,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -733,14 +733,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.638499,
-          38.204285
+          26.637698,
+          38.20528
         ],
         "type": "Point"
       },
-      "id": "uzunkuyu:38.204285:26.638499",
+      "id": "uzunkuyu:38.205280:26.637698",
       "properties": {
-        "alan_m2": 20404,
+        "alan_m2": 44408,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -757,12 +757,12 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.421,
-        "sar_cevre_degisim_tepe_db": 3.977,
+        "sar_cevre_degisim_konservatif_db": 0.373,
+        "sar_cevre_degisim_tepe_db": 3.37,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 1.388,
+        "sar_lokal_degisim_skor_db": 0.791,
         "sar_mekansal_ayrim": "TEK_POL_CEVRE_DEGISIMI",
-        "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
+        "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
         "yeni_tarih": "2026-09-18"
       },
@@ -778,7 +778,7 @@
       },
       "id": "uzunkuyu:38.206094:26.529281",
       "properties": {
-        "alan_m2": 14002,
+        "alan_m2": 13202,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -816,7 +816,7 @@
       },
       "id": "uzunkuyu:38.208446:26.532028",
       "properties": {
-        "alan_m2": 12302,
+        "alan_m2": 13502,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -847,14 +847,52 @@
     {
       "geometry": {
         "coordinates": [
-          26.643995,
-          38.341134
+          26.678798,
+          38.211431
         ],
         "type": "Point"
       },
-      "id": "uzunkuyu:38.341134:26.643995",
+      "id": "uzunkuyu:38.211431:26.678798",
       "properties": {
-        "alan_m2": 14002,
+        "alan_m2": 12902,
+        "alarm": false,
+        "arka_plan": true,
+        "bolge": "uzunkuyu",
+        "eski_tarih": "2026-09-12",
+        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
+        "hedef_katmani": "ANA_250_PLUS",
+        "kaynak": "coverage_blind_area_audit.json",
+        "mahalle_yaklasik": "Mevki doğrulanmadı",
+        "mikro_guclu_diagnostik": false,
+        "mikro_saha_dogrulandi": false,
+        "neden": "KARISIK_GECERSIZLIK",
+        "onceki_sar_lokal_degisim_skor_db": null,
+        "saha_dogrulanmis_yikim_onculu": false,
+        "saha_gorevi": false,
+        "saha_oncul_gorev_id": null,
+        "saha_oncul_son_tarih": null,
+        "sar_cevre_degisim_konservatif_db": 0.447,
+        "sar_cevre_degisim_tepe_db": 1.67,
+        "sar_kaynak_tipi": "BOLGESEL_RTC",
+        "sar_lokal_degisim_skor_db": 0.725,
+        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
+        "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
+        "temporal_durum": null,
+        "yeni_tarih": "2026-09-18"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          26.643308,
+          38.34222
+        ],
+        "type": "Point"
+      },
+      "id": "uzunkuyu:38.342220:26.643308",
+      "properties": {
+        "alan_m2": 23504,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -871,10 +909,10 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.001,
-        "sar_cevre_degisim_tepe_db": 3.421,
+        "sar_cevre_degisim_konservatif_db": 0.827,
+        "sar_cevre_degisim_tepe_db": 2.155,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.424,
+        "sar_lokal_degisim_skor_db": 0.643,
         "sar_mekansal_ayrim": "TEK_POL_CEVRE_DEGISIMI",
         "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
@@ -885,14 +923,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.677882,
+          26.677997,
           38.347556
         ],
         "type": "Point"
       },
-      "id": "uzunkuyu:38.347556:26.677882",
+      "id": "uzunkuyu:38.347556:26.677997",
       "properties": {
-        "alan_m2": 18403,
+        "alan_m2": 18003,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -909,48 +947,10 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.816,
-        "sar_cevre_degisim_tepe_db": 2.318,
+        "sar_cevre_degisim_konservatif_db": 0.573,
+        "sar_cevre_degisim_tepe_db": 2.119,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.693,
-        "sar_mekansal_ayrim": "TEK_POL_CEVRE_DEGISIMI",
-        "sar_polarizasyon_uyumu": "TEK_POL_BASKIN",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-09-18"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          26.676508,
-          38.353435
-        ],
-        "type": "Point"
-      },
-      "id": "uzunkuyu:38.353435:26.676508",
-      "properties": {
-        "alan_m2": 13202,
-        "alarm": false,
-        "arka_plan": true,
-        "bolge": "uzunkuyu",
-        "eski_tarih": "2026-09-12",
-        "harita_katmani": "SAR_GENIS_YUZEY_ARKA_PLAN",
-        "hedef_katmani": "ANA_250_PLUS",
-        "kaynak": "coverage_blind_area_audit.json",
-        "mahalle_yaklasik": "Özbek",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": false,
-        "neden": "KARISIK_GECERSIZLIK",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": false,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": null,
-        "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.051,
-        "sar_cevre_degisim_tepe_db": 4.329,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.175,
+        "sar_lokal_degisim_skor_db": 0.416,
         "sar_mekansal_ayrim": "TEK_POL_CEVRE_DEGISIMI",
         "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
@@ -960,10 +960,10 @@
     }
   ],
   "layer_counts": {
-    "SAR_DUSUK_KANIT_ARKA_PLAN": 13,
-    "SAR_GENIS_YUZEY_ARKA_PLAN": 6,
+    "SAR_DUSUK_KANIT_ARKA_PLAN": 15,
+    "SAR_GENIS_YUZEY_ARKA_PLAN": 5,
     "SAR_GUCLU_LOKAL": 1,
-    "SAR_LOKAL_ORTA": 3,
+    "SAR_LOKAL_ORTA": 2,
     "SAR_MIKRO_DIAGNOSTIK": 1,
     "SAR_SAHA_ONCUL": 1
   },
