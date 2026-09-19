@@ -1,0 +1,119 @@
+{
+  "surum": 1,
+  "amac": "Morfoloji 100-puan tavanının ranking bilgisini gizleyip gizlemediğini ölçmek",
+  "uretim_filtresi": false,
+  "alarm": false,
+  "saha_gorevi": false,
+  "rota_degistirir": false,
+  "ana_uretim_esigi_degisti": false,
+  "mikro_politikasi_degisti": false,
+  "gercek_derinlik_olcumu": false,
+  "ham_skor_yalniz_diagnostik": true,
+  "gercek_kazi_referansi_disari_aktarilan_havuzda": false,
+  "yalniz_tavan_acmak_yeterli": false,
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "15.09.2026",
+      "son_tarih": "18.09.2026",
+      "disari_aktarilan_aday_sayisi": 29,
+      "tavan_100_aday_sayisi": 20,
+      "kirpilmis_skor_dagilimi": {
+        "sayi": 29,
+        "benzersiz_sayi": 6,
+        "min": 75,
+        "p10": 85,
+        "medyan": 100,
+        "p90": 100,
+        "max": 100,
+        "aralik": 25
+      },
+      "ham_skor_dagilimi": {
+        "sayi": 29,
+        "benzersiz_sayi": 10,
+        "min": 75,
+        "p10": 85,
+        "medyan": 105,
+        "p90": 115,
+        "max": 115,
+        "aralik": 40
+      },
+      "tavan_aday_ham_skor_dagilimi": {
+        "sayi": 20,
+        "benzersiz_sayi": 5,
+        "min": 100,
+        "p10": 103,
+        "medyan": 105,
+        "p90": 115,
+        "max": 115,
+        "aralik": 15
+      },
+      "tavan_altinda_kaybolan_benzersiz_ham_skor_sayisi": 5,
+      "gercek_kazi_referansi": {
+        "id": "FN-20260916-CESME-001",
+        "yalniz_bu_bolgede_degerlendirildi": true,
+        "en_yakin_disari_aktarilan_aday_mesafe_m": 2870.1,
+        "45m_icinde_eslesme": false,
+        "kirpilmis_morfoloji_puani": null,
+        "ham_morfoloji_puani": null,
+        "ham_skor_sirasi": null,
+        "ham_skorda_referansin_ustundeki_aday_sayisi": null,
+        "tum_tavan_adaylarinin_altinda": false
+      },
+      "yalniz_tavani_acmak_referans_rankingini_kurtarir": false,
+      "yorum": "Ham skor yalnız diagnostiktir; üretim veya rota kararında kullanılmaz."
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_tarih": "15.09.2026",
+      "son_tarih": "18.09.2026",
+      "disari_aktarilan_aday_sayisi": 24,
+      "tavan_100_aday_sayisi": 20,
+      "kirpilmis_skor_dagilimi": {
+        "sayi": 24,
+        "benzersiz_sayi": 5,
+        "min": 75,
+        "p10": 90,
+        "medyan": 100,
+        "p90": 100,
+        "max": 100,
+        "aralik": 25
+      },
+      "ham_skor_dagilimi": {
+        "sayi": 24,
+        "benzersiz_sayi": 7,
+        "min": 75,
+        "p10": 90,
+        "medyan": 105,
+        "p90": 105,
+        "max": 115,
+        "aralik": 40
+      },
+      "tavan_aday_ham_skor_dagilimi": {
+        "sayi": 20,
+        "benzersiz_sayi": 3,
+        "min": 100,
+        "p10": 100,
+        "medyan": 105,
+        "p90": 105,
+        "max": 115,
+        "aralik": 15
+      },
+      "tavan_altinda_kaybolan_benzersiz_ham_skor_sayisi": 3,
+      "gercek_kazi_referansi": {
+        "id": "FN-20260916-CESME-001",
+        "yalniz_bu_bolgede_degerlendirildi": false,
+        "en_yakin_disari_aktarilan_aday_mesafe_m": null,
+        "45m_icinde_eslesme": false,
+        "kirpilmis_morfoloji_puani": null,
+        "ham_morfoloji_puani": null,
+        "ham_skor_sirasi": null,
+        "ham_skorda_referansin_ustundeki_aday_sayisi": null,
+        "tum_tavan_adaylarinin_altinda": false
+      },
+      "yalniz_tavani_acmak_referans_rankingini_kurtarir": null,
+      "yorum": "Ham skor yalnız diagnostiktir; üretim veya rota kararında kullanılmaz."
+    }
+  },
+  "operasyonel_yorum": "Bu ölçüm üretim kararını değiştirmez; ham skor yalnız diagnostiktir."
+}
