@@ -1,0 +1,46 @@
+{
+  "surum": 1,
+  "amac": "SAR yokluğunu temel/kepçe kazısı için zorunlu negatif veto yapmadan önce saha pozitifleriyle kalibre etmek",
+  "alarm": false,
+  "saha_gorevi": false,
+  "uretim_filtresi": false,
+  "ana_uretim_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "zorunlu_veto_kalibrasyonu_icin_min_dogrulanmis_kazi": 2,
+  "zamansal_gecerli_sar_kalibrasyon_pozitifi": 1,
+  "sar_destekli_dogrulanmis_kazi": 0,
+  "sar_tarafindan_kacirilan_dogrulanmis_kazi": 1,
+  "sar_zorunlu_veto_kalibre": false,
+  "sar_zorunlu_veto_guvenli_degil_gozlendi": true,
+  "sar_zorunlu_veto_kullanilabilir": false,
+  "kalibrasyon_sonuclari": [
+    {
+      "bolge_anahtari": "cesme",
+      "kalibrasyon_id": "FN-20260916-CESME-001",
+      "enlem": 38.34184646606445,
+      "boylam": 26.432861328125,
+      "sar_lokal_degisim_skor_db": 0.848,
+      "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
+      "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
+      "sar_guclu_lokal_destek": false,
+      "sar_kalibrasyon_destegi": false
+    }
+  ],
+  "kacirilan_pozitifler": [
+    {
+      "bolge_anahtari": "cesme",
+      "kalibrasyon_id": "FN-20260916-CESME-001",
+      "enlem": 38.34184646606445,
+      "boylam": 26.432861328125,
+      "sar_lokal_degisim_skor_db": 0.848,
+      "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
+      "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
+      "sar_guclu_lokal_destek": false,
+      "sar_kalibrasyon_destegi": false
+    }
+  ],
+  "politika": "SAR güçlü-lokal desteği bağımsız pozitif kanıt olarak kullanılabilir; ancak en az iki zamansal geçerli saha-doğrulanmış kazının tamamı SAR tarafından desteklenmeden SAR yokluğu negatif/hard-veto değildir. Doğrulanmış bir kazı SAR tarafından kaçırılırsa zorunlu veto açıkça güvensiz kabul edilir."
+}
