@@ -1,0 +1,439 @@
+{
+  "surum": 1,
+  "amac": "Morfoloji tavan doygunluğunda seed-bileşen merkez hizalamasını ölçmek",
+  "uretim_filtresi": false,
+  "alarm": false,
+  "saha_gorevi": false,
+  "rota_degistirir": false,
+  "ana_uretim_esigi_degisti": false,
+  "mikro_politikasi_degisti": false,
+  "hizali_mesafe_esigi_piksel": 1.5,
+  "hatalar": [],
+  "bolgeler": {
+    "cesme": {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "durum": "ok",
+      "onceki_tarih": "15.09.2026",
+      "son_tarih": "18.09.2026",
+      "lokal_seed_sayisi": 526,
+      "disari_aktarilan_aday_sayisi": 29,
+      "tavan_100_puanli_sayi": 20,
+      "tavan_100_hizali_sayi": 20,
+      "tavan_100_hizasiz_sayi": 0,
+      "tavan_100_seed_merkezi_bilesende_sayi": 20,
+      "tavan_100_hizali_oran": 1.0,
+      "tavan_100_hizasiz_oran": 0.0,
+      "saha_referans_hizalama": [
+        {
+          "id": "FP-20260913-CIFTLIKKOY-001",
+          "sonuc": "YANLIS_POZITIF",
+          "en_yakin_seed_mesafe_m": 136.1,
+          "seed_yakaladi": false,
+          "morfoloji_puani": null,
+          "bilesen_merkez_mesafe_piksel": null,
+          "seed_merkezi_bilesen_icinde": null,
+          "seed_bilesen_hizali": null
+        },
+        {
+          "id": "FN-20260916-CESME-001",
+          "sonuc": "DOGRULANMIS_KAZI",
+          "en_yakin_seed_mesafe_m": 11.2,
+          "seed_yakaladi": true,
+          "morfoloji_puani": 75,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "id": "FP-20260916-REISDERE-001",
+          "sonuc": "YANLIS_POZITIF",
+          "en_yakin_seed_mesafe_m": 70.0,
+          "seed_yakaladi": false,
+          "morfoloji_puani": null,
+          "bilesen_merkez_mesafe_piksel": null,
+          "seed_merkezi_bilesen_icinde": null,
+          "seed_bilesen_hizali": null
+        },
+        {
+          "id": "FP-20260917-MUSALLA-001",
+          "sonuc": "YANLIS_POZITIF",
+          "en_yakin_seed_mesafe_m": 259.4,
+          "seed_yakaladi": false,
+          "morfoloji_puani": null,
+          "bilesen_merkez_mesafe_piksel": null,
+          "seed_merkezi_bilesen_icinde": null,
+          "seed_bilesen_hizali": null
+        },
+        {
+          "id": "FP-20260917-MUSALLA-002",
+          "sonuc": "YANLIS_POZITIF",
+          "en_yakin_seed_mesafe_m": 580.8,
+          "seed_yakaladi": false,
+          "morfoloji_puani": null,
+          "bilesen_merkez_mesafe_piksel": null,
+          "seed_merkezi_bilesen_icinde": null,
+          "seed_bilesen_hizali": null
+        }
+      ],
+      "ornek_tavan_adaylar": [
+        {
+          "enlem": 38.315085,
+          "boylam": 26.422221,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.329105,
+          "boylam": 26.3145,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.284966,
+          "boylam": 26.378835,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.304412,
+          "boylam": 26.376088,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.3443,
+          "boylam": 26.306486,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.320783,
+          "boylam": 26.307517,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.313638,
+          "boylam": 26.386619,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.342039,
+          "boylam": 26.290116,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.398117,
+          "boylam": 26.484725,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.361395,
+          "boylam": 26.287941,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.303327,
+          "boylam": 26.37769,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.415845,
+          "boylam": 26.50865,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.316713,
+          "boylam": 26.460113,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.347285,
+          "boylam": 26.484267,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.356149,
+          "boylam": 26.304769,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.343848,
+          "boylam": 26.289201,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.285418,
+          "boylam": 26.286568,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.285327,
+          "boylam": 26.286224,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.416207,
+          "boylam": 26.508994,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.368269,
+          "boylam": 26.310607,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        }
+      ]
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "durum": "ok",
+      "onceki_tarih": "15.09.2026",
+      "son_tarih": "18.09.2026",
+      "lokal_seed_sayisi": 213,
+      "disari_aktarilan_aday_sayisi": 24,
+      "tavan_100_puanli_sayi": 20,
+      "tavan_100_hizali_sayi": 20,
+      "tavan_100_hizasiz_sayi": 0,
+      "tavan_100_seed_merkezi_bilesende_sayi": 20,
+      "tavan_100_hizali_oran": 1.0,
+      "tavan_100_hizasiz_oran": 0.0,
+      "saha_referans_hizalama": [
+        {
+          "id": "FP-20260917-UZUNKUYU-001",
+          "sonuc": "YANLIS_POZITIF",
+          "en_yakin_seed_mesafe_m": 60.8,
+          "seed_yakaladi": false,
+          "morfoloji_puani": null,
+          "bilesen_merkez_mesafe_piksel": null,
+          "seed_merkezi_bilesen_icinde": null,
+          "seed_bilesen_hizali": null
+        }
+      ],
+      "ornek_tavan_adaylar": [
+        {
+          "enlem": 38.297809,
+          "boylam": 26.578509,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.279448,
+          "boylam": 26.581028,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.316713,
+          "boylam": 26.460132,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.355244,
+          "boylam": 26.643766,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.347285,
+          "boylam": 26.484288,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.344209,
+          "boylam": 26.481999,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.253037,
+          "boylam": 26.462651,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.419191,
+          "boylam": 26.576792,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.236847,
+          "boylam": 26.452576,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.263439,
+          "boylam": 26.480739,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.270946,
+          "boylam": 26.459102,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.22934,
+          "boylam": 26.502835,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.269951,
+          "boylam": 26.458071,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.270403,
+          "boylam": 26.458529,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.251047,
+          "boylam": 26.460933,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.284785,
+          "boylam": 26.557902,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.249419,
+          "boylam": 26.470092,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.283518,
+          "boylam": 26.558245,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.228887,
+          "boylam": 26.504438,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        },
+        {
+          "enlem": 38.252585,
+          "boylam": 26.462193,
+          "morfoloji_puani": 100,
+          "bilesen_merkez_mesafe_piksel": 0.0,
+          "seed_merkezi_bilesen_icinde": true,
+          "seed_bilesen_hizali": true
+        }
+      ]
+    }
+  },
+  "cekirdek_regresyon_hizalama_ozeti": {
+    "gercek_kazi_bulundu": true,
+    "gercek_kazi_seed_bilesen_hizali": true,
+    "gercek_kazi_bilesen_merkez_mesafe_piksel": 0.0,
+    "cekirdek_yanlis_pozitif_bulunan_sayi": 4,
+    "cekirdek_yanlis_pozitif_hizali_sayi": 0,
+    "cekirdek_yanlis_pozitif_hizasiz_sayi": 0
+  },
+  "not": "Bu çıktı yalnız morfoloji skorunun neden doygunlaştığını ölçer. Seed merkezinden uzak bir komşu bileşen, bağımsız kanıt olmadan temel/kepçe lehine yeni operasyonel sinyal sayılmaz."
+}
