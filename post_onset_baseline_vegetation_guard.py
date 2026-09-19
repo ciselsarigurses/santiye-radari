@@ -61,8 +61,19 @@ def _region_guard(region):
         item for item in (region.get("kritik_regresyon") or [])
         if isinstance(item, dict)
     ]
-    true_rows = [x for x in critical if str(x.get("sonuc") or "").upper() == "DOGRULANMIS_KAZI"]
-    true_reference_safe = all(not _vegetation_negative(x) for x in true_rows)
+    true_rows = [
+        x for x in critical
+        if str(x.get("sonuc") or "").upper() == "DOGRULANMIS_KAZI"
+    ]
+    # all([]) Python'da True döner. Gerçek-kazı referansı bu bölgenin dışında ise
+    # bölgesel korumayı başarı gibi raporlamak yanlış güven üretir. Böyle bölgelerde
+    # durum "uygulanamaz" (None) olmalı; yalnız gerçekten referans içeren bölge
+    # regresyon güvenliğini belirler.
+    true_reference_safe = (
+        all(not _vegetation_negative(x) for x in true_rows)
+        if true_rows
+        else None
+    )
 
     return {
         "durum": region.get("durum"),
@@ -72,6 +83,7 @@ def _region_guard(region):
         "girdi_aday_sayisi": len(candidates),
         "korunan_aday_sayisi": len(kept),
         "kalici_bitki_bastirilan_sayi": len(suppressed),
+        "gercek_kazi_referansi_sayisi": len(true_rows),
         "gercek_kazi_referansi_korundu": true_reference_safe,
         "korunan_adaylar": kept,
         "bastirilan_adaylar": suppressed,
@@ -88,16 +100,31 @@ def audit(payload=None):
             continue
         regions[key] = _region_guard(region)
 
-    suppressed = sum(int(x.get("kalici_bitki_bastirilan_sayi") or 0) for x in regions.values())
-    true_safe = all(x.get("gercek_kazi_referansi_korundu") is not False for x in regions.values())
+    suppressed = sum(
+        int(x.get("kalici_bitki_bastirilan_sayi") or 0)
+        for x in regions.values()
+    )
+    true_reference_regions = [
+        x for x in regions.values()
+        if int(x.get("gercek_kazi_referansi_sayisi") or 0) > 0
+    ]
+    true_reference_count = sum(
+        int(x.get("gercek_kazi_referansi_sayisi") or 0)
+        for x in true_reference_regions
+    )
+    true_safe = bool(true_reference_regions) and all(
+        x.get("gercek_kazi_referansi_korundu") is True
+        for x in true_reference_regions
+    )
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "13 Eylül baseline referans-benzeri adaylarında çoğunluk korunmuş bitki dokusunu tarla/bahçe negatif bağlamı olarak bastırmak",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": 250,
         "mikro_aralik_m2": [150, 249],
         "kalici_bitki_negatif_esigi": MAX_PERSISTENT_VEG_FRACTION,
         "toplam_kalici_bitki_bastirilan": suppressed,
+        "gercek_kazi_referansi_sayisi": true_reference_count,
         "gercek_kazi_referansi_korundu": true_safe,
         "uretim_filtresi": False,
         "alarm": False,
@@ -106,7 +133,8 @@ def audit(payload=None):
         "not": (
             "Bu çıktı üretim veya rota filtresi değildir. Kalıcı bitki oranı >=0.50 olan referans-benzeri "
             "adayları güçlü tarla/bahçe negatif bağlamı olarak ayırır; doğrulanmış gerçek kazı referansının "
-            "bastırılmadığını regresyon güvenliği olarak raporlar."
+            "bastırılmadığını regresyon güvenliği olarak raporlar. Referans içermeyen bölgelerde bölgesel "
+            "koruma durumu null/uygulanamaz olarak bırakılır."
         ),
     }
 
@@ -127,13 +155,26 @@ def _self_check():
                     {"enlem": 1, "boylam": 1, "kalici_bitki_orani_5x5": 0.72},
                     {"enlem": 2, "boylam": 2, "kalici_bitki_orani_5x5": 0.12},
                 ],
-            }
+            },
+            "uzunkuyu": {
+                "durum": "ok",
+                "bolge": "Uzunkuyu",
+                "kritik_regresyon": [
+                    {"sonuc": "YANLIS_POZITIF", "kalici_bitki_orani_5x5": 0.72}
+                ],
+                "benzer_diagnostik_adaylar": [],
+            },
         }
     }
     result = audit(sample)
     assert result["toplam_kalici_bitki_bastirilan"] == 1
+    assert result["gercek_kazi_referansi_sayisi"] == 1
     assert result["gercek_kazi_referansi_korundu"] is True
+    assert result["bolgeler"]["cesme"]["gercek_kazi_referansi_sayisi"] == 1
+    assert result["bolgeler"]["cesme"]["gercek_kazi_referansi_korundu"] is True
     assert result["bolgeler"]["cesme"]["korunan_aday_sayisi"] == 1
+    assert result["bolgeler"]["uzunkuyu"]["gercek_kazi_referansi_sayisi"] == 0
+    assert result["bolgeler"]["uzunkuyu"]["gercek_kazi_referansi_korundu"] is None
 
 
 def main():
