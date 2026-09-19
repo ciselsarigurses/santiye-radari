@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "13 Eylül baseline referans-benzeri adaylarında çoğunluk korunmuş bitki dokusunu tarla/bahçe negatif bağlamı olarak bastırmak",
   "gercek_derinlik_olcumu": false,
   "ana_uretim_esigi_m2": 250,
@@ -9,6 +9,7 @@
   ],
   "kalici_bitki_negatif_esigi": 0.5,
   "toplam_kalici_bitki_bastirilan": 2,
+  "gercek_kazi_referansi_sayisi": 1,
   "gercek_kazi_referansi_korundu": true,
   "uretim_filtresi": false,
   "alarm": false,
@@ -22,6 +23,7 @@
       "girdi_aday_sayisi": 8,
       "korunan_aday_sayisi": 6,
       "kalici_bitki_bastirilan_sayi": 2,
+      "gercek_kazi_referansi_sayisi": 1,
       "gercek_kazi_referansi_korundu": true,
       "korunan_adaylar": [
         {
@@ -216,12 +218,13 @@
       "girdi_aday_sayisi": 0,
       "korunan_aday_sayisi": 0,
       "kalici_bitki_bastirilan_sayi": 0,
-      "gercek_kazi_referansi_korundu": true,
+      "gercek_kazi_referansi_sayisi": 0,
+      "gercek_kazi_referansi_korundu": null,
       "korunan_adaylar": [],
       "bastirilan_adaylar": [],
       "alarm": false,
       "saha_gorevi": false
     }
   },
-  "not": "Bu çıktı üretim veya rota filtresi değildir. Kalıcı bitki oranı >=0.50 olan referans-benzeri adayları güçlü tarla/bahçe negatif bağlamı olarak ayırır; doğrulanmış gerçek kazı referansının bastırılmadığını regresyon güvenliği olarak raporlar."
+  "not": "Bu çıktı üretim veya rota filtresi değildir. Kalıcı bitki oranı >=0.50 olan referans-benzeri adayları güçlü tarla/bahçe negatif bağlamı olarak ayırır; doğrulanmış gerçek kazı referansının bastırılmadığını regresyon güvenliği olarak raporlar. Referans içermeyen bölgelerde bölgesel koruma durumu null/uygulanamaz olarak bırakılır."
 }
