@@ -25,6 +25,7 @@ import satellite
 OUTPUT_JSON = Path(__file__).with_name("localized_excavation_seed_review.json")
 MAIN_THRESHOLD_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
+DIAGNOSTIC_EXPORT_LIMIT = 250
 
 # Geniş/planar tarla değişimine karşı mevcut parlak-lokal diagnostik sınırlar.
 MAX_LOCAL_MEAN_RGB = 0.09
@@ -329,7 +330,7 @@ def audit():
                 "saha_gorevi": False,
                 "saha_referans_regresyonu": checks,
                 "regresyon_uyumsuz_sayisi": len(failures),
-                "lokal_seed_diagnostik_adaylari": _discover(region_key, arrays)[:20],
+                "lokal_seed_diagnostik_adaylari": _discover(region_key, arrays)[:DIAGNOSTIC_EXPORT_LIMIT],
             }
         except Exception as exc:
             regions[region_key] = {
@@ -342,6 +343,7 @@ def audit():
         "amac": "Geniş tarla yüzey değişiminden farklı, lokal/seyrek temel kazısı seed hipotezini test etmek",
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
+        "diagnostik_disari_aktarma_tavani": DIAGNOSTIC_EXPORT_LIMIT,
         "alarm": False,
         "saha_gorevi": False,
         "uretim_filtresi": False,
