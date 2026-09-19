@@ -1,0 +1,77 @@
+name: Seed Bileşen Hizalama Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "seed_component_alignment_audit.py"
+      - ".github/workflows/seed-component-alignment-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-seed-component-alignment
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt 'planetary-computer>=1.0,<2'
+
+      - name: Hizalama öz testi
+        run: python seed_component_alignment_audit.py --check-only
+
+      - name: Seed-bileşen hizalamasını ölç
+        run: python seed_component_alignment_audit.py
+
+      - name: Diagnostiği güvenli kaydet
+        run: |
+          output="seed_component_alignment_review.json"
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Hizalama diagnostiği değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python seed_component_alignment_audit.py --check-only
+            python seed_component_alignment_audit.py
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add $output
+            git commit -m "Radar: seed-bileşen hizalama diagnostiğini güncelle"
+            if git push origin HEAD:main; then
+              echo "Seed-bileşen hizalama diagnostiği kaydedildi."
+              exit 0
+            fi
+
+            echo "Ana dal ilerledi; yeniden denenecek."
+            sleep $((attempt * 2))
+          done
+
+          echo "Üç denemede diagnostik kaydı tamamlanamadı."
+          exit 1
