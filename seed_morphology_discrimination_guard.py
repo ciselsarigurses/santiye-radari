@@ -2,9 +2,9 @@
 
 Bu guard üretim filtresi değildir. Alarm, saha görevi, rota veya 250 m² / 150–249 m²
 politikalarını değiştirmez. Amaç, aynı Sentinel-2 türevi kanıtların toplanması nedeniyle
-morfoloji skorlarının kitlesel olarak ORTA/YÜKSEK seviyeye doygunlaşıp doygunlaşmadığını
-ölçmek ve böyle bir durumda skorun tek başına güven kanıtı sayılmasını engelleyecek
-ölçülebilir bir sağlık sinyali üretmektir.
+morfoloji skorlarının kitlesel olarak ORTA/YÜKSEK seviyeye veya 100 puan tavanına
+doygunlaşıp doygunlaşmadığını ölçmek ve böyle bir durumda skorun tek başına güven
+kanıtı sayılmasını engelleyecek ölçülebilir bir sağlık sinyali üretmektir.
 """
 
 from __future__ import annotations
@@ -18,7 +18,9 @@ INPUT_JSON = Path(__file__).with_name("seed_centered_excavation_morphology_revie
 OUTPUT_JSON = Path(__file__).with_name("seed_morphology_discrimination_review.json")
 
 SATURATION_RATIO = 0.95
+CAP_SATURATION_RATIO = 0.50
 MIN_SEEDS = 20
+MIN_EXPORTED_FOR_CAP_CHECK = 10
 CORE_POSITIVE_ID = "FN-20260916-CESME-001"
 CORE_FALSE_POSITIVE_IDS = {
     "FP-20260916-REISDERE-001",
@@ -35,6 +37,32 @@ def _ratio(numerator: int, denominator: int) -> float:
     return float(numerator) / float(denominator)
 
 
+def _percentile(values, ratio):
+    if not values:
+        return None
+    ordered = sorted(values)
+    index = int(round((len(ordered) - 1) * ratio))
+    return int(ordered[index])
+
+
+def _score_distribution(exported):
+    scores = []
+    for item in exported:
+        try:
+            scores.append(int(item.get("seed_merkezli_morfoloji_puani") or 0))
+        except (TypeError, ValueError):
+            continue
+    return {
+        "skor_sayisi": len(scores),
+        "benzersiz_skor_sayisi": len(set(scores)),
+        "skor_min": min(scores) if scores else None,
+        "skor_p10": _percentile(scores, 0.10),
+        "skor_medyan": _percentile(scores, 0.50),
+        "skor_p90": _percentile(scores, 0.90),
+        "skor_max": max(scores) if scores else None,
+    }
+
+
 def _region_health(region: dict) -> dict:
     total = int(region.get("lokal_seed_sayisi") or 0)
     medium_high = int(region.get("orta_yuksek_seed_morfoloji") or 0)
@@ -46,8 +74,14 @@ def _region_health(region: dict) -> dict:
         if int(item.get("seed_merkezli_morfoloji_puani") or 0) >= 100
     )
     capped_ratio = _ratio(capped, len(exported))
+    distribution = _score_distribution(exported)
 
-    saturation = bool(total >= MIN_SEEDS and medium_high_ratio >= SATURATION_RATIO)
+    level_saturation = bool(total >= MIN_SEEDS and medium_high_ratio >= SATURATION_RATIO)
+    cap_saturation = bool(
+        len(exported) >= MIN_EXPORTED_FOR_CAP_CHECK
+        and capped_ratio >= CAP_SATURATION_RATIO
+    )
+    ranking_saturation = bool(level_saturation or cap_saturation)
     return {
         "lokal_seed_sayisi": total,
         "orta_yuksek_seed_morfoloji": medium_high,
@@ -55,14 +89,18 @@ def _region_health(region: dict) -> dict:
         "disari_aktarilan_aday_sayisi": len(exported),
         "tavan_100_puanli_disari_aktarilan": capped,
         "tavan_100_puan_orani": round(capped_ratio, 4),
-        "skor_doygunlugu_riski": saturation,
-        "tek_basina_guven_kaniti_olarak_kullanilabilir": False if saturation else True,
+        **distribution,
+        "seviye_doygunlugu_riski": level_saturation,
+        "tavan_doygunlugu_riski": cap_saturation,
+        "skor_doygunlugu_riski": ranking_saturation,
+        "tek_basina_guven_kaniti_olarak_kullanilabilir": False if ranking_saturation else True,
+        "morfoloji_ranking_saglikli": False if ranking_saturation else True,
         "not": (
-            "Morfoloji seviyesi aday havuzunun neredeyse tamamını ORTA/YUKSEK işaretliyor; "
-            "bu katman ayırt edici değildir ve bağımsız SAR/temporal/yapılaşma kanıtı olmadan "
-            "yüksek güven veya KONTROLE_GIT üretmemelidir."
-            if saturation
-            else "Morfoloji seviyesi bu sağlık eşiğinde doygun görünmüyor."
+            "Morfoloji puanı aday havuzunda doygun: ORTA/YÜKSEK seviyesi veya 100 puan tavanı "
+            "yeterince ayırt edici değil. Bu katman bağımsız SAR/temporal/yapılaşma kanıtı "
+            "olmadan yüksek güven veya KONTROLE_GIT üretmemelidir."
+            if ranking_saturation
+            else "Morfoloji skoru bu sağlık eşiklerinde doygun görünmüyor."
         ),
     }
 
@@ -117,10 +155,14 @@ def _build(payload: dict) -> dict:
         key for key, value in region_health.items()
         if value["skor_doygunlugu_riski"]
     )
+    cap_saturation_regions = sorted(
+        key for key, value in region_health.items()
+        if value["tavan_doygunlugu_riski"]
+    )
     regression = _core_regression(raw_regions)
 
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Seed-merkezli temel/kepçe morfoloji proxy skorunun ayırt ediciliğini ölçmek",
         "uretim_filtresi": False,
         "alarm": False,
@@ -128,17 +170,21 @@ def _build(payload: dict) -> dict:
         "rota_degistirir": False,
         "ana_uretim_esigi_degisti": False,
         "mikro_politikasi_degisti": False,
-        "doygunluk_esigi": SATURATION_RATIO,
+        "seviye_doygunluk_esigi": SATURATION_RATIO,
+        "tavan_doygunluk_esigi": CAP_SATURATION_RATIO,
         "minimum_seed": MIN_SEEDS,
+        "tavan_kontrolu_minimum_disari_aktarilan": MIN_EXPORTED_FOR_CAP_CHECK,
         "skor_doygunlugu_var": bool(saturation_regions),
         "doygun_bolgeler": saturation_regions,
+        "tavan_doygun_bolgeler": cap_saturation_regions,
         "bagimsiz_kanit_zorunlulugu": True,
         "bolgeler": region_health,
         "cekirdek_regresyon": regression,
         "operasyonel_yorum": (
-            "Doygunluk varken morfoloji puanı yalnız diagnostik/ranking girdisidir; "
-            "bağımsız SAR, temporal devamlılık veya başka yapılaşma desteği olmadan "
-            "yüksek güvenli temel/kepçe adayı sayılmaz."
+            "Doygunluk varken morfoloji puanı yalnız diagnostik/ranking girdisidir; bağımsız SAR, "
+            "temporal devamlılık veya başka yapılaşma desteği olmadan yüksek güvenli temel/kepçe "
+            "adayı sayılmaz. Özellikle 100 puan tavanında yığılma varsa adaylar morfoloji puanıyla "
+            "kendi aralarında güvenilir biçimde sıralanamaz."
             if saturation_regions
             else "Morfoloji puanı yine tek başına operasyonel kanıt değildir."
         ),
@@ -151,22 +197,50 @@ def _self_check() -> None:
             "lokal_seed_sayisi": 100,
             "orta_yuksek_seed_morfoloji": 100,
             "adaylar": [
-                {"seed_merkezli_morfoloji_puani": 100},
+                {"seed_merkezli_morfoloji_puani": 100}
+                for _ in range(8)
+            ] + [
                 {"seed_merkezli_morfoloji_puani": 80},
+                {"seed_merkezli_morfoloji_puani": 70},
             ],
         }
     )
+    assert saturated["seviye_doygunlugu_riski"] is True
+    assert saturated["tavan_doygunlugu_riski"] is True
     assert saturated["skor_doygunlugu_riski"] is True
     assert saturated["tek_basina_guven_kaniti_olarak_kullanilabilir"] is False
+    assert saturated["benzersiz_skor_sayisi"] == 3
+    assert saturated["skor_medyan"] == 100
+
+    cap_only = _region_health(
+        {
+            "lokal_seed_sayisi": 100,
+            "orta_yuksek_seed_morfoloji": 40,
+            "adaylar": [
+                {"seed_merkezli_morfoloji_puani": 100}
+                for _ in range(6)
+            ] + [
+                {"seed_merkezli_morfoloji_puani": 40}
+                for _ in range(4)
+            ],
+        }
+    )
+    assert cap_only["seviye_doygunlugu_riski"] is False
+    assert cap_only["tavan_doygunlugu_riski"] is True
+    assert cap_only["morfoloji_ranking_saglikli"] is False
 
     healthy = _region_health(
         {
             "lokal_seed_sayisi": 100,
             "orta_yuksek_seed_morfoloji": 40,
-            "adaylar": [],
+            "adaylar": [
+                {"seed_merkezli_morfoloji_puani": score}
+                for score in range(40, 90, 5)
+            ],
         }
     )
     assert healthy["skor_doygunlugu_riski"] is False
+    assert healthy["morfoloji_ranking_saglikli"] is True
 
     regression = _core_regression(
         {
