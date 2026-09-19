@@ -1,0 +1,81 @@
+name: Kazı Tarla Geniş Bağlam Regresyon Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "excavation_wide_context_regression_audit.py"
+      - ".github/workflows/excavation-wide-context-regression.yml"
+  workflow_run:
+    workflows: ["Temel Kazısı Morfoloji Diagnostiği"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-excavation-wide-context-regression
+  cancel-in-progress: true
+
+jobs:
+  diagnose:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt
+
+      - name: Geniş bağlam regresyon öz testi
+        run: python excavation_wide_context_regression_audit.py --check-only
+
+      - name: 1 gerçek + 4 yanlış pozitifte geniş bağlamı ölç
+        run: python excavation_wide_context_regression_audit.py
+
+      - name: Diagnostiği güvenli kaydet
+        run: |
+          output="excavation_wide_context_regression_review.json"
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Geniş bağlam regresyon diagnostiği değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python excavation_wide_context_regression_audit.py --check-only
+            python excavation_wide_context_regression_audit.py
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add "$output"
+            git commit -m "Radar: kazı-tarla geniş bağlam regresyonunu güncelle"
+            if git push origin HEAD:main; then
+              echo "Geniş bağlam regresyon diagnostiği kaydedildi."
+              exit 0
+            fi
+
+            echo "Ana dal ilerledi; yeniden denenecek (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Üç denemede diagnostik kaydı tamamlanamadı."
+          exit 1
