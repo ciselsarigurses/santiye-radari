@@ -2,8 +2,9 @@
 
 Bu katman yalnız diagnostiktir. Ana 250 m² eşiğini, 150–249 m² MİKRO politikasını,
 alarmı veya saha rotasını değiştirmez. Amaç, doğrulanmış kazı referansında görülmeyen
-çoğunluk kalıcı bitki/ağaç dokusunu güçlü tarla-bahçe negatif bağlamı olarak işaretlemek
-ve referans-benzeri kısa listede yanlış güven artışını önlemektir.
+çoğunluk kalıcı bitki/ağaç dokusunu ve Musalla yanlış-pozitifine benzeyen karma
+bitki+çıplak-zemin dokusunu güçlü tarla-bahçe negatif bağlamı olarak işaretlemek,
+referans-benzeri kısa listede yanlış güven artışını önlemektir.
 """
 
 from __future__ import annotations
@@ -17,6 +18,8 @@ BASE = Path(__file__).resolve().parent
 INPUT = BASE / "post_onset_baseline_excavation_review.json"
 OUTPUT = BASE / "post_onset_baseline_vegetation_guard_review.json"
 MAX_PERSISTENT_VEG_FRACTION = 0.50
+MIXED_PERSISTENT_VEG_MIN = 0.40
+MIXED_BARE_GROUND_MAX = 0.60
 
 
 def _load(path=INPUT):
@@ -34,7 +37,29 @@ def _number(value, default=0.0):
 
 
 def _vegetation_negative(item):
-    return _number(item.get("kalici_bitki_orani_5x5")) >= MAX_PERSISTENT_VEG_FRACTION
+    persistent = _number(item.get("kalici_bitki_orani_5x5"))
+    bare = _number(item.get("ciplak_zemin_orani_5x5"))
+    majority_vegetation = persistent >= MAX_PERSISTENT_VEG_FRACTION
+    mixed_field_texture = (
+        persistent >= MIXED_PERSISTENT_VEG_MIN
+        and bare <= MIXED_BARE_GROUND_MAX
+    )
+    return majority_vegetation or mixed_field_texture
+
+
+def _negative_reason(item):
+    persistent = _number(item.get("kalici_bitki_orani_5x5"))
+    bare = _number(item.get("ciplak_zemin_orani_5x5"))
+    if persistent >= MAX_PERSISTENT_VEG_FRACTION:
+        return (
+            "5x5 çevrede kalıcı bitki/ağaç dokusu çoğunlukta; tarla/bahçe lehine güçlü negatif bağlam."
+        )
+    if persistent >= MIXED_PERSISTENT_VEG_MIN and bare <= MIXED_BARE_GROUND_MAX:
+        return (
+            "5x5 çevrede kalıcı bitki dokusu korunurken çıplak zemin çoğunluk oluşturmuyor; "
+            "Musalla tarla/bahçe yanlış-pozitif imzasına benzeyen karma arazi bağlamı."
+        )
+    return None
 
 
 def _region_guard(region):
@@ -48,9 +73,7 @@ def _region_guard(region):
         row = dict(item)
         row["kalici_bitki_negatif_baglami"] = _vegetation_negative(row)
         if row["kalici_bitki_negatif_baglami"]:
-            row["negatif_baglamsal_neden"] = (
-                "5x5 çevrede kalıcı bitki/ağaç dokusu çoğunlukta; tarla/bahçe lehine güçlü negatif bağlam."
-            )
+            row["negatif_baglamsal_neden"] = _negative_reason(row)
             row["alarm"] = False
             row["saha_gorevi"] = False
             suppressed.append(row)
@@ -117,12 +140,14 @@ def audit(payload=None):
         for x in true_reference_regions
     )
     return {
-        "surum": 2,
-        "amac": "13 Eylül baseline referans-benzeri adaylarında çoğunluk korunmuş bitki dokusunu tarla/bahçe negatif bağlamı olarak bastırmak",
+        "surum": 3,
+        "amac": "13 Eylül baseline referans-benzeri adaylarında korunmuş/karma bitki dokusunu tarla-bahçe negatif bağlamı olarak bastırmak",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": 250,
         "mikro_aralik_m2": [150, 249],
         "kalici_bitki_negatif_esigi": MAX_PERSISTENT_VEG_FRACTION,
+        "karma_bitki_min_esigi": MIXED_PERSISTENT_VEG_MIN,
+        "karma_ciplak_zemin_max_esigi": MIXED_BARE_GROUND_MAX,
         "toplam_kalici_bitki_bastirilan": suppressed,
         "gercek_kazi_referansi_sayisi": true_reference_count,
         "gercek_kazi_referansi_korundu": true_safe,
@@ -131,43 +156,55 @@ def audit(payload=None):
         "saha_gorevi": False,
         "bolgeler": regions,
         "not": (
-            "Bu çıktı üretim veya rota filtresi değildir. Kalıcı bitki oranı >=0.50 olan referans-benzeri "
-            "adayları güçlü tarla/bahçe negatif bağlamı olarak ayırır; doğrulanmış gerçek kazı referansının "
-            "bastırılmadığını regresyon güvenliği olarak raporlar. Referans içermeyen bölgelerde bölgesel "
-            "koruma durumu null/uygulanamaz olarak bırakılır."
+            "Bu çıktı üretim veya rota filtresi değildir. Kalıcı bitki oranı >=0.50 olan veya "
+            "kalıcı bitki >=0.40 iken çıplak zemin <=0.60 kalan referans-benzeri adayları güçlü "
+            "tarla/bahçe negatif bağlamı olarak ayırır. İkinci kural, kritik Musalla yanlış-pozitifinin "
+            "0.40 kalıcı-bitki / 0.52 çıplak-zemin imzasını hedefler; doğrulanmış gerçek kazı referansı "
+            "0.00 / 0.92 olduğu için korunur. Referans içermeyen bölgelerde bölgesel koruma durumu "
+            "null/uygulanamaz olarak bırakılır."
         ),
     }
 
 
 def _self_check():
-    assert _vegetation_negative({"kalici_bitki_orani_5x5": 0.50})
-    assert _vegetation_negative({"kalici_bitki_orani_5x5": 0.72})
-    assert not _vegetation_negative({"kalici_bitki_orani_5x5": 0.49})
+    assert _vegetation_negative({"kalici_bitki_orani_5x5": 0.50, "ciplak_zemin_orani_5x5": 0.80})
+    assert _vegetation_negative({"kalici_bitki_orani_5x5": 0.72, "ciplak_zemin_orani_5x5": 0.20})
+    # Kritik Musalla yanlış-pozitif imzası: çoğunluk bitki değil ama karma tarla/bahçe dokusu.
+    assert _vegetation_negative({"kalici_bitki_orani_5x5": 0.40, "ciplak_zemin_orani_5x5": 0.52})
+    assert not _vegetation_negative({"kalici_bitki_orani_5x5": 0.39, "ciplak_zemin_orani_5x5": 0.52})
+    assert not _vegetation_negative({"kalici_bitki_orani_5x5": 0.40, "ciplak_zemin_orani_5x5": 0.61})
+    # Doğrulanmış gerçek kazı baseline→post-onset imzası korunmalı.
+    assert not _vegetation_negative({"kalici_bitki_orani_5x5": 0.0, "ciplak_zemin_orani_5x5": 0.92})
     sample = {
         "bolgeler": {
             "cesme": {
                 "durum": "ok",
                 "bolge": "Çeşme",
                 "kritik_regresyon": [
-                    {"sonuc": "DOGRULANMIS_KAZI", "kalici_bitki_orani_5x5": 0.0}
+                    {
+                        "sonuc": "DOGRULANMIS_KAZI",
+                        "kalici_bitki_orani_5x5": 0.0,
+                        "ciplak_zemin_orani_5x5": 0.92,
+                    }
                 ],
                 "benzer_diagnostik_adaylar": [
-                    {"enlem": 1, "boylam": 1, "kalici_bitki_orani_5x5": 0.72},
-                    {"enlem": 2, "boylam": 2, "kalici_bitki_orani_5x5": 0.12},
+                    {"enlem": 1, "boylam": 1, "kalici_bitki_orani_5x5": 0.72, "ciplak_zemin_orani_5x5": 0.20},
+                    {"enlem": 2, "boylam": 2, "kalici_bitki_orani_5x5": 0.40, "ciplak_zemin_orani_5x5": 0.52},
+                    {"enlem": 3, "boylam": 3, "kalici_bitki_orani_5x5": 0.12, "ciplak_zemin_orani_5x5": 0.84},
                 ],
             },
             "uzunkuyu": {
                 "durum": "ok",
                 "bolge": "Uzunkuyu",
                 "kritik_regresyon": [
-                    {"sonuc": "YANLIS_POZITIF", "kalici_bitki_orani_5x5": 0.72}
+                    {"sonuc": "YANLIS_POZITIF", "kalici_bitki_orani_5x5": 0.72, "ciplak_zemin_orani_5x5": 0.20}
                 ],
                 "benzer_diagnostik_adaylar": [],
             },
         }
     }
     result = audit(sample)
-    assert result["toplam_kalici_bitki_bastirilan"] == 1
+    assert result["toplam_kalici_bitki_bastirilan"] == 2
     assert result["gercek_kazi_referansi_sayisi"] == 1
     assert result["gercek_kazi_referansi_korundu"] is True
     assert result["bolgeler"]["cesme"]["gercek_kazi_referansi_sayisi"] == 1
