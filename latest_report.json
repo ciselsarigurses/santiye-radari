@@ -41,7 +41,10 @@
       "takip_operasyon_durumu": "DOGRULANDI_ARKA_PLAN_TAKIP",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331547/26.644338",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "ERKEN",
@@ -303,7 +306,15 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313186/26.307059",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "saha_geri_bildirim_ana_bastirma": true,
+      "saha_geri_bildirim_id": "FP-20260917-MUSALLA-001",
+      "saha_geri_bildirim_sonuc": "YANLIS_POZITIF",
+      "saha_geri_bildirim_neden": "Saha fotoğrafında aktif kazı/temel yok; tarla-bahçe, zeytin/meyve ağaçları ve kuru otsu zemin görülüyor. 13→15 Eylül yüzey değişimi kazı olarak aşırı yorumlandı.",
+      "saha_geri_bildirim_sonuc_tarihi": "2026-09-17",
+      "saha_geri_bildirim_mesafe_m": 0.0,
+      "yeniden_degerlendirme": "Bu saha sonucu yalnız aynı/eski uydu kanıtını günlük rotadan çıkarır; daha yeni Sentinel/SAR müdahalesi normal kanıt kapılarından yeniden değerlendirilebilir."
     },
     {
       "oncelik": "GECİKEN",
@@ -471,7 +482,10 @@
       "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332190/26.652385",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -503,7 +517,10 @@
       "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334541/26.651698",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -537,7 +554,10 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.332994/26.652237",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -701,7 +721,10 @@
       "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313469/26.638073",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -3167,7 +3190,10 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319607/26.617445",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -3915,7 +3941,10 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.314452/26.640674",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -5475,7 +5504,10 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Geniş bitişik zemin/yüzey değişimi.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.333446/26.651665",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -5840,7 +5872,10 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331094/26.637240",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -5908,7 +5943,15 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.308120/26.326863",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "saha_geri_bildirim_ana_bastirma": true,
+      "saha_geri_bildirim_id": "FP-20260917-MUSALLA-002",
+      "saha_geri_bildirim_sonuc": "YANLIS_POZITIF",
+      "saha_geri_bildirim_neden": "Saha fotoğrafında aktif kazı/temel yok; mevcut yapı yanında tarla-bahçe, kuru otsu ve işlenmiş/çıplak tarımsal yüzey görülüyor. 13→15 Eylül yüzey değişimi kazı olarak aşırı yorumlandı.",
+      "saha_geri_bildirim_sonuc_tarihi": "2026-09-17",
+      "saha_geri_bildirim_mesafe_m": 0.0,
+      "yeniden_degerlendirme": "Bu saha sonucu yalnız aynı/eski uydu kanıtını günlük rotadan çıkarır; daha yeni Sentinel/SAR müdahalesi normal kanıt kapılarından yeniden değerlendirilebilir."
     },
     {
       "oncelik": "GECİKEN",
@@ -5942,7 +5985,22 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Eşik üstü uydu değişimi; normal saha sırası.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.271217/26.338883",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "saha_geri_bildirim_ana_bastirma": true,
+      "saha_geri_bildirim_id": "OP-20260916-OVACIK-001",
+      "saha_geri_bildirim_sonuc": "MEVCUT_MUSTERI",
+      "saha_geri_bildirim_neden": "Kullanıcı Apple Maps ile paylaştığı ve radarın Ovacık'ta yakaladığı sahayı mevcut müşteri olarak doğruladı; sinyal gerçek yapılaşma/şantiye referansıdır fakat yeni müşteri saha kontrolü gerektirmez.",
+      "saha_geri_bildirim_sonuc_tarihi": "2026-09-16",
+      "saha_geri_bildirim_mesafe_m": 0.0,
+      "saha_geri_bildirim_operasyon_bastirma": true,
+      "yeniden_degerlendirme": "Pozitif şantiye kanıtı korunur; mevcut müşteri statüsü değişmedikçe yeni-müşteri günlük saha rotasına alınmaz.",
+      "mevcut_musteri": true,
+      "mevcut_musteri_kayit_id": "OP-20260916-OVACIK-001",
+      "mevcut_musteri_mesafe_m": 0.0,
+      "mevcut_musteri_notu": "Kullanıcı Apple Maps ile paylaştığı ve radarın Ovacık'ta yakaladığı sahayı mevcut müşteri olarak doğruladı; sinyal gerçek yapılaşma/şantiye referansıdır fakat yeni müşteri saha kontrolü gerektirmez.",
+      "model_kalibrasyon_sinifi": "POZITIF_SANTIYE",
+      "operasyon_odak_notu": "Konum mevcut müşteri sahası olarak doğrulandı; gerçek şantiye sinyali kalibrasyonda korunuyor fakat yeni müşteri kontrol rotasına alınmıyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -6044,7 +6102,15 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320150/26.562138",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "saha_geri_bildirim_ana_bastirma": true,
+      "saha_geri_bildirim_id": "FP-20260917-UZUNKUYU-001",
+      "saha_geri_bildirim_sonuc": "YANLIS_POZITIF",
+      "saha_geri_bildirim_neden": "Saha fotoğrafında aktif kazı/temel yok; alan tarla-bahçe, ağaçlık ve kuru otsu yüzey karakterinde. Spektral yüzey/toprak değişimi kazı olarak aşırı yorumlandı.",
+      "saha_geri_bildirim_sonuc_tarihi": "2026-09-17",
+      "saha_geri_bildirim_mesafe_m": 0.0,
+      "yeniden_degerlendirme": "Bu saha sonucu yalnız aynı/eski uydu kanıtını günlük rotadan çıkarır; daha yeni Sentinel/SAR müdahalesi normal kanıt kapılarından yeniden değerlendirilebilir."
     },
     {
       "oncelik": "GECİKEN",
@@ -6078,7 +6144,15 @@
       "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
       "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.322140/26.407912",
       "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı."
+      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
+      "rota_uygun": false,
+      "saha_geri_bildirim_ana_bastirma": true,
+      "saha_geri_bildirim_id": "FP-20260916-REISDERE-001",
+      "saha_geri_bildirim_sonuc": "YANLIS_POZITIF",
+      "saha_geri_bildirim_neden": "Saha fotoğrafında aktif kazı yok; düzlenmiş/topraklı alan ve moloz-yığın mevcut. 13→15 Eylül Sentinel değişimi erken hafriyat olarak aşırı yorumlandı.",
+      "saha_geri_bildirim_sonuc_tarihi": "2026-09-16",
+      "saha_geri_bildirim_mesafe_m": 0.0,
+      "yeniden_degerlendirme": "Bu saha sonucu yalnız aynı/eski uydu kanıtını günlük rotadan çıkarır; daha yeni Sentinel/SAR müdahalesi normal kanıt kapılarından yeniden değerlendirilebilir."
     },
     {
       "oncelik": "GECİKEN",
@@ -7275,7 +7349,7 @@
       "gunluk_sira": 3
     }
   ],
-  "gunun_ilk_3_notu": "15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.",
+  "gunun_ilk_3_notu": "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; bölge dengesi daha yüksek öncelikli adayı düşürmez.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -7454,5 +7528,177 @@
     "eslesen_gorevler": [],
     "onceki_oncelik_katmanlari_korundu": true,
     "not": "Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin shortlist'i silinmez. YIKIM_TEMIZLIK sonucu, sonraki yeni Sentinel sahnesinde aynı noktadaki 250 m²+ mevcut görevi güçlendirir; yalnız boş rota kapasitesini kullanır veya korunmayan backlog ile yer değiştirir. Yeni alarm/görev üretmez."
-  }
+  },
+  "ana_saha_geri_bildirim_bastirilan": [
+    {
+      "gorev_id": "UCF568A03B1",
+      "enlem": 38.313186,
+      "boylam": 26.307059,
+      "alan_m2": 1800,
+      "son_tarih": "15.09.2026",
+      "saha_geri_bildirim_id": "FP-20260917-MUSALLA-001",
+      "sonuc": "YANLIS_POZITIF",
+      "mesafe_m": 0.0
+    },
+    {
+      "gorev_id": "UD53CF00647",
+      "enlem": 38.30812,
+      "boylam": 26.326863,
+      "alan_m2": 1000,
+      "son_tarih": "15.09.2026",
+      "saha_geri_bildirim_id": "FP-20260917-MUSALLA-002",
+      "sonuc": "YANLIS_POZITIF",
+      "mesafe_m": 0.0
+    },
+    {
+      "gorev_id": "UA65167A849",
+      "enlem": 38.271217,
+      "boylam": 26.338883,
+      "alan_m2": 1000,
+      "son_tarih": "15.09.2026",
+      "saha_geri_bildirim_id": "OP-20260916-OVACIK-001",
+      "sonuc": "MEVCUT_MUSTERI",
+      "mesafe_m": 0.0
+    },
+    {
+      "gorev_id": "UADFA62B1D0",
+      "enlem": 38.32015,
+      "boylam": 26.562138,
+      "alan_m2": 400,
+      "son_tarih": "15.09.2026",
+      "saha_geri_bildirim_id": "FP-20260917-UZUNKUYU-001",
+      "sonuc": "YANLIS_POZITIF",
+      "mesafe_m": 0.0
+    },
+    {
+      "gorev_id": "U88BF6DBCB5",
+      "enlem": 38.32214,
+      "boylam": 26.407912,
+      "alan_m2": 500,
+      "son_tarih": "15.09.2026",
+      "saha_geri_bildirim_id": "FP-20260916-REISDERE-001",
+      "sonuc": "YANLIS_POZITIF",
+      "mesafe_m": 0.0
+    }
+  ],
+  "ana_saha_geri_bildirim_bastirilan_sayi": 5,
+  "ana_saha_geri_bildirim_notu": "Doğrulanmış negatif saha sonuçları aynı/eski Sentinel kanıtında günlük rota uygunluğunu kapatır; mevcut müşteriler pozitif şantiye referansı olarak korunur fakat müşteri statüsü değişmedikçe yeni-müşteri rotasına alınmaz. Alarm/görev silinmez.",
+  "kor_alan_saha_devriyesi": [],
+  "operasyon_odak_disinda_devriye": [],
+  "operasyon_odak_disinda_devriye_sayi": 0,
+  "operasyon_odak_arka_plan": [
+    {
+      "gorev_id": "UEC44340AEC",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.331547,
+      "boylam": 26.644338,
+      "alan_m2": 400,
+      "saha_durumu": "TEKRAR_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U1CA0ACAC42",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.33219,
+      "boylam": 26.652385,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U323433E687",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.334541,
+      "boylam": 26.651698,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U01296BD121",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.332994,
+      "boylam": 26.652237,
+      "alan_m2": 1300,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U297CD118A9",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.313469,
+      "boylam": 26.638073,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "UC0BF966F07",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.319607,
+      "boylam": 26.617445,
+      "alan_m2": 3400,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U4806506FC1",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.314452,
+      "boylam": 26.640674,
+      "alan_m2": 1300,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U75654E26C3",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.333446,
+      "boylam": 26.651665,
+      "alan_m2": 2700,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U135C9ACAE2",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.331094,
+      "boylam": 26.63724,
+      "alan_m2": 900,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "UA65167A849",
+      "mahalle": "Ovacık",
+      "enlem": 38.271217,
+      "boylam": 26.338883,
+      "alan_m2": 1000,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": false,
+      "mevcut_musteri": true,
+      "mevcut_musteri_kayit_id": "OP-20260916-OVACIK-001"
+    }
+  ],
+  "operasyon_odak_arka_plan_sayi": 10,
+  "mevcut_musteri_arka_plan_sayi": 1,
+  "operasyon_odak_notu": "Günlük rota Çeşme yarımadası–Uzunkuyu odağındadır. Açıkça Gülbahçe etiketli adaylar ve doğrulanmış mevcut müşteri sahaları günlük yeni-müşteri rotasının dışında tutulur. Açık Gülbahçe kör-alan devriyeleri diagnostik arka planda korunur fakat saha rotasına girmez. Mevcut müşteri sinyali yanlış pozitif sayılmaz; model kalibrasyonunda gerçek şantiye olarak korunur. Doğrulanmamış mevki veya Gülbahçe kelimesi geçen karma doğu-bölgesi etiketi coğrafi tahminle elenmez."
 }
