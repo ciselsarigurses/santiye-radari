@@ -30,6 +30,7 @@ MAIN_THRESHOLD_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
 MATCH_RADIUS_M = 45.0
 REFERENCE_PRIORITY_MATCH_RADIUS_M = 5.0
+MORPHOLOGY_EXPORT_LIMIT = 120
 HIGH_SCORE = 65
 MEDIUM_SCORE = 45
 
@@ -277,7 +278,7 @@ def _reference_priority_rows(region_key):
     ]
 
 
-def _priority_export_candidates(scored, priority_rows, base_limit=20):
+def _priority_export_candidates(scored, priority_rows, base_limit=MORPHOLOGY_EXPORT_LIMIT):
     selected = [dict(item) for item in scored[:base_limit]]
     for item in selected:
         item["referans_cekirdek_oncelikli"] = any(
@@ -367,6 +368,7 @@ def _analyze_region(region_key):
             1 for x in scored
             if x["seed_merkezli_morfoloji_seviyesi"] in {"ORTA", "YUKSEK"}
         ),
+        "morfoloji_disari_aktarma_tavani": MORPHOLOGY_EXPORT_LIMIT,
         "referans_cekirdek_oncelikli_girdi_sayisi": len(priority_rows),
         "referans_cekirdek_oncelikli_disari_aktarilan_sayi": sum(
             1 for item in exported_candidates if item.get("referans_cekirdek_oncelikli") is True
@@ -401,7 +403,7 @@ def _self_check():
     ]
     priority = [{"enlem": scored[-1]["enlem"], "boylam": scored[-1]["boylam"]}]
     exported = _priority_export_candidates(scored, priority)
-    assert len(exported) == 21
+    assert len(exported) == 25
     assert exported[-1]["enlem"] == scored[-1]["enlem"]
     assert exported[-1]["referans_cekirdek_oncelikli"] is True
 
@@ -438,7 +440,7 @@ def audit():
         "bolgeler": regions,
         "not": (
             "Geniş ana morfoloji bileşenleri yerine lokal-seed merkezli ikinci hipotezdir. "
-            "İlk 20 morfoloji adayı yanında, doğrulanmış kazı imzasının çekirdeğinde kalan 150 m²+ "
+            "İlk 120 morfoloji adayı yanında, doğrulanmış kazı imzasının çekirdeğinde kalan 150 m²+ "
             "diagnostik adaylar da downstream SAR/rota denetiminde kaybolmamaları için korunur. "
             "Yeni saha pozitifleri, temporal devamlılık ve Sentinel-1/SAR desteği olmadan rotaya bağlanmaz."
         ),
