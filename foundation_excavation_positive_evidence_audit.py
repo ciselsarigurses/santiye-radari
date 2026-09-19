@@ -134,6 +134,11 @@ def _analyze_region(region_key, route_region, precursors):
         temporal_positive, precursor, precursor_distance = _temporal_support(
             candidate, scene_date, region_precursors
         )
+        temporal_in_radius = bool(
+            precursor is not None
+            and precursor_distance is not None
+            and precursor_distance <= TEMPORAL_MATCH_RADIUS_M
+        )
         negative_reasons = _negative_context_reasons(candidate)
         blocked = bool(negative_reasons)
         independent_positive = bool(sar_positive or temporal_positive)
@@ -165,16 +170,24 @@ def _analyze_region(region_key, route_region, precursors):
                 "sar_lokal_degisim_skor_db": candidate.get("sar_lokal_degisim_skor_db"),
                 "sar_yoklugu_negatif_kanit": False,
                 "temporal_oncul_destek": temporal_positive,
+                "temporal_oncul_esik_icinde": temporal_in_radius,
                 "temporal_oncul_mesafe_m": (
+                    round(precursor_distance, 1) if temporal_in_radius else None
+                ),
+                "temporal_en_yakin_mesafe_m": (
                     round(precursor_distance, 1)
                     if precursor_distance is not None
                     else None
                 ),
-                "temporal_iz_id": precursor.get("temporal_iz_id") if precursor else None,
+                "temporal_iz_id": (
+                    precursor.get("temporal_iz_id")
+                    if precursor is not None and temporal_in_radius
+                    else None
+                ),
                 "temporal_oncul_tarih": (
                     precursor.get("son_guclu_tarih")
                     or precursor.get("ilk_guclu_tarih")
-                    if precursor
+                    if precursor is not None and temporal_in_radius
                     else None
                 ),
                 "pozitif_kanit_kaynaklari": sources,
@@ -264,7 +277,7 @@ def audit(route=None, temporal=None, sar_calibration=None):
         sar_calibration.get("sar_zorunlu_veto_kullanilabilir") is True
     )
     return {
-        "surum": 2,
+        "surum": 3,
         "amac": (
             "SAR yokluğunu veto yapmadan morfoloji + S1 pozitif veya önceki-tarih "
             "temporal-lokal kanıtını çaprazlamak; tarla/FP negatif kapılarını korumak"
@@ -290,10 +303,11 @@ def audit(route=None, temporal=None, sar_calibration=None):
             "Bu çıktı yalnız recall diagnostiğidir. SAR güçlü-lokal desteği pozitif "
             "kanıttır; SAR yokluğu negatif veto değildir. Önceki tarih temporal-lokal "
             "iz yalnız mevcut morfoloji adayıyla 25 m içinde ve daha eski bir sahnede "
-            "ise ikinci kanıt sayılır. Saha yanlış-pozitifi, mevcut müşteri, tarla/bahçe "
-            "negatif bağlamı ve spektral FP-klon baskısı pozitif recall sayımını veto eder. "
-            "250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez; bu katman otomatik "
-            "saha görevi üretmez."
+            "ise ikinci kanıt sayılır. 25 m dışındaki en yakın iz yalnız debug mesafesi "
+            "olarak tutulur; temporal_iz_id/tarih ile aday arasında ilişki kurulmaz. "
+            "Saha yanlış-pozitifi, mevcut müşteri, tarla/bahçe negatif bağlamı ve "
+            "spektral FP-klon baskısı pozitif recall sayımını veto eder. 250 m² ana eşik "
+            "ve 150–249 m² MİKRO politikası değişmez; bu katman otomatik saha görevi üretmez."
         ),
     }
 
@@ -400,7 +414,13 @@ def _self_check():
 
     assert by_lat[38.30]["ana_esik_pozitif_destekli_diagnostik"] is True
     assert by_lat[38.30]["sar_yoklugu_negatif_kanit"] is False
+    assert by_lat[38.30]["temporal_oncul_esik_icinde"] is True
+    assert by_lat[38.30]["temporal_iz_id"] == "T1"
     assert by_lat[38.31]["ana_esik_pozitif_destekli_diagnostik"] is False
+    assert by_lat[38.31]["temporal_oncul_esik_icinde"] is False
+    assert by_lat[38.31]["temporal_oncul_mesafe_m"] is None
+    assert by_lat[38.31]["temporal_iz_id"] is None
+    assert float(by_lat[38.31]["temporal_en_yakin_mesafe_m"]) > TEMPORAL_MATCH_RADIUS_M
     assert by_lat[38.32]["ana_esik_pozitif_destekli_diagnostik"] is True
     assert by_lat[38.33]["mikro_pozitif_destekli_diagnostik"] is True
 
