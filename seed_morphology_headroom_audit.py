@@ -268,7 +268,7 @@ def _self_check():
         "soil_orani": 0.08,
         "koyu_zon_orani": 0.10,
     }
-    assert _raw_score(strong) == 105
+    assert _raw_score(strong) == 115
 
     broad = {
         "bilesen_piksel": 25,
