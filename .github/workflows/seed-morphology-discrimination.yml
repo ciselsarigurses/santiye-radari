@@ -1,0 +1,74 @@
+name: Seed Morfoloji Ayırt Edilebilirlik Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "seed_centered_excavation_morphology_review.json"
+      - "seed_morphology_discrimination_guard.py"
+      - ".github/workflows/seed-morphology-discrimination.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-seed-morphology-discrimination
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Ayırt edilebilirlik öz testi
+        run: python seed_morphology_discrimination_guard.py --check-only
+
+      - name: Seed morfoloji doygunluğunu ölç
+        run: python seed_morphology_discrimination_guard.py
+
+      - name: Diagnostiği güvenli kaydet
+        run: |
+          output="seed_morphology_discrimination_review.json"
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Ayırt edilebilirlik diagnostiği değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python seed_morphology_discrimination_guard.py --check-only
+            python seed_morphology_discrimination_guard.py
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add $output
+            git commit -m "Radar: seed morfoloji ayırt edilebilirlik diagnostiğini güncelle"
+            if git push origin HEAD:main; then
+              echo "Ayırt edilebilirlik diagnostiği kaydedildi."
+              exit 0
+            fi
+
+            echo "Ana dal ilerledi; yeniden denenecek."
+            sleep $((attempt * 2))
+          done
+
+          echo "Üç denemede diagnostik kaydı tamamlanamadı."
+          exit 1
