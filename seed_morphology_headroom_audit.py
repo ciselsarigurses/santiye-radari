@@ -6,33 +6,23 @@ ve 150–249 m² MİKRO politikası değişmez. Amaç, mevcut toplamsal morfoloj
 yalnız diagnostik olarak açmanın saha-doğrulamalı gerçek kazıyı daha iyi sıralayıp
 sıralamayacağını ölçmektir.
 
-Ham skor burada mevcut seed_centered_excavation_morphology_audit.py kurallarından
-tekrar hesaplanır; üretim skoruna veya karar kapılarına yazılmaz.
+Gerçek kazı yeni-aday havuzunda aranmaz: kullanıcı talimatı gereği doğrulanmış saha
+zaten yeni satış fırsatı değildir. Kalibrasyon puanı `saha_referans_regresyonu`
+üzerinden okunur. 100'ün altındaki kırpılmış skor ham skorla aynıdır; 100 olan bir
+referansta ham puan bu dosyadan kesin bilinemez.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import math
 from pathlib import Path
 
 
 INPUT_JSON = Path(__file__).with_name("seed_centered_excavation_morphology_review.json")
 OUTPUT_JSON = Path(__file__).with_name("seed_morphology_headroom_review.json")
-TRUE_REFERENCE = (38.341846, 26.432861)
 TRUE_REFERENCE_ID = "FN-20260916-CESME-001"
-MATCH_RADIUS_M = 45.0
 CAP_SCORE = 100
-
-
-def _distance_m(a, b):
-    lat1, lon1 = float(a[0]), float(a[1])
-    lat2, lon2 = float(b[0]), float(b[1])
-    mean_lat = math.radians((lat1 + lat2) / 2.0)
-    north = (lat1 - lat2) * 110570.0
-    east = (lon1 - lon2) * 111320.0 * math.cos(mean_lat)
-    return math.hypot(north, east)
 
 
 def _raw_score(item: dict) -> int:
@@ -123,17 +113,11 @@ def _distribution(values):
     }
 
 
-def _nearest_true_reference(rows):
-    nearest = None
-    nearest_distance = None
-    for row in rows:
-        if "enlem" not in row or "boylam" not in row:
-            continue
-        distance = _distance_m(TRUE_REFERENCE, (row["enlem"], row["boylam"]))
-        if nearest_distance is None or distance < nearest_distance:
-            nearest = row
-            nearest_distance = distance
-    return nearest, nearest_distance
+def _reference_regression(region: dict):
+    for row in region.get("saha_referans_regresyonu") or []:
+        if isinstance(row, dict) and str(row.get("id") or "") == TRUE_REFERENCE_ID:
+            return row
+    return None
 
 
 def _region_health(region_key: str, region: dict) -> dict:
@@ -156,36 +140,46 @@ def _region_health(region_key: str, region: dict) -> dict:
     raw_scores = [item["ham_morfoloji_puani"] for item in scored]
     cap_raw_scores = [item["ham_morfoloji_puani"] for item in capped]
 
-    nearest, distance = _nearest_true_reference(scored)
-    true_match = bool(
-        region_key == "cesme"
-        and nearest is not None
-        and distance is not None
-        and distance <= MATCH_RADIUS_M
+    reference = _reference_regression(region) if region_key == "cesme" else None
+    reference_capped = None
+    reference_raw = None
+    reference_raw_exact = False
+    reference_detected = False
+    reference_regression_ok = False
+    reference_seed_distance = None
+    if reference:
+        try:
+            reference_capped = int(reference.get("seed_merkezli_morfoloji_puani"))
+        except (TypeError, ValueError):
+            reference_capped = None
+        reference_detected = reference.get("tespit") is True
+        reference_regression_ok = reference.get("regresyon_uyumlu") is True
+        reference_seed_distance = reference.get("en_yakin_seed_mesafe_m")
+        if reference_capped is not None and 0 < reference_capped < CAP_SCORE:
+            reference_raw = reference_capped
+            reference_raw_exact = True
+
+    higher_than_reference = (
+        sum(1 for value in raw_scores if value > reference_raw)
+        if reference_raw_exact else None
     )
-    true_raw = nearest.get("ham_morfoloji_puani") if true_match else None
-    true_capped = (
-        int(nearest.get("seed_merkezli_morfoloji_puani") or 0)
-        if true_match else None
+    raw_rank_if_inserted = (
+        higher_than_reference + 1
+        if higher_than_reference is not None else None
     )
-    higher_than_true = (
-        sum(1 for value in raw_scores if value > true_raw)
-        if true_raw is not None else None
-    )
-    raw_rank = (higher_than_true + 1) if higher_than_true is not None else None
     minimum_cap_raw = min(cap_raw_scores) if cap_raw_scores else None
-    true_below_all_cap = bool(
-        true_raw is not None
+    reference_below_all_cap = bool(
+        reference_raw_exact
         and minimum_cap_raw is not None
-        and true_raw < minimum_cap_raw
+        and reference_raw < minimum_cap_raw
     )
 
     return {
         "bolge": region.get("bolge"),
         "onceki_tarih": region.get("onceki_tarih"),
         "son_tarih": region.get("son_tarih"),
-        "disari_aktarilan_aday_sayisi": len(scored),
-        "tavan_100_aday_sayisi": len(capped),
+        "disari_aktarilan_yeni_aday_sayisi": len(scored),
+        "tavan_100_yeni_aday_sayisi": len(capped),
         "kirpilmis_skor_dagilimi": _distribution(
             [int(item.get("seed_merkezli_morfoloji_puani") or 0) for item in scored]
         ),
@@ -194,26 +188,27 @@ def _region_health(region_key: str, region: dict) -> dict:
         "tavan_altinda_kaybolan_benzersiz_ham_skor_sayisi": len(set(cap_raw_scores)),
         "gercek_kazi_referansi": {
             "id": TRUE_REFERENCE_ID,
-            "yalniz_bu_bolgede_degerlendirildi": region_key == "cesme",
-            "en_yakin_disari_aktarilan_aday_mesafe_m": (
-                round(distance, 1) if region_key == "cesme" and distance is not None else None
-            ),
-            "45m_icinde_eslesme": true_match,
-            "kirpilmis_morfoloji_puani": true_capped,
-            "ham_morfoloji_puani": true_raw,
-            "ham_skor_sirasi": raw_rank,
-            "ham_skorda_referansin_ustundeki_aday_sayisi": higher_than_true,
-            "tum_tavan_adaylarinin_altinda": true_below_all_cap,
+            "regresyonda_var": reference is not None,
+            "tespit": reference_detected,
+            "regresyon_uyumlu": reference_regression_ok,
+            "en_yakin_seed_mesafe_m": reference_seed_distance,
+            "kirpilmis_morfoloji_puani": reference_capped,
+            "ham_morfoloji_puani": reference_raw,
+            "ham_puan_kesin": reference_raw_exact,
+            "yeni_aday_havuzuna_eklenmesi_beklenmez": True,
+            "ham_skorla_yeni_adaylar_arasina_eklense_sirasi": raw_rank_if_inserted,
+            "ham_skorda_referansin_ustundeki_yeni_aday_sayisi": higher_than_reference,
+            "tum_100_puan_yeni_adaylarinin_ham_skorundan_dusuk": reference_below_all_cap,
         },
         "yalniz_tavani_acmak_referans_rankingini_kurtarir": bool(
-            true_match and not true_below_all_cap
+            reference_raw_exact and not reference_below_all_cap
         ) if region_key == "cesme" else None,
         "yorum": (
-            "Gerçek kazı referansı tüm 100-puan tavan adaylarının ham skorundan da düşük; "
-            "yalnız 100 puan kırpmasını kaldırmak recall/ranking sorununu çözmez. Yeni ayrım "
-            "aynı Sentinel-2 toplamsal kanıtlarını daha fazla ödüllendirmek yerine temporal/SAR "
-            "ve tarla-negatif bağlamına dayanmalıdır."
-            if region_key == "cesme" and true_below_all_cap
+            "Gerçek kazı referansı 100'ün altında olduğu için ham puanı kesin biliniyor ve tüm "
+            "100-puan yeni adaylarının ham skorundan da düşük. Yalnız skor tavanını kaldırmak "
+            "ranking/recall sorununu çözmez; aynı-katman pozitiflerinin toplamsal aşırı ödüllendirilmesi "
+            "yeniden kalibre edilmelidir."
+            if region_key == "cesme" and reference_below_all_cap
             else "Ham skor yalnız diagnostiktir; üretim veya rota kararında kullanılmaz."
         ),
     }
@@ -227,11 +222,16 @@ def _build(payload: dict) -> dict:
     }
     cesme = regions.get("cesme") or {}
     ref = cesme.get("gercek_kazi_referansi") or {}
-    true_matched = ref.get("45m_icinde_eslesme") is True
-    true_below_caps = ref.get("tum_tavan_adaylarinin_altinda") is True
+    ref_ok = bool(
+        ref.get("regresyonda_var") is True
+        and ref.get("tespit") is True
+        and ref.get("regresyon_uyumlu") is True
+    )
+    ref_raw_exact = ref.get("ham_puan_kesin") is True
+    ref_below_caps = ref.get("tum_100_puan_yeni_adaylarinin_ham_skorundan_dusuk") is True
 
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Morfoloji 100-puan tavanının ranking bilgisini gizleyip gizlemediğini ölçmek",
         "uretim_filtresi": False,
         "alarm": False,
@@ -241,15 +241,18 @@ def _build(payload: dict) -> dict:
         "mikro_politikasi_degisti": False,
         "gercek_derinlik_olcumu": False,
         "ham_skor_yalniz_diagnostik": True,
-        "gercek_kazi_referansi_disari_aktarilan_havuzda": true_matched,
-        "yalniz_tavan_acmak_yeterli": bool(true_matched and not true_below_caps),
+        "dogrulanmis_saha_yeni_aday_sayilmaz": True,
+        "gercek_kazi_regresyonu_saglikli": ref_ok,
+        "gercek_kazi_ham_puani_kesin": ref_raw_exact,
+        "yalniz_tavan_acmak_yeterli": bool(ref_raw_exact and not ref_below_caps),
+        "morfoloji_toplamsal_ranking_kalibrasyon_riski": bool(ref_raw_exact and ref_below_caps),
         "bolgeler": regions,
         "operasyonel_yorum": (
-            "Gerçek kazı referansı dışa aktarılan havuzda bulunuyor fakat ham toplamsal skorda da "
-            "tavan adaylarının altında kalıyor. Sorun yalnız 100 puan kırpması değil; aynı-katman "
-            "pozitiflerinin toplamsal doygunluğu. Üretim eşiği gevşetilmemeli ve morfoloji tek başına "
-            "KONTROLE_GIT üretmemeli."
-            if true_matched and true_below_caps
+            "Gerçek kazı regresyonu yakalanıyor ancak puanı 75; dışa aktarılan 100-puan yeni adayların "
+            "ham skorları da 100 veya üzerinde. Sorun yalnız 100 puan kırpması değil, toplamsal morfoloji "
+            "kanıtlarının yeni adayları saha-doğrulamalı pozitiften fazla ödüllendirmesi. Üretim eşiği "
+            "gevşetilmemeli; morfoloji bağımsız SAR/temporal kanıt olmadan KONTROLE_GIT üretmemeli."
+            if ref_raw_exact and ref_below_caps
             else "Bu ölçüm üretim kararını değiştirmez; ham skor yalnız diagnostiktir."
         ),
     }
@@ -285,6 +288,25 @@ def _self_check():
     assert _raw_score(broad) < 0
     dist = _distribution([75, 100, 105, 115])
     assert dist["min"] == 75 and dist["max"] == 115 and dist["aralik"] == 40
+
+    region = {
+        "durum": "ok",
+        "saha_referans_regresyonu": [
+            {
+                "id": TRUE_REFERENCE_ID,
+                "tespit": True,
+                "regresyon_uyumlu": True,
+                "en_yakin_seed_mesafe_m": 11.2,
+                "seed_merkezli_morfoloji_puani": 75,
+            }
+        ],
+        "adaylar": [
+            {**strong, "seed_merkezli_morfoloji_puani": 100},
+        ],
+    }
+    health = _region_health("cesme", region)
+    assert health["gercek_kazi_referansi"]["ham_morfoloji_puani"] == 75
+    assert health["gercek_kazi_referansi"]["tum_100_puan_yeni_adaylarinin_ham_skorundan_dusuk"] is True
 
 
 def audit() -> dict:
