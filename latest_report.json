@@ -7349,43 +7349,20 @@
       "gunluk_sira": 3
     }
   ],
-  "gunun_ilk_3_notu": "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; bölge dengesi daha yüksek öncelikli adayı düşürmez.",
+  "gunun_ilk_3_notu": "15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.319517,
-      "boylam": 26.564084,
-      "alan_m2": 500,
-      "ortalama_bsi_degisim": 0.1918,
-      "ortalama_rgb_farki": 0.1877,
+      "mahalle": "Musalla",
+      "enlem": 38.304864,
+      "boylam": 26.329381,
+      "alan_m2": 300,
+      "ortalama_bsi_degisim": 0.1181,
+      "ortalama_rgb_farki": 0.156,
       "kiyi_su_tamponu_riski": false,
       "kiyi_su_tamponu_orani": 0.0,
       "uzun_kisa_orani": 1.5,
-      "kutu_doluluk_orani": 0.833,
-      "kompaktlik": 0.628,
-      "saha_benzeri_geometri": true,
-      "lineer_geometri_riski": false,
-      "yakindaki_kuru_degisim_120m": 0,
-      "izole_saha_benzeri": true,
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "onceki_tarih": "15.09.2026",
-      "son_tarih": "18.09.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.319517,26.564084",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
-    },
-    {
-      "mahalle": "Alaçatı",
-      "enlem": 38.295819,
-      "boylam": 26.380094,
-      "alan_m2": 500,
-      "ortalama_bsi_degisim": 0.1549,
-      "ortalama_rgb_farki": 0.1749,
-      "kiyi_su_tamponu_riski": false,
-      "kiyi_su_tamponu_orani": 0.0,
-      "uzun_kisa_orani": 1.0,
-      "kutu_doluluk_orani": 0.556,
-      "kompaktlik": 0.321,
+      "kutu_doluluk_orani": 0.5,
+      "kompaktlik": 0.377,
       "saha_benzeri_geometri": true,
       "lineer_geometri_riski": false,
       "yakindaki_kuru_degisim_120m": 0,
@@ -7394,11 +7371,59 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "15.09.2026",
       "son_tarih": "18.09.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.295819,26.380094",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.304864,26.329381",
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": false,
+      "zaman_serisi_ani_baslangic_orani": 1.86,
+      "zaman_serisi_onceki_bsi_degisim": 0.0372,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
+      "yerellik_lokal_ani_baslangic_destegi": false,
+      "yerellik_yaygin_cevre_degisim_riski": false,
+      "yerellik_orani": 2.06,
+      "yerellik_cevre_halka_son_bsi_degisim": 0.0336,
+      "yerellik_cevre_halka_gecerli_oran": 1.0,
+      "kalibrasyon_rotasyon_gun": 1,
+      "kalibrasyon_rotasyon_havuzu": 4,
+      "katmanlar_arasi_mahalle_cesitliligi": true
+    },
+    {
+      "mahalle": "Gülbahçe",
+      "enlem": 38.321145,
+      "boylam": 26.640789,
+      "alan_m2": 900,
+      "ortalama_bsi_degisim": 0.1359,
+      "ortalama_rgb_farki": 0.1429,
+      "kiyi_su_tamponu_riski": false,
+      "kiyi_su_tamponu_orani": 0.0,
+      "uzun_kisa_orani": 2.5,
+      "kutu_doluluk_orani": 0.9,
+      "kompaktlik": 0.442,
+      "saha_benzeri_geometri": true,
+      "lineer_geometri_riski": false,
+      "yakindaki_kuru_degisim_120m": 0,
+      "izole_saha_benzeri": true,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_tarih": "15.09.2026",
+      "son_tarih": "18.09.2026",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.321145,26.640789",
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": false,
+      "zaman_serisi_ani_baslangic_orani": 1.79,
+      "zaman_serisi_onceki_bsi_degisim": 0.0639,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
+      "yerellik_lokal_ani_baslangic_destegi": false,
+      "yerellik_yaygin_cevre_degisim_riski": false,
+      "yerellik_orani": 1.89,
+      "yerellik_cevre_halka_son_bsi_degisim": 0.0605,
+      "yerellik_cevre_halka_gecerli_oran": 1.0,
+      "kalibrasyon_rotasyon_gun": 1,
+      "kalibrasyon_rotasyon_havuzu": 3
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir.",
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin dışında bölge başına en fazla bir, toplam iki örnek tutulur. Nihai Sentinel kör-alan devriyesi aynı mahalleyi de seçmişse güvenli bir kuru-zemin alternatifi tercih edilir; alternatif yoksa mevcut kalibrasyon korunur. Ana ilk-3 saha rotası veya nihai kör-alan devriyesiyle aynı mahallede kalan alarm-dışı kalibrasyon, temporal/yerellik kalite sınıfını düşürmeden güvenli alternatif varsa farklı mahalleye taşınır; eş kalite alternatif yoksa güçlü mevcut nokta korunur. Temporal ani-başlangıç desteği olan güvenli adaylar aynı Sentinel sahnesinde en güçlü dört mahalle-çeşitli aday arasında günlük döner; 250-900 m² adayda güvenilir yaygın çevre değişimi varsa temporal acil havuzdan çıkarılır. Aynı boyut sınıfında 3x3 merkez değişimi 5x5 çevre halkasına göre belirgin biçimde lokal kalan aday saha kalibrasyonunda önce gelir; bu yine alarm değildir.",
   "dogrulanmis_takip_sahalari": [
     {
       "gorev_id": "UEC44340AEC",
@@ -7430,10 +7455,7 @@
     "saha_oncul_azami_yas_gun": 60,
     "saha_oncul_eslesen_gorevler": [],
     "one_alinan_gorevler": [],
-    "not": "Yalnız mevcut aktif görevlerin sırasını değiştirir; alarm/görev üretmez. Daha eski güçlü MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği yalnız zaten bağımsız 250 m²+ taze ana adayda sıralama kanıtıdır. TEKRAR_GIT en yüksek öncelikte kalır.",
-    "temporal_lokal_oncul_esleme_mesafesi_m": 25.0,
-    "temporal_lokal_oncul_eslesen_gorevler": [],
-    "temporal_lokal_oncul_notu": "Daha eski güçlü 250-900 m² ani+lokal diagnostik yalnız zaten bağımsız taze 250 m²+ ana aday için sıralama kanıtıdır; alarm/görev üretmez."
+    "not": "Yalnız mevcut aktif görevlerin sırasını değiştirir; alarm/görev üretmez. Daha eski güçlü MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği yalnız zaten bağımsız 250 m²+ taze ana adayda sıralama kanıtıdır. TEKRAR_GIT en yüksek öncelikte kalır."
   },
   "postseason_fresh_evidence_retention": {
     "aktif": true,
@@ -7585,20 +7607,34 @@
   "ana_saha_geri_bildirim_notu": "Doğrulanmış negatif saha sonuçları aynı/eski Sentinel kanıtında günlük rota uygunluğunu kapatır; mevcut müşteriler pozitif şantiye referansı olarak korunur fakat müşteri statüsü değişmedikçe yeni-müşteri rotasına alınmaz. Alarm/görev silinmez.",
   "kor_alan_saha_devriyesi": [
     {
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Musalla",
-      "enlem": 38.30188,
-      "boylam": 26.28279,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Uzunkuyu",
+      "enlem": 38.278906,
+      "boylam": 26.555956,
       "alan_m2": 400,
-      "neden": "KARISIK_GECERSIZLIK",
+      "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.3626,
+      "kalan_kor_yuzde": 0.196,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.301880,26.282790",
-      "saha_gorevi": false
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.278906,26.555956"
+    },
+    {
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Ildır",
+      "enlem": 38.386359,
+      "boylam": 26.450039,
+      "alan_m2": 800,
+      "neden": "BULUT_GOLGE_KALICI",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.4014,
+      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.386359,26.450039"
     }
   ],
   "operasyon_odak_disinda_devriye": [],
@@ -7719,7 +7755,7 @@
   "mevcut_musteri_arka_plan_sayi": 1,
   "operasyon_odak_notu": "Günlük rota Çeşme yarımadası–Uzunkuyu odağındadır. Açıkça Gülbahçe etiketli adaylar ve doğrulanmış mevcut müşteri sahaları günlük yeni-müşteri rotasının dışında tutulur. Açık Gülbahçe kör-alan devriyeleri diagnostik arka planda korunur fakat saha rotasına girmez. Mevcut müşteri sinyali yanlış pozitif sayılmaz; model kalibrasyonunda gerçek şantiye olarak korunur. Doğrulanmamış mevki veya Gülbahçe kelimesi geçen karma doğu-bölgesi etiketi coğrafi tahminle elenmez.",
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-19",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Mevcut bölgesel kör-alan rotasyonu korunur; iki günde bir uygun 250-6500 m² bilinen-kara kör hücresi varsa doğu slotu önce Gülbahçe operasyonel referansının 2 km çekirdeğine ayrılır. Çekirdekte güvenli aday yoksa 3 km çevre yalnız yedek kapsama olarak kullanılabilir. Aktif radar görevlerinden >=150 m ve diğer kör-alan devriyesinden >=250 m uzakta tutulur. Operasyonel referans idari/kadastral sınır değildir.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
   "gulbahce_kor_alan_devriye_korumasi": {
     "alarm": false,
     "saha_gorevi": false,
@@ -7771,5 +7807,32 @@
     "neden": "GUNCEL_SAHNE_INCELEMESI_ESLESMIYOR"
   },
   "temporal_lokal_erken_izleme": [],
-  "temporal_lokal_erken_izleme_notu": "15 Eylül ve sonrasında güçlü temporal-lokal aday yüksek diagnostik ağırlık alır; bu katman yine alarm veya saha görevi üretmez."
+  "temporal_lokal_erken_izleme_notu": "15 Eylül ve sonrasında güçlü temporal-lokal aday yüksek diagnostik ağırlık alır; bu katman yine alarm veya saha görevi üretmez.",
+  "temporal_kalibrasyon_rotasyonu": {
+    "durum": "uygulandi",
+    "slot_sayisi": 2,
+    "kural": "Ani-baslangic destekli alarm-disi kalibrasyonlar ayni Sentinel sahnesinde en guclu dort mahalle-cesitli aday arasinda gunluk doner; 250-900 m2 adayda guvenilir yaygin cevre degisim riski temporal acil havuzundan dusurulur. Ayni boyut sinifinda merkez degisimi cevre halkasina gore belirgin lokal kalan adaylar saha kalibrasyonunda once gelir; normal guvenli rotasyon korunur."
+  },
+  "gecikmis_rota_rotasyonu": {
+    "durum": "gerekmedi",
+    "kural": "Yalniz gecikmis kuyrukta, ayni guncel Sentinel kalite bandindaki kucuk-guclu adaylarda en guclu capa korunur; kalan slotlar Cesme yerel takvim gunune gore gunluk doner.",
+    "havuz": 0,
+    "rapor_tarihi": "2026-09-19",
+    "rotasyon_tarihi": "2026-09-19"
+  },
+  "kalibrasyon_katmanlar_arasi_cesitlilik": {
+    "durum": "uygulandi",
+    "engellenen_mahalleler": [
+      "germiyan",
+      "ildır",
+      "ilıca",
+      "mevki doğrulanmadı",
+      "uzunkuyu"
+    ],
+    "secilen_mahalleler": [
+      "Musalla",
+      "Gülbahçe"
+    ],
+    "kural": "Ana ilk-3 veya kor-alan devriyesi mahallesini, ayni temporal/yerellik kalite sinifinda guvenli alternatif varsa alarm-disi kalibrasyonda tekrar etme."
+  }
 }
