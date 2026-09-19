@@ -28,8 +28,10 @@ MICRO_RANGE_M2 = [150, 249]
 LOCAL_SUPPORT = {"KOMPAKT_LOKAL_DESTEKLI", "LOKAL_AYRIM_DESTEKLI"}
 STRONG_DB = 2.0
 # Seed-merkezli katman yüksek-recall modunda 120 morfoloji adayı dışarı verir.
-# SAR denetimi bu havuzu yeniden ilk 20/40'a kesmemeli; 120 hedef bölge başına
-# runtime sınırı içinde kalırken düşük-kontrast gerçek kazıların downstream'e ulaşmasını korur.
+# Referans-çekirdeği öncelikleri bu tabanın üstüne eklenebildiği için SAR katmanı
+# salt [:120] kesmesi yapamaz; aksi halde özellikle korumaya çalıştığımız düşük-
+# kontrast adaylar downstream'de tekrar kaybolur. Seçici runtime tavanını 120'de
+# tutar fakat referans-çekirdeği adaylarını önce korur.
 MAX_CANDIDATES_PER_REGION = 120
 CALIBRATION_SOURCE = "SAHA_DOGRULANMIS_KAZI_KALIBRASYON"
 
@@ -71,6 +73,14 @@ def _strong_local(row):
     except (TypeError, ValueError):
         return False
     return bool(score >= STRONG_DB and str(row.get("sar_mekansal_ayrim") or "") in LOCAL_SUPPORT)
+
+
+def _select_candidates(region):
+    """SAR runtime tavanı içinde referans-çekirdeği adaylarını kaybetmeden seçim yap."""
+    pool = [item for item in (region.get("adaylar") or []) if isinstance(item, dict)]
+    priority = [item for item in pool if item.get("referans_cekirdek_oncelikli") is True]
+    ordinary = [item for item in pool if item.get("referans_cekirdek_oncelikli") is not True]
+    return (priority + ordinary)[:MAX_CANDIDATES_PER_REGION]
 
 
 def _target_from_candidate(candidate):
@@ -120,7 +130,8 @@ def _confirmed_calibration_targets(region_key):
 
 
 def _analyze_region(region_key, region):
-    candidates = list(region.get("adaylar") or [])[:MAX_CANDIDATES_PER_REGION]
+    pool = [item for item in (region.get("adaylar") or []) if isinstance(item, dict)]
+    candidates = _select_candidates(region)
     seed_targets = [_target_from_candidate(candidate) for candidate in candidates]
     calibration_targets = _confirmed_calibration_targets(region_key)
     targets = seed_targets + calibration_targets
@@ -191,7 +202,12 @@ def _analyze_region(region_key, region):
         "sar_eski_tarih": result.get("eski_tarih"),
         "sar_yeni_tarih": sar_new,
         "sar_optik_doneme_zamansal_uygun": temporal_ok,
+        "s2_seed_havuz_sayisi": len(pool),
         "s2_seed_hedef_sayisi": len(seed_targets),
+        "referans_cekirdek_sar_hedef_sayisi": sum(
+            1 for item in candidates if item.get("referans_cekirdek_oncelikli") is True
+        ),
+        "sar_tavaninda_disarida_kalan_sayi": max(len(pool) - len(candidates), 0),
         "saha_kalibrasyon_hedef_sayisi": len(calibration_targets),
         "hedef_sayisi": len(rows),
         "rtc_cifti_kapsayan_hedef": len(covered_rows),
@@ -223,6 +239,20 @@ def _self_check():
     })
     assert MAX_CANDIDATES_PER_REGION >= 120
 
+    # Base 120 adayın sonuna eklenen referans-çekirdeği satırları salt slicing ile
+    # kaybolmamalı. Sabit 120 runtime tavanında bu öncelikler sıradan adayların
+    # bir kısmını yerinden eder, fakat tamamı SAR'a ulaşır.
+    synthetic = [
+        {"id": index, "referans_cekirdek_oncelikli": index >= 120}
+        for index in range(126)
+    ]
+    selected = _select_candidates({"adaylar": synthetic})
+    selected_ids = {item["id"] for item in selected}
+    assert len(selected) == MAX_CANDIDATES_PER_REGION
+    assert all(index in selected_ids for index in range(120, 126))
+    assert 0 in selected_ids
+    assert 119 not in selected_ids
+
 
 def audit():
     _self_check()
@@ -248,7 +278,7 @@ def audit():
             }
 
     return {
-        "surum": 3,
+        "surum": 4,
         "amac": "Lokal S2 temel/kepçe seedlerini ve saha doğrulanmış kazı kalibrasyon hedeflerini zamansal olarak uygun Sentinel-1 RTC lokal desteğiyle çapraz denetlemek",
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
@@ -262,6 +292,7 @@ def audit():
         "not": (
             "SAR yalnız optik değişim dönemine zamansal olarak yetişiyorsa S2-SAR çapraz destek sayılır. "
             "Saha doğrulanmış kazı exact koordinatında ayrıca diagnostik ölçülür; bu hedef ancak SAR yeni sahnesi saha doğrulama tarihine eşit/yeni ise kalibrasyon desteği sayılır ve S2-SAR aday sayısına katılmaz. "
+            "Referans-çekirdeği öncelikli düşük-kontrast adaylar sabit SAR runtime tavanı içinde sıradan adaylardan önce korunur. "
             "Tarih karşılaştırması YYYY-MM-DD ve DD.MM.YYYY biçimlerini birlikte destekler. "
             "Bu katman tek başına saha görevi üretmez; saha kalibrasyonu olmadan rota kapısına bağlanmaz."
         ),
