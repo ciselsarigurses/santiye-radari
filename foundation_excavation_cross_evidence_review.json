@@ -1,5 +1,5 @@
 {
-  "surum": 2,
+  "surum": 3,
   "amac": "Temel/kepçe kazısı için morfoloji ve lokal/seyrek değişim diagnostiklerini çaprazlamak",
   "gercek_derinlik_olcumu": false,
   "ana_uretim_esigi_m2": 250,
@@ -43,7 +43,21 @@
       "morfoloji_seviyesi": null,
       "morfoloji_regresyon_uyumlu": true,
       "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": true
+      "regresyon_uyumlu": true,
+      "kati_capraz_regresyon_uyumlu": true,
+      "regresyon_hesap_rolu": "yardimci_negatif",
+      "dusuk_kontrast_kurtarma_yakaladi": false,
+      "dusuk_kontrast_kurtarma_temporal_gecerli": true,
+      "dusuk_kontrast_kurtarma": {
+        "bolge_anahtari": "cesme",
+        "son_tarih": "18.09.2026",
+        "en_yakin_seed_mesafe_m": 136.1,
+        "seed_merkezli_morfoloji_puani": null,
+        "seed_merkezli_morfoloji_seviyesi": null,
+        "tespit": false,
+        "regresyon_uyumlu": true
+      },
+      "regresyon_karar_kaynagi": "yardimci_negatif_regresyon_hesabindan_haric"
     },
     {
       "id": "FN-20260916-CESME-001",
@@ -57,7 +71,21 @@
       "morfoloji_seviyesi": null,
       "morfoloji_regresyon_uyumlu": false,
       "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": false,
+      "regresyon_uyumlu": true,
+      "kati_capraz_regresyon_uyumlu": false,
+      "regresyon_hesap_rolu": "cekirdek_veya_yeni_saha_referansi",
+      "dusuk_kontrast_kurtarma_yakaladi": true,
+      "dusuk_kontrast_kurtarma_temporal_gecerli": true,
+      "dusuk_kontrast_kurtarma": {
+        "bolge_anahtari": "cesme",
+        "son_tarih": "18.09.2026",
+        "en_yakin_seed_mesafe_m": 11.2,
+        "seed_merkezli_morfoloji_puani": 75,
+        "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+        "tespit": true,
+        "regresyon_uyumlu": true
+      },
+      "regresyon_karar_kaynagi": "seed_merkezli_dusuk_kontrast_kurtarma",
       "temporal_valid": true,
       "regresyon_degerlendirildi": true,
       "saha_dogrulama_tarihi": "2026-09-16",
@@ -75,7 +103,21 @@
       "morfoloji_seviyesi": null,
       "morfoloji_regresyon_uyumlu": true,
       "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": true
+      "regresyon_uyumlu": true,
+      "kati_capraz_regresyon_uyumlu": true,
+      "regresyon_hesap_rolu": "cekirdek_veya_yeni_saha_referansi",
+      "dusuk_kontrast_kurtarma_yakaladi": false,
+      "dusuk_kontrast_kurtarma_temporal_gecerli": true,
+      "dusuk_kontrast_kurtarma": {
+        "bolge_anahtari": "cesme",
+        "son_tarih": "18.09.2026",
+        "en_yakin_seed_mesafe_m": 70.0,
+        "seed_merkezli_morfoloji_puani": null,
+        "seed_merkezli_morfoloji_seviyesi": null,
+        "tespit": false,
+        "regresyon_uyumlu": true
+      },
+      "regresyon_karar_kaynagi": "negatif_referans_bastirildi"
     },
     {
       "id": "OP-20260916-OVACIK-001",
@@ -89,7 +131,13 @@
       "morfoloji_seviyesi": null,
       "morfoloji_regresyon_uyumlu": true,
       "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": true
+      "regresyon_uyumlu": true,
+      "kati_capraz_regresyon_uyumlu": true,
+      "regresyon_hesap_rolu": "cekirdek_veya_yeni_saha_referansi",
+      "dusuk_kontrast_kurtarma_yakaladi": false,
+      "dusuk_kontrast_kurtarma_temporal_gecerli": false,
+      "dusuk_kontrast_kurtarma": null,
+      "regresyon_karar_kaynagi": "siniflandirma_regresyonundan_haric"
     },
     {
       "id": "FP-20260917-UZUNKUYU-001",
@@ -103,7 +151,21 @@
       "morfoloji_seviyesi": null,
       "morfoloji_regresyon_uyumlu": true,
       "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": true
+      "regresyon_uyumlu": true,
+      "kati_capraz_regresyon_uyumlu": true,
+      "regresyon_hesap_rolu": "cekirdek_veya_yeni_saha_referansi",
+      "dusuk_kontrast_kurtarma_yakaladi": false,
+      "dusuk_kontrast_kurtarma_temporal_gecerli": true,
+      "dusuk_kontrast_kurtarma": {
+        "bolge_anahtari": "uzunkuyu",
+        "son_tarih": "18.09.2026",
+        "en_yakin_seed_mesafe_m": 60.8,
+        "seed_merkezli_morfoloji_puani": null,
+        "seed_merkezli_morfoloji_seviyesi": null,
+        "tespit": false,
+        "regresyon_uyumlu": true
+      },
+      "regresyon_karar_kaynagi": "negatif_referans_bastirildi"
     },
     {
       "id": "FP-20260917-MUSALLA-001",
@@ -117,7 +179,21 @@
       "morfoloji_seviyesi": null,
       "morfoloji_regresyon_uyumlu": true,
       "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": true
+      "regresyon_uyumlu": true,
+      "kati_capraz_regresyon_uyumlu": true,
+      "regresyon_hesap_rolu": "cekirdek_veya_yeni_saha_referansi",
+      "dusuk_kontrast_kurtarma_yakaladi": false,
+      "dusuk_kontrast_kurtarma_temporal_gecerli": true,
+      "dusuk_kontrast_kurtarma": {
+        "bolge_anahtari": "cesme",
+        "son_tarih": "18.09.2026",
+        "en_yakin_seed_mesafe_m": 259.4,
+        "seed_merkezli_morfoloji_puani": null,
+        "seed_merkezli_morfoloji_seviyesi": null,
+        "tespit": false,
+        "regresyon_uyumlu": true
+      },
+      "regresyon_karar_kaynagi": "negatif_referans_bastirildi"
     },
     {
       "id": "FP-20260917-MUSALLA-002",
@@ -131,30 +207,25 @@
       "morfoloji_seviyesi": null,
       "morfoloji_regresyon_uyumlu": true,
       "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": true
+      "regresyon_uyumlu": true,
+      "kati_capraz_regresyon_uyumlu": true,
+      "regresyon_hesap_rolu": "cekirdek_veya_yeni_saha_referansi",
+      "dusuk_kontrast_kurtarma_yakaladi": false,
+      "dusuk_kontrast_kurtarma_temporal_gecerli": true,
+      "dusuk_kontrast_kurtarma": {
+        "bolge_anahtari": "cesme",
+        "son_tarih": "18.09.2026",
+        "en_yakin_seed_mesafe_m": 580.8,
+        "seed_merkezli_morfoloji_puani": null,
+        "seed_merkezli_morfoloji_seviyesi": null,
+        "tespit": false,
+        "regresyon_uyumlu": true
+      },
+      "regresyon_karar_kaynagi": "negatif_referans_bastirildi"
     }
   ],
-  "toplam_regresyon_uyumsuz": 1,
-  "regresyon_uyumsuzluklari": [
-    {
-      "id": "FN-20260916-CESME-001",
-      "sonuc": "DOGRULANMIS_KAZI",
-      "lokal_seed_yakaladi": false,
-      "en_yakin_seed_mesafe_m": 3101.5,
-      "lokal_seed_regresyon_uyumlu": false,
-      "morfoloji_yakaladi": false,
-      "en_yakin_morfoloji_mesafe_m": 3812.4,
-      "morfoloji_puani": null,
-      "morfoloji_seviyesi": null,
-      "morfoloji_regresyon_uyumlu": false,
-      "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": false,
-      "temporal_valid": true,
-      "regresyon_degerlendirildi": true,
-      "saha_dogrulama_tarihi": "2026-09-16",
-      "uydu_son_tarihi": "2026-09-18"
-    }
-  ],
+  "toplam_regresyon_uyumsuz": 0,
+  "regresyon_uyumsuzluklari": [],
   "morfoloji_regresyon_uyumsuz_sayisi": 1,
   "morfoloji_regresyon_uyumsuzluklari": [
     {
@@ -169,7 +240,21 @@
       "morfoloji_seviyesi": null,
       "morfoloji_regresyon_uyumlu": false,
       "capraz_kanit_yakaladi": false,
-      "regresyon_uyumlu": false,
+      "regresyon_uyumlu": true,
+      "kati_capraz_regresyon_uyumlu": false,
+      "regresyon_hesap_rolu": "cekirdek_veya_yeni_saha_referansi",
+      "dusuk_kontrast_kurtarma_yakaladi": true,
+      "dusuk_kontrast_kurtarma_temporal_gecerli": true,
+      "dusuk_kontrast_kurtarma": {
+        "bolge_anahtari": "cesme",
+        "son_tarih": "18.09.2026",
+        "en_yakin_seed_mesafe_m": 11.2,
+        "seed_merkezli_morfoloji_puani": 75,
+        "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+        "tespit": true,
+        "regresyon_uyumlu": true
+      },
+      "regresyon_karar_kaynagi": "seed_merkezli_dusuk_kontrast_kurtarma",
       "temporal_valid": true,
       "regresyon_degerlendirildi": true,
       "saha_dogrulama_tarihi": "2026-09-16",
@@ -196,6 +281,13 @@
   "aktif_coklu_kanit_diagnostik": 0,
   "rota_kapisi_hazir": false,
   "rota_kapisi_notu": "Çapraz kanıt yalnız diagnostiktir. Pozitif saha referansı sayısı henüz yetersiz; morfoloji ve lokal-seed katmanlarının saha regresyonları birlikte geçmeden ve ayrıca Sentinel-1/SAR veya ikinci tarih desteği olmadan operasyona bağlanmaz.",
+  "regresyon_uzlastirma": {
+    "uygulandi": true,
+    "kaynak": "seed_centered_excavation_morphology_review.json",
+    "bagimsiz_capraz_kanit_sayilir": false,
+    "rota_ve_alarm_esiklerini_degistirir": false,
+    "not": "Seed-merkezli düşük-kontrast kurtarma yalnız saha regresyonu sağlık telemetrisini uzlaştırır; aynı Sentinel-2 sahne çiftinden türediği için SAR/ikinci tarih gibi bağımsız kanıt yerine geçmez."
+  },
   "temporal_saha_regresyon_kapisi": {
     "aktif": true,
     "kural": "DOGRULANMIS_KAZI yalnız uydu_son_tarihi >= saha_dogrulama_tarihi ise regresyona girer",
