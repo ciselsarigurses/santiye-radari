@@ -1,6 +1,6 @@
 {
-  "surum": 2,
-  "amac": "13 Eylül baseline referans-benzeri adaylarında çoğunluk korunmuş bitki dokusunu tarla/bahçe negatif bağlamı olarak bastırmak",
+  "surum": 3,
+  "amac": "13 Eylül baseline referans-benzeri adaylarında korunmuş/karma bitki dokusunu tarla-bahçe negatif bağlamı olarak bastırmak",
   "gercek_derinlik_olcumu": false,
   "ana_uretim_esigi_m2": 250,
   "mikro_aralik_m2": [
@@ -8,7 +8,9 @@
     249
   ],
   "kalici_bitki_negatif_esigi": 0.5,
-  "toplam_kalici_bitki_bastirilan": 2,
+  "karma_bitki_min_esigi": 0.4,
+  "karma_ciplak_zemin_max_esigi": 0.6,
+  "toplam_kalici_bitki_bastirilan": 3,
   "gercek_kazi_referansi_sayisi": 1,
   "gercek_kazi_referansi_korundu": true,
   "uretim_filtresi": false,
@@ -21,8 +23,8 @@
       "baseline_tarih": "13.09.2026",
       "post_onset_tarih": "18.09.2026",
       "girdi_aday_sayisi": 8,
-      "korunan_aday_sayisi": 6,
-      "kalici_bitki_bastirilan_sayi": 2,
+      "korunan_aday_sayisi": 5,
+      "kalici_bitki_bastirilan_sayi": 3,
       "gercek_kazi_referansi_sayisi": 1,
       "gercek_kazi_referansi_korundu": true,
       "korunan_adaylar": [
@@ -93,28 +95,6 @@
           "kalici_bitki_negatif_baglami": false
         },
         {
-          "enlem": 38.286775,
-          "boylam": 26.497203,
-          "seed_piksel": 1,
-          "spektral_etki_alani_m2": 100,
-          "seed_sinifi": "PARLAK_LOKAL",
-          "alarm": false,
-          "saha_gorevi": false,
-          "neden_diagnostik": "13 Eylül sakin baseline ile en güncel 17 Eylül sonrası aynı-yörünge sahnesinde doğrulanmış kazının lokal seed sınıfına benziyor; dört kritik FP çevresi bastırıldı.",
-          "ortalama_rgb_5x5": 0.0604,
-          "max_rgb_5x5": 0.268,
-          "ortalama_rgb_9x9": 0.0372,
-          "parlak_artis_orani_5x5": 0.2,
-          "koyulasma_orani_5x5": 0.28,
-          "soil_mask_orani_5x5": 0.04,
-          "kalici_bitki_orani_5x5": 0.48,
-          "ciplak_zemin_orani_5x5": 0.48,
-          "koyu_alt_toprak_proxy_orani_5x5": 0.08,
-          "seed_merkezli_morfoloji_puani": 100,
-          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
-          "kalici_bitki_negatif_baglami": false
-        },
-        {
           "enlem": 38.278725,
           "boylam": 26.303853,
           "seed_piksel": 5,
@@ -160,6 +140,29 @@
         }
       ],
       "bastirilan_adaylar": [
+        {
+          "enlem": 38.286775,
+          "boylam": 26.497203,
+          "seed_piksel": 1,
+          "spektral_etki_alani_m2": 100,
+          "seed_sinifi": "PARLAK_LOKAL",
+          "alarm": false,
+          "saha_gorevi": false,
+          "neden_diagnostik": "13 Eylül sakin baseline ile en güncel 17 Eylül sonrası aynı-yörünge sahnesinde doğrulanmış kazının lokal seed sınıfına benziyor; dört kritik FP çevresi bastırıldı.",
+          "ortalama_rgb_5x5": 0.0604,
+          "max_rgb_5x5": 0.268,
+          "ortalama_rgb_9x9": 0.0372,
+          "parlak_artis_orani_5x5": 0.2,
+          "koyulasma_orani_5x5": 0.28,
+          "soil_mask_orani_5x5": 0.04,
+          "kalici_bitki_orani_5x5": 0.48,
+          "ciplak_zemin_orani_5x5": 0.48,
+          "koyu_alt_toprak_proxy_orani_5x5": 0.08,
+          "seed_merkezli_morfoloji_puani": 100,
+          "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+          "kalici_bitki_negatif_baglami": true,
+          "negatif_baglamsal_neden": "5x5 çevrede kalıcı bitki dokusu korunurken çıplak zemin çoğunluk oluşturmuyor; Musalla tarla/bahçe yanlış-pozitif imzasına benzeyen karma arazi bağlamı."
+        },
         {
           "enlem": 38.315537,
           "boylam": 26.349415,
@@ -226,5 +229,5 @@
       "saha_gorevi": false
     }
   },
-  "not": "Bu çıktı üretim veya rota filtresi değildir. Kalıcı bitki oranı >=0.50 olan referans-benzeri adayları güçlü tarla/bahçe negatif bağlamı olarak ayırır; doğrulanmış gerçek kazı referansının bastırılmadığını regresyon güvenliği olarak raporlar. Referans içermeyen bölgelerde bölgesel koruma durumu null/uygulanamaz olarak bırakılır."
+  "not": "Bu çıktı üretim veya rota filtresi değildir. Kalıcı bitki oranı >=0.50 olan veya kalıcı bitki >=0.40 iken çıplak zemin <=0.60 kalan referans-benzeri adayları güçlü tarla/bahçe negatif bağlamı olarak ayırır. İkinci kural, kritik Musalla yanlış-pozitifinin 0.40 kalıcı-bitki / 0.52 çıplak-zemin imzasını hedefler; doğrulanmış gerçek kazı referansı 0.00 / 0.92 olduğu için korunur. Referans içermeyen bölgelerde bölgesel koruma durumu null/uygulanamaz olarak bırakılır."
 }
