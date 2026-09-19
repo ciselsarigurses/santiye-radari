@@ -1,0 +1,80 @@
+name: Baseline Bitki Negatif Bağlam Diagnostiği
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "post_onset_baseline_excavation_review.json"
+      - "post_onset_baseline_vegetation_guard.py"
+      - ".github/workflows/post-onset-baseline-vegetation-guard.yml"
+  workflow_run:
+    workflows:
+      - "13 Eylül Baseline Kazı Diagnostiği"
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-post-onset-baseline-vegetation
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Negatif bağlam öz testi
+        run: python post_onset_baseline_vegetation_guard.py --check-only
+
+      - name: Korunmuş bitki dokusunu diagnostik bastır
+        run: python post_onset_baseline_vegetation_guard.py
+
+      - name: Yalnız semantik değişiklik varsa güvenli kaydet
+        run: |
+          output="post_onset_baseline_vegetation_guard_review.json"
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Baseline bitki negatif bağlam diagnostiği değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python post_onset_baseline_vegetation_guard.py --check-only
+            python post_onset_baseline_vegetation_guard.py
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add "$output"
+            git commit -m "Radar: baseline bitki negatif bağlam diagnostiğini güncelle"
+            if git push origin HEAD:main; then
+              echo "Baseline bitki negatif bağlam diagnostiği kaydedildi."
+              exit 0
+            fi
+
+            echo "Ana dal ilerledi; yeniden deneniyor (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Baseline bitki negatif bağlam diagnostiği üç denemede kaydedilemedi."
+          exit 1
