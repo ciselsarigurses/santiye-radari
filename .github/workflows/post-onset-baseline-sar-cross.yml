@@ -7,6 +7,10 @@ on:
       - "post_onset_baseline_sar_cross_audit.py"
       - "post_onset_baseline_vegetation_guard_review.json"
       - "manual_field_feedback.json"
+      # Saatlik Sentinel-1 yoklaması semantik olarak yeni bir SAR snapshotı
+      # yayınladığında baseline adaylarını kendi exact koordinatlarında yeniden ölç.
+      # Böylece S2 morfoloji değişmese bile daha taze S1 kanıtı kaçırılmaz.
+      - "sentinel1_rtc_map.geojson"
       - "sentinel1_rtc_change_diagnostic.py"
       - "sentinel1_scene_probe.py"
       - ".github/workflows/post-onset-baseline-sar-cross.yml"
