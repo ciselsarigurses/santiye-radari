@@ -13,6 +13,7 @@ on:
       - "foundation_excavation_reference_similarity_audit.py"
       - "foundation_excavation_sar_seed_audit.py"
       - "foundation_excavation_cross_evidence_audit.py"
+      - "foundation_excavation_cross_evidence_reconcile.py"
       - "foundation_excavation_route_gate_audit.py"
       - "foundation_excavation_core_fp_route_policy.py"
       - "temporal_field_feedback_regression_guard.py"
@@ -70,6 +71,7 @@ jobs:
           python foundation_excavation_reference_similarity_audit.py --check-only
           python foundation_excavation_sar_seed_audit.py --check-only
           python foundation_excavation_cross_evidence_audit.py --check-only
+          python foundation_excavation_cross_evidence_reconcile.py --check-only
           python foundation_excavation_route_gate_audit.py --check-only
           python foundation_excavation_core_fp_route_policy.py --check-only
           python temporal_field_feedback_regression_guard.py --check-only
@@ -85,6 +87,7 @@ jobs:
           python foundation_excavation_reference_similarity_audit.py
           python foundation_excavation_sar_seed_audit.py
           python foundation_excavation_cross_evidence_audit.py
+          python foundation_excavation_cross_evidence_reconcile.py
           python temporal_field_feedback_regression_guard.py
           python foundation_excavation_route_gate_audit.py
           python foundation_excavation_core_fp_route_policy.py
@@ -112,6 +115,7 @@ jobs:
             python foundation_excavation_reference_similarity_audit.py --check-only
             python foundation_excavation_sar_seed_audit.py --check-only
             python foundation_excavation_cross_evidence_audit.py --check-only
+            python foundation_excavation_cross_evidence_reconcile.py --check-only
             python foundation_excavation_route_gate_audit.py --check-only
             python foundation_excavation_core_fp_route_policy.py --check-only
             python temporal_field_feedback_regression_guard.py --check-only
@@ -124,6 +128,7 @@ jobs:
             python foundation_excavation_reference_similarity_audit.py
             python foundation_excavation_sar_seed_audit.py
             python foundation_excavation_cross_evidence_audit.py
+            python foundation_excavation_cross_evidence_reconcile.py
             python temporal_field_feedback_regression_guard.py
             python foundation_excavation_route_gate_audit.py
             python foundation_excavation_core_fp_route_policy.py
