@@ -11,17 +11,11 @@
 
 ## Günün ilk 3 kontrolü
 
-> Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; bölge dengesi daha yüksek öncelikli adayı düşürmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir.
+> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.
 
 1. **ERKEN — Ilıca** · yaklaşık 700 m² · Görev `U2EBF2F9DD1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.318703,26.387192)
 2. **ERKEN — Germiyan** · yaklaşık 500 m² · Görev `UA1A64C2BEA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313095,26.471675)
 3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · Görev `U92D437BB80` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.368450,26.643880)
-
-## Temporal-lokal erken sinyal izleme
-
-> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül sonrası bunlar yüksek diagnostik ağırlıkla izlenir; görev açma kuralı değişmez.
-
-Bu turda güvenli temporal-lokal erken sinyal yok.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
