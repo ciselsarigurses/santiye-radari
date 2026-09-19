@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-18",
+  "rapor_tarihi": "2026-09-19",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -10,54 +10,9 @@
     "rapor_esleme_m": 90,
     "manuel_tekrar_override": true
   },
-  "arka_plan_aday_sayisi": 2,
+  "arka_plan_aday_sayisi": 0,
   "operasyonel_listeden_ayrilan": 0,
   "manuel_tekrar_korunan": 0,
-  "kanit_kaynagi_sayilari": {
-    "hareket_json": 2
-  },
-  "adaylar": [
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Ovacık",
-      "enlem": 38.275649,
-      "boylam": 26.341287,
-      "alan_m2": 37904,
-      "genis_kompaktlik": 0.067,
-      "genis_geometri_riski": true,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
-      "kanit_kaynagi": "hareket_json",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.275649,26.341287",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.275649/26.341287",
-      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
-      "kaynak_bolgeler": [
-        "cesme"
-      ]
-    },
-    {
-      "alarm": false,
-      "saha_gorevi": false,
-      "izleme": "ARKA_PLAN_GENIS_YUZEY",
-      "bolge_anahtari": "cesme",
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Ovacık",
-      "enlem": 38.274293,
-      "boylam": 26.344721,
-      "alan_m2": 23402,
-      "genis_kompaktlik": 0.127,
-      "genis_geometri_riski": true,
-      "sinyal": "Bitişik yüzey/toprak değişimi adayı",
-      "kanit_kaynagi": "hareket_json",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.274293,26.344721",
-      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.274293/26.344721",
-      "neden": "10.000 m² üstünde ve ölçülen düşük-kompaktlık riski var. Bu geometri tek başına şantiye kanıtı sayılmaz; geniş arazi/tarım/toprak/doğal yüzey değişimi olasılığı nedeniyle arka planda izlenir. Yeni sahnede daha kompakt-parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa operasyonel havuza yeniden girebilir.",
-      "kaynak_bolgeler": [
-        "cesme"
-      ]
-    }
-  ]
+  "kanit_kaynagi_sayilari": {},
+  "adaylar": []
 }
