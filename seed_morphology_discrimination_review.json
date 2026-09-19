@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "Seed-merkezli temel/kepçe morfoloji proxy skorunun ayırt ediciliğini ölçmek",
   "uretim_filtresi": false,
   "alarm": false,
@@ -7,10 +7,16 @@
   "rota_degistirir": false,
   "ana_uretim_esigi_degisti": false,
   "mikro_politikasi_degisti": false,
-  "doygunluk_esigi": 0.95,
+  "seviye_doygunluk_esigi": 0.95,
+  "tavan_doygunluk_esigi": 0.5,
   "minimum_seed": 20,
+  "tavan_kontrolu_minimum_disari_aktarilan": 10,
   "skor_doygunlugu_var": true,
   "doygun_bolgeler": [
+    "cesme",
+    "uzunkuyu"
+  ],
+  "tavan_doygun_bolgeler": [
     "cesme",
     "uzunkuyu"
   ],
@@ -23,9 +29,19 @@
       "disari_aktarilan_aday_sayisi": 29,
       "tavan_100_puanli_disari_aktarilan": 20,
       "tavan_100_puan_orani": 0.6897,
+      "skor_sayisi": 29,
+      "benzersiz_skor_sayisi": 6,
+      "skor_min": 75,
+      "skor_p10": 85,
+      "skor_medyan": 100,
+      "skor_p90": 100,
+      "skor_max": 100,
+      "seviye_doygunlugu_riski": true,
+      "tavan_doygunlugu_riski": true,
       "skor_doygunlugu_riski": true,
       "tek_basina_guven_kaniti_olarak_kullanilabilir": false,
-      "not": "Morfoloji seviyesi aday havuzunun neredeyse tamamını ORTA/YUKSEK işaretliyor; bu katman ayırt edici değildir ve bağımsız SAR/temporal/yapılaşma kanıtı olmadan yüksek güven veya KONTROLE_GIT üretmemelidir."
+      "morfoloji_ranking_saglikli": false,
+      "not": "Morfoloji puanı aday havuzunda doygun: ORTA/YÜKSEK seviyesi veya 100 puan tavanı yeterince ayırt edici değil. Bu katman bağımsız SAR/temporal/yapılaşma kanıtı olmadan yüksek güven veya KONTROLE_GIT üretmemelidir."
     },
     "uzunkuyu": {
       "lokal_seed_sayisi": 213,
@@ -34,9 +50,19 @@
       "disari_aktarilan_aday_sayisi": 24,
       "tavan_100_puanli_disari_aktarilan": 20,
       "tavan_100_puan_orani": 0.8333,
+      "skor_sayisi": 24,
+      "benzersiz_skor_sayisi": 5,
+      "skor_min": 75,
+      "skor_p10": 90,
+      "skor_medyan": 100,
+      "skor_p90": 100,
+      "skor_max": 100,
+      "seviye_doygunlugu_riski": true,
+      "tavan_doygunlugu_riski": true,
       "skor_doygunlugu_riski": true,
       "tek_basina_guven_kaniti_olarak_kullanilabilir": false,
-      "not": "Morfoloji seviyesi aday havuzunun neredeyse tamamını ORTA/YUKSEK işaretliyor; bu katman ayırt edici değildir ve bağımsız SAR/temporal/yapılaşma kanıtı olmadan yüksek güven veya KONTROLE_GIT üretmemelidir."
+      "morfoloji_ranking_saglikli": false,
+      "not": "Morfoloji puanı aday havuzunda doygun: ORTA/YÜKSEK seviyesi veya 100 puan tavanı yeterince ayırt edici değil. Bu katman bağımsız SAR/temporal/yapılaşma kanıtı olmadan yüksek güven veya KONTROLE_GIT üretmemelidir."
     }
   },
   "cekirdek_regresyon": {
@@ -47,5 +73,5 @@
     "yanlis_pozitif_regresyon_ihlalleri": [],
     "cekirdek_regresyon_saglikli": true
   },
-  "operasyonel_yorum": "Doygunluk varken morfoloji puanı yalnız diagnostik/ranking girdisidir; bağımsız SAR, temporal devamlılık veya başka yapılaşma desteği olmadan yüksek güvenli temel/kepçe adayı sayılmaz."
+  "operasyonel_yorum": "Doygunluk varken morfoloji puanı yalnız diagnostik/ranking girdisidir; bağımsız SAR, temporal devamlılık veya başka yapılaşma desteği olmadan yüksek güvenli temel/kepçe adayı sayılmaz. Özellikle 100 puan tavanında yığılma varsa adaylar morfoloji puanıyla kendi aralarında güvenilir biçimde sıralanamaz."
 }
