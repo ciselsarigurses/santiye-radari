@@ -1,0 +1,81 @@
+name: 13 Eylül Baseline SAR Köprüsü
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "post_onset_baseline_excavation_review.json"
+      - "post_onset_baseline_sar_bridge.py"
+      - "manual_field_feedback.json"
+      - "sentinel1_rtc_change_diagnostic.py"
+      - "sentinel1_scene_probe.py"
+      - ".github/workflows/post-onset-baseline-sar-bridge.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-post-onset-baseline-sar-bridge
+  cancel-in-progress: true
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt 'planetary-computer>=1.0,<2'
+
+      - name: Baseline SAR köprüsü öz testi
+        run: python post_onset_baseline_sar_bridge.py --check-only
+
+      - name: Baseline referans adaylarını SAR ile ölç
+        run: python post_onset_baseline_sar_bridge.py
+
+      - name: Diagnostiği güvenli kaydet
+        run: |
+          output="post_onset_baseline_sar_bridge_review.json"
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Baseline SAR köprüsü çıktısı değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python post_onset_baseline_sar_bridge.py --check-only
+            python post_onset_baseline_sar_bridge.py
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add "$output"
+            git commit -m "Radar: 13 Eylül baseline SAR köprü diagnostiğini güncelle"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Ana dal ilerledi; yeniden deneniyor (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Baseline SAR köprüsü üç denemede kaydedilemedi."
+          exit 1
