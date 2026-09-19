@@ -7349,7 +7349,7 @@
       "gunluk_sira": 3
     }
   ],
-  "gunun_ilk_3_notu": "15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.",
+  "gunun_ilk_3_notu": "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; bölge dengesi daha yüksek öncelikli adayı düşürmez.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -7570,31 +7570,8 @@
       "saha_gorevi": false
     }
   ],
-  "operasyon_odak_disinda_devriye": [
-    {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Gülbahçe",
-      "enlem": 38.324311,
-      "boylam": 26.662541,
-      "alan_m2": 400,
-      "neden": "KARISIK_GECERSIZLIK",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.1856,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.324311,26.662541",
-      "saha_gorevi": false,
-      "gulbahce_operasyonel_kapsama": true,
-      "gulbahce_referans_mesafesi_m": 1754,
-      "gulbahce_cekirdek_operasyon": true,
-      "rota_uygun": false,
-      "operasyon_odak_disinda": true,
-      "operasyon_odak_notu": "Gülbahçe operasyonel öncelik dışında; kör-alan gözlemi diagnostik arka planda korunur ve günlük saha rotasına gönderilmez."
-    }
-  ],
-  "operasyon_odak_disinda_devriye_sayi": 1,
+  "operasyon_odak_disinda_devriye": [],
+  "operasyon_odak_disinda_devriye_sayi": 0,
   "operasyon_odak_arka_plan": [
     {
       "gorev_id": "UEC44340AEC",
