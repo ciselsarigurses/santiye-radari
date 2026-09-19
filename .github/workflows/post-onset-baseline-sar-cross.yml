@@ -6,8 +6,9 @@ on:
     paths:
       - "post_onset_baseline_sar_cross_audit.py"
       - "post_onset_baseline_vegetation_guard_review.json"
-      - "foundation_excavation_sar_seed_review.json"
       - "manual_field_feedback.json"
+      - "sentinel1_rtc_change_diagnostic.py"
+      - "sentinel1_scene_probe.py"
       - ".github/workflows/post-onset-baseline-sar-cross.yml"
   workflow_run:
     workflows:
@@ -27,7 +28,7 @@ jobs:
   diagnose:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 15
     steps:
       - name: Depoyu al
         uses: actions/checkout@v6
@@ -39,11 +40,15 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: pip install -r requirements.txt 'planetary-computer>=1.0,<2'
 
       - name: Öz testi çalıştır
         run: python post_onset_baseline_sar_cross_audit.py --check-only
 
-      - name: Baseline + SAR çapraz diagnostiğini üret
+      - name: Baseline adaylarını exact SAR hedeflerinde ölç
         run: python post_onset_baseline_sar_cross_audit.py
 
       - name: Diagnostiği güvenli kaydet
@@ -69,7 +74,7 @@ jobs:
             fi
 
             git add $output
-            git commit -m "Radar: baseline sonrası SAR çapraz diagnostiğini güncelle"
+            git commit -m "Radar: baseline sonrası exact SAR diagnostiğini güncelle"
             if git push origin HEAD:main; then
               exit 0
             fi
