@@ -26,6 +26,7 @@ MAIN_THRESHOLD_M2 = 250
 MICRO_MIN_M2 = 150
 MICRO_MAX_M2 = 249
 MATCH_RADIUS_M = 45.0
+DEFAULT_FEEDBACK_RADIUS_M = 30.0
 MIN_MORPHOLOGY_SCORE = 65
 STRONG_SAR_DB = 2.0
 LOCAL_SUPPORT = {"KOMPAKT_LOKAL_DESTEKLI", "LOKAL_AYRIM_DESTEKLI"}
@@ -91,7 +92,11 @@ def _feedback_effect(candidate, scene_date, feedback):
         ip = _point(item)
         if ip is None:
             continue
-        radius = max(float(item.get("eslesme_yaricapi_m") or 30), MATCH_RADIUS_M)
+        try:
+            radius = float(item.get("eslesme_yaricapi_m") or DEFAULT_FEEDBACK_RADIUS_M)
+        except (TypeError, ValueError):
+            radius = DEFAULT_FEEDBACK_RADIUS_M
+        radius = max(radius, 1.0)
         distance = _distance_m(cp, ip)
         if distance <= radius:
             matches.append((distance, item))
@@ -266,12 +271,13 @@ def audit(baseline=None, feedback=None):
     main_count = sum(int(x.get("ana_esik_yuksek_guven_sayisi") or 0) for x in regions.values())
     micro_count = sum(int(x.get("mikro_coklu_kanit_sayisi") or 0) for x in regions.values())
     return {
-        "surum": 2,
+        "surum": 3,
         "amac": "13 Eylül sakin baseline ile 17 Eylül sonrası referans-benzeri temel/kepçe adaylarını kendi koordinatlarında Sentinel-1 RTC ile çaprazlamak",
         "gercek_derinlik_olcumu": False,
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
         "mikro_aralik_m2": [MICRO_MIN_M2, MICRO_MAX_M2],
         "sar_guclu_lokal_esik_db": STRONG_SAR_DB,
+        "saha_geri_bildirim_yaricapi_politikasi": "KAYITTAKI_DEGER; yoksa 30 m",
         "toplam_ana_esik_yuksek_guven_diagnostik": main_count,
         "toplam_mikro_coklu_kanit": micro_count,
         "bolge_hata_sayisi": len(errors),
@@ -280,7 +286,7 @@ def audit(baseline=None, feedback=None):
         "saha_gorevi": False,
         "uretim_filtresi": False,
         "bolgeler": regions,
-        "not": "Baseline-referans adayları SAR'ın önceden seçilmiş hedef havuzuna bağımlı değildir; exact koordinatlarında ölçülür. SAR yokluğu/zayıflığı veto değildir, yalnız güçlü lokal ve onset penceresini çevreleyen SAR ikinci pozitif kanıt sayılır.",
+        "not": "Baseline-referans adayları SAR'ın önceden seçilmiş hedef havuzuna bağımlı değildir; exact koordinatlarında ölçülür. SAR yokluğu/zayıflığı veto değildir, yalnız güçlü lokal ve onset penceresini çevreleyen SAR ikinci pozitif kanıt sayılır. Saha geri bildirimi yalnız kayıtta tanımlı eşleşme yarıçapında (yoksa 30 m) engel oluşturur; 45 m SAR eşleme toleransı geri bildirim engeline genişletilmez.",
     }
 
 
@@ -289,6 +295,19 @@ def _self_check():
     assert not _strong_local({"sar_lokal_degisim_skor_db": 1.9, "sar_mekansal_ayrim": "KOMPAKT_LOKAL_DESTEKLI"})
     assert _brackets_onset("2026-09-12", "2026-09-18", "13.09.2026", "18.09.2026")
     assert not _brackets_onset("2026-09-16", "2026-09-18", "13.09.2026", "18.09.2026")
+
+    fp = [{
+        "id": "FP25",
+        "sonuc": "YANLIS_POZITIF",
+        "sonuc_tarihi": "2026-09-17",
+        "enlem": 38.300000,
+        "boylam": 26.300000,
+        "eslesme_yaricapi_m": 25,
+    }]
+    inside_25m = {"enlem": 38.300180, "boylam": 26.300000}
+    outside_25m_inside_old_45m = {"enlem": 38.300315, "boylam": 26.300000}
+    assert _feedback_effect(inside_25m, _date("2026-09-15"), fp)[0] is True
+    assert _feedback_effect(outside_25m_inside_old_45m, _date("2026-09-15"), fp)[0] is False
 
     baseline_region = {
         "durum": "ok",
