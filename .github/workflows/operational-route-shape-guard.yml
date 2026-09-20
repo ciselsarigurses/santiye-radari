@@ -49,6 +49,7 @@ jobs:
           python operational_route_freshness_guard.py --self-check
           python route_coordinate_link_guard.py --self-check
           python operational_corridor_guard.py --self-check
+          python foundation_excavation_operational_route_guard.py --check-only
 
       - name: Operasyonel rotayı üret
         run: |
@@ -68,23 +69,27 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Kaynak rapor başka bir workflow tarafından aynı anda güncellendiyse,
-          # en güncel main üzerinde dört korumayı da yeniden hesapla.
-          git restore operational_route.json 2>/dev/null || true
+          # en güncel main üzerinde dört rota korumasını yeniden hesapla ve en son
+          # temel/kepçe çoklu-kanıt kapısını uygula. Böylece genel BSI/toprak değişimi
+          # daha geç çalışan rota adımıyla tekrar KONTROLE_GIT'e dönemez.
+          git restore operational_route.json latest_report.json SAHA_RAPORU.md 2>/dev/null || true
           git pull --rebase origin main
           python operational_route_shape_guard.py --self-check
           python operational_route_freshness_guard.py --self-check
           python route_coordinate_link_guard.py --self-check
           python operational_corridor_guard.py --self-check
+          python foundation_excavation_operational_route_guard.py --check-only
           python operational_route_shape_guard.py
           python operational_route_freshness_guard.py
           python route_coordinate_link_guard.py
           python operational_corridor_guard.py
+          python foundation_excavation_operational_route_guard.py
           git diff --check
 
-          git add operational_route.json
+          git add operational_route.json latest_report.json SAHA_RAPORU.md
           if git diff --cached --quiet; then
             echo "Operasyonel rota değişmedi; commit gerekmiyor."
             exit 0
           fi
-          git commit -m "Rota: taze zemin kanıtını ve operasyon koridorunu uygula"
+          git commit -m "Rota: taze zemin, koridor ve temel-kazısı kapısını uygula"
           git push origin HEAD:main
