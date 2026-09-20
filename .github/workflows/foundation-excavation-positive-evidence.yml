@@ -6,7 +6,9 @@ on:
     paths:
       - "foundation_excavation_positive_evidence_audit.py"
       - "foundation_excavation_onset_temporal_guard.py"
+      - "foundation_excavation_onset_sar_positive_bridge.py"
       - "foundation_excavation_route_gate_review.json"
+      - "foundation_excavation_onset_sar_review.json"
       - "temporal_local_precursor_watchlist.json"
       - "sar_hard_veto_calibration_review.json"
       - ".github/workflows/foundation-excavation-positive-evidence.yml"
@@ -14,6 +16,7 @@ on:
     workflows:
       - "Temel Kazısı Morfoloji Diagnostiği"
       - "SAR Hard-Veto Kalibrasyon Diagnostiği"
+      - "15-17 Eylül Onset SAR Diagnostiği"
     types: [completed]
   workflow_dispatch:
 
@@ -44,11 +47,13 @@ jobs:
         run: |
           python foundation_excavation_positive_evidence_audit.py --check-only
           python foundation_excavation_onset_temporal_guard.py --check-only
+          python foundation_excavation_onset_sar_positive_bridge.py --check-only
 
-      - name: Morfoloji + SAR veya onset-penceresi temporal kanıtını çaprazla
+      - name: Morfoloji + bağımsız onset/SAR kanıtını çaprazla
         run: |
           python foundation_excavation_positive_evidence_audit.py
           python foundation_excavation_onset_temporal_guard.py
+          python foundation_excavation_onset_sar_positive_bridge.py
 
       - name: Diagnostiği güvenli kaydet
         run: |
@@ -66,8 +71,10 @@ jobs:
             git reset --hard origin/main
             python foundation_excavation_positive_evidence_audit.py --check-only
             python foundation_excavation_onset_temporal_guard.py --check-only
+            python foundation_excavation_onset_sar_positive_bridge.py --check-only
             python foundation_excavation_positive_evidence_audit.py
             python foundation_excavation_onset_temporal_guard.py
+            python foundation_excavation_onset_sar_positive_bridge.py
 
             if [[ -z "$(git status --porcelain -- $output)" ]]; then
               echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
