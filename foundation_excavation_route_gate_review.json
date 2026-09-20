@@ -1,5 +1,5 @@
 {
-  "surum": 5,
+  "surum": 6,
   "amac": "Lokal temel/kepçe morfolojisi + zamansal uygun SAR + saha kalibrasyonu ile konservatif rota kapısı diagnostigi",
   "gercek_derinlik_olcumu": false,
   "ana_uretim_esigi_m2": 250,
@@ -14,7 +14,7 @@
   "saha_dogrulanmis_kazi_sayisi": 1,
   "dogrulanmis_kazi_referansi": 1,
   "zamansal_gecersiz_dogrulanmis_kazi_referansi": 0,
-  "rota_kapisi_icin_min_dogrulanmis_kazi": 2,
+  "rota_kapisi_icin_min_dogrulanmis_kazi": 1,
   "toplam_yuksek_guven_diagnostik": 0,
   "rota_kapisi_hazir": false,
   "bolgeler": {
@@ -7491,9 +7491,11 @@
       "yalniz_yardimci_fp_benzerligi_sayisi": 28
     }
   },
-  "not": "Rota kapısı yalnız diagnostiktir. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez. Tarla/bahçe morfoloji negatifleri ve kullanıcının dört çekirdek yanlış-pozitifine 0.25 veya daha yakın spektral klonlar sert veto olarak kalır. Tarihsel yardımcı yanlış-pozitif benzerliği tek başına veto değildir; adayın çoklu-kanıt, SAR, saha geri bildirimi ve kalibrasyon kapıları aynen uygulanır. Saha geri bildiriminde yalnız kayıttaki gerçek 25/30 m yarıçap kullanılır; 45 m SAR eşleme toleransı bu engele genişletilmez. En az iki zamansal geçerli doğrulanmış kazı referansı olmadan rota kapısı açılmaz.",
+  "not": "Rota kapısı diagnostiktir; yeni alarm/görev üretmez. Çekirdek 1+4 regresyon seti tam olduğunda bir zamansal geçerli doğrulanmış kazı kalibrasyon için yeterlidir. Buna rağmen 250 m² ana eşik, 150–249 m² MİKRO diagnostik sınırı, yüksek morfoloji, aynı koordinatta zamansal uygun Sentinel-1 çapraz desteği, sıfır morfoloji regresyon uyumsuzluğu, güçlü tarla/bahçe negatif vetosu ve dört çekirdek FP spektral-klon vetosu aynen uygulanır. Çekirdek set eksikse minimum iki doğrulanmış kazı kuralına dönülür.",
   "fp_klon_politikasi": "Kullanıcının dört çekirdek yanlış-pozitifi sert veto; tarihsel yardımcı yanlış-pozitif tek başına yalnız diagnostik negatif kanıt",
   "geri_bildirim_yaricap_politikasi": "Saha kaydındaki eslesme_yaricapi_m aynen kullanılır; SAR 45 m toleransı saha yanlış-pozitifi/mevcut-müşteri engeline taşınmaz",
   "toplam_cekirdek_fp_klon_baskilanan": 45,
-  "toplam_yalniz_yardimci_fp_benzerligi": 56
+  "toplam_yalniz_yardimci_fp_benzerligi": 56,
+  "cekirdek_1arti4_kalibrasyon_tam": true,
+  "rota_kalibrasyon_politikasi": "Çekirdek 1 doğrulanmış kazı + 4 kullanıcı-doğrulanmış tarla/bahçe yanlış-pozitifi eksiksiz ve pozitif referans zamansal geçerliyse ikinci doğrulanmış kazı beklenmez; aksi durumda eski iki-pozitif emniyet kilidi korunur."
 }
