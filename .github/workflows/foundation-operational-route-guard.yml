@@ -11,6 +11,7 @@ on:
       - foundation_excavation_operational_route_guard.py
       - foundation_excavation_support_coverage_audit.py
       - foundation_excavation_positive_evidence_audit.py
+      - foundation_excavation_onset_temporal_guard.py
       - foundation_excavation_positive_context_guard.py
       - .github/workflows/foundation-operational-route-guard.yml
   workflow_run:
@@ -46,6 +47,7 @@ jobs:
       - name: Temel-kazısı operasyon kapısı öz testi
         run: |
           python foundation_excavation_positive_evidence_audit.py --check-only
+          python foundation_excavation_onset_temporal_guard.py --check-only
           python foundation_excavation_positive_context_guard.py --check-only
           python foundation_excavation_operational_route_guard.py --check-only
           python foundation_excavation_support_coverage_audit.py --check-only
@@ -53,6 +55,7 @@ jobs:
       - name: Pozitif kanıt zincirini güncel girdilerden yeniden kur
         run: |
           python foundation_excavation_positive_evidence_audit.py
+          python foundation_excavation_onset_temporal_guard.py
           python foundation_excavation_positive_context_guard.py
 
       - name: Nihai operasyon rotasına çoklu-kanıt kapısını uygula
@@ -89,10 +92,12 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python foundation_excavation_positive_evidence_audit.py --check-only
+            python foundation_excavation_onset_temporal_guard.py --check-only
             python foundation_excavation_positive_context_guard.py --check-only
             python foundation_excavation_operational_route_guard.py --check-only
             python foundation_excavation_support_coverage_audit.py --check-only
             python foundation_excavation_positive_evidence_audit.py
+            python foundation_excavation_onset_temporal_guard.py
             python foundation_excavation_positive_context_guard.py
             python foundation_excavation_operational_route_guard.py
             python foundation_excavation_support_coverage_audit.py
