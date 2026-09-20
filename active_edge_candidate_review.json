@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-19",
+  "rapor_tarihi": "2026-09-20",
   "amac": "Güncel 250 m²+ ana Sentinel adaylarının bağlı bileşeninin analiz bbox kenarına değip değmediğini ölçerek alan/merkez koordinatı kırpma riskini görünür kılmak.",
   "politika": "DIAGNOSTIK_ONLY: 250 m² ana eşik, alarm ve saha görevi değişmez. Kenar teması bbox genişletme/yeniden ölçüm kanıtıdır; tek başına yeni alarm değildir.",
   "ana_uretim_esigi_m2": 250,
@@ -55,7 +55,7 @@
         },
         {
           "gorev_id": "U8FF6DAB3C3",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Çiftlikköy",
           "enlem": 38.273207,
           "boylam": 26.270312,
@@ -77,7 +77,7 @@
         },
         {
           "gorev_id": "U212B48E3D5",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Çiftlikköy",
           "enlem": 38.287046,
           "boylam": 26.276036,
@@ -99,7 +99,7 @@
         },
         {
           "gorev_id": "UA1A64C2BEA",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Germiyan",
           "enlem": 38.313095,
           "boylam": 26.471675,
@@ -143,7 +143,7 @@
         },
         {
           "gorev_id": "U7F8008AAD6",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Germiyan",
           "enlem": 38.311196,
           "boylam": 26.466523,
@@ -165,7 +165,7 @@
         },
         {
           "gorev_id": "U06EB06E030",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.272122,
           "boylam": 26.303167,
@@ -231,7 +231,7 @@
         },
         {
           "gorev_id": "UC9C93F8D3E",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.272393,
           "boylam": 26.312668,
@@ -253,7 +253,7 @@
         },
         {
           "gorev_id": "U82332941AB",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Dalyan",
           "enlem": 38.352531,
           "boylam": 26.322742,
@@ -275,7 +275,7 @@
         },
         {
           "gorev_id": "U856843B7E3",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.28388,
           "boylam": 26.318964,
@@ -341,7 +341,7 @@
         },
         {
           "gorev_id": "U9ED0EDA93C",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Musalla",
           "enlem": 38.306854,
           "boylam": 26.329381,
@@ -363,7 +363,7 @@
         },
         {
           "gorev_id": "UD5A9FE8B9E",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Reisdere",
           "enlem": 38.310382,
           "boylam": 26.417642,
@@ -473,7 +473,7 @@
         },
         {
           "gorev_id": "U1F70CEAA6B",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Alaçatı",
           "enlem": 38.27782,
           "boylam": 26.375401,
@@ -495,7 +495,7 @@
         },
         {
           "gorev_id": "U2EBF2F9DD1",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Ilıca",
           "enlem": 38.318703,
           "boylam": 26.387192,
@@ -579,7 +579,7 @@
         },
         {
           "gorev_id": "U92D437BB80",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.36845,
           "boylam": 26.64388,
@@ -601,7 +601,7 @@
         },
         {
           "gorev_id": "UEA57F5567A",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.299618,
           "boylam": 26.518519,
@@ -623,7 +623,7 @@
         },
         {
           "gorev_id": "UD79E7C7BE1",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.343667,
           "boylam": 26.551491,
