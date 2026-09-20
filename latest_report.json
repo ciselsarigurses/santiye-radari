@@ -7740,5 +7740,7 @@
     }
   },
   "temel_kazi_kapisi_arka_plan_sayi": 3,
-  "temel_kazi_kapisi_aktif": true
+  "temel_kazi_kapisi_aktif": true,
+  "temporal_lokal_erken_izleme": [],
+  "temporal_lokal_erken_izleme_notu": "15 Eylül ve sonrasında güçlü temporal-lokal aday yüksek diagnostik ağırlık alır; bu katman yine alarm veya saha görevi üretmez."
 }
