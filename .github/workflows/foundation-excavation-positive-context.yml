@@ -1,0 +1,81 @@
+name: Temel Kazısı Pozitif Bağlam Koruması
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "foundation_excavation_positive_context_guard.py"
+      - "foundation_excavation_positive_evidence_review.json"
+      - "post_onset_baseline_vegetation_guard_review.json"
+      - ".github/workflows/foundation-excavation-positive-context.yml"
+  workflow_run:
+    workflows:
+      - "Temel Kazısı Pozitif Kanıt Recall Diagnostiği"
+      - "Baseline Bitki Negatif Bağlam Diagnostiği"
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-foundation-positive-context
+  cancel-in-progress: true
+
+jobs:
+  diagnose:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Baseline negatif bağlam öz testi
+        run: python foundation_excavation_positive_context_guard.py --check-only
+
+      - name: Pozitif recall adaylarını baseline tarla bağlamıyla koru
+        run: python foundation_excavation_positive_context_guard.py
+
+      - name: Diagnostiği güvenli kaydet
+        run: |
+          output="foundation_excavation_positive_context_review.json"
+          if [[ -z "$(git status --porcelain -- $output)" ]]; then
+            echo "Pozitif bağlam diagnostiği değişmedi."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python foundation_excavation_positive_context_guard.py --check-only
+            python foundation_excavation_positive_context_guard.py
+
+            if [[ -z "$(git status --porcelain -- $output)" ]]; then
+              echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
+              exit 0
+            fi
+
+            git add "$output"
+            git commit -m "Radar: pozitif recall baseline bağlamını güncelle"
+            if git push origin HEAD:main; then
+              echo "Pozitif bağlam diagnostiği kaydedildi."
+              exit 0
+            fi
+
+            echo "Ana dal ilerledi; yeniden denenecek (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Üç denemede diagnostik kaydı tamamlanamadı."
+          exit 1
