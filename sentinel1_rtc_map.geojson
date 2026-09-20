@@ -557,7 +557,7 @@
         "mikro_guclu_diagnostik": false,
         "mikro_saha_dogrulandi": false,
         "neden": "BULUT",
-        "onceki_sar_lokal_degisim_skor_db": 3.045,
+        "onceki_sar_lokal_degisim_skor_db": null,
         "saha_dogrulanmis_yikim_onculu": false,
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
@@ -568,7 +568,7 @@
         "sar_lokal_degisim_skor_db": 2.337,
         "sar_mekansal_ayrim": "KOMPAKT_LOKAL_DESTEKLI",
         "sar_polarizasyon_uyumu": "CIFT_POL_GUCLU",
-        "temporal_durum": "ARDISIK_GUCLU_LOKAL_HAREKET",
+        "temporal_durum": null,
         "yeni_tarih": "2026-09-18"
       },
       "type": "Feature"
