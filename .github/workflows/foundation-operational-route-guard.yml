@@ -12,12 +12,15 @@ on:
       - foundation_excavation_support_coverage_audit.py
       - foundation_excavation_positive_evidence_audit.py
       - foundation_excavation_onset_temporal_guard.py
+      - foundation_excavation_onset_sar_positive_bridge.py
+      - foundation_excavation_onset_sar_review.json
       - foundation_excavation_positive_context_guard.py
       - .github/workflows/foundation-operational-route-guard.yml
   workflow_run:
     workflows:
       - "Temel Kazısı Pozitif Bağlam Koruması"
       - "Operasyonel Rota Geometri Koruması"
+      - "15-17 Eylül Onset SAR Diagnostiği"
     types: [completed]
 
 permissions:
@@ -48,6 +51,7 @@ jobs:
         run: |
           python foundation_excavation_positive_evidence_audit.py --check-only
           python foundation_excavation_onset_temporal_guard.py --check-only
+          python foundation_excavation_onset_sar_positive_bridge.py --check-only
           python foundation_excavation_positive_context_guard.py --check-only
           python foundation_excavation_operational_route_guard.py --check-only
           python foundation_excavation_support_coverage_audit.py --check-only
@@ -56,6 +60,7 @@ jobs:
         run: |
           python foundation_excavation_positive_evidence_audit.py
           python foundation_excavation_onset_temporal_guard.py
+          python foundation_excavation_onset_sar_positive_bridge.py
           python foundation_excavation_positive_context_guard.py
 
       - name: Nihai operasyon rotasına çoklu-kanıt kapısını uygula
@@ -93,11 +98,13 @@ jobs:
             git reset --hard origin/main
             python foundation_excavation_positive_evidence_audit.py --check-only
             python foundation_excavation_onset_temporal_guard.py --check-only
+            python foundation_excavation_onset_sar_positive_bridge.py --check-only
             python foundation_excavation_positive_context_guard.py --check-only
             python foundation_excavation_operational_route_guard.py --check-only
             python foundation_excavation_support_coverage_audit.py --check-only
             python foundation_excavation_positive_evidence_audit.py
             python foundation_excavation_onset_temporal_guard.py
+            python foundation_excavation_onset_sar_positive_bridge.py
             python foundation_excavation_positive_context_guard.py
             python foundation_excavation_operational_route_guard.py
             python foundation_excavation_support_coverage_audit.py
