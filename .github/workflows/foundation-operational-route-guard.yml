@@ -9,6 +9,7 @@ on:
     branches: [main]
     paths:
       - foundation_excavation_operational_route_guard.py
+      - foundation_excavation_support_coverage_audit.py
       - .github/workflows/foundation-operational-route-guard.yml
   workflow_run:
     workflows:
@@ -41,10 +42,14 @@ jobs:
           python-version: '3.12'
 
       - name: Temel-kazısı operasyon kapısı öz testi
-        run: python foundation_excavation_operational_route_guard.py --check-only
+        run: |
+          python foundation_excavation_operational_route_guard.py --check-only
+          python foundation_excavation_support_coverage_audit.py --check-only
 
       - name: Nihai operasyon rotasına çoklu-kanıt kapısını uygula
-        run: python foundation_excavation_operational_route_guard.py
+        run: |
+          python foundation_excavation_operational_route_guard.py
+          python foundation_excavation_support_coverage_audit.py
 
       - name: Değişiklik biçimini kontrol et
         run: git diff --check
@@ -53,7 +58,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          outputs="operational_route.json latest_report.json SAHA_RAPORU.md"
+          outputs="operational_route.json latest_report.json SAHA_RAPORU.md foundation_excavation_support_coverage_review.json"
           if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
             echo "Temel-kazısı operasyon kapısında semantik değişiklik yok."
             exit 0
@@ -66,7 +71,9 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python foundation_excavation_operational_route_guard.py --check-only
+            python foundation_excavation_support_coverage_audit.py --check-only
             python foundation_excavation_operational_route_guard.py
+            python foundation_excavation_support_coverage_audit.py
 
             if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
               echo "Güncel main üzerinde ek değişiklik gerekmiyor."
@@ -74,7 +81,7 @@ jobs:
             fi
 
             git add $outputs
-            git commit -m "Radar: genel zemin adaylarını operasyon rotasından ayır"
+            git commit -m "Radar: temel kazısı rota ve recall kapsamını güncelle"
             if git push origin HEAD:main; then
               exit 0
             fi
