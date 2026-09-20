@@ -7623,7 +7623,7 @@
     "onceki_oncelik_katmanlari_korundu": true,
     "not": "Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin shortlist'i silinmez. YIKIM_TEMIZLIK sonucu, sonraki yeni Sentinel sahnesinde aynı noktadaki 250 m²+ mevcut görevi güçlendirir; yalnız boş rota kapasitesini kullanır veya korunmayan backlog ile yer değiştirir. Yeni alarm/görev üretmez."
   },
-  "temel_kazi_kapisi_arka_plan_sayi": 3,
+  "temel_kazi_kapisi_arka_plan_sayi": 0,
   "temel_kazi_kapisi_aktif": true,
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-20",
   "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. En yeni Gülbahçe Sentinel sahnesinde tarihsel kara kanıtlı 250-6500 m² gerçek kalite körlüğü mevcut devriye tarafından kapsanmıyorsa, 1-2 günlük taze pencerede iki günlük duty rotasyonunun boşta bıraktığı farklı güvenli kör hücre ara-gün istisnası olarak temsil edilir. Kapsama kararı tüm sahne için tek bit yerine seçilecek kör küme bazında ölçülür; bir kümenin kapsanması kalan kümeleri yanlışlıkla kapatmaz. Daha yeni kullanılabilir Sentinel sahnesi gelmezse aynı en-yeni sahnenin çözülmemiş kara-kör kümeleri görünürlük borcu olarak aynı çeşitlendirilmiş ara-gün rotasyonunda tutulur. Aktif görev ve bölgeler arası mesafe korumaları aynen uygulanır; 150-249 m² MİKRO katmanı bu istisnaya girmez.",
