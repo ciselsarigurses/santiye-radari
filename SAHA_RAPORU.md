@@ -17,6 +17,12 @@
 2. **PARSEL — Germiyan** · yaklaşık 800 m² · Görev `U1586C07CE7` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313005,26.471695)
 3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 900 m² · Görev `U0DC0A1AFC8` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.341948,26.554696)
 
+## Temporal-lokal erken sinyal izleme
+
+> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül sonrası bunlar yüksek diagnostik ağırlıkla izlenir; görev açma kuralı değişmez.
+
+Bu turda güvenli temporal-lokal erken sinyal yok.
+
 ## Bugün sahada kontrol edilecek uydu adayları
 
 ### 1. GECİKEN — Musalla
