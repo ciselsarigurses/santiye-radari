@@ -2,7 +2,7 @@
   "rapor_tarihi": "2026-09-20",
   "kaynak_rapor_olusturma": "2026-09-20 19:14 +03",
   "politika": "DIAGNOSTIK_ONLY: koordinat otomatik taşınmaz; alarm/görev/sıra/250 m² ana eşik/150–249 m² MİKRO politikası değişmez.",
-  "rota_hedefi": 0,
+  "rota_hedefi": 1,
   "olculen": 0,
   "postprocess_riski": 0,
   "ham_mask_eslesmedi": 0,
@@ -11,5 +11,13 @@
   "maksimum_mevcut_sinyal_farki_m": 0.0,
   "sahne_ciftleri": [],
   "hedefler": [],
-  "hatalar": []
+  "hatalar": [
+    {
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "",
+      "son_tarih": "18.09.2026",
+      "hedef_sayisi": 1,
+      "hata": "SatelliteError: Rota adayında Sentinel tarih çifti eksik."
+    }
+  ]
 }
