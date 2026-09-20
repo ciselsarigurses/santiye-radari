@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "Kritik 15-17 Eylül regresyon setinde tarla/bahçe bağlamı için üretim-dışı gölge ceza denetimi",
   "gercek_derinlik_olcumu": false,
   "uretim_filtresi": false,
@@ -18,7 +18,10 @@
       "FP-20260917-MUSALLA-002",
       "FP-20260917-UZUNKUYU-001"
     ],
-    "beklenen_ornek_sayisi": 5
+    "beklenen_ornek_sayisi": 5,
+    "morfolojiyle_eslesen_ornek_sayisi": 0,
+    "zamansal_ve_mekansal_degerlendirilebilir_ornek_sayisi": 0,
+    "kapsam_tam": false
   },
   "golge_cezalari": {
     "tarim_baglam_min_m2": 600.0,
@@ -79,7 +82,9 @@
   "degerlendirilen_kritik_fp_sayisi": 0,
   "kritik_fp_yuksek_once": 0,
   "kritik_fp_yuksek_sonra": 0,
-  "kritik_fp_golge_regresyon_geciyor": true,
+  "kritik_fp_golge_regresyon_geciyor": null,
+  "kritik_fp_regresyon_degerlendirilebilir": false,
+  "kritik_fp_regresyon_durumu": "DEGERLENDIRILEMEDI",
   "dogrulanmis_kazi_referansi": {
     "id": "FN-20260916-CESME-001",
     "sonuc": "DOGRULANMIS_KAZI",
@@ -104,5 +109,5 @@
     "yanlis_pozitif_temporal_regresyon_gecerli": false,
     "pozitif_temporal_regresyon_gecerli": false
   },
-  "not": "Bu katman yalnız gölge diagnostiktir. Yanlış-pozitif kararları yalnız aynı/eski uydu sahnesi için regresyona girer; daha yeni Sentinel kanıtı kalıcı olarak engellenmez. Doğrulanmış kazı ise yalnız uydu tarihi saha doğrulama tarihine ulaştığında pozitif regresyona alınır."
+  "not": "Bu katman yalnız gölge diagnostiktir. Yanlış-pozitif kararları yalnız aynı/eski uydu sahnesi ve mekansal eşleşme varsa regresyona girer; daha yeni Sentinel kanıtı kalıcı olarak engellenmez. Hiç değerlendirilebilir örnek yoksa regresyon artık PASS sayılmaz, DEGERLENDIRILEMEDI olarak işaretlenir. Doğrulanmış kazı ise yalnız uydu tarihi saha doğrulama tarihine ulaştığında pozitif regresyona alınır."
 }
