@@ -1,5 +1,5 @@
 {
-  "surum": 3,
+  "surum": 4,
   "amac": "SAR yokluğunu veto yapmadan morfoloji + S1 pozitif veya önceki-tarih temporal-lokal kanıtını çaprazlamak; tarla/FP negatif kapılarını korumak",
   "gercek_derinlik_olcumu": false,
   "ana_uretim_esigi_m2": 250,
@@ -62,7 +62,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.315085,
@@ -95,7 +98,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.329105,
@@ -128,7 +134,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.284966,
@@ -161,7 +170,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.304412,
@@ -194,7 +206,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.3443,
@@ -227,7 +242,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.320783,
@@ -260,7 +278,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.313638,
@@ -293,7 +314,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.342039,
@@ -326,7 +350,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.398117,
@@ -359,7 +386,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.361395,
@@ -392,7 +422,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.303327,
@@ -425,7 +458,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.415845,
@@ -458,7 +494,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.316713,
@@ -491,7 +530,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.347285,
@@ -524,7 +566,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.356149,
@@ -557,7 +602,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.343848,
@@ -590,7 +638,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.285418,
@@ -623,7 +674,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.285327,
@@ -656,7 +710,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.416207,
@@ -689,7 +746,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.368269,
@@ -722,7 +782,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.347013,
@@ -755,7 +818,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.329105,
@@ -788,7 +854,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.317618,
@@ -821,7 +890,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.306583,
@@ -854,7 +926,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.342581,
@@ -887,7 +962,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.296724,
@@ -920,7 +998,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.268052,
@@ -953,7 +1034,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.285056,
@@ -986,7 +1070,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.318884,
@@ -1019,7 +1106,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.298262,
@@ -1052,7 +1142,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.229973,
@@ -1085,7 +1178,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.2818,
@@ -1118,7 +1214,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.290935,
@@ -1151,7 +1250,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.309929,
@@ -1184,7 +1286,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.290302,
@@ -1217,7 +1322,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.27366,
@@ -1250,7 +1358,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.232144,
@@ -1283,7 +1394,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.188909,
@@ -1316,7 +1430,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.286865,
@@ -1349,7 +1466,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.28189,
@@ -1382,7 +1502,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.316984,
@@ -1415,7 +1538,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.245078,
@@ -1448,7 +1574,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.330552,
@@ -1481,7 +1610,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.274654,
@@ -1514,7 +1646,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.279177,
@@ -1547,7 +1682,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.319065,
@@ -1580,7 +1718,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.253037,
@@ -1613,7 +1754,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.231601,
@@ -1646,7 +1790,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.32205,
@@ -1679,7 +1826,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.229792,
@@ -1712,7 +1862,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.324492,
@@ -1745,7 +1898,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.231149,
@@ -1778,7 +1934,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.299437,
@@ -1811,7 +1970,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.289669,
@@ -1844,7 +2006,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.231872,
@@ -1877,7 +2042,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.302874,
@@ -1910,7 +2078,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.322773,
@@ -1943,7 +2114,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.255932,
@@ -1976,7 +2150,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.256655,
@@ -2009,7 +2186,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.317256,
@@ -2042,7 +2222,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.321145,
@@ -2075,7 +2258,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.271851,
@@ -2108,7 +2294,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.236304,
@@ -2141,7 +2330,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.302241,
@@ -2174,7 +2366,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.302332,
@@ -2207,7 +2402,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.307849,
@@ -2240,7 +2438,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.270856,
@@ -2273,7 +2474,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.395132,
@@ -2306,7 +2510,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.258102,
@@ -2339,7 +2546,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.278453,
@@ -2372,7 +2582,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.260273,
@@ -2405,7 +2618,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250595,
@@ -2438,7 +2654,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.354249,
@@ -2471,7 +2690,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.309749,
@@ -2504,7 +2726,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.299437,
@@ -2537,7 +2762,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.358591,
@@ -2570,7 +2798,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.251047,
@@ -2603,7 +2834,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.313186,
@@ -2636,7 +2870,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.306221,
@@ -2669,7 +2906,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.286865,
@@ -2702,7 +2942,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.312372,
@@ -2735,7 +2978,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.327386,
@@ -2768,7 +3014,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.304593,
@@ -2801,7 +3050,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.354159,
@@ -2834,7 +3086,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.323406,
@@ -2867,7 +3122,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.323859,
@@ -2900,7 +3158,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.31816,
@@ -2933,7 +3194,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.315356,
@@ -2966,7 +3230,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.281076,
@@ -2999,7 +3266,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.230787,
@@ -3032,7 +3302,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250866,
@@ -3065,7 +3338,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.251409,
@@ -3098,7 +3374,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.24951,
@@ -3131,7 +3410,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.322683,
@@ -3164,7 +3446,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.262353,
@@ -3197,7 +3482,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.282976,
@@ -3230,7 +3518,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.29392,
@@ -3263,7 +3554,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.312462,
@@ -3296,7 +3590,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.308935,
@@ -3329,7 +3626,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.270765,
@@ -3362,7 +3662,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.341044,
@@ -3395,7 +3698,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.288945,
@@ -3428,7 +3734,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.288403,
@@ -3461,7 +3770,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.292744,
@@ -3494,7 +3806,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.237751,
@@ -3527,7 +3842,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.396308,
@@ -3560,7 +3878,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.232144,
@@ -3593,7 +3914,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.273479,
@@ -3626,7 +3950,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.228887,
@@ -3659,7 +3986,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.276373,
@@ -3692,7 +4022,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.223822,
@@ -3725,7 +4058,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.315085,
@@ -3758,7 +4094,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.270946,
@@ -3791,7 +4130,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.361757,
@@ -3824,7 +4166,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.249419,
@@ -3857,7 +4202,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.230968,
@@ -3890,7 +4238,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.262263,
@@ -3923,7 +4274,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.327657,
@@ -3956,7 +4310,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.21523,
@@ -3989,7 +4346,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.280443,
@@ -4022,7 +4382,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.280895,
@@ -4055,7 +4418,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.280715,
@@ -4088,7 +4454,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.318432,
@@ -4121,7 +4490,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.280443,
@@ -4154,7 +4526,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.287589,
@@ -4187,9 +4562,14 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         }
-      ]
+      ],
+      "onset_penceresi_temporal_destekli_sayi": 0,
+      "baseline_temporal_destegi_haric_sayi": 0
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
@@ -4231,7 +4611,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.279448,
@@ -4264,7 +4647,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.316713,
@@ -4297,7 +4683,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.355244,
@@ -4330,7 +4719,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.347285,
@@ -4363,7 +4755,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.344209,
@@ -4396,7 +4791,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.253037,
@@ -4429,7 +4827,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.419191,
@@ -4462,7 +4863,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.236847,
@@ -4495,7 +4899,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.263439,
@@ -4528,7 +4935,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.270946,
@@ -4561,7 +4971,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.22934,
@@ -4594,7 +5007,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.269951,
@@ -4627,7 +5043,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.270403,
@@ -4660,7 +5079,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.251047,
@@ -4693,7 +5115,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.228887,
@@ -4726,7 +5151,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.252585,
@@ -4759,7 +5187,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.346018,
@@ -4792,7 +5223,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.314723,
@@ -4825,7 +5259,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.335526,
@@ -4858,7 +5295,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250324,
@@ -4891,7 +5331,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250143,
@@ -4924,7 +5367,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.410689,
@@ -4957,7 +5403,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.310924,
@@ -4990,7 +5439,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.313366,
@@ -5023,7 +5475,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250595,
@@ -5056,7 +5511,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.312191,
@@ -5089,7 +5547,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.24951,
@@ -5122,7 +5583,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.317618,
@@ -5155,7 +5619,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250866,
@@ -5188,7 +5655,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.283066,
@@ -5221,7 +5691,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.262353,
@@ -5254,7 +5727,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250595,
@@ -5287,7 +5763,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.31816,
@@ -5320,7 +5799,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.313276,
@@ -5353,7 +5835,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.312372,
@@ -5386,7 +5871,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.196145,
@@ -5419,7 +5907,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.276283,
@@ -5452,7 +5943,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.274021,
@@ -5485,7 +5979,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.299618,
@@ -5518,7 +6015,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.221923,
@@ -5551,7 +6051,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.251047,
@@ -5584,7 +6087,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.330823,
@@ -5617,7 +6123,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.344571,
@@ -5650,7 +6159,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.317708,
@@ -5683,7 +6195,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250776,
@@ -5716,7 +6231,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.314995,
@@ -5749,7 +6267,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.238746,
@@ -5782,7 +6303,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.273207,
@@ -5815,7 +6339,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.342943,
@@ -5848,7 +6375,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.379665,
@@ -5881,7 +6411,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.302332,
@@ -5914,7 +6447,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.398569,
@@ -5947,7 +6483,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.303327,
@@ -5980,7 +6519,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.229521,
@@ -6013,7 +6555,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.222013,
@@ -6046,7 +6591,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.256474,
@@ -6079,7 +6627,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.240917,
@@ -6112,7 +6663,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.32006,
@@ -6145,7 +6699,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.262263,
@@ -6178,7 +6735,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.334803,
@@ -6211,7 +6771,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.251047,
@@ -6244,7 +6807,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.284604,
@@ -6277,7 +6843,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.322773,
@@ -6310,7 +6879,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.318703,
@@ -6343,7 +6915,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.222647,
@@ -6376,7 +6951,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.335617,
@@ -6409,7 +6987,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.333627,
@@ -6442,7 +7023,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.257288,
@@ -6475,7 +7059,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.321869,
@@ -6508,7 +7095,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.263529,
@@ -6541,7 +7131,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.252314,
@@ -6574,7 +7167,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.318251,
@@ -6607,7 +7203,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.314271,
@@ -6640,7 +7239,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.372701,
@@ -6673,7 +7275,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.263077,
@@ -6706,7 +7311,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.415483,
@@ -6739,7 +7347,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.232325,
@@ -6772,7 +7383,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.275378,
@@ -6805,7 +7419,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.315266,
@@ -6838,7 +7455,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250686,
@@ -6871,7 +7491,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.313366,
@@ -6904,7 +7527,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.240917,
@@ -6937,7 +7563,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.415573,
@@ -6970,7 +7599,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.316623,
@@ -7003,7 +7635,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.234676,
@@ -7036,7 +7671,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.341496,
@@ -7069,7 +7707,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.302241,
@@ -7102,7 +7743,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.32205,
@@ -7135,7 +7779,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.236304,
@@ -7168,7 +7815,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.322773,
@@ -7201,7 +7851,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.330642,
@@ -7234,7 +7887,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.29383,
@@ -7267,7 +7923,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.223461,
@@ -7300,7 +7959,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.327205,
@@ -7333,7 +7995,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.238565,
@@ -7366,7 +8031,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.42706,
@@ -7399,7 +8067,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.22545,
@@ -7432,7 +8103,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": false,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.284785,
@@ -7465,7 +8139,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.249419,
@@ -7498,7 +8175,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.283518,
@@ -7531,7 +8211,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.250957,
@@ -7564,7 +8247,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.355335,
@@ -7597,7 +8283,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.427151,
@@ -7630,7 +8319,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.230154,
@@ -7663,7 +8355,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.262896,
@@ -7696,7 +8391,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.236576,
@@ -7729,7 +8427,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.221923,
@@ -7762,7 +8463,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.262263,
@@ -7795,7 +8499,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.231149,
@@ -7828,7 +8535,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.327929,
@@ -7861,7 +8571,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.275107,
@@ -7894,7 +8607,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.21523,
@@ -7927,7 +8643,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.272303,
@@ -7960,7 +8679,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.309929,
@@ -7993,7 +8715,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.343305,
@@ -8026,7 +8751,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.418649,
@@ -8059,7 +8787,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.292563,
@@ -8092,7 +8823,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.333446,
@@ -8125,7 +8859,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.262806,
@@ -8158,7 +8895,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.345928,
@@ -8191,7 +8931,10 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         },
         {
           "enlem": 38.318341,
@@ -8224,10 +8967,23 @@
           "tarla_bahce_baskilandi": false,
           "yanlis_pozitif_spektral_klon_baskilandi": true,
           "alarm": false,
-          "saha_gorevi": false
+          "saha_gorevi": false,
+          "temporal_oncul_destek_ham": false,
+          "temporal_onset_penceresi_gecerli": false,
+          "temporal_oncul_baseline_olarak_haric": false
         }
-      ]
+      ],
+      "onset_penceresi_temporal_destekli_sayi": 0,
+      "baseline_temporal_destegi_haric_sayi": 0
     }
   },
-  "not": "Bu çıktı yalnız recall diagnostiğidir. SAR güçlü-lokal desteği pozitif kanıttır; SAR yokluğu negatif veto değildir. Önceki tarih temporal-lokal iz yalnız mevcut morfoloji adayıyla 25 m içinde ve daha eski bir sahnede ise ikinci kanıt sayılır. 25 m dışındaki en yakın iz yalnız debug mesafesi olarak tutulur; temporal_iz_id/tarih ile aday arasında ilişki kurulmaz. Saha yanlış-pozitifi, mevcut müşteri, tarla/bahçe negatif bağlamı ve spektral FP-klon baskısı pozitif recall sayımını veto eder. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez; bu katman otomatik saha görevi üretmez."
+  "not": "Pozitif temporal ikinci kanıt yalnız 15–17 Eylül 2026 onset penceresinde kabul edilir. 13 Eylül ve daha eski temporal-lokal izler sakin baseline kabul edilir ve yeni kazı kanıtı olarak sayılmaz. Sentinel-1 pozitif desteği bağımsız kalır; SAR yokluğu veto değildir. 250 m² ana ve 150–249 m² MİKRO eşikleri değişmez.",
+  "onset_temporal_koruma_uygulandi": true,
+  "onset_temporal_penceresi": [
+    "2026-09-15",
+    "2026-09-17"
+  ],
+  "pre_onset_temporal_pozitif_destek_sayilir": false,
+  "toplam_onset_penceresi_temporal_destekli": 0,
+  "toplam_baseline_temporal_destegi_haric": 0
 }
