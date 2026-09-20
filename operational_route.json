@@ -38,7 +38,7 @@
   "temel_kazi_kapisi_sonrasi_rota_gorevleri": [],
   "temel_kazi_kapisi_arka_plan": [],
   "temel_kazi_kapisi_arka_plan_sayi": 0,
-  "temel_kazi_kapisi_destekli_ana_aday_sayi": 0,
+  "temel_kazi_kapisi_destekli_ana_aday_sayi": 1,
   "temel_kazi_kapisi_eslesme_m": 60.0,
   "temel_kazi_kapisi_degisti": false,
   "temel_kazi_kapisi_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur."

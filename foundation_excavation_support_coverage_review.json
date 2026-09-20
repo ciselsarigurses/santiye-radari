@@ -6,10 +6,32 @@
   "alarm": false,
   "saha_gorevi": false,
   "uretim_filtresi": false,
-  "korunmus_ana_destek_sayisi": 0,
-  "aday_havuzu_recall_boslugu_sayisi": 0,
-  "rota_recall_boslugu_sayisi": 0,
-  "ciddi_recall_boslugu": false,
-  "destekler": [],
+  "korunmus_ana_destek_sayisi": 1,
+  "aday_havuzu_recall_boslugu_sayisi": 1,
+  "rota_recall_boslugu_sayisi": 1,
+  "ciddi_recall_boslugu": true,
+  "destekler": [
+    {
+      "region_key": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "scene": "2026-09-18",
+      "enlem": 38.307849,
+      "boylam": 26.333503,
+      "alan_m2": 400,
+      "morfoloji_puani": 95.0,
+      "pozitif_kanit_kaynaklari": [
+        "S2_MORFOLOJI",
+        "S1_ONSET_11_17"
+      ],
+      "tam_aday_havuzunda_temsil": false,
+      "tam_aday_havuzu_mesafe_m": 376.5,
+      "nihai_rotada_temsil": false,
+      "nihai_rota_mesafe_m": null,
+      "aday_havuzu_recall_boslugu": true,
+      "rota_recall_boslugu": true,
+      "alarm": false,
+      "saha_gorevi": false
+    }
+  ],
   "not": "Bu denetim yeni görev üretmez. Aday-havuzu recall boşluğu, çoklu-pozitif bir temel/kepçe desteğinin aynı sahnede tam saha_adaylari havuzunda temsil edilmediğini gösterir ve operasyonel yükseltmeden önce rota kaynak zincirinin incelenmesini gerektirir. Nihai rota boşluğu tek başına hata değildir; başka negatif/operasyonel kapılar nedeniyle bilinçli bastırma olabilir."
 }
