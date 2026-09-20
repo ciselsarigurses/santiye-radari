@@ -84,6 +84,12 @@ jobs:
           python route_coordinate_link_guard.py
           python operational_corridor_guard.py
           python foundation_excavation_operational_route_guard.py
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("SAHA_RAPORU.md")
+          if path.exists():
+              path.write_text(path.read_text(encoding="utf-8").rstrip() + "\n", encoding="utf-8")
+          PY
           git diff --check
 
           git add operational_route.json latest_report.json SAHA_RAPORU.md
