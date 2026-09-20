@@ -16,6 +16,7 @@ on:
       - "foundation_excavation_cross_evidence_reconcile.py"
       - "foundation_excavation_route_gate_audit.py"
       - "foundation_excavation_core_fp_route_policy.py"
+      - "foundation_excavation_one_plus_four_route_policy.py"
       - "temporal_field_feedback_regression_guard.py"
       - "sentinel1_rtc_change_diagnostic.py"
       - "sentinel1_scene_probe.py"
@@ -74,6 +75,7 @@ jobs:
           python foundation_excavation_cross_evidence_reconcile.py --check-only
           python foundation_excavation_route_gate_audit.py --check-only
           python foundation_excavation_core_fp_route_policy.py --check-only
+          python foundation_excavation_one_plus_four_route_policy.py --check-only
           python temporal_field_feedback_regression_guard.py --check-only
 
       - name: Morfoloji ve saha referans diagnostiklerini üret
@@ -91,6 +93,7 @@ jobs:
           python temporal_field_feedback_regression_guard.py
           python foundation_excavation_route_gate_audit.py
           python foundation_excavation_core_fp_route_policy.py
+          python foundation_excavation_one_plus_four_route_policy.py
 
       - name: Diagnostik sonuçlarını güvenli kaydet
         run: |
@@ -118,6 +121,7 @@ jobs:
             python foundation_excavation_cross_evidence_reconcile.py --check-only
             python foundation_excavation_route_gate_audit.py --check-only
             python foundation_excavation_core_fp_route_policy.py --check-only
+            python foundation_excavation_one_plus_four_route_policy.py --check-only
             python temporal_field_feedback_regression_guard.py --check-only
             python foundation_excavation_morphology_audit.py
             python foundation_excavation_agri_shadow_guard.py
@@ -132,6 +136,7 @@ jobs:
             python temporal_field_feedback_regression_guard.py
             python foundation_excavation_route_gate_audit.py
             python foundation_excavation_core_fp_route_policy.py
+            python foundation_excavation_one_plus_four_route_policy.py
 
             if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
               echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
