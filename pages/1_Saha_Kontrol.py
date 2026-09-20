@@ -61,6 +61,30 @@ def read_report():
         return {}
 
 
+def operational_satellite_task_ids(report: dict) -> set[str] | None:
+    """Temel/kepçe kapısı aktifse uydu için tek operasyon otoritesini döndür.
+
+    ``saha_adaylari`` diagnostik/backlog havuzunu korur. Ancak temel-kazı kapısı
+    etkin bir raporda KONTROLE_GIT eylemi yalnız nihai ``gunun_ilk_3_kontrolu``
+    rotasındaki görevlere açıktır. Böylece SQLite'ta eski KONTROLE_GIT durumu
+    taşıyan genel BSI/toprak değişimi adayı Saha Kontrol ekranından kapıyı aşamaz.
+    İnsan tarafından verilmiş TEKRAR_GIT kararı aşağıdaki filtrede ayrıca korunur.
+    """
+    if report.get("temel_kazi_kapisi_aktif") is not True:
+        return None
+    task_ids: set[str] = set()
+    for raw in report.get("gunun_ilk_3_kontrolu") or []:
+        if not isinstance(raw, dict):
+            continue
+        try:
+            task_id = str(raw.get("gorev_id") or satellite_task_id(raw))
+        except (TypeError, ValueError):
+            continue
+        if task_id:
+            task_ids.add(task_id)
+    return task_ids
+
+
 def state_map():
     with connect() as connection:
         ensure_state_schema(connection)
@@ -214,6 +238,7 @@ st.info(
 report = read_report()
 states = state_map()
 outcomes = outcome_map()
+operational_satellite_ids = operational_satellite_task_ids(report)
 
 satellite_items = []
 for raw in report.get("saha_adaylari", []):
@@ -229,9 +254,29 @@ for raw in report.get("saha_adaylari", []):
     )
     if status == "KONTROL_EDILDI":
         continue
+    if (
+        operational_satellite_ids is not None
+        and status != "TEKRAR_GIT"
+        and task_id not in operational_satellite_ids
+    ):
+        # Nihai temel/kepçe rotasına girmeyen genel zemin değişimleri diagnostik
+        # havuzda kalır; Saha Kontrol ekranı bunları yeniden KONTROLE_GIT yapmaz.
+        continue
     item["gorev_id"] = task_id
     item["saha_durumu"] = status
     satellite_items.append(item)
+
+if operational_satellite_ids is not None:
+    assert all(
+        item.get("saha_durumu") == "TEKRAR_GIT"
+        or item.get("gorev_id") in operational_satellite_ids
+        for item in satellite_items
+    ), "Temel/kepçe kapısı dışındaki uydu adayı Saha Kontrol ekranına sızdı."
+    st.caption(
+        "🛡️ Temel/kepçe çoklu-kanıt kapısı aktif: genel BSI/toprak değişimi adayları "
+        "diagnostik arka planda kalır; bu ekranda yalnız nihai uydu rotası ve insan "
+        "kararıyla TEKRAR_GIT kayıtları eyleme açıktır."
+    )
 
 site_items = [
     item for item in active_sites(states)
