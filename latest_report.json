@@ -7804,5 +7804,24 @@
     "uygulandi": false,
     "elendi": 0,
     "neden": "DEGISIKLIK_YOK"
+  },
+  "kapasite_santiye_devriyesi": [],
+  "kapasite_santiye_devriyesi_meta": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "olusturma": "2026-09-20 19:24 +0300",
+    "bolgeler": {
+      "cesme": {
+        "durum": "uretim_kotasi_yeterli",
+        "uretim_santiye_olcegi": 17,
+        "tavan_disinda_uygun_havuz": 0
+      },
+      "uzunkuyu": {
+        "durum": "denetim_hatasi",
+        "uretim_santiye_olcegi": 7,
+        "tavan_disinda_uygun_havuz": 0,
+        "hata": "TypeError: _uncapped_hotspots() got an unexpected keyword argument 'agricultural_context_mask'"
+      }
+    }
   }
 }

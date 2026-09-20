@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-16",
+  "rapor_tarihi": "2026-09-20",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -12,79 +12,168 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2A_T35SMC_20260915T090428_L2A",
+      "son_item": "S2B_T35SMC_20260918T085916_L2A",
       "durum": "ok",
-      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
+      "latest_item": "S2B_T35SMC_20260918T085916_L2A",
       "ana_sentinel_esigi_m2": 250,
       "aday_tavani": 24,
-      "ham_uygun_aday": 26,
+      "ham_uygun_aday": 34,
       "tavan_sonrasi_aday": 24,
-      "raporda_kalan_aday": 24,
-      "tavan_disinda_kalan": 2,
+      "raporda_kalan_aday": 23,
+      "tavan_disinda_kalan": 10,
       "tavan_disinda_ornekler": [
         {
-          "enlem": 38.286413,
-          "boylam": 26.240205,
-          "alan_m2": 900,
-          "boyut_sinifi": "STANDART",
-          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
-          "tarim_riski": false,
-          "tarim_baglam_alani_m2": 2900,
-          "tarim_baglam_orani": 3.22,
-          "harita": "https://www.google.com/maps/search/?api=1&query=38.286413,26.240205"
-        },
-        {
-          "enlem": 38.276373,
-          "boylam": 26.343805,
-          "alan_m2": 900,
+          "enlem": 38.272755,
+          "boylam": 26.340371,
+          "alan_m2": 1200,
           "boyut_sinifi": "STANDART",
           "sinyal": "Bitişik yüzey/toprak değişimi adayı",
           "tarim_riski": false,
           "tarim_baglam_alani_m2": 0,
           "tarim_baglam_orani": 0.0,
-          "harita": "https://www.google.com/maps/search/?api=1&query=38.276373,26.343805"
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.272755,26.340371"
+        },
+        {
+          "enlem": 38.306131,
+          "boylam": 26.328008,
+          "alan_m2": 1100,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 0,
+          "tarim_baglam_orani": 0.0,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.306131,26.328008"
+        },
+        {
+          "enlem": 38.272212,
+          "boylam": 26.32652,
+          "alan_m2": 1100,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 2000,
+          "tarim_baglam_orani": 1.82,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.272212,26.326520"
+        },
+        {
+          "enlem": 38.25367,
+          "boylam": 26.310264,
+          "alan_m2": 1000,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 3200,
+          "tarim_baglam_orani": 3.2,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.253670,26.310264"
+        },
+        {
+          "enlem": 38.294734,
+          "boylam": 26.303167,
+          "alan_m2": 900,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 2200,
+          "tarim_baglam_orani": 2.44,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.294734,26.303167"
+        },
+        {
+          "enlem": 38.299709,
+          "boylam": 26.371852,
+          "alan_m2": 800,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 1600,
+          "tarim_baglam_orani": 2.0,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.299709,26.371852"
+        },
+        {
+          "enlem": 38.298442,
+          "boylam": 26.37769,
+          "alan_m2": 800,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 1100,
+          "tarim_baglam_orani": 1.38,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.298442,26.377690"
+        },
+        {
+          "enlem": 38.293377,
+          "boylam": 26.320109,
+          "alan_m2": 800,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 1200,
+          "tarim_baglam_orani": 1.5,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.293377,26.320109"
         }
       ],
       "rapor_secimi_disinda_kalan": 2,
       "rapor_secimi_disinda_ornekler": [
         {
-          "enlem": 38.32612,
-          "boylam": 26.311867,
-          "alan_m2": 900,
+          "enlem": 38.299618,
+          "boylam": 26.518724,
+          "alan_m2": 3600,
           "boyut_sinifi": "STANDART",
           "sinyal": "Bitişik yüzey/toprak değişimi adayı",
           "tarim_riski": false,
-          "tarim_baglam_alani_m2": 1500,
-          "tarim_baglam_orani": 1.67,
-          "harita": "https://www.google.com/maps/search/?api=1&query=38.326120,26.311867"
+          "tarim_baglam_alani_m2": 7101,
+          "tarim_baglam_orani": 1.97,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.299618,26.518724"
         },
         {
-          "enlem": 38.30604,
-          "boylam": 26.327893,
-          "alan_m2": 900,
+          "enlem": 38.307306,
+          "boylam": 26.326176,
+          "alan_m2": 1300,
           "boyut_sinifi": "STANDART",
           "sinyal": "Bitişik yüzey/toprak değişimi adayı",
           "tarim_riski": false,
           "tarim_baglam_alani_m2": 0,
           "tarim_baglam_orani": 0.0,
-          "harita": "https://www.google.com/maps/search/?api=1&query=38.306040,26.327893"
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.307306,26.326176"
         }
       ]
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2A_T35SMC_20260915T090428_L2A",
+      "son_item": "S2B_T35SMC_20260918T085916_L2A",
       "durum": "ok",
-      "latest_item": "S2A_T35SMC_20260915T090428_L2A",
+      "latest_item": "S2B_T35SMC_20260918T085916_L2A",
       "ana_sentinel_esigi_m2": 250,
       "aday_tavani": 24,
-      "ham_uygun_aday": 4,
-      "tavan_sonrasi_aday": 4,
-      "raporda_kalan_aday": 4,
+      "ham_uygun_aday": 10,
+      "tavan_sonrasi_aday": 10,
+      "raporda_kalan_aday": 8,
       "tavan_disinda_kalan": 0,
       "tavan_disinda_ornekler": [],
-      "rapor_secimi_disinda_kalan": 0,
-      "rapor_secimi_disinda_ornekler": []
+      "rapor_secimi_disinda_kalan": 2,
+      "rapor_secimi_disinda_ornekler": [
+        {
+          "enlem": 38.311196,
+          "boylam": 26.466429,
+          "alan_m2": 6501,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 0,
+          "tarim_baglam_orani": 0.0,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.311196,26.466429"
+        },
+        {
+          "enlem": 38.322683,
+          "boylam": 26.469176,
+          "alan_m2": 1500,
+          "boyut_sinifi": "STANDART",
+          "sinyal": "Bitişik yüzey/toprak değişimi adayı",
+          "tarim_riski": false,
+          "tarim_baglam_alani_m2": 2500,
+          "tarim_baglam_orani": 1.67,
+          "harita": "https://www.google.com/maps/search/?api=1&query=38.322683,26.469176"
+        }
+      ]
     }
   }
 }
