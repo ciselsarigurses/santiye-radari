@@ -41,7 +41,9 @@ jobs:
         run: pip install -r requirements.txt 'planetary-computer>=1.0,<2'
 
       - name: Kritik pencere öz testi
-        run: python critical_onset_window_audit.py --self-check-only
+        run: |
+          python critical_onset_window_audit.py --self-check-only
+          python critical_onset_latest_scene_audit.py --self-check-only
 
       - name: Veri gerçekliğini üret ve yalnız semantik değişiklikte kaydet
         shell: bash
@@ -74,18 +76,29 @@ jobs:
             git reset --hard origin/main
 
             python critical_onset_window_audit.py --self-check-only
+            python critical_onset_latest_scene_audit.py --self-check-only
             python critical_onset_window_audit.py --live --output /tmp/critical-onset-window.json
+            python critical_onset_latest_scene_audit.py --live --output /tmp/critical-onset-latest-scene.json
 
-            if semantic_equal critical_onset_window_availability.json /tmp/critical-onset-window.json; then
-              echo "Kritik başlangıç penceresi veri gerçekliğinde semantik değişiklik yok."
+            changed=0
+            if ! semantic_equal critical_onset_window_availability.json /tmp/critical-onset-window.json; then
+              cp /tmp/critical-onset-window.json critical_onset_window_availability.json
+              changed=1
+            fi
+            if ! semantic_equal critical_onset_latest_scene.json /tmp/critical-onset-latest-scene.json; then
+              cp /tmp/critical-onset-latest-scene.json critical_onset_latest_scene.json
+              changed=1
+            fi
+
+            if [[ "$changed" -eq 0 ]]; then
+              echo "Kritik başlangıç penceresi ve en güncel Sentinel veri gerçekliğinde semantik değişiklik yok."
               exit 0
             fi
 
-            cp /tmp/critical-onset-window.json critical_onset_window_availability.json
-            git add critical_onset_window_availability.json
-            git commit -m "Radar: kritik 15-17 Eylül veri uygunluğunu güncelle"
+            git add critical_onset_window_availability.json critical_onset_latest_scene.json
+            git commit -m "Radar: kritik pencere ve en güncel Sentinel uygunluğunu güncelle"
             if git push origin HEAD:main; then
-              echo "Kritik başlangıç penceresi diagnostik kaydı güncellendi."
+              echo "Kritik başlangıç penceresi ve en güncel Sentinel diagnostik kaydı güncellendi."
               exit 0
             fi
 
