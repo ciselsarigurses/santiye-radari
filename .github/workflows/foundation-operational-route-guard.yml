@@ -51,6 +51,15 @@ jobs:
           python foundation_excavation_operational_route_guard.py
           python foundation_excavation_support_coverage_audit.py
 
+      - name: Markdown sonunu deterministik tut
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("SAHA_RAPORU.md")
+          if path.exists():
+              path.write_text(path.read_text(encoding="utf-8").rstrip() + "\n", encoding="utf-8")
+          PY
+
       - name: Değişiklik biçimini kontrol et
         run: git diff --check
 
@@ -74,12 +83,19 @@ jobs:
             python foundation_excavation_support_coverage_audit.py --check-only
             python foundation_excavation_operational_route_guard.py
             python foundation_excavation_support_coverage_audit.py
+            python - <<'PY'
+          from pathlib import Path
+          path = Path("SAHA_RAPORU.md")
+          if path.exists():
+              path.write_text(path.read_text(encoding="utf-8").rstrip() + "\n", encoding="utf-8")
+          PY
 
             if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
               echo "Güncel main üzerinde ek değişiklik gerekmiyor."
               exit 0
             fi
 
+            git diff --check -- $outputs
             git add $outputs
             git commit -m "Radar: temel kazısı rota ve recall kapsamını güncelle"
             if git push origin HEAD:main; then
