@@ -1,0 +1,86 @@
+name: Temel Kazısı Operasyonel Rota Kapısı
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Bot commitleri workflow zincirini tetiklemezse saatlik güvenlik ağı.
+    - cron: '23 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - foundation_excavation_operational_route_guard.py
+      - .github/workflows/foundation-operational-route-guard.yml
+  workflow_run:
+    workflows:
+      - "Temel Kazısı Pozitif Bağlam Koruması"
+      - "Operasyonel Rota Geometri Koruması"
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: santiye-radari-foundation-operational-route-guard
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Temel-kazısı operasyon kapısı öz testi
+        run: python foundation_excavation_operational_route_guard.py --check-only
+
+      - name: Nihai operasyon rotasına çoklu-kanıt kapısını uygula
+        run: python foundation_excavation_operational_route_guard.py
+
+      - name: Değişiklik biçimini kontrol et
+        run: git diff --check
+
+      - name: Yalnız çıktı değiştiyse güvenli kaydet
+        shell: bash
+        run: |
+          set -euo pipefail
+          outputs="operational_route.json latest_report.json SAHA_RAPORU.md"
+          if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
+            echo "Temel-kazısı operasyon kapısında semantik değişiklik yok."
+            exit 0
+          fi
+
+          git config user.name "santiye-radari-bot"
+          git config user.email "santiye-radari-bot@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python foundation_excavation_operational_route_guard.py --check-only
+            python foundation_excavation_operational_route_guard.py
+
+            if [[ -z "$(git status --porcelain -- $outputs)" ]]; then
+              echo "Güncel main üzerinde ek değişiklik gerekmiyor."
+              exit 0
+            fi
+
+            git add $outputs
+            git commit -m "Radar: genel zemin adaylarını operasyon rotasından ayır"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Ana dal ilerledi; yeniden deneniyor (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Temel-kazısı operasyon kapısı üç denemede kaydedilemedi."
+          exit 1
