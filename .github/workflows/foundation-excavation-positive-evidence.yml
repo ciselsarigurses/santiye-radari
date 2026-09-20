@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "foundation_excavation_positive_evidence_audit.py"
+      - "foundation_excavation_onset_temporal_guard.py"
       - "foundation_excavation_route_gate_review.json"
       - "temporal_local_precursor_watchlist.json"
       - "sar_hard_veto_calibration_review.json"
@@ -40,10 +41,14 @@ jobs:
           python-version: "3.12"
 
       - name: Pozitif-only kanıt öz testi
-        run: python foundation_excavation_positive_evidence_audit.py --check-only
+        run: |
+          python foundation_excavation_positive_evidence_audit.py --check-only
+          python foundation_excavation_onset_temporal_guard.py --check-only
 
-      - name: Morfoloji + SAR pozitif veya önceki-tarih temporal kanıtını çaprazla
-        run: python foundation_excavation_positive_evidence_audit.py
+      - name: Morfoloji + SAR veya onset-penceresi temporal kanıtını çaprazla
+        run: |
+          python foundation_excavation_positive_evidence_audit.py
+          python foundation_excavation_onset_temporal_guard.py
 
       - name: Diagnostiği güvenli kaydet
         run: |
@@ -60,7 +65,9 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python foundation_excavation_positive_evidence_audit.py --check-only
+            python foundation_excavation_onset_temporal_guard.py --check-only
             python foundation_excavation_positive_evidence_audit.py
+            python foundation_excavation_onset_temporal_guard.py
 
             if [[ -z "$(git status --porcelain -- $output)" ]]; then
               echo "Güncel main üzerinde kayıt gerektiren fark kalmadı."
