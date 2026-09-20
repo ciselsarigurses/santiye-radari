@@ -1,6 +1,10 @@
 name: Kritik Başlangıç Penceresi Kalıcı Diagnostiği
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/critical-onset-window-persist.yml"
   workflow_run:
     workflows: ["Sentinel Yeni Sahne Hızlı Yoklama"]
     types: [completed]
