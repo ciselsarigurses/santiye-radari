@@ -103,6 +103,13 @@ def _shadow(record):
     }
 
 
+def _regression_pass(evaluated_count, high_after):
+    """Boş regresyon setinin yanlışlıkla PASS sayılmasını engeller."""
+    if int(evaluated_count or 0) <= 0:
+        return None
+    return int(high_after or 0) == 0
+
+
 def _load(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -136,7 +143,11 @@ def _evaluate_feedback(item, examples):
     nearest, distance = _nearest(item, examples)
     result_date = _parse_date(item.get("sonuc_tarihi"))
     latest_date = nearest.get("uydu_son_tarihi") if nearest else None
-    matched = bool(nearest is not None and distance is not None and distance <= float(item.get("eslesme_yaricapi_m") or MATCH_M))
+    matched = bool(
+        nearest is not None
+        and distance is not None
+        and distance <= float(item.get("eslesme_yaricapi_m") or MATCH_M)
+    )
 
     # Yanlış-pozitif saha kararı yalnız aynı/eski uydu kanıtını bastırır. Daha yeni
     # sahne yeni bir müdahale gösterebilir; bu gölge regresyon onu kalıcı veto etmez.
@@ -206,6 +217,12 @@ def _self_check():
     assert preserved["golge_proxy_puani"] == 75, preserved
     assert preserved["golge_proxy_seviyesi"] == "YUKSEK", preserved
 
+    # En kritik regresyon-integrite testi: hiç değerlendirilen saha örneği yoksa
+    # 'geçti' denemez. False yerine None kullanımı 'başarısız' ile 'ölçülemedi'yi ayırır.
+    assert _regression_pass(0, 0) is None
+    assert _regression_pass(2, 0) is True
+    assert _regression_pass(2, 1) is False
+
 
 def audit():
     _self_check()
@@ -227,12 +244,17 @@ def audit():
     true_reference = _evaluate_feedback(feedback[CRITICAL_TRUE_ID], examples)
     customer_control = _evaluate_feedback(feedback[EXISTING_CUSTOMER_ID], examples)
 
-    evaluated_fp = [x for x in critical_fp if x["yanlis_pozitif_temporal_regresyon_gecerli"]]
+    evaluated_fp = [x for x in critical_fp if x["yanlis_pozitif_temporal_regresyon_gecerli"] and x["eslesti"]]
     fp_high_before = sum(x.get("ham_proxy_seviyesi") == "YUKSEK" for x in evaluated_fp)
     fp_high_after = sum(x.get("golge_proxy_seviyesi") == "YUKSEK" for x in evaluated_fp)
+    matched_critical_count = sum(1 for x in critical_fp if x["eslesti"]) + int(bool(true_reference["eslesti"]))
+    temporal_valid_critical_count = sum(
+        1 for x in critical_fp if x["yanlis_pozitif_temporal_regresyon_gecerli"] and x["eslesti"]
+    ) + int(bool(true_reference["pozitif_temporal_regresyon_gecerli"] and true_reference["eslesti"]))
+    regression_pass = _regression_pass(len(evaluated_fp), fp_high_after)
 
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Kritik 15-17 Eylül regresyon setinde tarla/bahçe bağlamı için üretim-dışı gölge ceza denetimi",
         "gercek_derinlik_olcumu": False,
         "uretim_filtresi": False,
@@ -244,6 +266,9 @@ def audit():
             "dogrulanmis_kazi_id": CRITICAL_TRUE_ID,
             "yanlis_pozitif_ids": sorted(CRITICAL_FP_IDS),
             "beklenen_ornek_sayisi": 5,
+            "morfolojiyle_eslesen_ornek_sayisi": matched_critical_count,
+            "zamansal_ve_mekansal_degerlendirilebilir_ornek_sayisi": temporal_valid_critical_count,
+            "kapsam_tam": matched_critical_count == 5,
         },
         "golge_cezalari": {
             "tarim_baglam_min_m2": AGRI_CONTEXT_MIN_M2,
@@ -255,13 +280,20 @@ def audit():
         "degerlendirilen_kritik_fp_sayisi": len(evaluated_fp),
         "kritik_fp_yuksek_once": fp_high_before,
         "kritik_fp_yuksek_sonra": fp_high_after,
-        "kritik_fp_golge_regresyon_geciyor": fp_high_after == 0,
+        "kritik_fp_golge_regresyon_geciyor": regression_pass,
+        "kritik_fp_regresyon_degerlendirilebilir": len(evaluated_fp) > 0,
+        "kritik_fp_regresyon_durumu": (
+            "GECTI" if regression_pass is True else
+            "KALDI" if regression_pass is False else
+            "DEGERLENDIRILEMEDI"
+        ),
         "dogrulanmis_kazi_referansi": true_reference,
         "mevcut_musteri_pozitif_kontrolu": customer_control,
         "not": (
-            "Bu katman yalnız gölge diagnostiktir. Yanlış-pozitif kararları yalnız aynı/eski uydu sahnesi için "
-            "regresyona girer; daha yeni Sentinel kanıtı kalıcı olarak engellenmez. Doğrulanmış kazı ise yalnız "
-            "uydu tarihi saha doğrulama tarihine ulaştığında pozitif regresyona alınır."
+            "Bu katman yalnız gölge diagnostiktir. Yanlış-pozitif kararları yalnız aynı/eski uydu sahnesi ve "
+            "mekansal eşleşme varsa regresyona girer; daha yeni Sentinel kanıtı kalıcı olarak engellenmez. "
+            "Hiç değerlendirilebilir örnek yoksa regresyon artık PASS sayılmaz, DEGERLENDIRILEMEDI olarak işaretlenir. "
+            "Doğrulanmış kazı ise yalnız uydu tarihi saha doğrulama tarihine ulaştığında pozitif regresyona alınır."
         ),
     }
 
