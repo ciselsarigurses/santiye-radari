@@ -6,7 +6,9 @@ on:
     paths:
       - ".github/workflows/critical-onset-window-persist.yml"
   workflow_run:
-    workflows: ["Sentinel Yeni Sahne Hızlı Yoklama"]
+    workflows:
+      - "Sentinel Yeni Sahne Hızlı Yoklama"
+      - "Kritik başlangıç penceresi Sentinel denetimi"
     types: [completed]
   workflow_dispatch:
 
