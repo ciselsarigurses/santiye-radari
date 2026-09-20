@@ -7292,7 +7292,8 @@
       "uydu_diagnostik_adayi": true,
       "dogrulama_durumu": "SAHA_TEYIDI_BEKLIYOR",
       "kaynak": "FOUNDATION_POSITIVE_CONTEXT",
-      "gunluk_sira": 1
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 2
     }
   ],
   "gunun_ilk_3_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur.",

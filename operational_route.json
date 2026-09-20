@@ -13,7 +13,9 @@
   "geometri_riski_min_alan_orani": 0.85,
   "geometri_arka_plan_toplam": 0,
   "rota_degisti": false,
-  "temel_rota_gorevleri": [],
+  "temel_rota_gorevleri": [
+    "FKC28C831021"
+  ],
   "operasyonel_rota": [
     {
       "oncelik": "YUKSEK",
@@ -53,7 +55,8 @@
       "uydu_diagnostik_adayi": true,
       "dogrulama_durumu": "SAHA_TEYIDI_BEKLIYOR",
       "kaynak": "FOUNDATION_POSITIVE_CONTEXT",
-      "gunluk_sira": 1
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 2
     }
   ],
   "geometri_arka_plan": [],
@@ -62,8 +65,12 @@
   "merkezi_rota_kilidi": true,
   "tazelik_korumasi": true,
   "tazelik_sirasi_degisti": false,
-  "geometri_sonrasi_rota_gorevleri": [],
-  "tazelik_sonrasi_rota_gorevleri": [],
+  "geometri_sonrasi_rota_gorevleri": [
+    "FKC28C831021"
+  ],
+  "tazelik_sonrasi_rota_gorevleri": [
+    "FKC28C831021"
+  ],
   "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur.",
   "operasyon_odak_arka_plan": [],
   "operasyon_odak_arka_plan_sayi": 0,
@@ -86,21 +93,5 @@
   "temel_kazi_kapisi_destekli_ana_aday_sayi": 1,
   "temel_kazi_kapisi_eslesme_m": 60.0,
   "temel_kazi_kapisi_degisti": false,
-  "temel_kazi_kapisi_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur.",
-  "temel_kazi_destekli_yeni_rota_adayi_sayi": 1,
-  "temel_kazi_destekli_yeni_rota_adaylari": [
-    {
-      "gorev_id": "FKC28C831021",
-      "enlem": 38.307849,
-      "boylam": 26.333503,
-      "alan_m2": 400,
-      "morfoloji_puani": 95.0,
-      "pozitif_kanit_kaynaklari": [
-        "S2_MORFOLOJI",
-        "S1_ONSET_11_17"
-      ]
-    }
-  ],
-  "temel_kazi_destekli_rota_enjeksiyonu": true,
-  "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, tarla/FP/müşteri engelleri geçtikten sonra nihai kullanıcı rotasına eklenebilir. MİKRO adaylar diagnostik kalır; SQLite görev havuzu değiştirilmez; Sentinel-2'den gerçek derinlik ölçülmez."
+  "temel_kazi_kapisi_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur."
 }
