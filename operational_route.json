@@ -13,11 +13,7 @@
   "geometri_riski_min_alan_orani": 0.85,
   "geometri_arka_plan_toplam": 0,
   "rota_degisti": false,
-  "temel_rota_gorevleri": [
-    "UA9B7173088",
-    "U1586C07CE7",
-    "U0DC0A1AFC8"
-  ],
+  "temel_rota_gorevleri": [],
   "operasyonel_rota": [],
   "geometri_arka_plan": [],
   "yorum": "Bu çıktı yeni alarm veya saha görevi üretmez. Yalnız gecikmiş 800–10.000 m² adaylarda aynı Sentinel sahnesiyle doğrulanmış düşük-kompakt/uzun-ince geometri riskini günlük rota sıralamasında arka plana alır. Taze ERKEN/PARSEL, TEKRAR_GIT, 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez.",
@@ -25,16 +21,8 @@
   "merkezi_rota_kilidi": true,
   "tazelik_korumasi": true,
   "tazelik_sirasi_degisti": false,
-  "geometri_sonrasi_rota_gorevleri": [
-    "UA9B7173088",
-    "U1586C07CE7",
-    "U0DC0A1AFC8"
-  ],
-  "tazelik_sonrasi_rota_gorevleri": [
-    "UA9B7173088",
-    "U1586C07CE7",
-    "U0DC0A1AFC8"
-  ],
+  "geometri_sonrasi_rota_gorevleri": [],
+  "tazelik_sonrasi_rota_gorevleri": [],
   "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur.",
   "operasyon_odak_arka_plan": [],
   "operasyon_odak_arka_plan_sayi": 0,
@@ -46,12 +34,5 @@
     "mahalle_tahmini": false
   },
   "operasyon_koridor_korumasi": true,
-  "operasyon_koridor_notu": "Son kapı yalnız günlük rota sunumunu sınırlar; adayları/alarmları silmez ve yeni görev üretmez. Açık Gülbahçe, mevcut müşteri, rota_uygun=false veya 26.600000 boylamının doğusundaki belirsiz adaylar diagnostik arka planda kalır. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez.",
-  "temel_kazi_kapisi_sonrasi_rota_gorevleri": [],
-  "temel_kazi_kapisi_arka_plan": [],
-  "temel_kazi_kapisi_arka_plan_sayi": 0,
-  "temel_kazi_kapisi_destekli_ana_aday_sayi": 0,
-  "temel_kazi_kapisi_eslesme_m": 60.0,
-  "temel_kazi_kapisi_degisti": false,
-  "temel_kazi_kapisi_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur."
+  "operasyon_koridor_notu": "Son kapı yalnız günlük rota sunumunu sınırlar; adayları/alarmları silmez ve yeni görev üretmez. Açık Gülbahçe, mevcut müşteri, rota_uygun=false veya 26.600000 boylamının doğusundaki belirsiz adaylar diagnostik arka planda kalır. 250 m² ana eşik ve 150–249 m² MİKRO politikası değişmez."
 }
