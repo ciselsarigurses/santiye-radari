@@ -1,0 +1,284 @@
+{
+  "surum": 1,
+  "olusturma_utc": "2026-09-20T01:50:39+00:00",
+  "amac": "15-17 Eylül 2026 kazı başlangıç penceresinde yalnız gerçekten mevcut Sentinel tarihleriyle temporal karşılaştırma yapılabilirliğini kaydetmek",
+  "alarm": false,
+  "saha_gorevi": false,
+  "gercek_derinlik_olcumu": false,
+  "ana_sentinel_esigi_m2": 250,
+  "mikro_aralik_m2": [
+    150,
+    249
+  ],
+  "ozel_baslangic_penceresi": [
+    "2026-09-15",
+    "2026-09-16",
+    "2026-09-17"
+  ],
+  "istenen_farklar": [
+    "2026-09-13->2026-09-15",
+    "2026-09-15->2026-09-16",
+    "2026-09-15->2026-09-17",
+    "2026-09-16->2026-09-17"
+  ],
+  "bolgeler": {
+    "cesme": {
+      "etiket": "Çeşme merkez · Alaçatı · Ilıca",
+      "sentinel2": {
+        "durum": "ok",
+        "mevcut_tarihler": [
+          "2026-09-13",
+          "2026-09-15"
+        ],
+        "eksik_tarihler": [
+          "2026-09-16",
+          "2026-09-17"
+        ],
+        "farklar": {
+          "2026-09-13->2026-09-15": {
+            "hesaplanabilir": true,
+            "neden": "OK",
+            "eski_item": "S2C_T35SMC_20260913T090741_L2A",
+            "yeni_item": "S2A_T35SMC_20260915T090428_L2A",
+            "eski_bulut_yuzde": 0.57,
+            "yeni_bulut_yuzde": 11.07,
+            "ayni_mgrs_karo": true,
+            "ayni_goreli_yorunge": true
+          },
+          "2026-09-15->2026-09-16": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S2_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-16"
+            ]
+          },
+          "2026-09-15->2026-09-17": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S2_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-17"
+            ]
+          },
+          "2026-09-16->2026-09-17": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S2_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-16",
+              "2026-09-17"
+            ]
+          }
+        },
+        "baseline_vs_mudahale": {
+          "hesaplanabilir": true,
+          "baseline_tarihi": "2026-09-13",
+          "mudahale_tarihi": "2026-09-15",
+          "detay": {
+            "hesaplanabilir": true,
+            "neden": "OK",
+            "eski_item": "S2C_T35SMC_20260913T090741_L2A",
+            "yeni_item": "S2A_T35SMC_20260915T090428_L2A",
+            "eski_bulut_yuzde": 0.57,
+            "yeni_bulut_yuzde": 11.07,
+            "ayni_mgrs_karo": true,
+            "ayni_goreli_yorunge": true
+          }
+        }
+      },
+      "sentinel1": {
+        "durum": "ok",
+        "metadata_kaynagi": "Microsoft Planetary Computer",
+        "kaynak_hatalari": [],
+        "mevcut_tarihler": [
+          "2026-09-17"
+        ],
+        "eksik_tarihler": [
+          "2026-09-13",
+          "2026-09-15",
+          "2026-09-16"
+        ],
+        "farklar": {
+          "2026-09-13->2026-09-15": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S1_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-13",
+              "2026-09-15"
+            ]
+          },
+          "2026-09-15->2026-09-16": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S1_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-15",
+              "2026-09-16"
+            ]
+          },
+          "2026-09-15->2026-09-17": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S1_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-15"
+            ]
+          },
+          "2026-09-16->2026-09-17": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S1_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-16"
+            ]
+          }
+        },
+        "baseline_vs_mudahale": {
+          "hesaplanabilir": true,
+          "neden": "OK_AYNI_GEOMETRI",
+          "eski_item": "S1C_IW_GRDH_1SDV_20260911T161434_20260911T161459_009402_012B36",
+          "yeni_item": "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8",
+          "ortak_kritik_noktalar": [
+            "Alaçatı",
+            "Ilıca",
+            "Ovacık",
+            "Çeşme",
+            "Çiftlikköy"
+          ],
+          "goreli_yorunge": 29,
+          "orbit_yonu": "ascending",
+          "polarizasyon": [
+            "VH",
+            "VV"
+          ],
+          "baseline_tarihi": "2026-09-11",
+          "mudahale_tarihi": "2026-09-17"
+        }
+      }
+    },
+    "uzunkuyu": {
+      "etiket": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "sentinel2": {
+        "durum": "ok",
+        "mevcut_tarihler": [
+          "2026-09-13",
+          "2026-09-15"
+        ],
+        "eksik_tarihler": [
+          "2026-09-16",
+          "2026-09-17"
+        ],
+        "farklar": {
+          "2026-09-13->2026-09-15": {
+            "hesaplanabilir": true,
+            "neden": "OK",
+            "eski_item": "S2C_T35SMC_20260913T090741_L2A",
+            "yeni_item": "S2A_T35SMC_20260915T090428_L2A",
+            "eski_bulut_yuzde": 0.57,
+            "yeni_bulut_yuzde": 11.07,
+            "ayni_mgrs_karo": true,
+            "ayni_goreli_yorunge": true
+          },
+          "2026-09-15->2026-09-16": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S2_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-16"
+            ]
+          },
+          "2026-09-15->2026-09-17": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S2_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-17"
+            ]
+          },
+          "2026-09-16->2026-09-17": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S2_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-16",
+              "2026-09-17"
+            ]
+          }
+        },
+        "baseline_vs_mudahale": {
+          "hesaplanabilir": true,
+          "baseline_tarihi": "2026-09-13",
+          "mudahale_tarihi": "2026-09-15",
+          "detay": {
+            "hesaplanabilir": true,
+            "neden": "OK",
+            "eski_item": "S2C_T35SMC_20260913T090741_L2A",
+            "yeni_item": "S2A_T35SMC_20260915T090428_L2A",
+            "eski_bulut_yuzde": 0.57,
+            "yeni_bulut_yuzde": 11.07,
+            "ayni_mgrs_karo": true,
+            "ayni_goreli_yorunge": true
+          }
+        }
+      },
+      "sentinel1": {
+        "durum": "ok",
+        "metadata_kaynagi": "Microsoft Planetary Computer",
+        "kaynak_hatalari": [],
+        "mevcut_tarihler": [
+          "2026-09-17"
+        ],
+        "eksik_tarihler": [
+          "2026-09-13",
+          "2026-09-15",
+          "2026-09-16"
+        ],
+        "farklar": {
+          "2026-09-13->2026-09-15": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S1_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-13",
+              "2026-09-15"
+            ]
+          },
+          "2026-09-15->2026-09-16": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S1_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-15",
+              "2026-09-16"
+            ]
+          },
+          "2026-09-15->2026-09-17": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S1_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-15"
+            ]
+          },
+          "2026-09-16->2026-09-17": {
+            "hesaplanabilir": false,
+            "neden": "EKSIK_S1_TARIHI",
+            "eksik_tarihler": [
+              "2026-09-16"
+            ]
+          }
+        },
+        "baseline_vs_mudahale": {
+          "hesaplanabilir": true,
+          "neden": "OK_AYNI_GEOMETRI",
+          "eski_item": "S1C_IW_GRDH_1SDV_20260911T161434_20260911T161459_009402_012B36",
+          "yeni_item": "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8",
+          "ortak_kritik_noktalar": [
+            "Germiyan",
+            "Gülbahçe",
+            "Ildır",
+            "Uzunkuyu"
+          ],
+          "goreli_yorunge": 29,
+          "orbit_yonu": "ascending",
+          "polarizasyon": [
+            "VH",
+            "VV"
+          ],
+          "baseline_tarihi": "2026-09-11",
+          "mudahale_tarihi": "2026-09-17"
+        }
+      }
+    }
+  },
+  "not": "hesaplanabilir=false olan temporal fark için görüntü/fark üretilmez. Sentinel-2 10 m veriden derinlik ölçülmez; bu dosya yalnız veri tazeliği/karşılaştırılabilirlik diagnostigidir."
+}
