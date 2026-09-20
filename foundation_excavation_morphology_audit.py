@@ -148,7 +148,12 @@ def _score_component(
     inner_ring = inner_dilated & ~component_mask
     outer_ring = outer_dilated & ~inner_dilated
 
-    context_mask = (
+    # İki bağlamı kesin olarak ayır: değişim maskesi hafriyat/ikincil bozulma
+    # proxy'sidir; agricultural_context_mask ise yalnız tarla/bahçe negatif
+    # bağlamıdır. Tarım maskesini pozitif "spoil" kanıtı gibi ödüllendirmek
+    # tarla yanlış-pozitiflerini yapay olarak yükseltir.
+    change_context_mask = np.asarray(change_mask, dtype=bool)
+    agricultural_mask = (
         np.asarray(agricultural_context_mask, dtype=bool)
         if agricultural_context_mask is not None
         else np.zeros(change_mask.shape, dtype=bool)
@@ -160,8 +165,10 @@ def _score_component(
     )
     pixels = np.asarray(component, dtype="int32")
     strong_fraction = float(np.mean(strong_mask[pixels[:, 0], pixels[:, 1]]))
-    inner_context_fraction = _fraction(context_mask, inner_ring)
-    outer_context_fraction = _fraction(context_mask, outer_ring)
+    inner_change_fraction = _fraction(change_context_mask, inner_ring)
+    outer_change_fraction = _fraction(change_context_mask, outer_ring)
+    inner_agricultural_fraction = _fraction(agricultural_mask, inner_ring)
+    outer_agricultural_fraction = _fraction(agricultural_mask, outer_ring)
     context_area_m2, context_ratio, agricultural_risk = _agricultural_context(
         component,
         agricultural_context_mask,
@@ -204,12 +211,12 @@ def _score_component(
     elif strong_fraction >= 0.25:
         score += 8
 
-    # Temel kazısında çekirdeğin hemen yanında hafriyat/ikincil bozulma olabilir;
-    # fakat bütün çevrenin aynı şekilde değişmesi tarla düzeltmesine daha yakındır.
-    if 0.05 <= inner_context_fraction <= 0.45:
+    # Temel kazısında çekirdeğin hemen yanında ayrı hafriyat/ikincil bozulma
+    # zonu olabilir. Bu kanıt yalnız gerçek değişim maskesinden gelir.
+    if 0.05 <= inner_change_fraction <= 0.45:
         score += 10
         reasons.append("çekirdek yanında sınırlı ikincil yüzey değişimi")
-    if outer_context_fraction <= 0.15:
+    if outer_change_fraction <= 0.15:
         score += 10
         reasons.append("dış çevre büyük ölçüde stabil")
 
@@ -222,7 +229,7 @@ def _score_component(
     if compactness <= 0.12:
         score -= 15
         penalties.append("düşük kompaktlık")
-    if outer_context_fraction >= 0.50:
+    if outer_change_fraction >= 0.50:
         score -= 20
         penalties.append("geniş homojen çevresel değişim")
     if area_m2 > 10000:
@@ -244,8 +251,10 @@ def _score_component(
         "alan_m2": int(round(area_m2)),
         **features,
         "guclu_cekirdek_orani": round(strong_fraction, 3),
-        "yakin_cevre_degisim_orani": round(inner_context_fraction, 3),
-        "dis_cevre_degisim_orani": round(outer_context_fraction, 3),
+        "yakin_cevre_degisim_orani": round(inner_change_fraction, 3),
+        "dis_cevre_degisim_orani": round(outer_change_fraction, 3),
+        "yakin_cevre_tarim_orani": round(inner_agricultural_fraction, 3),
+        "dis_cevre_tarim_orani": round(outer_agricultural_fraction, 3),
         "tarim_baglam_alani_m2": int(round(context_area_m2)),
         "tarim_baglam_orani": round(context_ratio, 3),
         "tarim_riski": agricultural_risk,
@@ -449,6 +458,41 @@ def _self_check():
         square, change, small, agriculture, [26.3, 38.2, 26.32, 38.22], 100.0
     )
     assert square_score["temel_kazi_proxy_puani"] >= MEDIUM_SCORE, square_score
+    assert square_score["yakin_cevre_degisim_orani"] == 0.0, square_score
+    assert "çekirdek yanında sınırlı ikincil yüzey değişimi" not in square_score["pozitif_kanitlar"], square_score
+
+    # Tarım/bahçe bağlamı, çekirdeğin yanında olsa bile gerçek değişim yoksa
+    # ikincil hafriyat/spoil pozitif kanıtı üretemez.
+    agriculture_ring = satellite._dilate_mask(_component_mask(shape, square), 2)
+    agriculture_ring &= ~_component_mask(shape, square)
+    agri_ring_score = _score_component(
+        square,
+        change,
+        small,
+        agriculture_ring,
+        [26.3, 38.2, 26.32, 38.22],
+        100.0,
+    )
+    assert agri_ring_score["yakin_cevre_tarim_orani"] > 0.0, agri_ring_score
+    assert agri_ring_score["yakin_cevre_degisim_orani"] == 0.0, agri_ring_score
+    assert "çekirdek yanında sınırlı ikincil yüzey değişimi" not in agri_ring_score["pozitif_kanitlar"], agri_ring_score
+
+    # Ayrı ve gerçekten değişmiş yakın zon varsa pozitif ikincil-bozulma kanıtı
+    # üretilebildiğini de doğrula. Bir piksel boşluk bırakıldığı için ana çekirdekle
+    # tek bağlı bileşene birleşmez.
+    change_with_spoil = change.copy()
+    for c in range(4, 8):
+        change_with_spoil[2, c] = True
+    spoil_score = _score_component(
+        square,
+        change_with_spoil,
+        small,
+        agriculture,
+        [26.3, 38.2, 26.32, 38.22],
+        100.0,
+    )
+    assert spoil_score["yakin_cevre_degisim_orani"] > 0.0, spoil_score
+    assert "çekirdek yanında sınırlı ikincil yüzey değişimi" in spoil_score["pozitif_kanitlar"], spoil_score
 
     change2 = np.zeros(shape, dtype=bool)
     small2 = np.zeros(shape, dtype=bool)
