@@ -30,6 +30,7 @@ OUTPUT_JSON = BASE / "foundation_excavation_route_gate_review.json"
 
 MAIN_THRESHOLD_M2 = 250
 MICRO_RANGE_M2 = [150, 249]
+# Yalnız S1/S2 aday eşlemesi içindir; saha geri bildirim yarıçapına uygulanmaz.
 MATCH_RADIUS_M = 45.0
 REFERENCE_SIMILARITY_MATCH_RADIUS_M = 5.0
 MIN_MORPHOLOGY_SCORE = 65
@@ -118,7 +119,9 @@ def _feedback_effect(candidate, scene_date, feedback):
     for item in feedback:
         radius = float(item.get("eslesme_yaricapi_m") or 30)
         distance = _distance_m(_point(candidate), _point(item))
-        if distance <= max(radius, MATCH_RADIUS_M):
+        # Saha kaydının kendi 25/30 m yarıçapı otoritedir. SAR için kullanılan
+        # 45 m eşleme toleransı komşu parseli yanlışlıkla bastırmamalıdır.
+        if distance <= radius:
             matches.append((distance, item))
     if not matches:
         return {
@@ -537,6 +540,30 @@ def _self_check():
     payload = audit(morphology, sar, feedback, valid_references)
     assert payload["bolgeler"]["cesme"]["ana_esik_yuksek_guven_sayisi"] == 0
     assert payload["rota_kapisi_hazir"] is False
+
+    # Regresyon: 25 m saha yarıçapı 45 m SAR eşleme toleransına genişlememeli.
+    radius_feedback = [
+        {
+            "id": "FP-RADIUS",
+            "sonuc": "YANLIS_POZITIF",
+            "sonuc_tarihi": "2026-09-15",
+            "enlem": 38.30,
+            "boylam": 26.30,
+            "eslesme_yaricapi_m": 25,
+        }
+    ]
+    inside_effect = _feedback_effect(
+        {"enlem": 38.30, "boylam": 26.3002},
+        _date("15.09.2026"),
+        radius_feedback,
+    )
+    neighbor_effect = _feedback_effect(
+        {"enlem": 38.30, "boylam": 26.3004},
+        _date("15.09.2026"),
+        radius_feedback,
+    )
+    assert inside_effect["engel"] is True
+    assert neighbor_effect["engel"] is False
 
     no_sar = json.loads(json.dumps(sar))
     no_sar["bolgeler"]["cesme"]["tum_sar_sonuclari"][0]["s2_sar_capraz_destek"] = False
