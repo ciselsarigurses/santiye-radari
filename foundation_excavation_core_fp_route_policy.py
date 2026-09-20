@@ -19,6 +19,8 @@ CORE_FP_DISTANCE_KEY = "cekirdek_regresyon_yanlis_pozitif_uzakligi"
 CORE_FP_ID_KEY = "cekirdek_regresyon_yanlis_pozitif_id"
 AUX_FP_DISTANCE_KEY = "yardimci_yanlis_pozitif_uzakligi"
 AUX_FP_ID_KEY = "yardimci_yanlis_pozitif_id"
+DEFAULT_FEEDBACK_RADIUS_M = 30.0
+_BASE_FEEDBACK_EFFECT = base._feedback_effect
 
 
 def _num(value):
@@ -26,6 +28,44 @@ def _num(value):
         return float(value)
     except (TypeError, ValueError):
         return None
+
+
+def _feedback_effect_exact_radius(candidate, scene_date, feedback):
+    """Saha geri bildirimini kayıttaki gerçek yarıçapla sınırlar.
+
+    Temel rota audit'indeki 45 m SAR eşleme toleransı geri bildirim yarıçapına
+    taşınmamalıdır. Böylece 25–45 m uzaktaki komşu parsel yalnız bilinen bir
+    yanlış-pozitife veya mevcut müşteriye yakın diye bastırılmaz.
+    """
+    candidate_point = base._point(candidate)
+    if candidate_point is None:
+        return {
+            "engel": False,
+            "mevcut_musteri": False,
+            "geri_bildirim": None,
+        }
+
+    in_radius = []
+    for item in feedback:
+        item_point = base._point(item)
+        if item_point is None:
+            continue
+        radius = _num(item.get("eslesme_yaricapi_m"))
+        if radius is None or radius <= 0:
+            radius = DEFAULT_FEEDBACK_RADIUS_M
+        if base._distance_m(candidate_point, item_point) <= radius:
+            in_radius.append(item)
+
+    if not in_radius:
+        return {
+            "engel": False,
+            "mevcut_musteri": False,
+            "geri_bildirim": None,
+        }
+
+    # Tarih ve sonuç semantiğini değiştirmeden yalnız aday kayıt havuzunu
+    # gerçek saha yarıçapına daraltıyoruz.
+    return _BASE_FEEDBACK_EFFECT(candidate, scene_date, in_radius)
 
 
 def _core_fp_spectral_clone_effect(candidate, similarity_rows):
@@ -122,6 +162,10 @@ def _annotate_policy(payload, reference_similarity):
         "Kullanıcının dört çekirdek yanlış-pozitifi sert veto; tarihsel yardımcı "
         "yanlış-pozitif tek başına yalnız diagnostik negatif kanıt"
     )
+    payload["geri_bildirim_yaricap_politikasi"] = (
+        "Saha kaydındaki eslesme_yaricapi_m aynen kullanılır; SAR 45 m toleransı "
+        "saha yanlış-pozitifi/mevcut-müşteri engeline taşınmaz"
+    )
     payload["toplam_cekirdek_fp_klon_baskilanan"] = total_core_suppressed
     payload["toplam_yalniz_yardimci_fp_benzerligi"] = total_aux_only
     payload["not"] = (
@@ -130,8 +174,9 @@ def _annotate_policy(payload, reference_similarity):
         "çekirdek yanlış-pozitifine 0.25 veya daha yakın spektral klonlar sert veto "
         "olarak kalır. Tarihsel yardımcı yanlış-pozitif benzerliği tek başına veto "
         "değildir; adayın çoklu-kanıt, SAR, saha geri bildirimi ve kalibrasyon kapıları "
-        "aynen uygulanır. En az iki zamansal geçerli doğrulanmış kazı referansı olmadan "
-        "rota kapısı açılmaz."
+        "aynen uygulanır. Saha geri bildiriminde yalnız kayıttaki gerçek 25/30 m yarıçap "
+        "kullanılır; 45 m SAR eşleme toleransı bu engele genişletilmez. En az iki "
+        "zamansal geçerli doğrulanmış kazı referansı olmadan rota kapısı açılmaz."
     )
     return payload
 
@@ -140,12 +185,15 @@ def audit(morphology=None, sar=None, feedback=None, reference_similarity=None):
     if reference_similarity is None:
         reference_similarity = base._load(base.REFERENCE_SIMILARITY_JSON)
 
-    original = base._fp_spectral_clone_effect
+    original_fp = base._fp_spectral_clone_effect
+    original_feedback = base._feedback_effect
     base._fp_spectral_clone_effect = _core_fp_spectral_clone_effect
+    base._feedback_effect = _feedback_effect_exact_radius
     try:
         payload = base.audit(morphology, sar, feedback, reference_similarity)
     finally:
-        base._fp_spectral_clone_effect = original
+        base._fp_spectral_clone_effect = original_fp
+        base._feedback_effect = original_feedback
     return _annotate_policy(payload, reference_similarity)
 
 
@@ -195,6 +243,21 @@ def _self_check():
     assert row["yalniz_yardimci_fp_benzerligi"] is True
     assert payload["toplam_yalniz_yardimci_fp_benzerligi"] == 1
     assert payload["toplam_cekirdek_fp_klon_baskilanan"] == 0
+
+    # Regresyon: 25 m saha yarıçapı SAR'ın 45 m eşleme toleransına genişlememeli.
+    fp = [{
+        "id": "FP-RADIUS",
+        "sonuc": "YANLIS_POZITIF",
+        "sonuc_tarihi": "2026-09-15",
+        "enlem": 38.3,
+        "boylam": 26.3,
+        "eslesme_yaricapi_m": 25,
+    }]
+    scene_date = base._date("2026-09-15")
+    inside = {"enlem": 38.30018, "boylam": 26.3}
+    outside = {"enlem": 38.30032, "boylam": 26.3}
+    assert _feedback_effect_exact_radius(inside, scene_date, fp)["engel"] is True
+    assert _feedback_effect_exact_radius(outside, scene_date, fp)["engel"] is False
 
 
 def main(argv=None):
