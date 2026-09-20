@@ -1,0 +1,15 @@
+{
+  "surum": 1,
+  "amac": "Korunmuş 250 m²+ çoklu-pozitif temel/kepçe desteklerinin aday/rota zincirinde sessizce kaybolmasını denetlemek",
+  "ana_uretim_esigi_m2": 250,
+  "eslesme_yaricapi_m": 60.0,
+  "alarm": false,
+  "saha_gorevi": false,
+  "uretim_filtresi": false,
+  "korunmus_ana_destek_sayisi": 0,
+  "aday_havuzu_recall_boslugu_sayisi": 0,
+  "rota_recall_boslugu_sayisi": 0,
+  "ciddi_recall_boslugu": false,
+  "destekler": [],
+  "not": "Bu denetim yeni görev üretmez. Aday-havuzu recall boşluğu, çoklu-pozitif bir temel/kepçe desteğinin aynı sahnede tam saha_adaylari havuzunda temsil edilmediğini gösterir ve operasyonel yükseltmeden önce rota kaynak zincirinin incelenmesini gerektirir. Nihai rota boşluğu tek başına hata değildir; başka negatif/operasyonel kapılar nedeniyle bilinçli bastırma olabilir."
+}
