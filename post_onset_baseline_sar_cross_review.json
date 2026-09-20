@@ -1,5 +1,5 @@
 {
-  "surum": 2,
+  "surum": 3,
   "amac": "13 Eylül sakin baseline ile 17 Eylül sonrası referans-benzeri temel/kepçe adaylarını kendi koordinatlarında Sentinel-1 RTC ile çaprazlamak",
   "gercek_derinlik_olcumu": false,
   "ana_uretim_esigi_m2": 250,
@@ -8,6 +8,7 @@
     249
   ],
   "sar_guclu_lokal_esik_db": 2.0,
+  "saha_geri_bildirim_yaricapi_politikasi": "KAYITTAKI_DEGER; yoksa 30 m",
   "toplam_ana_esik_yuksek_guven_diagnostik": 0,
   "toplam_mikro_coklu_kanit": 0,
   "bolge_hata_sayisi": 0,
@@ -160,5 +161,5 @@
       "adaylar": []
     }
   },
-  "not": "Baseline-referans adayları SAR'ın önceden seçilmiş hedef havuzuna bağımlı değildir; exact koordinatlarında ölçülür. SAR yokluğu/zayıflığı veto değildir, yalnız güçlü lokal ve onset penceresini çevreleyen SAR ikinci pozitif kanıt sayılır."
+  "not": "Baseline-referans adayları SAR'ın önceden seçilmiş hedef havuzuna bağımlı değildir; exact koordinatlarında ölçülür. SAR yokluğu/zayıflığı veto değildir, yalnız güçlü lokal ve onset penceresini çevreleyen SAR ikinci pozitif kanıt sayılır. Saha geri bildirimi yalnız kayıtta tanımlı eşleşme yarıçapında (yoksa 30 m) engel oluşturur; 45 m SAR eşleme toleransı geri bildirim engeline genişletilmez."
 }
