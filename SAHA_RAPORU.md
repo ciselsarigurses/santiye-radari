@@ -11,25 +11,12 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir. Sahada doğrulanmış yıkım/parsel temizliğiyle 25 m içinde çakışan, sonraki Sentinel sahnesine ait mevcut 250 m²+ eyleme dönük görev yeni inşaat devam sinyali olarak değerlendirilir. Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin öncelikleri korunur; yıkım takibi yalnız boş rota kapasitesini kullanır veya korunmayan eski/backlog kaydıyla yer değiştirir. Yeni alarm/görev üretmez ve MİKRO 150–249 m² bandını yükseltmez.
 
-Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
+1. **PARSEL — Ilıca** · yaklaşık 800 m² · Görev `UA9B7173088` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.299709,26.371852)
+2. **PARSEL — Germiyan** · yaklaşık 800 m² · Görev `U1586C07CE7` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313005,26.471695)
+3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 900 m² · Görev `U0DC0A1AFC8` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.341948,26.554696)
 
-## Ek kuru zemin kalibrasyon kontrolü
-
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
-
-1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 500 m² · 15.09.2026 → 18.09.2026 · BSI Δ 0.192 · RGB Δ 0.188 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.319517,26.564084) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.319517/26.564084)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Alaçatı** · yaklaşık 500 m² · 15.09.2026 → 18.09.2026 · BSI Δ 0.155 · RGB Δ 0.175 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.295819,26.380094) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.295819/26.380094)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-
-## Kör alan saha devriyesi
-
-> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
-
-1. **KÖR ALAN — Musalla** · yaklaşık 400 m² · karışık geçersizlik · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.296634,26.280271) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.296634/26.280271)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
 ## Bugün sahada kontrol edilecek uydu adayları
 
 ### 1. GECİKEN — Musalla
