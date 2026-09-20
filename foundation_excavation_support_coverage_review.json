@@ -8,7 +8,7 @@
   "uretim_filtresi": false,
   "korunmus_ana_destek_sayisi": 1,
   "aday_havuzu_recall_boslugu_sayisi": 1,
-  "rota_recall_boslugu_sayisi": 1,
+  "rota_recall_boslugu_sayisi": 0,
   "ciddi_recall_boslugu": true,
   "destekler": [
     {
@@ -25,10 +25,10 @@
       ],
       "tam_aday_havuzunda_temsil": false,
       "tam_aday_havuzu_mesafe_m": 376.5,
-      "nihai_rotada_temsil": false,
-      "nihai_rota_mesafe_m": null,
+      "nihai_rotada_temsil": true,
+      "nihai_rota_mesafe_m": 0.0,
       "aday_havuzu_recall_boslugu": true,
-      "rota_recall_boslugu": true,
+      "rota_recall_boslugu": false,
       "alarm": false,
       "saha_gorevi": false
     }
