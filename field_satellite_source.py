@@ -10,6 +10,13 @@ olduğuna dair nihai whitelist yine sayfadaki temel/kepçe kapısı filtresidir.
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
+
+BASE = Path(__file__).resolve().parent
+REPORT_JSON = BASE / "latest_report.json"
+
 
 def _task_id(item: dict) -> str:
     """Yalnız açıkça taşınan görev kimliğini kullan; burada yeni kimlik üretme."""
@@ -113,6 +120,30 @@ def _self_check() -> None:
     assert [row.get("gorev_id") for row in merged_satellite_candidates(no_id)] == ["OLD-BSI"]
 
 
+def _current_report_check() -> None:
+    """Mevcut rapordaki nihai rota kimliklerinin kontrol kaynağında kaybolmadığını doğrula."""
+    if not REPORT_JSON.exists():
+        return
+    try:
+        report = json.loads(REPORT_JSON.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return
+    if not isinstance(report, dict):
+        return
+
+    operational = operational_satellite_task_ids(report)
+    if operational is None:
+        return
+    merged_ids = {
+        _task_id(row)
+        for row in merged_satellite_candidates(report)
+        if isinstance(row, dict) and _task_id(row)
+    }
+    missing = operational - merged_ids
+    assert not missing, f"Nihai uydu rota görevi Saha Kontrol kaynağında kayıp: {sorted(missing)}"
+
+
 if __name__ == "__main__":
     _self_check()
+    _current_report_check()
     print("field satellite source self-check: ok")
