@@ -2,37 +2,14 @@
   "rapor_tarihi": "2026-09-21",
   "kaynak_rapor_olusturma": "2026-09-21 11:16 +03",
   "politika": "DIAGNOSTIK_ONLY: koordinat otomatik taşınmaz; alarm/görev/sıra/250 m² ana eşik/150–249 m² MİKRO politikası değişmez.",
-  "rota_hedefi": 1,
+  "rota_hedefi": 0,
   "olculen": 0,
   "postprocess_riski": 0,
-  "ham_mask_eslesmedi": 1,
+  "ham_mask_eslesmedi": 0,
   "10m_ustu_mevcut_sinyal_farki": 0,
   "20m_ustu_mevcut_sinyal_farki": 0,
   "maksimum_mevcut_sinyal_farki_m": 0.0,
-  "sahne_ciftleri": [
-    {
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "15.09.2026",
-      "son_tarih": "18.09.2026",
-      "onceki_item": "S2A_T35SMC_20260915T090428_L2A",
-      "son_item": "S2B_T35SMC_20260918T085916_L2A",
-      "hedef_sayisi": 1
-    }
-  ],
-  "hedefler": [
-    {
-      "gorev_id": "FKC28C831021",
-      "oncelik": "YUKSEK",
-      "mahalle": null,
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "15.09.2026",
-      "son_tarih": "18.09.2026",
-      "alan_m2": 400,
-      "mevcut_enlem": 38.307849,
-      "mevcut_boylam": 26.333503,
-      "durum": "HAM_MASK_ESLESMEDI",
-      "not": "Mevcut rota koordinatı, adayın kendi tarih çiftinin güncel üretim maskesinde bağlı bileşene düşmedi."
-    }
-  ],
+  "sahne_ciftleri": [],
+  "hedefler": [],
   "hatalar": []
 }
