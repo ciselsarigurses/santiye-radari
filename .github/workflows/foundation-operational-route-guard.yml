@@ -24,6 +24,7 @@ on:
       - "Temel Kazısı Pozitif Bağlam Koruması"
       - "Operasyonel Rota Geometri Koruması"
       - "15-17 Eylül Onset SAR Diagnostiği"
+      - "Günlük Şantiye Taraması"
     types: [completed]
 
 permissions:
