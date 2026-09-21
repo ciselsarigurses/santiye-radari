@@ -213,12 +213,13 @@ def _route_markdown(route):
     for index, item in enumerate(route, start=1):
         neighborhood = str(item.get("mahalle") or "Konum araştırılıyor")
         area = int(float(item.get("alan_m2") or 0))
+        area_text = f"{area:,}".replace(",", ".")
         task_id = str(item.get("gorev_id") or "-")
         href = str(item.get("harita") or "")
         link = f" · [Yol tarifi]({href})" if href.startswith(("http://", "https://")) else ""
         lines.append(
             f"{index}. **{str(item.get('oncelik') or 'KONTROL')} — {neighborhood}** · "
-            f"yaklaşık {area:,} m² · Görev `{task_id}`{link}".replace(",", ".")
+            f"yaklaşık {area_text} m² · Görev `{task_id}`{link}"
         )
     lines.append("")
     return "\n".join(lines)
@@ -286,6 +287,20 @@ def _self_check():
     micro_row["ana_esik_pozitif_destekli_diagnostik_korumali"] = False
     micro_guarded = guard_route({"operasyonel_rota": [{**base, "gorev_id": "MICRO", "enlem": 38.3001, "boylam": 26.3001}]}, micro)
     assert micro_guarded["operasyonel_rota"] == []
+
+    map_url = "https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503"
+    markdown = _route_markdown([
+        {
+            "oncelik": "YUKSEK",
+            "mahalle": None,
+            "alan_m2": 1200,
+            "gorev_id": "MAP",
+            "harita": map_url,
+        }
+    ])
+    assert "yaklaşık 1.200 m²" in markdown, markdown
+    assert map_url in markdown, markdown
+    assert "destination=38.307849.26.333503" not in markdown, markdown
 
 
 def main():
