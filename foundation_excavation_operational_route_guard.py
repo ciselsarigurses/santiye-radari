@@ -8,6 +8,12 @@ içinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayıyla mekânsal olara
 rota dışı diagnostik arka plana alınır. İnsan tarafından açıkça istenen ``TEKRAR_GIT``
 kayıtları korunur.
 
+Korunmuş 250 m²+ temel/kepçe desteği önceki rota katmanlarında kaybolmuşsa, mevcut
+``foundation_excavation_supported_route_injector`` aynı fail-closed S2 tarih çifti,
+tarla/FP/müşteri engeli ve bağımsız kanıt kurallarıyla son kapıda yeniden uygulanır.
+Böylece daha geç çalışan rota korumaları doğrulanmış yüksek-güven adayını sessizce
+silemez; MİKRO adaylar yine yalnız diagnostik kalır.
+
 Amaç BSI/toprak değişiminin tek başına saha rotası üretmesini engellerken aday kaydını
 ve geri alınabilirliği korumaktır.
 """
@@ -26,6 +32,7 @@ ROUTE_JSON = BASE / "operational_route.json"
 REPORT_JSON = BASE / "latest_report.json"
 FIELD_REPORT_MD = BASE / "SAHA_RAPORU.md"
 POSITIVE_CONTEXT_JSON = BASE / "foundation_excavation_positive_context_review.json"
+MORPHOLOGY_JSON = BASE / "foundation_excavation_morphology_review.json"
 
 MATCH_RADIUS_M = 60.0
 MAIN_THRESHOLD_M2 = 250
@@ -188,6 +195,15 @@ def guard_route(route, context):
     return result
 
 
+def _guard_and_restore_supported(route, context, report, morphology):
+    """Filtrele, sonra yalnız injector'ın tam doğruladığı 250 m²+ desteği geri yükle."""
+    guarded = guard_route(route, context)
+    # Lazy import döngüsel modül yüklemesini önler: injector bu modülün rapor yardımcılarını kullanır.
+    import foundation_excavation_supported_route_injector as injector
+
+    return injector.inject(guarded, context, report, morphology)
+
+
 def _update_report(report, guarded_route):
     final_route = [dict(x) for x in guarded_route.get("operasyonel_rota") or []]
     report = dict(report)
@@ -248,10 +264,27 @@ def _self_check():
                         "boylam": 26.3001,
                         "spektral_etki_alani_m2": 400,
                         "morfoloji_puani": 95,
+                        "morfoloji_yuksek": True,
+                        "bagimsiz_pozitif_destek": True,
                         "pozitif_kanit_kaynaklari": ["S2_MORFOLOJI", "S1_LOKAL_POZITIF"],
                         "ana_esik_pozitif_destekli_diagnostik_korumali": True,
+                        "negatif_baglamsal_engel": False,
+                        "geri_bildirim_engeli": False,
+                        "mevcut_musteri": False,
+                        "tarla_bahce_baskilandi": False,
+                        "yanlis_pozitif_spektral_klon_baskilandi": False,
+                        "baseline_bitki_negatif_baglami": False,
                     }
                 ],
+            }
+        }
+    }
+    morphology = {
+        "bolgeler": {
+            "cesme": {
+                "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+                "onceki_tarih": "15.09.2026",
+                "son_tarih": "18.09.2026",
             }
         }
     }
@@ -276,6 +309,16 @@ def _self_check():
     assert guarded["temel_kazi_kapisi_arka_plan_sayi"] == 1
     assert guarded["temel_kazi_kapisi_arka_plan"][0]["gorev_id"] == "RAW"
 
+    # Sonraki rota katmanı destekli adayı tamamen silse bile fail-closed injector geri yüklemeli.
+    restored = _guard_and_restore_supported(
+        {"operasyonel_rota": []}, context, {"saha_adaylari": []}, morphology
+    )
+    assert len(restored["operasyonel_rota"]) == 1, restored
+    restored_row = restored["operasyonel_rota"][0]
+    assert restored_row["enlem"] == 38.3001
+    assert restored_row["s2_morfoloji_cifti"] == "15.09.2026->18.09.2026"
+    assert restored_row["temel_derinlik_olcumu"] is False
+
     stale = json.loads(json.dumps(context))
     stale["bolgeler"]["cesme"]["pozitif_s2_son_tarih"] = "17.09.2026"
     stale_guarded = guard_route({"operasyonel_rota": [{**base, "gorev_id": "STALE", "enlem": 38.3001, "boylam": 26.3001}]}, stale)
@@ -287,6 +330,10 @@ def _self_check():
     micro_row["ana_esik_pozitif_destekli_diagnostik_korumali"] = False
     micro_guarded = guard_route({"operasyonel_rota": [{**base, "gorev_id": "MICRO", "enlem": 38.3001, "boylam": 26.3001}]}, micro)
     assert micro_guarded["operasyonel_rota"] == []
+    micro_restored = _guard_and_restore_supported(
+        {"operasyonel_rota": []}, micro, {"saha_adaylari": []}, morphology
+    )
+    assert micro_restored["operasyonel_rota"] == [], micro_restored
 
     map_url = "https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503"
     markdown = _route_markdown([
@@ -314,10 +361,12 @@ def main():
 
     route = _load(ROUTE_JSON)
     context = _load(POSITIVE_CONTEXT_JSON)
-    guarded = guard_route(route, context)
+    source_report = _load(REPORT_JSON)
+    morphology = _load(MORPHOLOGY_JSON)
+    guarded = _guard_and_restore_supported(route, context, source_report, morphology)
     ROUTE_JSON.write_text(json.dumps(guarded, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    report = _update_report(_load(REPORT_JSON), guarded)
+    report = _update_report(source_report, guarded)
     REPORT_JSON.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     if FIELD_REPORT_MD.exists():
