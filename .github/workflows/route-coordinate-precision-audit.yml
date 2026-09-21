@@ -7,6 +7,7 @@ on:
     paths:
       - "operational_route.json"
       - "route_coordinate_precision_audit.py"
+      - "foundation_route_seed_provenance_audit.py"
       - ".github/workflows/route-coordinate-precision-audit.yml"
   workflow_run:
     workflows: ["Operasyonel Rota Geometri Koruması", "Günlük Şantiye Taraması", "Temel Kazısı Operasyonel Rota Kapısı"]
@@ -41,22 +42,30 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Rota koordinat audit öz testi
-        run: python route_coordinate_precision_audit.py --self-test
+        run: |
+          python route_coordinate_precision_audit.py --self-test
+          python foundation_route_seed_provenance_audit.py --check-only
 
       - name: Operasyonel rotayı kendi Sentinel tarih çiftiyle ölç
-        run: python route_coordinate_precision_audit.py
+        run: |
+          python route_coordinate_precision_audit.py
+          python foundation_route_seed_provenance_audit.py
 
       - name: Çıktıyı doğrula
         shell: bash
         run: |
           test -f route_coordinate_precision_audit.json
+          test -f foundation_route_seed_provenance_review.json
           python - <<'PY'
           import json
           from pathlib import Path
           data = json.loads(Path('route_coordinate_precision_audit.json').read_text(encoding='utf-8'))
           if int(data.get('rota_hedefi') or 0) and not (data.get('hedefler') or data.get('hatalar')):
               raise SystemExit('Rota hedefleri vardı fakat audit ne ölçüm ne hata üretti.')
-          print('Rota koordinat audit çıktısı yapısal olarak geçerli.')
+          seed = json.loads(Path('foundation_route_seed_provenance_review.json').read_text(encoding='utf-8'))
+          if int(seed.get('rota_hedefi') or 0) != int(seed.get('kaynak_dogrulanan') or 0) + int(seed.get('kaynak_dogrulanamayan') or 0):
+              raise SystemExit('Seed provenance sayımları tutarsız.')
+          print('Rota koordinat ve seed provenance audit çıktıları yapısal olarak geçerli.')
           PY
 
       - name: Sonucu yalnız anlamlı değişiklikte güvenli kaydet
@@ -66,28 +75,31 @@ jobs:
           git config user.name "santiye-radari-bot"
           git config user.email "santiye-radari-bot@users.noreply.github.com"
 
-          git add route_coordinate_precision_audit.json
+          outputs="route_coordinate_precision_audit.json foundation_route_seed_provenance_review.json"
+          git add $outputs
           if git diff --cached --quiet; then
-            echo "Rota koordinat audit sonucu değişmedi; commit yok."
+            echo "Rota koordinat/provenance audit sonucu değişmedi; commit yok."
             exit 0
           fi
 
-          git commit -m "Radar: rota koordinat piksel auditini güncelle"
+          git commit -m "Radar: rota koordinat ve seed provenance auditini güncelle"
           git fetch origin main
           if ! git merge-base --is-ancestor origin/main HEAD; then
             echo "Main audit sırasında ilerledi; en güncel rota üzerinde yeniden ölçülüyor."
             git reset --hard origin/main
             python route_coordinate_precision_audit.py --self-test
+            python foundation_route_seed_provenance_audit.py --check-only
             python route_coordinate_precision_audit.py
-            git add route_coordinate_precision_audit.json
+            python foundation_route_seed_provenance_audit.py
+            git add $outputs
             if git diff --cached --quiet; then
               echo "Yeniden ölçüm sonrası semantik değişiklik yok."
               exit 0
             fi
-            git commit -m "Radar: rota koordinat piksel auditini güncelle"
+            git commit -m "Radar: rota koordinat ve seed provenance auditini güncelle"
             git fetch origin main
             if ! git merge-base --is-ancestor origin/main HEAD; then
-              echo "Main yeniden ilerledi; stale koordinat audit sonucu zorlanmadı."
+              echo "Main yeniden ilerledi; stale koordinat/provenance audit sonucu zorlanmadı."
               exit 0
             fi
           fi
