@@ -4,24 +4,20 @@ Normal ``saha_adaylari`` havuzu diagnostik/backlog kayıtlarını korur. Temel/k
 kapısı aktif olduğunda bazı yüksek güvenli, çoklu-kanıt adayları doğrudan nihai
 ``gunun_ilk_3_kontrolu`` rotasına enjekte edilebilir ve ham aday havuzunda yer
 almayabilir. Bu yardımcı, o rota-only kayıtları Saha Kontrol kaynağına ekler;
-mevcut kayıtları görev kimliğiyle tekilleştirir. Hangi kayıtların eyleme açık
+mevcut açık görev kimliklerini tekilleştirir. Hangi kayıtların eyleme açık
 olduğuna dair nihai whitelist yine sayfadaki temel/kepçe kapısı filtresidir.
 """
 
 from __future__ import annotations
 
-from field_state import satellite_task_id
-
 
 def _task_id(item: dict) -> str:
-    try:
-        return str(item.get("gorev_id") or satellite_task_id(item))
-    except (TypeError, ValueError):
-        return ""
+    """Yalnız açıkça taşınan görev kimliğini kullan; burada yeni kimlik üretme."""
+    return str(item.get("gorev_id") or "").strip()
 
 
 def operational_satellite_task_ids(report: dict) -> set[str] | None:
-    """Kapı aktifse nihai uydu rotasındaki görev kimliklerini döndür."""
+    """Kapı aktifse nihai uydu rotasındaki açık görev kimliklerini döndür."""
     if report.get("temel_kazi_kapisi_aktif") is not True:
         return None
 
@@ -36,11 +32,12 @@ def operational_satellite_task_ids(report: dict) -> set[str] | None:
 
 
 def merged_satellite_candidates(report: dict) -> list[dict]:
-    """Ham havuz + rota-only adayları görev kimliğiyle tekilleştirerek birleştir.
+    """Ham havuz + rota-only adayları açık görev kimliğiyle tekilleştirerek birleştir.
 
     Temel/kepçe kapısı kapalı eski raporlarda davranış değişmez: yalnız
-    ``saha_adaylari`` döner. Kapı aktifse nihai rotada olup ham havuzda olmayan
-    kayıt eklenir. Bu fonksiyon kendi başına yeni görev üretmez veya durum açmaz.
+    ``saha_adaylari`` döner. Kapı aktifse nihai rotada olup ham havuzda olmayan,
+    açık ``gorev_id`` taşıyan kayıt eklenir. Bu fonksiyon yeni görev kimliği
+    üretmez, görev durumu açmaz ve dış bağımlılık yüklemez.
     """
     merged: list[dict] = []
     seen: set[str] = set()
@@ -51,7 +48,6 @@ def merged_satellite_candidates(report: dict) -> list[dict]:
         item = dict(raw)
         task_id = _task_id(item)
         if task_id:
-            item["gorev_id"] = task_id
             seen.add(task_id)
         merged.append(item)
 
@@ -65,7 +61,6 @@ def merged_satellite_candidates(report: dict) -> list[dict]:
         task_id = _task_id(item)
         if not task_id or task_id in seen:
             continue
-        item["gorev_id"] = task_id
         merged.append(item)
         seen.add(task_id)
 
@@ -111,6 +106,11 @@ def _self_check() -> None:
     }
     assert [row.get("gorev_id") for row in merged_satellite_candidates(legacy)] == ["OLD-BSI"]
     assert operational_satellite_task_ids(legacy) is None
+
+    # Kimliği olmayan rota kaydı burada yeni görev kimliğine dönüştürülmez.
+    no_id = dict(report)
+    no_id["gunun_ilk_3_kontrolu"] = [{"enlem": 38.30, "boylam": 26.33}]
+    assert [row.get("gorev_id") for row in merged_satellite_candidates(no_id)] == ["OLD-BSI"]
 
 
 if __name__ == "__main__":
