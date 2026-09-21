@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-20",
+  "rapor_tarihi": "2026-09-21",
   "amac": "Güncel 250 m²+ ana Sentinel adaylarının bağlı bileşeninin analiz bbox kenarına değip değmediğini ölçerek alan/merkez koordinatı kırpma riskini görünür kılmak.",
   "politika": "DIAGNOSTIK_ONLY: 250 m² ana eşik, alarm ve saha görevi değişmez. Kenar teması bbox genişletme/yeniden ölçüm kanıtıdır; tek başına yeni alarm değildir.",
   "ana_uretim_esigi_m2": 250,
@@ -33,7 +33,7 @@
       "adaylar": [
         {
           "gorev_id": "U8DE81B062E",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Çiftlikköy",
           "enlem": 38.273388,
           "boylam": 26.269282,
@@ -121,7 +121,7 @@
         },
         {
           "gorev_id": "U649046A726",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Germiyan",
           "enlem": 38.322683,
           "boylam": 26.469156,
@@ -187,7 +187,7 @@
         },
         {
           "gorev_id": "UA87E0BC61F",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.275559,
           "boylam": 26.304426,
@@ -209,7 +209,7 @@
         },
         {
           "gorev_id": "U2DA6B8B936",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.285147,
           "boylam": 26.304769,
@@ -297,7 +297,7 @@
         },
         {
           "gorev_id": "U80B863698A",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.270313,
           "boylam": 26.325375,
@@ -319,7 +319,7 @@
         },
         {
           "gorev_id": "U677B2B0ED9",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Alaçatı",
           "enlem": 38.265881,
           "boylam": 26.375973,
@@ -429,7 +429,7 @@
         },
         {
           "gorev_id": "U61BE327D57",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.275016,
           "boylam": 26.338768,
@@ -517,7 +517,7 @@
         },
         {
           "gorev_id": "UA9B7173088",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Ilıca",
           "enlem": 38.299709,
           "boylam": 26.371852,
@@ -557,7 +557,7 @@
       "adaylar": [
         {
           "gorev_id": "U1586C07CE7",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Germiyan",
           "enlem": 38.313005,
           "boylam": 26.471695,
@@ -645,7 +645,7 @@
         },
         {
           "gorev_id": "U0B49654827",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.343034,
           "boylam": 26.553094,
@@ -667,7 +667,7 @@
         },
         {
           "gorev_id": "U47805EAF7B",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.343305,
           "boylam": 26.554925,
@@ -689,7 +689,7 @@
         },
         {
           "gorev_id": "U0DC0A1AFC8",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.341948,
           "boylam": 26.554696,
@@ -711,7 +711,7 @@
         },
         {
           "gorev_id": "UC2B66D20E7",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Uzunkuyu",
           "enlem": 38.290031,
           "boylam": 26.569579,
