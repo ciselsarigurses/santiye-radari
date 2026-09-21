@@ -29,9 +29,9 @@ LOCAL_SUPPORT = {"KOMPAKT_LOKAL_DESTEKLI", "LOKAL_AYRIM_DESTEKLI"}
 STRONG_DB = 2.0
 # Seed-merkezli katman yüksek-recall modunda 120 morfoloji adayı dışarı verir.
 # Referans-çekirdeği öncelikleri bu tabanın üstüne eklenebildiği için SAR katmanı
-# salt [:120] kesmesi yapamaz; aksi halde özellikle korumaya çalıştığımız düşük-
-# kontrast adaylar downstream'de tekrar kaybolur. Seçici runtime tavanını 120'de
-# tutar fakat referans-çekirdeği adaylarını önce korur.
+# salt [:120] kesmesi yapamaz. 120 hedeflik taban bütçe korunur; referans-çekirdeği
+# adayları ve 250 m²+ ana eşik adayları bütçe yüzünden asla düşürülmez. Kalan
+# kapasitede önce 150–249 m² MİKRO diagnostikler, sonra küçük adaylar ölçülür.
 MAX_CANDIDATES_PER_REGION = 120
 CALIBRATION_SOURCE = "SAHA_DOGRULANMIS_KAZI_KALIBRASYON"
 
@@ -75,12 +75,30 @@ def _strong_local(row):
     return bool(score >= STRONG_DB and str(row.get("sar_mekansal_ayrim") or "") in LOCAL_SUPPORT)
 
 
+def _area_m2(item):
+    try:
+        return int(item.get("spektral_etki_alani_m2") or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
 def _select_candidates(region):
-    """SAR runtime tavanı içinde referans-çekirdeği adaylarını kaybetmeden seçim yap."""
+    """SAR bütçesinde referans çekirdeğini ve 250 m²+ ana eşiği kaybetmeden seç."""
     pool = [item for item in (region.get("adaylar") or []) if isinstance(item, dict)]
     priority = [item for item in pool if item.get("referans_cekirdek_oncelikli") is True]
     ordinary = [item for item in pool if item.get("referans_cekirdek_oncelikli") is not True]
-    return (priority + ordinary)[:MAX_CANDIDATES_PER_REGION]
+    main = [item for item in ordinary if _area_m2(item) >= MAIN_THRESHOLD_M2]
+    micro = [
+        item for item in ordinary
+        if MICRO_RANGE_M2[0] <= _area_m2(item) <= MICRO_RANGE_M2[1]
+    ]
+    small = [item for item in ordinary if _area_m2(item) < MICRO_RANGE_M2[0]]
+
+    protected = priority + main
+    remaining_budget = max(MAX_CANDIDATES_PER_REGION - len(protected), 0)
+    # Korunan set tek başına taban bütçeyi aşarsa recall lehine küçük bir taşmaya
+    # izin ver. Morfoloji export'u zaten sınırlı olduğundan bu kontrolsüz büyümez.
+    return protected + (micro + small)[:remaining_budget]
 
 
 def _target_from_candidate(candidate):
@@ -132,6 +150,8 @@ def _confirmed_calibration_targets(region_key):
 def _analyze_region(region_key, region):
     pool = [item for item in (region.get("adaylar") or []) if isinstance(item, dict)]
     candidates = _select_candidates(region)
+    selected_ids = {id(item) for item in candidates}
+    excluded = [item for item in pool if id(item) not in selected_ids]
     seed_targets = [_target_from_candidate(candidate) for candidate in candidates]
     calibration_targets = _confirmed_calibration_targets(region_key)
     targets = seed_targets + calibration_targets
@@ -207,7 +227,15 @@ def _analyze_region(region_key, region):
         "referans_cekirdek_sar_hedef_sayisi": sum(
             1 for item in candidates if item.get("referans_cekirdek_oncelikli") is True
         ),
-        "sar_tavaninda_disarida_kalan_sayi": max(len(pool) - len(candidates), 0),
+        "ana_esik_sar_hedef_sayisi": sum(_area_m2(item) >= MAIN_THRESHOLD_M2 for item in candidates),
+        "mikro_sar_hedef_sayisi": sum(
+            MICRO_RANGE_M2[0] <= _area_m2(item) <= MICRO_RANGE_M2[1]
+            for item in candidates
+        ),
+        "sar_tavaninda_disarida_kalan_sayi": len(excluded),
+        "sar_tavaninda_disarida_kalan_ana_esik_sayi": sum(
+            _area_m2(item) >= MAIN_THRESHOLD_M2 for item in excluded
+        ),
         "saha_kalibrasyon_hedef_sayisi": len(calibration_targets),
         "hedef_sayisi": len(rows),
         "rtc_cifti_kapsayan_hedef": len(covered_rows),
@@ -239,19 +267,41 @@ def _self_check():
     })
     assert MAX_CANDIDATES_PER_REGION >= 120
 
-    # Base 120 adayın sonuna eklenen referans-çekirdeği satırları salt slicing ile
-    # kaybolmamalı. Sabit 120 runtime tavanında bu öncelikler sıradan adayların
-    # bir kısmını yerinden eder, fakat tamamı SAR'a ulaşır.
+    # Base 120 adayın sonuna eklenen referans-çekirdeği satırları ile base listenin
+    # kuyruğundaki 250 m²+ ana eşik / 150–249 m² MİKRO adaylar salt slicing yüzünden
+    # SAR ölçümünden düşmemeli.
     synthetic = [
-        {"id": index, "referans_cekirdek_oncelikli": index >= 120}
+        {
+            "id": index,
+            "referans_cekirdek_oncelikli": index >= 120,
+            "spektral_etki_alani_m2": 100,
+        }
         for index in range(126)
     ]
+    synthetic[119]["spektral_etki_alani_m2"] = 400
+    synthetic[118]["spektral_etki_alani_m2"] = 200
     selected = _select_candidates({"adaylar": synthetic})
     selected_ids = {item["id"] for item in selected}
     assert len(selected) == MAX_CANDIDATES_PER_REGION
     assert all(index in selected_ids for index in range(120, 126))
+    assert 119 in selected_ids
+    assert 118 in selected_ids
     assert 0 in selected_ids
-    assert 119 not in selected_ids
+    assert 117 not in selected_ids
+
+    # Korunan çekirdek + ana eşik sayısı taban bütçeyi aşarsa ana eşik recallı için
+    # kontrollü taşma yapılır; morfoloji export havuzu yine üst sınırı belirler.
+    overflow = [
+        {
+            "id": index,
+            "referans_cekirdek_oncelikli": index < 120,
+            "spektral_etki_alani_m2": 400 if index == 120 else 100,
+        }
+        for index in range(121)
+    ]
+    overflow_selected = _select_candidates({"adaylar": overflow})
+    assert len(overflow_selected) == 121
+    assert {item["id"] for item in overflow_selected} == set(range(121))
 
 
 def audit():
@@ -278,7 +328,7 @@ def audit():
             }
 
     return {
-        "surum": 4,
+        "surum": 5,
         "amac": "Lokal S2 temel/kepçe seedlerini ve saha doğrulanmış kazı kalibrasyon hedeflerini zamansal olarak uygun Sentinel-1 RTC lokal desteğiyle çapraz denetlemek",
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
         "mikro_aralik_m2": MICRO_RANGE_M2,
@@ -292,7 +342,7 @@ def audit():
         "not": (
             "SAR yalnız optik değişim dönemine zamansal olarak yetişiyorsa S2-SAR çapraz destek sayılır. "
             "Saha doğrulanmış kazı exact koordinatında ayrıca diagnostik ölçülür; bu hedef ancak SAR yeni sahnesi saha doğrulama tarihine eşit/yeni ise kalibrasyon desteği sayılır ve S2-SAR aday sayısına katılmaz. "
-            "Referans-çekirdeği öncelikli düşük-kontrast adaylar sabit SAR runtime tavanı içinde sıradan adaylardan önce korunur. "
+            "Referans-çekirdeği öncelikli düşük-kontrast adaylar ve 250 m²+ ana eşik adayları SAR taban bütçesi yüzünden düşürülemez; kalan kapasitede MİKRO adaylar küçük adaylardan önce ölçülür. "
             "Tarih karşılaştırması YYYY-MM-DD ve DD.MM.YYYY biçimlerini birlikte destekler. "
             "Bu katman tek başına saha görevi üretmez; saha kalibrasyonu olmadan rota kapısına bağlanmaz."
         ),
