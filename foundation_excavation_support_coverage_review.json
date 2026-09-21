@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "Korunmuş 250 m²+ çoklu-pozitif temel/kepçe desteklerinin aday/rota zincirinde sessizce kaybolmasını denetlemek",
   "ana_uretim_esigi_m2": 250,
   "eslesme_yaricapi_m": 60.0,
@@ -9,7 +9,9 @@
   "korunmus_ana_destek_sayisi": 1,
   "aday_havuzu_recall_boslugu_sayisi": 1,
   "rota_recall_boslugu_sayisi": 0,
-  "ciddi_recall_boslugu": true,
+  "operasyonel_kurtarilan_sayisi": 1,
+  "kurtarilamamis_recall_boslugu_sayisi": 0,
+  "ciddi_recall_boslugu": false,
   "destekler": [
     {
       "region_key": "cesme",
@@ -29,9 +31,11 @@
       "nihai_rota_mesafe_m": 0.0,
       "aday_havuzu_recall_boslugu": true,
       "rota_recall_boslugu": false,
+      "operasyonel_olarak_kurtarildi": true,
+      "kurtarilamamis_recall_boslugu": false,
       "alarm": false,
       "saha_gorevi": false
     }
   ],
-  "not": "Bu denetim yeni görev üretmez. Aday-havuzu recall boşluğu, çoklu-pozitif bir temel/kepçe desteğinin aynı sahnede tam saha_adaylari havuzunda temsil edilmediğini gösterir ve operasyonel yükseltmeden önce rota kaynak zincirinin incelenmesini gerektirir. Nihai rota boşluğu tek başına hata değildir; başka negatif/operasyonel kapılar nedeniyle bilinçli bastırma olabilir."
+  "not": "Bu denetim yeni görev üretmez. Aday-havuzu recall boşluğu ham saha_adaylari üretimindeki kör noktayı gösterir. Aynı korunmuş destek nihai rotada güvenli kapı üzerinden temsil ediliyorsa operasyonel olarak kurtarılmış sayılır ve tek başına ciddi sistem sorunu değildir. Ciddi recall boşluğu yalnız ham havuzda temsil edilmeyen korunmuş desteğin nihai rotada da bulunmaması halinde işaretlenir. Nihai rota boşluğu tek başına hata değildir; ham havuzda temsil edilen bir aday başka negatif/operasyonel kapılar nedeniyle bilinçli olarak bastırılmış olabilir."
 }
