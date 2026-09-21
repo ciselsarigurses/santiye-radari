@@ -25,6 +25,7 @@ on:
       - "Operasyonel Rota Geometri Koruması"
       - "15-17 Eylül Onset SAR Diagnostiği"
       - "Günlük Şantiye Taraması"
+      - "Ana Saha Geri Bildirim Koruması"
     types: [completed]
 
 permissions:
