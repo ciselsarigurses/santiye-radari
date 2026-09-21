@@ -5,10 +5,11 @@ on:
   push:
     branches: [main]
     paths:
+      - "operational_route.json"
       - "route_coordinate_precision_audit.py"
       - ".github/workflows/route-coordinate-precision-audit.yml"
   workflow_run:
-    workflows: ["Operasyonel Rota Geometri Koruması", "Günlük Şantiye Taraması"]
+    workflows: ["Operasyonel Rota Geometri Koruması", "Günlük Şantiye Taraması", "Temel Kazısı Operasyonel Rota Kapısı"]
     types: [completed]
 
 permissions:
