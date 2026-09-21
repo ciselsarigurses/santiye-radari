@@ -173,6 +173,15 @@ jobs:
             exit 0
           fi
 
+      - name: Sentinel metadata yoklamasını eksiksiz doğrula
+        if: always() && steps.probe.outcome == 'success'
+        shell: bash
+        run: |
+          if [[ "${{ steps.probe.outputs.probe_complete }}" != "true" ]]; then
+            echo "::error::Sentinel metadata yoklaması eksik kaldı (probe_complete=${{ steps.probe.outputs.probe_complete }})."
+            exit 1
+          fi
+
       - name: Yeni üretim sahnesi varsa ana radar zincirini başlat
         if: steps.probe.outputs.new_scene == 'true'
         env:
