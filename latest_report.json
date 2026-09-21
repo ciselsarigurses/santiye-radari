@@ -7296,7 +7296,8 @@
       "s2_morfoloji_onceki_tarih": "15.09.2026",
       "s2_morfoloji_son_tarih": "18.09.2026",
       "s2_morfoloji_cifti": "15.09.2026->18.09.2026",
-      "gunluk_sira": 1
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 3
     }
   ],
   "gunun_ilk_3_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur.",
@@ -7647,7 +7648,7 @@
   "operasyon_odak_arka_plan_sayi": 10,
   "mevcut_musteri_arka_plan_sayi": 1,
   "operasyon_odak_notu": "Günlük rota Çeşme yarımadası–Uzunkuyu odağındadır. Açıkça Gülbahçe etiketli adaylar ve doğrulanmış mevcut müşteri sahaları günlük yeni-müşteri rotasının dışında tutulur. Açık Gülbahçe kör-alan devriyeleri diagnostik arka planda korunur fakat saha rotasına girmez. Mevcut müşteri sinyali yanlış pozitif sayılmaz; model kalibrasyonunda gerçek şantiye olarak korunur. Doğrulanmamış mevki veya Gülbahçe kelimesi geçen karma doğu-bölgesi etiketi coğrafi tahminle elenmez.",
-  "temel_kazi_kapisi_arka_plan_sayi": 3,
+  "temel_kazi_kapisi_arka_plan_sayi": 0,
   "temel_kazi_kapisi_aktif": true,
   "temporal_lokal_erken_izleme": [],
   "temporal_lokal_erken_izleme_notu": "15 Eylül ve sonrasında güçlü temporal-lokal aday yüksek diagnostik ağırlık alır; bu katman yine alarm veya saha görevi üretmez."
