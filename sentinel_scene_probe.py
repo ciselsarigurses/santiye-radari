@@ -13,7 +13,8 @@ geometri hataları gereksiz STAC sorgusu üretmemek için tekrar edilmez.
 Gülbahçe ayrı bir üretim Sentinel kutusu değildir; Uzunkuyu doğu kutusunun içindedir.
 Yine de saatlik yoklamada sessiz kapsama regresyonu yaşanmaması için Gülbahçe'nin
 2 km operasyon alanı + 150 m analiz bağlamı ayrıca doğrulanır ve çıktı içinde açıkça
-gösterilir. Bu kontrol üçüncü bir STAC sorgusu yapmaz ve alarm/görev üretmez.
+gösterilir. Bu kontrol üçüncü bir STAC sorgusu yapmaz, alarm/görev üretmez ve düşük
+operasyonel önceliği nedeniyle Çeşme–Uzunkuyu çekirdek metadata yoklamasını bloke etmez.
 """
 
 from __future__ import annotations
@@ -217,7 +218,8 @@ def probe(connection, pair_provider=satellite.sentinel_pair):
         if row.get("metadata_sorgusu") is True and row.get("durum") == "ok"
     ]
     stac_complete = len(successful_stac) == len(STAC_REGIONS)
-    probe_complete = stac_complete and gulbahce_row.get("durum") == "ok"
+    gulbahce_diagnostic_complete = gulbahce_row.get("durum") == "ok"
+    probe_complete = stac_complete
     return {
         "kontrol_zamani": datetime.now(ISTANBUL).isoformat(timespec="seconds"),
         "yeni_sahne": any(
@@ -225,13 +227,14 @@ def probe(connection, pair_provider=satellite.sentinel_pair):
         ),
         "probe_ok": bool(successful_stac),
         "probe_complete": probe_complete,
+        "gulbahce_diagnostic_complete": gulbahce_diagnostic_complete,
         "bolgeler": rows,
         "not": (
             "Bu yalnız metadata yoklamasıdır; alarm/görev üretmez. Yeni sahne saptanırsa "
             "mevcut tam tarama workflow'u çalıştırılmalıdır. Geçici STAC/ağ hataları "
-            "bölge başına en fazla üç denemeyle sınırlandırılır. Gülbahçe, Uzunkuyu "
-            "kutusunun 2 km operasyon alanı + 150 m analiz bağlamını kapsadığı ayrıca "
-            "doğrulanan açık diagnostik kayıttır; ek STAC sorgusu yapılmaz."
+            "bölge başına en fazla üç denemeyle sınırlandırılır. Çeşme ve Uzunkuyu "
+            "çekirdek üretim bölgeleridir. Gülbahçe kapsaması düşük öncelikli açık "
+            "diagnostik olarak ayrıca raporlanır; ek STAC sorgusu veya çekirdek blokajı üretmez."
         ),
     }
 
@@ -249,6 +252,10 @@ def _write_github_output(path, payload):
         handle.write(f"new_scene={'true' if payload['yeni_sahne'] else 'false'}\n")
         handle.write(f"probe_ok={'true' if payload['probe_ok'] else 'false'}\n")
         handle.write(f"probe_complete={'true' if payload['probe_complete'] else 'false'}\n")
+        handle.write(
+            "gulbahce_diagnostic_complete="
+            f"{'true' if payload['gulbahce_diagnostic_complete'] else 'false'}\n"
+        )
         handle.write(f"changed_regions={','.join(changed_regions)}\n")
 
 
@@ -276,6 +283,7 @@ def _self_check():
         stable = probe(connection, unchanged)
         assert stable["probe_ok"] is True
         assert stable["probe_complete"] is True
+        assert stable["gulbahce_diagnostic_complete"] is True
         assert stable["yeni_sahne"] is False
         assert [row["bolge"] for row in stable["bolgeler"]] == [
             "cesme",
@@ -317,6 +325,7 @@ def _self_check():
         finally:
             time.sleep = original_sleep
         assert recovered["probe_complete"] is True
+        assert recovered["gulbahce_diagnostic_complete"] is True
         assert recovered["yeni_sahne"] is True
         uzunkuyu = next(row for row in recovered["bolgeler"] if row["bolge"] == "uzunkuyu")
         gulbahce = next(row for row in recovered["bolgeler"] if row["bolge"] == "gulbahce")
@@ -337,8 +346,9 @@ def _self_check():
         assert partial["bolgeler"][0]["durum"] == "hata"
         assert partial["bolgeler"][0]["deneme_sayisi"] == 1
 
-        # Gülbahçe doğu kenarı gelecekte daraltılırsa ana iki sorgu başarılı olsa
-        # bile yoklama tamamlandı sayılmamalı; sessiz kapsama regresyonu görünür olmalı.
+        # Gülbahçe düşük operasyonel önceliktir. Doğu diagnostik sınırı gelecekte
+        # daraltılsa bile Çeşme + Uzunkuyu çekirdek metadata sorguları eksiksizse
+        # ana yoklama tamamlanmış kalmalı; kapsama regresyonu ayrı diagnostikte görünür olmalı.
         original_bbox = list(satellite.REGIONS[GULBAHCE_SOURCE_REGION]["bbox"])
         try:
             satellite.REGIONS[GULBAHCE_SOURCE_REGION]["bbox"] = [26.45, 38.18, 26.65, 38.43]
@@ -348,7 +358,8 @@ def _self_check():
         gulbahce = next(row for row in uncovered["bolgeler"] if row["bolge"] == "gulbahce")
         assert gulbahce["durum"] == "kapsama_hatasi", uncovered
         assert gulbahce["kapsama_tam"] is False, uncovered
-        assert uncovered["probe_complete"] is False, uncovered
+        assert uncovered["probe_complete"] is True, uncovered
+        assert uncovered["gulbahce_diagnostic_complete"] is False, uncovered
     finally:
         connection.close()
 
@@ -371,7 +382,9 @@ def main():
     if not payload["probe_ok"]:
         print("Hiçbir üretim bölgesinde Sentinel metadata yoklaması tamamlanamadı.")
     elif not payload["probe_complete"]:
-        print("UYARI: Sentinel metadata yoklaması üretim bölgeleri veya Gülbahçe açık kapsama korumasında eksik tamamlandı.")
+        print("UYARI: Çeşme–Uzunkuyu çekirdek Sentinel metadata yoklaması eksik tamamlandı.")
+    elif not payload["gulbahce_diagnostic_complete"]:
+        print("NOT: Gülbahçe düşük öncelikli açık kapsama diagnostigi eksik; çekirdek yoklama tamamlandı.")
     return 0
 
 
