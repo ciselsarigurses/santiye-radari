@@ -1,14 +1,17 @@
 """Korunmuş 250 m²+ çoklu-kanıt temel/kepçe adayını nihai saha rotasına taşır.
 
-Operasyonel rota koruması tarihsel/generic KONTROLE_GIT kayıtlarını filtreler ancak
-pozitif-context diagnostik havuzunda ilk kez oluşan yeni bir adayı kendiliğinden
-rota kaydına dönüştürmez. Bu modül bu recall boşluğunu kapatır.
+Bu katman yalnız doğrulanmış Sentinel-2 morfoloji tarih çifti bulunan adayları rotaya
+çıkarır. Pozitif-context zincirinde yalnız son S2 tarihi taşınıyorsa, tarih çifti
+foundation_excavation_morphology_review.json içindeki gerçek bölge kaydından geri
+bağlanır. Böylece rota/piksel denetimi veri olmayan bir tarihi uydurmaz ve eksik
+provenance ile KONTROLE_GIT üretmez.
 
 Yalnız aşağıdaki mevcut kanıtlara sahip adaylar eklenebilir:
 - 250 m²+,
 - ``ana_esik_pozitif_destekli_diagnostik_korumali == true``,
 - yüksek S2 morfoloji,
 - bağımsız pozitif destek,
+- doğrulanmış S2 morfoloji önce/son tarih çifti,
 - tarla/bahçe, saha geri bildirimi, mevcut müşteri ve çekirdek FP-klon engeli yok,
 - operasyon koridorunda (boylam <= 26.60; Gülbahçe açıkça dışarıda),
 - en az iki pozitif kanıt kaynağı.
@@ -34,6 +37,7 @@ ROUTE_JSON = BASE / "operational_route.json"
 REPORT_JSON = BASE / "latest_report.json"
 FIELD_REPORT_MD = BASE / "SAHA_RAPORU.md"
 POSITIVE_CONTEXT_JSON = BASE / "foundation_excavation_positive_context_review.json"
+MORPHOLOGY_JSON = BASE / "foundation_excavation_morphology_review.json"
 
 MAIN_THRESHOLD_M2 = 250
 ROUTE_LIMIT = 3
@@ -81,12 +85,29 @@ def _is_blocked(item):
     )
 
 
-def _qualified_rows(context):
+def _verified_s2_pair(morphology, region_key, scene):
+    """Return the real S2 morphology pair for this region, otherwise fail closed."""
+    region = (morphology.get("bolgeler") or {}).get(str(region_key))
+    if not isinstance(region, dict):
+        return None
+    previous = str(region.get("onceki_tarih") or "").strip()
+    latest = str(region.get("son_tarih") or "").strip()
+    if not previous or not latest or not scene or latest != scene:
+        return None
+    return previous, latest
+
+
+def _qualified_rows(context, morphology):
     rows = []
     for region_key, region in (context.get("bolgeler") or {}).items():
         if not isinstance(region, dict):
             continue
         scene = str(region.get("pozitif_s2_son_tarih") or "").strip()
+        pair = _verified_s2_pair(morphology, region_key, scene)
+        if pair is None:
+            # Gerçek önce/son morfoloji çifti doğrulanamıyorsa diagnostikte kal.
+            continue
+        previous, latest = pair
         region_name = str(region.get("bolge") or "").strip()
         for raw in region.get("adaylar") or []:
             if not isinstance(raw, dict) or _point(raw) is None:
@@ -103,14 +124,14 @@ def _qualified_rows(context):
                 continue
             if lon > EAST_LIMIT_LON:
                 continue
-            # Operasyon dışı Gülbahçe adı açıkça işaretlenmişse fail-closed davran.
             if "gülbahçe" in region_name.casefold():
                 continue
             rows.append(
                 {
                     "region_key": str(region_key),
                     "bolge": region_name,
-                    "scene": scene,
+                    "scene": latest,
+                    "s2_onceki_tarih": previous,
                     "raw": raw,
                     "enlem": lat,
                     "boylam": lon,
@@ -140,8 +161,18 @@ def _near_any(candidate, rows, radius=MATCH_RADIUS_M):
 
 
 def _task_id(candidate):
+    # Kimliği değiştirmemek için mevcut deterministik seed korunur.
     seed = f"{candidate['enlem']:.6f},{candidate['boylam']:.6f},{candidate['scene']}"
     return "FK" + hashlib.sha1(seed.encode("utf-8")).hexdigest()[:10].upper()
+
+
+def _apply_provenance(task, candidate):
+    task["onceki_tarih"] = candidate["s2_onceki_tarih"]
+    task["son_tarih"] = candidate["scene"]
+    task["s2_morfoloji_onceki_tarih"] = candidate["s2_onceki_tarih"]
+    task["s2_morfoloji_son_tarih"] = candidate["scene"]
+    task["s2_morfoloji_cifti"] = f"{candidate['s2_onceki_tarih']}->{candidate['scene']}"
+    return task
 
 
 def _synthetic_task(candidate):
@@ -149,8 +180,7 @@ def _synthetic_task(candidate):
     lat = candidate["enlem"]
     lon = candidate["boylam"]
     area = int(round(candidate["alan_m2"]))
-    scene = candidate["scene"]
-    return {
+    task = {
         "oncelik": "YUKSEK",
         "mahalle": None,
         "enlem": lat,
@@ -158,8 +188,6 @@ def _synthetic_task(candidate):
         "alan_m2": area,
         "sinyal": "Çoklu-kanıt temel/kepçe kazısı olasılığı · S2 morfoloji + bağımsız uydu desteği",
         "bolge": candidate["bolge"],
-        "onceki_tarih": None,
-        "son_tarih": scene,
         "yeni_goruntu": False,
         "harita": f"https://www.google.com/maps/dir/?api=1&destination={lat:.6f},{lon:.6f}",
         "konum_notu": (
@@ -189,22 +217,24 @@ def _synthetic_task(candidate):
         "dogrulama_durumu": "SAHA_TEYIDI_BEKLIYOR",
         "kaynak": "FOUNDATION_POSITIVE_CONTEXT",
     }
+    return _apply_provenance(task, candidate)
 
 
-def inject(route, context, report):
+def inject(route, context, report, morphology):
     result = dict(route)
     current = [dict(x) for x in (route.get("operasyonel_rota") or []) if isinstance(x, dict)]
     report_pool = [dict(x) for x in (report.get("saha_adaylari") or []) if isinstance(x, dict)]
-    qualified = _qualified_rows(context)
+    qualified = _qualified_rows(context, morphology)
 
     injected = []
     for candidate in qualified:
-        if _near_any(candidate, current) is not None:
+        current_match = _near_any(candidate, current)
+        if current_match is not None:
+            # Önceden enjekte edilmiş adayın kayıp provenance alanlarını da onar.
+            if current_match.get("temel_kazi_coklu_kanit_destekli") is True:
+                _apply_provenance(current_match, candidate)
             continue
 
-        # Aynı nokta merkezi saha havuzunda zaten varsa yeni görev kimliği uydurmak yerine
-        # mevcut kaydı zenginleştir. Yoksa yalnız kullanıcıya sunulan rotada deterministik
-        # bir uydu-diagnostik kontrol kaydı oluştur; SQLite değişmez.
         existing = _near_any(candidate, report_pool)
         if existing is not None:
             task = dict(existing)
@@ -215,12 +245,11 @@ def inject(route, context, report):
             task["rota_uygun"] = True
             task["saha_durumu"] = "KONTROLE_GIT"
             task["oncelik"] = "YUKSEK"
+            task = _apply_provenance(task, candidate)
         else:
             task = _synthetic_task(candidate)
         injected.append(task)
 
-    # İnsan TEKRAR_GIT kararı her zaman önde ve korunmuş kalır. Sonra yeni çoklu-kanıt
-    # adayları gelir; kalan mevcut rota sırasını bozmadan üçlük limit doldurulur.
     repeats = [x for x in current if str(x.get("saha_durumu") or "").upper() == "TEKRAR_GIT"]
     others = [x for x in current if str(x.get("saha_durumu") or "").upper() != "TEKRAR_GIT"]
     final = []
@@ -249,15 +278,16 @@ def inject(route, context, report):
             "boylam": x.get("boylam"),
             "alan_m2": x.get("alan_m2"),
             "morfoloji_puani": x.get("temel_kazi_morfoloji_puani"),
+            "s2_morfoloji_cifti": x.get("s2_morfoloji_cifti"),
             "pozitif_kanit_kaynaklari": x.get("temel_kazi_pozitif_kanit_kaynaklari"),
         }
         for x in injected
     ]
     result["temel_kazi_destekli_rota_enjeksiyonu"] = True
     result["temel_kazi_destekli_rota_enjeksiyon_notu"] = (
-        "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, tarla/FP/müşteri "
-        "engelleri geçtikten sonra nihai kullanıcı rotasına eklenebilir. MİKRO adaylar "
-        "diagnostik kalır; SQLite görev havuzu değiştirilmez; Sentinel-2'den gerçek derinlik ölçülmez."
+        "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji "
+        "tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO "
+        "adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez."
     )
     return result
 
@@ -304,22 +334,40 @@ def _self_check():
             }
         }
     }
-    payload = inject({"operasyonel_rota": []}, context, {"saha_adaylari": []})
+    morphology = {
+        "bolgeler": {
+            "cesme": {
+                "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+                "onceki_tarih": "15.09.2026",
+                "son_tarih": "18.09.2026",
+            }
+        }
+    }
+
+    payload = inject({"operasyonel_rota": []}, context, {"saha_adaylari": []}, morphology)
     assert len(payload["operasyonel_rota"]) == 1, payload
     row = payload["operasyonel_rota"][0]
     assert row["enlem"] == 38.307849
     assert row["saha_durumu"] == "KONTROLE_GIT"
+    assert row["onceki_tarih"] == "15.09.2026"
+    assert row["son_tarih"] == "18.09.2026"
+    assert row["s2_morfoloji_cifti"] == "15.09.2026->18.09.2026"
     assert row["uydu_diagnostik_adayi"] is True
     assert row["temel_derinlik_olcumu"] is False
 
+    # Kaynak morfoloji tarih çifti yoksa rota üretme: veri tarihi uydurmak yasak.
+    missing_pair = {"bolgeler": {"cesme": {"son_tarih": "18.09.2026"}}}
+    payload = inject({"operasyonel_rota": []}, context, {"saha_adaylari": []}, missing_pair)
+    assert payload["operasyonel_rota"] == [], payload
+
     blocked = json.loads(json.dumps(context))
     blocked["bolgeler"]["cesme"]["adaylar"][0]["tarla_bahce_baskilandi"] = True
-    payload = inject({"operasyonel_rota": []}, blocked, {"saha_adaylari": []})
+    payload = inject({"operasyonel_rota": []}, blocked, {"saha_adaylari": []}, morphology)
     assert payload["operasyonel_rota"] == [], payload
 
     east = json.loads(json.dumps(context))
     east["bolgeler"]["cesme"]["adaylar"][0]["boylam"] = 26.65
-    payload = inject({"operasyonel_rota": []}, east, {"saha_adaylari": []})
+    payload = inject({"operasyonel_rota": []}, east, {"saha_adaylari": []}, morphology)
     assert payload["operasyonel_rota"] == [], payload
 
     repeat = {
@@ -328,9 +376,25 @@ def _self_check():
         "enlem": 38.32,
         "boylam": 26.32,
     }
-    payload = inject({"operasyonel_rota": [repeat]}, context, {"saha_adaylari": []})
+    payload = inject({"operasyonel_rota": [repeat]}, context, {"saha_adaylari": []}, morphology)
     assert payload["operasyonel_rota"][0]["gorev_id"] == "HUMAN"
     assert payload["operasyonel_rota"][1]["uydu_diagnostik_adayi"] is True
+
+    # Mevcut enjekte edilmiş görev de provenance geri-bağlamasıyla onarılmalı.
+    existing = _synthetic_task({
+        "raw": context["bolgeler"]["cesme"]["adaylar"][0],
+        "enlem": 38.307849,
+        "boylam": 26.333503,
+        "alan_m2": 400,
+        "morfoloji_puani": 95,
+        "sources": ["S2_MORFOLOJI", "S1_ONSET_11_17"],
+        "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+        "scene": "18.09.2026",
+        "s2_onceki_tarih": "15.09.2026",
+    })
+    existing["onceki_tarih"] = None
+    payload = inject({"operasyonel_rota": [existing]}, context, {"saha_adaylari": []}, morphology)
+    assert payload["operasyonel_rota"][0]["onceki_tarih"] == "15.09.2026", payload
 
 
 def main():
@@ -345,7 +409,8 @@ def main():
     route = _load(ROUTE_JSON)
     report = _load(REPORT_JSON)
     context = _load(POSITIVE_CONTEXT_JSON)
-    enriched = inject(route, context, report)
+    morphology = _load(MORPHOLOGY_JSON)
+    enriched = inject(route, context, report, morphology)
     ROUTE_JSON.write_text(json.dumps(enriched, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     updated_report = route_guard._update_report(report, enriched)
