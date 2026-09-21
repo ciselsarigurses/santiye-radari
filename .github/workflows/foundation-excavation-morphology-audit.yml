@@ -19,6 +19,7 @@ on:
       - "foundation_excavation_one_plus_four_route_policy.py"
       - "temporal_field_feedback_regression_guard.py"
       - "sentinel1_rtc_change_diagnostic.py"
+      - "sentinel1_rtc_map.geojson"
       - "sentinel1_scene_probe.py"
       - "sentinel1_blind_target_bridge.py"
       - "satellite.py"
