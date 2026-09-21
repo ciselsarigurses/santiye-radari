@@ -7773,5 +7773,7 @@
     "kapsam": "YALNIZ_OPERASYONEL_SAHA_ADAYLARI",
     "kanit_durumu": "MANUEL_LINK_KANIT_DEGIL",
     "oncelik_etkisi": "YOK_DOGRULANANA_KADAR"
-  }
+  },
+  "temporal_lokal_erken_izleme": [],
+  "temporal_lokal_erken_izleme_notu": "15 Eylül ve sonrasında güçlü temporal-lokal aday yüksek diagnostik ağırlık alır; bu katman yine alarm veya saha görevi üretmez."
 }
