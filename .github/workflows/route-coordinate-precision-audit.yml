@@ -63,9 +63,14 @@ jobs:
           if int(data.get('rota_hedefi') or 0) and not (data.get('hedefler') or data.get('hatalar')):
               raise SystemExit('Rota hedefleri vardı fakat audit ne ölçüm ne hata üretti.')
           seed = json.loads(Path('foundation_route_seed_provenance_review.json').read_text(encoding='utf-8'))
-          if int(seed.get('rota_hedefi') or 0) != int(seed.get('kaynak_dogrulanan') or 0) + int(seed.get('kaynak_dogrulanamayan') or 0):
+          targets = int(seed.get('rota_hedefi') or 0)
+          verified = int(seed.get('kaynak_dogrulanan') or 0)
+          unverified = int(seed.get('kaynak_dogrulanamayan') or 0)
+          if targets != verified + unverified:
               raise SystemExit('Seed provenance sayımları tutarsız.')
-          print('Rota koordinat ve seed provenance audit çıktıları yapısal olarak geçerli.')
+          if unverified:
+              raise SystemExit(f'{unverified} temel-kazısı rota adayı seed-merkezli gerçek S2 kaynağına geri izlenemedi.')
+          print('Rota koordinat ve seed provenance audit çıktıları yapısal olarak geçerli; temel rota provenance fail-closed.')
           PY
 
       - name: Sonucu yalnız anlamlı değişiklikte güvenli kaydet
@@ -91,6 +96,13 @@ jobs:
             python foundation_route_seed_provenance_audit.py --check-only
             python route_coordinate_precision_audit.py
             python foundation_route_seed_provenance_audit.py
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          seed = json.loads(Path('foundation_route_seed_provenance_review.json').read_text(encoding='utf-8'))
+          if int(seed.get('kaynak_dogrulanamayan') or 0):
+              raise SystemExit('Yeniden ölçümde temel-kazısı seed provenance doğrulanamadı.')
+          PY
             git add $outputs
             if git diff --cached --quiet; then
               echo "Yeniden ölçüm sonrası semantik değişiklik yok."
