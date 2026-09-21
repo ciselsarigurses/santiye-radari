@@ -122,22 +122,30 @@ def audit(context=None, report=None):
     for support in supports:
         pool_match, pool_distance = _nearest(support, pool)
         route_match, route_distance = _nearest(support, final_route)
+        pool_gap = pool_match is None
+        route_gap = route_match is None
+        recovered = pool_gap and not route_gap
+        unrecovered = pool_gap and route_gap
         rows.append({
             **support,
             "tam_aday_havuzunda_temsil": pool_match is not None,
             "tam_aday_havuzu_mesafe_m": round(pool_distance, 1) if pool_distance is not None else None,
             "nihai_rotada_temsil": route_match is not None,
             "nihai_rota_mesafe_m": round(route_distance, 1) if route_distance is not None else None,
-            "aday_havuzu_recall_boslugu": pool_match is None,
-            "rota_recall_boslugu": route_match is None,
+            "aday_havuzu_recall_boslugu": pool_gap,
+            "rota_recall_boslugu": route_gap,
+            "operasyonel_olarak_kurtarildi": recovered,
+            "kurtarilamamis_recall_boslugu": unrecovered,
             "alarm": False,
             "saha_gorevi": False,
         })
 
     pool_orphans = [x for x in rows if x["aday_havuzu_recall_boslugu"]]
     route_orphans = [x for x in rows if x["rota_recall_boslugu"]]
+    recovered = [x for x in rows if x["operasyonel_olarak_kurtarildi"]]
+    unrecovered = [x for x in rows if x["kurtarilamamis_recall_boslugu"]]
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "Korunmuş 250 m²+ çoklu-pozitif temel/kepçe desteklerinin aday/rota zincirinde sessizce kaybolmasını denetlemek",
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
         "eslesme_yaricapi_m": MATCH_RADIUS_M,
@@ -147,13 +155,17 @@ def audit(context=None, report=None):
         "korunmus_ana_destek_sayisi": len(rows),
         "aday_havuzu_recall_boslugu_sayisi": len(pool_orphans),
         "rota_recall_boslugu_sayisi": len(route_orphans),
-        "ciddi_recall_boslugu": bool(pool_orphans),
+        "operasyonel_kurtarilan_sayisi": len(recovered),
+        "kurtarilamamis_recall_boslugu_sayisi": len(unrecovered),
+        "ciddi_recall_boslugu": bool(unrecovered),
         "destekler": rows,
         "not": (
-            "Bu denetim yeni görev üretmez. Aday-havuzu recall boşluğu, çoklu-pozitif bir temel/kepçe desteğinin "
-            "aynı sahnede tam saha_adaylari havuzunda temsil edilmediğini gösterir ve operasyonel yükseltmeden önce "
-            "rota kaynak zincirinin incelenmesini gerektirir. Nihai rota boşluğu tek başına hata değildir; başka "
-            "negatif/operasyonel kapılar nedeniyle bilinçli bastırma olabilir."
+            "Bu denetim yeni görev üretmez. Aday-havuzu recall boşluğu ham saha_adaylari üretimindeki kör noktayı "
+            "gösterir. Aynı korunmuş destek nihai rotada güvenli kapı üzerinden temsil ediliyorsa operasyonel olarak "
+            "kurtarılmış sayılır ve tek başına ciddi sistem sorunu değildir. Ciddi recall boşluğu yalnız ham havuzda "
+            "temsil edilmeyen korunmuş desteğin nihai rotada da bulunmaması halinde işaretlenir. Nihai rota boşluğu tek "
+            "başına hata değildir; ham havuzda temsil edilen bir aday başka negatif/operasyonel kapılar nedeniyle bilinçli "
+            "olarak bastırılmış olabilir."
         ),
     }
 
@@ -196,10 +208,30 @@ def _self_check():
     assert payload["korunmus_ana_destek_sayisi"] == 1, payload
     assert payload["aday_havuzu_recall_boslugu_sayisi"] == 0, payload
     assert payload["rota_recall_boslugu_sayisi"] == 1, payload
+    assert payload["operasyonel_kurtarilan_sayisi"] == 0, payload
+    assert payload["kurtarilamamis_recall_boslugu_sayisi"] == 0, payload
     assert payload["ciddi_recall_boslugu"] is False, payload
+
+    recovered = audit(context, {
+        "saha_adaylari": [],
+        "gunun_ilk_3_kontrolu": [{
+            "enlem": 38.3001,
+            "boylam": 26.3001,
+            "son_tarih": "18.09.2026",
+            "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+        }],
+    })
+    assert recovered["aday_havuzu_recall_boslugu_sayisi"] == 1, recovered
+    assert recovered["rota_recall_boslugu_sayisi"] == 0, recovered
+    assert recovered["operasyonel_kurtarilan_sayisi"] == 1, recovered
+    assert recovered["kurtarilamamis_recall_boslugu_sayisi"] == 0, recovered
+    assert recovered["ciddi_recall_boslugu"] is False, recovered
 
     missing = audit(context, {"saha_adaylari": [], "gunun_ilk_3_kontrolu": []})
     assert missing["aday_havuzu_recall_boslugu_sayisi"] == 1, missing
+    assert missing["rota_recall_boslugu_sayisi"] == 1, missing
+    assert missing["operasyonel_kurtarilan_sayisi"] == 0, missing
+    assert missing["kurtarilamamis_recall_boslugu_sayisi"] == 1, missing
     assert missing["ciddi_recall_boslugu"] is True, missing
 
 
