@@ -96,13 +96,7 @@ jobs:
             python foundation_route_seed_provenance_audit.py --check-only
             python route_coordinate_precision_audit.py
             python foundation_route_seed_provenance_audit.py
-            python - <<'PY'
-          import json
-          from pathlib import Path
-          seed = json.loads(Path('foundation_route_seed_provenance_review.json').read_text(encoding='utf-8'))
-          if int(seed.get('kaynak_dogrulanamayan') or 0):
-              raise SystemExit('Yeniden ölçümde temel-kazısı seed provenance doğrulanamadı.')
-          PY
+            python -c "import json,pathlib; d=json.loads(pathlib.Path('foundation_route_seed_provenance_review.json').read_text(encoding='utf-8')); assert int(d.get('kaynak_dogrulanamayan') or 0)==0, 'Yeniden ölçümde temel-kazısı seed provenance doğrulanamadı.'"
             git add $outputs
             if git diff --cached --quiet; then
               echo "Yeniden ölçüm sonrası semantik değişiklik yok."
