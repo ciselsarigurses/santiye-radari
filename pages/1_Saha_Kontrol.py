@@ -9,6 +9,7 @@ import streamlit as st
 
 from coordinate_navigation import load_audit, signal_core_target
 from field_outcome import OUTCOME_LABELS, outcome_map
+from field_satellite_source import merged_satellite_candidates
 from field_state import ensure_state_schema, satellite_task_id, site_task_id
 from scanner import connect
 
@@ -241,7 +242,7 @@ outcomes = outcome_map()
 operational_satellite_ids = operational_satellite_task_ids(report)
 
 satellite_items = []
-for raw in report.get("saha_adaylari", []):
+for raw in merged_satellite_candidates(report):
     if not isinstance(raw, dict):
         continue
     item = dict(raw)
