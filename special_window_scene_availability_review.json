@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "13/15/16/17 Eylül exact Sentinel-2 ve Sentinel-1 veri/geometri uygunluğunu açıkça doğrulamak",
   "alarm": false,
   "saha_gorevi": false,
@@ -21,10 +21,29 @@
     "2026-09-15->2026-09-17",
     "2026-09-16->2026-09-17"
   ],
+  "operasyon_odak_noktalari": [
+    "Çeşme",
+    "Alaçatı",
+    "Ilıca",
+    "Reisdere",
+    "Ovacık",
+    "Musalla",
+    "Çiftlikköy",
+    "Uzunkuyu"
+  ],
   "sentinel2": {
     "cesme": {
       "durum": "ok",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "operasyon_odak_noktalari": [
+        "Çeşme",
+        "Alaçatı",
+        "Ilıca",
+        "Reisdere",
+        "Ovacık",
+        "Musalla",
+        "Çiftlikköy"
+      ],
       "tarihler": {
         "2026-09-13": {
           "tam_kapsam_morfoloji_sahnesi": 1,
@@ -32,7 +51,33 @@
           "minimum_bulut_yuzde": 0.566,
           "itemler": [
             "S2C_T35SMC_20260913T090741_L2A"
-          ]
+          ],
+          "operasyon_odagi": {
+            "hedef_noktalar": [
+              "Çeşme",
+              "Alaçatı",
+              "Ilıca",
+              "Reisdere",
+              "Ovacık",
+              "Musalla",
+              "Çiftlikköy"
+            ],
+            "kapsanan_noktalar": [
+              "Alaçatı",
+              "Ilıca",
+              "Musalla",
+              "Ovacık",
+              "Reisdere",
+              "Çeşme",
+              "Çiftlikköy"
+            ],
+            "tam_kapsam_morfoloji_sahnesi": 1,
+            "tam_kapsam_bsi_sahnesi": 1,
+            "minimum_bulut_yuzde": 0.566,
+            "itemler": [
+              "S2C_T35SMC_20260913T090741_L2A"
+            ]
+          }
         },
         "2026-09-15": {
           "tam_kapsam_morfoloji_sahnesi": 1,
@@ -40,19 +85,77 @@
           "minimum_bulut_yuzde": 11.067,
           "itemler": [
             "S2A_T35SMC_20260915T090428_L2A"
-          ]
+          ],
+          "operasyon_odagi": {
+            "hedef_noktalar": [
+              "Çeşme",
+              "Alaçatı",
+              "Ilıca",
+              "Reisdere",
+              "Ovacık",
+              "Musalla",
+              "Çiftlikköy"
+            ],
+            "kapsanan_noktalar": [
+              "Alaçatı",
+              "Ilıca",
+              "Musalla",
+              "Ovacık",
+              "Reisdere",
+              "Çeşme",
+              "Çiftlikköy"
+            ],
+            "tam_kapsam_morfoloji_sahnesi": 1,
+            "tam_kapsam_bsi_sahnesi": 1,
+            "minimum_bulut_yuzde": 11.067,
+            "itemler": [
+              "S2A_T35SMC_20260915T090428_L2A"
+            ]
+          }
         },
         "2026-09-16": {
           "tam_kapsam_morfoloji_sahnesi": 0,
           "tam_kapsam_bsi_sahnesi": 0,
           "minimum_bulut_yuzde": null,
-          "itemler": []
+          "itemler": [],
+          "operasyon_odagi": {
+            "hedef_noktalar": [
+              "Çeşme",
+              "Alaçatı",
+              "Ilıca",
+              "Reisdere",
+              "Ovacık",
+              "Musalla",
+              "Çiftlikköy"
+            ],
+            "kapsanan_noktalar": [],
+            "tam_kapsam_morfoloji_sahnesi": 0,
+            "tam_kapsam_bsi_sahnesi": 0,
+            "minimum_bulut_yuzde": null,
+            "itemler": []
+          }
         },
         "2026-09-17": {
           "tam_kapsam_morfoloji_sahnesi": 0,
           "tam_kapsam_bsi_sahnesi": 0,
           "minimum_bulut_yuzde": null,
-          "itemler": []
+          "itemler": [],
+          "operasyon_odagi": {
+            "hedef_noktalar": [
+              "Çeşme",
+              "Alaçatı",
+              "Ilıca",
+              "Reisdere",
+              "Ovacık",
+              "Musalla",
+              "Çiftlikköy"
+            ],
+            "kapsanan_noktalar": [],
+            "tam_kapsam_morfoloji_sahnesi": 0,
+            "tam_kapsam_bsi_sahnesi": 0,
+            "minimum_bulut_yuzde": null,
+            "itemler": []
+          }
         }
       },
       "exact_ciftler": {
@@ -68,6 +171,20 @@
             "ayni_mgrs_var": true,
             "ayni_goreli_yorunge_var": true,
             "durum": "EXACT_AYNI_YORUNGE"
+          },
+          "operasyon_odagi": {
+            "morfoloji": {
+              "exact_cift_var": true,
+              "ayni_mgrs_var": true,
+              "ayni_goreli_yorunge_var": true,
+              "durum": "EXACT_AYNI_YORUNGE"
+            },
+            "bsi": {
+              "exact_cift_var": true,
+              "ayni_mgrs_var": true,
+              "ayni_goreli_yorunge_var": true,
+              "durum": "EXACT_AYNI_YORUNGE"
+            }
           }
         },
         "2026-09-15->2026-09-16": {
@@ -82,6 +199,20 @@
             "ayni_mgrs_var": false,
             "ayni_goreli_yorunge_var": false,
             "durum": "VERI_YOK"
+          },
+          "operasyon_odagi": {
+            "morfoloji": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            },
+            "bsi": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            }
           }
         },
         "2026-09-15->2026-09-17": {
@@ -96,6 +227,20 @@
             "ayni_mgrs_var": false,
             "ayni_goreli_yorunge_var": false,
             "durum": "VERI_YOK"
+          },
+          "operasyon_odagi": {
+            "morfoloji": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            },
+            "bsi": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            }
           }
         },
         "2026-09-16->2026-09-17": {
@@ -110,6 +255,20 @@
             "ayni_mgrs_var": false,
             "ayni_goreli_yorunge_var": false,
             "durum": "VERI_YOK"
+          },
+          "operasyon_odagi": {
+            "morfoloji": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            },
+            "bsi": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            }
           }
         }
       }
@@ -117,6 +276,9 @@
     "uzunkuyu": {
       "durum": "ok",
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "operasyon_odak_noktalari": [
+        "Uzunkuyu"
+      ],
       "tarihler": {
         "2026-09-13": {
           "tam_kapsam_morfoloji_sahnesi": 1,
@@ -124,7 +286,21 @@
           "minimum_bulut_yuzde": 0.566,
           "itemler": [
             "S2C_T35SMC_20260913T090741_L2A"
-          ]
+          ],
+          "operasyon_odagi": {
+            "hedef_noktalar": [
+              "Uzunkuyu"
+            ],
+            "kapsanan_noktalar": [
+              "Uzunkuyu"
+            ],
+            "tam_kapsam_morfoloji_sahnesi": 1,
+            "tam_kapsam_bsi_sahnesi": 1,
+            "minimum_bulut_yuzde": 0.566,
+            "itemler": [
+              "S2C_T35SMC_20260913T090741_L2A"
+            ]
+          }
         },
         "2026-09-15": {
           "tam_kapsam_morfoloji_sahnesi": 1,
@@ -132,19 +308,53 @@
           "minimum_bulut_yuzde": 11.067,
           "itemler": [
             "S2A_T35SMC_20260915T090428_L2A"
-          ]
+          ],
+          "operasyon_odagi": {
+            "hedef_noktalar": [
+              "Uzunkuyu"
+            ],
+            "kapsanan_noktalar": [
+              "Uzunkuyu"
+            ],
+            "tam_kapsam_morfoloji_sahnesi": 1,
+            "tam_kapsam_bsi_sahnesi": 1,
+            "minimum_bulut_yuzde": 11.067,
+            "itemler": [
+              "S2A_T35SMC_20260915T090428_L2A"
+            ]
+          }
         },
         "2026-09-16": {
           "tam_kapsam_morfoloji_sahnesi": 0,
           "tam_kapsam_bsi_sahnesi": 0,
           "minimum_bulut_yuzde": null,
-          "itemler": []
+          "itemler": [],
+          "operasyon_odagi": {
+            "hedef_noktalar": [
+              "Uzunkuyu"
+            ],
+            "kapsanan_noktalar": [],
+            "tam_kapsam_morfoloji_sahnesi": 0,
+            "tam_kapsam_bsi_sahnesi": 0,
+            "minimum_bulut_yuzde": null,
+            "itemler": []
+          }
         },
         "2026-09-17": {
           "tam_kapsam_morfoloji_sahnesi": 0,
           "tam_kapsam_bsi_sahnesi": 0,
           "minimum_bulut_yuzde": null,
-          "itemler": []
+          "itemler": [],
+          "operasyon_odagi": {
+            "hedef_noktalar": [
+              "Uzunkuyu"
+            ],
+            "kapsanan_noktalar": [],
+            "tam_kapsam_morfoloji_sahnesi": 0,
+            "tam_kapsam_bsi_sahnesi": 0,
+            "minimum_bulut_yuzde": null,
+            "itemler": []
+          }
         }
       },
       "exact_ciftler": {
@@ -160,6 +370,20 @@
             "ayni_mgrs_var": true,
             "ayni_goreli_yorunge_var": true,
             "durum": "EXACT_AYNI_YORUNGE"
+          },
+          "operasyon_odagi": {
+            "morfoloji": {
+              "exact_cift_var": true,
+              "ayni_mgrs_var": true,
+              "ayni_goreli_yorunge_var": true,
+              "durum": "EXACT_AYNI_YORUNGE"
+            },
+            "bsi": {
+              "exact_cift_var": true,
+              "ayni_mgrs_var": true,
+              "ayni_goreli_yorunge_var": true,
+              "durum": "EXACT_AYNI_YORUNGE"
+            }
           }
         },
         "2026-09-15->2026-09-16": {
@@ -174,6 +398,20 @@
             "ayni_mgrs_var": false,
             "ayni_goreli_yorunge_var": false,
             "durum": "VERI_YOK"
+          },
+          "operasyon_odagi": {
+            "morfoloji": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            },
+            "bsi": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            }
           }
         },
         "2026-09-15->2026-09-17": {
@@ -188,6 +426,20 @@
             "ayni_mgrs_var": false,
             "ayni_goreli_yorunge_var": false,
             "durum": "VERI_YOK"
+          },
+          "operasyon_odagi": {
+            "morfoloji": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            },
+            "bsi": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            }
           }
         },
         "2026-09-16->2026-09-17": {
@@ -202,6 +454,20 @@
             "ayni_mgrs_var": false,
             "ayni_goreli_yorunge_var": false,
             "durum": "VERI_YOK"
+          },
+          "operasyon_odagi": {
+            "morfoloji": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            },
+            "bsi": {
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
+            }
           }
         }
       }
@@ -337,5 +603,5 @@
       }
     }
   },
-  "not": "VERI_YOK veya EXACT_GEOMETRI_ESLESMIYOR olan çift için görüntü varmış gibi temporal fark üretilmez. Metadata uygunluğu kazı/şantiye kanıtı değildir; yalnız hangi exact karşılaştırmanın fiziksel olarak kurulabileceğini gösterir."
+  "not": "VERI_YOK veya EXACT_GEOMETRI_ESLESMIYOR olan çift için görüntü varmış gibi temporal fark üretilmez. Sentinel-2 geniş analiz AOI kapsaması ile operasyon odağı kapsaması ayrı raporlanır; Gülbahçe diagnostik bağlamı Uzunkuyu çekirdeğinin veri uygunluğunu veto etmez. Metadata uygunluğu kazı/şantiye kanıtı değildir."
 }
