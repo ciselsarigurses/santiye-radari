@@ -18,6 +18,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: santiye-radari-main-field-feedback
@@ -100,3 +101,11 @@ jobs:
 
           echo "Saha geri bildirimi/operasyon odağı üç güvenli denemede kaydedilemedi."
           exit 1
+
+      - name: Temel kazısı rota kapısını hemen yeniden çalıştır
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method POST \
+            "repos/${{ github.repository }}/actions/workflows/foundation-operational-route-guard.yml/dispatches" \
+            -f ref=main
