@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: santiye-radari-special-window-scene-availability
@@ -43,7 +44,47 @@ jobs:
         run: python special_window_scene_availability_audit.py --check-only
 
       - name: 13-17 Eylül exact veri uygunluğunu ölç
-        run: python special_window_scene_availability_audit.py
+        id: exact_window
+        shell: bash
+        run: |
+          output="special_window_scene_availability_review.json"
+          cp "$output" /tmp/special-window-before.json
+          python special_window_scene_availability_audit.py
+
+          python - "$output" /tmp/special-window-before.json "$GITHUB_OUTPUT" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          current_path, previous_path, github_output = map(Path, sys.argv[1:4])
+          current = json.loads(current_path.read_text(encoding="utf-8"))
+          previous = json.loads(previous_path.read_text(encoding="utf-8"))
+
+          gains = []
+
+          def walk(old, new, path=""):
+              if isinstance(old, dict) and isinstance(new, dict):
+                  for key, new_value in new.items():
+                      old_value = old.get(key)
+                      child = f"{path}.{key}" if path else key
+                      if key == "exact_cift_var" and old_value is False and new_value is True:
+                          gains.append(child)
+                      walk(old_value, new_value, child)
+                  return
+              if isinstance(old, list) and isinstance(new, list):
+                  return
+
+          walk(previous, current)
+          with github_output.open("a", encoding="utf-8") as handle:
+              handle.write(f"critical_exact_gain={'true' if gains else 'false'}\n")
+              handle.write("critical_exact_gain_count=" + str(len(gains)) + "\n")
+          if gains:
+              print("Yeni hesaplanabilir exact kritik pencere çifti bulundu:")
+              for gain in gains:
+                  print(f"- {gain}")
+          else:
+              print("Yeni hesaplanabilir exact kritik pencere çifti yok.")
+          PY
 
       - name: Yalnız semantik değişiklik varsa kaydet
         run: |
@@ -80,3 +121,27 @@ jobs:
 
           echo "Exact sahne uygunluğu üç denemede kaydedilemedi."
           exit 1
+
+      - name: Yeni exact kritik pencere çifti varsa ana radar zincirini başlat
+        if: steps.exact_window.outputs.critical_exact_gain == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          echo "Yeni hesaplanabilir exact 13/15/16/17 Eylül çifti: ${{ steps.exact_window.outputs.critical_exact_gain_count }} kanıt yolu."
+          echo "Bu sahne en güncel ürün olmayabilir; geç yayımlanan tarihsel veri de tam taramayı tetikler."
+
+          response_code="$(curl -sS -o /tmp/daily-dispatch-response.txt -w '%{http_code}' \
+            -L -X POST \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "https://api.github.com/repos/${REPOSITORY}/actions/workflows/daily-scan.yml/dispatches" \
+            -d '{"ref":"main"}')"
+          if [[ "$response_code" != "204" ]]; then
+            cat /tmp/daily-dispatch-response.txt
+            echo "Yeni exact kritik pencere verisi için tam radar taraması başlatılamadı; HTTP ${response_code}."
+            exit 1
+          fi
+          echo "Yeni exact kritik pencere verisi tam radar taramasına bağlandı."
