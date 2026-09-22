@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-09-20T13:57:54+00:00",
+  "olusturma_utc": "2026-09-22T15:49:45+00:00",
   "amac": "15 Eylül öncesi baseline ile gerçekten mevcut en güncel post-window Sentinel sahnesini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -45,7 +45,9 @@
           "ortak_kritik_noktalar": [
             "Alaçatı",
             "Ilıca",
+            "Musalla",
             "Ovacık",
+            "Reisdere",
             "Çeşme",
             "Çiftlikköy"
           ],

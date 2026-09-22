@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-09-20T01:50:39+00:00",
+  "olusturma_utc": "2026-09-22T15:49:45+00:00",
   "amac": "15-17 Eylül 2026 kazı başlangıç penceresinde yalnız gerçekten mevcut Sentinel tarihleriyle temporal karşılaştırma yapılabilirliğini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -136,7 +136,9 @@
           "ortak_kritik_noktalar": [
             "Alaçatı",
             "Ilıca",
+            "Musalla",
             "Ovacık",
+            "Reisdere",
             "Çeşme",
             "Çiftlikköy"
           ],
