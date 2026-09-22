@@ -96,6 +96,63 @@ jobs:
           python foundation_excavation_core_fp_route_policy.py
           python foundation_excavation_one_plus_four_route_policy.py
 
+      - name: Çekirdek 1+4 regresyon koordinat bütünlüğünü doğrula
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          expected = {
+              "FN-20260916-CESME-001": ("DOGRULANMIS_KAZI", 38.341846, 26.432861),
+              "FP-20260916-REISDERE-001": ("YANLIS_POZITIF", 38.322140, 26.407912),
+              "FP-20260917-UZUNKUYU-001": ("YANLIS_POZITIF", 38.320150, 26.562138),
+              "FP-20260917-MUSALLA-001": ("YANLIS_POZITIF", 38.313186, 26.307059),
+              "FP-20260917-MUSALLA-002": ("YANLIS_POZITIF", 38.308120, 26.326863),
+          }
+
+          payload = json.loads(Path("excavation_reference_signature_review.json").read_text(encoding="utf-8"))
+          found = {}
+          for region in (payload.get("bolgeler") or {}).values():
+              if not isinstance(region, dict):
+                  continue
+              for row in region.get("referanslar") or []:
+                  if isinstance(row, dict) and row.get("id") in expected:
+                      found[row["id"]] = row
+
+          missing = sorted(set(expected) - set(found))
+          if missing:
+              raise SystemExit(f"Çekirdek 1+4 regresyon referansı eksik: {missing}")
+
+          for item_id, (expected_result, expected_lat, expected_lon) in expected.items():
+              row = found[item_id]
+              actual_result = str(row.get("sonuc") or "").upper()
+              try:
+                  actual_lat = float(row["enlem"])
+                  actual_lon = float(row["boylam"])
+              except (KeyError, TypeError, ValueError) as exc:
+                  raise SystemExit(f"{item_id} koordinatı okunamadı: {exc}") from exc
+              if actual_result != expected_result:
+                  raise SystemExit(
+                      f"{item_id} saha sonucu değişti: {actual_result!r} != {expected_result!r}"
+                  )
+              if abs(actual_lat - expected_lat) > 0.000001 or abs(actual_lon - expected_lon) > 0.000001:
+                  raise SystemExit(
+                      f"{item_id} koordinatı regresyon setinden saptı: "
+                      f"({actual_lat:.6f},{actual_lon:.6f}) != "
+                      f"({expected_lat:.6f},{expected_lon:.6f})"
+                  )
+
+          similarity = json.loads(Path("foundation_excavation_reference_similarity_review.json").read_text(encoding="utf-8"))
+          if similarity.get("cekirdek_regresyon_tam") is not True:
+              raise SystemExit("Çekirdek 1+4 regresyon seti tam değil.")
+          if int(similarity.get("cekirdek_regresyon_pozitif_referans_sayisi") or 0) != 1:
+              raise SystemExit("Çekirdek pozitif referans sayısı 1 değil.")
+          if int(similarity.get("cekirdek_regresyon_yanlis_pozitif_referans_sayisi") or 0) != 4:
+              raise SystemExit("Çekirdek yanlış-pozitif referans sayısı 4 değil.")
+
+          print("Çekirdek 1+4 regresyon koordinat bütünlüğü: OK")
+          PY
+
       - name: Diagnostik sonuçlarını güvenli kaydet
         run: |
           outputs="foundation_excavation_morphology_review.json foundation_excavation_agri_shadow_review.json excavation_reference_signature_review.json localized_excavation_seed_review.json localized_excavation_reference_rank_review.json seed_centered_excavation_morphology_review.json foundation_excavation_reference_similarity_review.json foundation_excavation_sar_seed_review.json foundation_excavation_cross_evidence_review.json foundation_excavation_route_gate_review.json"
