@@ -3,11 +3,15 @@
 Bu katman yalnız metadata diagnostiğidir. Görüntü yokken varmış gibi davranmayı engeller;
 alarm, saha görevi, rota, 250 m² ana eşik veya 150-249 m² MİKRO politikasını değiştirmez.
 
-Sentinel-2 için 13, 15, 16 ve 17 Eylül tarihlerinde tam AOI kapsayan sahneleri ve
-13→15, 15→16, 15→17, 16→17 exact çiftlerinin aynı MGRS/tercihen aynı göreli yörüngeyle
-kurulup kurulamadığını raporlar. Sentinel-1 için aynı tarihlerde AOI ile kesişen IW
-sahnelerini ve exact çiftte aynı orbit imzası + ortak kritik nokta bulunup bulunmadığını
-raporlar. Bu çıktı yalnız veri varlığı/geometrisi hakkındadır; kazı kanıtı değildir.
+Sentinel-2 için 13, 15, 16 ve 17 Eylül tarihlerinde hem geniş analiz AOI kapsamasını
+hem de Çeşme-Uzunkuyu operasyon odağının kapsanıp kapsanmadığını raporlar. Böylece
+diagnostik bağlamdaki Gülbahçe kenarı eksik diye Uzunkuyu çekirdeği yanlışlıkla
+"veri yok" sayılmaz. 13→15, 15→16, 15→17, 16→17 exact çiftlerinin aynı
+MGRS/tercihen aynı göreli yörüngeyle kurulup kurulamadığı ayrı gösterilir.
+
+Sentinel-1 için aynı tarihlerde AOI ile kesişen IW sahnelerini ve exact çiftte aynı
+orbit imzası + ortak kritik nokta bulunup bulunmadığını raporlar. Bu çıktı yalnız
+veri varlığı/geometrisi hakkındadır; kazı kanıtı değildir.
 """
 
 from __future__ import annotations
@@ -32,6 +36,21 @@ REQUESTED_PAIRS = (
 REGION_KEYS = ("cesme", "uzunkuyu")
 S2_BSI_ASSETS = ("blue", "red", "nir", "swir16", "scl")
 
+# Kullanıcının operasyonel ana hattı. Gülbahçe ayrı diagnostik bağlamda kalır,
+# fakat Uzunkuyu çekirdeğinin Sentinel-2 kullanılabilirliğini veto edemez.
+OPERATIONAL_FOCUS_POINTS = {
+    "cesme": (
+        "Çeşme",
+        "Alaçatı",
+        "Ilıca",
+        "Reisdere",
+        "Ovacık",
+        "Musalla",
+        "Çiftlikköy",
+    ),
+    "uzunkuyu": ("Uzunkuyu",),
+}
+
 
 def _date_text(item):
     raw = str((item.get("properties") or {}).get("datetime") or "")
@@ -48,6 +67,41 @@ def _cloud(item):
         return float((item.get("properties") or {}).get("eo:cloud_cover"))
     except (TypeError, ValueError):
         return None
+
+
+def _point_in_item_bbox(item, point):
+    footprint = item.get("bbox")
+    if not isinstance(footprint, (list, tuple)) or len(footprint) < 4:
+        return False
+    try:
+        west, south, east, north = map(float, footprint[:4])
+        lat, lon = map(float, point)
+    except (TypeError, ValueError):
+        return False
+    return west <= lon <= east and south <= lat <= north
+
+
+def _covered_operational_focus_points(item, region_key):
+    names = OPERATIONAL_FOCUS_POINTS[region_key]
+    return sorted(
+        name
+        for name in names
+        if _point_in_item_bbox(item, satellite.PLACE_CENTERS[name])
+    )
+
+
+def _s2_focus_candidates(items, region_key, target_date, require_bsi=False):
+    required = set(OPERATIONAL_FOCUS_POINTS[region_key])
+    rows = []
+    for item in items:
+        if _date_text(item) != target_date:
+            continue
+        if set(_covered_operational_focus_points(item, region_key)) != required:
+            continue
+        if require_bsi and not all(key in (item.get("assets") or {}) for key in S2_BSI_ASSETS):
+            continue
+        rows.append(item)
+    return rows
 
 
 def _s2_full_candidates(items, bbox, target_date, require_bsi=False):
@@ -108,31 +162,65 @@ def _s2_region(region_key):
     dates = {}
     morph_by_date = {}
     bsi_by_date = {}
+    focus_morph_by_date = {}
+    focus_bsi_by_date = {}
     for target in FOCUS_DATES:
         morph = _s2_full_candidates(items, bbox, target, require_bsi=False)
         bsi = _s2_full_candidates(items, bbox, target, require_bsi=True)
+        focus_morph = _s2_focus_candidates(items, region_key, target, require_bsi=False)
+        focus_bsi = _s2_focus_candidates(items, region_key, target, require_bsi=True)
         morph_by_date[target] = morph
         bsi_by_date[target] = bsi
+        focus_morph_by_date[target] = focus_morph
+        focus_bsi_by_date[target] = focus_bsi
         clouds = [value for item in morph if (value := _cloud(item)) is not None]
+        focus_clouds = [value for item in focus_morph if (value := _cloud(item)) is not None]
+        covered_focus = sorted({
+            point
+            for item in items
+            if _date_text(item) == target
+            for point in _covered_operational_focus_points(item, region_key)
+        })
         dates[target] = {
             "tam_kapsam_morfoloji_sahnesi": len(morph),
             "tam_kapsam_bsi_sahnesi": len(bsi),
             "minimum_bulut_yuzde": round(min(clouds), 3) if clouds else None,
             "itemler": [str(item.get("id") or "") for item in morph[:4]],
+            "operasyon_odagi": {
+                "hedef_noktalar": list(OPERATIONAL_FOCUS_POINTS[region_key]),
+                "kapsanan_noktalar": covered_focus,
+                "tam_kapsam_morfoloji_sahnesi": len(focus_morph),
+                "tam_kapsam_bsi_sahnesi": len(focus_bsi),
+                "minimum_bulut_yuzde": round(min(focus_clouds), 3) if focus_clouds else None,
+                "itemler": [str(item.get("id") or "") for item in focus_morph[:4]],
+            },
         }
 
     pairs = {}
     for start, end in REQUESTED_PAIRS:
         morph_status = _s2_pair_status(morph_by_date[start], morph_by_date[end])
         bsi_status = _s2_pair_status(bsi_by_date[start], bsi_by_date[end])
+        focus_morph_status = _s2_pair_status(
+            focus_morph_by_date[start],
+            focus_morph_by_date[end],
+        )
+        focus_bsi_status = _s2_pair_status(
+            focus_bsi_by_date[start],
+            focus_bsi_by_date[end],
+        )
         pairs[f"{start}->{end}"] = {
             "morfoloji": morph_status,
             "bsi": bsi_status,
+            "operasyon_odagi": {
+                "morfoloji": focus_morph_status,
+                "bsi": focus_bsi_status,
+            },
         }
 
     return {
         "durum": "ok",
         "bolge": satellite.REGIONS[region_key]["label"],
+        "operasyon_odak_noktalari": list(OPERATIONAL_FOCUS_POINTS[region_key]),
         "tarihler": dates,
         "exact_ciftler": pairs,
     }
@@ -254,6 +342,29 @@ def _self_check():
     assert _s2_pair_status(left, [_synthetic_s2("2026-09-15", orbit=99)])["durum"] == "EXACT_FARKLI_YORUNGE_RISKI"
     assert _s2_pair_status(left, [])["durum"] == "VERI_YOK"
 
+    all_focus = {
+        name
+        for names in OPERATIONAL_FOCUS_POINTS.values()
+        for name in names
+    }
+    assert all_focus == {
+        "Alaçatı",
+        "Çeşme",
+        "Reisdere",
+        "Ilıca",
+        "Ovacık",
+        "Musalla",
+        "Çiftlikköy",
+        "Uzunkuyu",
+    }
+    assert "Gülbahçe" not in all_focus
+    for region_key in REGION_KEYS:
+        focus = _s2_focus_candidates(left, region_key, "2026-09-13")
+        assert len(focus) == 1
+        assert set(_covered_operational_focus_points(focus[0], region_key)) == set(
+            OPERATIONAL_FOCUS_POINTS[region_key]
+        )
+
     original = s1.AOIS["cesme"]["kritik_noktalar"]
     try:
         s1.AOIS["cesme"]["kritik_noktalar"] = {"TEST": (38.5, 26.5)}
@@ -268,7 +379,7 @@ def _self_check():
 def audit():
     _self_check()
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "13/15/16/17 Eylül exact Sentinel-2 ve Sentinel-1 veri/geometri uygunluğunu açıkça doğrulamak",
         "alarm": False,
         "saha_gorevi": False,
@@ -277,11 +388,17 @@ def audit():
         "mikro_aralik_m2": [150, 249],
         "tarihler": list(FOCUS_DATES),
         "istenen_exact_ciftler": [f"{start}->{end}" for start, end in REQUESTED_PAIRS],
+        "operasyon_odak_noktalari": [
+            name
+            for region_key in REGION_KEYS
+            for name in OPERATIONAL_FOCUS_POINTS[region_key]
+        ],
         "sentinel2": {key: _s2_region(key) for key in REGION_KEYS},
         "sentinel1": {key: _s1_region(key) for key in REGION_KEYS},
         "not": (
             "VERI_YOK veya EXACT_GEOMETRI_ESLESMIYOR olan çift için görüntü varmış gibi temporal fark üretilmez. "
-            "Metadata uygunluğu kazı/şantiye kanıtı değildir; yalnız hangi exact karşılaştırmanın fiziksel olarak kurulabileceğini gösterir."
+            "Sentinel-2 geniş analiz AOI kapsaması ile operasyon odağı kapsaması ayrı raporlanır; Gülbahçe diagnostik "
+            "bağlamı Uzunkuyu çekirdeğinin veri uygunluğunu veto etmez. Metadata uygunluğu kazı/şantiye kanıtı değildir."
         ),
     }
 
