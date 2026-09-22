@@ -55,7 +55,15 @@ AOIS = {
         "s2_region": "cesme",
         "kritik_noktalar": {
             name: PLACE_CENTERS[name]
-            for name in ("Çeşme", "Alaçatı", "Ilıca", "Ovacık", "Çiftlikköy")
+            for name in (
+                "Çeşme",
+                "Alaçatı",
+                "Ilıca",
+                "Reisdere",
+                "Ovacık",
+                "Çiftlikköy",
+                "Musalla",
+            )
         },
     },
     "uzunkuyu": {
@@ -359,6 +367,20 @@ def inspect_region(region_key, search_fn=_search_items):
 def _self_check():
     region_key = "uzunkuyu"
     bbox = AOIS[region_key]["bbox"]
+    ana_odak = {
+        "Çeşme",
+        "Alaçatı",
+        "Reisdere",
+        "Ilıca",
+        "Ovacık",
+        "Musalla",
+        "Çiftlikköy",
+        "Uzunkuyu",
+    }
+    izlenen_ana_noktalar = set(AOIS["cesme"]["kritik_noktalar"]) | set(
+        AOIS["uzunkuyu"]["kritik_noktalar"]
+    )
+    assert ana_odak.issubset(izlenen_ana_noktalar)
 
     def fake(day, orbit=87, state="ascending", pols=("VV", "VH"), bbox_value=None, mode="IW"):
         return {
