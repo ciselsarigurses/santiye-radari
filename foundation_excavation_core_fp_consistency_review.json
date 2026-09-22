@@ -16,16 +16,16 @@
   "uretim_filtresi": false,
   "bolgeler": {
     "cesme": {
-      "mevcut_fp_klon_bastirma_sayisi": 21,
+      "mevcut_fp_klon_bastirma_sayisi": 18,
       "yalniz_yardimci_fp_nedeniyle_bastirilan_sayi": 0,
-      "cekirdek_fp_de_bastiran_sayi": 21,
+      "cekirdek_fp_de_bastiran_sayi": 18,
       "eslesmeyen_bastirilmis_aday": 0,
       "yalniz_yardimci_fp_adaylari": []
     },
     "uzunkuyu": {
-      "mevcut_fp_klon_bastirma_sayisi": 24,
+      "mevcut_fp_klon_bastirma_sayisi": 18,
       "yalniz_yardimci_fp_nedeniyle_bastirilan_sayi": 0,
-      "cekirdek_fp_de_bastiran_sayi": 24,
+      "cekirdek_fp_de_bastiran_sayi": 18,
       "eslesmeyen_bastirilmis_aday": 0,
       "yalniz_yardimci_fp_adaylari": []
     }
