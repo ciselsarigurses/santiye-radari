@@ -60,30 +60,107 @@ jobs:
           current = json.loads(current_path.read_text(encoding="utf-8"))
           previous = json.loads(previous_path.read_text(encoding="utf-8"))
 
-          gains = []
+          REGIONS = ("cesme", "uzunkuyu")
 
-          def walk(old, new, path=""):
-              if isinstance(old, dict) and isinstance(new, dict):
-                  for key, new_value in new.items():
-                      old_value = old.get(key)
-                      child = f"{path}.{key}" if path else key
-                      if key == "exact_cift_var" and old_value is False and new_value is True:
-                          gains.append(child)
-                      walk(old_value, new_value, child)
-                  return
-              if isinstance(old, list) and isinstance(new, list):
-                  return
+          def requested_pairs(report):
+              return tuple(str(pair) for pair in (report.get("istenen_exact_ciftler") or ()))
 
-          walk(previous, current)
+          def s2_capability(report, region, pair):
+              node = (
+                  (((report.get("sentinel2") or {}).get(region) or {}).get("exact_ciftler") or {})
+                  .get(pair)
+                  or {}
+              )
+              # Sürüm 2'de operasyon odağı kanonik kaynaktır. Eski raporda bu alan
+              # yoksa dış morfoloji/BSI alanlarına düşerek yalnız şema geçişinin
+              # yeni veri gibi görünmesini engelle.
+              operational = node.get("operasyon_odagi")
+              source = operational if isinstance(operational, dict) else node
+              return any(
+                  bool((source.get(kind) or {}).get("exact_cift_var"))
+                  for kind in ("morfoloji", "bsi")
+              )
+
+          def s1_capability(report, region, pair):
+              node = (
+                  (((report.get("sentinel1") or {}).get(region) or {}).get("exact_ciftler") or {})
+                  .get(pair)
+                  or {}
+              )
+              return bool(node.get("exact_cift_var"))
+
+          def capability_matrix(report, pairs):
+              matrix = {}
+              for region in REGIONS:
+                  for pair in pairs:
+                      matrix[("sentinel2", region, pair)] = s2_capability(report, region, pair)
+                      matrix[("sentinel1", region, pair)] = s1_capability(report, region, pair)
+              return matrix
+
+          def gain_paths(old_report, new_report):
+              pairs = requested_pairs(new_report) or requested_pairs(old_report)
+              old = capability_matrix(old_report, pairs)
+              new = capability_matrix(new_report, pairs)
+              return [
+                  ".".join(key)
+                  for key, value in new.items()
+                  if value and not old.get(key, False)
+              ]
+
+          # Regresyon: sürüm-1 dış alanından sürüm-2 operasyon_odagi alanına
+          # taşınmak tek başına yeni exact veri sayılmamalı.
+          test_pair = "2026-09-13->2026-09-15"
+          legacy = {
+              "istenen_exact_ciftler": [test_pair],
+              "sentinel2": {"cesme": {"exact_ciftler": {test_pair: {
+                  "morfoloji": {"exact_cift_var": True},
+                  "bsi": {"exact_cift_var": True},
+              }}}},
+          }
+          migrated = {
+              "istenen_exact_ciftler": [test_pair],
+              "sentinel2": {"cesme": {"exact_ciftler": {test_pair: {
+                  "morfoloji": {"exact_cift_var": True},
+                  "bsi": {"exact_cift_var": True},
+                  "operasyon_odagi": {
+                      "morfoloji": {"exact_cift_var": True},
+                      "bsi": {"exact_cift_var": True},
+                  },
+              }}}},
+              "diagnostik": {"exact_cift_var": True},
+          }
+          assert gain_paths(legacy, migrated) == []
+
+          no_pair = {"istenen_exact_ciftler": [test_pair]}
+          s2_gain = {
+              "istenen_exact_ciftler": [test_pair],
+              "sentinel2": {"cesme": {"exact_ciftler": {test_pair: {
+                  "operasyon_odagi": {
+                      "morfoloji": {"exact_cift_var": True},
+                      "bsi": {"exact_cift_var": False},
+                  },
+              }}}},
+          }
+          assert gain_paths(no_pair, s2_gain) == [f"sentinel2.cesme.{test_pair}"]
+
+          s1_gain = {
+              "istenen_exact_ciftler": [test_pair],
+              "sentinel1": {"uzunkuyu": {"exact_ciftler": {test_pair: {
+                  "exact_cift_var": True,
+              }}}},
+          }
+          assert gain_paths(no_pair, s1_gain) == [f"sentinel1.uzunkuyu.{test_pair}"]
+
+          gains = gain_paths(previous, current)
           with github_output.open("a", encoding="utf-8") as handle:
               handle.write(f"critical_exact_gain={'true' if gains else 'false'}\n")
               handle.write("critical_exact_gain_count=" + str(len(gains)) + "\n")
           if gains:
-              print("Yeni hesaplanabilir exact kritik pencere çifti bulundu:")
+              print("Yeni hesaplanabilir exact kritik pencere kapasitesi bulundu:")
               for gain in gains:
                   print(f"- {gain}")
           else:
-              print("Yeni hesaplanabilir exact kritik pencere çifti yok.")
+              print("Yeni hesaplanabilir exact kritik pencere kapasitesi yok.")
           PY
 
       - name: Yalnız semantik değişiklik varsa kaydet
@@ -129,7 +206,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
         shell: bash
         run: |
-          echo "Yeni hesaplanabilir exact 13/15/16/17 Eylül çifti: ${{ steps.exact_window.outputs.critical_exact_gain_count }} kanıt yolu."
+          echo "Yeni hesaplanabilir exact 13/15/16/17 Eylül kapasitesi: ${{ steps.exact_window.outputs.critical_exact_gain_count }} sensör/bölge/çift."
           echo "Bu sahne en güncel ürün olmayabilir; geç yayımlanan tarihsel veri de tam taramayı tetikler."
 
           response_code="$(curl -sS -o /tmp/daily-dispatch-response.txt -w '%{http_code}' \
