@@ -71,7 +71,7 @@ AOIS = {
         "s2_region": "uzunkuyu",
         "kritik_noktalar": {
             name: PLACE_CENTERS[name]
-            for name in ("Uzunkuyu", "Germiyan", "Ildır", "Gülbahçe")
+            for name in ("Uzunkuyu", "Germiyan", "Ildır")
         },
     },
     "gulbahce": {
@@ -381,6 +381,8 @@ def _self_check():
         AOIS["uzunkuyu"]["kritik_noktalar"]
     )
     assert ana_odak.issubset(izlenen_ana_noktalar)
+    assert "Gülbahçe" not in AOIS["uzunkuyu"]["kritik_noktalar"]
+    assert set(AOIS["gulbahce"]["kritik_noktalar"]) == {"Gülbahçe"}
 
     def fake(day, orbit=87, state="ascending", pols=("VV", "VH"), bbox_value=None, mode="IW"):
         return {
@@ -409,7 +411,8 @@ def _self_check():
     assert _usable_item(partial, bbox)
     assert not _usable_item(outside, bbox)
     assert 0 < _bbox_overlap_fraction(partial, bbox) < 1
-    assert "Gülbahçe" in _covered_points(partial, region_key)
+    assert not _covered_points(partial, region_key)
+    assert "Gülbahçe" in _covered_points(partial, "gulbahce")
     assert _compatible_signature(items[0]) == (87, "ascending", ("VH", "VV"))
     pair = _find_same_geometry_pair(items, region_key)
     assert pair is not None
