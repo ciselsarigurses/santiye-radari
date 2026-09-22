@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-09-22T15:49:45+00:00",
+  "olusturma_utc": "2026-09-22T17:40:25+00:00",
   "amac": "15 Eylül öncesi baseline ile gerçekten mevcut en güncel post-window Sentinel sahnesini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -93,7 +93,6 @@
           "yeni_item": "S1C_IW_GRDH_1SDV_20260918T160624_20260918T160649_009504_012E90",
           "ortak_kritik_noktalar": [
             "Germiyan",
-            "Gülbahçe",
             "Ildır",
             "Uzunkuyu"
           ],
