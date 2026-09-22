@@ -11,15 +11,6 @@
 
 ## Günün ilk 3 kontrolü
 
-> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
+> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
-1. **GECİKEN — Alaçatı** · yaklaşık 300 m² · Görev `UB3F1CABF9E` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.282433,26.365212) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.282433/26.365212)
-2. **GECİKEN — Dalyan** · yaklaşık 300 m² · Görev `U82332941AB` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.352531,26.322742) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.352531/26.322742)
-3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · Görev `U92D437BB80` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.368450,26.643880) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.368450/26.643880)
-
-## Kör alan saha devriyesi
-
-> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
-
-1. **KÖR ALAN — Çeşme** · yaklaşık 400 m² · karışık geçersizlik · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.324944,26.337166) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.324944/26.337166)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
