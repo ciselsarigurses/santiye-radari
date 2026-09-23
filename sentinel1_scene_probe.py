@@ -69,10 +69,7 @@ AOIS = {
     "uzunkuyu": {
         "bbox": REGIONS["uzunkuyu"]["bbox"],
         "s2_region": "uzunkuyu",
-        "kritik_noktalar": {
-            name: PLACE_CENTERS[name]
-            for name in ("Uzunkuyu", "Germiyan", "Ildır")
-        },
+        "kritik_noktalar": {"Uzunkuyu": PLACE_CENTERS["Uzunkuyu"]},
     },
     "gulbahce": {
         "bbox": GULBAHCE_DIAGNOSTIC_BBOX,
@@ -381,7 +378,7 @@ def _self_check():
         AOIS["uzunkuyu"]["kritik_noktalar"]
     )
     assert ana_odak.issubset(izlenen_ana_noktalar)
-    assert "Gülbahçe" not in AOIS["uzunkuyu"]["kritik_noktalar"]
+    assert set(AOIS["uzunkuyu"]["kritik_noktalar"]) == {"Uzunkuyu"}
     assert set(AOIS["gulbahce"]["kritik_noktalar"]) == {"Gülbahçe"}
 
     def fake(day, orbit=87, state="ascending", pols=("VV", "VH"), bbox_value=None, mode="IW"):
