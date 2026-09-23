@@ -26,6 +26,9 @@ on:
       - "15-17 Eylül Onset SAR Diagnostiği"
       - "Günlük Şantiye Taraması"
       - "Ana Saha Geri Bildirim Koruması"
+      # Sezon öncelik katmanı SAHA_RAPORU/latest_report ilk-3 listesini yeniden yazabilir;
+      # ardından temel/kepçe çoklu-kanıt kapısını yeniden uygula.
+      - "15 Eylül Taze Kazı Öncelik Koruması"
     types: [completed]
 
 permissions:
