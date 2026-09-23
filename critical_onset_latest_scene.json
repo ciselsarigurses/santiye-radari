@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-09-23T14:45:29+00:00",
+  "olusturma_utc": "2026-09-23T15:30:39+00:00",
   "amac": "15 Eylül öncesi baseline ile gerçekten mevcut en güncel post-window Sentinel sahnesini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -16,10 +16,13 @@
       "sentinel2": {
         "durum": "ok",
         "en_guncel_postwindow_tarih": "2026-09-23",
+        "en_guncel_postwindow_global_bulut_yuzde": 88.77,
+        "en_guncel_uretim_filtresi_uygun_tarih": "2026-09-18",
+        "uretim_global_bulut_esigi_yuzde": 25.0,
         "baseline_13eylul_mevcut": true,
         "baseline_vs_en_guncel": {
-          "hesaplanabilir": true,
-          "neden": "OK",
+          "hesaplanabilir": false,
+          "neden": "YUKSEK_GLOBAL_BULUT_YEREL_SCL_DOGRULAMASI_GEREKLI",
           "baseline_tarihi": "2026-09-13",
           "son_tarih": "2026-09-23",
           "eski_item": "S2C_T35SMC_20260913T090741_L2A",
@@ -27,7 +30,21 @@
           "eski_bulut_yuzde": 0.57,
           "yeni_bulut_yuzde": 88.77,
           "ayni_mgrs_karo": true,
-          "ayni_goreli_yorunge": true
+          "ayni_goreli_yorunge": true,
+          "yerel_scl_dogrulamasi_gerekli": true
+        },
+        "baseline_vs_en_guncel_uretim_filtresi_uygun": {
+          "hesaplanabilir": true,
+          "neden": "OK",
+          "baseline_tarihi": "2026-09-13",
+          "son_tarih": "2026-09-18",
+          "eski_item": "S2C_T35SMC_20260913T090741_L2A",
+          "yeni_item": "S2B_T35SMC_20260918T085916_L2A",
+          "eski_bulut_yuzde": 0.57,
+          "yeni_bulut_yuzde": 0.29,
+          "ayni_mgrs_karo": true,
+          "ayni_goreli_yorunge": true,
+          "yerel_scl_dogrulamasi_gerekli": false
         }
       },
       "sentinel1": {
@@ -65,10 +82,13 @@
       "sentinel2": {
         "durum": "ok",
         "en_guncel_postwindow_tarih": "2026-09-23",
+        "en_guncel_postwindow_global_bulut_yuzde": 88.77,
+        "en_guncel_uretim_filtresi_uygun_tarih": "2026-09-18",
+        "uretim_global_bulut_esigi_yuzde": 25.0,
         "baseline_13eylul_mevcut": true,
         "baseline_vs_en_guncel": {
-          "hesaplanabilir": true,
-          "neden": "OK",
+          "hesaplanabilir": false,
+          "neden": "YUKSEK_GLOBAL_BULUT_YEREL_SCL_DOGRULAMASI_GEREKLI",
           "baseline_tarihi": "2026-09-13",
           "son_tarih": "2026-09-23",
           "eski_item": "S2C_T35SMC_20260913T090741_L2A",
@@ -76,7 +96,21 @@
           "eski_bulut_yuzde": 0.57,
           "yeni_bulut_yuzde": 88.77,
           "ayni_mgrs_karo": true,
-          "ayni_goreli_yorunge": true
+          "ayni_goreli_yorunge": true,
+          "yerel_scl_dogrulamasi_gerekli": true
+        },
+        "baseline_vs_en_guncel_uretim_filtresi_uygun": {
+          "hesaplanabilir": true,
+          "neden": "OK",
+          "baseline_tarihi": "2026-09-13",
+          "son_tarih": "2026-09-18",
+          "eski_item": "S2C_T35SMC_20260913T090741_L2A",
+          "yeni_item": "S2B_T35SMC_20260918T085916_L2A",
+          "eski_bulut_yuzde": 0.57,
+          "yeni_bulut_yuzde": 0.29,
+          "ayni_mgrs_karo": true,
+          "ayni_goreli_yorunge": true,
+          "yerel_scl_dogrulamasi_gerekli": false
         }
       },
       "sentinel1": {
@@ -106,5 +140,5 @@
       }
     }
   },
-  "not": "Exact 13→15, 15→16, 15→17 ve 16→17 uygunluğu ayrı kritik-pencere denetiminde kalır. Bu dosya yalnız en güncel gerçek sahneyi ekler; olmayan tarih üretilmez."
+  "not": "Exact 13→15, 15→16, 15→17 ve 16→17 uygunluğu ayrı kritik-pencere denetiminde kalır. Bu dosya katalogdaki en güncel gerçek sahneyi kaydeder; S2 global bulut üretim eşiğini aşarsa doğrudan hesaplanabilir saymaz ve üretim filtresini geçen en güncel tarihi ayrıca gösterir. Olmayan tarih üretilmez."
 }
