@@ -24,7 +24,24 @@
       ],
       "production_item": "S2B_T35SMC_20260918T085916_L2A",
       "production_date": "18.09.2026 09:09Z",
-      "newer_candidates": []
+      "newer_candidates": [
+        {
+          "item": "S2C_T35SMC_20260923T090847_L2A",
+          "tarih": "23.09.2026 09:09Z",
+          "global_bulut": 88.77,
+          "aoi_kapali": 99.92,
+          "aoi_yeterince_acik": false,
+          "lokal_kara_pencere": {
+            "kapali_yuzde": 100.0,
+            "kara_yuzde": 100.0,
+            "merkez_enlem": 38.189045,
+            "merkez_boylam": 26.231448,
+            "yaklasik_pencere_m": 2000,
+            "adim_m": 1000
+          },
+          "lokal_kara_pencere_yeterince_acik": false
+        }
+      ]
     },
     {
       "hedef": "uzunkuyu",
@@ -39,7 +56,24 @@
       ],
       "production_item": "S2B_T35SMC_20260918T085916_L2A",
       "production_date": "18.09.2026 09:09Z",
-      "newer_candidates": []
+      "newer_candidates": [
+        {
+          "item": "S2C_T35SMC_20260923T090847_L2A",
+          "tarih": "23.09.2026 09:09Z",
+          "global_bulut": 88.77,
+          "aoi_kapali": 99.72,
+          "aoi_yeterince_acik": false,
+          "lokal_kara_pencere": {
+            "kapali_yuzde": 100.0,
+            "kara_yuzde": 100.0,
+            "merkez_enlem": 38.189045,
+            "merkez_boylam": 26.461454,
+            "yaklasik_pencere_m": 2000,
+            "adim_m": 1000
+          },
+          "lokal_kara_pencere_yeterince_acik": false
+        }
+      ]
     },
     {
       "hedef": "gulbahce_2km",
@@ -54,7 +88,24 @@
       ],
       "production_item": "S2B_T35SMC_20260918T085916_L2A",
       "production_date": "18.09.2026 09:09Z",
-      "newer_candidates": []
+      "newer_candidates": [
+        {
+          "item": "S2C_T35SMC_20260923T090847_L2A",
+          "tarih": "23.09.2026 09:09Z",
+          "global_bulut": 88.77,
+          "aoi_kapali": 100.0,
+          "aoi_yeterince_acik": false,
+          "lokal_kara_pencere": {
+            "kapali_yuzde": 100.0,
+            "kara_yuzde": 100.0,
+            "merkez_enlem": 38.323736,
+            "merkez_boylam": 26.634108,
+            "yaklasik_pencere_m": 2000,
+            "adim_m": 1000
+          },
+          "lokal_kara_pencere_yeterince_acik": false
+        }
+      ]
     }
   ]
 }
