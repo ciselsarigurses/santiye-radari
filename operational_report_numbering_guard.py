@@ -9,9 +9,10 @@ Yeni mimaride ise nihai operasyon kaynağı ``operational_route.json`` ve kullan
 sunulan bölüm ``## Günün ilk 3 kontrolü``dür. Bu durumda ham ``latest_report.json``
 aday adediyle modern saha raporunu karşılaştırmak doğru değildir: genel Sentinel
 adayları diagnostik havuzda kalabilirken nihai rota çoklu-kanıt kapılarından sonra
-1-3 kayda düşebilir. Modern bölüm varsa bu dosya artık nihai rota sidecar'ıyla
-fail-closed biçimde sayı tutarlılığı doğrular ve legacy başlık numaralandırmasını
-uygulamaz.
+1-3 kayda düşebilir. Modern bölüm varsa bu dosya nihai rota sidecar'ını kaynak kabul
+eder; eşzamanlı workflow sırası yüzünden markdown geçici olarak eski kalmışsa bölümü
+aynı authoritative renderer ile deterministik biçimde senkronize eder ve sonra
+fail-closed sayı doğrulaması yapar.
 
 Bu katman algılama, alarm, görev, Sentinel eşiği veya SQLite verisini değiştirmez.
 """
@@ -57,8 +58,8 @@ def _legacy_active_count():
     return _operational_count(items)
 
 
-def _final_route_count():
-    """Modern raporda tek kaynak olan nihai operasyon sidecar'ının kayıt sayısı."""
+def _final_route_items():
+    """Modern raporda tek kaynak olan nihai operasyon sidecar'ını doğrulayarak döndür."""
     if not OPERATIONAL_ROUTE_JSON.exists():
         raise RuntimeError("operational_route.json yok")
     try:
@@ -72,7 +73,11 @@ def _final_route_count():
         raise RuntimeError("operasyonel_rota liste değil")
     if any(not isinstance(item, dict) for item in items):
         raise RuntimeError("operasyonel_rota içinde nesne olmayan kayıt var")
-    return len(items)
+    return [dict(item) for item in items]
+
+
+def _final_route_count():
+    return len(_final_route_items())
 
 
 def renumber_legacy_operational_section(lines):
@@ -113,6 +118,27 @@ def count_modern_operational_section(lines):
         if in_section and MODERN_ENTRY_RE.match(line.strip()):
             count += 1
     return count, found_section
+
+
+def sync_modern_operational_section(text, route_items):
+    """Modern bölümü nihai rotadan authoritative renderer ile yeniden kur.
+
+    Workflow zincirleri aynı raporu farklı sıralarda yazabildiği için markdown bazen
+    birkaç saniyeliğine eski rota sayısını taşıyabilir. Bu durumda hata vermek yerine
+    yalnız modern operasyon bölümünü ``foundation_excavation_operational_route_guard``
+    renderer'ıyla yeniden üretiriz; ardından sayı yine uyuşmuyorsa fail-closed kalırız.
+    """
+    from foundation_excavation_operational_route_guard import _update_markdown
+
+    rendered = _update_markdown(str(text or ""), route_items)
+    actual, found = count_modern_operational_section(rendered.splitlines())
+    expected = len(route_items)
+    if not found or actual != expected:
+        raise RuntimeError(
+            "Modern operasyon markdown senkronizasyonu nihai rotayı üretemedi: "
+            f"markdown={actual}, final_rota={expected}"
+        )
+    return rendered
 
 
 def _self_check():
@@ -164,6 +190,25 @@ def _self_check():
     modern_count, modern_found = count_modern_operational_section(modern)
     assert modern_found and modern_count == 2
 
+    # Modern markdown eski rota sayısını taşısa bile nihai sidecar tek kaynak olmalı.
+    repaired = sync_modern_operational_section(
+        "\n".join(modern) + "\n",
+        [
+            {
+                "oncelik": "YUKSEK",
+                "mahalle": "A",
+                "alan_m2": 400,
+                "gorev_id": "A1",
+                "harita": "https://example.com/a",
+            }
+        ],
+    )
+    repaired_count, repaired_found = count_modern_operational_section(repaired.splitlines())
+    assert repaired_found and repaired_count == 1
+    assert "Görev `A1`" in repaired
+    assert "2. **TEKRAR — B**" not in repaired
+    assert "## Başka bölüm" in repaired
+
 
 def apply_guard():
     _self_check()
@@ -175,12 +220,24 @@ def apply_guard():
 
     modern_actual, modern_found = count_modern_operational_section(lines)
     if modern_found:
-        modern_expected = _final_route_count()
+        final_route = _final_route_items()
+        modern_expected = len(final_route)
         if modern_actual != modern_expected:
-            raise RuntimeError(
-                "Modern operasyon markdown sayısı operational_route.json nihai rotasıyla uyuşmuyor: "
-                f"markdown={modern_actual}, final_rota={modern_expected}"
-            )
+            rendered = sync_modern_operational_section(original, final_route)
+            changed = rendered != original
+            if changed:
+                REPORT_MD.write_text(rendered, encoding="utf-8")
+            repaired_actual, repaired_found = count_modern_operational_section(rendered.splitlines())
+            if not repaired_found or repaired_actual != modern_expected:
+                raise RuntimeError(
+                    "Modern operasyon markdown onarım sonrası nihai rotayla uyuşmuyor: "
+                    f"markdown={repaired_actual}, final_rota={modern_expected}"
+                )
+            return {
+                "durum": "modern_final_rota_senkronize",
+                "aktif": repaired_actual,
+                "degisti": changed,
+            }
         return {
             "durum": "modern_final_rota_dogrulandi",
             "aktif": modern_actual,
@@ -220,13 +277,14 @@ def main(check_only=False):
     if check_only:
         print(
             "Saha raporu sıra koruması öz testi başarılı: legacy bölüm yeniden numaralanıyor; "
-            "modern Günün ilk 3 bölümü nihai operational_route.json ile doğrulanıyor."
+            "modern Günün ilk 3 bölümü nihai operational_route.json ile doğrulanıp gerekirse senkronize ediliyor."
         )
         return
     result = apply_guard()
-    if result["durum"] == "modern_final_rota_dogrulandi":
+    if result["durum"] in {"modern_final_rota_dogrulandi", "modern_final_rota_senkronize"}:
+        action = "senkronize edildi" if result["durum"] == "modern_final_rota_senkronize" else "doğrulandı"
         print(
-            "Saha raporu sıra koruması: modern nihai rota doğrulandı; "
+            f"Saha raporu sıra koruması: modern nihai rota {action}; "
             f"{result['aktif']} operasyon kaydı."
         )
         return
