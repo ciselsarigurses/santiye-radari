@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-09-22T17:40:25+00:00",
+  "olusturma_utc": "2026-09-23T17:41:38+00:00",
   "amac": "15-17 Eylül 2026 kazı başlangıç penceresinde yalnız gerçekten mevcut Sentinel tarihleriyle temporal karşılaştırma yapılabilirliğini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -265,8 +265,6 @@
           "eski_item": "S1C_IW_GRDH_1SDV_20260911T161434_20260911T161459_009402_012B36",
           "yeni_item": "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8",
           "ortak_kritik_noktalar": [
-            "Germiyan",
-            "Ildır",
             "Uzunkuyu"
           ],
           "goreli_yorunge": 29,
