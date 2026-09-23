@@ -10,9 +10,9 @@ sunulan bölüm ``## Günün ilk 3 kontrolü``dür. Bu durumda ham ``latest_repo
 aday adediyle modern saha raporunu karşılaştırmak doğru değildir: genel Sentinel
 adayları diagnostik havuzda kalabilirken nihai rota çoklu-kanıt kapılarından sonra
 1-3 kayda düşebilir. Modern bölüm varsa bu dosya nihai rota sidecar'ını kaynak kabul
-eder; eşzamanlı workflow sırası yüzünden markdown geçici olarak eski kalmışsa bölümü
-aynı authoritative renderer ile deterministik biçimde senkronize eder ve sonra
-fail-closed sayı doğrulaması yapar.
+eder; eşzamanlı workflow sırası yüzünden markdown geçici olarak eski kalmışsa yalnız
+modern bölümü deterministik biçimde senkronize eder ve sonra fail-closed sayı
+doğrulaması yapar.
 
 Bu katman algılama, alarm, görev, Sentinel eşiği veya SQLite verisini değiştirmez.
 """
@@ -33,6 +33,7 @@ LEGACY_SECTION_TITLE = "## Bugün sahada kontrol edilecek uydu adayları"
 MODERN_SECTION_TITLE = "## Günün ilk 3 kontrolü"
 HEADING_RE = re.compile(r"^(###\s+)\d+(\.\s+.+)$")
 MODERN_ENTRY_RE = re.compile(r"^\d+\.\s+\*\*")
+NEXT_H2_RE = re.compile(r"^##\s+.+$", re.MULTILINE)
 
 
 def _operational_count(items):
@@ -121,16 +122,38 @@ def count_modern_operational_section(lines):
 
 
 def sync_modern_operational_section(text, route_items):
-    """Modern bölümü nihai rotadan authoritative renderer ile yeniden kur.
+    """Yalnız modern bölümü nihai rotadan yeniden kur; sonraki rapor bölümlerini koru.
 
     Workflow zincirleri aynı raporu farklı sıralarda yazabildiği için markdown bazen
-    birkaç saniyeliğine eski rota sayısını taşıyabilir. Bu durumda hata vermek yerine
-    yalnız modern operasyon bölümünü ``foundation_excavation_operational_route_guard``
-    renderer'ıyla yeniden üretiriz; ardından sayı yine uyuşmuyorsa fail-closed kalırız.
+    birkaç saniyeliğine eski rota sayısını taşıyabilir. Burada nihai route sidecar'ı
+    tek kaynak kabul edilir. Bölüm gövdesi mevcut temel-kazısı rota renderer'ıyla
+    üretilir; bölüm sınırı ise ilk sonraki H2 başlığıdır. Böylece rapora ileride yeni
+    bir bölüm eklense bile senkronizasyon o bölümü yanlışlıkla yutmaz.
     """
-    from foundation_excavation_operational_route_guard import _update_markdown
+    from foundation_excavation_operational_route_guard import _route_markdown
 
-    rendered = _update_markdown(str(text or ""), route_items)
+    source = str(text or "")
+    start = source.find(MODERN_SECTION_TITLE)
+    if start < 0:
+        raise RuntimeError("Modern operasyon bölümü senkronizasyon sırasında bulunamadı")
+
+    body_start = start + len(MODERN_SECTION_TITLE)
+    tail = source[body_start:]
+    next_match = NEXT_H2_RE.search(tail)
+    end = body_start + next_match.start() if next_match else len(source)
+
+    prefix = source[:start].rstrip()
+    suffix = source[end:].lstrip()
+    section = _route_markdown(route_items).rstrip()
+
+    parts = []
+    if prefix:
+        parts.append(prefix)
+    parts.append(section)
+    if suffix:
+        parts.append(suffix)
+    rendered = "\n\n".join(parts).rstrip() + "\n"
+
     actual, found = count_modern_operational_section(rendered.splitlines())
     expected = len(route_items)
     if not found or actual != expected:
@@ -190,7 +213,8 @@ def _self_check():
     modern_count, modern_found = count_modern_operational_section(modern)
     assert modern_found and modern_count == 2
 
-    # Modern markdown eski rota sayısını taşısa bile nihai sidecar tek kaynak olmalı.
+    # Modern markdown eski rota sayısını taşısa bile nihai sidecar tek kaynak olmalı;
+    # modern bölümden sonraki bilinmeyen/yeni rapor başlıkları aynen korunmalı.
     repaired = sync_modern_operational_section(
         "\n".join(modern) + "\n",
         [
@@ -208,6 +232,7 @@ def _self_check():
     assert "Görev `A1`" in repaired
     assert "2. **TEKRAR — B**" not in repaired
     assert "## Başka bölüm" in repaired
+    assert "1. **Bu kayıt sayılmamalı**" in repaired
 
 
 def apply_guard():
