@@ -29,6 +29,7 @@ BASELINE_DAY = date(2026, 9, 13)
 INTERVENTION_START = date(2026, 9, 15)
 REGION_KEYS = ("cesme", "uzunkuyu")
 OUTPUT = Path(__file__).with_name("critical_onset_latest_scene.json")
+CLOUD_AUDIT = Path(__file__).with_name("cloud_threshold_audit.json")
 # satellite._search_items üretimde ``eo:cloud_cover < 25`` kullanır. Bu metadata
 # diagnostiği katalogdaki daha yeni yüksek-bulut sahneyi saklamaya devam eder,
 # ancak onu doğrudan analiz/temporal fark için kullanılabilir ilan etmez.
@@ -51,6 +52,28 @@ def _cloud(item):
         return float(value) if value is not None else 999.0
     except (TypeError, ValueError):
         return 999.0
+
+
+def _load_local_scl_audit(region_key, item_id, path=CLOUD_AUDIT):
+    """Aynı S2 itemi için daha önce ölçülmüş yerel SCL kapanmasını döndürür.
+
+    Persist edilmiş audit eşleşmiyorsa fail-open değil, bilinmiyor davranır: yüksek
+    global bulutlu sahne yine üretim analizine alınmaz ve yerel doğrulama gerekli
+    kalır. Böylece eski bir SCL kaydı yeni sahneye yanlışlıkla taşınmaz.
+    """
+    if not item_id or not path.exists():
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, json.JSONDecodeError):
+        return None
+    for target in payload.get("hedefler") or []:
+        if str(target.get("hedef") or "") != str(region_key):
+            continue
+        for candidate in target.get("newer_candidates") or []:
+            if str(candidate.get("item") or "") == str(item_id):
+                return candidate
+    return None
 
 
 def _query_s2_all(bbox, request_post=requests.post):
@@ -89,7 +112,13 @@ def _best_by_day(items):
     return grouped
 
 
-def _s2_pair(baseline, newer, newer_day, require_production_cloud=False):
+def _s2_pair(
+    baseline,
+    newer,
+    newer_day,
+    require_production_cloud=False,
+    local_scl=None,
+):
     if baseline is None or newer is None or newer_day is None:
         return None
     same_tile = satellite._same_mgrs_tile(baseline, newer)
@@ -97,9 +126,22 @@ def _s2_pair(baseline, newer, newer_day, require_production_cloud=False):
     new_orbit = satellite._relative_orbit(newer)
     newer_cloud = _cloud(newer)
     high_cloud = newer_cloud >= S2_PRODUCTION_MAX_CLOUD
+    local_scl_available = isinstance(local_scl, dict)
+    local_window = (local_scl or {}).get("lokal_kara_pencere") or {}
+    local_open = bool(
+        local_scl_available
+        and (
+            bool(local_scl.get("aoi_yeterince_acik"))
+            or bool(local_scl.get("lokal_kara_pencere_yeterince_acik"))
+        )
+    )
     calculable = bool(same_tile and (not require_production_cloud or not high_cloud))
     if not same_tile:
         reason = "FARKLI_MGRS_KARO"
+    elif require_production_cloud and high_cloud and local_scl_available and not local_open:
+        reason = "YUKSEK_GLOBAL_BULUT_YEREL_SCL_KAPALI"
+    elif require_production_cloud and high_cloud and local_scl_available and local_open:
+        reason = "YUKSEK_GLOBAL_BULUT_YEREL_SCL_ACIK_AMA_URETIM_FILTRESI_DISI"
     elif require_production_cloud and high_cloud:
         reason = "YUKSEK_GLOBAL_BULUT_YEREL_SCL_DOGRULAMASI_GEREKLI"
     else:
@@ -119,11 +161,25 @@ def _s2_pair(baseline, newer, newer_day, require_production_cloud=False):
             if old_orbit is not None and new_orbit is not None
             else None
         ),
-        "yerel_scl_dogrulamasi_gerekli": bool(require_production_cloud and high_cloud),
+        "yerel_scl_dogrulamasi_gerekli": bool(
+            require_production_cloud and high_cloud and not local_scl_available
+        ),
+        "yerel_scl_dogrulamasi_mevcut": bool(local_scl_available),
+        "yerel_scl_aoi_kapali_yuzde": (
+            local_scl.get("aoi_kapali") if local_scl_available else None
+        ),
+        "yerel_scl_lokal_kara_pencere_kapali_yuzde": (
+            local_window.get("kapali_yuzde") if local_scl_available else None
+        ),
+        "yerel_scl_yeterince_acik": bool(local_open) if local_scl_available else None,
     }
 
 
-def _s2_summary(region_key, query_fn=_query_s2_all):
+def _s2_summary(
+    region_key,
+    query_fn=_query_s2_all,
+    local_scl_lookup=_load_local_scl_audit,
+):
     bbox = satellite.REGIONS[region_key]["bbox"]
     try:
         grouped = _best_by_day(query_fn(bbox))
@@ -139,6 +195,11 @@ def _s2_summary(region_key, query_fn=_query_s2_all):
     baseline = grouped.get(BASELINE_DAY)
     latest = grouped.get(latest_day) if latest_day else None
     latest_production = grouped.get(latest_production_day) if latest_production_day else None
+    latest_local_scl = (
+        local_scl_lookup(region_key, latest.get("id"))
+        if latest is not None and _cloud(latest) >= S2_PRODUCTION_MAX_CLOUD
+        else None
+    )
 
     return {
         "durum": "ok",
@@ -158,6 +219,7 @@ def _s2_summary(region_key, query_fn=_query_s2_all):
             latest,
             latest_day,
             require_production_cloud=True,
+            local_scl=latest_local_scl,
         ),
         "baseline_vs_en_guncel_uretim_filtresi_uygun": _s2_pair(
             baseline,
@@ -247,7 +309,7 @@ def build_report(s2_query=_query_s2_all, s1_search=s1._search_items):
             }
             for key in REGION_KEYS
         },
-        "not": "Exact 13→15, 15→16, 15→17 ve 16→17 uygunluğu ayrı kritik-pencere denetiminde kalır. Bu dosya katalogdaki en güncel gerçek sahneyi kaydeder; S2 global bulut üretim eşiğini aşarsa doğrudan hesaplanabilir saymaz ve üretim filtresini geçen en güncel tarihi ayrıca gösterir. Olmayan tarih üretilmez.",
+        "not": "Exact 13→15, 15→16, 15→17 ve 16→17 uygunluğu ayrı kritik-pencere denetiminde kalır. Bu dosya katalogdaki en güncel gerçek sahneyi kaydeder; S2 global bulut üretim eşiğini aşarsa doğrudan hesaplanabilir saymaz, varsa aynı iteme ait yerel SCL kapanma sonucunu ayrıca işler ve üretim filtresini geçen en güncel tarihi gösterir. Olmayan tarih üretilmez.",
     }
 
 
@@ -290,15 +352,41 @@ def _self_check():
             _fake_s2("2026-09-23", "S2_23_CLOUDY", cloud=88.77),
         ]
 
-    s2_summary = _s2_summary("cesme", s2_query)
+    s2_summary = _s2_summary(
+        "cesme",
+        s2_query,
+        local_scl_lookup=lambda _region, _item: None,
+    )
     assert s2_summary["en_guncel_postwindow_tarih"] == "2026-09-23"
     assert s2_summary["en_guncel_postwindow_global_bulut_yuzde"] == 88.77
     assert s2_summary["baseline_vs_en_guncel"]["hesaplanabilir"] is False
     assert s2_summary["baseline_vs_en_guncel"]["neden"] == "YUKSEK_GLOBAL_BULUT_YEREL_SCL_DOGRULAMASI_GEREKLI"
+    assert s2_summary["baseline_vs_en_guncel"]["yerel_scl_dogrulamasi_gerekli"] is True
     assert s2_summary["en_guncel_uretim_filtresi_uygun_tarih"] == "2026-09-18"
     production_pair = s2_summary["baseline_vs_en_guncel_uretim_filtresi_uygun"]
     assert production_pair["hesaplanabilir"] is True
     assert production_pair["yeni_item"] == "S2_18"
+
+    closed_scl = {
+        "item": "S2_23_CLOUDY",
+        "aoi_kapali": 99.92,
+        "aoi_yeterince_acik": False,
+        "lokal_kara_pencere": {"kapali_yuzde": 100.0},
+        "lokal_kara_pencere_yeterince_acik": False,
+    }
+    closed_summary = _s2_summary(
+        "cesme",
+        s2_query,
+        local_scl_lookup=lambda _region, item: closed_scl if item == "S2_23_CLOUDY" else None,
+    )
+    closed_pair = closed_summary["baseline_vs_en_guncel"]
+    assert closed_pair["hesaplanabilir"] is False
+    assert closed_pair["neden"] == "YUKSEK_GLOBAL_BULUT_YEREL_SCL_KAPALI"
+    assert closed_pair["yerel_scl_dogrulamasi_gerekli"] is False
+    assert closed_pair["yerel_scl_dogrulamasi_mevcut"] is True
+    assert closed_pair["yerel_scl_aoi_kapali_yuzde"] == 99.92
+    assert closed_pair["yerel_scl_lokal_kara_pencere_kapali_yuzde"] == 100.0
+    assert closed_pair["yerel_scl_yeterince_acik"] is False
 
     def s1_search(_bbox, days=30):
         del days
