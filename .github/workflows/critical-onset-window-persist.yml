@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/critical-onset-window-persist.yml"
+      - "critical_onset_window_audit.py"
+      - "critical_onset_latest_scene_audit.py"
   workflow_run:
     workflows:
       - "Sentinel Yeni Sahne Hızlı Yoklama"
