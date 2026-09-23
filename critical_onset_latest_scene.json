@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-09-23T08:04:48+00:00",
+  "olusturma_utc": "2026-09-23T14:45:29+00:00",
   "amac": "15 Eylül öncesi baseline ile gerçekten mevcut en güncel post-window Sentinel sahnesini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -15,17 +15,17 @@
       "etiket": "Çeşme merkez · Alaçatı · Ilıca",
       "sentinel2": {
         "durum": "ok",
-        "en_guncel_postwindow_tarih": "2026-09-18",
+        "en_guncel_postwindow_tarih": "2026-09-23",
         "baseline_13eylul_mevcut": true,
         "baseline_vs_en_guncel": {
           "hesaplanabilir": true,
           "neden": "OK",
           "baseline_tarihi": "2026-09-13",
-          "son_tarih": "2026-09-18",
+          "son_tarih": "2026-09-23",
           "eski_item": "S2C_T35SMC_20260913T090741_L2A",
-          "yeni_item": "S2B_T35SMC_20260918T085916_L2A",
+          "yeni_item": "S2C_T35SMC_20260923T090847_L2A",
           "eski_bulut_yuzde": 0.57,
-          "yeni_bulut_yuzde": 0.29,
+          "yeni_bulut_yuzde": 88.77,
           "ayni_mgrs_karo": true,
           "ayni_goreli_yorunge": true
         }
@@ -64,17 +64,17 @@
       "etiket": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "sentinel2": {
         "durum": "ok",
-        "en_guncel_postwindow_tarih": "2026-09-18",
+        "en_guncel_postwindow_tarih": "2026-09-23",
         "baseline_13eylul_mevcut": true,
         "baseline_vs_en_guncel": {
           "hesaplanabilir": true,
           "neden": "OK",
           "baseline_tarihi": "2026-09-13",
-          "son_tarih": "2026-09-18",
+          "son_tarih": "2026-09-23",
           "eski_item": "S2C_T35SMC_20260913T090741_L2A",
-          "yeni_item": "S2B_T35SMC_20260918T085916_L2A",
+          "yeni_item": "S2C_T35SMC_20260923T090847_L2A",
           "eski_bulut_yuzde": 0.57,
-          "yeni_bulut_yuzde": 0.29,
+          "yeni_bulut_yuzde": 88.77,
           "ayni_mgrs_karo": true,
           "ayni_goreli_yorunge": true
         }
