@@ -7532,38 +7532,24 @@
   },
   "kor_alan_saha_devriyesi": [
     {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Şifne",
-      "enlem": 38.348189,
-      "boylam": 26.45166,
-      "alan_m2": 400,
-      "neden": "KARISIK_GECERSIZLIK",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 0.196,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.348189,26.451660"
-    },
-    {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Çiftlikköy",
-      "enlem": 38.26172,
-      "boylam": 26.291605,
+      "mahalle": "Çeşme",
+      "enlem": 38.326301,
+      "boylam": 26.325489,
       "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
+      "neden": "KARISIK_GECERSIZLIK",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 0.4014,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.261720,26.291605"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.326301,26.325489",
+      "saha_gorevi": false
     }
   ],
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-09-24",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. En yeni Gülbahçe Sentinel sahnesinde tarihsel kara kanıtlı 250-6500 m² gerçek kalite körlüğü mevcut devriye tarafından kapsanmıyorsa, 1-2 günlük taze pencerede iki günlük duty rotasyonunun boşta bıraktığı farklı güvenli kör hücre ara-gün istisnası olarak temsil edilir. Kapsama kararı tüm sahne için tek bit yerine seçilecek kör küme bazında ölçülür; bir kümenin kapsanması kalan kümeleri yanlışlıkla kapatmaz. Daha yeni kullanılabilir Sentinel sahnesi gelmezse aynı en-yeni sahnenin çözülmemiş kara-kör kümeleri görünürlük borcu olarak aynı çeşitlendirilmiş ara-gün rotasyonunda tutulur. Aktif görev ve bölgeler arası mesafe korumaları aynen uygulanır; 150-249 m² MİKRO katmanı bu istisnaya girmez.",
   "gulbahce_kor_alan_devriye_korumasi": {
     "alarm": false,
     "saha_gorevi": false,
@@ -7618,8 +7604,34 @@
     "elendi": 0,
     "neden": "DEGISIKLIK_YOK"
   },
-  "operasyon_odak_disinda_devriye": [],
-  "operasyon_odak_disinda_devriye_sayi": 0,
+  "operasyon_odak_disinda_devriye": [
+    {
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Gülbahçe · güncel uydu kör alanı",
+      "enlem": 38.346832,
+      "boylam": 26.641132,
+      "alan_m2": 1200,
+      "neden": "BULUT",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.0,
+      "kaynak_tipi": "GULBAHCE_GUNCEL_SAHNE_BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "saha_gorevi": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "gulbahce_operasyonel_kapsama": true,
+      "gulbahce_cekirdek_operasyon": true,
+      "gulbahce_referans_mesafesi_m": 1601,
+      "gulbahce_guncel_sahne_korlugu": true,
+      "gulbahce_guncel_sahne_tarihi": "18.09.2026",
+      "gulbahce_guncel_sahne_item": "S2B_T35SMC_20260918T085916_L2A",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346832,26.641132",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe operasyonel öncelik dışında; kör-alan gözlemi diagnostik arka planda korunur ve günlük saha rotasına gönderilmez."
+    }
+  ],
+  "operasyon_odak_disinda_devriye_sayi": 1,
   "operasyon_odak_arka_plan": [
     {
       "gorev_id": "UEC44340AEC",
