@@ -142,21 +142,8 @@
   "temel_kazi_kapisi_eslesme_m": 60.0,
   "temel_kazi_kapisi_degisti": false,
   "temel_kazi_kapisi_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur.",
-  "temel_kazi_destekli_yeni_rota_adayi_sayi": 1,
-  "temel_kazi_destekli_yeni_rota_adaylari": [
-    {
-      "gorev_id": "FK09CDCE8371",
-      "enlem": 38.262806,
-      "boylam": 26.477305,
-      "alan_m2": 300,
-      "morfoloji_puani": 90.0,
-      "s2_morfoloji_cifti": "15.09.2026->18.09.2026",
-      "pozitif_kanit_kaynaklari": [
-        "S2_MORFOLOJI",
-        "S1_LOKAL_POZITIF"
-      ]
-    }
-  ],
+  "temel_kazi_destekli_yeni_rota_adayi_sayi": 0,
+  "temel_kazi_destekli_yeni_rota_adaylari": [],
   "temel_kazi_destekli_rota_enjeksiyonu": true,
   "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez."
 }
