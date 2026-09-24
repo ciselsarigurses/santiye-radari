@@ -10,6 +10,9 @@ on:
     paths:
       - foundation_excavation_operational_route_guard.py
       - foundation_excavation_supported_route_injector.py
+      - post_onset_sar_persistence_route_guard.py
+      - post_onset_sar_persistence_review.json
+      - manual_field_feedback.json
       - foundation_uzunkuyu_route_repair.py
       - foundation_excavation_support_coverage_audit.py
       - foundation_excavation_positive_evidence_audit.py
@@ -25,6 +28,7 @@ on:
       - "Temel Kazısı Pozitif Bağlam Koruması"
       - "Operasyonel Rota Geometri Koruması"
       - "15-17 Eylül Onset SAR Diagnostiği"
+      - "Post-Onset SAR Süreklilik Uzlaştırması"
       - "Günlük Şantiye Taraması"
       - "Ana Saha Geri Bildirim Koruması"
       # Sezon öncelik katmanı SAHA_RAPORU/latest_report ilk-3 listesini yeniden yazabilir;
@@ -64,6 +68,7 @@ jobs:
           python foundation_excavation_positive_context_guard.py --check-only
           python foundation_excavation_operational_route_guard.py --check-only
           python foundation_excavation_supported_route_injector.py --check-only
+          python post_onset_sar_persistence_route_guard.py --check-only
           python -c "import foundation_uzunkuyu_route_repair as m; m._self_check(); print('Uzunkuyu route repair self-check: ok')"
           python foundation_excavation_support_coverage_audit.py --check-only
           python field_satellite_source.py
@@ -80,6 +85,7 @@ jobs:
         run: |
           python foundation_excavation_operational_route_guard.py
           python foundation_excavation_supported_route_injector.py
+          python post_onset_sar_persistence_route_guard.py
           python foundation_uzunkuyu_route_repair.py
           python foundation_excavation_support_coverage_audit.py
 
@@ -117,6 +123,7 @@ jobs:
             python foundation_excavation_positive_context_guard.py --check-only
             python foundation_excavation_operational_route_guard.py --check-only
             python foundation_excavation_supported_route_injector.py --check-only
+            python post_onset_sar_persistence_route_guard.py --check-only
             python -c "import foundation_uzunkuyu_route_repair as m; m._self_check(); print('Uzunkuyu route repair self-check: ok')"
             python foundation_excavation_support_coverage_audit.py --check-only
             python field_satellite_source.py
@@ -127,6 +134,7 @@ jobs:
             python foundation_excavation_positive_context_guard.py
             python foundation_excavation_operational_route_guard.py
             python foundation_excavation_supported_route_injector.py
+            python post_onset_sar_persistence_route_guard.py
             python foundation_uzunkuyu_route_repair.py
             python foundation_excavation_support_coverage_audit.py
             python - <<'PY'
