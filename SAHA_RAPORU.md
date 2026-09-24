@@ -13,5 +13,6 @@
 
 > **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
-1. **YUKSEK — Konum araştırılıyor** · yaklaşık 300 m² · Görev `FK09CDCE8371` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262806,26.477305)
-2. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
+1. **YUKSEK — Konum araştırılıyor** · yaklaşık 500 m² · Görev `FKP7A28A377A` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.278725,26.303853)
+2. **YUKSEK — Konum araştırılıyor** · yaklaşık 300 m² · Görev `FK09CDCE8371` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262806,26.477305)
+3. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
