@@ -1,0 +1,43 @@
+name: Temel Kazısı S2-SAR Zaman Kesişim Koruması
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - foundation_sar_temporal_overlap_guard.py
+      - foundation_excavation_sar_seed_review.json
+      - .github/workflows/foundation-sar-temporal-overlap-guard.yml
+  workflow_run:
+    workflows:
+      - "Temel Kazısı Morfoloji Diagnostiği"
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: santiye-radari-foundation-sar-temporal-overlap-guard
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Python kur
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Zaman kesişim öz testi
+        run: python foundation_sar_temporal_overlap_guard.py --check-only
+
+      - name: Canlı S2-SAR zaman kesişimini doğrula
+        run: python foundation_sar_temporal_overlap_guard.py --enforce
