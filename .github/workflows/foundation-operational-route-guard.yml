@@ -10,6 +10,7 @@ on:
     paths:
       - foundation_excavation_operational_route_guard.py
       - foundation_excavation_supported_route_injector.py
+      - foundation_uzunkuyu_route_repair.py
       - foundation_excavation_support_coverage_audit.py
       - foundation_excavation_positive_evidence_audit.py
       - foundation_excavation_onset_temporal_guard.py
@@ -63,6 +64,7 @@ jobs:
           python foundation_excavation_positive_context_guard.py --check-only
           python foundation_excavation_operational_route_guard.py --check-only
           python foundation_excavation_supported_route_injector.py --check-only
+          python -c "import foundation_uzunkuyu_route_repair as m; m._self_check(); print('Uzunkuyu route repair self-check: ok')"
           python foundation_excavation_support_coverage_audit.py --check-only
           python field_satellite_source.py
           python -m py_compile pages/1_Saha_Kontrol.py
@@ -78,6 +80,7 @@ jobs:
         run: |
           python foundation_excavation_operational_route_guard.py
           python foundation_excavation_supported_route_injector.py
+          python foundation_uzunkuyu_route_repair.py
           python foundation_excavation_support_coverage_audit.py
 
       - name: Markdown sonunu deterministik tut
@@ -114,6 +117,7 @@ jobs:
             python foundation_excavation_positive_context_guard.py --check-only
             python foundation_excavation_operational_route_guard.py --check-only
             python foundation_excavation_supported_route_injector.py --check-only
+            python -c "import foundation_uzunkuyu_route_repair as m; m._self_check(); print('Uzunkuyu route repair self-check: ok')"
             python foundation_excavation_support_coverage_audit.py --check-only
             python field_satellite_source.py
             python -m py_compile pages/1_Saha_Kontrol.py
@@ -123,6 +127,7 @@ jobs:
             python foundation_excavation_positive_context_guard.py
             python foundation_excavation_operational_route_guard.py
             python foundation_excavation_supported_route_injector.py
+            python foundation_uzunkuyu_route_repair.py
             python foundation_excavation_support_coverage_audit.py
             python - <<'PY'
           from pathlib import Path
