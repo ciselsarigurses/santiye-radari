@@ -3,8 +3,10 @@
 Bu denetim yalnız diagnostiktir; rota, alarm, saha görevi, 250 m² ana eşik veya
 150–249 m² MİKRO politikasını değiştirmez. FOUNDATION_POSITIVE_CONTEXT kaynaklı
 operasyon kayıtları generic üretim maskesinden değil seed-merkezli lokal morfoloji
-havuzundan gelebilir. Bu nedenle rota koordinatının gerçek kaynak kaydıyla aynı
-Sentinel-2 tarih çiftinde ve aynı noktada izlenebilir olduğunu ayrıca doğrular.
+havuzundan gelebilir. Bu nedenle yalnız bu kaynak tipindeki rota koordinatının gerçek
+kaynak kaydıyla aynı Sentinel-2 tarih çiftinde ve aynı noktada izlenebilir olduğunu
+doğrular. Post-onset SAR süreklilik gibi ayrı provenance yoluna sahip adayları bu
+audit seed-merkezli kaynakmış gibi zorlamaz.
 """
 
 from __future__ import annotations
@@ -70,20 +72,42 @@ def _foundation_routes(route):
         for row in (route.get("operasyonel_rota") or [])
         if isinstance(row, dict)
         and row.get("temel_kazi_coklu_kanit_destekli") is True
-        and (
-            str(row.get("kaynak") or "") == "FOUNDATION_POSITIVE_CONTEXT"
-            or row.get("uydu_diagnostik_adayi") is True
-        )
+        and str(row.get("kaynak") or "") == "FOUNDATION_POSITIVE_CONTEXT"
         and _point(row) is not None
     ]
 
 
+def _label_tokens(label):
+    return {
+        part.strip().casefold()
+        for part in str(label or "").split("·")
+        if part.strip()
+    }
+
+
 def _region_key(route_row, seed):
     label = str(route_row.get("bolge") or "")
-    for key, region in (seed.get("bolgeler") or {}).items():
+    regions = seed.get("bolgeler") or {}
+
+    # Önce tam etiketi tercih et; mevcut Çeşme yolu değişmeden kalır.
+    for key, region in regions.items():
         if isinstance(region, dict) and str(region.get("bolge") or "") == label:
             return str(key)
-    return None
+
+    # Operasyonel rota Gülbahçe'yi bilinçli olarak etiketten çıkarabilir. Seed kaydı
+    # daha geniş kaynak etiketi taşısa da aynı çekirdek bölgeyi fail-closed biçimde
+    # eşleştir: rota tokenlarının tamamı kaynak etikette olmalı ve tek eşleşme olmalı.
+    route_tokens = _label_tokens(label)
+    if not route_tokens:
+        return None
+    matches = []
+    for key, region in regions.items():
+        if not isinstance(region, dict):
+            continue
+        source_tokens = _label_tokens(region.get("bolge"))
+        if route_tokens <= source_tokens:
+            matches.append(str(key))
+    return matches[0] if len(matches) == 1 else None
 
 
 def _nearest(route_row, candidates):
@@ -181,7 +205,7 @@ def audit(route=None, seed=None):
     rows = [_audit_row(row, seed) for row in _foundation_routes(route)]
     verified = sum(1 for row in rows if row.get("durum") == "KAYNAK_DOGRULANDI")
     return {
-        "surum": 1,
+        "surum": 2,
         "amac": "FOUNDATION_POSITIVE_CONTEXT operasyon kaydını gerçek seed-merkezli S2 morfoloji kaynağına geri izlemek",
         "gercek_derinlik_olcumu": False,
         "alarm": False,
@@ -195,9 +219,10 @@ def audit(route=None, seed=None):
         "kaynak_dogrulanamayan": len(rows) - verified,
         "hedefler": rows,
         "not": (
+            "Yalnız FOUNDATION_POSITIVE_CONTEXT kaynaklı rota kayıtları bu seed-merkezli provenance yolunda denetlenir. "
             "Generic üretim maskesiyle eşleşmeme tek başına bu seed-merkezli yolu veto etmez. "
-            "Bu denetim yalnız rotadaki tarih/koordinat/alan/morfoloji provenance'ını gerçek "
-            "seed-merkezli kaynak kaydıyla doğrular; saha teyidinin yerini tutmaz."
+            "Operasyonel etikette Gülbahçe'nin çıkarılması halinde çekirdek Uzunkuyu/Germiyan/Ildır tokenları tek bir "
+            "seed bölgesine fail-closed eşleşebilir. Saha teyidinin yerini tutmaz."
         ),
     }
 
@@ -217,7 +242,20 @@ def _self_check():
                 "uydu_diagnostik_adayi": True,
                 "kaynak": "FOUNDATION_POSITIVE_CONTEXT",
                 "temel_kazi_morfoloji_puani": 95,
-            }
+            },
+            {
+                "gorev_id": "POSTTEST",
+                "enlem": 38.278725,
+                "boylam": 26.303853,
+                "alan_m2": 500,
+                "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+                "onceki_tarih": "13.09.2026",
+                "son_tarih": "18.09.2026",
+                "temel_kazi_coklu_kanit_destekli": True,
+                "uydu_diagnostik_adayi": True,
+                "kaynak": "POST_ONSET_SAR_PERSISTENCE",
+                "temel_kazi_morfoloji_puani": 100,
+            },
         ]
     }
     seed = {
@@ -237,7 +275,23 @@ def _self_check():
                         "seed_piksel": 4,
                     }
                 ],
-            }
+            },
+            "uzunkuyu": {
+                "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+                "onceki_tarih": "15.09.2026",
+                "son_tarih": "18.09.2026",
+                "adaylar": [
+                    {
+                        "enlem": 38.262806,
+                        "boylam": 26.477305,
+                        "spektral_etki_alani_m2": 300,
+                        "seed_merkezli_morfoloji_puani": 90,
+                        "seed_merkezli_morfoloji_seviyesi": "YUKSEK",
+                        "seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+                        "seed_piksel": 3,
+                    }
+                ],
+            },
         }
     }
     payload = audit(route, seed)
@@ -255,6 +309,28 @@ def _self_check():
     far["bolgeler"]["cesme"]["adaylar"][0]["enlem"] = 38.3085
     payload = audit(route, far)
     assert payload["kaynak_dogrulanan"] == 0, payload
+
+    uzunkuyu_route = {
+        "operasyonel_rota": [
+            {
+                "gorev_id": "FKUZUNKUYU",
+                "enlem": 38.262806,
+                "boylam": 26.477305,
+                "alan_m2": 300,
+                "bolge": "Uzunkuyu · Germiyan · Ildır",
+                "onceki_tarih": "15.09.2026",
+                "son_tarih": "18.09.2026",
+                "temel_kazi_coklu_kanit_destekli": True,
+                "uydu_diagnostik_adayi": True,
+                "kaynak": "FOUNDATION_POSITIVE_CONTEXT",
+                "temel_kazi_morfoloji_puani": 90,
+            }
+        ]
+    }
+    payload = audit(uzunkuyu_route, seed)
+    assert payload["rota_hedefi"] == 1, payload
+    assert payload["kaynak_dogrulanan"] == 1, payload
+    assert payload["hedefler"][0]["bolge_anahtari"] == "uzunkuyu", payload
 
 
 def main():
