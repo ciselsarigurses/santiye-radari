@@ -12,11 +12,9 @@
   "geometri_riski_eslesme_m": 25.0,
   "geometri_riski_min_alan_orani": 0.85,
   "geometri_arka_plan_toplam": 0,
-  "rota_degisti": true,
+  "rota_degisti": false,
   "temel_rota_gorevleri": [
-    "UB3F1CABF9E",
-    "U82332941AB",
-    "U92D437BB80"
+    "FKC28C831021"
   ],
   "operasyonel_rota": [
     {
@@ -60,7 +58,8 @@
       "s2_morfoloji_onceki_tarih": "15.09.2026",
       "s2_morfoloji_son_tarih": "18.09.2026",
       "s2_morfoloji_cifti": "15.09.2026->18.09.2026",
-      "gunluk_sira": 1
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 6
     }
   ],
   "geometri_arka_plan": [],
@@ -68,56 +67,16 @@
   "rota_kaynagi": "MERKEZI_GUNUN_ILK_3",
   "merkezi_rota_kilidi": true,
   "tazelik_korumasi": true,
-  "tazelik_sirasi_degisti": true,
+  "tazelik_sirasi_degisti": false,
   "geometri_sonrasi_rota_gorevleri": [
-    "UB3F1CABF9E",
-    "U82332941AB",
-    "U92D437BB80"
+    "FKC28C831021"
   ],
   "tazelik_sonrasi_rota_gorevleri": [
-    "U82332941AB",
-    "U92D437BB80",
-    "UB3F1CABF9E"
+    "FKC28C831021"
   ],
   "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur.",
-  "operasyon_odak_arka_plan": [
-    {
-      "oncelik": "GECİKEN",
-      "oncelik_nedeni": "Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.36845,
-      "boylam": 26.64388,
-      "alan_m2": 400,
-      "sinyal": "6 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı",
-      "boyut_sinifi": "KUCUK",
-      "tarim_riski": false,
-      "tarim_baglam_alani_m2": 1300,
-      "tarim_baglam_orani": 3.25,
-      "tarim_riski_nedeni": null,
-      "rota_uygun": true,
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "onceki_tarih": "15.09.2026",
-      "son_tarih": "18.09.2026",
-      "yeni_goruntu": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.368450,26.643880",
-      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
-      "gorev_id": "U92D437BB80",
-      "saha_durumu": "KONTROLE_GIT",
-      "ilk_gorulme": "2026-09-18",
-      "bekleme_gun": 6,
-      "gecikmis": true,
-      "uydu_kanit_yasi_gun": 6,
-      "uydu_onceligi": "ORTA",
-      "parsel_sorgu": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.368450/26.643880",
-      "ada_parsel_durumu": "MANUEL_DOGRULAMA_GEREKLI",
-      "parsel_notu": "Radar koordinatı yaklaşık değişim merkezidir; TKGM Parsel Sorgu haritasında manuel kontrol edilmelidir. Ada/parsel otomatik çıkarılmadı veya doğrulanmadı.",
-      "gunluk_sira": 2,
-      "rota_uydu_kanit_yasi_gun": 6,
-      "operasyon_odak_disinda": true,
-      "operasyon_koridor_notu": "Çeşme–Uzunkuyu günlük operasyon koridorunun konservatif doğu sınırının ötesinde; mahalle tahmini yapılmadan diagnostik arka planda tutuldu."
-    }
-  ],
-  "operasyon_odak_arka_plan_sayi": 1,
+  "operasyon_odak_arka_plan": [],
+  "operasyon_odak_arka_plan_sayi": 0,
   "operasyon_odak_sonrasi_rota_gorevleri": [
     "FKC28C831021"
   ],
@@ -141,9 +100,5 @@
   "temel_kazi_destekli_yeni_rota_adayi_sayi": 0,
   "temel_kazi_destekli_yeni_rota_adaylari": [],
   "temel_kazi_destekli_rota_enjeksiyonu": true,
-  "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez.",
-  "post_onset_persistence_yeni_rota_adayi_sayi": 0,
-  "post_onset_persistence_yeni_rota_adaylari": [],
-  "post_onset_persistence_rota_enjeksiyonu": true,
-  "post_onset_persistence_rota_notu": "Yalnız 250 m²+ yüksek S2 morfolojisi ile >=2 dB, çift-pol güçlü ve kompakt-lokal post-onset S1 sürekliliği birlikte bulunan adaylar eklenir. S1 sürekliliği onset başlangıç kanıtı sayılmaz; MİKRO adaylar diagnostik kalır."
+  "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez."
 }
