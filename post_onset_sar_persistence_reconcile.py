@@ -108,7 +108,7 @@ def _spans_post_scene(sar_old, sar_new, post_scene):
         and new_date
         and post_date
         and onset_start
-        and onset_start <= old_date < post_date <= new_date
+        and onset_start <= old_date <= post_date < new_date
     )
 
 
@@ -297,7 +297,9 @@ def _self_check():
         "sar_mekansal_ayrim": "KOMPAKT_LOKAL_DESTEKLI",
     })
     assert _spans_post_scene("2026-09-17", "2026-09-23", "18.09.2026")
+    assert _spans_post_scene("2026-09-18", "2026-09-24", "18.09.2026")
     assert not _spans_post_scene("2026-09-14", "2026-09-23", "18.09.2026")
+    assert not _spans_post_scene("2026-09-19", "2026-09-24", "18.09.2026")
 
     bridge = {
         "bolgeler": {
