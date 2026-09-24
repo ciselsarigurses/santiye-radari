@@ -59,6 +59,16 @@ def _date(value):
     return f"{parts[2]}-{parts[1].zfill(2)}-{parts[0].zfill(2)}"
 
 
+def _region_family(value):
+    """Normalize presentation labels without merging Çeşme and Uzunkuyu corridors."""
+    text = str(value or "").casefold()
+    if "uzunkuyu" in text or "germiyan" in text or "ıldır" in text or "ildir" in text:
+        return "uzunkuyu"
+    if "çeşme" in text or "cesme" in text or "alaçatı" in text or "alacati" in text or "ılıca" in text or "ilica" in text:
+        return "cesme"
+    return text.strip()
+
+
 def _supports(context):
     rows = []
     for region_key, region in (context.get("bolgeler") or {}).items():
@@ -93,14 +103,14 @@ def _nearest(support, rows):
     target = (support["enlem"], support["boylam"])
     nearest = None
     nearest_distance = None
+    support_family = _region_family(support.get("bolge"))
     for raw in rows or []:
         if not isinstance(raw, dict) or _point(raw) is None:
             continue
         if _date(raw.get("son_tarih")) != support["scene"]:
             continue
-        support_region = support.get("bolge") or ""
-        row_region = str(raw.get("bolge") or "")
-        if support_region and row_region and support_region != row_region:
+        row_family = _region_family(raw.get("bolge"))
+        if support_family and row_family and support_family != row_family:
             continue
         distance = _distance_m(target, _point(raw))
         if nearest_distance is None or distance < nearest_distance:
@@ -145,7 +155,7 @@ def audit(context=None, report=None):
     recovered = [x for x in rows if x["operasyonel_olarak_kurtarildi"]]
     unrecovered = [x for x in rows if x["kurtarilamamis_recall_boslugu"]]
     return {
-        "surum": 2,
+        "surum": 3,
         "amac": "Korunmuş 250 m²+ çoklu-pozitif temel/kepçe desteklerinin aday/rota zincirinde sessizce kaybolmasını denetlemek",
         "ana_uretim_esigi_m2": MAIN_THRESHOLD_M2,
         "eslesme_yaricapi_m": MATCH_RADIUS_M,
@@ -162,10 +172,10 @@ def audit(context=None, report=None):
         "not": (
             "Bu denetim yeni görev üretmez. Aday-havuzu recall boşluğu ham saha_adaylari üretimindeki kör noktayı "
             "gösterir. Aynı korunmuş destek nihai rotada güvenli kapı üzerinden temsil ediliyorsa operasyonel olarak "
-            "kurtarılmış sayılır ve tek başına ciddi sistem sorunu değildir. Ciddi recall boşluğu yalnız ham havuzda "
-            "temsil edilmeyen korunmuş desteğin nihai rotada da bulunmaması halinde işaretlenir. Nihai rota boşluğu tek "
-            "başına hata değildir; ham havuzda temsil edilen bir aday başka negatif/operasyonel kapılar nedeniyle bilinçli "
-            "olarak bastırılmış olabilir."
+            "kurtarılmış sayılır ve tek başına ciddi sistem sorunu değildir. Bölge sunum etiketleri Çeşme/Uzunkuyu "
+            "koridor ailesine normalize edilir; toplu etikette Gülbahçe adının bulunması tek başına Uzunkuyu eşleşmesini "
+            "bozmaz. Ciddi recall boşluğu yalnız ham havuzda temsil edilmeyen korunmuş desteğin nihai rotada da "
+            "bulunmaması halinde işaretlenir."
         ),
     }
 
@@ -233,6 +243,38 @@ def _self_check():
     assert missing["operasyonel_kurtarilan_sayisi"] == 0, missing
     assert missing["kurtarilamamis_recall_boslugu_sayisi"] == 1, missing
     assert missing["ciddi_recall_boslugu"] is True, missing
+
+    # Uzunkuyu toplu kaynak etiketi Gülbahçe'yi içerebilir; rota etiketi bilinçli olarak
+    # çekirdek koridora indirgenir. Aynı tarih ve 60 m içinde bu iki sunum etiketi eşleşmelidir.
+    grouped_context = {
+        "bolgeler": {
+            "uzunkuyu": {
+                "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+                "pozitif_s2_son_tarih": "18.09.2026",
+                "adaylar": [{
+                    "enlem": 38.262806,
+                    "boylam": 26.477305,
+                    "spektral_etki_alani_m2": 300,
+                    "morfoloji_puani": 90,
+                    "pozitif_kanit_kaynaklari": ["S2_MORFOLOJI", "S1_LOKAL_POZITIF"],
+                    "ana_esik_pozitif_destekli_diagnostik_korumali": True,
+                }],
+            }
+        }
+    }
+    grouped_report = {
+        "saha_adaylari": [],
+        "gunun_ilk_3_kontrolu": [{
+            "enlem": 38.262806,
+            "boylam": 26.477305,
+            "son_tarih": "18.09.2026",
+            "bolge": "Uzunkuyu · Germiyan · Ildır",
+        }],
+    }
+    grouped = audit(grouped_context, grouped_report)
+    assert grouped["rota_recall_boslugu_sayisi"] == 0, grouped
+    assert grouped["operasyonel_kurtarilan_sayisi"] == 1, grouped
+    assert grouped["ciddi_recall_boslugu"] is False, grouped
 
 
 def main():
