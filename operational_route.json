@@ -200,5 +200,9 @@
   "temel_kazi_destekli_yeni_rota_adayi_sayi": 0,
   "temel_kazi_destekli_yeni_rota_adaylari": [],
   "temel_kazi_destekli_rota_enjeksiyonu": true,
-  "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez."
+  "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez.",
+  "post_onset_persistence_yeni_rota_adayi_sayi": 0,
+  "post_onset_persistence_yeni_rota_adaylari": [],
+  "post_onset_persistence_rota_enjeksiyonu": true,
+  "post_onset_persistence_rota_notu": "Yalnız 250 m²+ yüksek S2 morfolojisi ile >=2 dB, çift-pol güçlü ve kompakt-lokal post-onset S1 sürekliliği birlikte bulunan adaylar eklenir. S1 sürekliliği onset başlangıç kanıtı sayılmaz; MİKRO adaylar diagnostik kalır."
 }
