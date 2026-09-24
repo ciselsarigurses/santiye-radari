@@ -6,12 +6,12 @@
   "alarm": false,
   "saha_gorevi": false,
   "uretim_filtresi": false,
-  "korunmus_ana_destek_sayisi": 1,
-  "aday_havuzu_recall_boslugu_sayisi": 1,
-  "rota_recall_boslugu_sayisi": 0,
+  "korunmus_ana_destek_sayisi": 2,
+  "aday_havuzu_recall_boslugu_sayisi": 2,
+  "rota_recall_boslugu_sayisi": 1,
   "operasyonel_kurtarilan_sayisi": 1,
-  "kurtarilamamis_recall_boslugu_sayisi": 0,
-  "ciddi_recall_boslugu": false,
+  "kurtarilamamis_recall_boslugu_sayisi": 1,
+  "ciddi_recall_boslugu": true,
   "destekler": [
     {
       "region_key": "cesme",
@@ -33,6 +33,29 @@
       "rota_recall_boslugu": false,
       "operasyonel_olarak_kurtarildi": true,
       "kurtarilamamis_recall_boslugu": false,
+      "alarm": false,
+      "saha_gorevi": false
+    },
+    {
+      "region_key": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "scene": "2026-09-18",
+      "enlem": 38.262806,
+      "boylam": 26.477305,
+      "alan_m2": 300,
+      "morfoloji_puani": 90.0,
+      "pozitif_kanit_kaynaklari": [
+        "S2_MORFOLOJI",
+        "S1_LOKAL_POZITIF"
+      ],
+      "tam_aday_havuzunda_temsil": false,
+      "tam_aday_havuzu_mesafe_m": 5434.9,
+      "nihai_rotada_temsil": false,
+      "nihai_rota_mesafe_m": null,
+      "aday_havuzu_recall_boslugu": true,
+      "rota_recall_boslugu": true,
+      "operasyonel_olarak_kurtarildi": false,
+      "kurtarilamamis_recall_boslugu": true,
       "alarm": false,
       "saha_gorevi": false
     }
