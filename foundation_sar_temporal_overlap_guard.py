@@ -8,7 +8,7 @@ katmanında kullanılabilir.
 
 Bu dosya üretim skoru, rota veya aday üretmez. Mevcut
 ``foundation_excavation_sar_seed_review.json`` çıktısındaki doğrudan çapraz destek
-sayısı ile tarih semantiğinin tutarlı kalmasını fail-closed denetler.
+sayısı, satır işaretleri ve tarih semantiğinin tutarlı kalmasını fail-closed denetler.
 """
 
 from __future__ import annotations
@@ -66,13 +66,30 @@ def audit(payload=None):
         except (TypeError, ValueError):
             cross_count = 0
 
+        cross_rows_raw = region.get("capraz_destekli_adaylar")
+        cross_rows = cross_rows_raw if isinstance(cross_rows_raw, list) else []
+        row_count = len(cross_rows)
+        count_mismatch = cross_count != row_count
+        invalid_row_indexes = []
+        for index, row in enumerate(cross_rows):
+            if not isinstance(row, dict):
+                invalid_row_indexes.append(index)
+                continue
+            if row.get("s2_sar_capraz_destek") is not True:
+                invalid_row_indexes.append(index)
+                continue
+            if row.get("sar_optik_doneme_zamansal_uygun") is not True:
+                invalid_row_indexes.append(index)
+
         overlap = _windows_overlap(
             region.get("s2_onceki_tarih"),
             region.get("s2_son_tarih"),
             region.get("sar_eski_tarih"),
             region.get("sar_yeni_tarih"),
         )
-        mismatch = bool(cross_count > 0 and overlap is not True)
+        temporal_mismatch = bool(cross_count > 0 and overlap is not True)
+        row_mismatch = bool(count_mismatch or invalid_row_indexes)
+        mismatch = bool(temporal_mismatch or row_mismatch)
         if mismatch:
             mismatches.append(region_key)
 
@@ -82,13 +99,18 @@ def audit(payload=None):
             "sar_eski_tarih": region.get("sar_eski_tarih"),
             "sar_yeni_tarih": region.get("sar_yeni_tarih"),
             "s2_sar_capraz_destekli_sayi": cross_count,
+            "capraz_destekli_satir_sayisi": row_count,
+            "capraz_destek_sayi_satir_tutarli": not count_mismatch,
+            "gecersiz_capraz_destek_satir_indeksleri": invalid_row_indexes,
+            "capraz_destek_satirlari_tutarli": not invalid_row_indexes,
             "gozlem_pencereleri_kesisiyor": overlap,
-            "dogrudan_capraz_destek_temporal_uyumlu": not mismatch,
+            "dogrudan_capraz_destek_temporal_uyumlu": not temporal_mismatch,
+            "dogrudan_capraz_destek_tutarli": not mismatch,
         }
 
     return {
-        "surum": 1,
-        "amac": "Doğrudan S2-SAR temel/kepçe çapraz desteğini kesişen gözlem pencerelerine sabitlemek",
+        "surum": 2,
+        "amac": "Doğrudan S2-SAR temel/kepçe çapraz desteğini kesişen gözlem pencerelerine ve tutarlı aday satırlarına sabitlemek",
         "uretim_filtresi": False,
         "alarm": False,
         "saha_gorevi": False,
@@ -97,8 +119,10 @@ def audit(payload=None):
         "bolgeler": rows,
         "not": (
             "S2-SAR doğrudan çapraz destek yalnız S1 ve S2 gözlem aralıkları en az bir gün "
-            "kesişiyorsa geçerlidir. Kesişmeyen daha yeni SAR değişimleri doğrudan onset kanıtı "
-            "değil, ayrı devam/persistence diagnostigidir. Bu koruma skor veya rota üretmez."
+            "kesişiyorsa geçerlidir. Ayrıca bölgesel çapraz-destek sayısı capraz_destekli_adaylar "
+            "satır sayısıyla eşleşmeli ve her satır açıkça zamansal uygun + çapraz destekli olmalıdır. "
+            "Kesişmeyen daha yeni SAR değişimleri doğrudan onset kanıtı değil, ayrı devam/persistence "
+            "diagnostigidir. Bu koruma skor veya rota üretmez."
         ),
     }
 
@@ -110,6 +134,10 @@ def _self_check():
     assert _windows_overlap("15.09.2026", "18.09.2026", "23.09.2026", "29.09.2026") is False
     assert _windows_overlap("15.09.2026", None, "17.09.2026", "23.09.2026") is None
 
+    good_row = {
+        "s2_sar_capraz_destek": True,
+        "sar_optik_doneme_zamansal_uygun": True,
+    }
     non_overlap_with_cross = {
         "bolgeler": {
             "cesme": {
@@ -118,6 +146,7 @@ def _self_check():
                 "sar_eski_tarih": "23.09.2026",
                 "sar_yeni_tarih": "29.09.2026",
                 "s2_sar_capraz_destekli_sayi": 2,
+                "capraz_destekli_adaylar": [good_row, good_row],
             },
             "uzunkuyu": {},
         }
@@ -134,11 +163,66 @@ def _self_check():
                 "sar_eski_tarih": "23.09.2026",
                 "sar_yeni_tarih": "29.09.2026",
                 "s2_sar_capraz_destekli_sayi": 0,
+                "capraz_destekli_adaylar": [],
             },
             "uzunkuyu": {},
         }
     }
     assert audit(non_overlap_without_cross)["ciddi_temporal_uyumsuzluk"] is False
+
+    count_drift = {
+        "bolgeler": {
+            "cesme": {
+                "s2_onceki_tarih": "15.09.2026",
+                "s2_son_tarih": "18.09.2026",
+                "sar_eski_tarih": "17.09.2026",
+                "sar_yeni_tarih": "23.09.2026",
+                "s2_sar_capraz_destekli_sayi": 2,
+                "capraz_destekli_adaylar": [good_row],
+            },
+            "uzunkuyu": {},
+        }
+    }
+    result = audit(count_drift)
+    assert result["ciddi_temporal_uyumsuzluk"] is True
+    assert result["bolgeler"]["cesme"]["capraz_destek_sayi_satir_tutarli"] is False
+
+    bad_row_flag = {
+        "bolgeler": {
+            "cesme": {
+                "s2_onceki_tarih": "15.09.2026",
+                "s2_son_tarih": "18.09.2026",
+                "sar_eski_tarih": "17.09.2026",
+                "sar_yeni_tarih": "23.09.2026",
+                "s2_sar_capraz_destekli_sayi": 1,
+                "capraz_destekli_adaylar": [
+                    {
+                        "s2_sar_capraz_destek": True,
+                        "sar_optik_doneme_zamansal_uygun": False,
+                    }
+                ],
+            },
+            "uzunkuyu": {},
+        }
+    }
+    result = audit(bad_row_flag)
+    assert result["ciddi_temporal_uyumsuzluk"] is True
+    assert result["bolgeler"]["cesme"]["capraz_destek_satirlari_tutarli"] is False
+
+    fully_consistent = {
+        "bolgeler": {
+            "cesme": {
+                "s2_onceki_tarih": "15.09.2026",
+                "s2_son_tarih": "18.09.2026",
+                "sar_eski_tarih": "17.09.2026",
+                "sar_yeni_tarih": "23.09.2026",
+                "s2_sar_capraz_destekli_sayi": 1,
+                "capraz_destekli_adaylar": [good_row],
+            },
+            "uzunkuyu": {},
+        }
+    }
+    assert audit(fully_consistent)["ciddi_temporal_uyumsuzluk"] is False
 
 
 def main(argv=None):
