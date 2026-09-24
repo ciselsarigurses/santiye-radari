@@ -19,6 +19,11 @@ on:
       - "Baseline Bitki Negatif Bağlam Diagnostiği"
       - "Temel Kazısı Morfoloji Diagnostiği"
     types: [completed]
+  # Sentinel yoklama workflow'unun kendi GITHUB_TOKEN'iyle yaptığı snapshot commitleri
+  # yeni push workflow'u başlatmaz. :35 yoklamasından sonra :50'de yeniden ölçerek
+  # taze S1 kanıtının optik görüntü değişmese bile baseline adaylarına ulaşmasını garanti et.
+  schedule:
+    - cron: "50 * * * *"
   workflow_dispatch:
 
 permissions:
