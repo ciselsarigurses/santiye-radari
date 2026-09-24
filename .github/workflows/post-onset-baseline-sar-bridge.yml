@@ -7,9 +7,17 @@ on:
       - "post_onset_baseline_excavation_review.json"
       - "post_onset_baseline_sar_bridge.py"
       - "manual_field_feedback.json"
+      # Sentinel yoklamasının semantik RTC snapshotı değiştiğinde baseline köprüsünü
+      # de tazele; yalnız kaynak kodu değişimine bağlı kalma.
+      - "sentinel1_rtc_map.geojson"
       - "sentinel1_rtc_change_diagnostic.py"
       - "sentinel1_scene_probe.py"
       - ".github/workflows/post-onset-baseline-sar-bridge.yml"
+  # :35 Sentinel yoklaması ve :50 exact-SAR çapraz diagnostik sonrasında canlı RTC
+  # verisini tekrar ölç. Böylece 13 Eylül baseline köprüsü dış veri değiştiğinde
+  # eski SAR skorunda takılı kalmaz.
+  schedule:
+    - cron: "55 * * * *"
   workflow_dispatch:
 
 permissions:
