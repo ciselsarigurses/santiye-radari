@@ -23,3 +23,7 @@
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
 2. **KALİBRASYON — Alaçatı** · yaklaşık 500 m² · 15.09.2026 → 18.09.2026 · BSI Δ 0.155 · RGB Δ 0.175 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.295819,26.380094)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+
+## Arka planda izlenen geniş yüzey hareketleri
+
+Bu raporda ölçülmüş düşük-kompaktlık kuralına giren geniş yüzey hareketi yok.
