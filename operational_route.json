@@ -14,6 +14,7 @@
   "geometri_arka_plan_toplam": 0,
   "rota_degisti": false,
   "temel_rota_gorevleri": [
+    "FK09CDCE8371",
     "FKC28C831021"
   ],
   "operasyonel_rota": [
@@ -58,7 +59,8 @@
       "s2_morfoloji_onceki_tarih": "15.09.2026",
       "s2_morfoloji_son_tarih": "18.09.2026",
       "s2_morfoloji_cifti": "15.09.2026->18.09.2026",
-      "gunluk_sira": 1
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 6
     },
     {
       "oncelik": "YUKSEK",
@@ -112,9 +114,11 @@
   "tazelik_korumasi": true,
   "tazelik_sirasi_degisti": false,
   "geometri_sonrasi_rota_gorevleri": [
+    "FK09CDCE8371",
     "FKC28C831021"
   ],
   "tazelik_sonrasi_rota_gorevleri": [
+    "FK09CDCE8371",
     "FKC28C831021"
   ],
   "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur.",
