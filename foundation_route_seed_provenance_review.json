@@ -1,5 +1,5 @@
 {
-  "surum": 1,
+  "surum": 2,
   "amac": "FOUNDATION_POSITIVE_CONTEXT operasyon kaydını gerçek seed-merkezli S2 morfoloji kaynağına geri izlemek",
   "gercek_derinlik_olcumu": false,
   "alarm": false,
@@ -8,10 +8,48 @@
   "eslesme_yaricapi_m": 5.0,
   "minimum_alan_benzerligi": 0.8,
   "minimum_morfoloji_puani": 65.0,
-  "rota_hedefi": 1,
-  "kaynak_dogrulanan": 1,
+  "rota_hedefi": 2,
+  "kaynak_dogrulanan": 2,
   "kaynak_dogrulanamayan": 0,
   "hedefler": [
+    {
+      "gorev_id": "FK09CDCE8371",
+      "enlem": 38.262806,
+      "boylam": 26.477305,
+      "rota_alan_m2": 300,
+      "rota_morfoloji_puani": 90.0,
+      "rota_onceki_tarih": "15.09.2026",
+      "rota_son_tarih": "18.09.2026",
+      "kaynak": "FOUNDATION_POSITIVE_CONTEXT",
+      "bolge_anahtari": "uzunkuyu",
+      "kaynak_onceki_tarih": "15.09.2026",
+      "kaynak_son_tarih": "18.09.2026",
+      "tarih_cifti_eslesiyor": true,
+      "kaynak_eslesme_mesafe_m": 0.0,
+      "kaynak_enlem": 38.262806,
+      "kaynak_boylam": 26.477305,
+      "kaynak_alan_m2": 300,
+      "alan_benzerligi": 1.0,
+      "kaynak_morfoloji_puani": 90.0,
+      "kaynak_morfoloji_seviyesi": "YUKSEK",
+      "kaynak_seed_sinifi": "DUSUK_KONTRAST_KAZI_PROXY",
+      "kaynak_seed_piksel": 3,
+      "kaynak_pozitif_kanitlar": [
+        "lokal ve küçük müdahale bileşeni",
+        "uzun-şerit olmayan yerel geometri",
+        "kapalı/kompakt yerel doluluk",
+        "merkez çevreden daha güçlü değişiyor",
+        "çekirdek değişimi seyrek/lokal",
+        "dış çevre büyük ölçüde stabil",
+        "sınırlı parlak hafriyat/çıplak-zemin zonu"
+      ],
+      "kaynak_negatif_kanitlar": [],
+      "koordinat_eslesiyor": true,
+      "alan_eslesiyor": true,
+      "morfoloji_eslesiyor": true,
+      "durum": "KAYNAK_DOGRULANDI",
+      "otomatik_rota_degistirme": false
+    },
     {
       "gorev_id": "FKC28C831021",
       "enlem": 38.307849,
@@ -52,5 +90,5 @@
       "otomatik_rota_degistirme": false
     }
   ],
-  "not": "Generic üretim maskesiyle eşleşmeme tek başına bu seed-merkezli yolu veto etmez. Bu denetim yalnız rotadaki tarih/koordinat/alan/morfoloji provenance'ını gerçek seed-merkezli kaynak kaydıyla doğrular; saha teyidinin yerini tutmaz."
+  "not": "Yalnız FOUNDATION_POSITIVE_CONTEXT kaynaklı rota kayıtları bu seed-merkezli provenance yolunda denetlenir. Generic üretim maskesiyle eşleşmeme tek başına bu seed-merkezli yolu veto etmez. Operasyonel etikette Gülbahçe'nin çıkarılması halinde çekirdek Uzunkuyu/Germiyan/Ildır tokenları tek bir seed bölgesine fail-closed eşleşebilir. Saha teyidinin yerini tutmaz."
 }
