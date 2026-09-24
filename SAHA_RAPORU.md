@@ -13,3 +13,7 @@
 
 1. **YUKSEK — Konum araştırılıyor** · yaklaşık 300 m² · Görev `FK09CDCE8371` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262806,26.477305)
 2. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
+
+## Arka planda izlenen geniş yüzey hareketleri
+
+Bu raporda ölçülmüş düşük-kompaktlık kuralına giren geniş yüzey hareketi yok.
