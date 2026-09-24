@@ -153,6 +153,52 @@ jobs:
           print("Çekirdek 1+4 regresyon koordinat bütünlüğü: OK")
           PY
 
+      - name: Seed-merkezli etkin 1+4 regresyonunu doğrula
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          core_ids = {
+              "FN-20260916-CESME-001",
+              "FP-20260916-REISDERE-001",
+              "FP-20260917-UZUNKUYU-001",
+              "FP-20260917-MUSALLA-001",
+              "FP-20260917-MUSALLA-002",
+          }
+          payload = json.loads(
+              Path("seed_centered_excavation_morphology_review.json").read_text(encoding="utf-8")
+          )
+          found = {}
+          for region in (payload.get("bolgeler") or {}).values():
+              if not isinstance(region, dict):
+                  continue
+              if region.get("durum") != "ok":
+                  raise SystemExit(f"Seed-merkezli regresyon bölgesi sağlıklı değil: {region.get('durum')}")
+              for row in region.get("saha_referans_regresyonu") or []:
+                  if isinstance(row, dict) and row.get("id") in core_ids:
+                      found[row["id"]] = row
+
+          missing = sorted(core_ids - set(found))
+          if missing:
+              raise SystemExit(f"Seed-merkezli etkin regresyonda çekirdek referans eksik: {missing}")
+
+          mismatched = sorted(
+              item_id for item_id, row in found.items()
+              if row.get("regresyon_uyumlu") is not True
+          )
+          if mismatched:
+              raise SystemExit(f"Seed-merkezli etkin 1+4 regresyonu bozuldu: {mismatched}")
+
+          if int(payload.get("toplam_regresyon_uyumsuz") or 0) != 0:
+              raise SystemExit(
+                  "Seed-merkezli morfoloji katmanında saha regresyon uyumsuzluğu var: "
+                  f"{payload.get('toplam_regresyon_uyumsuz')}"
+              )
+
+          print("Seed-merkezli etkin 1+4 regresyonu: OK")
+          PY
+
       - name: Diagnostik sonuçlarını güvenli kaydet
         run: |
           outputs="foundation_excavation_morphology_review.json foundation_excavation_agri_shadow_review.json excavation_reference_signature_review.json localized_excavation_seed_review.json localized_excavation_reference_rank_review.json seed_centered_excavation_morphology_review.json foundation_excavation_reference_similarity_review.json foundation_excavation_sar_seed_review.json foundation_excavation_cross_evidence_review.json foundation_excavation_route_gate_review.json"
