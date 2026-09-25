@@ -6,13 +6,13 @@
     150,
     249
   ],
-  "durum": "veri_tarihi_uyusmuyor",
+  "durum": "ok",
   "amac": "Gülbahçe 2 km operasyon alanında yalnız EN YENİ Sentinel SCL sahnesinde kalite nedeniyle görülemeyen pikselleri, son açık tarihlerde SCL=4/5 ile bağımsız olarak kara olduğu kanıtlanmış yüzeylerde ölçmek; iki-sahne temporal körlüğünü güncel-sahne körlüğüyle karıştırmamak.",
   "kaynak_son_tarih": "25.09.2026",
   "kaynak_son_item": "S2A_T35SMC_20260925T090524_L2A",
-  "coverage_son_tarih": "18.09.2026",
-  "coverage_son_item": "S2B_T35SMC_20260918T085916_L2A",
-  "ayni_sentinel_sahnesi": false,
+  "coverage_son_tarih": "25.09.2026",
+  "coverage_son_item": "S2A_T35SMC_20260925T090524_L2A",
+  "ayni_sentinel_sahnesi": true,
   "kara_referans_sahne_sayisi": 8,
   "kara_referans_tarihleri": [
     "18.09.2026",
@@ -28,8 +28,8 @@
   "guncel_sahne_mikro_kor_150_249": 0,
   "guncel_sahne_kor_250_6500": 1,
   "guncel_sahne_kor_6500ustu": 1,
-  "secilen_devriye_eslesen_kor_kume": 0,
-  "secilen_devriye_guncel_korlugu_kapsiyor": false,
+  "secilen_devriye_eslesen_kor_kume": 1,
+  "secilen_devriye_guncel_korlugu_kapsiyor": true,
   "guncel_sahne_mikro_kor_kumeleri": [],
   "guncel_sahne_kor_kumeleri": [
     {
@@ -40,8 +40,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 656,
-      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_mesafe_m": 0,
+      "secilen_devriye_kapsiyor": true,
       "secilen_devriyeye_yakin_ek_kontrol": false
     }
   ],
