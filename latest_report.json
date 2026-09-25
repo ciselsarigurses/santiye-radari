@@ -6710,5 +6710,39 @@
     "not": "TAZE KAZI sıralama bandı yalnız 15 Eylül 2026 veya daha yeni Sentinel sahnesine verilir. Sezon öncesi sinyal silinmez; normal/backlog kanıtı olarak izlenir. 150-249 m² MİKRO doğrudan saha görevine yükseltilmez."
   },
   "temel_kazi_kapisi_arka_plan_sayi": 3,
-  "temel_kazi_kapisi_aktif": true
+  "temel_kazi_kapisi_aktif": true,
+  "arka_plan_genis_yuzey_hareketleri": [],
+  "arka_plan_kurali": {
+    "alarm": false,
+    "saha_gorevi": false,
+    "min_alan_m2": 10000,
+    "dusuk_kompaktlik_max": 0.15,
+    "manuel_tekrar_override": true,
+    "kanit": "hareket_json; metadata yoksa aynı tarihli bağımsız şekil denetimi",
+    "aciklama": "Yalnız 10.000 m² üstü + ölçülmüş düşük-kompaktlık riski birlikteyse operasyon listesinden ayrılır. Ham Sentinel/radar kaydı silinmez.",
+    "yaklasik_provenans": {
+      "aktif": true,
+      "maksimum_esleme_m": 25.0,
+      "minimum_alan_benzerligi": 0.6,
+      "kanit": "shape_false_positive_audit üretim seçimi + nihai yaklaşık provenans doğrulaması",
+      "aciklama": "BBox/yeniden-pikselleştirme nedeniyle birkaç metre kayan düşük-kompaktlık geniş kümeler yalnız şekil denetiminin kendi 25 m / 0.60 güven sınırında arka plana ayrılır."
+    },
+    "tarihsel_tasima": {
+      "aktif": true,
+      "yalniz_yeni_goruntu_false": true,
+      "minimum_bekleme_gun": 1,
+      "minimum_alan_m2": 10000,
+      "maksimum_esleme_m": 25.0,
+      "minimum_alan_benzerligi": 0.6,
+      "kanit": "aynı-gün shape_false_positive_audit üretim seçimi",
+      "aciklama": "Yalnız tarihsel/gecikmiş geniş görev, güncel düşük-kompaktlık geometriyle güvenli provenans sınırında yeniden eşleşirse arka plana ayrılır. Taze görev ve insanın TEKRAR_GIT kararı korunur."
+    },
+    "tekrar_calistirma_koruması": {
+      "aktif": true,
+      "yalniz_ayni_rapor_tarihi": true,
+      "alarm": false,
+      "saha_gorevi": false,
+      "aciklama": "Aynı günlük rapor yeniden işlendiğinde daha önce arka plana ayrılmış geniş-yüzey diagnostik kayıtları sessizce düşürülmez."
+    }
+  }
 }
