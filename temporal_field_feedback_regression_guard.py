@@ -282,10 +282,11 @@ def _self_check():
         "toplam_regresyon_uyumsuz": 0,
         "regresyon_uyumsuzluklari": [],
     }
-    ignored = _patch_seed_centered_morphology(seed_review, statuses)
+    ignored = _patch_seed_centered_morphology(seed_review, post_event_statuses)
     assert ignored == ["FN-TEST"], ignored
     patched_positive = seed_review["bolgeler"]["cesme"]["saha_referans_regresyonu"][0]
-    assert patched_positive["regresyon_uyumlu"] is None, patched_positive
+    assert patched_positive["regresyon_uyumlu"] is True, patched_positive
+    assert patched_positive["ham_regresyon_uyumlu"] is True, patched_positive
     assert patched_positive["regresyon_degerlendirildi"] is False, patched_positive
     assert seed_review["toplam_regresyon_uyumsuz"] == 0, seed_review
 
