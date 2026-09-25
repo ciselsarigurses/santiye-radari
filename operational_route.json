@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-24",
-  "kaynak_rapor_olusturma": "2026-09-24 19:16 +03",
+  "rapor_tarihi": "2026-09-25",
+  "kaynak_rapor_olusturma": "2026-09-25 11:16 +03",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -12,9 +12,11 @@
   "geometri_riski_eslesme_m": 25.0,
   "geometri_riski_min_alan_orani": 0.85,
   "geometri_arka_plan_toplam": 0,
-  "rota_degisti": false,
+  "rota_degisti": true,
   "temel_rota_gorevleri": [
-    "FKC28C831021"
+    "UB3F1CABF9E",
+    "U82332941AB",
+    "UADFA62B1D0"
   ],
   "operasyonel_rota": [
     {
@@ -58,8 +60,7 @@
       "s2_morfoloji_onceki_tarih": "15.09.2026",
       "s2_morfoloji_son_tarih": "18.09.2026",
       "s2_morfoloji_cifti": "15.09.2026->18.09.2026",
-      "gunluk_sira": 1,
-      "rota_uydu_kanit_yasi_gun": 6
+      "gunluk_sira": 1
     }
   ],
   "geometri_arka_plan": [],
@@ -67,12 +68,16 @@
   "rota_kaynagi": "MERKEZI_GUNUN_ILK_3",
   "merkezi_rota_kilidi": true,
   "tazelik_korumasi": true,
-  "tazelik_sirasi_degisti": false,
+  "tazelik_sirasi_degisti": true,
   "geometri_sonrasi_rota_gorevleri": [
-    "FKC28C831021"
+    "UB3F1CABF9E",
+    "U82332941AB",
+    "UADFA62B1D0"
   ],
   "tazelik_sonrasi_rota_gorevleri": [
-    "FKC28C831021"
+    "U82332941AB",
+    "UADFA62B1D0",
+    "UB3F1CABF9E"
   ],
   "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur.",
   "operasyon_odak_arka_plan": [],
@@ -91,18 +96,135 @@
   "temel_kazi_kapisi_sonrasi_rota_gorevleri": [
     "FKC28C831021"
   ],
-  "temel_kazi_kapisi_arka_plan": [],
-  "temel_kazi_kapisi_arka_plan_sayi": 0,
+  "temel_kazi_kapisi_arka_plan": [
+    {
+      "oncelik": "GECİKEN",
+      "oncelik_nedeni": "Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "mahalle": "Dalyan",
+      "enlem": 38.352531,
+      "boylam": 26.322742,
+      "alan_m2": 300,
+      "sinyal": "7 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "KUCUK",
+      "tarim_riski": false,
+      "tarim_baglam_alani_m2": 500,
+      "tarim_baglam_orani": 1.67,
+      "tarim_riski_nedeni": null,
+      "rota_uygun": false,
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "15.09.2026",
+      "son_tarih": "18.09.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.352531,26.322742",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U82332941AB",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-09-18",
+      "bekleme_gun": 7,
+      "gecikmis": true,
+      "uydu_kanit_yasi_gun": 7,
+      "uydu_onceligi": "ORTA",
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 7,
+      "temel_kazi_coklu_kanit_destekli": false,
+      "temel_kazi_kapisi": "GENEL_ZEMIN_DEGISIMI_TEK_BASINA_ROTA_DEGIL",
+      "operasyonel_durum": "DIAGNOSTIK_ARKA_PLAN"
+    },
+    {
+      "oncelik": "GECİKEN",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.32015,
+      "boylam": 26.562138,
+      "alan_m2": 400,
+      "sinyal": "10 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_tarih": "13.09.2026",
+      "son_tarih": "15.09.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.320150,26.562138",
+      "konum_notu": "Koordinat açık saha görevinin yaklaşık merkezidir. Alan ve sinyal son eşleşen uydu adayından en fazla 25 m tarihsel eşleşmeyle taşınmıştır; son yeniden analizde küme tekrar görünmediği için saha teyidi beklenmektedir.",
+      "gorev_id": "UADFA62B1D0",
+      "saha_durumu": "KONTROLE_GIT",
+      "takip_gorevi": false,
+      "gecikmis": true,
+      "ilk_gorulme": "2026-09-15",
+      "bekleme_gun": 10,
+      "kontrol_sayisi": 0,
+      "son_islem": "2026-09-15",
+      "adres": null,
+      "ada": null,
+      "parsel": null,
+      "firma": null,
+      "proje": null,
+      "boyut_sinifi": "KUCUK",
+      "tarihsel_esleme_mesafe_m": 0.0,
+      "uydu_onceligi": "ORTA",
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "gunluk_sira": 2,
+      "rota_uydu_kanit_yasi_gun": 10,
+      "temel_kazi_coklu_kanit_destekli": false,
+      "temel_kazi_kapisi": "GENEL_ZEMIN_DEGISIMI_TEK_BASINA_ROTA_DEGIL",
+      "rota_uygun": false,
+      "operasyonel_durum": "DIAGNOSTIK_ARKA_PLAN"
+    },
+    {
+      "oncelik": "GECİKEN",
+      "mahalle": "Alaçatı",
+      "enlem": 38.282433,
+      "boylam": 26.365212,
+      "alan_m2": 300,
+      "sinyal": "20 gündür saha kontrolü bekliyor · Küçük, güçlü yüzey/toprak değişimi adayı",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "03.09.2026",
+      "son_tarih": "05.09.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.282433,26.365212",
+      "konum_notu": "Koordinat açık saha görevinin yaklaşık merkezidir. Alan ve sinyal son eşleşen uydu adayından en fazla 25 m tarihsel eşleşmeyle taşınmıştır; son yeniden analizde küme tekrar görünmediği için saha teyidi beklenmektedir.",
+      "gorev_id": "UB3F1CABF9E",
+      "saha_durumu": "KONTROLE_GIT",
+      "takip_gorevi": false,
+      "gecikmis": true,
+      "ilk_gorulme": "2026-09-05",
+      "bekleme_gun": 20,
+      "kontrol_sayisi": 0,
+      "son_islem": "2026-09-05",
+      "adres": null,
+      "ada": null,
+      "parsel": null,
+      "firma": null,
+      "proje": null,
+      "boyut_sinifi": "KUCUK",
+      "tarihsel_esleme_mesafe_m": 0.0,
+      "uydu_onceligi": "ORTA",
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "gunluk_sira": 3,
+      "rota_uydu_kanit_yasi_gun": 20,
+      "temel_kazi_coklu_kanit_destekli": false,
+      "temel_kazi_kapisi": "GENEL_ZEMIN_DEGISIMI_TEK_BASINA_ROTA_DEGIL",
+      "rota_uygun": false,
+      "operasyonel_durum": "DIAGNOSTIK_ARKA_PLAN"
+    }
+  ],
+  "temel_kazi_kapisi_arka_plan_sayi": 3,
   "temel_kazi_kapisi_destekli_ana_aday_sayi": 1,
   "temel_kazi_kapisi_eslesme_m": 60.0,
-  "temel_kazi_kapisi_degisti": false,
+  "temel_kazi_kapisi_degisti": true,
   "temel_kazi_kapisi_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur.",
-  "temel_kazi_destekli_yeni_rota_adayi_sayi": 0,
-  "temel_kazi_destekli_yeni_rota_adaylari": [],
+  "temel_kazi_destekli_yeni_rota_adayi_sayi": 1,
+  "temel_kazi_destekli_yeni_rota_adaylari": [
+    {
+      "gorev_id": "FKC28C831021",
+      "enlem": 38.307849,
+      "boylam": 26.333503,
+      "alan_m2": 400,
+      "morfoloji_puani": 95.0,
+      "s2_morfoloji_cifti": "15.09.2026->18.09.2026",
+      "pozitif_kanit_kaynaklari": [
+        "S2_MORFOLOJI",
+        "S1_ONSET_11_17"
+      ]
+    }
+  ],
   "temel_kazi_destekli_rota_enjeksiyonu": true,
-  "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez.",
-  "post_onset_persistence_yeni_rota_adayi_sayi": 0,
-  "post_onset_persistence_yeni_rota_adaylari": [],
-  "post_onset_persistence_rota_enjeksiyonu": true,
-  "post_onset_persistence_rota_notu": "Yalnız 250 m²+ yüksek S2 morfolojisi ile >=2 dB, çift-pol güçlü ve kompakt-lokal post-onset S1 sürekliliği birlikte bulunan adaylar eklenir. S1 sürekliliği onset başlangıç kanıtı sayılmaz; MİKRO adaylar diagnostik kalır."
+  "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez."
 }
