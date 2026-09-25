@@ -13,15 +13,15 @@
 
 > Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-1. **ERKEN — Uzunkuyu** · yaklaşık 600 m² · Görev `UD510E313E5` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.289307,26.553208)
-2. **ERKEN — Alaçatı** · yaklaşık 400 m² · Görev `UEA6F865345` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262987,26.371280)
-3. **ERKEN — Ilıca** · yaklaşık 300 m² · Görev `U5ED5045173` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.317346,26.347240)
+1. **ERKEN — Uzunkuyu** · yaklaşık 600 m² · Görev `UD510E313E5` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.289307,26.553208) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.289307/26.553208)
+2. **ERKEN — Alaçatı** · yaklaşık 400 m² · Görev `UEA6F865345` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262987,26.371280) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.262987/26.371280)
+3. **ERKEN — Ilıca** · yaklaşık 300 m² · Görev `U5ED5045173` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.317346,26.347240) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.317346/26.347240)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
 > **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Çeşme** · yaklaşık 300 m² · 18.09.2026 → 25.09.2026 · BSI Δ 0.235 · RGB Δ 0.145 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.330461,26.307631)
+1. **KALİBRASYON — Çeşme** · yaklaşık 300 m² · 18.09.2026 → 25.09.2026 · BSI Δ 0.235 · RGB Δ 0.145 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.330461,26.307631) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.330461/26.307631)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Gülbahçe** · yaklaşık 1.800 m² · 18.09.2026 → 25.09.2026 · BSI Δ 0.120 · RGB Δ 0.183 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.334441,26.651322)
+2. **KALİBRASYON — Gülbahçe** · yaklaşık 1.800 m² · 18.09.2026 → 25.09.2026 · BSI Δ 0.120 · RGB Δ 0.183 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.334441,26.651322) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.334441/26.651322)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
