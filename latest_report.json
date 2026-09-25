@@ -7306,7 +7306,8 @@
       "s2_morfoloji_onceki_tarih": "15.09.2026",
       "s2_morfoloji_son_tarih": "18.09.2026",
       "s2_morfoloji_cifti": "15.09.2026->18.09.2026",
-      "gunluk_sira": 1
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 7
     }
   ],
   "gunun_ilk_3_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur.",
