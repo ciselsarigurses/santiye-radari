@@ -21,9 +21,9 @@
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "pozitif_s2_son_tarih": "18.09.2026",
-      "baseline_post_onset_tarih": "18.09.2026",
-      "sahne_tarihi_eslesiyor": true,
-      "baseline_negatif_aday_sayisi": 3,
+      "baseline_post_onset_tarih": "25.09.2026",
+      "sahne_tarihi_eslesiyor": false,
+      "baseline_negatif_aday_sayisi": 0,
       "girdi_aday_sayisi": 126,
       "baseline_negatif_eslesen_sayi": 0,
       "ana_esik_once": 1,
@@ -77,7 +77,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": true,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -127,7 +127,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": true
         },
@@ -177,7 +177,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": true
         },
@@ -227,7 +227,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": true
         },
@@ -277,7 +277,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": true
         },
@@ -327,7 +327,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": true
         },
@@ -377,7 +377,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": true
         },
@@ -427,7 +427,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -476,7 +476,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -525,7 +525,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -574,7 +574,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -623,7 +623,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -672,7 +672,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -721,7 +721,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -770,7 +770,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -819,7 +819,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -868,7 +868,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -917,7 +917,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -966,7 +966,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1015,7 +1015,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1064,7 +1064,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1113,7 +1113,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1162,7 +1162,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1211,7 +1211,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1260,7 +1260,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1309,7 +1309,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1358,7 +1358,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1407,7 +1407,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1456,7 +1456,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1505,7 +1505,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1554,7 +1554,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1603,7 +1603,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1652,7 +1652,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1701,7 +1701,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1750,7 +1750,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1799,7 +1799,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1848,7 +1848,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1897,7 +1897,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1946,7 +1946,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -1995,7 +1995,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2044,7 +2044,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2093,7 +2093,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2142,7 +2142,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2191,7 +2191,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2240,7 +2240,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2289,7 +2289,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2338,7 +2338,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2387,7 +2387,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2436,7 +2436,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2485,7 +2485,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2534,7 +2534,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2583,7 +2583,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2632,7 +2632,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2681,7 +2681,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2730,7 +2730,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2779,7 +2779,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2828,7 +2828,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2877,7 +2877,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2926,7 +2926,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -2975,7 +2975,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3024,7 +3024,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3073,7 +3073,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3122,7 +3122,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3171,7 +3171,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3220,7 +3220,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3269,7 +3269,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3318,7 +3318,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3367,7 +3367,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3416,7 +3416,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3465,7 +3465,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3514,7 +3514,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3563,7 +3563,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3612,7 +3612,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3661,7 +3661,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3710,7 +3710,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3759,7 +3759,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3808,7 +3808,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3857,7 +3857,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3906,7 +3906,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -3955,7 +3955,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4004,7 +4004,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4053,7 +4053,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4102,7 +4102,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4151,7 +4151,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4200,7 +4200,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4249,7 +4249,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4298,7 +4298,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4347,7 +4347,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4396,7 +4396,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4445,7 +4445,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4494,7 +4494,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4543,7 +4543,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4592,7 +4592,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4641,7 +4641,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4690,7 +4690,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4739,7 +4739,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4788,7 +4788,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4837,7 +4837,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4886,7 +4886,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4935,7 +4935,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -4984,7 +4984,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5033,7 +5033,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5082,7 +5082,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5131,7 +5131,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5180,7 +5180,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5229,7 +5229,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5278,7 +5278,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5327,7 +5327,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5376,7 +5376,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5425,7 +5425,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5474,7 +5474,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5523,7 +5523,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5572,7 +5572,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5621,7 +5621,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5670,7 +5670,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5719,7 +5719,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5768,7 +5768,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5817,7 +5817,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5866,7 +5866,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5915,7 +5915,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -5964,7 +5964,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6013,7 +6013,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6062,7 +6062,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6111,7 +6111,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6160,7 +6160,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6209,7 +6209,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         }
@@ -6218,8 +6218,8 @@
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "pozitif_s2_son_tarih": "18.09.2026",
-      "baseline_post_onset_tarih": "18.09.2026",
-      "sahne_tarihi_eslesiyor": true,
+      "baseline_post_onset_tarih": "25.09.2026",
+      "sahne_tarihi_eslesiyor": false,
       "baseline_negatif_aday_sayisi": 0,
       "girdi_aday_sayisi": 122,
       "baseline_negatif_eslesen_sayi": 0,
@@ -6274,7 +6274,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": true
         },
@@ -6324,7 +6324,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": true
         },
@@ -6373,7 +6373,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6422,7 +6422,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6471,7 +6471,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6520,7 +6520,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6569,7 +6569,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6618,7 +6618,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6667,7 +6667,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6716,7 +6716,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6765,7 +6765,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6814,7 +6814,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6863,7 +6863,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6912,7 +6912,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -6961,7 +6961,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7010,7 +7010,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7059,7 +7059,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7108,7 +7108,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7157,7 +7157,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7206,7 +7206,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7255,7 +7255,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7304,7 +7304,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7353,7 +7353,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7402,7 +7402,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7451,7 +7451,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7500,7 +7500,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7549,7 +7549,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7598,7 +7598,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7647,7 +7647,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7696,7 +7696,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7745,7 +7745,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7794,7 +7794,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7843,7 +7843,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7892,7 +7892,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7941,7 +7941,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -7990,7 +7990,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8039,7 +8039,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8088,7 +8088,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8137,7 +8137,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8186,7 +8186,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8235,7 +8235,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8284,7 +8284,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8333,7 +8333,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8382,7 +8382,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8431,7 +8431,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8480,7 +8480,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8529,7 +8529,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8578,7 +8578,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8627,7 +8627,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8676,7 +8676,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8725,7 +8725,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8774,7 +8774,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8823,7 +8823,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8872,7 +8872,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8921,7 +8921,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -8970,7 +8970,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9019,7 +9019,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9068,7 +9068,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9117,7 +9117,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9166,7 +9166,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9215,7 +9215,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9264,7 +9264,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9313,7 +9313,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9362,7 +9362,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9411,7 +9411,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9460,7 +9460,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9509,7 +9509,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9558,7 +9558,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9607,7 +9607,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9656,7 +9656,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9705,7 +9705,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9754,7 +9754,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9803,7 +9803,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9852,7 +9852,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9901,7 +9901,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9950,7 +9950,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -9999,7 +9999,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10048,7 +10048,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10097,7 +10097,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10146,7 +10146,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10195,7 +10195,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10244,7 +10244,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10293,7 +10293,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10342,7 +10342,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10391,7 +10391,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10440,7 +10440,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10489,7 +10489,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10538,7 +10538,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10587,7 +10587,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10636,7 +10636,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10685,7 +10685,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10734,7 +10734,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10783,7 +10783,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10832,7 +10832,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10881,7 +10881,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10930,7 +10930,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -10979,7 +10979,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11028,7 +11028,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11077,7 +11077,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11126,7 +11126,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11175,7 +11175,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11224,7 +11224,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11273,7 +11273,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11322,7 +11322,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11371,7 +11371,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11420,7 +11420,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11469,7 +11469,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11518,7 +11518,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11567,7 +11567,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11616,7 +11616,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11665,7 +11665,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11714,7 +11714,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11763,7 +11763,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11812,7 +11812,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11861,7 +11861,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11910,7 +11910,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -11959,7 +11959,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -12008,7 +12008,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -12057,7 +12057,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -12106,7 +12106,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -12155,7 +12155,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         },
@@ -12204,7 +12204,7 @@
           "baseline_bitki_negatif_baglami": false,
           "baseline_bitki_negatif_mesafe_m": null,
           "baseline_bitki_negatif_neden": null,
-          "baseline_negatif_sahne_eslesiyor": true,
+          "baseline_negatif_sahne_eslesiyor": false,
           "ana_esik_pozitif_destekli_diagnostik_korumali": false,
           "mikro_pozitif_destekli_diagnostik_korumali": false
         }
