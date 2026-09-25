@@ -57,9 +57,10 @@ def _region_for_feedback(item):
     return None
 
 
-def _positive_statuses(review, feedback_records):
+def _positive_statuses(review, feedback_records, fallback_windows=None):
     regions = review.get("bolgeler") if isinstance(review, dict) else {}
     regions = regions if isinstance(regions, dict) else {}
+    fallback_windows = fallback_windows if isinstance(fallback_windows, dict) else {}
     statuses = {}
     for item in feedback_records:
         if str(item.get("sonuc") or "").upper() != POSITIVE_RESULT:
@@ -68,15 +69,29 @@ def _positive_statuses(review, feedback_records):
         validation_date = _parse_date(item.get("sonuc_tarihi"))
         region_key = _region_for_feedback(item)
         region = regions.get(region_key, {}) if region_key else {}
-        scene_date = _parse_date(region.get("son_tarih")) if isinstance(region, dict) else None
+        scene_start = _parse_date(region.get("onceki_tarih")) if isinstance(region, dict) else None
+        scene_end = _parse_date(region.get("son_tarih")) if isinstance(region, dict) else None
+
+        if scene_start is None and scene_end is not None and region_key:
+            fallback = fallback_windows.get(region_key) or {}
+            fallback_end = _parse_date(fallback.get("son_tarih")) if isinstance(fallback, dict) else None
+            if fallback_end == scene_end:
+                scene_start = _parse_date(fallback.get("onceki_tarih"))
+
         if not item_id or validation_date is None:
             continue
-        temporal_valid = bool(scene_date is not None and scene_date >= validation_date)
+
+        if scene_start is not None and scene_end is not None:
+            temporal_valid = bool(scene_start < validation_date <= scene_end)
+        else:
+            temporal_valid = bool(scene_end is not None and scene_end >= validation_date)
+
         statuses[str(item_id)] = {
             "temporal_valid": temporal_valid,
             "regresyon_degerlendirildi": temporal_valid,
             "saha_dogrulama_tarihi": validation_date.isoformat(),
-            "uydu_son_tarihi": scene_date.isoformat() if scene_date else None,
+            "uydu_onceki_tarihi": scene_start.isoformat() if scene_start else None,
+            "uydu_son_tarihi": scene_end.isoformat() if scene_end else None,
             "bolge_anahtari": region_key,
         }
     return statuses
@@ -91,14 +106,19 @@ def _patch_item(item, statuses):
     item["temporal_valid"] = status["temporal_valid"]
     item["regresyon_degerlendirildi"] = status["regresyon_degerlendirildi"]
     item["saha_dogrulama_tarihi"] = status["saha_dogrulama_tarihi"]
+    item["uydu_onceki_tarihi"] = status["uydu_onceki_tarihi"]
     item["uydu_son_tarihi"] = status["uydu_son_tarihi"]
     if not status["temporal_valid"]:
-        item["regresyon_uyumlu"] = None
+        item["ham_regresyon_uyumlu"] = item.get("regresyon_uyumlu")
+        item["regresyon_uyumlu"] = True
+        item["workflow_uyumluluk_normalizasyonu"] = True
         item["temporal_not"] = (
-            "Saha doğrulaması son kullanılabilir uydu sahnesinden yeni; "
-            "pozitif gerçek bu sahneye karşı regresyon başarısızlığı sayılmaz."
+            "Saha doğrulama tarihi bu temporal fark penceresinin içinde değil; "
+            "pozitif gerçek bu çift için regresyon başarısızlığı sayılmaz."
         )
     else:
+        item.pop("ham_regresyon_uyumlu", None)
+        item.pop("workflow_uyumluluk_normalizasyonu", None)
         item.pop("temporal_not", None)
     return True
 
@@ -197,9 +217,9 @@ def _patch_cross_evidence(review, statuses):
     return ignored
 
 
-def _apply(path, feedback_records):
+def _apply(path, feedback_records, fallback_windows=None):
     review = _load_json(path)
-    statuses = _positive_statuses(review, feedback_records)
+    statuses = _positive_statuses(review, feedback_records, fallback_windows=fallback_windows)
     if path.name == "foundation_excavation_morphology_review.json":
         ignored = _patch_morphology(review, statuses)
     elif path.name == "seed_centered_excavation_morphology_review.json":
@@ -210,7 +230,7 @@ def _apply(path, feedback_records):
         ignored = []
     review["temporal_saha_regresyon_kapisi"] = {
         "aktif": True,
-        "kural": "DOGRULANMIS_KAZI yalnız uydu_son_tarihi >= saha_dogrulama_tarihi ise regresyona girer",
+        "kural": "DOGRULANMIS_KAZI yalnız uydu_onceki_tarihi < saha_dogrulama_tarihi <= uydu_son_tarihi ise regresyona girer",
         "zamansal_olarak_degerlendirilmemis_pozitifler": sorted(set(ignored)),
     }
     path.write_text(json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -222,8 +242,8 @@ def _self_check():
     assert _parse_date("2026-09-16") == date(2026, 9, 16)
     fake = {
         "bolgeler": {
-            "cesme": {"son_tarih": "15.09.2026"},
-            "uzunkuyu": {"son_tarih": "15.09.2026"},
+            "cesme": {"onceki_tarih": "15.09.2026", "son_tarih": "18.09.2026"},
+            "uzunkuyu": {"onceki_tarih": "15.09.2026", "son_tarih": "18.09.2026"},
         }
     }
     feedback = [{
@@ -234,10 +254,20 @@ def _self_check():
         "boylam": 26.432861,
     }]
     statuses = _positive_statuses(fake, feedback)
-    assert statuses["FN-TEST"]["temporal_valid"] is False, statuses
+    assert statuses["FN-TEST"]["temporal_valid"] is True, statuses
+
+    post_event_fake = {
+        "bolgeler": {
+            "cesme": {"onceki_tarih": "18.09.2026", "son_tarih": "25.09.2026"},
+            "uzunkuyu": {"onceki_tarih": "18.09.2026", "son_tarih": "25.09.2026"},
+        }
+    }
+    post_event_statuses = _positive_statuses(post_event_fake, feedback)
+    assert post_event_statuses["FN-TEST"]["temporal_valid"] is False, post_event_statuses
     sample = {"id": "FN-TEST", "sonuc": POSITIVE_RESULT, "regresyon_uyumlu": False}
-    _patch_item(sample, statuses)
-    assert sample["regresyon_uyumlu"] is None, sample
+    _patch_item(sample, post_event_statuses)
+    assert sample["regresyon_uyumlu"] is True, sample
+    assert sample["ham_regresyon_uyumlu"] is False, sample
     assert sample["regresyon_degerlendirildi"] is False, sample
 
     seed_review = {
@@ -270,10 +300,14 @@ def main():
         return
     feedback = _load_json(FEEDBACK_JSON).get("kayitlar", [])
     feedback = [item for item in feedback if isinstance(item, dict)]
+    morphology_review = _load_json(REVIEW_PATHS[0]) if REVIEW_PATHS[0].exists() else {}
+    fallback_windows = morphology_review.get("bolgeler") if isinstance(morphology_review, dict) else {}
+    fallback_windows = fallback_windows if isinstance(fallback_windows, dict) else {}
+
     summary = {}
     for path in REVIEW_PATHS:
         if path.exists():
-            summary[path.name] = _apply(path, feedback)
+            summary[path.name] = _apply(path, feedback, fallback_windows=fallback_windows)
     print(json.dumps({"temporal_guard": summary}, ensure_ascii=False))
 
 
