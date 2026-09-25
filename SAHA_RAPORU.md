@@ -11,8 +11,17 @@
 
 ## Günün ilk 3 kontrolü
 
-> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-1. **ERKEN — Uzunkuyu** · yaklaşık 600 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UD510E313E5` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.289307,26.553208)
-2. **ERKEN — Alaçatı** · yaklaşık 400 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UEA6F865345` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262987,26.371280)
-3. **ERKEN — Ilıca** · yaklaşık 300 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `U5ED5045173` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.317346,26.347240)
+1. **ERKEN — Uzunkuyu** · yaklaşık 600 m² · Görev `UD510E313E5` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.289307,26.553208)
+2. **ERKEN — Alaçatı** · yaklaşık 400 m² · Görev `UEA6F865345` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262987,26.371280)
+3. **ERKEN — Ilıca** · yaklaşık 300 m² · Görev `U5ED5045173` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.317346,26.347240)
+
+## Ek kuru zemin kalibrasyon kontrolü
+
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
+
+1. **KALİBRASYON — Çeşme** · yaklaşık 300 m² · 18.09.2026 → 25.09.2026 · BSI Δ 0.235 · RGB Δ 0.145 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.330461,26.307631)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+2. **KALİBRASYON — Gülbahçe** · yaklaşık 1.800 m² · 18.09.2026 → 25.09.2026 · BSI Δ 0.120 · RGB Δ 0.183 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.334441,26.651322)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
