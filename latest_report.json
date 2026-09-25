@@ -8302,6 +8302,31 @@
   "uyari": "Uydu koordinatları yaklaşık değişim merkezidir. Kesin adres/ada-parsel olarak kullanılmamalı; saha kontrolüyle doğrulanmalıdır.",
   "gunun_ilk_3_kontrolu": [
     {
+      "oncelik": "DOĞRULAMA",
+      "mahalle": "Alaçatı",
+      "enlem": 38.296453,
+      "boylam": 26.380094,
+      "alan_m2": 400,
+      "sinyal": "Üretim maskesi dışında; yeni Sentinel sahnesinde izole, uzun-temporal ani ve lokal kuru-zemin değişimi. Hafriyat/temel saha doğrulaması.",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "18.09.2026",
+      "son_tarih": "25.09.2026",
+      "yeni_goruntu": true,
+      "saha_durumu": "DIAGNOSTIK_DOGRULAMA",
+      "alarm": false,
+      "saha_gorevi": false,
+      "boyut_sinifi": "KURU_ZEMIN_DOGRULAMA",
+      "uydu_onceligi": "YÜKSEK",
+      "postseason_kuru_zemin_dogrulama": true,
+      "yerellik_orani": 6.66,
+      "uzun_temporal_ani_baslangic_orani": 4.44,
+      "son_cift_bsi_degisim": 0.1114,
+      "konum_notu": "Sentinel kuru-zemin diagnostik kümesinin yaklaşık merkezidir; kesin adres, ada veya parsel değildir. Üretim alarmı değildir ve sahada doğrulanmalıdır.",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.296453,26.380094",
+      "gorev_id": "DG89D6E2EA82",
+      "gunluk_sira": 1
+    },
+    {
       "oncelik": "YUKSEK",
       "mahalle": null,
       "enlem": 38.307849,
@@ -8342,24 +8367,24 @@
       "s2_morfoloji_onceki_tarih": "15.09.2026",
       "s2_morfoloji_son_tarih": "18.09.2026",
       "s2_morfoloji_cifti": "15.09.2026->18.09.2026",
-      "gunluk_sira": 1,
+      "gunluk_sira": 2,
       "rota_uydu_kanit_yasi_gun": 7
     }
   ],
-  "gunun_ilk_3_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur.",
+  "gunun_ilk_3_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
       "mahalle": "Çeşme",
-      "enlem": 38.330461,
-      "boylam": 26.307631,
+      "enlem": 38.327296,
+      "boylam": 26.311752,
       "alan_m2": 300,
-      "ortalama_bsi_degisim": 0.2354,
-      "ortalama_rgb_farki": 0.1455,
+      "ortalama_bsi_degisim": 0.1665,
+      "ortalama_rgb_farki": 0.2174,
       "kiyi_su_tamponu_riski": false,
       "kiyi_su_tamponu_orani": 0.0,
-      "uzun_kisa_orani": 1.0,
-      "kutu_doluluk_orani": 0.75,
-      "kompaktlik": 0.589,
+      "uzun_kisa_orani": 1.5,
+      "kutu_doluluk_orani": 0.5,
+      "kompaktlik": 0.377,
       "saha_benzeri_geometri": true,
       "lineer_geometri_riski": false,
       "yakindaki_kuru_degisim_120m": 0,
@@ -8368,8 +8393,16 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "onceki_tarih": "18.09.2026",
       "son_tarih": "25.09.2026",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.330461,26.307631",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.327296,26.311752",
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": true,
+      "zaman_serisi_ani_baslangic_orani": 8.09,
+      "zaman_serisi_onceki_bsi_degisim": 0.015,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
+      "kalibrasyon_rotasyon_gun": 0,
+      "kalibrasyon_rotasyon_havuzu": 4,
+      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC"
     },
     {
       "mahalle": "Gülbahçe",
@@ -8392,10 +8425,17 @@
       "onceki_tarih": "18.09.2026",
       "son_tarih": "25.09.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.334441,26.651322",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": false,
+      "zaman_serisi_ani_baslangic_orani": 1.22,
+      "zaman_serisi_onceki_bsi_degisim": 0.0987,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
+      "kalibrasyon_rotasyon_gun": 0,
+      "kalibrasyon_rotasyon_havuzu": 2
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir.",
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında bölge başına en fazla bir, toplam iki örnek seçilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; sahne değişmezse en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel tarih çiftine ait zaman-serisi denetimi güvenli ani başlangıç desteği verirse bu örnek saha teyidi için rotasyonun önüne alınır; alarm/görev statüsü değişmez. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday ilk dört kişilik kalibrasyon havuzuna alınmaz.",
   "dogrulanmis_takip_sahalari": [
     {
       "gorev_id": "UEC44340AEC",
@@ -8458,8 +8498,10 @@
       "cesme",
       "uzunkuyu"
     ],
-    "guclu_aday_sayisi": 0,
-    "rotaya_alinan": [],
+    "guclu_aday_sayisi": 4,
+    "rotaya_alinan": [
+      "DG89D6E2EA82"
+    ],
     "alarm": false,
     "kalici_saha_gorevi": false,
     "kural": "Yalnız o gün yeni Sentinel sahnesi + uzun-temporal ani başlangıç + kararlı geçmiş zemin + yörünge güveni + izole/non-lineer geometri + lokal 5x5 çevre kontrastı. TEKRAR_GIT ve taze ana üretim hafriyat adayları düşürülmez."
