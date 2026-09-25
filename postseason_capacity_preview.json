@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-24",
-  "olusturma": "2026-09-24 19:55 +0300",
+  "rapor_tarihi": "2026-09-25",
+  "olusturma": "2026-09-25 11:20 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -17,19 +17,19 @@
   "saha_kaniti": {
     "kontrol": 4,
     "dogrulanmis_santiye_kazi": 0,
-    "rapor_kontrol": 4,
+    "rapor_kontrol": 3,
     "rapor_dogrulanmis_santiye_kazi": 0,
     "mikro_manuel_kontrol": 1,
     "mikro_manuel_dogrulanmis_santiye_kazi": 0,
-    "mikro_rapora_zaten_dahil": true,
+    "mikro_rapora_zaten_dahil": false,
     "politika_icin_yeterli": false,
     "asgari_kontrol": 5,
     "asgari_dogrulanmis_santiye_kazi": 3,
     "mikro_konum_notu": "MİKRO manuel saha eşleşmesi şantiye/kazı sınıfı kalibrasyonuna dahil edilir; GPS/EXIF yoksa koordinat hassasiyeti bağımsız doğrulanmış sayılmaz."
   },
   "veri_tazeligi": {
-    "gunluk_rapor_tarihi": "2026-09-24",
-    "kapasite_denetim_tarihi": "2026-09-24",
+    "gunluk_rapor_tarihi": "2026-09-25",
+    "kapasite_denetim_tarihi": "2026-09-25",
     "ayni_gun": true
   },
   "bolgeler": {
