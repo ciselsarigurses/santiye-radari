@@ -40,7 +40,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1870,
+      "secilen_devriyeye_mesafe_m": 1594,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -52,7 +52,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1826,
+      "secilen_devriyeye_mesafe_m": 1551,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -64,7 +64,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 648,
+      "secilen_devriyeye_mesafe_m": 335,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -76,7 +76,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 604,
+      "secilen_devriyeye_mesafe_m": 291,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -88,7 +88,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 517,
+      "secilen_devriyeye_mesafe_m": 201,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -100,8 +100,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 322,
-      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_mesafe_m": 0,
+      "secilen_devriye_kapsiyor": true,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -112,8 +112,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 0,
-      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_mesafe_m": 322,
+      "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     }
   ],
