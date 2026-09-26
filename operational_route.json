@@ -14,9 +14,7 @@
   "geometri_arka_plan_toplam": 0,
   "rota_degisti": false,
   "temel_rota_gorevleri": [
-    "UD510E313E5",
-    "UEA6F865345",
-    "U5ED5045173"
+    "FKC28C831021"
   ],
   "operasyonel_rota": [
     {
@@ -60,7 +58,8 @@
       "s2_morfoloji_onceki_tarih": "15.09.2026",
       "s2_morfoloji_son_tarih": "18.09.2026",
       "s2_morfoloji_cifti": "15.09.2026->18.09.2026",
-      "gunluk_sira": 1
+      "gunluk_sira": 1,
+      "rota_uydu_kanit_yasi_gun": 8
     }
   ],
   "geometri_arka_plan": [],
@@ -70,14 +69,10 @@
   "tazelik_korumasi": true,
   "tazelik_sirasi_degisti": false,
   "geometri_sonrasi_rota_gorevleri": [
-    "UD510E313E5",
-    "UEA6F865345",
-    "U5ED5045173"
+    "FKC28C831021"
   ],
   "tazelik_sonrasi_rota_gorevleri": [
-    "UD510E313E5",
-    "UEA6F865345",
-    "U5ED5045173"
+    "FKC28C831021"
   ],
   "tazelik_notu": "Yeni alarm/görev üretmez. Yeni raporlarda merkezi 'Günün ilk 3 kontrolü' nihai operasyon havuzudur; eski backlog bu aşamada yeniden açılmaz. Bu havuz içinde GECİKEN görevlerde önce küçük-güçlü/parsel ölçeği, sonra gerçek Sentinel kanıt yaşı kullanılır. TEKRAR_GIT ve geometri arka-plan koruması aynen korunur.",
   "operasyon_odak_arka_plan": [],
@@ -105,9 +100,5 @@
   "temel_kazi_destekli_yeni_rota_adayi_sayi": 0,
   "temel_kazi_destekli_yeni_rota_adaylari": [],
   "temel_kazi_destekli_rota_enjeksiyonu": true,
-  "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez.",
-  "post_onset_persistence_yeni_rota_adayi_sayi": 0,
-  "post_onset_persistence_yeni_rota_adaylari": [],
-  "post_onset_persistence_rota_enjeksiyonu": true,
-  "post_onset_persistence_rota_notu": "Yalnız 250 m²+ yüksek S2 morfolojisi ile >=2 dB, çift-pol güçlü ve kompakt-lokal post-onset S1 sürekliliği birlikte bulunan adaylar eklenir. S1 sürekliliği onset başlangıç kanıtı sayılmaz; MİKRO adaylar diagnostik kalır."
+  "temel_kazi_destekli_rota_enjeksiyon_notu": "Yalnız 250 m²+ korunmuş çoklu-pozitif temel/kepçe adayları, doğrulanmış S2 morfoloji tarih çifti ve tarla/FP/müşteri engelleri kontrolünden sonra rotaya eklenebilir. MİKRO adaylar diagnostik kalır; SQLite değişmez; Sentinel-2'den gerçek derinlik ölçülmez."
 }
