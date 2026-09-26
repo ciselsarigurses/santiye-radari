@@ -8464,7 +8464,7 @@
     "yeni_saha_gorevi": false,
     "not": "TAZE KAZI sıralama bandı yalnız 15 Eylül 2026 veya daha yeni Sentinel sahnesine verilir. Sezon öncesi sinyal silinmez; normal/backlog kanıtı olarak izlenir. 150-249 m² MİKRO doğrudan saha görevine yükseltilmez."
   },
-  "temel_kazi_kapisi_arka_plan_sayi": 3,
+  "temel_kazi_kapisi_arka_plan_sayi": 0,
   "temel_kazi_kapisi_aktif": true,
   "arka_plan_genis_yuzey_hareketleri": [],
   "arka_plan_kurali": {
