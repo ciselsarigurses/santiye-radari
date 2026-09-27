@@ -11,11 +11,9 @@
 
 ## Günün ilk 3 kontrolü
 
-> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
+> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
-1. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `UCB78A24EDB` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.281438,26.386505) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.281438/26.386505)
-2. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U2A1C96C4FA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.284332,26.318506) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.284332/26.318506)
-3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `UB844BC8E38` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.424890,26.575647) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.424890/26.575647)
+1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
