@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-09-26",
+  "rapor_tarihi": "2026-09-27",
   "amac": "Güncel 250 m²+ ana Sentinel adaylarının bağlı bileşeninin analiz bbox kenarına değip değmediğini ölçerek alan/merkez koordinatı kırpma riskini görünür kılmak.",
   "politika": "DIAGNOSTIK_ONLY: 250 m² ana eşik, alarm ve saha görevi değişmez. Kenar teması bbox genişletme/yeniden ölçüm kanıtıdır; tek başına yeni alarm değildir.",
   "ana_uretim_esigi_m2": 250,
@@ -33,7 +33,7 @@
       "adaylar": [
         {
           "gorev_id": "U7A612AE359",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Çiftlikköy",
           "enlem": 38.278815,
           "boylam": 26.296298,
@@ -77,7 +77,7 @@
         },
         {
           "gorev_id": "UCF4D398D85",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Musalla",
           "enlem": 38.290212,
           "boylam": 26.304197,
@@ -253,7 +253,7 @@
         },
         {
           "gorev_id": "U64A34DA7BC",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.29193,
           "boylam": 26.318392,
@@ -297,7 +297,7 @@
         },
         {
           "gorev_id": "UC10C203A9E",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.292382,
           "boylam": 26.320109,
@@ -341,7 +341,7 @@
         },
         {
           "gorev_id": "UEA6F865345",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Alaçatı",
           "enlem": 38.262987,
           "boylam": 26.37128,
@@ -385,7 +385,7 @@
         },
         {
           "gorev_id": "U74102845B1",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.293287,
           "boylam": 26.327779,
@@ -473,7 +473,7 @@
         },
         {
           "gorev_id": "U5ED5045173",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Ilıca",
           "enlem": 38.317346,
           "boylam": 26.34724,
@@ -517,7 +517,7 @@
         },
         {
           "gorev_id": "UF9CF659C75",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Reisdere",
           "enlem": 38.301789,
           "boylam": 26.394976,
@@ -539,7 +539,7 @@
         },
         {
           "gorev_id": "U3AFE58F2C0",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Ilıca",
           "enlem": 38.304141,
           "boylam": 26.37563,
@@ -601,7 +601,7 @@
         },
         {
           "gorev_id": "UD6DEE85E44",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.256293,
           "boylam": 26.675478,
@@ -711,7 +711,7 @@
         },
         {
           "gorev_id": "UD510E313E5",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Uzunkuyu",
           "enlem": 38.289307,
           "boylam": 26.553208,
