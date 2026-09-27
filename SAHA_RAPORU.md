@@ -9,11 +9,9 @@
 
 ## Günün ilk 3 kontrolü
 
-> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir.
+> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
-1. **PARSEL — Gülbahçe** · yaklaşık 800 m² · Görev `U4806506FC1` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.314452,26.640789)
-2. **PARSEL — Alaçatı** · yaklaşık 800 m² · Görev `UCB78A24EDB` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.281438,26.386505)
-3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U2A1C96C4FA` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.284332,26.318506)
+1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
@@ -2487,3 +2485,7 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması değildir; yanlış pozitifler saha kontrolüyle elenir.
+
+## Arka planda izlenen geniş yüzey hareketleri
+
+Bu raporda ölçülmüş düşük-kompaktlık kuralına giren geniş yüzey hareketi yok.
