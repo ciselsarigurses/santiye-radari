@@ -13,6 +13,6 @@
 
 > 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
 
-1. **ERKEN — Mevki doğrulanmadı** · yaklaşık 600 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UCBA52B4719` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.378399,26.525707)
-2. **ERKEN — Özbek** · yaklaşık 600 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UB0AD329E91` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.380841,26.677424)
-3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 500 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `U9055679147` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.419191,26.588698)
+1. **ERKEN — Mevki doğrulanmadı** · yaklaşık 600 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UCBA52B4719` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.378399,26.525707) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.378399/26.525707)
+2. **ERKEN — Özbek** · yaklaşık 600 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UB0AD329E91` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.380841,26.677424) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.380841/26.677424)
+3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 500 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `U9055679147` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.419191,26.588698) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.419191/26.588698)
