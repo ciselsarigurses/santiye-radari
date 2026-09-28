@@ -68,10 +68,15 @@ def _positive_statuses(review, feedback_records):
         validation_date = _parse_date(item.get("sonuc_tarihi"))
         region_key = _region_for_feedback(item)
         region = regions.get(region_key, {}) if region_key else {}
+        previous_date = _parse_date(region.get("onceki_tarih")) if isinstance(region, dict) else None
         scene_date = _parse_date(region.get("son_tarih")) if isinstance(region, dict) else None
         if not item_id or validation_date is None:
             continue
-        temporal_valid = bool(scene_date is not None and scene_date >= validation_date)
+        temporal_valid = bool(
+            scene_date is not None
+            and (previous_date is None or previous_date < validation_date)
+            and validation_date <= scene_date
+        )
         statuses[str(item_id)] = {
             "temporal_valid": temporal_valid,
             "regresyon_degerlendirildi": temporal_valid,
