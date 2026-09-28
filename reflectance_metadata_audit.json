@@ -9,13 +9,13 @@
   "bolgeler": {
     "cesme": {
       "durum": "ok",
-      "onceki_item": "S2B_T35SMC_20260918T085916_L2A",
-      "son_item": "S2A_T35SMC_20260925T090524_L2A"
+      "onceki_item": "S2A_T35SMC_20260925T090524_L2A",
+      "son_item": "S2B_T35SMC_20260928T090838_L2A"
     },
     "uzunkuyu": {
       "durum": "ok",
-      "onceki_item": "S2B_T35SMC_20260918T085916_L2A",
-      "son_item": "S2A_T35SMC_20260925T090524_L2A"
+      "onceki_item": "S2A_T35SMC_20260925T090524_L2A",
+      "son_item": "S2B_T35SMC_20260928T090838_L2A"
     }
   },
   "itemlar": {
@@ -40,9 +40,9 @@
         }
       }
     },
-    "S2B_T35SMC_20260918T085916_L2A": {
-      "item": "S2B_T35SMC_20260918T085916_L2A",
-      "tarih": "2026-09-18T09:09:45.002000Z",
+    "S2B_T35SMC_20260928T090838_L2A": {
+      "item": "S2B_T35SMC_20260928T090838_L2A",
+      "tarih": "2026-09-28T09:09:46.074000Z",
       "mgrs": "-",
       "relative_orbit": 7,
       "durum": "MATCH",
