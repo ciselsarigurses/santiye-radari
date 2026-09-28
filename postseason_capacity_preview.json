@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-09-27",
-  "olusturma": "2026-09-27 22:53 +0300",
+  "rapor_tarihi": "2026-09-28",
+  "olusturma": "2026-09-28 19:41 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -17,50 +17,50 @@
   "saha_kaniti": {
     "kontrol": 4,
     "dogrulanmis_santiye_kazi": 0,
-    "rapor_kontrol": 4,
+    "rapor_kontrol": 3,
     "rapor_dogrulanmis_santiye_kazi": 0,
     "mikro_manuel_kontrol": 1,
     "mikro_manuel_dogrulanmis_santiye_kazi": 0,
-    "mikro_rapora_zaten_dahil": true,
+    "mikro_rapora_zaten_dahil": false,
     "politika_icin_yeterli": false,
     "asgari_kontrol": 5,
     "asgari_dogrulanmis_santiye_kazi": 3,
     "mikro_konum_notu": "MİKRO manuel saha eşleşmesi şantiye/kazı sınıfı kalibrasyonuna dahil edilir; GPS/EXIF yoksa koordinat hassasiyeti bağımsız doğrulanmış sayılmaz."
   },
   "veri_tazeligi": {
-    "gunluk_rapor_tarihi": "2026-09-27",
-    "kapasite_denetim_tarihi": "2026-09-27",
+    "gunluk_rapor_tarihi": "2026-09-28",
+    "kapasite_denetim_tarihi": "2026-09-28",
     "ayni_gun": true
   },
   "bolgeler": {
     "cesme": {
       "durum": "ok",
-      "latest_item": "S2A_T35SMC_20260925T090524_L2A",
-      "ham_800_10000": 21,
-      "raporda_800_10000": 21,
-      "raporda_10000_ustu": 1,
+      "latest_item": "S2B_T35SMC_20260928T090838_L2A",
+      "ham_800_10000": 201,
+      "raporda_800_10000": 5,
+      "raporda_10000_ustu": 11,
       "mevcut_post_dedupe_hedefi": 8,
       "diagnostik_15eylul_senaryosu": 10,
-      "senaryoya_eksik": 0,
-      "bire_bir_takasla_teorik_ek_kapasite": 0,
-      "teorik_son_800_10000": 21,
+      "senaryoya_eksik": 5,
+      "bire_bir_takasla_teorik_ek_kapasite": 5,
+      "teorik_son_800_10000": 10,
       "senaryo_kapasite_acisindan_mumkun": true
     },
     "uzunkuyu": {
       "durum": "ok",
-      "latest_item": "S2A_T35SMC_20260925T090524_L2A",
-      "ham_800_10000": 6,
+      "latest_item": "S2B_T35SMC_20260928T090838_L2A",
+      "ham_800_10000": 348,
       "raporda_800_10000": 6,
-      "raporda_10000_ustu": 0,
+      "raporda_10000_ustu": 12,
       "mevcut_post_dedupe_hedefi": 8,
       "diagnostik_15eylul_senaryosu": 10,
       "senaryoya_eksik": 4,
-      "bire_bir_takasla_teorik_ek_kapasite": 0,
-      "teorik_son_800_10000": 6,
-      "senaryo_kapasite_acisindan_mumkun": false
+      "bire_bir_takasla_teorik_ek_kapasite": 4,
+      "teorik_son_800_10000": 10,
+      "senaryo_kapasite_acisindan_mumkun": true
     }
   },
-  "kapasite_senaryosu_iki_bolgede_mumkun": false,
+  "kapasite_senaryosu_iki_bolgede_mumkun": true,
   "onerilen_eylem": "URETIME_DOKUNMA",
   "neden": "Saha doğrulama örneklemi politika değişikliği için yetersiz. 15 Eylül senaryosu yalnız kapasite diagnostikidir; eşik/kota/alarm değiştirilmez."
 }
