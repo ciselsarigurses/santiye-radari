@@ -3,7 +3,7 @@
 **Rapor tarihi:** 2026-09-28
 **Hazırlanma:** 2026-09-28 19:36 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 21 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır · Gülbahçe: 24 hareket bölgesi adayı · Aktif saha görevi: 291 · Geciken kontrol: 245 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)
+**Özet:** İnternet: 0 yeni aktif bulgu, 1 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: 21 hareket bölgesi adayı · Uzunkuyu · Germiyan · Ildır · Gülbahçe: 24 hareket bölgesi adayı · Aktif saha görevi: 291 · Geciken kontrol: 245 · Tekrar gidilecek: 1 · Saha sonucu: 4 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 2 yanlış pozitif)
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
