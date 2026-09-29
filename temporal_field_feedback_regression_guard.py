@@ -68,14 +68,20 @@ def _positive_statuses(review, feedback_records):
         validation_date = _parse_date(item.get("sonuc_tarihi"))
         region_key = _region_for_feedback(item)
         region = regions.get(region_key, {}) if region_key else {}
+        previous_date = _parse_date(region.get("onceki_tarih")) if isinstance(region, dict) else None
         scene_date = _parse_date(region.get("son_tarih")) if isinstance(region, dict) else None
         if not item_id or validation_date is None:
             continue
-        temporal_valid = bool(scene_date is not None and scene_date >= validation_date)
+        temporal_valid = bool(
+            previous_date is not None
+            and scene_date is not None
+            and previous_date < validation_date <= scene_date
+        )
         statuses[str(item_id)] = {
             "temporal_valid": temporal_valid,
             "regresyon_degerlendirildi": temporal_valid,
             "saha_dogrulama_tarihi": validation_date.isoformat(),
+            "uydu_onceki_tarihi": previous_date.isoformat() if previous_date else None,
             "uydu_son_tarihi": scene_date.isoformat() if scene_date else None,
             "bolge_anahtari": region_key,
         }
@@ -91,12 +97,14 @@ def _patch_item(item, statuses):
     item["temporal_valid"] = status["temporal_valid"]
     item["regresyon_degerlendirildi"] = status["regresyon_degerlendirildi"]
     item["saha_dogrulama_tarihi"] = status["saha_dogrulama_tarihi"]
+    item["uydu_onceki_tarihi"] = status["uydu_onceki_tarihi"]
     item["uydu_son_tarihi"] = status["uydu_son_tarihi"]
     if not status["temporal_valid"]:
         item["regresyon_uyumlu"] = None
         item["temporal_not"] = (
-            "Saha doğrulaması son kullanılabilir uydu sahnesinden yeni; "
-            "pozitif gerçek bu sahneye karşı regresyon başarısızlığı sayılmaz."
+            "Pozitif saha gerçeği bu uydu fark penceresinin içinde başlamıyor "
+            "veya pencere başlangıcı/sonu doğrulanamıyor; bu çift regresyon "
+            "başarısızlığı sayılmaz."
         )
     else:
         item.pop("temporal_not", None)
@@ -210,7 +218,10 @@ def _apply(path, feedback_records):
         ignored = []
     review["temporal_saha_regresyon_kapisi"] = {
         "aktif": True,
-        "kural": "DOGRULANMIS_KAZI yalnız uydu_son_tarihi >= saha_dogrulama_tarihi ise regresyona girer",
+        "kural": (
+            "DOGRULANMIS_KAZI yalnız uydu_onceki_tarihi < saha_dogrulama_tarihi "
+            "<= uydu_son_tarihi ise regresyona girer"
+        ),
         "zamansal_olarak_degerlendirilmemis_pozitifler": sorted(set(ignored)),
     }
     path.write_text(json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -220,12 +231,6 @@ def _apply(path, feedback_records):
 def _self_check():
     assert _parse_date("15.09.2026") == date(2026, 9, 15)
     assert _parse_date("2026-09-16") == date(2026, 9, 16)
-    fake = {
-        "bolgeler": {
-            "cesme": {"son_tarih": "15.09.2026"},
-            "uzunkuyu": {"son_tarih": "15.09.2026"},
-        }
-    }
     feedback = [{
         "id": "FN-TEST",
         "sonuc": POSITIVE_RESULT,
@@ -233,12 +238,38 @@ def _self_check():
         "enlem": 38.341846,
         "boylam": 26.432861,
     }]
-    statuses = _positive_statuses(fake, feedback)
+
+    onset_window = {
+        "bolgeler": {
+            "cesme": {"onceki_tarih": "15.09.2026", "son_tarih": "18.09.2026"},
+            "uzunkuyu": {"onceki_tarih": "15.09.2026", "son_tarih": "18.09.2026"},
+        }
+    }
+    statuses = _positive_statuses(onset_window, feedback)
+    assert statuses["FN-TEST"]["temporal_valid"] is True, statuses
+    assert statuses["FN-TEST"]["uydu_onceki_tarihi"] == "2026-09-15", statuses
+
+    post_onset_window = {
+        "bolgeler": {
+            "cesme": {"onceki_tarih": "18.09.2026", "son_tarih": "28.09.2026"},
+            "uzunkuyu": {"onceki_tarih": "18.09.2026", "son_tarih": "28.09.2026"},
+        }
+    }
+    statuses = _positive_statuses(post_onset_window, feedback)
     assert statuses["FN-TEST"]["temporal_valid"] is False, statuses
     sample = {"id": "FN-TEST", "sonuc": POSITIVE_RESULT, "regresyon_uyumlu": False}
     _patch_item(sample, statuses)
     assert sample["regresyon_uyumlu"] is None, sample
     assert sample["regresyon_degerlendirildi"] is False, sample
+
+    missing_start = {
+        "bolgeler": {
+            "cesme": {"son_tarih": "18.09.2026"},
+            "uzunkuyu": {"son_tarih": "18.09.2026"},
+        }
+    }
+    statuses_missing = _positive_statuses(missing_start, feedback)
+    assert statuses_missing["FN-TEST"]["temporal_valid"] is False, statuses_missing
 
     seed_review = {
         "bolgeler": {
