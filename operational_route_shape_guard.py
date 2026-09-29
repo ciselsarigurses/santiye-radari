@@ -34,6 +34,12 @@ SHAPE_MAX_M2 = 10000
 MATCH_DISTANCE_M = 25.0
 MIN_AREA_RATIO = 0.85
 ACTIVE_STATUSES = {"KONTROLE_GIT", "TEKRAR_GIT"}
+POST_ONSET_METADATA_KEYS = (
+    "post_onset_persistence_yeni_rota_adayi_sayi",
+    "post_onset_persistence_yeni_rota_adaylari",
+    "post_onset_persistence_rota_enjeksiyonu",
+    "post_onset_persistence_rota_notu",
+)
 
 
 def _number(value, default=0.0):
@@ -238,6 +244,23 @@ def build_operational_route(report, shape_review, limit=3):
     }
 
 
+def _preserve_post_onset_metadata(result, previous_route):
+    """Geometri rota yeniden üretiminde bağımsız post-onset SAR sonucunu kaybetme.
+
+    Shape guard operational_route.json dosyasını latest_report\'tan yeniden kurduğu
+    için daha önce doğrulanmış post-onset persistence üst-seviye özetleri aksi halde
+    kısa süreli silinebiliyordu. Yalnız açıkça tanımlı dört metadata alanı korunur;
+    rota adayları veya yeni görevler bu helper tarafından üretilmez.
+    """
+    result = dict(result)
+    if not isinstance(previous_route, dict):
+        return result
+    for key in POST_ONSET_METADATA_KEYS:
+        if key in previous_route:
+            result[key] = previous_route[key]
+    return result
+
+
 def _self_check():
     scene = "S2B_T35SMC_20260908T090037_L2A"
     review = {
@@ -315,6 +338,20 @@ def _self_check():
     stale["son_tarih"] = "05.09.2026"
     assert matching_shape_risk(stale, shape_risks(review)) is None, "Farklı sahne tarihindeki şekil riski kullanılmamalı."
 
+    previous_route = {
+        "post_onset_persistence_yeni_rota_adayi_sayi": 0,
+        "post_onset_persistence_yeni_rota_adaylari": [],
+        "post_onset_persistence_rota_enjeksiyonu": True,
+        "post_onset_persistence_rota_notu": "korunacak",
+        "baska_eski_alan": "tasinmamali",
+    }
+    preserved = _preserve_post_onset_metadata({"operasyonel_rota": []}, previous_route)
+    assert preserved["post_onset_persistence_yeni_rota_adayi_sayi"] == 0
+    assert preserved["post_onset_persistence_yeni_rota_adaylari"] == []
+    assert preserved["post_onset_persistence_rota_enjeksiyonu"] is True
+    assert preserved["post_onset_persistence_rota_notu"] == "korunacak"
+    assert "baska_eski_alan" not in preserved
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -327,7 +364,9 @@ def main():
 
     report = _load_json(REPORT_JSON)
     review = _load_json(SHAPE_REVIEW_JSON)
+    previous_route = _load_json(OUTPUT_JSON)
     result = build_operational_route(report, review)
+    result = _preserve_post_onset_metadata(result, previous_route)
     OUTPUT_JSON.write_text(
         json.dumps(result, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
