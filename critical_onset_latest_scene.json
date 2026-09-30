@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-09-29T20:20:38+00:00",
+  "olusturma_utc": "2026-09-30T14:09:16+00:00",
   "amac": "15 Eylül öncesi baseline ile gerçekten mevcut en güncel post-window Sentinel sahnesini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -60,13 +60,13 @@
         "metadata_kaynagi": "Microsoft Planetary Computer",
         "kaynak_hatalari": [],
         "baseline_vs_en_guncel": {
-          "en_guncel_postwindow_tarih": "2026-09-29",
-          "karsilastirilan_postwindow_tarih": "2026-09-29",
+          "en_guncel_postwindow_tarih": "2026-09-30",
+          "karsilastirilan_postwindow_tarih": "2026-09-30",
           "hesaplanabilir": true,
           "neden": "OK_AYNI_GEOMETRI",
-          "baseline_tarihi": "2026-09-11",
-          "eski_item": "S1C_IW_GRDH_1SDV_20260911T161434_20260911T161459_009402_012B36",
-          "yeni_item": "S1D_IW_GRDH_1SDV_20260929T161446_20260929T161511_004795_008FE4",
+          "baseline_tarihi": "2026-09-12",
+          "eski_item": "S1C_IW_GRDH_1SDV_20260912T041424_20260912T041449_009409_012B6B",
+          "yeni_item": "S1D_IW_GRDH_1SDV_20260930T041438_20260930T041503_004802_00902B",
           "ortak_kritik_noktalar": [
             "Alaçatı",
             "Ilıca",
@@ -76,8 +76,8 @@
             "Çeşme",
             "Çiftlikköy"
           ],
-          "goreli_yorunge": 29,
-          "orbit_yonu": "ascending",
+          "goreli_yorunge": 36,
+          "orbit_yonu": "descending",
           "polarizasyon": [
             "VH",
             "VV"
@@ -134,18 +134,18 @@
         "metadata_kaynagi": "Microsoft Planetary Computer",
         "kaynak_hatalari": [],
         "baseline_vs_en_guncel": {
-          "en_guncel_postwindow_tarih": "2026-09-29",
-          "karsilastirilan_postwindow_tarih": "2026-09-29",
+          "en_guncel_postwindow_tarih": "2026-09-30",
+          "karsilastirilan_postwindow_tarih": "2026-09-30",
           "hesaplanabilir": true,
           "neden": "OK_AYNI_GEOMETRI",
-          "baseline_tarihi": "2026-09-11",
-          "eski_item": "S1C_IW_GRDH_1SDV_20260911T161434_20260911T161459_009402_012B36",
-          "yeni_item": "S1D_IW_GRDH_1SDV_20260929T161446_20260929T161511_004795_008FE4",
+          "baseline_tarihi": "2026-09-12",
+          "eski_item": "S1C_IW_GRDH_1SDV_20260912T041424_20260912T041449_009409_012B6B",
+          "yeni_item": "S1D_IW_GRDH_1SDV_20260930T041438_20260930T041503_004802_00902B",
           "ortak_kritik_noktalar": [
             "Uzunkuyu"
           ],
-          "goreli_yorunge": 29,
-          "orbit_yonu": "ascending",
+          "goreli_yorunge": 36,
+          "orbit_yonu": "descending",
           "polarizasyon": [
             "VH",
             "VV"
