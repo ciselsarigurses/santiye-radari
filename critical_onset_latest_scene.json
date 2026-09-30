@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-09-30T14:09:16+00:00",
+  "olusturma_utc": "2026-09-30T20:25:06+00:00",
   "amac": "15 Eylül öncesi baseline ile gerçekten mevcut en güncel post-window Sentinel sahnesini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -65,8 +65,8 @@
           "hesaplanabilir": true,
           "neden": "OK_AYNI_GEOMETRI",
           "baseline_tarihi": "2026-09-12",
-          "eski_item": "S1C_IW_GRDH_1SDV_20260912T041424_20260912T041449_009409_012B6B",
-          "yeni_item": "S1D_IW_GRDH_1SDV_20260930T041438_20260930T041503_004802_00902B",
+          "eski_item": "S1D_IW_GRDH_1SDV_20260912T160636_20260912T160701_004547_008753",
+          "yeni_item": "S1C_IW_GRDH_1SDV_20260930T160624_20260930T160649_009679_013455",
           "ortak_kritik_noktalar": [
             "Alaçatı",
             "Ilıca",
@@ -76,8 +76,8 @@
             "Çeşme",
             "Çiftlikköy"
           ],
-          "goreli_yorunge": 36,
-          "orbit_yonu": "descending",
+          "goreli_yorunge": 131,
+          "orbit_yonu": "ascending",
           "polarizasyon": [
             "VH",
             "VV"
@@ -139,13 +139,13 @@
           "hesaplanabilir": true,
           "neden": "OK_AYNI_GEOMETRI",
           "baseline_tarihi": "2026-09-12",
-          "eski_item": "S1C_IW_GRDH_1SDV_20260912T041424_20260912T041449_009409_012B6B",
-          "yeni_item": "S1D_IW_GRDH_1SDV_20260930T041438_20260930T041503_004802_00902B",
+          "eski_item": "S1D_IW_GRDH_1SDV_20260912T160636_20260912T160701_004547_008753",
+          "yeni_item": "S1C_IW_GRDH_1SDV_20260930T160624_20260930T160649_009679_013455",
           "ortak_kritik_noktalar": [
             "Uzunkuyu"
           ],
-          "goreli_yorunge": 36,
-          "orbit_yonu": "descending",
+          "goreli_yorunge": 131,
+          "orbit_yonu": "ascending",
           "polarizasyon": [
             "VH",
             "VV"
