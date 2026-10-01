@@ -48,6 +48,44 @@
       "maks_ic_bsi_degisim": 0.1011
     },
     {
+      "temporal_iz_id": "TL-20260928-38.21577-26.49574",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.215772,
+      "boylam": 26.495737,
+      "alan_m2": 700,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Mevki doğrulanmadı",
+      "ilk_guclu_tarih": "28.09.2026",
+      "son_guclu_tarih": "28.09.2026",
+      "son_guclu_sentinel_item": "S2B_T35SMC_20260928T090838_L2A",
+      "sentinel_sahneleri": [
+        "S2B_T35SMC_20260928T090838_L2A"
+      ],
+      "maks_yerellik_orani": 2.14,
+      "maks_ic_bsi_degisim": 0.2271
+    },
+    {
+      "temporal_iz_id": "TL-20260928-38.32702-26.57759",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.327024,
+      "boylam": 26.577593,
+      "alan_m2": 500,
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Mevki doğrulanmadı",
+      "ilk_guclu_tarih": "28.09.2026",
+      "son_guclu_tarih": "28.09.2026",
+      "son_guclu_sentinel_item": "S2B_T35SMC_20260928T090838_L2A",
+      "sentinel_sahneleri": [
+        "S2B_T35SMC_20260928T090838_L2A"
+      ],
+      "maks_yerellik_orani": 1.78,
+      "maks_ic_bsi_degisim": 0.1777
+    },
+    {
       "temporal_iz_id": "TL-20260925-38.29645-26.38009",
       "alarm": false,
       "saha_gorevi": false,
@@ -257,6 +295,6 @@
       "maks_ic_bsi_degisim": 0.107
     }
   ],
-  "guclu_iz_sayisi": 13,
-  "guncelleme_tarihi": "2026-09-28 19:46 +0300"
+  "guclu_iz_sayisi": 15,
+  "guncelleme_tarihi": "2026-10-02 00:03 +0300"
 }
