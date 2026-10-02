@@ -13,13 +13,13 @@
 
 > **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
-1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
+1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307849/26.333503)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
 > **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 700 m² · 25.09.2026 → 28.09.2026 · BSI Δ 0.199 · RGB Δ 0.193 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.214416,26.493883)
+1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 700 m² · 25.09.2026 → 28.09.2026 · BSI Δ 0.199 · RGB Δ 0.193 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.214416,26.493883) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.214416/26.493883)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 700 m² · 25.09.2026 → 28.09.2026 · BSI Δ 0.187 · RGB Δ 0.184 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.215772,26.495737)
+2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 700 m² · 25.09.2026 → 28.09.2026 · BSI Δ 0.187 · RGB Δ 0.184 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.215772,26.495737) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.215772/26.495737)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
