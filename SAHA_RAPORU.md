@@ -12,7 +12,3 @@
 > **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
 1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
-
-## Arka planda izlenen geniş yüzey hareketleri
-
-Bu raporda ölçülmüş düşük-kompaktlık kuralına giren geniş yüzey hareketi yok.
