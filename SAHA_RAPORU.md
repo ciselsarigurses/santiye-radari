@@ -13,7 +13,7 @@
 
 > Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir.
 
-1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
+1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307849/26.333503)
 
 ## Temporal-lokal erken sinyal izleme
 
