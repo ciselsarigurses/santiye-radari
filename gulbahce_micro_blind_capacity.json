@@ -7,104 +7,26 @@
     249
   ],
   "amac": "Gülbahçe'de iki-sahne temporal kalite körlüğünü en yeni sahnenin gerçek körlüğünden ayırmak; mikro körlük kapasitesini yalnız güncel-sahne kanıtından hesaplamak.",
-  "durum": "ok",
-  "kaynak_son_tarih": "28.09.2026",
-  "kaynak_son_item": "S2B_T35SMC_20260928T090838_L2A",
+  "durum": "guncel_sahne_verisi_dogrulanamadi",
+  "kaynak_son_tarih": "05.10.2026",
+  "kaynak_son_item": "S2A_T35SMC_20261005T090428_L2A",
   "gulbahce_operasyon_yaricapi_m": 2000,
   "mikro_ham_aday_2km": 0,
-  "guncel_sahne_dogrulandi": true,
+  "guncel_sahne_dogrulandi": false,
   "guncel_sahne_review_tarih": "28.09.2026",
   "guncel_sahne_review_item": "S2B_T35SMC_20260928T090838_L2A",
-  "guncel_sahne_mikro_kor_150_249": 0,
-  "guncel_sahne_kor_250_6500": 7,
-  "guncel_sahne_buyuk_kor_6500ustu_arka_plan": 0,
-  "mikro_kor_kume_tam_150_249": 0,
-  "ana_kor_kume_250plus": 7,
-  "mikro_gizleyebilen_kor_kume": 7,
-  "mikro_korluk_kapasitesi_var": true,
-  "kor_kume_ornekleri": [
-    {
-      "enlem": 38.328833,
-      "boylam": 26.656588,
-      "alan_m2": 400,
-      "neden": "BULUT",
-      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
-      "mikro_gizleyebilir": true,
-      "alarm": false,
-      "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.328833,26.656588"
-    },
-    {
-      "enlem": 38.341225,
-      "boylam": 26.643308,
-      "alan_m2": 400,
-      "neden": "BULUT",
-      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
-      "mikro_gizleyebilir": true,
-      "alarm": false,
-      "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.341225,26.643308"
-    },
-    {
-      "enlem": 38.341586,
-      "boylam": 26.643079,
-      "alan_m2": 400,
-      "neden": "BULUT",
-      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
-      "mikro_gizleyebilir": true,
-      "alarm": false,
-      "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.341586,26.643079"
-    },
-    {
-      "enlem": 38.34231,
-      "boylam": 26.642621,
-      "alan_m2": 400,
-      "neden": "BULUT",
-      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
-      "mikro_gizleyebilir": true,
-      "alarm": false,
-      "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.342310,26.642621"
-    },
-    {
-      "enlem": 38.343938,
-      "boylam": 26.64159,
-      "alan_m2": 400,
-      "neden": "BULUT",
-      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
-      "mikro_gizleyebilir": true,
-      "alarm": false,
-      "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.343938,26.641590"
-    },
-    {
-      "enlem": 38.346923,
-      "boylam": 26.641132,
-      "alan_m2": 400,
-      "neden": "BULUT",
-      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
-      "mikro_gizleyebilir": true,
-      "alarm": false,
-      "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346923,26.641132"
-    },
-    {
-      "enlem": 38.329919,
-      "boylam": 26.655443,
-      "alan_m2": 1200,
-      "neden": "BULUT",
-      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
-      "mikro_gizleyebilir": true,
-      "alarm": false,
-      "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.329919,26.655443"
-    }
-  ],
-  "kalite_kor_kara_yuzde_temporal_cift_sahne": 0.21,
+  "guncel_sahne_mikro_kor_150_249": null,
+  "guncel_sahne_kor_250_6500": null,
+  "guncel_sahne_buyuk_kor_6500ustu_arka_plan": null,
+  "mikro_kor_kume_tam_150_249": null,
+  "ana_kor_kume_250plus": null,
+  "mikro_gizleyebilen_kor_kume": null,
+  "mikro_korluk_kapasitesi_var": null,
+  "kor_kume_ornekleri": [],
+  "kalite_kor_kara_yuzde_temporal_cift_sahne": 0.088,
   "temporal_cift_sahne_kor_kume_150_249": 0,
-  "temporal_cift_sahne_kor_kume_250plus": 9,
-  "temporal_cift_sahne_mikro_gizleyebilen_kor_kume": 9,
+  "temporal_cift_sahne_kor_kume_250plus": 8,
+  "temporal_cift_sahne_mikro_gizleyebilen_kor_kume": 8,
   "temporal_cift_sahne_kor_kume_ornekleri": [
     {
       "enlem": 38.328833,
@@ -118,17 +40,6 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.328833,26.656588"
     },
     {
-      "enlem": 38.33833,
-      "boylam": 26.648116,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
-      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
-      "mikro_gizleyebilir": true,
-      "alarm": false,
-      "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.338330,26.648116"
-    },
-    {
       "enlem": 38.341225,
       "boylam": 26.643308,
       "alan_m2": 400,
@@ -173,6 +84,17 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.343938,26.641590"
     },
     {
+      "enlem": 38.346832,
+      "boylam": 26.641247,
+      "alan_m2": 800,
+      "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
+      "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
+      "mikro_gizleyebilir": true,
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.346832,26.641247"
+    },
+    {
       "enlem": 38.329919,
       "boylam": 26.655443,
       "alan_m2": 1200,
@@ -184,15 +106,15 @@
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.329919,26.655443"
     },
     {
-      "enlem": 38.333175,
-      "boylam": 26.632088,
-      "alan_m2": 14002,
+      "enlem": 38.343305,
+      "boylam": 26.627967,
+      "alan_m2": 3601,
       "neden": "BULUT_GOLGE_VEYA_GECERSIZ_SCL",
       "boyut_sinifi": "ANA_KOR_MIKRO_GIZLEYEBILIR",
       "mikro_gizleyebilir": true,
       "alarm": false,
       "saha_gorevi": false,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.333175,26.632088"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.343305,26.627967"
     }
   ],
   "yorum": "İki-sahne temporal kalite körlüğü, en yeni sahnenin körlüğü değildir. Mikro körlük kapasitesi yalnız micro audit ile aynı en yeni Sentinel sahnesine ait güncel-sahne review'ü doğrulanırsa hesaplanır. Temporal çift-sahne cepleri silinmez; arka-plan diagnostik olarak korunur. 6500 m² üstü güncel körlük geniş-yüzey arka planında ayrıca izlenir. Bu katman alarm veya saha görevi üretmez."
