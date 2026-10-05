@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-10-05",
-  "olusturma": "2026-10-05 19:34 +03",
+  "olusturma": "2026-10-05 20:00 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -141,7 +141,7 @@
       ],
       "nihai_rapor_secimi": 21,
       "nihai_rapor_eslesen_geometri": 21,
-      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 1,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
       "nihai_rapor_cozulen_geometri": 21,
       "nihai_rapor_cozulemeyen_geometri": 0,
@@ -154,12 +154,12 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 8,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 5,
+          "toplam": 7,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
@@ -171,12 +171,12 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 8,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 5,
+          "toplam": 7,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
@@ -315,12 +315,12 @@
           "dusuk_kompaktlik": true
         }
       ],
-      "nihai_rapor_secimi": 26,
-      "nihai_rapor_eslesen_geometri": 25,
-      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 1,
+      "nihai_rapor_secimi": 24,
+      "nihai_rapor_eslesen_geometri": 24,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 25,
-      "nihai_rapor_cozulemeyen_geometri": 1,
+      "nihai_rapor_cozulen_geometri": 24,
+      "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
@@ -330,7 +330,7 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 7,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -347,7 +347,7 @@
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 7,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -360,17 +360,7 @@
       "nihai_secili_genis_sekil_isaretli": 0,
       "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 0,
       "nihai_secili_genis_sekil_ornekleri": [],
-      "nihai_cozulemeyen_geometri_ornekleri": [
-        {
-          "enlem": 38.329919,
-          "boylam": 26.655443,
-          "alan_m2": 1200,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 194.2,
-          "en_yakin_alan_benzerligi": 0.667
-        }
-      ]
+      "nihai_cozulemeyen_geometri_ornekleri": []
     }
   }
 }

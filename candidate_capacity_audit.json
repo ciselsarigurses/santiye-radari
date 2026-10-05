@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-10-05",
-  "olusturma": "2026-10-05 19:32 +03",
+  "olusturma": "2026-10-05 19:58 +03",
   "amac": "24 aday tavanının ve 8-komşu piksel geometrisinin 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
   "diagnostik_santiye_olcegi_m2": [
     800,
@@ -18,7 +18,7 @@
       "tavan_sonrasi_aday": 24,
       "raporda_kalan_aday": 21,
       "tavan_disinda_kalan": 259,
-      "ham_secimden_farkli": 16,
+      "ham_secimden_farkli": 14,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
         "kucuk_250_800": 9,
@@ -32,8 +32,8 @@
       },
       "raporda_olcek_dagilimi": {
         "kucuk_250_800": 8,
-        "santiye_olcegi_800_10000": 8,
-        "genis_10000_ustu": 5
+        "santiye_olcegi_800_10000": 6,
+        "genis_10000_ustu": 7
       },
       "tavan_disinda_olcek_dagilimi": {
         "kucuk_250_800": 1,
@@ -43,7 +43,7 @@
       "ham_secimden_farkli_olcek_dagilimi": {
         "kucuk_250_800": 1,
         "santiye_olcegi_800_10000": 0,
-        "genis_10000_ustu": 15
+        "genis_10000_ustu": 13
       },
       "baglanti_geometrisi": {
         "sekiz_komsu_gecerli_aday": 283,
@@ -115,7 +115,7 @@
       "aday_tavani": 24,
       "ham_uygun_aday": 458,
       "tavan_sonrasi_aday": 24,
-      "raporda_kalan_aday": 26,
+      "raporda_kalan_aday": 24,
       "tavan_disinda_kalan": 434,
       "ham_secimden_farkli": 11,
       "tavana_ulasti": true,
@@ -131,7 +131,7 @@
       },
       "raporda_olcek_dagilimi": {
         "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 8,
+        "santiye_olcegi_800_10000": 6,
         "genis_10000_ustu": 18
       },
       "tavan_disinda_olcek_dagilimi": {
