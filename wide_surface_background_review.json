@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-10-04",
+  "rapor_tarihi": "2026-10-05",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -10,9 +10,39 @@
     "rapor_esleme_m": 90,
     "manuel_tekrar_override": true
   },
-  "arka_plan_aday_sayisi": 0,
+  "arka_plan_aday_sayisi": 1,
   "operasyonel_listeden_ayrilan": 0,
   "manuel_tekrar_korunan": 0,
-  "kanit_kaynagi_sayilari": {},
-  "adaylar": []
+  "kanit_kaynagi_sayilari": {
+    "shape_false_positive_audit_tarihsel_tasima": 1
+  },
+  "adaylar": [
+    {
+      "alarm": false,
+      "saha_gorevi": false,
+      "izleme": "ARKA_PLAN_GENIS_YUZEY",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Germiyan",
+      "enlem": 38.309025,
+      "boylam": 26.488846,
+      "alan_m2": 118311,
+      "genis_kompaktlik": 0.148,
+      "genis_geometri_riski": true,
+      "sinyal": "Güncel şekil denetiminde yeniden doğrulanan tarihsel geniş düşük-kompaktlık yüzey hareketi",
+      "kanit_kaynagi": "shape_false_positive_audit_tarihsel_tasima",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.309025,26.488846",
+      "parsel_on_kontrol": "https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.309025/26.488846",
+      "neden": "Eski Sentinel kanıtından taşınmış 10.000 m² üstü görev, güncel aynı-gün şekil denetiminde yeniden düşük-kompaktlık geniş yüzey karakteri gösterdi. Eşleşme mesafesi 10.0 m, alan benzerliği 0.93. Bu nedenle rota/backlog'u doldurmak yerine tarla/toprak temizliği/doğal veya başka geniş arazi hareketi olasılığı için arka planda izlenir; ham radar kaydı silinmez.",
+      "kaynak_bolgeler": [
+        "cesme"
+      ],
+      "geometri_esleme_mesafe_m": 10.0,
+      "geometri_alan_benzerligi": 0.933,
+      "geometri_kaynagi_enlem": 38.309115,
+      "geometri_kaynagi_boylam": 26.488846,
+      "tarihsel_gorev_id": "UB17051ADB9",
+      "tarihsel_bekleme_gun": 7
+    }
+  ]
 }
