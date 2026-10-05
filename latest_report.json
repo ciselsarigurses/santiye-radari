@@ -9696,6 +9696,6 @@
       "aciklama": "Aynı günlük rapor yeniden işlendiğinde daha önce arka plana ayrılmış geniş-yüzey diagnostik kayıtları sessizce düşürülmez."
     }
   },
-  "temel_kazi_kapisi_arka_plan_sayi": 3,
+  "temel_kazi_kapisi_arka_plan_sayi": 0,
   "temel_kazi_kapisi_aktif": true
 }
