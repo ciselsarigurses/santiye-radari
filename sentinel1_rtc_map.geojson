@@ -1,7 +1,7 @@
 {
   "alarm": false,
   "ana_sentinel_esigi_m2": 250,
-  "feature_count": 25,
+  "feature_count": 21,
   "features": [
     {
       "geometry": {
@@ -234,6 +234,44 @@
     {
       "geometry": {
         "coordinates": [
+          26.341974,
+          38.284242
+        ],
+        "type": "Point"
+      },
+      "id": "cesme:38.284242:26.341974",
+      "properties": {
+        "alan_m2": 200,
+        "alarm": false,
+        "arka_plan": false,
+        "bolge": "cesme",
+        "eski_tarih": "2026-09-24",
+        "harita_katmani": "SAR_MIKRO_DIAGNOSTIK",
+        "hedef_katmani": "MIKRO_DIAGNOSTIK",
+        "kaynak": "micro_site_decision_review.json",
+        "mahalle_yaklasik": "Alaçatı",
+        "mikro_guclu_diagnostik": true,
+        "mikro_saha_dogrulandi": false,
+        "neden": "MIKRO_GUCLU_DIAGNOSTIK",
+        "onceki_sar_lokal_degisim_skor_db": null,
+        "saha_dogrulanmis_yikim_onculu": false,
+        "saha_gorevi": false,
+        "saha_oncul_gorev_id": null,
+        "saha_oncul_son_tarih": null,
+        "sar_cevre_degisim_konservatif_db": 0.042,
+        "sar_cevre_degisim_tepe_db": 0.166,
+        "sar_kaynak_tipi": "BOLGESEL_RTC",
+        "sar_lokal_degisim_skor_db": 0.723,
+        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
+        "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
+        "temporal_durum": null,
+        "yeni_tarih": "2026-09-30"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
           26.290574,
           38.317437
         ],
@@ -272,12 +310,12 @@
     {
       "geometry": {
         "coordinates": [
-          26.473392,
-          38.349636
+          26.395548,
+          38.319336
         ],
         "type": "Point"
       },
-      "id": "cesme:38.349636:26.473392",
+      "id": "cesme:38.319336:26.395548",
       "properties": {
         "alan_m2": 200,
         "alarm": false,
@@ -287,7 +325,7 @@
         "harita_katmani": "SAR_MIKRO_DIAGNOSTIK",
         "hedef_katmani": "MIKRO_DIAGNOSTIK",
         "kaynak": "micro_site_decision_review.json",
-        "mahalle_yaklasik": "Mevki doğrulanmadı",
+        "mahalle_yaklasik": "Reisdere",
         "mikro_guclu_diagnostik": true,
         "mikro_saha_dogrulandi": false,
         "neden": "MIKRO_GUCLU_DIAGNOSTIK",
@@ -296,12 +334,12 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.94,
-        "sar_cevre_degisim_tepe_db": 1.48,
+        "sar_cevre_degisim_konservatif_db": 0.284,
+        "sar_cevre_degisim_tepe_db": 0.456,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 1.132,
+        "sar_lokal_degisim_skor_db": 0.767,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
+        "sar_polarizasyon_uyumu": "TEK_POL_BASKIN",
         "temporal_durum": null,
         "yeni_tarih": "2026-09-30"
       },
@@ -348,82 +386,6 @@
     {
       "geometry": {
         "coordinates": [
-          26.656588,
-          38.328833
-        ],
-        "type": "Point"
-      },
-      "id": "gulbahce:38.328833:26.656588",
-      "properties": {
-        "alan_m2": 400,
-        "alarm": false,
-        "arka_plan": true,
-        "bolge": "gulbahce",
-        "eski_tarih": "2026-09-24",
-        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
-        "hedef_katmani": "ANA_250_PLUS",
-        "kaynak": "gulbahce_latest_state_blind_review.json",
-        "mahalle_yaklasik": "Gulbahce",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": false,
-        "neden": "BULUT",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": false,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": null,
-        "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.128,
-        "sar_cevre_degisim_tepe_db": 1.022,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 1.504,
-        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-09-30"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          26.655443,
-          38.329919
-        ],
-        "type": "Point"
-      },
-      "id": "gulbahce:38.329919:26.655443",
-      "properties": {
-        "alan_m2": 1200,
-        "alarm": false,
-        "arka_plan": true,
-        "bolge": "gulbahce",
-        "eski_tarih": "2026-09-24",
-        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
-        "hedef_katmani": "ANA_250_PLUS",
-        "kaynak": "gulbahce_latest_state_blind_review.json",
-        "mahalle_yaklasik": "Gulbahce",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": false,
-        "neden": "BULUT",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": false,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": null,
-        "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.674,
-        "sar_cevre_degisim_tepe_db": 0.7,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.947,
-        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "TEK_POL_BASKIN",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-09-30"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
           26.644338,
           38.331547
         ],
@@ -462,14 +424,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.643308,
-          38.341225
+          26.627967,
+          38.343305
         ],
         "type": "Point"
       },
-      "id": "gulbahce:38.341225:26.643308",
+      "id": "gulbahce:38.343305:26.627967",
       "properties": {
-        "alan_m2": 400,
+        "alan_m2": 3601,
         "alarm": false,
         "arka_plan": true,
         "bolge": "gulbahce",
@@ -480,16 +442,16 @@
         "mahalle_yaklasik": "Gulbahce",
         "mikro_guclu_diagnostik": false,
         "mikro_saha_dogrulandi": false,
-        "neden": "BULUT",
+        "neden": "GOLGE",
         "onceki_sar_lokal_degisim_skor_db": null,
         "saha_dogrulanmis_yikim_onculu": false,
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.2,
-        "sar_cevre_degisim_tepe_db": 0.819,
+        "sar_cevre_degisim_konservatif_db": 0.593,
+        "sar_cevre_degisim_tepe_db": 0.637,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.865,
+        "sar_lokal_degisim_skor_db": 0.196,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
         "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
@@ -500,126 +462,12 @@
     {
       "geometry": {
         "coordinates": [
-          26.643079,
-          38.341586
-        ],
-        "type": "Point"
-      },
-      "id": "gulbahce:38.341586:26.643079",
-      "properties": {
-        "alan_m2": 400,
-        "alarm": false,
-        "arka_plan": true,
-        "bolge": "gulbahce",
-        "eski_tarih": "2026-09-24",
-        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
-        "hedef_katmani": "ANA_250_PLUS",
-        "kaynak": "gulbahce_latest_state_blind_review.json",
-        "mahalle_yaklasik": "Gulbahce",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": false,
-        "neden": "BULUT",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": false,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": null,
-        "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.004,
-        "sar_cevre_degisim_tepe_db": 0.737,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.601,
-        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "TEK_POL_BASKIN",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-09-30"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          26.642621,
-          38.34231
-        ],
-        "type": "Point"
-      },
-      "id": "gulbahce:38.342310:26.642621",
-      "properties": {
-        "alan_m2": 400,
-        "alarm": false,
-        "arka_plan": false,
-        "bolge": "gulbahce",
-        "eski_tarih": "2026-09-24",
-        "harita_katmani": "SAR_LOKAL_ORTA",
-        "hedef_katmani": "ANA_250_PLUS",
-        "kaynak": "gulbahce_latest_state_blind_review.json",
-        "mahalle_yaklasik": "Gulbahce",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": false,
-        "neden": "BULUT",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": false,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": null,
-        "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.111,
-        "sar_cevre_degisim_tepe_db": 0.926,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 1.082,
-        "sar_mekansal_ayrim": "LOKAL_AYRIM_DESTEKLI",
-        "sar_polarizasyon_uyumu": "CIFT_POL_ORTA",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-09-30"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
-          26.64159,
-          38.343938
-        ],
-        "type": "Point"
-      },
-      "id": "gulbahce:38.343938:26.641590",
-      "properties": {
-        "alan_m2": 400,
-        "alarm": false,
-        "arka_plan": true,
-        "bolge": "gulbahce",
-        "eski_tarih": "2026-09-24",
-        "harita_katmani": "SAR_DUSUK_KANIT_ARKA_PLAN",
-        "hedef_katmani": "ANA_250_PLUS",
-        "kaynak": "gulbahce_latest_state_blind_review.json",
-        "mahalle_yaklasik": "Gulbahce",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": false,
-        "neden": "BULUT",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": false,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": null,
-        "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.18,
-        "sar_cevre_degisim_tepe_db": 0.497,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.691,
-        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "TEK_POL_BASKIN",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-09-30"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
           26.641132,
-          38.346923
+          38.346742
         ],
         "type": "Point"
       },
-      "id": "gulbahce:38.346923:26.641132",
+      "id": "gulbahce:38.346742:26.641132",
       "properties": {
         "alan_m2": 400,
         "alarm": false,
@@ -638,12 +486,12 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.018,
-        "sar_cevre_degisim_tepe_db": 0.199,
+        "sar_cevre_degisim_konservatif_db": 0.046,
+        "sar_cevre_degisim_tepe_db": 0.659,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.647,
+        "sar_lokal_degisim_skor_db": 0.603,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "TEK_POL_BASKIN",
+        "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
         "yeni_tarih": "2026-09-30"
       },
@@ -955,10 +803,9 @@
     }
   ],
   "layer_counts": {
-    "SAR_DUSUK_KANIT_ARKA_PLAN": 20,
+    "SAR_DUSUK_KANIT_ARKA_PLAN": 16,
     "SAR_GENIS_YUZEY_ARKA_PLAN": 2,
-    "SAR_LOKAL_ORTA": 1,
-    "SAR_MIKRO_DIAGNOSTIK": 1,
+    "SAR_MIKRO_DIAGNOSTIK": 2,
     "SAR_SAHA_ONCUL": 1
   },
   "mikro_aralik_m2": [
@@ -968,8 +815,8 @@
   "name": "sentinel1_rtc_ground_diagnostics",
   "not": "Harita katmani diagnostiktir; Sentinel-1 geri sacilim degisimi tek basina insaat/kazi kaniti, alarm, saha gorevi, adres veya parsel dogrulamasi degildir.",
   "region_counts": {
-    "cesme": 9,
-    "gulbahce": 8,
+    "cesme": 10,
+    "gulbahce": 3,
     "uzunkuyu": 8
   },
   "rtc_pair_dates": {
