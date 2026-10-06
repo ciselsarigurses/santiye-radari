@@ -14,10 +14,10 @@
       "alarm": false,
       "saha_gorevi": false,
       "enlem": 38.338511,
-      "boylam": 26.499744,
+      "boylam": 26.499721,
       "alan_m2": 300,
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "mahalle": "Germiyan",
       "ilk_guclu_tarih": "05.10.2026",
       "son_guclu_tarih": "05.10.2026",
@@ -315,5 +315,5 @@
     }
   ],
   "guclu_iz_sayisi": 16,
-  "guncelleme_tarihi": "2026-10-05 20:07 +0300"
+  "guncelleme_tarihi": "2026-10-07 00:03 +0300"
 }
