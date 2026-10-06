@@ -12,7 +12,7 @@
   "kalite_kor_esleme_mesafesi_m": 125.0,
   "son_degerlendirilen_sentinel_tarihi": "05.10.2026",
   "son_degerlendirilen_sentinel_item": "S2A_T35SMC_20261005T090428_L2A",
-  "ayni_sahne_idempotent": false,
+  "ayni_sahne_idempotent": true,
   "guncel_scl_su_gecis_150plus": 24,
   "guncel_belirsiz_iz": 1,
   "guncel_mikro_150_249": 0,
