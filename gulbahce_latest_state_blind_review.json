@@ -40,7 +40,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1687,
+      "secilen_devriyeye_mesafe_m": null,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -52,7 +52,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 2428,
+      "secilen_devriyeye_mesafe_m": null,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     }
