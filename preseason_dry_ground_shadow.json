@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-10-06",
+  "rapor_tarihi": "2026-10-07",
   "amac": "15 Eylül sonrası kuru-zemin teyit filtresini yasak döneminde gölge modunda ölçmek; operasyonel alarm/görev üretmeden güçlü aday hacmini kalibre etmek.",
   "ana_alarm_alt_esigi_m2": 250,
   "diagnostik_aralik_m2": [
@@ -22,12 +22,27 @@
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "son_item": "S2A_T35SMC_20261005T090428_L2A",
       "son_tarih": "05.10.2026",
-      "guclu_golge_aday": 0,
+      "guclu_golge_aday": 1,
       "ana_goreve_yakin_oldugu_icin_atlanan": 0
     }
   },
-  "guclu_golge_aday_sayisi": 1,
+  "guclu_golge_aday_sayisi": 2,
   "adaylar": [
+    {
+      "mahalle": "Germiyan",
+      "enlem": 38.338511,
+      "boylam": 26.499744,
+      "alan_m2": 300,
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "son_item": "S2A_T35SMC_20261005T090428_L2A",
+      "yerellik_orani": 5.99,
+      "uzun_temporal_ani_baslangic_orani": 10.9,
+      "son_cift_bsi_degisim": 0.109,
+      "alarm": false,
+      "saha_gorevi": false,
+      "gölge_kalibrasyon": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.338511,26.499744"
+    },
     {
       "mahalle": "Germiyan",
       "enlem": 38.338511,
