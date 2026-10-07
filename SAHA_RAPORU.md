@@ -3,17 +3,15 @@
 **Rapor tarihi:** 2026-10-08
 **Hazırlanma:** 2026-10-08 00:07 +03
 
-**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 323 · Geciken kontrol: 322 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif)
+**Özet:** İnternet: 0 yeni aktif bulgu, 0 güncellendi. Instagram: 0 yeni indekslenmiş sonuç. Belediye: 0 yeni açık sonuç. Çeşme merkez · Alaçatı · Ilıca: yeni uydu görüntüsü yok · Uzunkuyu · Germiyan · Ildır · Gülbahçe: yeni uydu görüntüsü yok · Aktif saha görevi: 322 · Geciken kontrol: 321 · Tekrar gidilecek: 1 · Saha sonucu: 3 kontrol (0 şantiye/kazı, 1 yıkım/temizlik öncülü, 0 yol/altyapı, 1 tarla/bitki, 1 yanlış pozitif) · Arka plan geniş yüzey: 1
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
 ## Günün ilk 3 kontrolü
 
-> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir.
+> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
-1. **GECİKEN — Dalyan** · yaklaşık 300 m² · Görev `U82332941AB` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.352531,26.322742)
-2. **GECİKEN — Ilıca** · yaklaşık 300 m² · Görev `U5ED5045173` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.317346,26.347240)
-3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 300 m² · Görev `U1A4C444F07` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.367274,26.547369)
+1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503)
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
@@ -2597,16 +2595,6 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.391876,26.522616)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 259. GECİKEN — Germiyan
-- **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Germiyan
-- **Koordinat:** `38.309025, 26.488846`
-- **Değişim alanı:** yaklaşık 118.311 m²
-- **Görüntü aralığı:** 25.09.2026 → 28.09.2026
-- **Sinyal:** 10 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.309025,26.488846)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
 ### 260. GECİKEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Çeşme merkez · Alaçatı · Ilıca / Mevki doğrulanmadı
 - **Koordinat:** `38.197321, 26.493311`
@@ -2947,16 +2935,6 @@
 - **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.268233,26.565916)
 - **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
 
-### 294. GECİKEN — Germiyan
-- **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Germiyan
-- **Koordinat:** `38.309115, 26.488868`
-- **Değişim alanı:** yaklaşık 125.122 m²
-- **Görüntü aralığı:** 28.09.2026 → 05.10.2026
-- **Sinyal:** 3 gündür saha kontrolü bekliyor · Bitişik yüzey/toprak değişimi adayı
-- **Öncelik nedeni:** Çok geniş bitişik zemin/yüzey değişimi.
-- **Rota:** [Google Maps'te aç](https://www.google.com/maps/dir/?api=1&destination=38.309115,26.488868)
-- **Saha talimatı:** Konumu yerinde kontrol et. Kazı, temel, şantiye kurulumu veya aktif inşaat görülürse fotoğraf çek; firma/tabela ve mümkünse doğru adres bilgisini kaydet.
-
 ### 295. GECİKEN — Mevki doğrulanmadı
 - **Yaklaşık konum:** Uzunkuyu · Germiyan · Ildır · Gülbahçe / Mevki doğrulanmadı
 - **Koordinat:** `38.211974, 26.570953`
@@ -3257,3 +3235,9 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması değildir; yanlış pozitifler saha kontrolüyle elenir.
+
+## Arka planda izlenen geniş yüzey hareketleri
+
+> Bu bölüm **şantiye alarmı veya saha görevi değildir**. 10.000 m² üstü ve ölçülen düşük-kompaktlık riski taşıyan geniş değişimler; tarım, toprak temizliği, doğal/kırsal yüzey hareketi veya başka geniş arazi müdahalesi olasılığı nedeniyle operasyon listesinden ayrılır. Ham radar kaydı silinmez; yeni görüntüde kompakt/parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa yeniden değerlendirilir.
+
+- **Germiyan · yaklaşık 118.311 m²** — kompaktlık 0.148; koordinat `38.309025, 26.488846` · kanıt `shape_false_positive_audit_tarihsel_tasima` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.309025,26.488846) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.309025/26.488846)

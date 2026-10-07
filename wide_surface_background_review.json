@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-10-07",
+  "rapor_tarihi": "2026-10-08",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -42,7 +42,7 @@
       "geometri_kaynagi_enlem": 38.309115,
       "geometri_kaynagi_boylam": 26.488846,
       "tarihsel_gorev_id": "UB17051ADB9",
-      "tarihsel_bekleme_gun": 9
+      "tarihsel_bekleme_gun": 10
     }
   ]
 }
