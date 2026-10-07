@@ -24,7 +24,7 @@
     "05.09.2026",
     "03.09.2026"
   ],
-  "ikili_sahne_korlugu_250plus_diagnostik": 0,
+  "ikili_sahne_korlugu_250plus_diagnostik": 2,
   "guncel_sahne_mikro_kor_150_249": 0,
   "guncel_sahne_kor_250_6500": 2,
   "guncel_sahne_kor_6500ustu": 0,
@@ -40,8 +40,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1211,
-      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_mesafe_m": 0,
+      "secilen_devriye_kapsiyor": true,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -52,8 +52,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 0,
-      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_mesafe_m": 1211,
+      "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     }
   ],
