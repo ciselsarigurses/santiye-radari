@@ -10816,8 +10816,34 @@
       "saha_gorevi": false
     }
   ],
-  "operasyon_odak_disinda_devriye": [],
-  "operasyon_odak_disinda_devriye_sayi": 0,
+  "operasyon_odak_disinda_devriye": [
+    {
+      "bolge_anahtari": "uzunkuyu",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "mahalle": "Gülbahçe · güncel uydu kör alanı",
+      "enlem": 38.343305,
+      "boylam": 26.627967,
+      "alan_m2": 3601,
+      "neden": "GOLGE",
+      "referans_sahne_sayisi": 8,
+      "kalan_kor_yuzde": 0.0,
+      "kaynak_tipi": "GULBAHCE_GUNCEL_SAHNE_BILINEN_KARA_KORLUGU",
+      "alarm": false,
+      "saha_gorevi": false,
+      "durum": "KAPSAMA_KONTROLU",
+      "gulbahce_operasyonel_kapsama": true,
+      "gulbahce_cekirdek_operasyon": true,
+      "gulbahce_referans_mesafesi_m": 1927,
+      "gulbahce_guncel_sahne_korlugu": true,
+      "gulbahce_guncel_sahne_tarihi": "05.10.2026",
+      "gulbahce_guncel_sahne_item": "S2A_T35SMC_20261005T090428_L2A",
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.343305,26.627967",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe operasyonel öncelik dışında; kör-alan gözlemi diagnostik arka planda korunur ve günlük saha rotasına gönderilmez."
+    }
+  ],
+  "operasyon_odak_disinda_devriye_sayi": 1,
   "operasyon_odak_arka_plan": [
     {
       "gorev_id": "UEC44340AEC",
