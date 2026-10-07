@@ -11,6 +11,17 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307849/26.333503)
+1. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U37B73B4151` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.428327,26.577708)
+2. **PARSEL — Çiftlikköy** · yaklaşık 900 m² · Görev `UE2255AB69E` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.271489,26.278783)
+3. **PARSEL — Çiftlikköy** · yaklaşık 1.000 m² · Görev `UDD5DB4C916` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.286684,26.275349)
+
+## Ek kuru zemin kalibrasyon kontrolü
+
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
+
+1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 400 m² · 28.09.2026 → 05.10.2026 · BSI Δ 0.237 · RGB Δ 0.178 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.221742,26.494684)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 600 m² · 28.09.2026 → 05.10.2026 · BSI Δ 0.212 · RGB Δ 0.226 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.212245,26.588927)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
