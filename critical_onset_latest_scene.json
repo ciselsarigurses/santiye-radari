@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-10-08T15:04:42+00:00",
+  "olusturma_utc": "2026-10-08T16:50:49+00:00",
   "amac": "15 Eylül öncesi baseline ile gerçekten mevcut en güncel post-window Sentinel sahnesini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -22,7 +22,7 @@
         "baseline_13eylul_mevcut": true,
         "baseline_vs_en_guncel": {
           "hesaplanabilir": false,
-          "neden": "YUKSEK_GLOBAL_BULUT_YEREL_SCL_DOGRULAMASI_GEREKLI",
+          "neden": "YUKSEK_GLOBAL_BULUT_YEREL_SCL_ACIK_AMA_URETIM_FILTRESI_DISI",
           "baseline_tarihi": "2026-09-13",
           "son_tarih": "2026-10-08",
           "eski_item": "S2C_T35SMC_20260913T090741_L2A",
@@ -31,11 +31,11 @@
           "yeni_bulut_yuzde": 42.35,
           "ayni_mgrs_karo": true,
           "ayni_goreli_yorunge": true,
-          "yerel_scl_dogrulamasi_gerekli": true,
-          "yerel_scl_dogrulamasi_mevcut": false,
-          "yerel_scl_aoi_kapali_yuzde": null,
-          "yerel_scl_lokal_kara_pencere_kapali_yuzde": null,
-          "yerel_scl_yeterince_acik": null
+          "yerel_scl_dogrulamasi_gerekli": false,
+          "yerel_scl_dogrulamasi_mevcut": true,
+          "yerel_scl_aoi_kapali_yuzde": 70.6,
+          "yerel_scl_lokal_kara_pencere_kapali_yuzde": 0.0,
+          "yerel_scl_yeterince_acik": true
         },
         "baseline_vs_en_guncel_uretim_filtresi_uygun": {
           "hesaplanabilir": true,
@@ -96,7 +96,7 @@
         "baseline_13eylul_mevcut": true,
         "baseline_vs_en_guncel": {
           "hesaplanabilir": false,
-          "neden": "YUKSEK_GLOBAL_BULUT_YEREL_SCL_DOGRULAMASI_GEREKLI",
+          "neden": "YUKSEK_GLOBAL_BULUT_YEREL_SCL_ACIK_AMA_URETIM_FILTRESI_DISI",
           "baseline_tarihi": "2026-09-13",
           "son_tarih": "2026-10-08",
           "eski_item": "S2C_T35SMC_20260913T090741_L2A",
@@ -105,11 +105,11 @@
           "yeni_bulut_yuzde": 42.35,
           "ayni_mgrs_karo": true,
           "ayni_goreli_yorunge": true,
-          "yerel_scl_dogrulamasi_gerekli": true,
-          "yerel_scl_dogrulamasi_mevcut": false,
-          "yerel_scl_aoi_kapali_yuzde": null,
-          "yerel_scl_lokal_kara_pencere_kapali_yuzde": null,
-          "yerel_scl_yeterince_acik": null
+          "yerel_scl_dogrulamasi_gerekli": false,
+          "yerel_scl_dogrulamasi_mevcut": true,
+          "yerel_scl_aoi_kapali_yuzde": 24.53,
+          "yerel_scl_lokal_kara_pencere_kapali_yuzde": 0.0,
+          "yerel_scl_yeterince_acik": true
         },
         "baseline_vs_en_guncel_uretim_filtresi_uygun": {
           "hesaplanabilir": true,
