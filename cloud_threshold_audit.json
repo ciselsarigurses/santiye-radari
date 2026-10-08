@@ -8,7 +8,7 @@
   "lokal_kara_min_yuzde": 50.0,
   "alarm_uretmez": true,
   "saha_gorevi_uretmez": true,
-  "dikkat_hedef_aday_sayisi": 2,
+  "dikkat_hedef_aday_sayisi": 3,
   "uyarilar": [],
   "hedefler": [
     {
@@ -22,20 +22,20 @@
         26.53,
         38.43
       ],
-      "production_item": "S2B_T35SMC_20260928T090838_L2A",
-      "production_date": "28.09.2026 09:09Z",
+      "production_item": "S2A_T35SMC_20261005T090428_L2A",
+      "production_date": "05.10.2026 09:09Z",
       "newer_candidates": [
         {
-          "item": "S2C_T35SMC_20261003T090236_L2A",
-          "tarih": "03.10.2026 09:09Z",
-          "global_bulut": 55.25,
-          "aoi_kapali": 38.59,
+          "item": "S2B_T35SMC_20261008T085844_L2A",
+          "tarih": "08.10.2026 09:09Z",
+          "global_bulut": 42.35,
+          "aoi_kapali": 70.6,
           "aoi_yeterince_acik": false,
           "lokal_kara_pencere": {
             "kapali_yuzde": 0.0,
             "kara_yuzde": 100.0,
-            "merkez_enlem": 38.212923,
-            "merkez_boylam": 26.483294,
+            "merkez_enlem": 38.221968,
+            "merkez_boylam": 26.494742,
             "yaklasik_pencere_m": 2000,
             "adim_m": 1000
           },
@@ -54,20 +54,20 @@
         26.68,
         38.43
       ],
-      "production_item": "S2B_T35SMC_20260928T090838_L2A",
-      "production_date": "28.09.2026 09:09Z",
+      "production_item": "S2A_T35SMC_20261005T090428_L2A",
+      "production_date": "05.10.2026 09:09Z",
       "newer_candidates": [
         {
-          "item": "S2C_T35SMC_20261003T090236_L2A",
-          "tarih": "03.10.2026 09:09Z",
-          "global_bulut": 55.25,
-          "aoi_kapali": 59.14,
-          "aoi_yeterince_acik": false,
+          "item": "S2B_T35SMC_20261008T085844_L2A",
+          "tarih": "08.10.2026 09:09Z",
+          "global_bulut": 42.35,
+          "aoi_kapali": 24.53,
+          "aoi_yeterince_acik": true,
           "lokal_kara_pencere": {
             "kapali_yuzde": 0.0,
             "kara_yuzde": 100.0,
-            "merkez_enlem": 38.212923,
-            "merkez_boylam": 26.484363,
+            "merkez_enlem": 38.221968,
+            "merkez_boylam": 26.495817,
             "yaklasik_pencere_m": 2000,
             "adim_m": 1000
           },
@@ -86,24 +86,24 @@
         26.668464,
         38.350868
       ],
-      "production_item": "S2B_T35SMC_20260928T090838_L2A",
-      "production_date": "28.09.2026 09:09Z",
+      "production_item": "S2A_T35SMC_20261005T090428_L2A",
+      "production_date": "05.10.2026 09:09Z",
       "newer_candidates": [
         {
-          "item": "S2C_T35SMC_20261003T090236_L2A",
-          "tarih": "03.10.2026 09:09Z",
-          "global_bulut": 55.25,
-          "aoi_kapali": 99.96,
-          "aoi_yeterince_acik": false,
+          "item": "S2B_T35SMC_20261008T085844_L2A",
+          "tarih": "08.10.2026 09:09Z",
+          "global_bulut": 42.35,
+          "aoi_kapali": 8.37,
+          "aoi_yeterince_acik": true,
           "lokal_kara_pencere": {
-            "kapali_yuzde": 100.0,
-            "kara_yuzde": 100.0,
-            "merkez_enlem": 38.323736,
-            "merkez_boylam": 26.634108,
+            "kapali_yuzde": 2.7,
+            "kara_yuzde": 51.88,
+            "merkez_enlem": 38.341824,
+            "merkez_boylam": 26.64556,
             "yaklasik_pencere_m": 2000,
             "adim_m": 1000
           },
-          "lokal_kara_pencere_yeterince_acik": false
+          "lokal_kara_pencere_yeterince_acik": true
         }
       ]
     }
