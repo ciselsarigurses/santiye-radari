@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-10-08T16:50:49+00:00",
+  "olusturma_utc": "2026-10-08T20:57:09+00:00",
   "amac": "15 Eylül öncesi baseline ile gerçekten mevcut en güncel post-window Sentinel sahnesini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -60,13 +60,13 @@
         "metadata_kaynagi": "Microsoft Planetary Computer",
         "kaynak_hatalari": [],
         "baseline_vs_en_guncel": {
-          "en_guncel_postwindow_tarih": "2026-09-30",
-          "karsilastirilan_postwindow_tarih": "2026-09-30",
+          "en_guncel_postwindow_tarih": "2026-10-06",
+          "karsilastirilan_postwindow_tarih": "2026-10-06",
           "hesaplanabilir": true,
           "neden": "OK_AYNI_GEOMETRI",
           "baseline_tarihi": "2026-09-12",
           "eski_item": "S1D_IW_GRDH_1SDV_20260912T160636_20260912T160701_004547_008753",
-          "yeni_item": "S1C_IW_GRDH_1SDV_20260930T160624_20260930T160649_009679_013455",
+          "yeni_item": "S1D_IW_GRDH_1SDV_20261006T160636_20261006T160701_004897_009372",
           "ortak_kritik_noktalar": [
             "Alaçatı",
             "Ilıca",
@@ -134,13 +134,13 @@
         "metadata_kaynagi": "Microsoft Planetary Computer",
         "kaynak_hatalari": [],
         "baseline_vs_en_guncel": {
-          "en_guncel_postwindow_tarih": "2026-09-30",
-          "karsilastirilan_postwindow_tarih": "2026-09-30",
+          "en_guncel_postwindow_tarih": "2026-10-06",
+          "karsilastirilan_postwindow_tarih": "2026-10-06",
           "hesaplanabilir": true,
           "neden": "OK_AYNI_GEOMETRI",
           "baseline_tarihi": "2026-09-12",
           "eski_item": "S1D_IW_GRDH_1SDV_20260912T160636_20260912T160701_004547_008753",
-          "yeni_item": "S1C_IW_GRDH_1SDV_20260930T160624_20260930T160649_009679_013455",
+          "yeni_item": "S1D_IW_GRDH_1SDV_20261006T160636_20261006T160701_004897_009372",
           "ortak_kritik_noktalar": [
             "Uzunkuyu"
           ],
