@@ -11,12 +11,17 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-1. **YUKSEK — Konum araştırılıyor** · yaklaşık 400 m² · Görev `FKC28C831021` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.307849,26.333503) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.307849/26.333503)
+1. **GECİKEN — Dalyan** · yaklaşık 300 m² · Görev `U82332941AB` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.352531,26.322742)
+2. **GECİKEN — Ilıca** · yaklaşık 300 m² · Görev `U5ED5045173` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.317346,26.347240)
+3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 300 m² · Görev `U1A4C444F07` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.367274,26.547369)
 
-## Arka planda izlenen geniş yüzey hareketleri
+## Ek kuru zemin kalibrasyon kontrolü
 
-> Bu bölüm **şantiye alarmı veya saha görevi değildir**. 10.000 m² üstü ve ölçülen düşük-kompaktlık riski taşıyan geniş değişimler; tarım, toprak temizliği, doğal/kırsal yüzey hareketi veya başka geniş arazi müdahalesi olasılığı nedeniyle operasyon listesinden ayrılır. Ham radar kaydı silinmez; yeni görüntüde kompakt/parsel ölçekli veya devam eden güçlü müdahale kanıtı oluşursa yeniden değerlendirilir.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-- **Germiyan · yaklaşık 118.311 m²** — kompaktlık 0.148; koordinat `38.309025, 26.488846` · kanıt `shape_false_positive_audit_tarihsel_tasima` · [Harita](https://www.google.com/maps/dir/?api=1&destination=38.309025,26.488846) · [Parsel ön kontrol](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.309025/26.488846)
+1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 400 m² · 28.09.2026 → 05.10.2026 · BSI Δ 0.237 · RGB Δ 0.178 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.221742,26.494684)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 600 m² · 28.09.2026 → 05.10.2026 · BSI Δ 0.212 · RGB Δ 0.226 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.212245,26.588927)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
