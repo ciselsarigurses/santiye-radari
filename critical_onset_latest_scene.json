@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-10-12T15:58:03+00:00",
+  "olusturma_utc": "2026-10-12T17:08:59+00:00",
   "amac": "15 Eylül öncesi baseline ile gerçekten mevcut en güncel post-window Sentinel sahnesini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -61,27 +61,8 @@
         "kaynak_hatalari": [],
         "baseline_vs_en_guncel": {
           "en_guncel_postwindow_tarih": "2026-10-12",
-          "karsilastirilan_postwindow_tarih": "2026-10-06",
-          "hesaplanabilir": true,
-          "neden": "OK_AYNI_GEOMETRI",
-          "baseline_tarihi": "2026-09-12",
-          "eski_item": "S1D_IW_GRDH_1SDV_20260912T160636_20260912T160701_004547_008753",
-          "yeni_item": "S1D_IW_GRDH_1SDV_20261006T160636_20261006T160701_004897_009372",
-          "ortak_kritik_noktalar": [
-            "Alaçatı",
-            "Ilıca",
-            "Musalla",
-            "Ovacık",
-            "Reisdere",
-            "Çeşme",
-            "Çiftlikköy"
-          ],
-          "goreli_yorunge": 131,
-          "orbit_yonu": "ascending",
-          "polarizasyon": [
-            "VH",
-            "VV"
-          ]
+          "hesaplanabilir": false,
+          "neden": "KARSILASTIRILABILIR_BASELINE_EN_GUNCEL_S1_CIFTI_YOK"
         }
       }
     },
@@ -135,21 +116,8 @@
         "kaynak_hatalari": [],
         "baseline_vs_en_guncel": {
           "en_guncel_postwindow_tarih": "2026-10-12",
-          "karsilastirilan_postwindow_tarih": "2026-10-06",
-          "hesaplanabilir": true,
-          "neden": "OK_AYNI_GEOMETRI",
-          "baseline_tarihi": "2026-09-12",
-          "eski_item": "S1D_IW_GRDH_1SDV_20260912T160636_20260912T160701_004547_008753",
-          "yeni_item": "S1D_IW_GRDH_1SDV_20261006T160636_20261006T160701_004897_009372",
-          "ortak_kritik_noktalar": [
-            "Uzunkuyu"
-          ],
-          "goreli_yorunge": 131,
-          "orbit_yonu": "ascending",
-          "polarizasyon": [
-            "VH",
-            "VV"
-          ]
+          "hesaplanabilir": false,
+          "neden": "KARSILASTIRILABILIR_BASELINE_EN_GUNCEL_S1_CIFTI_YOK"
         }
       }
     }
