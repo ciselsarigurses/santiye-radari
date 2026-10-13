@@ -46,12 +46,10 @@
       ],
       "tarihler": {
         "2026-09-13": {
-          "tam_kapsam_morfoloji_sahnesi": 1,
-          "tam_kapsam_bsi_sahnesi": 1,
-          "minimum_bulut_yuzde": 0.566,
-          "itemler": [
-            "S2C_T35SMC_20260913T090741_L2A"
-          ],
+          "tam_kapsam_morfoloji_sahnesi": 0,
+          "tam_kapsam_bsi_sahnesi": 0,
+          "minimum_bulut_yuzde": null,
+          "itemler": [],
           "operasyon_odagi": {
             "hedef_noktalar": [
               "Çeşme",
@@ -62,21 +60,11 @@
               "Musalla",
               "Çiftlikköy"
             ],
-            "kapsanan_noktalar": [
-              "Alaçatı",
-              "Ilıca",
-              "Musalla",
-              "Ovacık",
-              "Reisdere",
-              "Çeşme",
-              "Çiftlikköy"
-            ],
-            "tam_kapsam_morfoloji_sahnesi": 1,
-            "tam_kapsam_bsi_sahnesi": 1,
-            "minimum_bulut_yuzde": 0.566,
-            "itemler": [
-              "S2C_T35SMC_20260913T090741_L2A"
-            ]
+            "kapsanan_noktalar": [],
+            "tam_kapsam_morfoloji_sahnesi": 0,
+            "tam_kapsam_bsi_sahnesi": 0,
+            "minimum_bulut_yuzde": null,
+            "itemler": []
           }
         },
         "2026-09-15": {
@@ -161,29 +149,29 @@
       "exact_ciftler": {
         "2026-09-13->2026-09-15": {
           "morfoloji": {
-            "exact_cift_var": true,
-            "ayni_mgrs_var": true,
-            "ayni_goreli_yorunge_var": true,
-            "durum": "EXACT_AYNI_YORUNGE"
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
           },
           "bsi": {
-            "exact_cift_var": true,
-            "ayni_mgrs_var": true,
-            "ayni_goreli_yorunge_var": true,
-            "durum": "EXACT_AYNI_YORUNGE"
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
           },
           "operasyon_odagi": {
             "morfoloji": {
-              "exact_cift_var": true,
-              "ayni_mgrs_var": true,
-              "ayni_goreli_yorunge_var": true,
-              "durum": "EXACT_AYNI_YORUNGE"
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
             },
             "bsi": {
-              "exact_cift_var": true,
-              "ayni_mgrs_var": true,
-              "ayni_goreli_yorunge_var": true,
-              "durum": "EXACT_AYNI_YORUNGE"
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
             }
           }
         },
@@ -281,25 +269,19 @@
       ],
       "tarihler": {
         "2026-09-13": {
-          "tam_kapsam_morfoloji_sahnesi": 1,
-          "tam_kapsam_bsi_sahnesi": 1,
-          "minimum_bulut_yuzde": 0.566,
-          "itemler": [
-            "S2C_T35SMC_20260913T090741_L2A"
-          ],
+          "tam_kapsam_morfoloji_sahnesi": 0,
+          "tam_kapsam_bsi_sahnesi": 0,
+          "minimum_bulut_yuzde": null,
+          "itemler": [],
           "operasyon_odagi": {
             "hedef_noktalar": [
               "Uzunkuyu"
             ],
-            "kapsanan_noktalar": [
-              "Uzunkuyu"
-            ],
-            "tam_kapsam_morfoloji_sahnesi": 1,
-            "tam_kapsam_bsi_sahnesi": 1,
-            "minimum_bulut_yuzde": 0.566,
-            "itemler": [
-              "S2C_T35SMC_20260913T090741_L2A"
-            ]
+            "kapsanan_noktalar": [],
+            "tam_kapsam_morfoloji_sahnesi": 0,
+            "tam_kapsam_bsi_sahnesi": 0,
+            "minimum_bulut_yuzde": null,
+            "itemler": []
           }
         },
         "2026-09-15": {
@@ -360,29 +342,29 @@
       "exact_ciftler": {
         "2026-09-13->2026-09-15": {
           "morfoloji": {
-            "exact_cift_var": true,
-            "ayni_mgrs_var": true,
-            "ayni_goreli_yorunge_var": true,
-            "durum": "EXACT_AYNI_YORUNGE"
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
           },
           "bsi": {
-            "exact_cift_var": true,
-            "ayni_mgrs_var": true,
-            "ayni_goreli_yorunge_var": true,
-            "durum": "EXACT_AYNI_YORUNGE"
+            "exact_cift_var": false,
+            "ayni_mgrs_var": false,
+            "ayni_goreli_yorunge_var": false,
+            "durum": "VERI_YOK"
           },
           "operasyon_odagi": {
             "morfoloji": {
-              "exact_cift_var": true,
-              "ayni_mgrs_var": true,
-              "ayni_goreli_yorunge_var": true,
-              "durum": "EXACT_AYNI_YORUNGE"
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
             },
             "bsi": {
-              "exact_cift_var": true,
-              "ayni_mgrs_var": true,
-              "ayni_goreli_yorunge_var": true,
-              "durum": "EXACT_AYNI_YORUNGE"
+              "exact_cift_var": false,
+              "ayni_mgrs_var": false,
+              "ayni_goreli_yorunge_var": false,
+              "durum": "VERI_YOK"
             }
           }
         },
