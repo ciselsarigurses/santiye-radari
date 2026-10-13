@@ -18,8 +18,8 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "baseline_tarih": "13.09.2026",
-      "post_onset_tarih": "08.10.2026",
+      "baseline_tarih": null,
+      "post_onset_tarih": null,
       "girdi_bridge_aday": 0,
       "eslesen_cross_aday": 0,
       "sureklilik_ile_kurtarilan_sayi": 0,
@@ -29,8 +29,8 @@
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "baseline_tarih": "13.09.2026",
-      "post_onset_tarih": "08.10.2026",
+      "baseline_tarih": null,
+      "post_onset_tarih": null,
       "girdi_bridge_aday": 0,
       "eslesen_cross_aday": 0,
       "sureklilik_ile_kurtarilan_sayi": 0,
