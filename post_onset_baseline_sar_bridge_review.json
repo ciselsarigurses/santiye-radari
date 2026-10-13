@@ -16,16 +16,16 @@
   "bolgeler": {
     "cesme": {
       "durum": "ADAY_YOK",
-      "baseline_tarih": "13.09.2026",
-      "post_onset_tarih": "08.10.2026",
+      "baseline_tarih": null,
+      "post_onset_tarih": null,
       "hedef_sayisi": 0,
       "pozitif_sar_destekli_sayi": 0,
       "adaylar": []
     },
     "uzunkuyu": {
       "durum": "ADAY_YOK",
-      "baseline_tarih": "13.09.2026",
-      "post_onset_tarih": "08.10.2026",
+      "baseline_tarih": null,
+      "post_onset_tarih": null,
       "hedef_sayisi": 0,
       "pozitif_sar_destekli_sayi": 0,
       "adaylar": []
