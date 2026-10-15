@@ -68,12 +68,10 @@
           }
         },
         "2026-09-15": {
-          "tam_kapsam_morfoloji_sahnesi": 1,
-          "tam_kapsam_bsi_sahnesi": 1,
-          "minimum_bulut_yuzde": 11.067,
-          "itemler": [
-            "S2A_T35SMC_20260915T090428_L2A"
-          ],
+          "tam_kapsam_morfoloji_sahnesi": 0,
+          "tam_kapsam_bsi_sahnesi": 0,
+          "minimum_bulut_yuzde": null,
+          "itemler": [],
           "operasyon_odagi": {
             "hedef_noktalar": [
               "Çeşme",
@@ -84,21 +82,11 @@
               "Musalla",
               "Çiftlikköy"
             ],
-            "kapsanan_noktalar": [
-              "Alaçatı",
-              "Ilıca",
-              "Musalla",
-              "Ovacık",
-              "Reisdere",
-              "Çeşme",
-              "Çiftlikköy"
-            ],
-            "tam_kapsam_morfoloji_sahnesi": 1,
-            "tam_kapsam_bsi_sahnesi": 1,
-            "minimum_bulut_yuzde": 11.067,
-            "itemler": [
-              "S2A_T35SMC_20260915T090428_L2A"
-            ]
+            "kapsanan_noktalar": [],
+            "tam_kapsam_morfoloji_sahnesi": 0,
+            "tam_kapsam_bsi_sahnesi": 0,
+            "minimum_bulut_yuzde": null,
+            "itemler": []
           }
         },
         "2026-09-16": {
@@ -285,25 +273,19 @@
           }
         },
         "2026-09-15": {
-          "tam_kapsam_morfoloji_sahnesi": 1,
-          "tam_kapsam_bsi_sahnesi": 1,
-          "minimum_bulut_yuzde": 11.067,
-          "itemler": [
-            "S2A_T35SMC_20260915T090428_L2A"
-          ],
+          "tam_kapsam_morfoloji_sahnesi": 0,
+          "tam_kapsam_bsi_sahnesi": 0,
+          "minimum_bulut_yuzde": null,
+          "itemler": [],
           "operasyon_odagi": {
             "hedef_noktalar": [
               "Uzunkuyu"
             ],
-            "kapsanan_noktalar": [
-              "Uzunkuyu"
-            ],
-            "tam_kapsam_morfoloji_sahnesi": 1,
-            "tam_kapsam_bsi_sahnesi": 1,
-            "minimum_bulut_yuzde": 11.067,
-            "itemler": [
-              "S2A_T35SMC_20260915T090428_L2A"
-            ]
+            "kapsanan_noktalar": [],
+            "tam_kapsam_morfoloji_sahnesi": 0,
+            "tam_kapsam_bsi_sahnesi": 0,
+            "minimum_bulut_yuzde": null,
+            "itemler": []
           }
         },
         "2026-09-16": {
