@@ -8,7 +8,7 @@
   "lokal_kara_min_yuzde": 50.0,
   "alarm_uretmez": true,
   "saha_gorevi_uretmez": true,
-  "dikkat_hedef_aday_sayisi": 3,
+  "dikkat_hedef_aday_sayisi": 5,
   "uyarilar": [],
   "hedefler": [
     {
@@ -25,6 +25,22 @@
       "production_item": "S2A_T35SMC_20261005T090428_L2A",
       "production_date": "05.10.2026 09:09Z",
       "newer_candidates": [
+        {
+          "item": "S2A_T35SMC_20261015T090658_L2A",
+          "tarih": "15.10.2026 09:09Z",
+          "global_bulut": 79.95,
+          "aoi_kapali": 81.75,
+          "aoi_yeterince_acik": false,
+          "lokal_kara_pencere": {
+            "kapali_yuzde": 0.28,
+            "kara_yuzde": 100.0,
+            "merkez_enlem": 38.240058,
+            "merkez_boylam": 26.471846,
+            "yaklasik_pencere_m": 2000,
+            "adim_m": 1000
+          },
+          "lokal_kara_pencere_yeterince_acik": true
+        },
         {
           "item": "S2C_T35SMC_20261013T090800_L2A",
           "tarih": "13.10.2026 09:09Z",
@@ -74,6 +90,22 @@
       "production_date": "05.10.2026 09:09Z",
       "newer_candidates": [
         {
+          "item": "S2A_T35SMC_20261015T090658_L2A",
+          "tarih": "15.10.2026 09:09Z",
+          "global_bulut": 79.95,
+          "aoi_kapali": 76.02,
+          "aoi_yeterince_acik": false,
+          "lokal_kara_pencere": {
+            "kapali_yuzde": 0.0,
+            "kara_yuzde": 100.0,
+            "merkez_enlem": 38.221968,
+            "merkez_boylam": 26.656175,
+            "yaklasik_pencere_m": 2000,
+            "adim_m": 1000
+          },
+          "lokal_kara_pencere_yeterince_acik": true
+        },
+        {
           "item": "S2C_T35SMC_20261013T090800_L2A",
           "tarih": "13.10.2026 09:09Z",
           "global_bulut": 91.26,
@@ -121,6 +153,22 @@
       "production_item": "S2A_T35SMC_20261005T090428_L2A",
       "production_date": "05.10.2026 09:09Z",
       "newer_candidates": [
+        {
+          "item": "S2A_T35SMC_20261015T090658_L2A",
+          "tarih": "15.10.2026 09:09Z",
+          "global_bulut": 79.95,
+          "aoi_kapali": 100.0,
+          "aoi_yeterince_acik": false,
+          "lokal_kara_pencere": {
+            "kapali_yuzde": 100.0,
+            "kara_yuzde": 100.0,
+            "merkez_enlem": 38.323736,
+            "merkez_boylam": 26.634108,
+            "yaklasik_pencere_m": 2000,
+            "adim_m": 1000
+          },
+          "lokal_kara_pencere_yeterince_acik": false
+        },
         {
           "item": "S2C_T35SMC_20261013T090800_L2A",
           "tarih": "13.10.2026 09:09Z",
