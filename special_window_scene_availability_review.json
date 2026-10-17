@@ -461,7 +461,7 @@
           "itemler": []
         },
         "2026-09-17": {
-          "aoi_kesisen_iw_sahnesi": 2,
+          "aoi_kesisen_iw_sahnesi": 1,
           "kapsanan_kritik_noktalar": [
             "Alaçatı",
             "Ilıca",
@@ -472,8 +472,7 @@
             "Çiftlikköy"
           ],
           "itemler": [
-            "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8",
-            "S1C_IW_GRDH_1SDV_20260917T042231_20260917T042256_009482_012DCF"
+            "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8"
           ]
         }
       },
@@ -527,13 +526,12 @@
           "itemler": []
         },
         "2026-09-17": {
-          "aoi_kesisen_iw_sahnesi": 2,
+          "aoi_kesisen_iw_sahnesi": 1,
           "kapsanan_kritik_noktalar": [
             "Uzunkuyu"
           ],
           "itemler": [
-            "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8",
-            "S1C_IW_GRDH_1SDV_20260917T042231_20260917T042256_009482_012DCF"
+            "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8"
           ]
         }
       },
