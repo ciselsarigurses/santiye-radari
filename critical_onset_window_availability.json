@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "olusturma_utc": "2026-10-11T19:49:02+00:00",
+  "olusturma_utc": "2026-10-17T17:29:41+00:00",
   "amac": "15-17 Eylül 2026 kazı başlangıç penceresinde yalnız gerçekten mevcut Sentinel tarihleriyle temporal karşılaştırma yapılabilirliğini kaydetmek",
   "alarm": false,
   "saha_gorevi": false,
@@ -88,13 +88,12 @@
         "durum": "ok",
         "metadata_kaynagi": "Microsoft Planetary Computer",
         "kaynak_hatalari": [],
-        "mevcut_tarihler": [
-          "2026-09-17"
-        ],
+        "mevcut_tarihler": [],
         "eksik_tarihler": [
           "2026-09-13",
           "2026-09-15",
-          "2026-09-16"
+          "2026-09-16",
+          "2026-09-17"
         ],
         "farklar": {
           "2026-09-13->2026-09-15": {
@@ -117,14 +116,16 @@
             "hesaplanabilir": false,
             "neden": "EKSIK_S1_TARIHI",
             "eksik_tarihler": [
-              "2026-09-15"
+              "2026-09-15",
+              "2026-09-17"
             ]
           },
           "2026-09-16->2026-09-17": {
             "hesaplanabilir": false,
             "neden": "EKSIK_S1_TARIHI",
             "eksik_tarihler": [
-              "2026-09-16"
+              "2026-09-16",
+              "2026-09-17"
             ]
           }
         },
@@ -200,13 +201,12 @@
         "durum": "ok",
         "metadata_kaynagi": "Microsoft Planetary Computer",
         "kaynak_hatalari": [],
-        "mevcut_tarihler": [
-          "2026-09-17"
-        ],
+        "mevcut_tarihler": [],
         "eksik_tarihler": [
           "2026-09-13",
           "2026-09-15",
-          "2026-09-16"
+          "2026-09-16",
+          "2026-09-17"
         ],
         "farklar": {
           "2026-09-13->2026-09-15": {
@@ -229,14 +229,16 @@
             "hesaplanabilir": false,
             "neden": "EKSIK_S1_TARIHI",
             "eksik_tarihler": [
-              "2026-09-15"
+              "2026-09-15",
+              "2026-09-17"
             ]
           },
           "2026-09-16->2026-09-17": {
             "hesaplanabilir": false,
             "neden": "EKSIK_S1_TARIHI",
             "eksik_tarihler": [
-              "2026-09-16"
+              "2026-09-16",
+              "2026-09-17"
             ]
           }
         },
