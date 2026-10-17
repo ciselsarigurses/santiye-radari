@@ -7,6 +7,8 @@
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
+> **Parsel ön kontrol:** Rota satırlarındaki **Parsel Sorgu'da aç** bağlantısı yalnız radar koordinatını TKGM haritasında açar; ada/parsel otomatik çıkarılmaz ve doğrulanmış kabul edilmez.
+
 ## Günün ilk 3 kontrolü
 
 > **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
