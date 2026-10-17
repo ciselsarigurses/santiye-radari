@@ -461,19 +461,9 @@
           "itemler": []
         },
         "2026-09-17": {
-          "aoi_kesisen_iw_sahnesi": 1,
-          "kapsanan_kritik_noktalar": [
-            "Alaçatı",
-            "Ilıca",
-            "Musalla",
-            "Ovacık",
-            "Reisdere",
-            "Çeşme",
-            "Çiftlikköy"
-          ],
-          "itemler": [
-            "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8"
-          ]
+          "aoi_kesisen_iw_sahnesi": 0,
+          "kapsanan_kritik_noktalar": [],
+          "itemler": []
         }
       },
       "exact_ciftler": {
@@ -526,13 +516,9 @@
           "itemler": []
         },
         "2026-09-17": {
-          "aoi_kesisen_iw_sahnesi": 1,
-          "kapsanan_kritik_noktalar": [
-            "Uzunkuyu"
-          ],
-          "itemler": [
-            "S1D_IW_GRDH_1SDV_20260917T161446_20260917T161511_004620_0089D8"
-          ]
+          "aoi_kesisen_iw_sahnesi": 0,
+          "kapsanan_kritik_noktalar": [],
+          "itemler": []
         }
       },
       "exact_ciftler": {
