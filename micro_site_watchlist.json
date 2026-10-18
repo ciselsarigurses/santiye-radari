@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-10-05 20:42 +0300",
+  "olusturma": "2026-10-18 19:27 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -574,7 +574,7 @@
   "tekrar_dogrulanan_ham": 0,
   "mekansal_belirsiz_tekrar": 0,
   "tekrar_kimlik_kurali": "45 m eşleştirme toleransı iz sürekliliği içindir; iki-sahne tekrar kanıtı yalnız ilk güçlü konuma göre <=25 m sapmada geçerlidir. >25 m ham tekrar arka planda saklanır fakat devam eden aynı mikro şantiye sayılmaz.",
-  "koordinat_cekirdegi_eslesen_guncel_guclu": 4,
+  "koordinat_cekirdegi_eslesen_guncel_guclu": 0,
   "koordinat_cekirdegi_alarm_etkisi": false,
   "koordinat_cekirdegi_saha_gorevi_etkisi": false,
   "koordinat_cekirdegi_kurali": "Yalnız aynı koordinat+alan ve aynı Sentinel sahnesiyle eşleşen güncel güçlü MİKRO izine <=15 m aynı-bileşen sinyal çekirdeği eklenir. Temsilci koordinatı değişmez; çekirdek ikinci diagnostik yeniden-kontrol hedefidir."
