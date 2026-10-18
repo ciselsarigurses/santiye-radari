@@ -6,7 +6,7 @@
     150,
     249
   ],
-  "kaynak_olusturma": "2026-10-05 19:36 +0300",
+  "kaynak_olusturma": "2026-10-18 20:48 +0300",
   "gulbahce_operasyon_referans": {
     "enlem": 38.33278,
     "boylam": 26.64556,
@@ -14,9 +14,95 @@
     "sinir_adres_degil": true,
     "uzunkuyu_uretim_kapsaminda": true
   },
-  "gulbahce_ham_tekil_aday": 0,
-  "gulbahce_kisa_listeye_giren": 0,
+  "gulbahce_ham_tekil_aday": 2,
+  "gulbahce_kisa_listeye_giren": 2,
   "yalniz_sinirda_spektral_nedenle_elenen": 0,
-  "adaylar": [],
+  "adaylar": [
+    {
+      "oncelik": "MIKRO_DIAGNOSTIK",
+      "alarm": false,
+      "saha_gorevi": false,
+      "bolge": "uzunkuyu",
+      "yaklasik_mevki": "Gülbahçe çevresi",
+      "enlem": 38.325125,
+      "boylam": 26.632088,
+      "alan_m2": 200,
+      "piksel": 2,
+      "bbox_piksel": 2,
+      "doluluk_orani": 1.0,
+      "ortalama_rgb_degisim": 0.4026,
+      "ortalama_ndvi_kaybi": 0.2225,
+      "ortalama_parlaklik_artisi": 0.4026,
+      "gulbahce_merkeze_mesafe_m": 1402,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.325125,26.632088",
+      "neden": "150-249 m² bandında, en az iki bitişik yaklaşık 10 m pikselde ana küçük-saha yolu kadar güçlü çoklu-spektral değişim ve kompakt geometri görüldü. Tek başına saha ziyareti nedeni değildir.",
+      "mikro_kaynak_sentinel_tarihi": "18.10.2026",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ],
+      "ortusme_tekrari": false,
+      "250m_mikro_komsu": 0,
+      "genis_hareket_kumesi_riski": false,
+      "250plus_yakinlik_kaynak_tarihi": "18.10.2026",
+      "en_yakin_250plus_m": 1434,
+      "ana_adaya_yakin": false,
+      "spektral_kisa_liste_kapisi": true,
+      "kisa_listeye_girer": true,
+      "elenme_nedenleri": [],
+      "spektral_esikler": {
+        "rgb_min": 0.24,
+        "ndvi_kaybi_min": 0.22,
+        "rgb_gecer": true,
+        "ndvi_gecer": true,
+        "rgb_marj": 0.1626,
+        "ndvi_marj": 0.0025
+      },
+      "yalniz_sinirda_spektral_nedenle_elendi": false
+    },
+    {
+      "oncelik": "MIKRO_DIAGNOSTIK",
+      "alarm": false,
+      "saha_gorevi": false,
+      "bolge": "uzunkuyu",
+      "yaklasik_mevki": "Gülbahçe çevresi",
+      "enlem": 38.331547,
+      "boylam": 26.623731,
+      "alan_m2": 200,
+      "piksel": 2,
+      "bbox_piksel": 2,
+      "doluluk_orani": 1.0,
+      "ortalama_rgb_degisim": 0.3542,
+      "ortalama_ndvi_kaybi": 0.2411,
+      "ortalama_parlaklik_artisi": 0.3542,
+      "gulbahce_merkeze_mesafe_m": 2392,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.331547,26.623731",
+      "geometri_kaynagi": "4_komsu_diyagonal_mikro_kurtarma",
+      "diyagonal_ebeveynden_ayrisan": true,
+      "sekiz_komsu_ebeveyn_alan_m2": 600,
+      "neden": "Güçlü MİKRO maskesinde 150-249 m² kompakt 4-komşu parça, yalnız köşe teması nedeniyle 8-komşulukta 250 m²+ ebeveyne birleşiyordu. Geometrik diagnostik olarak geri kazanıldı; tek başına alarm veya saha ziyareti nedeni değildir.",
+      "mikro_kaynak_sentinel_tarihi": "18.10.2026",
+      "kaynak_bolgeler": [
+        "uzunkuyu"
+      ],
+      "ortusme_tekrari": false,
+      "250m_mikro_komsu": 0,
+      "genis_hareket_kumesi_riski": false,
+      "250plus_yakinlik_kaynak_tarihi": "18.10.2026",
+      "en_yakin_250plus_m": 1011,
+      "ana_adaya_yakin": false,
+      "spektral_kisa_liste_kapisi": true,
+      "kisa_listeye_girer": true,
+      "elenme_nedenleri": [],
+      "spektral_esikler": {
+        "rgb_min": 0.24,
+        "ndvi_kaybi_min": 0.22,
+        "rgb_gecer": true,
+        "ndvi_gecer": true,
+        "rgb_marj": 0.1142,
+        "ndvi_marj": 0.0211
+      },
+      "yalniz_sinirda_spektral_nedenle_elendi": false
+    }
+  ],
   "yorum": "Bu çıktı yalnız kalibrasyon açıklamasıdır. Güncel payload'da Gülbahçe adayları 2 km operasyon referansına gerçek koordinat mesafesiyle seçilir; eski payload'da yaklaşık etiket yalnız geriye uyum için kullanılır. Ham mikro adayın neden kısa-listede olmadığını görünür kılar; hiçbir eşiği düşürmez, alarm veya saha görevi üretmez."
 }
