@@ -11,15 +11,8 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
 
-Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
-
-## Ek kuru zemin kalibrasyon kontrolü
-
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
-
-1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 1.600 m² · 05.10.2026 → 18.10.2026 · BSI Δ 0.230 · RGB Δ 0.140 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.275649,26.416040)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 400 m² · 05.10.2026 → 18.10.2026 · BSI Δ 0.204 · RGB Δ 0.208 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.402006,26.604841)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+1. **ERKEN — Reisdere** · yaklaşık 700 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UCA43582B9D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.318884,26.423480)
+2. **ERKEN — Şifne** · yaklaşık 700 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UF7F1282B77` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.322411,26.427487)
+3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `U6FA33DDD3F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.194155,26.612168)
