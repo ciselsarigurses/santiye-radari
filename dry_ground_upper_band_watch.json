@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-10-18",
-  "olusturma": "2026-10-18 15:39 +0300",
+  "olusturma": "2026-10-18 21:46 +0300",
   "amac": "Mevcut 250-900 m² kuru-zemin teyit geçidinin üstünde kalan 901-2.000 m² güçlü temporal/izole adayları yalnız kalibrasyon için görünür kılmak.",
   "ana_uretim_esigi_m2": 250,
   "mevcut_kuru_zemin_dogrulama_ust_siniri_m2": 900,
@@ -15,20 +15,123 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2A_T35SMC_20261005T090428_L2A",
-      "guclu_temporal_ust_bant": 0,
+      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "guclu_temporal_ust_bant": 3,
       "ana_gorevle_zaten_kapsanan": 0,
-      "yerellik_testi_gereken": 0
+      "yerellik_testi_gereken": 3
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2A_T35SMC_20261005T090428_L2A",
-      "guclu_temporal_ust_bant": 0,
+      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "guclu_temporal_ust_bant": 3,
       "ana_gorevle_zaten_kapsanan": 0,
-      "yerellik_testi_gereken": 0
+      "yerellik_testi_gereken": 3
     }
   },
-  "guclu_temporal_ust_bant_toplam": 0,
-  "ana_gorev_disinda_yerellik_testi_gereken": 0,
-  "adaylar": []
+  "guclu_temporal_ust_bant_toplam": 6,
+  "ana_gorev_disinda_yerellik_testi_gereken": 6,
+  "adaylar": [
+    {
+      "mahalle": "Ildır",
+      "enlem": 38.374872,
+      "boylam": 26.493333,
+      "alan_m2": 1000,
+      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_tarih": "18.10.2026",
+      "son_cift_bsi_degisim": 0.224,
+      "uzun_temporal_ani_baslangic_orani": 22.4,
+      "ana_goreve_40m_yakin": false,
+      "en_yakin_ana_gorev_m": 611.0,
+      "yerellik_5x5_durumu": "UST_BANT_ICIN_HENUZ_OLCULMEDI",
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.374872,26.493333",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe"
+    },
+    {
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.275649,
+      "boylam": 26.41604,
+      "alan_m2": 1600,
+      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_tarih": "18.10.2026",
+      "son_cift_bsi_degisim": 0.2112,
+      "uzun_temporal_ani_baslangic_orani": 21.12,
+      "ana_goreve_40m_yakin": false,
+      "en_yakin_ana_gorev_m": 754.7,
+      "yerellik_5x5_durumu": "UST_BANT_ICIN_HENUZ_OLCULMEDI",
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.275649,26.416040",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca"
+    },
+    {
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.356058,
+      "boylam": 26.473163,
+      "alan_m2": 1100,
+      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_tarih": "18.10.2026",
+      "son_cift_bsi_degisim": 0.1377,
+      "uzun_temporal_ani_baslangic_orani": 13.77,
+      "ana_goreve_40m_yakin": false,
+      "en_yakin_ana_gorev_m": 524.0,
+      "yerellik_5x5_durumu": "UST_BANT_ICIN_HENUZ_OLCULMEDI",
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.356058,26.473163",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca"
+    },
+    {
+      "mahalle": "Ilıca",
+      "enlem": 38.290935,
+      "boylam": 26.347583,
+      "alan_m2": 1600,
+      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_tarih": "18.10.2026",
+      "son_cift_bsi_degisim": 0.1284,
+      "uzun_temporal_ani_baslangic_orani": 12.84,
+      "ana_goreve_40m_yakin": false,
+      "en_yakin_ana_gorev_m": 976.4,
+      "yerellik_5x5_durumu": "UST_BANT_ICIN_HENUZ_OLCULMEDI",
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.290935,26.347583",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca"
+    },
+    {
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.294372,
+      "boylam": 26.634607,
+      "alan_m2": 1300,
+      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_tarih": "18.10.2026",
+      "son_cift_bsi_degisim": 0.1436,
+      "uzun_temporal_ani_baslangic_orani": 11.58,
+      "ana_goreve_40m_yakin": false,
+      "en_yakin_ana_gorev_m": 1082.6,
+      "yerellik_5x5_durumu": "UST_BANT_ICIN_HENUZ_OLCULMEDI",
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.294372,26.634607",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe"
+    },
+    {
+      "mahalle": "Gülbahçe",
+      "enlem": 38.33417,
+      "boylam": 26.651207,
+      "alan_m2": 1800,
+      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_tarih": "18.10.2026",
+      "son_cift_bsi_degisim": 0.1942,
+      "uzun_temporal_ani_baslangic_orani": 9.81,
+      "ana_goreve_40m_yakin": false,
+      "en_yakin_ana_gorev_m": 44.7,
+      "yerellik_5x5_durumu": "UST_BANT_ICIN_HENUZ_OLCULMEDI",
+      "alarm": false,
+      "saha_gorevi": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.334170,26.651207",
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe"
+    }
+  ]
 }
