@@ -10,6 +10,44 @@
   "amac": "15 Eylül öncesi güçlü 250-900 m² temporal-lokal ani zemin izini saklamak; sonraki bağımsız taze 250 m²+ ana adaya yalnız sıralama kanıtı sağlamak.",
   "adaylar": [
     {
+      "temporal_iz_id": "TL-20261018-38.26064-26.47030",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.260635,
+      "boylam": 26.470301,
+      "alan_m2": 400,
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Mevki doğrulanmadı",
+      "ilk_guclu_tarih": "18.10.2026",
+      "son_guclu_tarih": "18.10.2026",
+      "son_guclu_sentinel_item": "S2B_T35SMC_20261018T090331_L2A",
+      "sentinel_sahneleri": [
+        "S2B_T35SMC_20261018T090331_L2A"
+      ],
+      "maks_yerellik_orani": 2.73,
+      "maks_ic_bsi_degisim": 0.1176
+    },
+    {
+      "temporal_iz_id": "TL-20261018-38.30405-26.41615",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.30405,
+      "boylam": 26.416154,
+      "alan_m2": 300,
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Reisdere",
+      "ilk_guclu_tarih": "18.10.2026",
+      "son_guclu_tarih": "18.10.2026",
+      "son_guclu_sentinel_item": "S2B_T35SMC_20261018T090331_L2A",
+      "sentinel_sahneleri": [
+        "S2B_T35SMC_20261018T090331_L2A"
+      ],
+      "maks_yerellik_orani": 2.47,
+      "maks_ic_bsi_degisim": 0.1148
+    },
+    {
       "temporal_iz_id": "TL-20261005-38.33851-26.49974",
       "alarm": false,
       "saha_gorevi": false,
@@ -314,6 +352,6 @@
       "maks_ic_bsi_degisim": 0.107
     }
   ],
-  "guclu_iz_sayisi": 16,
-  "guncelleme_tarihi": "2026-10-07 18:28 +0300"
+  "guclu_iz_sayisi": 18,
+  "guncelleme_tarihi": "2026-10-18 21:45 +0300"
 }
