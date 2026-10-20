@@ -24,7 +24,7 @@
     "08.09.2026",
     "05.09.2026"
   ],
-  "ikili_sahne_korlugu_250plus_diagnostik": 0,
+  "ikili_sahne_korlugu_250plus_diagnostik": 28,
   "guncel_sahne_mikro_kor_150_249": 0,
   "guncel_sahne_kor_250_6500": 28,
   "guncel_sahne_kor_6500ustu": 10,
@@ -40,7 +40,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 882,
+      "secilen_devriyeye_mesafe_m": 992,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -52,7 +52,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 860,
+      "secilen_devriyeye_mesafe_m": 1648,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -64,7 +64,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1019,
+      "secilen_devriyeye_mesafe_m": 1815,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -76,7 +76,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1665,
+      "secilen_devriyeye_mesafe_m": 2448,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -88,7 +88,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1461,
+      "secilen_devriyeye_mesafe_m": 2241,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -100,8 +100,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 0,
-      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_mesafe_m": 797,
+      "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -112,8 +112,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 797,
-      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_mesafe_m": 0,
+      "secilen_devriye_kapsiyor": true,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -124,7 +124,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1823,
+      "secilen_devriyeye_mesafe_m": 2434,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -136,7 +136,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1692,
+      "secilen_devriyeye_mesafe_m": 1676,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -148,7 +148,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1690,
+      "secilen_devriyeye_mesafe_m": 1646,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -160,7 +160,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1740,
+      "secilen_devriyeye_mesafe_m": 1824,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -172,7 +172,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 2814,
+      "secilen_devriyeye_mesafe_m": 3063,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -184,7 +184,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 937,
+      "secilen_devriyeye_mesafe_m": 1048,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -196,7 +196,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 832,
+      "secilen_devriyeye_mesafe_m": 1615,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -208,7 +208,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1373,
+      "secilen_devriyeye_mesafe_m": 2134,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -220,7 +220,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1331,
+      "secilen_devriyeye_mesafe_m": 2036,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -232,7 +232,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 879,
+      "secilen_devriyeye_mesafe_m": 252,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -244,7 +244,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 962,
+      "secilen_devriyeye_mesafe_m": 413,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -256,7 +256,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1699,
+      "secilen_devriyeye_mesafe_m": 2485,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -268,7 +268,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1284,
+      "secilen_devriyeye_mesafe_m": 1889,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -280,7 +280,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1132,
+      "secilen_devriyeye_mesafe_m": 917,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -292,7 +292,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1697,
+      "secilen_devriyeye_mesafe_m": 1753,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -304,7 +304,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 874,
+      "secilen_devriyeye_mesafe_m": 1010,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -316,7 +316,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1739,
+      "secilen_devriyeye_mesafe_m": 2530,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -328,7 +328,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1682,
+      "secilen_devriyeye_mesafe_m": 2215,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -340,7 +340,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 909,
+      "secilen_devriyeye_mesafe_m": 345,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -352,7 +352,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1419,
+      "secilen_devriyeye_mesafe_m": 2141,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -364,7 +364,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 924,
+      "secilen_devriyeye_mesafe_m": 513,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     }
