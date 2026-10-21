@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-10-20",
+  "rapor_tarihi": "2026-10-21",
   "amac": "Güncel 250 m²+ ana Sentinel adaylarının bağlı bileşeninin analiz bbox kenarına değip değmediğini ölçerek alan/merkez koordinatı kırpma riskini görünür kılmak.",
   "politika": "DIAGNOSTIK_ONLY: 250 m² ana eşik, alarm ve saha görevi değişmez. Kenar teması bbox genişletme/yeniden ölçüm kanıtıdır; tek başına yeni alarm değildir.",
   "ana_uretim_esigi_m2": 250,
@@ -407,7 +407,7 @@
         },
         {
           "gorev_id": "U9B549AAFB4",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Alaçatı",
           "enlem": 38.276916,
           "boylam": 26.368647,
@@ -451,7 +451,7 @@
         },
         {
           "gorev_id": "U208EDBEF90",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Alaçatı",
           "enlem": 38.288403,
           "boylam": 26.363381,
@@ -473,7 +473,7 @@
         },
         {
           "gorev_id": "U2B0286DBFC",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Ilıca",
           "enlem": 38.306492,
           "boylam": 26.364869,
@@ -579,7 +579,7 @@
         },
         {
           "gorev_id": "UD0CCA6105A",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.307668,
           "boylam": 26.670326,
@@ -601,7 +601,7 @@
         },
         {
           "gorev_id": "UE0BB1BA9D0",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.187733,
           "boylam": 26.597743,
@@ -821,7 +821,7 @@
         },
         {
           "gorev_id": "U9BA8FE627B",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Germiyan",
           "enlem": 38.297267,
           "boylam": 26.494706,
