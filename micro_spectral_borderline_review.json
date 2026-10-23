@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-10-23 21:56 +0300",
+  "olusturma": "2026-10-23 23:01 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -198,7 +198,7 @@
           "250m_mikro_komsu": 0,
           "genis_hareket_kumesi_riski": false,
           "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-          "en_yakin_250plus_m": 1473,
+          "en_yakin_250plus_m": 1797,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": false,
           "spektral_sinir_inceleme": true,
@@ -276,7 +276,7 @@
           "250m_mikro_komsu": 0,
           "genis_hareket_kumesi_riski": false,
           "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-          "en_yakin_250plus_m": 1106,
+          "en_yakin_250plus_m": 1396,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": false,
           "spektral_sinir_inceleme": true,
@@ -344,7 +344,7 @@
           "250m_mikro_komsu": 0,
           "genis_hareket_kumesi_riski": false,
           "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-          "en_yakin_250plus_m": 2606,
+          "en_yakin_250plus_m": 3642,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": false,
           "spektral_sinir_inceleme": true,
@@ -415,7 +415,7 @@
           "250m_mikro_komsu": 0,
           "genis_hareket_kumesi_riski": false,
           "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-          "en_yakin_250plus_m": 1060,
+          "en_yakin_250plus_m": 1227,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": false,
           "spektral_sinir_inceleme": true,
@@ -464,8 +464,8 @@
   "yakinlik_referans_sentinel_tarihleri": [
     "23.10.2026"
   ],
-  "250plus_yakinlik_referans_toplam_saha_adayi": 424,
-  "250plus_yakinlik_referans_guncel_sentinel": 58,
+  "250plus_yakinlik_referans_toplam_saha_adayi": 403,
+  "250plus_yakinlik_referans_guncel_sentinel": 37,
   "250plus_yakinlik_referans_dislanan_eski_veya_250alti": 366,
   "baglam_notu": "Spektral sınır yakınlık filtresi yalnız MİKRO taramasının güncel Sentinel tarihindeki 250+ adayları kullanır; eski açık saha backlog'u near-miss MİKRO sinyalini bastırmaz. Alarm/görev/250 m² eşiği değişmez."
 }

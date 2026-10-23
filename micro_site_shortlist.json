@@ -11,9 +11,9 @@
   "tekil_aday": 698,
   "ortusme_tekrari_elendi": 151,
   "genis_hareket_kumesi_arka_plana_alindi": 179,
-  "ana_250plus_adaya_yakin_arka_plana_alindi": 30,
-  "250plus_yakinlik_referans_toplam_saha_adayi": 424,
-  "250plus_yakinlik_referans_guncel_sentinel": 58,
+  "ana_250plus_adaya_yakin_arka_plana_alindi": 20,
+  "250plus_yakinlik_referans_toplam_saha_adayi": 403,
+  "250plus_yakinlik_referans_guncel_sentinel": 37,
   "250plus_yakinlik_referans_dislanan_eski_veya_250alti": 366,
   "yakinlik_referans_sentinel_tarihleri": [
     "23.10.2026"
@@ -50,7 +50,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-      "en_yakin_250plus_m": 4018,
+      "en_yakin_250plus_m": 4592,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -111,7 +111,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-      "en_yakin_250plus_m": 1107,
+      "en_yakin_250plus_m": 1698,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -144,7 +144,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-      "en_yakin_250plus_m": 1838,
+      "en_yakin_250plus_m": 2195,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -174,7 +174,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-      "en_yakin_250plus_m": 8372,
+      "en_yakin_250plus_m": 8378,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -204,7 +204,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-      "en_yakin_250plus_m": 391,
+      "en_yakin_250plus_m": 3805,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -270,7 +270,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-      "en_yakin_250plus_m": 1888,
+      "en_yakin_250plus_m": 3168,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -300,7 +300,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-      "en_yakin_250plus_m": 3937,
+      "en_yakin_250plus_m": 4121,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -330,7 +330,37 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-      "en_yakin_250plus_m": 9212,
+      "en_yakin_250plus_m": 9253,
+      "ana_adaya_yakin": false,
+      "spektral_kisa_liste_kapisi": true
+    },
+    {
+      "oncelik": "MIKRO_DIAGNOSTIK",
+      "alarm": false,
+      "saha_gorevi": false,
+      "bolge": "cesme",
+      "yaklasik_mevki": "Mevki doğrulanmadı",
+      "enlem": 38.253761,
+      "boylam": 26.499492,
+      "alan_m2": 200,
+      "piksel": 2,
+      "bbox_piksel": 2,
+      "doluluk_orani": 1.0,
+      "ortalama_rgb_degisim": 0.7595,
+      "ortalama_ndvi_kaybi": 0.4796,
+      "ortalama_parlaklik_artisi": 0.7595,
+      "gulbahce_merkeze_mesafe_m": 14760,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.253761,26.499492",
+      "neden": "150-249 m² bandında, en az iki bitişik yaklaşık 10 m pikselde ana küçük-saha yolu kadar güçlü çoklu-spektral değişim ve kompakt geometri görüldü. Tek başına saha ziyareti nedeni değildir.",
+      "mikro_kaynak_sentinel_tarihi": "23.10.2026",
+      "kaynak_bolgeler": [
+        "cesme"
+      ],
+      "ortusme_tekrari": false,
+      "250m_mikro_komsu": 0,
+      "genis_hareket_kumesi_riski": false,
+      "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
+      "en_yakin_250plus_m": 787,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -361,36 +391,6 @@
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
       "en_yakin_250plus_m": 588,
-      "ana_adaya_yakin": false,
-      "spektral_kisa_liste_kapisi": true
-    },
-    {
-      "oncelik": "MIKRO_DIAGNOSTIK",
-      "alarm": false,
-      "saha_gorevi": false,
-      "bolge": "uzunkuyu",
-      "yaklasik_mevki": "Mevki doğrulanmadı",
-      "enlem": 38.364741,
-      "boylam": 26.574502,
-      "alan_m2": 200,
-      "piksel": 2,
-      "bbox_piksel": 2,
-      "doluluk_orani": 1.0,
-      "ortalama_rgb_degisim": 0.7608,
-      "ortalama_ndvi_kaybi": 0.4699,
-      "ortalama_parlaklik_artisi": 0.7608,
-      "gulbahce_merkeze_mesafe_m": 8031,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.364741,26.574502",
-      "neden": "150-249 m² bandında, en az iki bitişik yaklaşık 10 m pikselde ana küçük-saha yolu kadar güçlü çoklu-spektral değişim ve kompakt geometri görüldü. Tek başına saha ziyareti nedeni değildir.",
-      "mikro_kaynak_sentinel_tarihi": "23.10.2026",
-      "kaynak_bolgeler": [
-        "uzunkuyu"
-      ],
-      "ortusme_tekrari": false,
-      "250m_mikro_komsu": 0,
-      "genis_hareket_kumesi_riski": false,
-      "250plus_yakinlik_kaynak_tarihi": "23.10.2026",
-      "en_yakin_250plus_m": 715,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     }
