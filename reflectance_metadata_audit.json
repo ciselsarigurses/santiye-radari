@@ -9,19 +9,19 @@
   "bolgeler": {
     "cesme": {
       "durum": "ok",
-      "onceki_item": "S2A_T35SMC_20261005T090428_L2A",
-      "son_item": "S2B_T35SMC_20261018T090331_L2A"
+      "onceki_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_item": "S2C_T35SMC_20261023T090118_L2A"
     },
     "uzunkuyu": {
       "durum": "ok",
-      "onceki_item": "S2A_T35SMC_20261005T090428_L2A",
-      "son_item": "S2B_T35SMC_20261018T090331_L2A"
+      "onceki_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_item": "S2C_T35SMC_20261023T090118_L2A"
     }
   },
   "itemlar": {
-    "S2A_T35SMC_20261005T090428_L2A": {
-      "item": "S2A_T35SMC_20261005T090428_L2A",
-      "tarih": "2026-10-05T09:09:59.390000Z",
+    "S2B_T35SMC_20261018T090331_L2A": {
+      "item": "S2B_T35SMC_20261018T090331_L2A",
+      "tarih": "2026-10-18T09:09:45.593000Z",
       "mgrs": "-",
       "relative_orbit": 7,
       "durum": "MATCH",
@@ -40,9 +40,9 @@
         }
       }
     },
-    "S2B_T35SMC_20261018T090331_L2A": {
-      "item": "S2B_T35SMC_20261018T090331_L2A",
-      "tarih": "2026-10-18T09:09:45.593000Z",
+    "S2C_T35SMC_20261023T090118_L2A": {
+      "item": "S2C_T35SMC_20261023T090118_L2A",
+      "tarih": "2026-10-23T09:09:45.931000Z",
       "mgrs": "-",
       "relative_orbit": 7,
       "durum": "MATCH",
