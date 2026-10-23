@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-10-23",
-  "olusturma": "2026-10-23 21:51 +03",
+  "olusturma": "2026-10-23 22:54 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -139,44 +139,44 @@
           "dusuk_kompaktlik": true
         }
       ],
-      "nihai_rapor_secimi": 28,
-      "nihai_rapor_eslesen_geometri": 26,
-      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 1,
+      "nihai_rapor_secimi": 19,
+      "nihai_rapor_eslesen_geometri": 19,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 26,
-      "nihai_rapor_cozulemeyen_geometri": 2,
+      "nihai_rapor_cozulen_geometri": 19,
+      "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 13,
-          "uzun_ince": 1,
+          "toplam": 7,
+          "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 6,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 7,
+          "toplam": 8,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
       },
       "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": {
         "kucuk_250_800": {
-          "toplam": 13,
-          "uzun_ince": 1,
+          "toplam": 7,
+          "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 6,
+          "toplam": 4,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 7,
+          "toplam": 8,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
@@ -184,26 +184,7 @@
       "nihai_secili_genis_sekil_isaretli": 0,
       "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 0,
       "nihai_secili_genis_sekil_ornekleri": [],
-      "nihai_cozulemeyen_geometri_ornekleri": [
-        {
-          "enlem": 38.333265,
-          "boylam": 26.484381,
-          "alan_m2": 2000,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 82.5,
-          "en_yakin_alan_benzerligi": 0.204
-        },
-        {
-          "enlem": 38.257198,
-          "boylam": 26.437904,
-          "alan_m2": 2000,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 182.6,
-          "en_yakin_alan_benzerligi": 0.116
-        }
-      ]
+      "nihai_cozulemeyen_geometri_ornekleri": []
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
@@ -334,22 +315,22 @@
           "dusuk_kompaktlik": true
         }
       ],
-      "nihai_rapor_secimi": 30,
-      "nihai_rapor_eslesen_geometri": 25,
-      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 1,
+      "nihai_rapor_secimi": 18,
+      "nihai_rapor_eslesen_geometri": 18,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 25,
-      "nihai_rapor_cozulemeyen_geometri": 5,
+      "nihai_rapor_cozulen_geometri": 18,
+      "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 13,
+          "toplam": 7,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 6,
+          "toplam": 5,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -361,12 +342,12 @@
       },
       "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": {
         "kucuk_250_800": {
-          "toplam": 13,
+          "toplam": 7,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 6,
+          "toplam": 5,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -379,53 +360,7 @@
       "nihai_secili_genis_sekil_isaretli": 0,
       "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 0,
       "nihai_secili_genis_sekil_ornekleri": [],
-      "nihai_cozulemeyen_geometri_ornekleri": [
-        {
-          "enlem": 38.294915,
-          "boylam": 26.470436,
-          "alan_m2": 180132,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 296.2,
-          "en_yakin_alan_benzerligi": 0.004
-        },
-        {
-          "enlem": 38.375505,
-          "boylam": 26.497797,
-          "alan_m2": 131823,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 423.8,
-          "en_yakin_alan_benzerligi": 0.026
-        },
-        {
-          "enlem": 38.364018,
-          "boylam": 26.500889,
-          "alan_m2": 120821,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 221.8,
-          "en_yakin_alan_benzerligi": 0.016
-        },
-        {
-          "enlem": 38.36248,
-          "boylam": 26.582173,
-          "alan_m2": 2000,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 240.0,
-          "en_yakin_alan_benzerligi": 0.05
-        },
-        {
-          "enlem": 38.34023,
-          "boylam": 26.552521,
-          "alan_m2": 2000,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 98.5,
-          "en_yakin_alan_benzerligi": 0.172
-        }
-      ]
+      "nihai_cozulemeyen_geometri_ornekleri": []
     }
   }
 }

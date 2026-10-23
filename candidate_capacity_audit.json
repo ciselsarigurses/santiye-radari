@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-10-23",
-  "olusturma": "2026-10-23 21:49 +03",
+  "olusturma": "2026-10-23 22:52 +03",
   "amac": "24 aday tavanının ve 8-komşu piksel geometrisinin 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
   "diagnostik_santiye_olcegi_m2": [
     800,
@@ -16,9 +16,9 @@
       "aday_tavani": 24,
       "ham_uygun_aday": 1512,
       "tavan_sonrasi_aday": 24,
-      "raporda_kalan_aday": 28,
+      "raporda_kalan_aday": 19,
       "tavan_disinda_kalan": 1488,
-      "ham_secimden_farkli": 20,
+      "ham_secimden_farkli": 19,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
         "kucuk_250_800": 63,
@@ -31,9 +31,9 @@
         "genis_10000_ustu": 16
       },
       "raporda_olcek_dagilimi": {
-        "kucuk_250_800": 13,
-        "santiye_olcegi_800_10000": 8,
-        "genis_10000_ustu": 7
+        "kucuk_250_800": 7,
+        "santiye_olcegi_800_10000": 4,
+        "genis_10000_ustu": 8
       },
       "tavan_disinda_olcek_dagilimi": {
         "kucuk_250_800": 55,
@@ -41,7 +41,7 @@
         "genis_10000_ustu": 289
       },
       "ham_secimden_farkli_olcek_dagilimi": {
-        "kucuk_250_800": 4,
+        "kucuk_250_800": 3,
         "santiye_olcegi_800_10000": 0,
         "genis_10000_ustu": 16
       },
@@ -116,9 +116,9 @@
       "aday_tavani": 24,
       "ham_uygun_aday": 1874,
       "tavan_sonrasi_aday": 24,
-      "raporda_kalan_aday": 30,
+      "raporda_kalan_aday": 18,
       "tavan_disinda_kalan": 1850,
-      "ham_secimden_farkli": 19,
+      "ham_secimden_farkli": 18,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
         "kucuk_250_800": 82,
@@ -131,9 +131,9 @@
         "genis_10000_ustu": 16
       },
       "raporda_olcek_dagilimi": {
-        "kucuk_250_800": 13,
-        "santiye_olcegi_800_10000": 8,
-        "genis_10000_ustu": 9
+        "kucuk_250_800": 7,
+        "santiye_olcegi_800_10000": 5,
+        "genis_10000_ustu": 6
       },
       "tavan_disinda_olcek_dagilimi": {
         "kucuk_250_800": 74,
@@ -141,7 +141,7 @@
         "genis_10000_ustu": 411
       },
       "ham_secimden_farkli_olcek_dagilimi": {
-        "kucuk_250_800": 4,
+        "kucuk_250_800": 3,
         "santiye_olcegi_800_10000": 0,
         "genis_10000_ustu": 15
       },
