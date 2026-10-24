@@ -13,6 +13,6 @@
 
 > 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
 
-1. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `UF82952EEBF` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.210888,26.496401)
-2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `U3E7714230F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.218215,26.443972)
-3. **ERKEN — Germiyan** · yaklaşık 700 m² · Görev `U687EBC3D44` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.309296,26.491844)
+1. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `UF82952EEBF` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.210888,26.496401) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.210888/26.496401)
+2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `U3E7714230F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.218215,26.443972) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.218215/26.443972)
+3. **ERKEN — Germiyan** · yaklaşık 700 m² · Görev `U687EBC3D44` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.309296,26.491844) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.309296/26.491844)
