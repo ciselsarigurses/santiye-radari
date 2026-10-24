@@ -16,3 +16,10 @@
 1. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `UF82952EEBF` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.210888,26.496401) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.210888/26.496401)
 2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `U3E7714230F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.218215,26.443972) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.218215/26.443972)
 3. **ERKEN — Germiyan** · yaklaşık 700 m² · Görev `U687EBC3D44` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.309296,26.491844) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.309296/26.491844)
+
+## Kör alan saha devriyesi
+
+> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
+
+1. **KÖR ALAN — Alaçatı** · yaklaşık 400 m² · karışık geçersizlik · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.263168,26.376202) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.263168/26.376202)
+   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
