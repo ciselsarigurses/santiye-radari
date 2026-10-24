@@ -11,10 +11,17 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
+1. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `UF82952EEBF` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.210888,26.496401)
+2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `U3E7714230F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.218215,26.443972)
+3. **ERKEN — Germiyan** · yaklaşık 700 m² · Görev `U687EBC3D44` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.309296,26.491844)
 
-## Arka planda izlenen geniş yüzey hareketleri
+## Ek kuru zemin kalibrasyon kontrolü
 
-Bu raporda ölçülmüş düşük-kompaktlık kuralına giren geniş yüzey hareketi yok.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
+
+1. **KALİBRASYON — Uzunkuyu** · yaklaşık 600 m² · 18.10.2026 → 23.10.2026 · BSI Δ 0.290 · RGB Δ 0.191 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.292382,26.554124)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+2. **KALİBRASYON — Uzunkuyu** · yaklaşık 400 m² · 18.10.2026 → 23.10.2026 · BSI Δ 0.289 · RGB Δ 0.139 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.291297,26.519297)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
