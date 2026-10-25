@@ -7,19 +7,21 @@
 
 > **Konum kuralı:** Uydu noktası değişim kümesinin yaklaşık merkezidir. Kesin adres veya ada/parsel doğrulanmadıkça yazılmaz.
 
+> **Parsel ön kontrol:** Rota satırlarındaki **Parsel Sorgu'da aç** bağlantısı yalnız radar koordinatını TKGM haritasında açar; ada/parsel otomatik çıkarılmaz ve doğrulanmış kabul edilmez.
+
 ## Günün ilk 3 kontrolü
 
 > Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-1. **PARSEL — Ildır** · yaklaşık 800 m² · Görev `U8D40E1150D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.386720,26.493218)
-2. **PARSEL — Mevki doğrulanmadı** · yaklaşık 900 m² · Görev `UB410632A3A` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.260183,26.495600)
-3. **PARSEL — Uzunkuyu** · yaklaşık 900 m² · Görev `UAF7AA6CBDC` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.302694,26.547713)
+1. **PARSEL — Ildır** · yaklaşık 800 m² · Görev `U8D40E1150D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.386720,26.493218) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.386720/26.493218)
+2. **PARSEL — Mevki doğrulanmadı** · yaklaşık 900 m² · Görev `UB410632A3A` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.260183,26.495600) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.260183/26.495600)
+3. **PARSEL — Uzunkuyu** · yaklaşık 900 m² · Görev `UAF7AA6CBDC` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.302694,26.547713) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.302694/26.547713)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
 > **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Uzunkuyu** · yaklaşık 600 m² · 18.10.2026 → 23.10.2026 · BSI Δ 0.290 · RGB Δ 0.191 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.292382,26.554124)
+1. **KALİBRASYON — Uzunkuyu** · yaklaşık 600 m² · 18.10.2026 → 23.10.2026 · BSI Δ 0.290 · RGB Δ 0.191 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.292382,26.554124) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.292382/26.554124)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Uzunkuyu** · yaklaşık 400 m² · 18.10.2026 → 23.10.2026 · BSI Δ 0.289 · RGB Δ 0.139 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.291297,26.519297)
+2. **KALİBRASYON — Uzunkuyu** · yaklaşık 400 m² · 18.10.2026 → 23.10.2026 · BSI Δ 0.289 · RGB Δ 0.139 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.291297,26.519297) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.291297/26.519297)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
