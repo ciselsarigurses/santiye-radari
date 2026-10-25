@@ -24,7 +24,7 @@
     "13.09.2026",
     "08.09.2026"
   ],
-  "ikili_sahne_korlugu_250plus_diagnostik": 0,
+  "ikili_sahne_korlugu_250plus_diagnostik": 5,
   "guncel_sahne_mikro_kor_150_249": 0,
   "guncel_sahne_kor_250_6500": 5,
   "guncel_sahne_kor_6500ustu": 3,
@@ -40,9 +40,10 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 0,
-      "secilen_devriye_kapsiyor": true,
-      "secilen_devriyeye_yakin_ek_kontrol": false
+      "secilen_devriyeye_mesafe_m": 72,
+      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_yakin_ek_kontrol": true,
+      "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
     },
     {
       "enlem": 38.318703,
@@ -52,10 +53,9 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 72,
-      "secilen_devriye_kapsiyor": false,
-      "secilen_devriyeye_yakin_ek_kontrol": true,
-      "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
+      "secilen_devriyeye_mesafe_m": 0,
+      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
       "enlem": 38.319427,
@@ -65,7 +65,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 225,
+      "secilen_devriyeye_mesafe_m": 153,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -77,7 +77,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 554,
+      "secilen_devriyeye_mesafe_m": 602,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -89,7 +89,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 82,
+      "secilen_devriyeye_mesafe_m": 126,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": true,
       "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
