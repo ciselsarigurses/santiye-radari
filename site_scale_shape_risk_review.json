@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-10-22",
-  "olusturma": "2026-10-22 22:59 +0300",
+  "rapor_tarihi": "2026-10-26",
+  "olusturma": "2026-10-26 18:07 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_sentinel_esigi_m2": 250,
@@ -21,9 +21,9 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_item": "S2C_T35SMC_20261023T090118_L2A",
       "durum": "ok",
-      "latest_item": "S2B_T35SMC_20261018T090331_L2A",
+      "latest_item": "S2C_T35SMC_20261023T090118_L2A",
       "ham_sekil_riski": 0,
       "nihai_sekil_riski": 0,
       "nihai_cozulen_sekil_riski": 0,
@@ -32,9 +32,9 @@
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2B_T35SMC_20261018T090331_L2A",
+      "son_item": "S2C_T35SMC_20261023T090118_L2A",
       "durum": "ok",
-      "latest_item": "S2B_T35SMC_20261018T090331_L2A",
+      "latest_item": "S2C_T35SMC_20261023T090118_L2A",
       "ham_sekil_riski": 0,
       "nihai_sekil_riski": 0,
       "nihai_cozulen_sekil_riski": 0,
