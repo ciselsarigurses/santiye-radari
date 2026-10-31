@@ -40,9 +40,10 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 225,
+      "secilen_devriyeye_mesafe_m": 82,
       "secilen_devriye_kapsiyor": false,
-      "secilen_devriyeye_yakin_ek_kontrol": false
+      "secilen_devriyeye_yakin_ek_kontrol": true,
+      "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
     },
     {
       "enlem": 38.318703,
@@ -52,9 +53,10 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 153,
+      "secilen_devriyeye_mesafe_m": 126,
       "secilen_devriye_kapsiyor": false,
-      "secilen_devriyeye_yakin_ek_kontrol": false
+      "secilen_devriyeye_yakin_ek_kontrol": true,
+      "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
     },
     {
       "enlem": 38.319427,
@@ -64,8 +66,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 0,
-      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_mesafe_m": 262,
+      "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -76,7 +78,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 721,
+      "secilen_devriyeye_mesafe_m": 600,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -88,8 +90,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 262,
-      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_mesafe_m": 0,
+      "secilen_devriye_kapsiyor": true,
       "secilen_devriyeye_yakin_ek_kontrol": false
     }
   ],
@@ -341,7 +343,7 @@
   "yorum": "Bu sonuç alarm/görev değildir. MİKRO temporal analizde iki sahnenin de geçerli olması gerekir; bu yüzden ikili-sahne körlüğü ayrı bir diagnostiktir. Buradaki 'güncel-sahne kör' sayısı yalnız en yeni sahnenin geçersiz olduğu ve tarihsel kara kanıtı bulunan alanları içerir. Tarihsel su, çözülememiş yüzey ve tarihsel kara olup güncel SCL=su görünen alanlar şantiye körlüğüne karıştırılmaz; arka planda ayrı tutulur.",
   "secilen_devriye_kapsama_yaricapi_m": 35,
   "yakin_ek_kontrol_yaricapi_m": 150,
-  "secilen_devriyeye_yakin_ek_kontrol_sayisi": 0,
-  "secilen_devriyeye_yakin_ek_kontrol_alan_m2": 0,
+  "secilen_devriyeye_yakin_ek_kontrol_sayisi": 2,
+  "secilen_devriyeye_yakin_ek_kontrol_alan_m2": 800,
   "yakin_ek_kontrol_yorumu": "Yakın ek kontrol yalnız 250 m²+ güncel-sahne kör kümeleri için saha verimliliği diagnostigidir. 'Devriye kapsıyor' sayılmaz, alarm/görev üretmez ve erişilebilirlik sahada değerlendirilir."
 }
