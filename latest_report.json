@@ -12973,34 +12973,20 @@
   "ana_saha_geri_bildirim_notu": "Doğrulanmış negatif saha sonuçları aynı/eski Sentinel kanıtında günlük rota uygunluğunu kapatır; mevcut müşteriler pozitif şantiye referansı olarak korunur fakat müşteri statüsü değişmedikçe yeni-müşteri rotasına alınmaz. Alarm/görev silinmez.",
   "kor_alan_saha_devriyesi": [
     {
-      "bolge_anahtari": "uzunkuyu",
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "mahalle": "Mevki doğrulanmadı",
-      "enlem": 38.180588,
-      "boylam": 26.494019,
-      "alan_m2": 400,
-      "neden": "BULUT_GOLGE_KALICI",
-      "referans_sahne_sayisi": 8,
-      "kalan_kor_yuzde": 8.8685,
-      "kaynak_tipi": "BILINEN_KARA_KORLUGU",
-      "alarm": false,
-      "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.180588,26.494019"
-    },
-    {
       "bolge_anahtari": "cesme",
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "mahalle": "Çeşme",
-      "enlem": 38.325396,
-      "boylam": 26.328924,
-      "alan_m2": 400,
+      "mahalle": "Ildır",
+      "enlem": 38.379032,
+      "boylam": 26.458167,
+      "alan_m2": 300,
       "neden": "BULUT_GOLGE_KALICI",
       "referans_sahne_sayisi": 8,
       "kalan_kor_yuzde": 3.0758,
       "kaynak_tipi": "BILINEN_KARA_KORLUGU",
       "alarm": false,
       "durum": "KAPSAMA_KONTROLU",
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.325396,26.328924"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.379032,26.458167",
+      "saha_gorevi": false
     }
   ],
   "operasyon_odak_disinda_devriye": [
@@ -13230,7 +13216,7 @@
     "oncelik_etkisi": "YOK_DOGRULANANA_KADAR"
   },
   "kor_alan_saha_devriyesi_rotasyon_tarihi": "2026-11-02",
-  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir; tarihsel Sentinel verisinde kara olduğu doğrulanmış kalıcı gözlem boşluklarından günlük en fazla iki insan kontrol noktası seçilir. Aktif radar görevlerinden >=150 m, birbirinden >=250 m uzakta tutulur. Çeşme ve Uzunkuyu çekirdekleri korunurken ortak Sentinel şeridi kalıcı biçimde aç kalmasın diye Çeşme yerel takvim gününe bağlı üç günlük dönüşüm uygulanır: bir gün Çeşme slotu ortak şeridi örnekler, bir gün iki çekirdek aynen korunur, bir gün Uzunkuyu slotu ortak şeridi örnekler. Güvenli örtüşme adayı yoksa mevcut çekirdek seçimine geri dönülür; kuru-zemin kalibrasyonunda temsil edilen mahalleler güvenli alternatif varsa tekrar seçilmez.",
+  "kor_alan_saha_devriyesi_notu": "Alarm/görev değildir. Gülbahçe duty gününde en yeni Sentinel sahnesinde tarihsel kara kanıtlı gerçek 250-6500 m² kalite körlüğü varsa doğu devriye slotu önce bu güncel körlüğe ayrılır. Yeni sahnenin ilk duty gününde küçük/kompakt güvenli körlük öne alınır; aynı sahne sürerse kalan güvenli kümeler iki günlük duty döngüsünde sırayla izlenir. Uygun güncel körlük yoksa mevcut tarihsel kör-alan rotasyonu korunur. Aktif radar görevlerinden >=150 m ve diğer bölge devriyesinden >=250 m ayrım korunur.",
   "gulbahce_kor_alan_devriye_korumasi": {
     "alarm": false,
     "saha_gorevi": false,
