@@ -11,13 +11,17 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
+1. **GECİKEN — Ildır** · yaklaşık 300 m² · Görev `U82990AC051` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.366279,26.473412)
+2. **GECİKEN — Ilıca** · yaklaşık 400 m² · Görev `U5D58302844` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.316623,26.339684)
+3. **GECİKEN — Ilıca** · yaklaşık 400 m² · Görev `U718CCE7AB3` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313819,26.350559)
 
-## Kör alan saha devriyesi
+## Ek kuru zemin kalibrasyon kontrolü
 
-> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KÖR ALAN — Alaçatı** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.258283,26.371165) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.258283/26.371165)
-   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
+1. **KALİBRASYON — Uzunkuyu** · yaklaşık 600 m² · 18.10.2026 → 23.10.2026 · BSI Δ 0.290 · RGB Δ 0.191 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.292382,26.554124)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+2. **KALİBRASYON — Uzunkuyu** · yaklaşık 400 m² · 18.10.2026 → 23.10.2026 · BSI Δ 0.289 · RGB Δ 0.139 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.291297,26.519297)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
