@@ -1,7 +1,7 @@
 {
   "alarm": false,
   "ana_sentinel_esigi_m2": 250,
-  "feature_count": 22,
+  "feature_count": 21,
   "features": [
     {
       "geometry": {
@@ -500,44 +500,6 @@
     {
       "geometry": {
         "coordinates": [
-          26.644338,
-          38.331547
-        ],
-        "type": "Point"
-      },
-      "id": "gulbahce:38.331547:26.644338",
-      "properties": {
-        "alan_m2": 400,
-        "alarm": false,
-        "arka_plan": false,
-        "bolge": "gulbahce",
-        "eski_tarih": "2026-10-30",
-        "harita_katmani": "SAR_SAHA_ONCUL",
-        "hedef_katmani": "SAHA_ONCUL_SAR_DIAGNOSTIK",
-        "kaynak": "santiye.db",
-        "mahalle_yaklasik": "Gulbahce",
-        "mikro_guclu_diagnostik": false,
-        "mikro_saha_dogrulandi": false,
-        "neden": "SAHA_DOGRULANMIS_YIKIM_ONCULU",
-        "onceki_sar_lokal_degisim_skor_db": null,
-        "saha_dogrulanmis_yikim_onculu": true,
-        "saha_gorevi": false,
-        "saha_oncul_gorev_id": "UEC44340AEC",
-        "saha_oncul_son_tarih": "08.09.2026",
-        "sar_cevre_degisim_konservatif_db": 0.299,
-        "sar_cevre_degisim_tepe_db": 0.318,
-        "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.607,
-        "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
-        "sar_polarizasyon_uyumu": "TEK_POL_BASKIN",
-        "temporal_durum": null,
-        "yeni_tarih": "2026-11-05"
-      },
-      "type": "Feature"
-    },
-    {
-      "geometry": {
-        "coordinates": [
           26.600376,
           38.188457
         ],
@@ -841,8 +803,7 @@
     }
   ],
   "layer_counts": {
-    "SAR_DUSUK_KANIT_ARKA_PLAN": 21,
-    "SAR_SAHA_ONCUL": 1
+    "SAR_DUSUK_KANIT_ARKA_PLAN": 21
   },
   "mikro_aralik_m2": [
     150,
@@ -852,7 +813,7 @@
   "not": "Harita katmani diagnostiktir; Sentinel-1 geri sacilim degisimi tek basina insaat/kazi kaniti, alarm, saha gorevi, adres veya parsel dogrulamasi degildir.",
   "region_counts": {
     "cesme": 8,
-    "gulbahce": 6,
+    "gulbahce": 5,
     "uzunkuyu": 8
   },
   "rtc_pair_dates": {
