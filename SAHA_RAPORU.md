@@ -11,6 +11,8 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
 
-Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
+1. **ERKEN — Ilıca** · yaklaşık 700 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UB5A2F99227` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.318341,26.337738)
+2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 600 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `U2517CC4A87` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.426880,26.452901)
+3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 500 m² · **TAZE KAZI ÖNCELİĞİ** · Görev `UD97B7B7A36` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.395584,26.603810)
