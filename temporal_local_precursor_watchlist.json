@@ -10,6 +10,44 @@
   "amac": "15 Eylül öncesi güçlü 250-900 m² temporal-lokal ani zemin izini saklamak; sonraki bağımsız taze 250 m²+ ana adaya yalnız sıralama kanıtı sağlamak.",
   "adaylar": [
     {
+      "temporal_iz_id": "TL-20261107-38.33001-26.44317",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.330009,
+      "boylam": 26.44317,
+      "alan_m2": 400,
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Şifne",
+      "ilk_guclu_tarih": "07.11.2026",
+      "son_guclu_tarih": "07.11.2026",
+      "son_guclu_sentinel_item": "S2B_T35SMC_20261107T090613_L2A",
+      "sentinel_sahneleri": [
+        "S2B_T35SMC_20261107T090613_L2A"
+      ],
+      "maks_yerellik_orani": 1.72,
+      "maks_ic_bsi_degisim": 0.1931
+    },
+    {
+      "temporal_iz_id": "TL-20261107-38.28759-26.39429",
+      "alarm": false,
+      "saha_gorevi": false,
+      "enlem": 38.287589,
+      "boylam": 26.394289,
+      "alan_m2": 500,
+      "bolge_anahtari": "cesme",
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "mahalle": "Alaçatı",
+      "ilk_guclu_tarih": "07.11.2026",
+      "son_guclu_tarih": "07.11.2026",
+      "son_guclu_sentinel_item": "S2B_T35SMC_20261107T090613_L2A",
+      "sentinel_sahneleri": [
+        "S2B_T35SMC_20261107T090613_L2A"
+      ],
+      "maks_yerellik_orani": 1.65,
+      "maks_ic_bsi_degisim": 0.1194
+    },
+    {
       "temporal_iz_id": "TL-20261023-38.31979-26.46629",
       "alarm": false,
       "saha_gorevi": false,
@@ -409,6 +447,6 @@
       "maks_ic_bsi_degisim": 0.107
     }
   ],
-  "guclu_iz_sayisi": 21,
-  "guncelleme_tarihi": "2026-10-29 00:03 +0300"
+  "guclu_iz_sayisi": 23,
+  "guncelleme_tarihi": "2026-11-08 18:02 +0300"
 }
