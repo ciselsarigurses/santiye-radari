@@ -11,11 +11,9 @@
 
 ## Günün ilk 3 kontrolü
 
-> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
+> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
-1. **ERKEN — Ilıca** · yaklaşık 700 m² · Görev `UB5A2F99227` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.318341,26.337738)
-2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 600 m² · Görev `U2517CC4A87` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.426880,26.452901)
-3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 500 m² · Görev `UD97B7B7A36` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.395584,26.603810)
+Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
