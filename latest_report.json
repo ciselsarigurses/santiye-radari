@@ -13865,6 +13865,6 @@
     "onceki_oncelik_katmanlari_korundu": true,
     "not": "Önceden hesaplanan taze-kazı retention, MİKRO→ANA, temporal-lokal ve kuru-zemin shortlist'i silinmez. YIKIM_TEMIZLIK sonucu, sonraki yeni Sentinel sahnesinde aynı noktadaki 250 m²+ mevcut görevi güçlendirir; yalnız boş rota kapasitesini kullanır veya korunmayan backlog ile yer değiştirir. Yeni alarm/görev üretmez."
   },
-  "temel_kazi_kapisi_arka_plan_sayi": 2,
+  "temel_kazi_kapisi_arka_plan_sayi": 0,
   "temel_kazi_kapisi_aktif": true
 }
