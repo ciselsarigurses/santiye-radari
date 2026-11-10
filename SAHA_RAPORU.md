@@ -19,7 +19,7 @@ Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
 
 > **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 900 m² · 23.10.2026 → 07.11.2026 · BSI Δ 0.292 · RGB Δ 0.169 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.320783,26.558016)
+1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 900 m² · 23.10.2026 → 07.11.2026 · BSI Δ 0.292 · RGB Δ 0.169 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.320783,26.558016) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.320783/26.558016)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Germiyan** · yaklaşık 500 m² · 23.10.2026 → 07.11.2026 · BSI Δ 0.278 · RGB Δ 0.166 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.331185,26.469843)
+2. **KALİBRASYON — Germiyan** · yaklaşık 500 m² · 23.10.2026 → 07.11.2026 · BSI Δ 0.278 · RGB Δ 0.166 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.331185,26.469843) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.331185/26.469843)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
