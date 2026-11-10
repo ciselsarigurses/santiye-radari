@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-11-08 17:57 +0300",
+  "olusturma": "2026-11-10 19:22 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -7,37 +7,6 @@
   "diagnostik_kanit_koruma_gun": 2,
   "amac": "Aynı Sentinel çiftindeki yakın 250-800 m² güçlü küçük adayların tek bölünmüş hafriyat mı, yoksa yan yana ayrı şantiyeler mi olduğunu saha kalibrasyonuyla ayırmak.",
   "otomatik_birlestirme": false,
-  "cift_sayisi": 1,
-  "ciftler": [
-    {
-      "durum": "SAHADA_AYRI_MI_TEK_KUME_MI_DOGRULA",
-      "alarm": false,
-      "saha_gorevi": false,
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "onceki_tarih": "23.10.2026",
-      "son_tarih": "07.11.2026",
-      "mesafe_m": 49.9,
-      "ortak_kontrol_merkezi": {
-        "enlem": 38.42688,
-        "boylam": 26.453187
-      },
-      "adaylar": [
-        {
-          "gorev_id": "U2517CC4A87",
-          "enlem": 38.42688,
-          "boylam": 26.452901,
-          "alan_m2": 600,
-          "mahalle": "Mevki doğrulanmadı"
-        },
-        {
-          "gorev_id": "U3B7CF02952",
-          "enlem": 38.42688,
-          "boylam": 26.453473,
-          "alan_m2": 400,
-          "mahalle": "Mevki doğrulanmadı"
-        }
-      ],
-      "yorum": "Aynı Sentinel görüntü çiftinde iki güçlü küçük aday 60 m içinde. Otomatik birleştirilmez: tek hafriyatın maskede bölünmesi veya yan yana iki ayrı saha olabilir. Saha geri bildirimi bu ayrımı kalibre etmelidir."
-    }
-  ]
+  "cift_sayisi": 0,
+  "ciftler": []
 }
