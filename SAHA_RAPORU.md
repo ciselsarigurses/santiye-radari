@@ -11,8 +11,6 @@
 
 ## Günün ilk 3 kontrolü
 
-> Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; bölge dengesi daha yüksek öncelikli adayı düşürmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir.
+> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
-1. **GECİKEN — Ildır** · yaklaşık 300 m² · Görev `U82990AC051` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.366279,26.473412)
-2. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 300 m² · Görev `U2D673FCD9F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.412227,26.613656)
-3. **GECİKEN — Ilıca** · yaklaşık 400 m² · Görev `U5D58302844` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.316623,26.339684)
+Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
