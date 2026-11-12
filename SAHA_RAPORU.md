@@ -11,15 +11,8 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
 
-Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
-
-## Ek kuru zemin kalibrasyon kontrolü
-
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
-
-1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 900 m² · 23.10.2026 → 07.11.2026 · BSI Δ 0.292 · RGB Δ 0.169 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.320783,26.558016)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Germiyan** · yaklaşık 500 m² · 23.10.2026 → 07.11.2026 · BSI Δ 0.278 · RGB Δ 0.166 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.331185,26.469843)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+1. **GECİKEN — Ildır** · yaklaşık 300 m² · Görev `U82990AC051` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.366279,26.473412)
+2. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 300 m² · Görev `U2D673FCD9F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.412227,26.613656)
+3. **GECİKEN — Ilıca** · yaklaşık 400 m² · Görev `U5D58302844` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.316623,26.339684)
