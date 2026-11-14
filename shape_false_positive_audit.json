@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-11-14",
-  "olusturma": "2026-11-14 20:32 +03",
+  "olusturma": "2026-11-14 23:33 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -139,17 +139,17 @@
           "dusuk_kompaktlik": true
         }
       ],
-      "nihai_rapor_secimi": 34,
-      "nihai_rapor_eslesen_geometri": 24,
+      "nihai_rapor_secimi": 22,
+      "nihai_rapor_eslesen_geometri": 22,
       "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 24,
-      "nihai_rapor_cozulemeyen_geometri": 10,
+      "nihai_rapor_cozulen_geometri": 22,
+      "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 10,
+          "toplam": 8,
           "uzun_ince": 1,
           "dusuk_kompaktlik": 0
         },
@@ -166,7 +166,7 @@
       },
       "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": {
         "kucuk_250_800": {
-          "toplam": 10,
+          "toplam": 8,
           "uzun_ince": 1,
           "dusuk_kompaktlik": 0
         },
@@ -184,62 +184,7 @@
       "nihai_secili_genis_sekil_isaretli": 0,
       "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 0,
       "nihai_secili_genis_sekil_ornekleri": [],
-      "nihai_cozulemeyen_geometri_ornekleri": [
-        {
-          "enlem": 38.255932,
-          "boylam": 26.4869,
-          "alan_m2": 403839,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 310.2,
-          "en_yakin_alan_benzerligi": 0.007
-        },
-        {
-          "enlem": 38.255298,
-          "boylam": 26.434127,
-          "alan_m2": 376136,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 250.2,
-          "en_yakin_alan_benzerligi": 0.007
-        },
-        {
-          "enlem": 38.245892,
-          "boylam": 26.441682,
-          "alan_m2": 357334,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 219.7,
-          "en_yakin_alan_benzerligi": 0.001
-        },
-        {
-          "enlem": 38.285508,
-          "boylam": 26.428059,
-          "alan_m2": 297928,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 313.2,
-          "en_yakin_alan_benzerligi": 0.423
-        },
-        {
-          "enlem": 38.244354,
-          "boylam": 26.420962,
-          "alan_m2": 288128,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 469.1,
-          "en_yakin_alan_benzerligi": 0.007
-        },
-        {
-          "enlem": 38.311377,
-          "boylam": 26.402417,
-          "alan_m2": 2000,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 122.1,
-          "en_yakin_alan_benzerligi": 0.85
-        }
-      ]
+      "nihai_cozulemeyen_geometri_ornekleri": []
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
@@ -370,17 +315,17 @@
           "dusuk_kompaktlik": true
         }
       ],
-      "nihai_rapor_secimi": 32,
-      "nihai_rapor_eslesen_geometri": 23,
+      "nihai_rapor_secimi": 21,
+      "nihai_rapor_eslesen_geometri": 21,
       "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 1,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 23,
-      "nihai_rapor_cozulemeyen_geometri": 9,
+      "nihai_rapor_cozulen_geometri": 21,
+      "nihai_rapor_cozulemeyen_geometri": 0,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 8,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -397,7 +342,7 @@
       },
       "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": {
         "kucuk_250_800": {
-          "toplam": 8,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
@@ -415,62 +360,7 @@
       "nihai_secili_genis_sekil_isaretli": 0,
       "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 0,
       "nihai_secili_genis_sekil_ornekleri": [],
-      "nihai_cozulemeyen_geometri_ornekleri": [
-        {
-          "enlem": 38.248153,
-          "boylam": 26.532372,
-          "alan_m2": 280449,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 724.9,
-          "en_yakin_alan_benzerligi": 0.005
-        },
-        {
-          "enlem": 38.229611,
-          "boylam": 26.463566,
-          "alan_m2": 241142,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 60.0,
-          "en_yakin_alan_benzerligi": 0.013
-        },
-        {
-          "enlem": 38.242545,
-          "boylam": 26.559161,
-          "alan_m2": 180432,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 284.4,
-          "en_yakin_alan_benzerligi": 0.004
-        },
-        {
-          "enlem": 38.228164,
-          "boylam": 26.48715,
-          "alan_m2": 132823,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 416.0,
-          "en_yakin_alan_benzerligi": 0.061
-        },
-        {
-          "enlem": 38.221652,
-          "boylam": 26.485891,
-          "alan_m2": 132623,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 206.0,
-          "en_yakin_alan_benzerligi": 0.024
-        },
-        {
-          "enlem": 38.264162,
-          "boylam": 26.496195,
-          "alan_m2": 129823,
-          "durum": "eslesmedi",
-          "geometri_kaynagi": null,
-          "en_yakin_mesafe_m": 191.2,
-          "en_yakin_alan_benzerligi": 0.008
-        }
-      ]
+      "nihai_cozulemeyen_geometri_ornekleri": []
     }
   }
 }
