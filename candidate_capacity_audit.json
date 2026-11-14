@@ -1,6 +1,6 @@
 {
   "rapor_tarihi": "2026-11-14",
-  "olusturma": "2026-11-14 17:54 +03",
+  "olusturma": "2026-11-14 20:30 +03",
   "amac": "24 aday tavanının ve 8-komşu piksel geometrisinin 250 m²+ geçerli Sentinel kümelerini gizleyip gizlemediğini ölçmek; bu dosya alarm veya saha görevi üretmez.",
   "diagnostik_santiye_olcegi_m2": [
     800,
@@ -10,20 +10,20 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2B_T35SMC_20261107T090613_L2A",
+      "son_item": "S2A_T35SMC_20261114T090416_L2A",
       "durum": "ok",
-      "latest_item": "S2B_T35SMC_20261107T090613_L2A",
+      "latest_item": "S2A_T35SMC_20261114T090416_L2A",
       "aday_tavani": 24,
-      "ham_uygun_aday": 1565,
+      "ham_uygun_aday": 1826,
       "tavan_sonrasi_aday": 24,
-      "raporda_kalan_aday": 24,
-      "tavan_disinda_kalan": 1541,
-      "ham_secimden_farkli": 16,
+      "raporda_kalan_aday": 34,
+      "tavan_disinda_kalan": 1802,
+      "ham_secimden_farkli": 22,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
-        "kucuk_250_800": 9,
-        "santiye_olcegi_800_10000": 1291,
-        "genis_10000_ustu": 265
+        "kucuk_250_800": 69,
+        "santiye_olcegi_800_10000": 1452,
+        "genis_10000_ustu": 305
       },
       "tavan_sonrasi_olcek_dagilimi": {
         "kucuk_250_800": 8,
@@ -31,76 +31,77 @@
         "genis_10000_ustu": 16
       },
       "raporda_olcek_dagilimi": {
-        "kucuk_250_800": 8,
-        "santiye_olcegi_800_10000": 6,
-        "genis_10000_ustu": 10
+        "kucuk_250_800": 10,
+        "santiye_olcegi_800_10000": 11,
+        "genis_10000_ustu": 13
       },
       "tavan_disinda_olcek_dagilimi": {
-        "kucuk_250_800": 1,
-        "santiye_olcegi_800_10000": 1291,
-        "genis_10000_ustu": 249
+        "kucuk_250_800": 61,
+        "santiye_olcegi_800_10000": 1452,
+        "genis_10000_ustu": 289
       },
       "ham_secimden_farkli_olcek_dagilimi": {
-        "kucuk_250_800": 0,
+        "kucuk_250_800": 6,
         "santiye_olcegi_800_10000": 0,
         "genis_10000_ustu": 16
       },
       "baglanti_geometrisi": {
-        "sekiz_komsu_gecerli_aday": 1565,
-        "dort_komsu_gecerli_aday": 1680,
-        "diyagonal_birlesmis_ebeveyn": 106,
-        "ayrisan_kucuk_250_800": 0,
-        "ayrisan_santiye_olcegi_800_10000": 179,
-        "genis_ebeveynden_ayrisan_250_10000": 86,
+        "sekiz_komsu_gecerli_aday": 1826,
+        "dort_komsu_gecerli_aday": 2022,
+        "diyagonal_birlesmis_ebeveyn": 144,
+        "ayrisan_kucuk_250_800": 32,
+        "ayrisan_santiye_olcegi_800_10000": 242,
+        "genis_ebeveynden_ayrisan_250_10000": 136,
         "ornekler": [
           {
-            "enlem": 38.407343,
-            "boylam": 26.514031,
-            "sekiz_komsu_alan_m2": 3300,
+            "enlem": 38.371887,
+            "boylam": 26.284049,
+            "sekiz_komsu_alan_m2": 1000,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              1600,
-              1700
+              400,
+              600
             ]
           },
           {
-            "enlem": 38.397031,
-            "boylam": 26.479116,
-            "sekiz_komsu_alan_m2": 3200,
+            "enlem": 38.359043,
+            "boylam": 26.305342,
+            "sekiz_komsu_alan_m2": 24802,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              1400,
-              1700
-            ]
-          },
-          {
-            "enlem": 38.370349,
-            "boylam": 26.506017,
-            "sekiz_komsu_alan_m2": 3200,
-            "dort_komsu_alt_aday_sayisi": 2,
-            "dort_komsu_alt_alanlar_m2": [
-              1500,
-              1700
-            ]
-          },
-          {
-            "enlem": 38.368088,
-            "boylam": 26.503957,
-            "sekiz_komsu_alan_m2": 9401,
-            "dort_komsu_alt_aday_sayisi": 2,
-            "dort_komsu_alt_alanlar_m2": [
-              1700,
-              7701
+              1100,
+              23602
             ]
           },
           {
             "enlem": 38.355425,
-            "boylam": 26.500408,
-            "sekiz_komsu_alan_m2": 761773,
+            "boylam": 26.296985,
+            "sekiz_komsu_alan_m2": 24602,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              1200,
-              759573
+              800,
+              23402
+            ]
+          },
+          {
+            "enlem": 38.351174,
+            "boylam": 26.296527,
+            "sekiz_komsu_alan_m2": 130612,
+            "dort_komsu_alt_aday_sayisi": 3,
+            "dort_komsu_alt_alanlar_m2": [
+              400,
+              400,
+              129412
+            ]
+          },
+          {
+            "enlem": 38.353435,
+            "boylam": 26.297786,
+            "sekiz_komsu_alan_m2": 2600,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              1100,
+              1500
             ]
           }
         ],
@@ -109,20 +110,20 @@
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2B_T35SMC_20261107T090613_L2A",
+      "son_item": "S2A_T35SMC_20261114T090416_L2A",
       "durum": "ok",
-      "latest_item": "S2B_T35SMC_20261107T090613_L2A",
+      "latest_item": "S2A_T35SMC_20261114T090416_L2A",
       "aday_tavani": 24,
-      "ham_uygun_aday": 1612,
+      "ham_uygun_aday": 1656,
       "tavan_sonrasi_aday": 24,
-      "raporda_kalan_aday": 13,
-      "tavan_disinda_kalan": 1588,
-      "ham_secimden_farkli": 19,
+      "raporda_kalan_aday": 32,
+      "tavan_disinda_kalan": 1632,
+      "ham_secimden_farkli": 23,
       "tavana_ulasti": true,
       "ham_olcek_dagilimi": {
-        "kucuk_250_800": 8,
-        "santiye_olcegi_800_10000": 1295,
-        "genis_10000_ustu": 309
+        "kucuk_250_800": 34,
+        "santiye_olcegi_800_10000": 1291,
+        "genis_10000_ustu": 331
       },
       "tavan_sonrasi_olcek_dagilimi": {
         "kucuk_250_800": 8,
@@ -130,76 +131,76 @@
         "genis_10000_ustu": 16
       },
       "raporda_olcek_dagilimi": {
-        "kucuk_250_800": 5,
-        "santiye_olcegi_800_10000": 4,
-        "genis_10000_ustu": 4
+        "kucuk_250_800": 8,
+        "santiye_olcegi_800_10000": 8,
+        "genis_10000_ustu": 16
       },
       "tavan_disinda_olcek_dagilimi": {
-        "kucuk_250_800": 0,
-        "santiye_olcegi_800_10000": 1295,
-        "genis_10000_ustu": 293
+        "kucuk_250_800": 26,
+        "santiye_olcegi_800_10000": 1291,
+        "genis_10000_ustu": 315
       },
       "ham_secimden_farkli_olcek_dagilimi": {
-        "kucuk_250_800": 3,
+        "kucuk_250_800": 7,
         "santiye_olcegi_800_10000": 0,
         "genis_10000_ustu": 16
       },
       "baglanti_geometrisi": {
-        "sekiz_komsu_gecerli_aday": 1612,
-        "dort_komsu_gecerli_aday": 1713,
-        "diyagonal_birlesmis_ebeveyn": 103,
-        "ayrisan_kucuk_250_800": 0,
-        "ayrisan_santiye_olcegi_800_10000": 164,
-        "genis_ebeveynden_ayrisan_250_10000": 67,
+        "sekiz_komsu_gecerli_aday": 1656,
+        "dort_komsu_gecerli_aday": 1776,
+        "diyagonal_birlesmis_ebeveyn": 116,
+        "ayrisan_kucuk_250_800": 14,
+        "ayrisan_santiye_olcegi_800_10000": 179,
+        "genis_ebeveynden_ayrisan_250_10000": 88,
         "ornekler": [
           {
-            "enlem": 38.416387,
-            "boylam": 26.580226,
-            "sekiz_komsu_alan_m2": 25204,
+            "enlem": 38.40282,
+            "boylam": 26.596025,
+            "sekiz_komsu_alan_m2": 5901,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              9902,
-              15303
+              1100,
+              4801
             ]
           },
           {
-            "enlem": 38.415845,
-            "boylam": 26.519206,
-            "sekiz_komsu_alan_m2": 6101,
+            "enlem": 38.401283,
+            "boylam": 26.593278,
+            "sekiz_komsu_alan_m2": 31706,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              1400,
-              4701
+              5001,
+              26505
             ]
           },
           {
-            "enlem": 38.407343,
-            "boylam": 26.51394,
-            "sekiz_komsu_alan_m2": 3001,
+            "enlem": 38.395494,
+            "boylam": 26.605528,
+            "sekiz_komsu_alan_m2": 9402,
             "dort_komsu_alt_aday_sayisi": 2,
             "dort_komsu_alt_alanlar_m2": [
-              1400,
+              800,
+              8101
+            ]
+          },
+          {
+            "enlem": 38.378218,
+            "boylam": 26.619266,
+            "sekiz_komsu_alan_m2": 10702,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              2100,
+              8602
+            ]
+          },
+          {
+            "enlem": 38.377223,
+            "boylam": 26.617663,
+            "sekiz_komsu_alan_m2": 2800,
+            "dort_komsu_alt_aday_sayisi": 2,
+            "dort_komsu_alt_alanlar_m2": [
+              1200,
               1600
-            ]
-          },
-          {
-            "enlem": 38.406529,
-            "boylam": 26.557673,
-            "sekiz_komsu_alan_m2": 6901,
-            "dort_komsu_alt_aday_sayisi": 2,
-            "dort_komsu_alt_alanlar_m2": [
-              3301,
-              3601
-            ]
-          },
-          {
-            "enlem": 38.394318,
-            "boylam": 26.558818,
-            "sekiz_komsu_alan_m2": 5301,
-            "dort_komsu_alt_aday_sayisi": 2,
-            "dort_komsu_alt_alanlar_m2": [
-              2200,
-              3101
             ]
           }
         ],
