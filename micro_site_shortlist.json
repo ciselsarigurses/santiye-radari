@@ -11,9 +11,9 @@
   "tekil_aday": 397,
   "ortusme_tekrari_elendi": 57,
   "genis_hareket_kumesi_arka_plana_alindi": 44,
-  "ana_250plus_adaya_yakin_arka_plana_alindi": 25,
-  "250plus_yakinlik_referans_toplam_saha_adayi": 504,
-  "250plus_yakinlik_referans_guncel_sentinel": 66,
+  "ana_250plus_adaya_yakin_arka_plana_alindi": 20,
+  "250plus_yakinlik_referans_toplam_saha_adayi": 481,
+  "250plus_yakinlik_referans_guncel_sentinel": 43,
   "250plus_yakinlik_referans_dislanan_eski_veya_250alti": 438,
   "yakinlik_referans_sentinel_tarihleri": [
     "14.11.2026"
@@ -179,7 +179,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "14.11.2026",
-      "en_yakin_250plus_m": 1092,
+      "en_yakin_250plus_m": 1157,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -209,7 +209,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "14.11.2026",
-      "en_yakin_250plus_m": 2225,
+      "en_yakin_250plus_m": 2201,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -305,7 +305,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "14.11.2026",
-      "en_yakin_250plus_m": 2018,
+      "en_yakin_250plus_m": 8362,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },
@@ -370,7 +370,7 @@
       "250m_mikro_komsu": 0,
       "genis_hareket_kumesi_riski": false,
       "250plus_yakinlik_kaynak_tarihi": "14.11.2026",
-      "en_yakin_250plus_m": 1329,
+      "en_yakin_250plus_m": 9405,
       "ana_adaya_yakin": false,
       "spektral_kisa_liste_kapisi": true
     },

@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-11-14 20:36 +0300",
+  "olusturma": "2026-11-14 23:51 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -59,7 +59,7 @@
           "250m_mikro_komsu": 0,
           "genis_hareket_kumesi_riski": false,
           "250plus_yakinlik_kaynak_tarihi": "14.11.2026",
-          "en_yakin_250plus_m": 1141,
+          "en_yakin_250plus_m": 604,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": false,
           "spektral_sinir_inceleme": true,
@@ -127,7 +127,7 @@
           "250m_mikro_komsu": 0,
           "genis_hareket_kumesi_riski": false,
           "250plus_yakinlik_kaynak_tarihi": "14.11.2026",
-          "en_yakin_250plus_m": 1317,
+          "en_yakin_250plus_m": 700,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": false,
           "spektral_sinir_inceleme": true,
@@ -195,7 +195,7 @@
           "250m_mikro_komsu": 2,
           "genis_hareket_kumesi_riski": false,
           "250plus_yakinlik_kaynak_tarihi": "14.11.2026",
-          "en_yakin_250plus_m": 285,
+          "en_yakin_250plus_m": 300,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": false,
           "spektral_sinir_inceleme": true,
@@ -335,7 +335,7 @@
           "250m_mikro_komsu": 1,
           "genis_hareket_kumesi_riski": false,
           "250plus_yakinlik_kaynak_tarihi": "14.11.2026",
-          "en_yakin_250plus_m": 262,
+          "en_yakin_250plus_m": 594,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": false,
           "spektral_sinir_inceleme": true,
@@ -397,7 +397,7 @@
           "250m_mikro_komsu": 1,
           "genis_hareket_kumesi_riski": false,
           "250plus_yakinlik_kaynak_tarihi": "14.11.2026",
-          "en_yakin_250plus_m": 200,
+          "en_yakin_250plus_m": 655,
           "ana_adaya_yakin": false,
           "spektral_kisa_liste_kapisi": false,
           "spektral_sinir_inceleme": true,
@@ -440,8 +440,8 @@
   "yakinlik_referans_sentinel_tarihleri": [
     "14.11.2026"
   ],
-  "250plus_yakinlik_referans_toplam_saha_adayi": 504,
-  "250plus_yakinlik_referans_guncel_sentinel": 66,
+  "250plus_yakinlik_referans_toplam_saha_adayi": 481,
+  "250plus_yakinlik_referans_guncel_sentinel": 43,
   "250plus_yakinlik_referans_dislanan_eski_veya_250alti": 438,
   "baglam_notu": "Spektral sınır yakınlık filtresi yalnız MİKRO taramasının güncel Sentinel tarihindeki 250+ adayları kullanır; eski açık saha backlog'u near-miss MİKRO sinyalini bastırmaz. Alarm/görev/250 m² eşiği değişmez."
 }
