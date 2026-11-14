@@ -13,80 +13,50 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2B_T35SMC_20261107T090613_L2A",
-      "son_tarih": "07.11.2026",
-      "guclu_golge_aday": 4,
+      "son_item": "S2A_T35SMC_20261114T090416_L2A",
+      "son_tarih": "14.11.2026",
+      "guclu_golge_aday": 2,
       "ana_goreve_yakin_oldugu_icin_atlanan": 0
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2B_T35SMC_20261107T090613_L2A",
-      "son_tarih": "07.11.2026",
+      "son_item": "S2A_T35SMC_20261114T090416_L2A",
+      "son_tarih": "14.11.2026",
       "guclu_golge_aday": 0,
       "ana_goreve_yakin_oldugu_icin_atlanan": 0
     }
   },
-  "guclu_golge_aday_sayisi": 4,
+  "guclu_golge_aday_sayisi": 2,
   "adaylar": [
     {
-      "mahalle": "Şifne",
-      "enlem": 38.330009,
-      "boylam": 26.44317,
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.241822,
+      "boylam": 26.454045,
       "alan_m2": 400,
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2B_T35SMC_20261107T090613_L2A",
-      "yerellik_orani": 1.72,
-      "uzun_temporal_ani_baslangic_orani": 3.03,
-      "son_cift_bsi_degisim": 0.1931,
+      "son_item": "S2A_T35SMC_20261114T090416_L2A",
+      "yerellik_orani": 2.21,
+      "uzun_temporal_ani_baslangic_orani": 2.37,
+      "son_cift_bsi_degisim": 0.1517,
       "alarm": false,
       "saha_gorevi": false,
       "gölge_kalibrasyon": true,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.330009,26.443170"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.241822,26.454045"
     },
     {
-      "mahalle": "Alaçatı",
-      "enlem": 38.287589,
-      "boylam": 26.394289,
-      "alan_m2": 500,
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.240465,
+      "boylam": 26.409514,
+      "alan_m2": 300,
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2B_T35SMC_20261107T090613_L2A",
-      "yerellik_orani": 1.65,
-      "uzun_temporal_ani_baslangic_orani": 3.54,
-      "son_cift_bsi_degisim": 0.1194,
+      "son_item": "S2A_T35SMC_20261114T090416_L2A",
+      "yerellik_orani": 1.95,
+      "uzun_temporal_ani_baslangic_orani": 4.31,
+      "son_cift_bsi_degisim": 0.2325,
       "alarm": false,
       "saha_gorevi": false,
       "gölge_kalibrasyon": true,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.287589,26.394289"
-    },
-    {
-      "mahalle": "Musalla",
-      "enlem": 38.313276,
-      "boylam": 26.309692,
-      "alan_m2": 600,
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2B_T35SMC_20261107T090613_L2A",
-      "yerellik_orani": 1.6,
-      "uzun_temporal_ani_baslangic_orani": 10.32,
-      "son_cift_bsi_degisim": 0.1743,
-      "alarm": false,
-      "saha_gorevi": false,
-      "gölge_kalibrasyon": true,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.313276,26.309692"
-    },
-    {
-      "mahalle": "Musalla",
-      "enlem": 38.294372,
-      "boylam": 26.313813,
-      "alan_m2": 400,
-      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2B_T35SMC_20261107T090613_L2A",
-      "yerellik_orani": 1.54,
-      "uzun_temporal_ani_baslangic_orani": 5.57,
-      "son_cift_bsi_degisim": 0.118,
-      "alarm": false,
-      "saha_gorevi": false,
-      "gölge_kalibrasyon": true,
-      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.294372,26.313813"
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.240465,26.409514"
     }
   ]
 }
