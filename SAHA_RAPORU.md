@@ -9,11 +9,9 @@
 
 ## Günün ilk 3 kontrolü
 
-> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren güçlü 250 m²+ hafriyat/temel adayları ve görev kimliği daha eski olsa bile 15 Eylül sonrası güncel Sentinel kanıtıyla yeniden doğrulanan aynı adaylar en fazla 2 gün eski backlog'un önünde tutulur. TEKRAR_GIT her zaman en yüksek önceliktedir. 150–249 m² Mikro Şantiye diagnostikleri doğrudan saha görevine yükseltilmez. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir.
+> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
-1. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `U59BBEA52C9` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.185472,26.518953)
-2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `U15DC9631D3` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.198316,26.487243)
-3. **ERKEN — Uzunkuyu** · yaklaşık 700 m² · Görev `UCC7904BE38` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.291749,26.564657)
+Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
 
 ## Bugün sahada kontrol edilecek uydu adayları
 
@@ -4777,3 +4775,7 @@ Bugün ilk kez bulunan yeni internet sonucu yok.
 
 ---
 **Not:** YÜKSEK / ORTA / NORMAL saha ziyaret önceliğidir. Alan büyüklüğüne ek olarak, uydu motorunun daha sert çoklu-spektral filtresinden geçen 250–800 m² küçük saha adayları ORTA sıraya alınır. Bu sınıflandırma inşaat olduğuna dair kesinlik veya ruhsat doğrulaması değildir; yanlış pozitifler saha kontrolüyle elenir.
+
+## Arka planda izlenen geniş yüzey hareketleri
+
+Bu raporda ölçülmüş düşük-kompaktlık kuralına giren geniş yüzey hareketi yok.
