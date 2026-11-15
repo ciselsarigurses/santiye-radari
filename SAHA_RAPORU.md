@@ -16,9 +16,3 @@
 1. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `U59BBEA52C9` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.185472,26.518953)
 2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 700 m² · Görev `U15DC9631D3` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.198316,26.487243)
 3. **ERKEN — Uzunkuyu** · yaklaşık 700 m² · Görev `UCC7904BE38` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.291749,26.564657)
-
-## Temporal-lokal erken sinyal izleme
-
-> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül sonrası bunlar yüksek diagnostik ağırlıkla izlenir; görev açma kuralı değişmez.
-
-Bu turda güvenli temporal-lokal erken sinyal yok.
