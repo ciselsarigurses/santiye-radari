@@ -11,6 +11,17 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
+1. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U823879BE4F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.237390,26.360633)
+2. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U511F239591` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262987,26.435500)
+3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U5D6931FB7C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.189633,26.561108)
+
+## Ek kuru zemin kalibrasyon kontrolü
+
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
+
+1. **KALİBRASYON — Alaçatı** · yaklaşık 1.200 m² · 07.11.2026 → 14.11.2026 · BSI Δ 0.339 · RGB Δ 0.145 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.263439,26.369791)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 300 m² · 07.11.2026 → 14.11.2026 · BSI Δ 0.311 · RGB Δ 0.200 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.191532,26.624876)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
