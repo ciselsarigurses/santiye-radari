@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-11-15",
+  "rapor_tarihi": "2026-11-16",
   "amac": "15 Eylül sonrası kuru-zemin teyit filtresini yasak döneminde gölge modunda ölçmek; operasyonel alarm/görev üretmeden güçlü aday hacmini kalibre etmek.",
   "ana_alarm_alt_esigi_m2": 250,
   "diagnostik_aralik_m2": [
@@ -15,7 +15,7 @@
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "son_item": "S2A_T35SMC_20261114T090416_L2A",
       "son_tarih": "14.11.2026",
-      "guclu_golge_aday": 0,
+      "guclu_golge_aday": 2,
       "ana_goreve_yakin_oldugu_icin_atlanan": 0
     },
     "uzunkuyu": {
@@ -26,6 +26,37 @@
       "ana_goreve_yakin_oldugu_icin_atlanan": 0
     }
   },
-  "guclu_golge_aday_sayisi": 0,
-  "adaylar": []
+  "guclu_golge_aday_sayisi": 2,
+  "adaylar": [
+    {
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.241822,
+      "boylam": 26.454045,
+      "alan_m2": 400,
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "son_item": "S2A_T35SMC_20261114T090416_L2A",
+      "yerellik_orani": 2.21,
+      "uzun_temporal_ani_baslangic_orani": 2.37,
+      "son_cift_bsi_degisim": 0.1517,
+      "alarm": false,
+      "saha_gorevi": false,
+      "gölge_kalibrasyon": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.241822,26.454045"
+    },
+    {
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.240465,
+      "boylam": 26.409514,
+      "alan_m2": 300,
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "son_item": "S2A_T35SMC_20261114T090416_L2A",
+      "yerellik_orani": 1.95,
+      "uzun_temporal_ani_baslangic_orani": 4.31,
+      "son_cift_bsi_degisim": 0.2325,
+      "alarm": false,
+      "saha_gorevi": false,
+      "gölge_kalibrasyon": true,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.240465,26.409514"
+    }
+  ]
 }
