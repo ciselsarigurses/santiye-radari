@@ -16,3 +16,12 @@
 1. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U823879BE4F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.237390,26.360633)
 2. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U511F239591` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.262987,26.435500)
 3. **PARSEL — Mevki doğrulanmadı** · yaklaşık 800 m² · Görev `U5D6931FB7C` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.189633,26.561108)
+
+## Temporal-lokal erken sinyal izleme
+
+> **Alarm veya saha görevi değildir.** 250–900 m² temporal kuru-zemin havuzunda yalnız ani başlangıç + güçlü lokal/kompakt değişim birlikte görülen, çevresi yaygın hareket göstermeyen ve veri kalitesi yeterli noktaları görünür tutar. 15 Eylül sonrası bunlar yüksek diagnostik ağırlıkla izlenir; görev açma kuralı değişmez.
+
+1. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 400 m² · yerellik 2.21 · iç BSI Δ 0.152 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.241822,26.454045) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.241822/26.454045)
+   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
+2. **TEMPORAL-LOKAL — Mevki doğrulanmadı** · yaklaşık 300 m² · yerellik 1.95 · iç BSI Δ 0.233 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.240465,26.409514) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.240465/26.409514)
+   - İzleme notu: Koordinat değişim kümesinin yaklaşık merkezidir; gerçek hafriyat/kazı/temel olup olmadığı saha teyidi olmadan kesinleştirilmez.
