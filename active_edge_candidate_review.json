@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-11-16",
+  "rapor_tarihi": "2026-11-17",
   "amac": "Güncel 250 m²+ ana Sentinel adaylarının bağlı bileşeninin analiz bbox kenarına değip değmediğini ölçerek alan/merkez koordinatı kırpma riskini görünür kılmak.",
   "politika": "DIAGNOSTIK_ONLY: 250 m² ana eşik, alarm ve saha görevi değişmez. Kenar teması bbox genişletme/yeniden ölçüm kanıtıdır; tek başına yeni alarm değildir.",
   "ana_uretim_esigi_m2": 250,
@@ -187,7 +187,7 @@
         },
         {
           "gorev_id": "U9EC2811BFA",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Dalyan",
           "enlem": 38.371887,
           "boylam": 26.284049,
@@ -275,7 +275,7 @@
         },
         {
           "gorev_id": "U07543D3CC9",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.264976,
           "boylam": 26.458739,
@@ -297,7 +297,7 @@
         },
         {
           "gorev_id": "U823879BE4F",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.23739,
           "boylam": 26.360633,
@@ -451,7 +451,7 @@
         },
         {
           "gorev_id": "U511F239591",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.262987,
           "boylam": 26.4355,
@@ -495,7 +495,7 @@
         },
         {
           "gorev_id": "UD09E402798",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.25964,
           "boylam": 26.357428,
@@ -623,7 +623,7 @@
         },
         {
           "gorev_id": "U2D975BDF1E",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.225089,
           "boylam": 26.460017,
@@ -733,7 +733,7 @@
         },
         {
           "gorev_id": "UE04F0C9D34",
-          "oncelik": "PARSEL",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.233229,
           "boylam": 26.483029,
