@@ -50,8 +50,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 0,
-      "secilen_devriye_kapsiyor": true,
+      "secilen_devriyeye_mesafe_m": 165,
+      "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -62,7 +62,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 40,
+      "secilen_devriyeye_mesafe_m": 126,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": true,
       "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
@@ -75,8 +75,8 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 165,
-      "secilen_devriye_kapsiyor": false,
+      "secilen_devriyeye_mesafe_m": 0,
+      "secilen_devriye_kapsiyor": true,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
@@ -87,7 +87,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 297,
+      "secilen_devriyeye_mesafe_m": 263,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -99,7 +99,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 993,
+      "secilen_devriyeye_mesafe_m": 892,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -111,7 +111,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1030,
+      "secilen_devriyeye_mesafe_m": 916,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -123,7 +123,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1148,
+      "secilen_devriyeye_mesafe_m": 1020,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -135,7 +135,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1215,
+      "secilen_devriyeye_mesafe_m": 1052,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -147,7 +147,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1245,
+      "secilen_devriyeye_mesafe_m": 1099,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -159,7 +159,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1373,
+      "secilen_devriyeye_mesafe_m": 1208,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -171,7 +171,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1429,
+      "secilen_devriyeye_mesafe_m": 1279,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -183,7 +183,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1444,
+      "secilen_devriyeye_mesafe_m": 1298,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -195,7 +195,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1476,
+      "secilen_devriyeye_mesafe_m": 1321,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -207,7 +207,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1218,
+      "secilen_devriyeye_mesafe_m": 1055,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -219,7 +219,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1484,
+      "secilen_devriyeye_mesafe_m": 1341,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -231,10 +231,9 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 78,
+      "secilen_devriyeye_mesafe_m": 220,
       "secilen_devriye_kapsiyor": false,
-      "secilen_devriyeye_yakin_ek_kontrol": true,
-      "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
+      "secilen_devriyeye_yakin_ek_kontrol": false
     },
     {
       "enlem": 38.330552,
@@ -244,7 +243,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1129,
+      "secilen_devriyeye_mesafe_m": 1154,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -256,7 +255,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1500,
+      "secilen_devriyeye_mesafe_m": 1340,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -268,7 +267,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1600,
+      "secilen_devriyeye_mesafe_m": 1441,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -280,7 +279,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1498,
+      "secilen_devriyeye_mesafe_m": 1351,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -292,7 +291,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1710,
+      "secilen_devriyeye_mesafe_m": 1551,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -304,7 +303,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1371,
+      "secilen_devriyeye_mesafe_m": 1210,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -316,7 +315,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1209,
+      "secilen_devriyeye_mesafe_m": 1073,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -328,7 +327,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1628,
+      "secilen_devriyeye_mesafe_m": 1474,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -340,7 +339,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1051,
+      "secilen_devriyeye_mesafe_m": 890,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -352,7 +351,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 1320,
+      "secilen_devriyeye_mesafe_m": 1175,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -364,7 +363,7 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 2393,
+      "secilen_devriyeye_mesafe_m": 2544,
       "secilen_devriye_kapsiyor": false,
       "secilen_devriyeye_yakin_ek_kontrol": false
     },
@@ -376,9 +375,10 @@
       "yuzey_kaniti": "TARIHSEL_KARA",
       "alarm": false,
       "saha_gorevi": false,
-      "secilen_devriyeye_mesafe_m": 296,
+      "secilen_devriyeye_mesafe_m": 132,
       "secilen_devriye_kapsiyor": false,
-      "secilen_devriyeye_yakin_ek_kontrol": false
+      "secilen_devriyeye_yakin_ek_kontrol": true,
+      "yakin_ek_kontrol_notu": "Seçilen Gülbahçe kör alan devriyesine 150 m içinde; kapsanmış sayılmaz. Saha erişimi uygunsa aynı ziyarette kısa ek kontrol yapılabilir."
     }
   ],
   "guncel_sahne_buyuk_kor_kumeleri": [
@@ -502,6 +502,6 @@
   "secilen_devriye_kapsama_yaricapi_m": 35,
   "yakin_ek_kontrol_yaricapi_m": 150,
   "secilen_devriyeye_yakin_ek_kontrol_sayisi": 2,
-  "secilen_devriyeye_yakin_ek_kontrol_alan_m2": 1600,
+  "secilen_devriyeye_yakin_ek_kontrol_alan_m2": 5201,
   "yakin_ek_kontrol_yorumu": "Yakın ek kontrol yalnız 250 m²+ güncel-sahne kör kümeleri için saha verimliliği diagnostigidir. 'Devriye kapsıyor' sayılmaz, alarm/görev üretmez ve erişilebilirlik sahada değerlendirilir."
 }
