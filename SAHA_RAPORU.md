@@ -19,7 +19,14 @@ Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
 
 > **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
 
-1. **KALİBRASYON — Alaçatı** · yaklaşık 1.200 m² · 07.11.2026 → 14.11.2026 · BSI Δ 0.339 · RGB Δ 0.145 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.263439,26.369791)
+1. **KALİBRASYON — Alaçatı** · yaklaşık 1.200 m² · 07.11.2026 → 14.11.2026 · BSI Δ 0.339 · RGB Δ 0.145 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.263439,26.369791) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.263439/26.369791)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 300 m² · 07.11.2026 → 14.11.2026 · BSI Δ 0.311 · RGB Δ 0.200 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.191532,26.624876)
+2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 300 m² · 07.11.2026 → 14.11.2026 · BSI Δ 0.311 · RGB Δ 0.200 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.191532,26.624876) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.191532/26.624876)
    - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+
+## Kör alan saha devriyesi
+
+> **Alarm değildir.** Tarihsel Sentinel görüntülerinde kara olduğu doğrulanmış fakat bulut/gölge veya geçersizlik nedeniyle halen gözlemsiz kalan alanlardan günlük en fazla iki nokta seçilir. Aktif radar görevlerinin en az 150 m dışındadır, iki uydu kutusunda aynı kör alanı iki kez göstermemek için 250 m mekânsal ayrım uygulanır ve güvenli alternatif varsa iki nokta farklı mahallelerden seçilir. Aynı görüntü günlerce değişmezse noktalar Çeşme yerel takvim gününe göre günlük rotasyonla değişir.
+
+1. **KÖR ALAN — Germiyan** · yaklaşık 400 m² · kalıcı bulut/gölge · 8 açık kara referans sahnesi · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.313909,26.469500) · [Parsel Sorgu'da aç](https://parselsorgu.tkgm.gov.tr/#ara/cografi/38.313909/26.469500)
+   - Saha notu: Bu bir şantiye alarmı değildir. Noktaya giderken çevrede yeni hafriyat, kazı, temel veya şantiye kurulumu görülürse fotoğraf ve konumla normal saha kaydı aç.
