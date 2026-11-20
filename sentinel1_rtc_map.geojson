@@ -13,7 +13,7 @@
       },
       "id": "cesme:38.192889:26.524562",
       "properties": {
-        "alan_m2": 2567045,
+        "alan_m2": 2555944,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -89,7 +89,7 @@
       },
       "id": "cesme:38.209170:26.422679",
       "properties": {
-        "alan_m2": 1219817,
+        "alan_m2": 1217816,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -127,7 +127,7 @@
       },
       "id": "cesme:38.213240:26.458281",
       "properties": {
-        "alan_m2": 9214480,
+        "alan_m2": 9206080,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -203,7 +203,7 @@
       },
       "id": "cesme:38.347647:26.291719",
       "properties": {
-        "alan_m2": 1435837,
+        "alan_m2": 1435437,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -241,7 +241,7 @@
       },
       "id": "cesme:38.359314:26.310836",
       "properties": {
-        "alan_m2": 2808168,
+        "alan_m2": 2798967,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -279,7 +279,7 @@
       },
       "id": "cesme:38.385273:26.484381",
       "properties": {
-        "alan_m2": 1734166,
+        "alan_m2": 1733766,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -652,14 +652,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.539928,
-          38.202024
+          26.540042,
+          38.202115
         ],
         "type": "Point"
       },
-      "id": "uzunkuyu:38.202024:26.539928",
+      "id": "uzunkuyu:38.202115:26.540042",
       "properties": {
-        "alan_m2": 10431734,
+        "alan_m2": 10409430,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -676,10 +676,10 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.105,
-        "sar_cevre_degisim_tepe_db": 0.729,
+        "sar_cevre_degisim_konservatif_db": 0.03,
+        "sar_cevre_degisim_tepe_db": 0.659,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.749,
+        "sar_lokal_degisim_skor_db": 0.148,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
         "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
@@ -690,14 +690,14 @@
     {
       "geometry": {
         "coordinates": [
-          26.464597,
+          26.464711,
           38.210165
         ],
         "type": "Point"
       },
-      "id": "uzunkuyu:38.210165:26.464597",
+      "id": "uzunkuyu:38.210165:26.464711",
       "properties": {
-        "alan_m2": 6677374,
+        "alan_m2": 6672173,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -714,10 +714,10 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.276,
-        "sar_cevre_degisim_tepe_db": 0.754,
+        "sar_cevre_degisim_konservatif_db": 0.257,
+        "sar_cevre_degisim_tepe_db": 0.79,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.037,
+        "sar_lokal_degisim_skor_db": 0.011,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
         "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
@@ -887,7 +887,7 @@
       },
       "id": "uzunkuyu:38.366912:26.627509",
       "properties": {
-        "alan_m2": 5487365,
+        "alan_m2": 5478163,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
