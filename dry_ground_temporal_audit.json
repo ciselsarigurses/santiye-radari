@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-11-21",
-  "olusturma": "2026-11-21 19:08 +0300",
+  "rapor_tarihi": "2026-11-22",
+  "olusturma": "2026-11-22 00:46 +0300",
   "amac": "Kuru-zemin saha-benzeri kalibrasyon örneklerinde son değişimden önceki Sentinel döneminin BSI kararlılığını aynı 3x3 piksel yamasında ölçmek; ani başlangıç desteği ve istikrarsız zemin riskini yalnız diagnostik olarak işaretlemek.",
   "esikler": {
     "patch_yaricap_piksel": 1,
