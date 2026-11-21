@@ -11,17 +11,8 @@
 
 ## Günün ilk 3 kontrolü
 
-> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
+> 15 Eylül sonrası operasyon modu: yeni Sentinel görüntüsünde beliren 250 m²+ kompakt ERKEN/PARSEL ve küçük-güçlü hafriyat/temel sinyalleri eski backlog'un önüne alınır. Aynı küçük alanda daha eski güçlü 150–249 m² MİKRO izi veya sahada doğrulanmış yıkım/parsel temizliği varsa, bağımsız 250 m²+ taze aday kendi taze-kazı bandı içinde öne alınır. TEKRAR_GIT her zaman en yüksek önceliktedir; öncül kanıt tek başına saha görevine yükseltilmez.
 
 1. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 300 m² · Görev `U2D673FCD9F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.412227,26.613656)
 2. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · Görev `U06E5EADC90` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.380570,26.607130)
 3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · Görev `U3B7CF02952` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.426880,26.453473)
-
-## Ek kuru zemin kalibrasyon kontrolü
-
-> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
-
-1. **KALİBRASYON — Alaçatı** · yaklaşık 1.200 m² · 07.11.2026 → 14.11.2026 · BSI Δ 0.339 · RGB Δ 0.145 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.263439,26.369791)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
-2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 300 m² · 07.11.2026 → 14.11.2026 · BSI Δ 0.311 · RGB Δ 0.200 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.191532,26.624876)
-   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
