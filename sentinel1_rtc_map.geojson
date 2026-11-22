@@ -7,13 +7,13 @@
       "geometry": {
         "coordinates": [
           26.524562,
-          38.192889
+          38.192798
         ],
         "type": "Point"
       },
-      "id": "cesme:38.192889:26.524562",
+      "id": "cesme:38.192798:26.524562",
       "properties": {
-        "alan_m2": 2555944,
+        "alan_m2": 2544243,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -30,10 +30,10 @@
         "saha_gorevi": false,
         "saha_oncul_gorev_id": null,
         "saha_oncul_son_tarih": null,
-        "sar_cevre_degisim_konservatif_db": 0.682,
-        "sar_cevre_degisim_tepe_db": 1.308,
+        "sar_cevre_degisim_konservatif_db": 1.015,
+        "sar_cevre_degisim_tepe_db": 1.324,
         "sar_kaynak_tipi": "BOLGESEL_RTC",
-        "sar_lokal_degisim_skor_db": 0.791,
+        "sar_lokal_degisim_skor_db": 0.533,
         "sar_mekansal_ayrim": "KARISIK_DUSUK_LOKALLIK",
         "sar_polarizasyon_uyumu": "CIFT_POL_ZAYIF",
         "temporal_durum": null,
@@ -127,7 +127,7 @@
       },
       "id": "cesme:38.213240:26.458281",
       "properties": {
-        "alan_m2": 9206080,
+        "alan_m2": 9202079,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -241,7 +241,7 @@
       },
       "id": "cesme:38.359314:26.310836",
       "properties": {
-        "alan_m2": 2798967,
+        "alan_m2": 2797367,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -279,7 +279,7 @@
       },
       "id": "cesme:38.385273:26.484381",
       "properties": {
-        "alan_m2": 1733766,
+        "alan_m2": 1732165,
         "alarm": false,
         "arka_plan": true,
         "bolge": "cesme",
@@ -659,7 +659,7 @@
       },
       "id": "uzunkuyu:38.202115:26.540042",
       "properties": {
-        "alan_m2": 10409430,
+        "alan_m2": 10353520,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -697,7 +697,7 @@
       },
       "id": "uzunkuyu:38.210165:26.464711",
       "properties": {
-        "alan_m2": 6672173,
+        "alan_m2": 6670973,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
@@ -887,7 +887,7 @@
       },
       "id": "uzunkuyu:38.366912:26.627509",
       "properties": {
-        "alan_m2": 5478163,
+        "alan_m2": 5476963,
         "alarm": false,
         "arka_plan": true,
         "bolge": "uzunkuyu",
