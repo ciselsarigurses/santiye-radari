@@ -1,15 +1,170 @@
 {
-  "rapor_tarihi": "2026-11-23",
-  "olusturma": "2026-11-23 22:58 +03",
+  "rapor_tarihi": "2026-11-24",
+  "olusturma": "2026-11-24 22:27 +03",
   "amac": "Diyagonal 800-10.000 m² yan-kümeleri yalnız yerini aldıkları normal şantiye-ölçeği adayından daha güçlü Sentinel kanıtı taşıyorsa, toplam 24 aday ve ölçek dağılımını değiştirmeden terfi ettirmek; ilk yan-küme için de güvenli karşılaştırma uygulamak ve mevcut sahneyi geriye dönük değiştirmemek.",
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
       "durum": "ok",
-      "latest_item": "S2A_T35SMC_20261114T090416_L2A",
-      "ham_aday": 1931,
-      "guvenli_diyagonal_yan_kume_havuzu": 105,
-      "erken_parsel_yan_kume": 55,
+      "latest_item": "S2A_T35SMC_20261124T090219_L2A",
+      "ham_aday": 1828,
+      "guvenli_diyagonal_yan_kume_havuzu": 107,
+      "erken_parsel_yan_kume": 59,
+      "mevcut_kota": 1,
+      "ham_mevcut_secili_yan_kume": 1,
+      "mevcut_secili_yan_kume": 1,
+      "simulasyon_kota": 2,
+      "simulasyon_secili_yan_kume": 2,
+      "son_secili_yan_kume": 2,
+      "toplam_aday_mevcut": 24,
+      "toplam_aday_simulasyon": 24,
+      "toplam_aday_son": 24,
+      "olcek_dagilimi_mevcut": {
+        "kucuk": 8,
+        "santiye_olcegi": 6,
+        "genis": 10
+      },
+      "olcek_dagilimi_simulasyon": {
+        "kucuk": 8,
+        "santiye_olcegi": 6,
+        "genis": 10
+      },
+      "olcek_dagilimi_son": {
+        "kucuk": 8,
+        "santiye_olcegi": 6,
+        "genis": 10
+      },
+      "ilk_yan_kume_karari": "ilk_yan_kume_terfi",
+      "ikinci_yan_kume_karari": "ikinci_yan_kume_terfi",
+      "uyarlamali_karar": "ikinci_yan_kume_terfi",
+      "sahne_politikasi": "yeni_sahne",
+      "uygulanan_karar": "ikinci_yan_kume_terfi",
+      "ilk_takas_eklenen": [
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.349998,
+          "boylam": 26.456907,
+          "alan_m2": 1200,
+          "guclu_sinyal_orani": 1.0,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        }
+      ],
+      "ilk_takas_cikarilan": [
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.332451,
+          "boylam": 26.386161,
+          "alan_m2": 800,
+          "guclu_sinyal_orani": 0.875,
+          "geometri_kaynagi": null
+        }
+      ],
+      "ikinci_takas_eklenen": [
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.363023,
+          "boylam": 26.475681,
+          "alan_m2": 2000,
+          "guclu_sinyal_orani": 1.0,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        }
+      ],
+      "ikinci_takas_cikarilan": [
+        {
+          "mahalle": "Şifne",
+          "enlem": 38.337697,
+          "boylam": 26.420161,
+          "alan_m2": 1000,
+          "guclu_sinyal_orani": 0.9,
+          "geometri_kaynagi": null
+        }
+      ],
+      "eklenen": [
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.349998,
+          "boylam": 26.456907,
+          "alan_m2": 1200,
+          "guclu_sinyal_orani": 1.0,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.363023,
+          "boylam": 26.475681,
+          "alan_m2": 2000,
+          "guclu_sinyal_orani": 1.0,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        }
+      ],
+      "cikarilan": [
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.332451,
+          "boylam": 26.386161,
+          "alan_m2": 800,
+          "guclu_sinyal_orani": 0.875,
+          "geometri_kaynagi": null
+        },
+        {
+          "mahalle": "Şifne",
+          "enlem": 38.337697,
+          "boylam": 26.420161,
+          "alan_m2": 1000,
+          "guclu_sinyal_orani": 0.9,
+          "geometri_kaynagi": null
+        }
+      ],
+      "en_guclu_yan_kumeler": [
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.349998,
+          "boylam": 26.456907,
+          "alan_m2": 1200,
+          "guclu_sinyal_orani": 1.0,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.363023,
+          "boylam": 26.475681,
+          "alan_m2": 2000,
+          "guclu_sinyal_orani": 1.0,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        },
+        {
+          "mahalle": "Reisdere",
+          "enlem": 38.319969,
+          "boylam": 26.404706,
+          "alan_m2": 1000,
+          "guclu_sinyal_orani": 0.7,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        },
+        {
+          "mahalle": "Reisdere",
+          "enlem": 38.31201,
+          "boylam": 26.395892,
+          "alan_m2": 1600,
+          "guclu_sinyal_orani": 0.375,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.425342,
+          "boylam": 26.459082,
+          "alan_m2": 8801,
+          "guclu_sinyal_orani": 0.375,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        }
+      ]
+    },
+    "uzunkuyu": {
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "durum": "ok",
+      "latest_item": "S2A_T35SMC_20261124T090219_L2A",
+      "ham_aday": 1241,
+      "guvenli_diyagonal_yan_kume_havuzu": 69,
+      "erken_parsel_yan_kume": 40,
       "mevcut_kota": 1,
       "ham_mevcut_secili_yan_kume": 1,
       "mevcut_secili_yan_kume": 0,
@@ -37,24 +192,24 @@
       "ilk_yan_kume_karari": "ilk_yan_kume_daha_guclu_degil",
       "ikinci_yan_kume_karari": "ilk_yan_kume_gecmedi",
       "uyarlamali_karar": "ilk_yan_kume_daha_guclu_degil",
-      "sahne_politikasi": "ayni_yeni_sahne_tekrar",
+      "sahne_politikasi": "yeni_sahne",
       "uygulanan_karar": "ilk_yan_kume_daha_guclu_degil",
       "ilk_takas_eklenen": [
         {
           "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.194879,
-          "boylam": 26.483122,
-          "alan_m2": 800,
+          "enlem": 38.349998,
+          "boylam": 26.456926,
+          "alan_m2": 1200,
           "guclu_sinyal_orani": 1.0,
           "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
         }
       ],
       "ilk_takas_cikarilan": [
         {
-          "mahalle": "Ovacık",
-          "enlem": 38.25964,
-          "boylam": 26.357428,
-          "alan_m2": 1500,
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.36845,
+          "boylam": 26.631401,
+          "alan_m2": 4401,
           "guclu_sinyal_orani": 1.0,
           "geometri_kaynagi": null
         }
@@ -66,181 +221,42 @@
       "en_guclu_yan_kumeler": [
         {
           "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.194879,
-          "boylam": 26.483122,
-          "alan_m2": 800,
+          "enlem": 38.349998,
+          "boylam": 26.456926,
+          "alan_m2": 1200,
           "guclu_sinyal_orani": 1.0,
           "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
         },
         {
-          "mahalle": "Ilıca",
-          "enlem": 38.312643,
-          "boylam": 26.350903,
-          "alan_m2": 3100,
-          "guclu_sinyal_orani": 0.9032,
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.363023,
+          "boylam": 26.616175,
+          "alan_m2": 1200,
+          "guclu_sinyal_orani": 1.0,
           "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
         },
         {
-          "mahalle": "Ovacık",
-          "enlem": 38.25358,
-          "boylam": 26.321025,
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.341677,
+          "boylam": 26.564084,
+          "alan_m2": 1600,
+          "guclu_sinyal_orani": 1.0,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        },
+        {
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.397755,
+          "boylam": 26.618235,
+          "alan_m2": 1600,
+          "guclu_sinyal_orani": 1.0,
+          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
+        },
+        {
+          "mahalle": "Ildır",
+          "enlem": 38.363023,
+          "boylam": 26.475702,
           "alan_m2": 2000,
-          "guclu_sinyal_orani": 0.85,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        },
-        {
-          "mahalle": "Ovacık",
-          "enlem": 38.261178,
-          "boylam": 26.356054,
-          "alan_m2": 4000,
-          "guclu_sinyal_orani": 0.775,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.236757,
-          "boylam": 26.45084,
-          "alan_m2": 3200,
-          "guclu_sinyal_orani": 0.7188,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        }
-      ]
-    },
-    "uzunkuyu": {
-      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "durum": "ok",
-      "latest_item": "S2A_T35SMC_20261114T090416_L2A",
-      "ham_aday": 1712,
-      "guvenli_diyagonal_yan_kume_havuzu": 56,
-      "erken_parsel_yan_kume": 29,
-      "mevcut_kota": 1,
-      "ham_mevcut_secili_yan_kume": 1,
-      "mevcut_secili_yan_kume": 1,
-      "simulasyon_kota": 2,
-      "simulasyon_secili_yan_kume": 2,
-      "son_secili_yan_kume": 1,
-      "toplam_aday_mevcut": 24,
-      "toplam_aday_simulasyon": 24,
-      "toplam_aday_son": 24,
-      "olcek_dagilimi_mevcut": {
-        "kucuk": 8,
-        "santiye_olcegi": 6,
-        "genis": 10
-      },
-      "olcek_dagilimi_simulasyon": {
-        "kucuk": 8,
-        "santiye_olcegi": 6,
-        "genis": 10
-      },
-      "olcek_dagilimi_son": {
-        "kucuk": 8,
-        "santiye_olcegi": 6,
-        "genis": 10
-      },
-      "ilk_yan_kume_karari": "ilk_yan_kume_terfi",
-      "ikinci_yan_kume_karari": "ikinci_yan_kume_daha_guclu_degil",
-      "uyarlamali_karar": "ikinci_yan_kume_daha_guclu_degil",
-      "sahne_politikasi": "ayni_yeni_sahne_tekrar",
-      "uygulanan_karar": "ikinci_yan_kume_daha_guclu_degil",
-      "ilk_takas_eklenen": [
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.189633,
-          "boylam": 26.561108,
-          "alan_m2": 800,
           "guclu_sinyal_orani": 1.0,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        }
-      ],
-      "ilk_takas_cikarilan": [
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.234676,
-          "boylam": 26.452347,
-          "alan_m2": 1200,
-          "guclu_sinyal_orani": 0.8333,
-          "geometri_kaynagi": null
-        }
-      ],
-      "ikinci_takas_eklenen": [
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.194879,
-          "boylam": 26.483029,
-          "alan_m2": 800,
-          "guclu_sinyal_orani": 0.875,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        }
-      ],
-      "ikinci_takas_cikarilan": [
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.225089,
-          "boylam": 26.460017,
-          "alan_m2": 1600,
-          "guclu_sinyal_orani": 0.875,
-          "geometri_kaynagi": null
-        }
-      ],
-      "eklenen": [
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.189633,
-          "boylam": 26.561108,
-          "alan_m2": 800,
-          "guclu_sinyal_orani": 1.0,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        }
-      ],
-      "cikarilan": [
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.234676,
-          "boylam": 26.452347,
-          "alan_m2": 1200,
-          "guclu_sinyal_orani": 0.8333,
-          "geometri_kaynagi": null
-        }
-      ],
-      "en_guclu_yan_kumeler": [
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.189633,
-          "boylam": 26.561108,
-          "alan_m2": 800,
-          "guclu_sinyal_orani": 1.0,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.194879,
-          "boylam": 26.483029,
-          "alan_m2": 800,
-          "guclu_sinyal_orani": 0.875,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.247791,
-          "boylam": 26.670097,
-          "alan_m2": 800,
-          "guclu_sinyal_orani": 0.75,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.236757,
-          "boylam": 26.450859,
-          "alan_m2": 3201,
-          "guclu_sinyal_orani": 0.7188,
-          "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
-        },
-        {
-          "mahalle": "Mevki doğrulanmadı",
-          "enlem": 38.274474,
-          "boylam": 26.461162,
-          "alan_m2": 1600,
-          "guclu_sinyal_orani": 0.6875,
           "geometri_kaynagi": "DIYAGONAL_YAN_KUME"
         }
       ]

@@ -1,6 +1,6 @@
 {
-  "rapor_tarihi": "2026-11-23",
-  "olusturma": "2026-11-23 23:00 +03",
+  "rapor_tarihi": "2026-11-24",
+  "olusturma": "2026-11-24 22:31 +03",
   "amac": "Üretim alarmını değiştirmeden 250 m²+ Sentinel kümelerinde uzun-ince ve düşük-kompaktlık geometrisini ölçmek; ham motor seçimini ve rebalance + dedupe sonrası gerçekten sahaya kalabilen nihai adayları ayrı izlemek.",
   "esikler": {
     "uzun_ince_min_uzun_kisa_orani": 5.0,
@@ -12,33 +12,33 @@
   "bolgeler": {
     "cesme": {
       "bolge": "Çeşme merkez · Alaçatı · Ilıca",
-      "son_item": "S2A_T35SMC_20261114T090416_L2A",
+      "son_item": "S2A_T35SMC_20261124T090219_L2A",
       "durum": "ok",
-      "latest_item": "S2A_T35SMC_20261114T090416_L2A",
-      "ham_gecerli_aday": 1826,
-      "diyagonal_yan_kume_geometri": 105,
+      "latest_item": "S2A_T35SMC_20261124T090219_L2A",
+      "ham_gecerli_aday": 1721,
+      "diyagonal_yan_kume_geometri": 107,
       "uretim_secimi": 24,
       "ham_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 69,
-          "uzun_ince": 1,
+          "toplam": 15,
+          "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 1452,
-          "uzun_ince": 1,
-          "dusuk_kompaktlik": 40
+          "toplam": 1443,
+          "uzun_ince": 4,
+          "dusuk_kompaktlik": 57
         },
         "genis_10000_ustu": {
-          "toplam": 305,
-          "uzun_ince": 0,
-          "dusuk_kompaktlik": 183
+          "toplam": 263,
+          "uzun_ince": 1,
+          "dusuk_kompaktlik": 173
         }
       },
       "uretim_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
           "toplam": 8,
-          "uzun_ince": 1,
+          "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
@@ -49,108 +49,108 @@
         "genis_10000_ustu": {
           "toplam": 16,
           "uzun_ince": 0,
-          "dusuk_kompaktlik": 16
+          "dusuk_kompaktlik": 15
         }
       },
-      "secili_genis_sekil_isaretli": 16,
+      "secili_genis_sekil_isaretli": 15,
       "secili_genis_sekil_ornekleri": [
         {
-          "enlem": 38.286051,
-          "boylam": 26.381468,
-          "alan_m2": 12365681,
+          "enlem": 38.289398,
+          "boylam": 26.383071,
+          "alan_m2": 10153470,
           "olcek": "genis_10000_ustu",
-          "piksel": 123645,
-          "satir_span": 637,
-          "sutun_span": 781,
-          "uzun_kisa_orani": 1.23,
-          "kutu_doluluk_orani": 0.249,
+          "piksel": 101525,
+          "satir_span": 658,
+          "sutun_span": 759,
+          "uzun_kisa_orani": 1.15,
+          "kutu_doluluk_orani": 0.203,
           "kompaktlik": 0.001,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.267961,
-          "boylam": 26.313927,
-          "alan_m2": 915888,
+          "enlem": 38.376409,
+          "boylam": 26.488388,
+          "alan_m2": 982794,
           "olcek": "genis_10000_ustu",
-          "piksel": 9158,
-          "satir_span": 198,
-          "sutun_span": 131,
-          "uzun_kisa_orani": 1.51,
-          "kutu_doluluk_orani": 0.353,
-          "kompaktlik": 0.01,
+          "piksel": 9827,
+          "satir_span": 188,
+          "sutun_span": 186,
+          "uzun_kisa_orani": 1.01,
+          "kutu_doluluk_orani": 0.281,
+          "kompaktlik": 0.013,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.243812,
-          "boylam": 26.315186,
-          "alan_m2": 795476,
+          "enlem": 38.35642,
+          "boylam": 26.46824,
+          "alan_m2": 848881,
           "olcek": "genis_10000_ustu",
-          "piksel": 7954,
-          "satir_span": 237,
-          "sutun_span": 246,
-          "uzun_kisa_orani": 1.04,
-          "kutu_doluluk_orani": 0.136,
-          "kompaktlik": 0.004,
+          "piksel": 8488,
+          "satir_span": 224,
+          "sutun_span": 262,
+          "uzun_kisa_orani": 1.17,
+          "kutu_doluluk_orani": 0.145,
+          "kompaktlik": 0.011,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.284242,
-          "boylam": 26.431265,
-          "alan_m2": 703767,
+          "enlem": 38.37867,
+          "boylam": 26.501896,
+          "alan_m2": 448643,
           "olcek": "genis_10000_ustu",
-          "piksel": 7037,
-          "satir_span": 235,
-          "sutun_span": 119,
-          "uzun_kisa_orani": 1.97,
-          "kutu_doluluk_orani": 0.252,
-          "kompaktlik": 0.008,
+          "piksel": 4486,
+          "satir_span": 79,
+          "sutun_span": 145,
+          "uzun_kisa_orani": 1.84,
+          "kutu_doluluk_orani": 0.392,
+          "kompaktlik": 0.033,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.312281,
-          "boylam": 26.46618,
-          "alan_m2": 482146,
+          "enlem": 38.311738,
+          "boylam": 26.510024,
+          "alan_m2": 381536,
           "olcek": "genis_10000_ustu",
-          "piksel": 4821,
-          "satir_span": 203,
-          "sutun_span": 92,
-          "uzun_kisa_orani": 2.21,
-          "kutu_doluluk_orani": 0.258,
-          "kompaktlik": 0.008,
+          "piksel": 3815,
+          "satir_span": 75,
+          "sutun_span": 130,
+          "uzun_kisa_orani": 1.73,
+          "kutu_doluluk_orani": 0.391,
+          "kompaktlik": 0.062,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.271579,
-          "boylam": 26.332587,
-          "alan_m2": 479146,
+          "enlem": 38.284332,
+          "boylam": 26.340028,
+          "alan_m2": 331832,
           "olcek": "genis_10000_ustu",
-          "piksel": 4791,
-          "satir_span": 124,
-          "sutun_span": 193,
-          "uzun_kisa_orani": 1.56,
-          "kutu_doluluk_orani": 0.2,
-          "kompaktlik": 0.01,
+          "piksel": 3318,
+          "satir_span": 118,
+          "sutun_span": 64,
+          "uzun_kisa_orani": 1.84,
+          "kutu_doluluk_orani": 0.439,
+          "kompaktlik": 0.05,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         }
       ],
-      "nihai_rapor_secimi": 22,
-      "nihai_rapor_eslesen_geometri": 22,
-      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
+      "nihai_rapor_secimi": 34,
+      "nihai_rapor_eslesen_geometri": 27,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 2,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 22,
-      "nihai_rapor_cozulemeyen_geometri": 0,
+      "nihai_rapor_cozulen_geometri": 27,
+      "nihai_rapor_cozulemeyen_geometri": 7,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 8,
-          "uzun_ince": 1,
+          "toplam": 12,
+          "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
@@ -159,15 +159,15 @@
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 8,
+          "toplam": 9,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
       },
       "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": {
         "kucuk_250_800": {
-          "toplam": 8,
-          "uzun_ince": 1,
+          "toplam": 12,
+          "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
@@ -176,7 +176,7 @@
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 8,
+          "toplam": 9,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
@@ -184,37 +184,92 @@
       "nihai_secili_genis_sekil_isaretli": 0,
       "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 0,
       "nihai_secili_genis_sekil_ornekleri": [],
-      "nihai_cozulemeyen_geometri_ornekleri": []
+      "nihai_cozulemeyen_geometri_ornekleri": [
+        {
+          "enlem": 38.22735,
+          "boylam": 26.478543,
+          "alan_m2": 79108,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 300.3,
+          "en_yakin_alan_benzerligi": 0.551
+        },
+        {
+          "enlem": 38.371796,
+          "boylam": 26.477627,
+          "alan_m2": 74107,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 846.3,
+          "en_yakin_alan_benzerligi": 0.02
+        },
+        {
+          "enlem": 38.365917,
+          "boylam": 26.479688,
+          "alan_m2": 48205,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 347.1,
+          "en_yakin_alan_benzerligi": 0.023
+        },
+        {
+          "enlem": 38.3746,
+          "boylam": 26.480947,
+          "alan_m2": 28603,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 424.3,
+          "en_yakin_alan_benzerligi": 0.052
+        },
+        {
+          "enlem": 38.263982,
+          "boylam": 26.439736,
+          "alan_m2": 2000,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 50.0,
+          "en_yakin_alan_benzerligi": 0.23
+        },
+        {
+          "enlem": 38.259278,
+          "boylam": 26.488159,
+          "alan_m2": 2000,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 268.8,
+          "en_yakin_alan_benzerligi": 0.5
+        }
+      ]
     },
     "uzunkuyu": {
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
-      "son_item": "S2A_T35SMC_20261114T090416_L2A",
+      "son_item": "S2A_T35SMC_20261124T090219_L2A",
       "durum": "ok",
-      "latest_item": "S2A_T35SMC_20261114T090416_L2A",
-      "ham_gecerli_aday": 1656,
-      "diyagonal_yan_kume_geometri": 56,
+      "latest_item": "S2A_T35SMC_20261124T090219_L2A",
+      "ham_gecerli_aday": 1172,
+      "diyagonal_yan_kume_geometri": 69,
       "uretim_secimi": 24,
       "ham_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 34,
-          "uzun_ince": 1,
+          "toplam": 27,
+          "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 1291,
-          "uzun_ince": 1,
-          "dusuk_kompaktlik": 41
+          "toplam": 887,
+          "uzun_ince": 3,
+          "dusuk_kompaktlik": 18
         },
         "genis_10000_ustu": {
-          "toplam": 331,
-          "uzun_ince": 0,
-          "dusuk_kompaktlik": 168
+          "toplam": 258,
+          "uzun_ince": 1,
+          "dusuk_kompaktlik": 138
         }
       },
       "uretim_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
           "toplam": 8,
-          "uzun_ince": 1,
+          "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
@@ -231,128 +286,128 @@
       "secili_genis_sekil_isaretli": 16,
       "secili_genis_sekil_ornekleri": [
         {
-          "enlem": 38.247701,
-          "boylam": 26.661053,
-          "alan_m2": 587603,
+          "enlem": 38.391605,
+          "boylam": 26.563168,
+          "alan_m2": 6806897,
           "olcek": "genis_10000_ustu",
-          "piksel": 5875,
-          "satir_span": 239,
-          "sutun_span": 100,
-          "uzun_kisa_orani": 2.39,
-          "kutu_doluluk_orani": 0.246,
-          "kompaktlik": 0.016,
+          "piksel": 68057,
+          "satir_span": 722,
+          "sutun_span": 480,
+          "uzun_kisa_orani": 1.5,
+          "kutu_doluluk_orani": 0.196,
+          "kompaktlik": 0.007,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.312281,
-          "boylam": 26.4662,
-          "alan_m2": 480384,
+          "enlem": 38.294372,
+          "boylam": 26.575189,
+          "alan_m2": 5534473,
           "olcek": "genis_10000_ustu",
-          "piksel": 4803,
-          "satir_span": 203,
-          "sutun_span": 92,
-          "uzun_kisa_orani": 2.21,
-          "kutu_doluluk_orani": 0.257,
-          "kompaktlik": 0.008,
-          "uzun_ince": false,
-          "dusuk_kompaktlik": true
-        },
-        {
-          "enlem": 38.185201,
-          "boylam": 26.561794,
-          "alan_m2": 320256,
-          "olcek": "genis_10000_ustu",
-          "piksel": 3202,
-          "satir_span": 117,
-          "sutun_span": 72,
-          "uzun_kisa_orani": 1.62,
-          "kutu_doluluk_orani": 0.38,
-          "kompaktlik": 0.037,
-          "uzun_ince": false,
-          "dusuk_kompaktlik": true
-        },
-        {
-          "enlem": 38.262896,
-          "boylam": 26.65842,
-          "alan_m2": 230340,
-          "olcek": "genis_10000_ustu",
-          "piksel": 2303,
-          "satir_span": 105,
-          "sutun_span": 63,
-          "uzun_kisa_orani": 1.67,
-          "kutu_doluluk_orani": 0.348,
-          "kompaktlik": 0.034,
-          "uzun_ince": false,
-          "dusuk_kompaktlik": true
-        },
-        {
-          "enlem": 38.260454,
-          "boylam": 26.671814,
-          "alan_m2": 194434,
-          "olcek": "genis_10000_ustu",
-          "piksel": 1944,
-          "satir_span": 88,
-          "sutun_span": 80,
+          "piksel": 55335,
+          "satir_span": 371,
+          "sutun_span": 409,
           "uzun_kisa_orani": 1.1,
-          "kutu_doluluk_orani": 0.276,
-          "kompaktlik": 0.039,
+          "kutu_doluluk_orani": 0.365,
+          "kompaktlik": 0.006,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         },
         {
-          "enlem": 38.189995,
-          "boylam": 26.573586,
-          "alan_m2": 190233,
+          "enlem": 38.329014,
+          "boylam": 26.538668,
+          "alan_m2": 4421777,
           "olcek": "genis_10000_ustu",
-          "piksel": 1902,
-          "satir_span": 77,
-          "sutun_span": 95,
-          "uzun_kisa_orani": 1.23,
-          "kutu_doluluk_orani": 0.26,
-          "kompaktlik": 0.038,
+          "piksel": 44210,
+          "satir_span": 458,
+          "sutun_span": 327,
+          "uzun_kisa_orani": 1.4,
+          "kutu_doluluk_orani": 0.295,
+          "kompaktlik": 0.01,
+          "uzun_ince": false,
+          "dusuk_kompaktlik": true
+        },
+        {
+          "enlem": 38.345476,
+          "boylam": 26.584806,
+          "alan_m2": 1826421,
+          "olcek": "genis_10000_ustu",
+          "piksel": 18261,
+          "satir_span": 336,
+          "sutun_span": 475,
+          "uzun_kisa_orani": 1.41,
+          "kutu_doluluk_orani": 0.114,
+          "kompaktlik": 0.011,
+          "uzun_ince": false,
+          "dusuk_kompaktlik": true
+        },
+        {
+          "enlem": 38.376409,
+          "boylam": 26.488295,
+          "alan_m2": 983073,
+          "olcek": "genis_10000_ustu",
+          "piksel": 9829,
+          "satir_span": 189,
+          "sutun_span": 185,
+          "uzun_kisa_orani": 1.02,
+          "kutu_doluluk_orani": 0.281,
+          "kompaktlik": 0.013,
+          "uzun_ince": false,
+          "dusuk_kompaktlik": true
+        },
+        {
+          "enlem": 38.275107,
+          "boylam": 26.568549,
+          "alan_m2": 900758,
+          "olcek": "genis_10000_ustu",
+          "piksel": 9006,
+          "satir_span": 136,
+          "sutun_span": 181,
+          "uzun_kisa_orani": 1.33,
+          "kutu_doluluk_orani": 0.366,
+          "kompaktlik": 0.041,
           "uzun_ince": false,
           "dusuk_kompaktlik": true
         }
       ],
-      "nihai_rapor_secimi": 21,
-      "nihai_rapor_eslesen_geometri": 21,
-      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 1,
+      "nihai_rapor_secimi": 34,
+      "nihai_rapor_eslesen_geometri": 25,
+      "nihai_rapor_diyagonal_yan_kume_eslesen_geometri": 0,
       "nihai_rapor_yaklasik_eslesen_geometri": 0,
-      "nihai_rapor_cozulen_geometri": 21,
-      "nihai_rapor_cozulemeyen_geometri": 0,
+      "nihai_rapor_cozulen_geometri": 25,
+      "nihai_rapor_cozulemeyen_geometri": 9,
       "nihai_rapor_yaklasik_esleme_esigi_m": 25,
       "nihai_rapor_yaklasik_min_alan_benzerligi": 0.6,
       "nihai_rapor_secimi_sekil_dagilimi": {
         "kucuk_250_800": {
-          "toplam": 6,
+          "toplam": 10,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 5,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 10,
+          "toplam": 9,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
       },
       "nihai_rapor_secimi_sekil_dagilimi_yaklasik_dahil": {
         "kucuk_250_800": {
-          "toplam": 6,
+          "toplam": 10,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "santiye_olcegi_800_10000": {
-          "toplam": 5,
+          "toplam": 6,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         },
         "genis_10000_ustu": {
-          "toplam": 10,
+          "toplam": 9,
           "uzun_ince": 0,
           "dusuk_kompaktlik": 0
         }
@@ -360,7 +415,62 @@
       "nihai_secili_genis_sekil_isaretli": 0,
       "nihai_secili_genis_sekil_isaretli_yaklasik_dahil": 0,
       "nihai_secili_genis_sekil_ornekleri": [],
-      "nihai_cozulemeyen_geometri_ornekleri": []
+      "nihai_cozulemeyen_geometri_ornekleri": [
+        {
+          "enlem": 38.262896,
+          "boylam": 26.65842,
+          "alan_m2": 230340,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 690.9,
+          "en_yakin_alan_benzerligi": 0.188
+        },
+        {
+          "enlem": 38.260454,
+          "boylam": 26.671814,
+          "alan_m2": 194434,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 897.4,
+          "en_yakin_alan_benzerligi": 0.022
+        },
+        {
+          "enlem": 38.322954,
+          "boylam": 26.615946,
+          "alan_m2": 164129,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 131.6,
+          "en_yakin_alan_benzerligi": 0.014
+        },
+        {
+          "enlem": 38.34231,
+          "boylam": 26.62396,
+          "alan_m2": 163329,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 1874.7,
+          "en_yakin_alan_benzerligi": 0.712
+        },
+        {
+          "enlem": 38.364289,
+          "boylam": 26.621441,
+          "alan_m2": 2000,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 241.9,
+          "en_yakin_alan_benzerligi": 0.6
+        },
+        {
+          "enlem": 38.256022,
+          "boylam": 26.48944,
+          "alan_m2": 2000,
+          "durum": "eslesmedi",
+          "geometri_kaynagi": null,
+          "en_yakin_mesafe_m": 156.3,
+          "en_yakin_alan_benzerligi": 0.172
+        }
+      ]
     }
   }
 }
