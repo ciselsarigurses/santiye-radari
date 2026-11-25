@@ -11,9 +11,9 @@
   "tekil_aday": 250,
   "ortusme_tekrari_elendi": 35,
   "genis_hareket_kumesi_arka_plana_alindi": 57,
-  "ana_250plus_adaya_yakin_arka_plana_alindi": 19,
-  "250plus_yakinlik_referans_toplam_saha_adayi": 547,
-  "250plus_yakinlik_referans_guncel_sentinel": 68,
+  "ana_250plus_adaya_yakin_arka_plana_alindi": 21,
+  "250plus_yakinlik_referans_toplam_saha_adayi": 552,
+  "250plus_yakinlik_referans_guncel_sentinel": 73,
   "250plus_yakinlik_referans_dislanan_eski_veya_250alti": 479,
   "yakinlik_referans_sentinel_tarihleri": [
     "24.11.2026"
