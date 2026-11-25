@@ -1,5 +1,5 @@
 {
-  "olusturma": "2026-11-24 22:39 +0300",
+  "olusturma": "2026-11-25 21:46 +0300",
   "alarm": false,
   "saha_gorevi": false,
   "ana_uretim_esigi_m2": 250,
@@ -11,7 +11,7 @@
   "ana_adaya_yakinlik_yaricapi_m": 150,
   "ham_mikro": 285,
   "tekil_mikro": 250,
-  "guncel_250plus_referans": 68,
+  "guncel_250plus_referans": 73,
   "temporal_probe_girdi": 8,
   "amac": "Ana 250 m²+ adaya yakınlık nedeniyle kısa listeden bastırılan fakat geniş-yüzey kümesi olmayan ve spektral kapıyı geçen 150-249 m² parçaların temporal kanıtını kaybetmeden, yalnız diagnostik olarak izlemek.",
   "uyari": "Temporal destek, bu parçanın ana 250 m²+ adaydan bağımsız ikinci bir şantiye olduğunu kanıtlamaz. Alarm/görev üretmez; ayrı fırsat için bağımsız lokal/geometrik veya güvenilir ek yapılaşma kanıtı gerekir.",
