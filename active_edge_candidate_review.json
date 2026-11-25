@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-11-24",
+  "rapor_tarihi": "2026-11-25",
   "amac": "Güncel 250 m²+ ana Sentinel adaylarının bağlı bileşeninin analiz bbox kenarına değip değmediğini ölçerek alan/merkez koordinatı kırpma riskini görünür kılmak.",
   "politika": "DIAGNOSTIK_ONLY: 250 m² ana eşik, alarm ve saha görevi değişmez. Kenar teması bbox genişletme/yeniden ölçüm kanıtıdır; tek başına yeni alarm değildir.",
   "ana_uretim_esigi_m2": 250,
@@ -10,7 +10,7 @@
   "kenar_yakin_esigi_piksel": 2,
   "alarm": false,
   "saha_gorevi": false,
-  "olculen_aday": 50,
+  "olculen_aday": 55,
   "kenara_temas_eden_aday": 3,
   "kenara_yakin_aday": 3,
   "dikkat_gerekiyor": true,
@@ -27,7 +27,7 @@
       "onceki_item": "S2A_T35SMC_20261114T090416_L2A",
       "son_item": "S2A_T35SMC_20261124T090219_L2A",
       "son_tarih": "24.11.2026",
-      "olculen_aday": 25,
+      "olculen_aday": 26,
       "kenara_temas_eden": 2,
       "kenara_yakin": 2,
       "adaylar": [
@@ -143,7 +143,7 @@
         },
         {
           "gorev_id": "UFE2FDDC58B",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Ildır",
           "enlem": 38.372339,
           "boylam": 26.487472,
@@ -209,7 +209,7 @@
         },
         {
           "gorev_id": "U253C478EEC",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.358229,
           "boylam": 26.462059,
@@ -231,7 +231,7 @@
         },
         {
           "gorev_id": "U0F26A65012",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.356601,
           "boylam": 26.461715,
@@ -253,7 +253,7 @@
         },
         {
           "gorev_id": "UE8B358420D",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.356058,
           "boylam": 26.460799,
@@ -275,7 +275,7 @@
         },
         {
           "gorev_id": "U17ED814571",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.356239,
           "boylam": 26.460342,
@@ -473,7 +473,7 @@
         },
         {
           "gorev_id": "U6097DE3C3D",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.281257,
           "boylam": 26.308089,
@@ -538,6 +538,28 @@
           "kenara_yakin": false
         },
         {
+          "gorev_id": "U05D87733E6",
+          "oncelik": "ERKEN",
+          "mahalle": "Reisdere",
+          "enlem": 38.316804,
+          "boylam": 26.416383,
+          "alan_m2": 600,
+          "bilesen_alan_m2": 600,
+          "bilesen_piksel": 6,
+          "alan_benzerligi": 1.0,
+          "kenar_mesafeleri_piksel": {
+            "kuzey": 1250,
+            "guney": 1511,
+            "bati": 1714,
+            "dogu": 991
+          },
+          "en_yakin_kenar": "dogu",
+          "en_yakin_kenar_piksel": 991,
+          "en_yakin_kenar_m": 9910.1,
+          "kenara_temas": false,
+          "kenara_yakin": false
+        },
+        {
           "gorev_id": "U623FEC7B31",
           "oncelik": "YÜKSEK",
           "mahalle": "Alaçatı",
@@ -594,34 +616,6 @@
           "neden": "postprocess_veya_yan_kume_birebir_kenar_olcumu_yapilmadi"
         },
         {
-          "gorev_id": "UD2E7D127F8",
-          "enlem": 38.22735,
-          "boylam": 26.478543,
-          "alan_m2": 79108,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
-          "gorev_id": "U3EE720E6BE",
-          "enlem": 38.371796,
-          "boylam": 26.477627,
-          "alan_m2": 74107,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
-          "gorev_id": "U10CE1B4DD0",
-          "enlem": 38.365917,
-          "boylam": 26.479688,
-          "alan_m2": 48205,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
-          "gorev_id": "U35C99F1B94",
-          "enlem": 38.3746,
-          "boylam": 26.480947,
-          "alan_m2": 28603,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
           "gorev_id": "U5D8FEEAF84",
           "enlem": 38.363023,
           "boylam": 26.475681,
@@ -632,9 +626,9 @@
           "neden": "postprocess_veya_yan_kume_birebir_kenar_olcumu_yapilmadi"
         },
         {
-          "gorev_id": "UBA01A43973",
-          "enlem": 38.263982,
-          "boylam": 26.439736,
+          "gorev_id": "U65EEF58CC8",
+          "enlem": 38.252133,
+          "boylam": 26.472934,
           "alan_m2": 2000,
           "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
         },
@@ -646,10 +640,38 @@
           "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
         },
         {
-          "gorev_id": "U65EEF58CC8",
-          "enlem": 38.252133,
-          "boylam": 26.472934,
+          "gorev_id": "UBA01A43973",
+          "enlem": 38.263982,
+          "boylam": 26.439736,
           "alan_m2": 2000,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U35C99F1B94",
+          "enlem": 38.3746,
+          "boylam": 26.480947,
+          "alan_m2": 28603,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U10CE1B4DD0",
+          "enlem": 38.365917,
+          "boylam": 26.479688,
+          "alan_m2": 48205,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U3EE720E6BE",
+          "enlem": 38.371796,
+          "boylam": 26.477627,
+          "alan_m2": 74107,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "UD2E7D127F8",
+          "enlem": 38.22735,
+          "boylam": 26.478543,
+          "alan_m2": 79108,
           "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
         }
       ]
@@ -665,7 +687,7 @@
       "onceki_item": "S2A_T35SMC_20261114T090416_L2A",
       "son_item": "S2A_T35SMC_20261124T090219_L2A",
       "son_tarih": "24.11.2026",
-      "olculen_aday": 25,
+      "olculen_aday": 29,
       "kenara_temas_eden": 1,
       "kenara_yakin": 1,
       "adaylar": [
@@ -736,6 +758,50 @@
           "kenara_yakin": false
         },
         {
+          "gorev_id": "U9D303E5297",
+          "oncelik": "ERKEN",
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.243812,
+          "boylam": 26.674562,
+          "alan_m2": 400,
+          "bilesen_alan_m2": 400,
+          "bilesen_piksel": 4,
+          "alan_benzerligi": 1.0,
+          "kenar_mesafeleri_piksel": {
+            "kuzey": 2058,
+            "guney": 704,
+            "bati": 1961,
+            "dogu": 46
+          },
+          "en_yakin_kenar": "dogu",
+          "en_yakin_kenar_piksel": 46,
+          "en_yakin_kenar_m": 460.0,
+          "kenara_temas": false,
+          "kenara_yakin": false
+        },
+        {
+          "gorev_id": "UCBF6DCC39D",
+          "oncelik": "ERKEN",
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.425342,
+          "boylam": 26.533517,
+          "alan_m2": 500,
+          "bilesen_alan_m2": 500,
+          "bilesen_piksel": 5,
+          "alan_benzerligi": 1.0,
+          "kenar_mesafeleri_piksel": {
+            "kuzey": 50,
+            "guney": 2711,
+            "bati": 729,
+            "dogu": 1278
+          },
+          "en_yakin_kenar": "kuzey",
+          "en_yakin_kenar_piksel": 50,
+          "en_yakin_kenar_m": 500.0,
+          "kenara_temas": false,
+          "kenara_yakin": false
+        },
+        {
           "gorev_id": "UC4C3B93DC3",
           "oncelik": "YÜKSEK",
           "mahalle": "Mevki doğrulanmadı",
@@ -781,7 +847,7 @@
         },
         {
           "gorev_id": "UE96A2A2648",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.423262,
           "boylam": 26.54714,
@@ -956,8 +1022,30 @@
           "kenara_yakin": false
         },
         {
-          "gorev_id": "U6E5D2D5AEC",
+          "gorev_id": "UD12052B3EC",
           "oncelik": "ERKEN",
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.241369,
+          "boylam": 26.504323,
+          "alan_m2": 400,
+          "bilesen_alan_m2": 400,
+          "bilesen_piksel": 4,
+          "alan_benzerligi": 1.0,
+          "kenar_mesafeleri_piksel": {
+            "kuzey": 2085,
+            "guney": 677,
+            "bati": 474,
+            "dogu": 1533
+          },
+          "en_yakin_kenar": "bati",
+          "en_yakin_kenar_piksel": 474,
+          "en_yakin_kenar_m": 4740.4,
+          "kenara_temas": false,
+          "kenara_yakin": false
+        },
+        {
+          "gorev_id": "U6E5D2D5AEC",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.381113,
           "boylam": 26.618579,
@@ -1023,7 +1111,7 @@
         },
         {
           "gorev_id": "U6E18A0F86D",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.374781,
           "boylam": 26.559963,
@@ -1045,7 +1133,7 @@
         },
         {
           "gorev_id": "UE3831098D2",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.372701,
           "boylam": 26.577593,
@@ -1067,7 +1155,7 @@
         },
         {
           "gorev_id": "U95FF6C4762",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.367997,
           "boylam": 26.560993,
@@ -1133,7 +1221,7 @@
         },
         {
           "gorev_id": "UBEB06F241F",
-          "oncelik": "ERKEN",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.323587,
           "boylam": 26.554582,
@@ -1198,8 +1286,30 @@
           "kenara_yakin": false
         },
         {
-          "gorev_id": "U401A80D705",
+          "gorev_id": "U38DFF179C8",
           "oncelik": "ERKEN",
+          "mahalle": "Mevki doğrulanmadı",
+          "enlem": 38.344662,
+          "boylam": 26.558589,
+          "alan_m2": 600,
+          "bilesen_alan_m2": 600,
+          "bilesen_piksel": 6,
+          "alan_benzerligi": 1.0,
+          "kenar_mesafeleri_piksel": {
+            "kuzey": 942,
+            "guney": 1820,
+            "bati": 947,
+            "dogu": 1059
+          },
+          "en_yakin_kenar": "kuzey",
+          "en_yakin_kenar_piksel": 942,
+          "en_yakin_kenar_m": 9420.9,
+          "kenara_temas": false,
+          "kenara_yakin": false
+        },
+        {
+          "gorev_id": "U401A80D705",
+          "oncelik": "BEKLEYEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.343848,
           "boylam": 26.56065,
@@ -1222,51 +1332,9 @@
       ],
       "eslesmeyenler": [
         {
-          "gorev_id": "U77266E25C3",
-          "enlem": 38.262896,
-          "boylam": 26.65842,
-          "alan_m2": 230340,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
-          "gorev_id": "U5EA9897F0C",
-          "enlem": 38.260454,
-          "boylam": 26.671814,
-          "alan_m2": 194434,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
-          "gorev_id": "U9121DAC12A",
-          "enlem": 38.322954,
-          "boylam": 26.615946,
-          "alan_m2": 164129,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
-          "gorev_id": "U673784BD8F",
-          "enlem": 38.34231,
-          "boylam": 26.62396,
-          "alan_m2": 163329,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
-          "gorev_id": "U2A060868FE",
-          "enlem": 38.364289,
-          "boylam": 26.621441,
-          "alan_m2": 2000,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
-          "gorev_id": "U88F3BC399D",
-          "enlem": 38.256022,
-          "boylam": 26.48944,
-          "alan_m2": 2000,
-          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
-        },
-        {
-          "gorev_id": "U120CBF80F6",
-          "enlem": 38.250052,
-          "boylam": 26.636324,
+          "gorev_id": "U35C39BB822",
+          "enlem": 38.19117,
+          "boylam": 26.517603,
           "alan_m2": 2000,
           "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
         },
@@ -1278,10 +1346,52 @@
           "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
         },
         {
-          "gorev_id": "U35C39BB822",
-          "enlem": 38.19117,
-          "boylam": 26.517603,
+          "gorev_id": "U120CBF80F6",
+          "enlem": 38.250052,
+          "boylam": 26.636324,
           "alan_m2": 2000,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U88F3BC399D",
+          "enlem": 38.256022,
+          "boylam": 26.48944,
+          "alan_m2": 2000,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U2A060868FE",
+          "enlem": 38.364289,
+          "boylam": 26.621441,
+          "alan_m2": 2000,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U673784BD8F",
+          "enlem": 38.34231,
+          "boylam": 26.62396,
+          "alan_m2": 163329,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U9121DAC12A",
+          "enlem": 38.322954,
+          "boylam": 26.615946,
+          "alan_m2": 164129,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U5EA9897F0C",
+          "enlem": 38.260454,
+          "boylam": 26.671814,
+          "alan_m2": 194434,
+          "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U77266E25C3",
+          "enlem": 38.262896,
+          "boylam": 26.65842,
+          "alan_m2": 230340,
           "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
         }
       ]
