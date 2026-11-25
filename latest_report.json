@@ -34,7 +34,10 @@
       "takip_baslangic_sahne": "08.09.2026",
       "takip_kayit_zamani": "2026-09-10 17:06 UTC",
       "takip_yeni_hareket": false,
-      "takip_operasyon_durumu": "DOGRULANDI_ARKA_PLAN_TAKIP"
+      "takip_operasyon_durumu": "DOGRULANDI_ARKA_PLAN_TAKIP",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "ERKEN",
@@ -78,7 +81,7 @@
       "tarim_baglam_alani_m2": 700,
       "tarim_baglam_orani": 1.0,
       "tarim_riski_nedeni": null,
-      "rota_uygun": true,
+      "rota_uygun": false,
       "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
       "onceki_tarih": "14.11.2026",
       "son_tarih": "24.11.2026",
@@ -92,7 +95,9 @@
       "gecikmis": false,
       "uydu_kanit_yasi_gun": 1,
       "uydu_onceligi": "ORTA",
-      "erken_hafriyat": true
+      "erken_hafriyat": true,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "ERKEN",
@@ -658,7 +663,10 @@
       "firma": null,
       "proje": null,
       "mahalle_kaynagi": "KOORDINAT_YAKIN_MERKEZ",
-      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir."
+      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -687,7 +695,10 @@
       "firma": null,
       "proje": null,
       "mahalle_kaynagi": "KOORDINAT_YAKIN_MERKEZ",
-      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir."
+      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -714,7 +725,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -851,7 +865,10 @@
       "firma": null,
       "proje": null,
       "mahalle_kaynagi": "KOORDINAT_YAKIN_MERKEZ",
-      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir."
+      "mahalle_notu": "Operasyonel yakın-merkez etiketi; idari/kadastral sınır veya ada/parsel değildir.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -2880,7 +2897,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -3474,7 +3494,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -4716,7 +4739,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -4932,7 +4958,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -5013,7 +5042,14 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "mevcut_musteri": true,
+      "mevcut_musteri_kayit_id": "OP-20260916-OVACIK-001",
+      "mevcut_musteri_mesafe_m": 0.0,
+      "mevcut_musteri_notu": "Kullanıcı Apple Maps ile paylaştığı ve radarın Ovacık'ta yakaladığı sahayı mevcut müşteri olarak doğruladı; sinyal gerçek yapılaşma/şantiye referansıdır fakat yeni müşteri saha kontrolü gerektirmez.",
+      "model_kalibrasyon_sinifi": "POZITIF_SANTIYE",
+      "operasyon_odak_notu": "Konum mevcut müşteri sahası olarak doğrulandı; gerçek şantiye sinyali kalibrasyonda korunuyor fakat yeni müşteri kontrol rotasına alınmıyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -6525,7 +6561,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -7551,7 +7590,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -7983,7 +8025,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -8226,7 +8271,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -8496,7 +8544,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -10062,7 +10113,10 @@
       "ada": null,
       "parsel": null,
       "firma": null,
-      "proje": null
+      "proje": null,
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "GECİKEN",
@@ -15438,7 +15492,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "BEKLEYEN",
@@ -15469,7 +15526,10 @@
       "boyut_sinifi": "STANDART",
       "tarihsel_esleme_mesafe_m": 0.0,
       "uydu_onceligi": "YÜKSEK",
-      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi."
+      "oncelik_nedeni": "Son analiz kümesinde tekrar görünmedi; saha görevi açık kaldığı için son güvenilir uydu ölçüsü korunuyor. Çok geniş bitişik zemin/yüzey değişimi.",
+      "rota_uygun": false,
+      "operasyon_odak_disinda": true,
+      "operasyon_odak_notu": "Gülbahçe mevcut operasyon odağında günlük ekip rotasına alınmıyor; kayıt silinmeden arka planda izleniyor."
     },
     {
       "oncelik": "BEKLEYEN",
@@ -15537,8 +15597,99 @@
   "yeni_internet_bulgulari": [],
   "oncelikli_internet_firsatlari": [],
   "uyari": "Uydu koordinatları yaklaşık değişim merkezidir. Kesin adres/ada-parsel olarak kullanılmamalı; saha kontrolüyle doğrulanmalıdır.",
-  "gunun_ilk_3_kontrolu": [],
-  "gunun_ilk_3_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur.",
+  "gunun_ilk_3_kontrolu": [
+    {
+      "oncelik": "ERKEN",
+      "oncelik_nedeni": "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali ve uydu kanıtı en fazla 2 günlük. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "mahalle": "Musalla",
+      "enlem": 38.304774,
+      "boylam": 26.299847,
+      "alan_m2": 700,
+      "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "KUCUK",
+      "tarim_riski": false,
+      "tarim_baglam_alani_m2": 700,
+      "tarim_baglam_orani": 1.0,
+      "tarim_riski_nedeni": null,
+      "rota_uygun": true,
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "14.11.2026",
+      "son_tarih": "24.11.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.304774,26.299847",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "UD854C79782",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-11-24",
+      "bekleme_gun": 1,
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 1,
+      "uydu_onceligi": "ORTA",
+      "erken_hafriyat": true,
+      "gunluk_sira": 1
+    },
+    {
+      "oncelik": "ERKEN",
+      "oncelik_nedeni": "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali ve uydu kanıtı en fazla 2 günlük. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "mahalle": "Mevki doğrulanmadı",
+      "enlem": 38.266243,
+      "boylam": 26.30248,
+      "alan_m2": 600,
+      "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "KUCUK",
+      "tarim_riski": false,
+      "tarim_baglam_alani_m2": 1100,
+      "tarim_baglam_orani": 1.83,
+      "tarim_riski_nedeni": null,
+      "rota_uygun": true,
+      "bolge": "Çeşme merkez · Alaçatı · Ilıca",
+      "onceki_tarih": "14.11.2026",
+      "son_tarih": "24.11.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.266243,26.302480",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U7F1131E684",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-11-24",
+      "bekleme_gun": 1,
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 1,
+      "uydu_onceligi": "ORTA",
+      "erken_hafriyat": true,
+      "gunluk_sira": 2
+    },
+    {
+      "oncelik": "ERKEN",
+      "oncelik_nedeni": "Erken hafriyat hedefi: 250–800 m² güçlü küçük-saha sinyali ve uydu kanıtı en fazla 2 günlük. Küçük alan; daha sert çoklu-spektral uydu filtresini geçti.",
+      "mahalle": "Germiyan",
+      "enlem": 38.300342,
+      "boylam": 26.517145,
+      "alan_m2": 400,
+      "sinyal": "Küçük, güçlü yüzey/toprak değişimi adayı",
+      "boyut_sinifi": "KUCUK",
+      "tarim_riski": false,
+      "tarim_baglam_alani_m2": 1000,
+      "tarim_baglam_orani": 2.5,
+      "tarim_riski_nedeni": null,
+      "rota_uygun": true,
+      "bolge": "Uzunkuyu · Germiyan · Ildır · Gülbahçe",
+      "onceki_tarih": "14.11.2026",
+      "son_tarih": "24.11.2026",
+      "yeni_goruntu": false,
+      "harita": "https://www.google.com/maps/dir/?api=1&destination=38.300342,26.517145",
+      "konum_notu": "Uydu değişim kümesinin yaklaşık merkezidir; kesin adres veya parsel değildir.",
+      "gorev_id": "U1D63611567",
+      "saha_durumu": "KONTROLE_GIT",
+      "ilk_gorulme": "2026-11-24",
+      "bekleme_gun": 1,
+      "gecikmis": false,
+      "uydu_kanit_yasi_gun": 1,
+      "uydu_onceligi": "ORTA",
+      "erken_hafriyat": true,
+      "gunluk_sira": 3
+    }
+  ],
+  "gunun_ilk_3_notu": "Yeni alarm üretmez; taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar. Gecikenlerde küçük-güçlü ve 800–2.000 m² parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir; bölge dengesi daha yüksek öncelikli adayı düşürmez.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -15699,5 +15850,225 @@
       "saha_gorevi": false,
       "aciklama": "Aynı günlük rapor yeniden işlendiğinde daha önce arka plana ayrılmış geniş-yüzey diagnostik kayıtları sessizce düşürülmez."
     }
-  }
+  },
+  "ana_saha_geri_bildirim_bastirilan": [],
+  "ana_saha_geri_bildirim_bastirilan_sayi": 0,
+  "ana_saha_geri_bildirim_notu": "Doğrulanmış negatif saha sonuçları aynı/eski Sentinel kanıtında günlük rota uygunluğunu kapatır; mevcut müşteriler pozitif şantiye referansı olarak korunur fakat müşteri statüsü değişmedikçe yeni-müşteri rotasına alınmaz. Alarm/görev silinmez.",
+  "kor_alan_saha_devriyesi": [],
+  "operasyon_odak_disinda_devriye": [],
+  "operasyon_odak_disinda_devriye_sayi": 0,
+  "operasyon_odak_arka_plan": [
+    {
+      "gorev_id": "UEC44340AEC",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.331547,
+      "boylam": 26.644338,
+      "alan_m2": 0,
+      "saha_durumu": "TEKRAR_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U180217381B",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.332813,
+      "boylam": 26.677424,
+      "alan_m2": 700,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U1CA0ACAC42",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.33219,
+      "boylam": 26.652385,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U323433E687",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.334541,
+      "boylam": 26.651698,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U01296BD121",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.332994,
+      "boylam": 26.652237,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U297CD118A9",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.313469,
+      "boylam": 26.638073,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "UC0BF966F07",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.319607,
+      "boylam": 26.617445,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U4806506FC1",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.314452,
+      "boylam": 26.640789,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U75654E26C3",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.333446,
+      "boylam": 26.651665,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U135C9ACAE2",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.331094,
+      "boylam": 26.63724,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "UA65167A849",
+      "mahalle": "Ovacık",
+      "enlem": 38.271217,
+      "boylam": 26.338883,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": false,
+      "mevcut_musteri": true,
+      "mevcut_musteri_kayit_id": "OP-20260916-OVACIK-001"
+    },
+    {
+      "gorev_id": "UA8AA1A294C",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.334351,
+      "boylam": 26.650749,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "UE359B543C3",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.345476,
+      "boylam": 26.626936,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U4EE0228F82",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.328291,
+      "boylam": 26.65613,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U0AD74FEC40",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.320693,
+      "boylam": 26.615602,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U28FE492723",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.323406,
+      "boylam": 26.636439,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U43E102CA0B",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.32006,
+      "boylam": 26.65384,
+      "alan_m2": 0,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U673784BD8F",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.34231,
+      "boylam": 26.62396,
+      "alan_m2": 163329,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    },
+    {
+      "gorev_id": "U9121DAC12A",
+      "mahalle": "Gülbahçe",
+      "enlem": 38.322954,
+      "boylam": 26.615946,
+      "alan_m2": 164129,
+      "saha_durumu": "KONTROLE_GIT",
+      "operasyon_odak_disinda": true,
+      "mevcut_musteri": false,
+      "mevcut_musteri_kayit_id": null
+    }
+  ],
+  "operasyon_odak_arka_plan_sayi": 19,
+  "mevcut_musteri_arka_plan_sayi": 1,
+  "operasyon_odak_notu": "Günlük rota Çeşme yarımadası–Uzunkuyu odağındadır. Açıkça Gülbahçe etiketli adaylar ve doğrulanmış mevcut müşteri sahaları günlük yeni-müşteri rotasının dışında tutulur. Açık Gülbahçe kör-alan devriyeleri diagnostik arka planda korunur fakat saha rotasına girmez. Mevcut müşteri sinyali yanlış pozitif sayılmaz; model kalibrasyonunda gerçek şantiye olarak korunur. Doğrulanmamış mevki veya Gülbahçe kelimesi geçen karma doğu-bölgesi etiketi coğrafi tahminle elenmez."
 }
