@@ -1,5 +1,5 @@
 {
-  "rapor_tarihi": "2026-11-25",
+  "rapor_tarihi": "2026-11-26",
   "amac": "Güncel 250 m²+ ana Sentinel adaylarının bağlı bileşeninin analiz bbox kenarına değip değmediğini ölçerek alan/merkez koordinatı kırpma riskini görünür kılmak.",
   "politika": "DIAGNOSTIK_ONLY: 250 m² ana eşik, alarm ve saha görevi değişmez. Kenar teması bbox genişletme/yeniden ölçüm kanıtıdır; tek başına yeni alarm değildir.",
   "ana_uretim_esigi_m2": 250,
@@ -33,7 +33,7 @@
       "adaylar": [
         {
           "gorev_id": "U48FBF70B67",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Germiyan",
           "enlem": 38.334984,
           "boylam": 26.525936,
@@ -55,7 +55,7 @@
         },
         {
           "gorev_id": "UD2DB6819D4",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Germiyan",
           "enlem": 38.32214,
           "boylam": 26.528798,
@@ -121,7 +121,7 @@
         },
         {
           "gorev_id": "U8061952231",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Çiftlikköy",
           "enlem": 38.282795,
           "boylam": 26.255888,
@@ -143,7 +143,7 @@
         },
         {
           "gorev_id": "UFE2FDDC58B",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Ildır",
           "enlem": 38.372339,
           "boylam": 26.487472,
@@ -165,7 +165,7 @@
         },
         {
           "gorev_id": "U37476CDB05",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.229702,
           "boylam": 26.48026,
@@ -209,7 +209,7 @@
         },
         {
           "gorev_id": "U253C478EEC",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.358229,
           "boylam": 26.462059,
@@ -231,7 +231,7 @@
         },
         {
           "gorev_id": "U0F26A65012",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.356601,
           "boylam": 26.461715,
@@ -253,7 +253,7 @@
         },
         {
           "gorev_id": "UE8B358420D",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.356058,
           "boylam": 26.460799,
@@ -275,7 +275,7 @@
         },
         {
           "gorev_id": "U17ED814571",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.356239,
           "boylam": 26.460342,
@@ -297,7 +297,7 @@
         },
         {
           "gorev_id": "U661DADCF18",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.352983,
           "boylam": 26.454389,
@@ -319,7 +319,7 @@
         },
         {
           "gorev_id": "U87F7757759",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.366731,
           "boylam": 26.452099,
@@ -341,7 +341,7 @@
         },
         {
           "gorev_id": "U8CAD388004",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Şifne",
           "enlem": 38.348732,
           "boylam": 26.452557,
@@ -363,7 +363,7 @@
         },
         {
           "gorev_id": "UD854C79782",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Musalla",
           "enlem": 38.304774,
           "boylam": 26.299847,
@@ -385,7 +385,7 @@
         },
         {
           "gorev_id": "U20A75EB76E",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Şifne",
           "enlem": 38.347013,
           "boylam": 26.447406,
@@ -429,7 +429,7 @@
         },
         {
           "gorev_id": "U7F1131E684",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.266243,
           "boylam": 26.30248,
@@ -473,7 +473,7 @@
         },
         {
           "gorev_id": "U6097DE3C3D",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.281257,
           "boylam": 26.308089,
@@ -495,7 +495,7 @@
         },
         {
           "gorev_id": "U35BF8F45C0",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Ovacık",
           "enlem": 38.27782,
           "boylam": 26.332816,
@@ -517,7 +517,7 @@
         },
         {
           "gorev_id": "U23C045E7B6",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.338783,
           "boylam": 26.39406,
@@ -561,7 +561,7 @@
         },
         {
           "gorev_id": "U623FEC7B31",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Alaçatı",
           "enlem": 38.274112,
           "boylam": 26.380552,
@@ -583,7 +583,7 @@
         },
         {
           "gorev_id": "U50BC1FBD18",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Alaçatı",
           "enlem": 38.27384,
           "boylam": 26.367387,
@@ -605,16 +605,6 @@
         }
       ],
       "eslesmeyenler": [
-        {
-          "gorev_id": "U2D83E768F3",
-          "enlem": 38.349998,
-          "boylam": 26.456907,
-          "rapor_alan_m2": 1200,
-          "bilesen_alan_m2": 848881,
-          "alan_benzerligi": 0.001,
-          "mevcut_geometrik_fark_m": 1217.8,
-          "neden": "postprocess_veya_yan_kume_birebir_kenar_olcumu_yapilmadi"
-        },
         {
           "gorev_id": "U5D8FEEAF84",
           "enlem": 38.363023,
@@ -673,6 +663,16 @@
           "boylam": 26.478543,
           "alan_m2": 79108,
           "neden": "rapor_noktasi_guncel_uretim_bilesenine_eslesmedi"
+        },
+        {
+          "gorev_id": "U2D83E768F3",
+          "enlem": 38.349998,
+          "boylam": 26.456907,
+          "rapor_alan_m2": 1200,
+          "bilesen_alan_m2": 848881,
+          "alan_benzerligi": 0.001,
+          "mevcut_geometrik_fark_m": 1217.8,
+          "neden": "postprocess_veya_yan_kume_birebir_kenar_olcumu_yapilmadi"
         }
       ]
     },
@@ -693,7 +693,7 @@
       "adaylar": [
         {
           "gorev_id": "UD78016767A",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.239199,
           "boylam": 26.677653,
@@ -715,7 +715,7 @@
         },
         {
           "gorev_id": "U698DB4CF3B",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.309387,
           "boylam": 26.67937,
@@ -737,7 +737,7 @@
         },
         {
           "gorev_id": "U180217381B",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Gülbahçe",
           "enlem": 38.332813,
           "boylam": 26.677424,
@@ -803,7 +803,7 @@
         },
         {
           "gorev_id": "UC4C3B93DC3",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.424528,
           "boylam": 26.548514,
@@ -825,7 +825,7 @@
         },
         {
           "gorev_id": "UFDB09B5E30",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.423352,
           "boylam": 26.549659,
@@ -847,7 +847,7 @@
         },
         {
           "gorev_id": "UE96A2A2648",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.423262,
           "boylam": 26.54714,
@@ -891,7 +891,7 @@
         },
         {
           "gorev_id": "UFFAE8958EE",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.268956,
           "boylam": 26.641705,
@@ -913,7 +913,7 @@
         },
         {
           "gorev_id": "U1F26FA6195",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.25756,
           "boylam": 26.637812,
@@ -935,7 +935,7 @@
         },
         {
           "gorev_id": "U2784636113",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.351717,
           "boylam": 26.496538,
@@ -957,7 +957,7 @@
         },
         {
           "gorev_id": "U9A6296726C",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.390429,
           "boylam": 26.623731,
@@ -979,7 +979,7 @@
         },
         {
           "gorev_id": "UD39BE3529F",
-          "oncelik": "ORTA",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.36845,
           "boylam": 26.631401,
@@ -1001,7 +1001,7 @@
         },
         {
           "gorev_id": "U4E732079C9",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.368631,
           "boylam": 26.622357,
@@ -1045,7 +1045,7 @@
         },
         {
           "gorev_id": "U6E5D2D5AEC",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.381113,
           "boylam": 26.618579,
@@ -1067,7 +1067,7 @@
         },
         {
           "gorev_id": "U1D63611567",
-          "oncelik": "ERKEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Germiyan",
           "enlem": 38.300342,
           "boylam": 26.517145,
@@ -1089,7 +1089,7 @@
         },
         {
           "gorev_id": "UC7116EFE69",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.375505,
           "boylam": 26.56168,
@@ -1111,7 +1111,7 @@
         },
         {
           "gorev_id": "U6E18A0F86D",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.374781,
           "boylam": 26.559963,
@@ -1133,7 +1133,7 @@
         },
         {
           "gorev_id": "UE3831098D2",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.372701,
           "boylam": 26.577593,
@@ -1155,7 +1155,7 @@
         },
         {
           "gorev_id": "U95FF6C4762",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.367997,
           "boylam": 26.560993,
@@ -1177,7 +1177,7 @@
         },
         {
           "gorev_id": "U9E5D4D47E7",
-          "oncelik": "YÜKSEK",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.35244,
           "boylam": 26.546568,
@@ -1221,7 +1221,7 @@
         },
         {
           "gorev_id": "UBEB06F241F",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.323587,
           "boylam": 26.554582,
@@ -1309,7 +1309,7 @@
         },
         {
           "gorev_id": "U401A80D705",
-          "oncelik": "BEKLEYEN",
+          "oncelik": "GECİKEN",
           "mahalle": "Mevki doğrulanmadı",
           "enlem": 38.343848,
           "boylam": 26.56065,
