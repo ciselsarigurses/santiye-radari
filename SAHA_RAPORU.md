@@ -11,9 +11,11 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
+1. **ERKEN — Reisdere** · yaklaşık 600 m² · Görev `U05D87733E6` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.316804,26.416383)
+2. **ERKEN — Mevki doğrulanmadı** · yaklaşık 600 m² · Görev `U38DFF179C8` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.344662,26.558589)
+3. **ERKEN — Mevki doğrulanmadı** · yaklaşık 500 m² · Görev `UCBF6DCC39D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.425342,26.533517)
 
 ## Ek kuru zemin kalibrasyon kontrolü
 
