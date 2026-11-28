@@ -11,6 +11,17 @@
 
 ## Günün ilk 3 kontrolü
 
-> **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
+> Bu bölüm yeni alarm üretmez. Taze ERKEN/PARSEL sinyalini gecikmiş backlog'un önünde tutar; gecikenlerde küçük-güçlü ve parsel ölçeğini geniş yüzey hareketlerinden önce kontrol ettirir. İki uydu bölgesi dengesi yalnız daha yüksek öncelikli adayı düşürmeden uygulanır.
 
-Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
+1. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 300 m² · Görev `U2D673FCD9F` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.412227,26.613656)
+2. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 300 m² · Görev `U6097DE3C3D` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.281257,26.308089)
+3. **GECİKEN — Mevki doğrulanmadı** · yaklaşık 400 m² · Görev `U06E5EADC90` · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.380570,26.607130)
+
+## Ek kuru zemin kalibrasyon kontrolü
+
+> **Alarm veya görev değildir.** Mevcut Sentinel üretim maskesinin dışında kalan kuru-zemin diagnostiklerinden, aktif radar görevlerinden en az 120 m uzakta olan ve uydu bölgesi başına en fazla bir tane seçilen güçlü örneklerdir. Toplam en fazla iki nokta gösterilir; amaç sahada bakıp gerçek hafriyat mı yanlış pozitif mi olduğunu öğrenerek algoritmayı iki bölgede de kalibre etmektir.
+
+1. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 700 m² · 14.11.2026 → 24.11.2026 · BSI Δ 0.293 · RGB Δ 0.122 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.240194,26.464119)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
+2. **KALİBRASYON — Mevki doğrulanmadı** · yaklaşık 700 m² · 14.11.2026 → 24.11.2026 · BSI Δ 0.274 · RGB Δ 0.124 · [Yol tarifi](https://www.google.com/maps/dir/?api=1&destination=38.221471,26.677768)
+   - Saha notu: Kazı/temel/şantiye varsa fotoğraf ve kısa not al; tarla sürümü, yol, bahçe temizliği veya başka bir neden ise onu yaz.
