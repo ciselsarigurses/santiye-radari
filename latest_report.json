@@ -17252,7 +17252,7 @@
   "oncelikli_internet_firsatlari": [],
   "uyari": "Uydu koordinatları yaklaşık değişim merkezidir. Kesin adres/ada-parsel olarak kullanılmamalı; saha kontrolüyle doğrulanmalıdır.",
   "gunun_ilk_3_kontrolu": [],
-  "gunun_ilk_3_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur.",
+  "gunun_ilk_3_notu": "Genel Sentinel yüzey/toprak değişimi KONTROLE_GIT için tek başına yeterli değildir. Aynı S2 sahnesinde 250 m²+ korunmuş çoklu-pozitif temel/kepçe diagnostik desteği olmayan kayıtlar silinmeden diagnostik arka plana alınır. TEKRAR_GIT insan kararı korunur. Üretim maskesi dışında kalan 250-900 m² kuru-zemin değişimi ancak yeni Sentinel sahnesinde izole + uzun-temporal ani başlangıç + lokal çevre kontrastı birlikte doğrulanırsa tek günlük DOĞRULAMA olarak eski backlog'un önüne girebilir; bu kayıt alarm veya kalıcı görev değildir.",
   "kuru_zemin_kalibrasyon_kontrolu": [
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -17275,7 +17275,14 @@
       "onceki_tarih": "14.11.2026",
       "son_tarih": "24.11.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.240194,26.464119",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": false,
+      "zaman_serisi_ani_baslangic_orani": 1.0,
+      "zaman_serisi_onceki_bsi_degisim": 0.3074,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": true,
+      "kalibrasyon_rotasyon_gun": 4,
+      "kalibrasyon_rotasyon_havuzu": 4
     },
     {
       "mahalle": "Mevki doğrulanmadı",
@@ -17298,10 +17305,18 @@
       "onceki_tarih": "14.11.2026",
       "son_tarih": "24.11.2026",
       "harita": "https://www.google.com/maps/dir/?api=1&destination=38.221471,26.677768",
-      "kalibrasyon_durumu": "ALARM_DEGIL"
+      "kalibrasyon_durumu": "ALARM_DEGIL",
+      "zaman_serisi_ani_baslangic_destegi": true,
+      "zaman_serisi_ani_baslangic_orani": 19.38,
+      "zaman_serisi_onceki_bsi_degisim": 0.0143,
+      "zaman_serisi_gecerli_oran": 1.0,
+      "zaman_serisi_istikrarsiz_zemin_riski": false,
+      "kalibrasyon_rotasyon_gun": 4,
+      "kalibrasyon_rotasyon_havuzu": 4,
+      "kalibrasyon_nedeni": "ZAMAN_SERISI_ANI_BASLANGIC"
     }
   ],
-  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışında kalan izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında uydu bölgesi başına en fazla bir, toplam iki örnek seçilir.",
+  "kuru_zemin_kalibrasyon_notu": "Alarm/görev değildir; üretim maskesinin dışındaki izole, saha-benzeri kuru-zemin değişimlerinden aktif görevlerin en az 120 m dışında bölge başına en fazla bir, toplam iki örnek seçilir. Yeni Sentinel sahnesinde en güçlü örnekten başlanır; sahne değişmezse en güçlü dört güvenli örnek günlük rotasyonla değiştirilir. Aynı rapor günü ve aynı Sentinel tarih çiftine ait zaman-serisi denetimi güvenli ani başlangıç desteği verirse bu örnek saha teyidi için rotasyonun önüne alınır; alarm/görev statüsü değişmez. Güvenli farklı mahalleler varken aynı mahalleden ikinci aday ilk dört kişilik kalibrasyon havuzuna alınmaz.",
   "dogrulanmis_takip_sahalari": [
     {
       "gorev_id": "UEC44340AEC",
