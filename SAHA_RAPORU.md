@@ -12,3 +12,7 @@
 > **Temel/kepçe çoklu-kanıt kapısı aktif.** Genel BSI/toprak değişimi tek başına saha rotası üretmez; 250 m²+ aynı-sahne temel/kepçe desteği gerekir. TEKRAR_GIT insan kararı korunur.
 
 Bugün çoklu-kanıt kapısını geçen operasyonel temel/kepçe noktası yok.
+
+## Arka planda izlenen geniş yüzey hareketleri
+
+Bu raporda ölçülmüş düşük-kompaktlık kuralına giren geniş yüzey hareketi yok.
